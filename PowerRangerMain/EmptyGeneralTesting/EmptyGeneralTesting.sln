@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPA", "SPA\SPA.vcxproj", "{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntegrationTesting", "IntegrationTesting\IntegrationTesting.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81} = {DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTesting", "UnitTesting\UnitTesting.vcxproj", "{353E6B76-DB90-4258-AC06-2DF35773532C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81} = {DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoTester", "AutoTester\AutoTester.vcxproj", "{20A7FBF3-D972-4220-A6AA-960484999FBB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81} = {DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Debug|Win32.Build.0 = Debug|Win32
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Release|Win32.ActiveCfg = Release|Win32
+		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Release|Win32.Build.0 = Release|Win32
+		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Debug|Win32.Build.0 = Debug|Win32
+		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Release|Win32.ActiveCfg = Release|Win32
+		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Release|Win32.Build.0 = Release|Win32
+		{353E6B76-DB90-4258-AC06-2DF35773532C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{353E6B76-DB90-4258-AC06-2DF35773532C}.Debug|Win32.Build.0 = Debug|Win32
+		{353E6B76-DB90-4258-AC06-2DF35773532C}.Release|Win32.ActiveCfg = Release|Win32
+		{353E6B76-DB90-4258-AC06-2DF35773532C}.Release|Win32.Build.0 = Release|Win32
+		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Debug|Win32.Build.0 = Debug|Win32
+		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Release|Win32.ActiveCfg = Release|Win32
+		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
