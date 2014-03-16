@@ -15,10 +15,18 @@
     <ClCompile Include="..\source\Parser.cpp" />
     <ClCompile Include="..\source\PKB.cpp" />
     <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="Follows.cpp" />
+    <ClCompile Include="Parent.cpp" />
+    <ClCompile Include="ProcTable.cpp" />
+    <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\source\PKB.h" />
     <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="Follows.h" />
+    <ClInclude Include="Parent.h" />
+    <ClInclude Include="ProcTable.h" />
+    <ClInclude Include="VarTable.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
