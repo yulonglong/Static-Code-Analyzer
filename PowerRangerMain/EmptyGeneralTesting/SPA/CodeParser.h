@@ -12,6 +12,7 @@
 #include <vector>
 #include "Node.h"
 
+void printPreOrderExpressionTree(Node* root);
 Node* parse(std::string);
 
 #endif
