@@ -4,13 +4,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 using namespace std;
 
 #include "PKB.h"
-#include "TNode.h"
 
-int Parse () {
+int PKB::setProcToAST(PROC p, Node* r) {
+	return NULL;
+}
 
-	return 0;
+Node* PKB::getRootAST (PROC p){
+	return NULL;
 }

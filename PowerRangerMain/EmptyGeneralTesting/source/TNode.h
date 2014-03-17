@@ -1,5 +1,0 @@
-class TNode
-{
-public:
-
-};
