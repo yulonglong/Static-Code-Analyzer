@@ -1,3 +1,6 @@
+#ifndef VARTABLE_H
+#define VARTABLE_H
+
 #pragma once
 
 #include <stdio.h>
@@ -17,3 +20,5 @@ public:
 	VARNAME getVarName (INDEX);
 	INDEX getVarIndex (VARNAME);
 };
+
+#endif

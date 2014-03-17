@@ -11,20 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\DesignExtractor.cpp" />
-    <ClCompile Include="..\source\Parser.cpp" />
-    <ClCompile Include="..\source\PKB.cpp" />
-    <ClCompile Include="..\source\TNode.cpp" />
+    <ClCompile Include="CodeParser.cpp" />
+    <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="Follows.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parent.cpp" />
+    <ClCompile Include="PKB.cpp" />
     <ClCompile Include="ProcTable.cpp" />
     <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\source\PKB.h" />
-    <ClInclude Include="..\source\TNode.h" />
+    <ClInclude Include="CodeParser.h" />
     <ClInclude Include="Follows.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Parent.h" />
+    <ClInclude Include="PKB.h" />
     <ClInclude Include="ProcTable.h" />
     <ClInclude Include="VarTable.h" />
   </ItemGroup>

@@ -1,3 +1,6 @@
+#ifndef PROCTABLE_H
+#define PROCTABLE_H
+
 #pragma once
 
 #include <stdio.h>
@@ -17,3 +20,5 @@ public:
 	PROCNAME getProcName (INDEX);
 	INDEX getProcIndex (PROCNAME);
 };
+
+#endif
