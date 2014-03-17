@@ -1,21 +1,24 @@
+#ifndef PKB_H
+#define PKB_H
+
 #pragma once
 
-#include<stdio.h>
+#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Node.h"
 
-using namespace std;
 typedef short PROC;
-
-class TNode;
 
 class VarTable;  // no need to #include "VarTable.h" as all I need is pointer
 
 class PKB {
 public:
 	static VarTable* varTable; 
-	static int setProcToAST(PROC p, TNode* r);
-	static TNode* getRootAST (PROC p);
+	static int setProcToAST(PROC p, Node* r);
+	static Node* getRootAST (PROC p);
 
 };
+
+#endif
