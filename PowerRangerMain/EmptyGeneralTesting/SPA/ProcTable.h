@@ -11,8 +11,9 @@ typedef int INDEX;
 typedef string PROCNAME; 
 
 class ProcTable {
-public: 
-	INDEX ProcTable::insertProc(PROCNAME);
-	PROCNAME ProcTable::getProcName (INDEX);
-	INDEX ProcTable::getProcIndex (PROCNAME);
+public:
+	ProcTable();
+	INDEX insertProc(PROCNAME);
+	PROCNAME getProcName (INDEX);
+	INDEX getProcIndex (PROCNAME);
 };

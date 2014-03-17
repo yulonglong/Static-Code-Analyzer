@@ -12,13 +12,13 @@ typedef void VOID;
 typedef bool BOOLEAN;
 
 class Follows {
-public: 
-	VOID Follows::setFollows(STMTNUM s1, STMTNUM s2);
-	BOOLEAN Follows::isFollows(STMTNUM s1, STMTNUM s2);
-	STMTNUM Follows::getFollows(STMTNUM);
-	STMTNUM Follows::getFollowedBy(STMTNUM);
-
 private: 
 	vector<STMTNUM> followsTable;
 	vector<STMTNUM> followedByTable;
+public: 
+	Follows();
+	VOID setFollows(STMTNUM s1, STMTNUM s2);
+	BOOLEAN isFollows(STMTNUM s1, STMTNUM s2);
+	STMTNUM getFollows(STMTNUM);
+	STMTNUM getFollowedBy(STMTNUM);
 }; 
