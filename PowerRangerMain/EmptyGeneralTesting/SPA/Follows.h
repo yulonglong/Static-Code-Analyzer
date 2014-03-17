@@ -1,3 +1,6 @@
+#ifndef FOLLOWS_H
+#define FOLLOWS_H
+
 #pragma once
 
 #include <stdio.h>
@@ -22,3 +25,5 @@ public:
 	STMTNUM getFollows(STMTNUM);
 	STMTNUM getFollowedBy(STMTNUM);
 }; 
+
+#endif

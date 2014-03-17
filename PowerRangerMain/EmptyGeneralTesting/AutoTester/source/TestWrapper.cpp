@@ -1,4 +1,5 @@
 #include "TestWrapper.h"
+#include "Parser.h"
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -28,4 +29,11 @@ void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 
   // store the answers to the query in the results list (it is initially empty)
   // each result must be a string.
+}
+
+
+int main(){
+	Node* ASTRoot;
+	ASTRoot = parse("in.txt");
+	return 0;
 }

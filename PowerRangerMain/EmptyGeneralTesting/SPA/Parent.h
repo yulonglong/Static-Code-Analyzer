@@ -1,3 +1,6 @@
+#ifndef PARENT_H
+#define PARENT_H
+
 #pragma once
 
 #include <stdio.h>
@@ -22,3 +25,5 @@ public:
 	STMTNUM getParent(STMTNUM);
 	LIST getChildren(STMTNUM);
 };
+
+#endif
