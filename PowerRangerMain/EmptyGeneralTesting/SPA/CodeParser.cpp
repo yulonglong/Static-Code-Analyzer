@@ -410,9 +410,9 @@ Node* parse(string filename){
 		else if(bracket.size()==0){
 			cout << "ERROR" << endl;
 		}
-		cout << stringProgLine << ". " << word << endl;
+		//cout << stringProgLine << ". " << word << endl;
 	}
 	
-	printPreOrderExpressionTree(root);
+	//printPreOrderExpressionTree(root);
 	return root;
 }
