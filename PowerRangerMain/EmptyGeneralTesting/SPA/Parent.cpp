@@ -2,28 +2,25 @@
 
 #include "Parent.h"
 
-class Parent {
-	vector<vector<STMTNUM>> parentTable;
+// constructor
+Parent::Parent() {
+	// program line 0 is not to be used for the enumeration
+	// parentTable.emplace_back();
+}
 
-	// constructor
-	Parent::Parent() {
-		// program line 0 is not to be used for the enumeration
-		// parentTable.emplace_back();
-	}
+VOID Parent::setParent(STMTNUM stmt1, STMTNUM stmt2) {
+	return;
+}
 
-	VOID Parent::setParent(STMTNUM, STMTNUM) {
+BOOLEAN Parent::isParent(STMTNUM stmt1, STMTNUM stmt2) {
+	return false;
+}
 
-	}
+STMTNUM Parent::getParent(STMTNUM stmt1) {
+	return -1;
+}
 
-	BOOLEAN Parent::isParent(STMTNUM, STMTNUM) {
-	
-	}
-
-	STMTNUM Parent::getParent(STMTNUM) {
-	
-	}
-
-	LIST Parent::getChildren(STMTNUM) {
-	
-	}
+LIST Parent::getChildren(STMTNUM stmt1) {
+	LIST newList;
+	return newList;
 }

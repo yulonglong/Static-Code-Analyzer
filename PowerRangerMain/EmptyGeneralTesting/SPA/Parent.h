@@ -10,13 +10,15 @@ using namespace std;
 typedef int STMTNUM;
 typedef void VOID;
 typedef bool BOOLEAN;
+typedef vector<int> LIST;
 
 class Parent {
-public: 
-	VOID Parent::setParent(STMTNUM, STMTNUM);
-	BOOLEAN Parent::isParent(STMTNUM, STMTNUM);
-	STMTNUM Parent::getParent(STMTNUM);
-	STMTNUM Parent::getChildren(STMTNUM);
 private: 
 	vector<vector<STMTNUM>> parentTable;
+public: 
+	Parent();
+	VOID setParent(STMTNUM, STMTNUM);
+	BOOLEAN isParent(STMTNUM, STMTNUM);
+	STMTNUM getParent(STMTNUM);
+	LIST getChildren(STMTNUM);
 };

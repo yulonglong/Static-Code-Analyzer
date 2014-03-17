@@ -12,7 +12,8 @@ typedef string VARNAME;
 
 class VarTable {
 public: 
-	INDEX VarTable::insertVar(VARNAME);
-	VARNAME VarTable::getVarName (INDEX);
-	INDEX VarTable::getVarIndex (VARNAME);
+	VarTable();
+	INDEX insertVar(VARNAME);
+	VARNAME getVarName (INDEX);
+	INDEX getVarIndex (VARNAME);
 };
