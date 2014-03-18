@@ -5,31 +5,8 @@ using namespace std;
 
 
 
-void printPreOrderExpressionTree(Node* root){
-	if(root->getParent()!=NULL){
-		cout << "Parent " << root->getParent()->getProgLine() << ".) "<< root->getParent()->getData() << " : " << root->getParent()->getType() << endl;
-	}
-	cout << root->getProgLine() << ".) " << root->getData() << " : " << root->getType() << endl;
-	
-	for(unsigned i=0;i<root->getChild().size();i++){
-		printPreOrderExpressionTree(root->getChild(i));
-	}
-	return;
-}
 
-void printInOrderExpressionTree(Node* root){
-	if(root->getChild(0)!=NULL){
-		printInOrderExpressionTree(root->getChild(0));
-	}
-	cout << root->getData() << " : " << root->getType() << " ";
-	if(root->getChild(1)!=NULL){
-		printInOrderExpressionTree(root->getChild(1));
-	}
-	return;
-}
-//end Node class
-
-Node* constructExpressionTree(vector<string> tokens,int newProgLine){
+Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable varTable){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -50,6 +27,9 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine){
 				type="constant";
 			}
 			else{
+				//insert to var table
+				varTable.insertVar(tokens[i]);
+				//end insertion
 				type="variable";
 			}
 			Node* curr = new Node(tokens[i],type,newProgLine);
@@ -182,7 +162,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-Node* parse(string filename){
+Node* parse(string filename,VarTable varTable,ProcTable procTable){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -280,6 +260,11 @@ Node* parse(string filename){
 			}
 			string procName;
 			procName=tokens[1];
+
+			//insert to proc table
+			procTable.insertProc(procName);
+			//end insertion
+
 			currProcName = procName;
 			
 			Node* stmtLst = new Node(procName, "stmtLst");
@@ -317,6 +302,10 @@ Node* parse(string filename){
 			}
 			string controlVarName;
 			controlVarName=tokens[1];
+
+			//insert to var table
+			varTable.insertVar(controlVarName);
+			//end insertion
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -342,6 +331,10 @@ Node* parse(string filename){
 			}
 			string controlVarName;
 			controlVarName=tokens[1];
+
+			//insert to var table
+			varTable.insertVar(controlVarName);
+			//end insertion
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -380,7 +373,7 @@ Node* parse(string filename){
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
-			Node* expressionRoot = constructExpressionTree(ans,progLine);
+			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable);
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
 			assignRoot->setChild(expressionRoot);
