@@ -11,8 +11,9 @@
 #include <stack>
 #include <vector>
 #include "Node.h"
+#include "ProcTable.h"
+#include "VarTable.h"
 
-void printPreOrderExpressionTree(Node* root);
-Node* parse(std::string);
+Node* parse(std::string,VarTable varTable,ProcTable procTable);
 
 #endif

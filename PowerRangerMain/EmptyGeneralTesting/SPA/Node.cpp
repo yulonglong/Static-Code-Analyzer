@@ -72,3 +72,15 @@ void Node::setParent(Node* newParent){
 void Node::setProgLine(int newProgLine){
 	progLine = newProgLine;
 }
+
+void Node::printPreOrderExpressionTree(Node* root){
+	if(root->getParent()!=NULL){
+		cout << "Parent " << root->getParent()->getProgLine() << ".) "<< root->getParent()->getData() << " : " << root->getParent()->getType() << endl;
+	}
+	cout << root->getProgLine() << ".) " << root->getData() << " : " << root->getType() << endl;
+	
+	for(unsigned i=0;i<root->getChild().size();i++){
+		printPreOrderExpressionTree(root->getChild(i));
+	}
+	return;
+}

@@ -4,6 +4,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <iostream>
 
 //begin Node class
 class Node{
@@ -30,6 +31,7 @@ public:
 	void setType(std::string newType);
 	void setParent(Node* newParent);
 	void setProgLine(int newProgLine);
+	void printPreOrderExpressionTree(Node* root);
 };
 
 #endif
