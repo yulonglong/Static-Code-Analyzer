@@ -3,8 +3,7 @@
 #include "Parent.h"
 
 vector<vector<STMTNUM>> parentTable;
-vector<STMTNUM> chidlrenTable;
-
+vector<STMTNUM> childrenTable;
 
 // constructor
 Parent::Parent() {
@@ -13,7 +12,7 @@ Parent::Parent() {
 	vector<STMTNUM> temp;
 	temp.assign(1,-1);
 	parentTable.assign(5, temp);
-	chidlrenTable.assign(5, -1);
+	childrenTable.assign(5, -1);
 }
 
 VOID Parent::setParent(STMTNUM s1, STMTNUM s2) {
@@ -27,8 +26,8 @@ VOID Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	temp1.push_back(s2);
 	parentTable[s1] = temp1;
 
-	if (s2 >= (signed int)chidlrenTable.size()) {
-		chidlrenTable.resize(s2+1, -1);
+	if (s2 >= (signed int)childrenTable.size()) {
+		childrenTable.resize(s2+1, -1);
 	}
 	childrenTable[s2] = s1; 
 }
