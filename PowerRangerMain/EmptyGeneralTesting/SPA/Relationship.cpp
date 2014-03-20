@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include "Relationship.h"
@@ -20,9 +19,9 @@ Relationship::RelType Relationship::getRelType()
         return FOLLOWSSTAR;
     } else if (relName == "PARENT"){
         return PARENT;
-    } else if (relName == "PARENTSTAR"){
+    } else{
         return PARENTSTAR;
-    }
+	}
 }
 
 string Relationship::getToken1()

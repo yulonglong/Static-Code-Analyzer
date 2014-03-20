@@ -1,18 +1,17 @@
-
 #include <iostream>
 #include <string>
 #include "Query.h"
 
 using namespace std;
 
-Query::Query(string v)
+Query::Query(string s)
 {
-    qVarName = v;
+    selectedSyn = s;
 }
 
-string Query::getQVarName()
+string Query::getSelectedSyn()
 {
-    return qVarName;
+    return selectedSyn;
 }
 
 void Query::addRelationship(Relationship r)
@@ -23,4 +22,14 @@ void Query::addRelationship(Relationship r)
 vector<Relationship> Query::getRelVect()
 {
     return relVect;
+}
+
+void Query::addSynTable(unordered_map<string, Query::SType> map)
+{
+	synTable = map;
+}
+
+unordered_map<std::string, Query::SType> Query::getSynTable()
+{
+	return synTable;
 }
