@@ -1,0 +1,43 @@
+﻿Build started 20/3/2014 3:30:25 PM.
+     1>Project "C:\SPACloud\PowerRangerMain\EmptyGeneralTesting\SPA\SPA.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\SPACloud\PowerRangerMain\EmptyGeneralTesting\Debug\".
+       InitializeBuildStatus:
+         Creating "Debug\SPA.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt CodeParser.cpp DesignExtractor.cpp Follows.cpp Node.cpp Parent.cpp PKB.cpp ProcTable.cpp Query.cpp Relationship.cpp VarTable.cpp
+         VarTable.cpp
+     1>c:\spacloud\powerrangermain\emptygeneraltesting\spa\vartable.cpp(29): warning C4018: '>=' : signed/unsigned mismatch
+         Relationship.cpp
+         Query.cpp
+         ProcTable.cpp
+     1>c:\spacloud\powerrangermain\emptygeneraltesting\spa\proctable.cpp(30): warning C4018: '>=' : signed/unsigned mismatch
+         PKB.cpp
+         Parent.cpp
+         Node.cpp
+         Follows.cpp
+     1>c:\spacloud\powerrangermain\emptygeneraltesting\spa\follows.cpp(16): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\spacloud\powerrangermain\emptygeneraltesting\spa\follows.cpp(21): warning C4018: '>=' : signed/unsigned mismatch
+         DesignExtractor.cpp
+         CodeParser.cpp
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\SPACloud\PowerRangerMain\EmptyGeneralTesting\Debug\SPA.lib" /NOLOGO Debug\CodeParser.obj
+         Debug\DesignExtractor.obj
+         Debug\Follows.obj
+         Debug\Node.obj
+         Debug\Parent.obj
+         Debug\PKB.obj
+         Debug\ProcTable.obj
+         Debug\Query.obj
+         Debug\Relationship.obj
+         Debug\VarTable.obj
+         SPA.vcxproj -> C:\SPACloud\PowerRangerMain\EmptyGeneralTesting\Debug\SPA.lib
+       FinalizeBuildStatus:
+         Deleting file "Debug\SPA.unsuccessfulbuild".
+         Touching "Debug\SPA.lastbuildstate".
+     1>Done Building Project "C:\SPACloud\PowerRangerMain\EmptyGeneralTesting\SPA\SPA.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:14.20
