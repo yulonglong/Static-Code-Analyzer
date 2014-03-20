@@ -18,12 +18,13 @@ typedef vector<int> LIST;
 class Parent {
 private: 
 	vector<vector<STMTNUM>> parentTable;
+	vector<STMTNUM> childrenTable;
 public: 
 	Parent();
 	VOID setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);
 	STMTNUM getParent(STMTNUM);
-	LIST getChildren(STMTNUM);
+	LIST vector<STMTNUM> getChildren(STMTNUM);
 };
 
 #endif
