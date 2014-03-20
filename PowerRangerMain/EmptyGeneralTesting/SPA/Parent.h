@@ -13,7 +13,7 @@ using namespace std;
 typedef int STMTNUM;
 typedef void VOID;
 typedef bool BOOLEAN;
-typedef vector<int> LIST;
+typedef vector<STMTNUM> LIST;
 
 class Parent {
 private: 
@@ -24,7 +24,7 @@ public:
 	VOID setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);
 	STMTNUM getParent(STMTNUM);
-	LIST vector<STMTNUM> getChildren(STMTNUM);
+	LIST getChildren(STMTNUM);
 };
 
 #endif

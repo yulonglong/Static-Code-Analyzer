@@ -19,7 +19,7 @@ Parent::Parent() {
 VOID Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	vector<STMTNUM> temp;
 	temp.assign(1,-1);
-	if (s1 >= parentTable.size()) {
+	if (s1 >= (signed int) parentTable.size()) {
 		parentTable.resize(s1+1, temp);
 	}
 
@@ -27,7 +27,7 @@ VOID Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	temp1.push_back(s2);
 	parentTable[s1] = temp1;
 
-	if (s2 >= chidlrenTable.size()) {
+	if (s2 >= (signed int)chidlrenTable.size()) {
 		chidlrenTable.resize(s2+1, -1);
 	}
 	childrenTable[s2] = s1; 
