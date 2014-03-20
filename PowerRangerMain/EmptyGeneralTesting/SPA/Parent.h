@@ -16,9 +16,6 @@ typedef bool BOOLEAN;
 typedef vector<STMTNUM> LIST;
 
 class Parent {
-private: 
-	vector<vector<STMTNUM>> parentTable;
-	vector<STMTNUM> childrenTable;
 public: 
 	Parent();
 	VOID setParent(STMTNUM, STMTNUM);
