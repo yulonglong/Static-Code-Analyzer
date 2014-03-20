@@ -12,9 +12,9 @@ VarTable::VarTable() {
 // VarTable and returns its index. Otherwise, return its index and the table remains unchanged.
 INDEX VarTable::insertVar(VARNAME varName) {
 	int varIndex = getVarIndex(varName);
-	bool containsVariable = (varIndex != -1);
+	bool containsVar = (varIndex != -1);
 		
-	if (!containsVariable) {
+	if (!containsVar	) {
 		varTable.emplace_back(varName);
 		return varTable.size()-1;  // return new index for this varName
 	} else {
@@ -42,6 +42,6 @@ INDEX VarTable::getVarIndex (VARNAME varName){
 	return -1;
 }
 
-INDEX getNumVariables() {
+INDEX getNumVar() {
 	return varTable.size();
 }
