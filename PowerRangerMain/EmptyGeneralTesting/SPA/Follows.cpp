@@ -25,6 +25,7 @@ VOID Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 }
 
 BOOLEAN Follows::isFollows(STMTNUM s1, STMTNUM s2) {
+	//Need to add exception handling
 	if (followsTable[s1] == s2) {
 		return true;
 	}
