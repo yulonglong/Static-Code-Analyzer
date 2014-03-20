@@ -50,7 +50,7 @@ int main()
 	
 	// SOME TEST JUST FOR FUN
 	if (statementType == Query::ASSIGN){
-		cout << "Statement type or synonym a: ASSIGN\n";
+		cout << "Statement type of synonym a: ASSIGN\n";
 	} else {
 		cout << "Mismatch in retrieving statement type!";
 	}
