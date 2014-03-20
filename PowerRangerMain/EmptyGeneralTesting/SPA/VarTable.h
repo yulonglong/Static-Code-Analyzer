@@ -19,6 +19,7 @@ public:
 	INDEX insertVar(VARNAME);
 	VARNAME getVarName (INDEX);
 	INDEX getVarIndex (VARNAME);
+	INDEX getNumVar(); 
 };
 
 #endif

@@ -19,6 +19,7 @@ public:
 	INDEX insertProc(PROCNAME);
 	PROCNAME getProcName (INDEX);
 	INDEX getProcIndex (PROCNAME);
+	INDEX getNumProcedures(); 
 };
 
 #endif
