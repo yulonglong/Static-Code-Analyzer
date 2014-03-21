@@ -27,6 +27,9 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	return intersectAnswers(answers);	
 }
 
+bool QueryEvaluator::evaluateQueryBoolean(Query q){
+	return true;
+}
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	vector<int> first = ans[0];
 	vector<int> queryAnswers;

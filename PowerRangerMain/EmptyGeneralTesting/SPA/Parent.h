@@ -20,8 +20,12 @@ public:
 	Parent();
 	VOID setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);
-	STMTNUM getParent(STMTNUM);
-	LIST getChildren(STMTNUM);
+	BOOLEAN isParent(SType, STMTNUM);
+	BOOLEAN isChildren(SType, STMTNUM);
+	BOOLEAN	isParent(SType, SType);
+	STMTNUM getParent(SType, SType, STMTNUM);
+	STMTNUM getChildren(SType, SType, STMTNUM);
+	STMTNUM getParent(SType, SType, SType)
 };
 
 #endif

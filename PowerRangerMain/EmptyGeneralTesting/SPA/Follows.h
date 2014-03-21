@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include "Query.h"
 
 using namespace std;
 typedef int STMTNUM;
@@ -20,10 +21,14 @@ private:
 	vector<STMTNUM> followedByTable;
 public: 
 	Follows();
-	VOID setFollows(STMTNUM s1, STMTNUM s2);
-	BOOLEAN isFollows(STMTNUM s1, STMTNUM s2);
-	STMTNUM getFollows(STMTNUM);
-	STMTNUM getFollowedBy(STMTNUM);
+	VOID setFollows(STMTNUM, STMTNUM);
+	BOOLEAN isFollows(STMTNUM, STMTNUM);
+	BOOLEAN isFollows(SType, STMTNUM);
+	BOOLEAN isFollowedBy(SType, STMTNUM);
+	BOOLEAN	isFollows(SType, SType);
+	STMTNUM getFollows(SType, SType, STMTNUM);
+	STMTNUM getFollowedBy(SType, SType, STMTNUM);
+	STMTNUM getFollows(SType, SType, SType)
 }; 
 
 #endif
