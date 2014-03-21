@@ -14,7 +14,7 @@ INDEX VarTable::insertVar(VARNAME varName) {
 	int varIndex = getVarIndex(varName);
 	bool containsVar = (varIndex != -1);
 		
-	if (!containsVar	) {
+	if (!containsVar) {
 		varTable.emplace_back(varName);
 		return varTable.size()-1;  // return new index for this varName
 	} else {
