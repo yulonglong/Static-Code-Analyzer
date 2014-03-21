@@ -20,6 +20,7 @@
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="ProcTable.cpp" />
     <ClCompile Include="Query.cpp" />
+    <ClCompile Include="QueryEvaluator.cpp" />
     <ClCompile Include="Relationship.cpp" />
     <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <ClInclude Include="PKB.h" />
     <ClInclude Include="ProcTable.h" />
     <ClInclude Include="Query.h" />
+    <ClInclude Include="QueryEvaluator.h" />
     <ClInclude Include="Relationship.h" />
     <ClInclude Include="VarTable.h" />
   </ItemGroup>
