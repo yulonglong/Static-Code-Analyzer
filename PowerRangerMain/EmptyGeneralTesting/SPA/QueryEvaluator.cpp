@@ -1,17 +1,34 @@
 #include <iostream>
 #include <string>
 #include "QueryEvaluator.h"
+#include <ctype.h>
+#include "Follows.h"
 
 using namespace std;
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
+	Follows f;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
-		case Relationship::FOLLOWS:
-			answers.push_back(evaluateFollows(*it));
+		case Relationship::FOLLOWS: {
+			string token1 = it->getToken1();
+			string token2 = it->getToken2();
+			string selectedSyn = q.getSelectedSyn();
+			unordered_map<string, Query::SType> m = q.getSynTable();
+			std::unordered_map<string, Query::SType>::iterator i = q.getSynTable().find(selectedSyn);
+
+			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				if(evaluateFollowsBoolean(*it)){
+					answers.push_back( f.getAll(i->second));
+				}
+				else {
+					answers.push_back(evaluateFollows(*it));
+				}
+			}
 			break;
+									}
 		case Relationship::FOLLOWSSTAR:
 			answers.push_back(evaluateFollowsStar(*it));
 			break;
@@ -28,8 +45,25 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 }
 
 bool QueryEvaluator::evaluateQueryBoolean(Query q){
-	return true;
+	vector<Relationship> relations = q.getRelVect();
+	bool answers = true;
+	Follows f;
+	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		switch(it->getRelType()){
+		case Relationship::FOLLOWS: 
+			answers = answers && evaluateFollowsBoolean(*it);
+			break;
+		case Relationship::FOLLOWSSTAR:
+			answers = answers && evaluateFollowsStarBoolean(*it);
+			break;
+		case Relationship::PARENT:
+			answers = answers && evaluateParentBoolean(*it);
+		case Relationship::PARENTSTAR:
+			answers = answers && evaluateParentStarBoolean(*it);
+		}
+	}
 }
+
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	vector<int> first = ans[0];
 	vector<int> queryAnswers;
