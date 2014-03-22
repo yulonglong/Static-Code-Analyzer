@@ -23,12 +23,13 @@ public:
 	Follows();
 	VOID setFollows(STMTNUM, STMTNUM);
 	BOOLEAN isFollows(STMTNUM, STMTNUM);
-	BOOLEAN isFollows(SType, STMTNUM);
-	BOOLEAN isFollowedBy(SType, STMTNUM);
-	BOOLEAN	isFollows(SType, SType);
-	STMTNUM getFollows(SType, SType, STMTNUM);
-	STMTNUM getFollowedBy(SType, SType, STMTNUM);
-	STMTNUM getFollows(SType, SType, SType)
+	BOOLEAN isFollows(Query::SType, STMTNUM);
+	BOOLEAN isFollowedBy(Query::SType, STMTNUM);
+	BOOLEAN	isFollows(Query::SType, Query::SType);
+	STMTNUM getFollows(Query::SType, Query::SType, STMTNUM);
+	STMTNUM getFollowedBy(Query::SType, Query::SType, STMTNUM);
+	STMTNUM getFollows(Query::SType, Query::SType, Query::SType);
+	vector<STMTNUM> getAll(Query::SType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet
 }; 
 
 #endif

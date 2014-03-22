@@ -14,14 +14,14 @@ private:
 	std::vector<int> evaluateFollowsStar(Relationship);
 	std::vector<int> evaluateParent(Relationship);
 	std::vector<int> evaluateParentStar(Relationship);
-	std::bool evaluateFollowsBoolean(Relationship);
-	std::bool evaluateFollowsStarBoolean(Relationship);
-	std::bool evaluateParentBoolean(Relationship);
-	std::bool evaluateParentStarBoolean(Relationship);
+	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, Query::SType>);
+	bool evaluateFollowsStarBoolean(Relationship);
+	bool evaluateParentBoolean(Relationship);
+	bool evaluateParentStarBoolean(Relationship);
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 public:
 	QueryEvaluator();
 	std::vector<int> evaluateQuery(Query);
-	std::bool evaluateQueryBoolean(Query);
+	bool evaluateQueryBoolean(Query);
 };
 #endif

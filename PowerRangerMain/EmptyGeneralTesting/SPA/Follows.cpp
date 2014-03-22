@@ -36,3 +36,8 @@ STMTNUM Follows::getFollows(STMTNUM s1) {
 STMTNUM Follows::getFollowedBy(STMTNUM s2) {
 	return followedByTable[s2];	
 }
+
+vector<STMTNUM> getAll(Query::SType s){
+	vector<STMTNUM> v;
+	return v;
+}
