@@ -21,6 +21,7 @@
     <ClCompile Include="Query.cpp" />
     <ClCompile Include="QueryEvaluator.cpp" />
     <ClCompile Include="Relationship.cpp" />
+    <ClCompile Include="TypeTable.cpp" />
     <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="Query.h" />
     <ClInclude Include="QueryEvaluator.h" />
     <ClInclude Include="Relationship.h" />
+    <ClInclude Include="TypeTable.h" />
     <ClInclude Include="VarTable.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

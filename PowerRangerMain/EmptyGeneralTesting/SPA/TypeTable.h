@@ -10,10 +10,11 @@
 #include <iterator>
 #include <map>
 
+
 using namespace std;
 typedef int STMTNUM;
-typedef string SType;
 typedef vector<STMTNUM> LIST;
+typedef string SType;
 
 class TypeTable {
 private:

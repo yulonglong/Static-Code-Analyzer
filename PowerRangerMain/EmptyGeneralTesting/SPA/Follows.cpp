@@ -70,6 +70,7 @@ STMTNUM Follows::getFollowedBy(SType t, STMTNUM s) {
 	if(table.getType(followedByTable[s]).compare(t) == 0){
 		return followedByTable[s];
 	}
+	return -1;
 }
 
 vector<STMTNUM> Follows::getFollows(SType t1, SType t2,SType t3) {
@@ -78,7 +79,7 @@ vector<STMTNUM> Follows::getFollows(SType t1, SType t2,SType t3) {
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
 			if(table.getType(*it).compare(t2) == 0){
-				if(table.getType(*it2).compare(table.getType(t3)) == 0){
+				if(table.getType(*it2).compare(t3) == 0){
 					v = table.getStmtNum(t1);
 					return v;
 				}
@@ -94,7 +95,7 @@ vector<STMTNUM> Follows::getFollowedBy(SType t1, SType t2,SType t3) {
 	for(;it!= followedByTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followedByTable.end();++it2){
 			if(table.getType(*it).compare(t2) == 0){
-				if(table.getType(*it2).compare(table.getType(t3)) == 0){
+				if(table.getType(*it2).compare(t3) == 0){
 					v = table.getStmtNum(t1);
 					return v;
 				}

@@ -4,8 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-
-typedef string SType;
+#include "TypeTable.h"
 
 class Query
 {
@@ -20,7 +19,7 @@ class Query
 	private:
         std::string selectedSyn; 
         std::vector<Relationship> relVect;
-		std::unordered_map<std::string, Query::SType> synTable;
+		std::unordered_map<std::string, SType> synTable;
 };
 
 #endif // QUERY_H_INCLUDED
