@@ -4,8 +4,6 @@
 using namespace std;
 
 
-
-
 Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable varTable){
 	stack<Node*> st;
 	int length = tokens.size();
@@ -162,14 +160,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-void parseCode(string filename) {
-	Node* ASTRoot;
-	VarTable varTable;
-	ProcTable procTable;
-	ASTRoot = parse(filename, varTable, procTable);
-}
-
-Node* parse(string filename,VarTable varTable,ProcTable procTable){
+Node* parseCode(string filename,VarTable varTable,ProcTable procTable){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);

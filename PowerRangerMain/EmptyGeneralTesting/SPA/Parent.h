@@ -20,12 +20,13 @@ public:
 	Parent();
 	VOID setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);
-	BOOLEAN isParent(SType, STMTNUM);
-	BOOLEAN isChildren(SType, STMTNUM);
-	BOOLEAN	isParent(SType, SType);
-	STMTNUM getParent(SType, SType, STMTNUM);
-	STMTNUM getChildren(SType, SType, STMTNUM);
-	STMTNUM getParent(SType, SType, SType)
+	BOOLEAN isParent(SType, STMTNUM); // isParent(while, s1) 
+	BOOLEAN isChildren(SType, STMTNUM); 
+	vector<STMTNUM> getParent(SType, SType, STMTNUM); // parent (w, s1) --> returns parents that are while statements
+	// what you want to get, 2nd parameter of parent
+	vector<STMTNUM> getChildren(SType, SType, STMTNUM);
+	// Parent (s1, w) returns all the while stmts
+	// vector<STMTNUM> getParent(SType, SType, SType);
 };
 
 #endif
