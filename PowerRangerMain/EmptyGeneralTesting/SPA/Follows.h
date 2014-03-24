@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 #include "Query.h"
+#include "TypeTable.h"
 
 using namespace std;
 typedef int STMTNUM;
@@ -19,6 +20,7 @@ class Follows {
 private: 
 	vector<STMTNUM> followsTable;
 	vector<STMTNUM> followedByTable;
+	TypeTable table;
 public: 
 	Follows();
 	VOID setFollows(STMTNUM, STMTNUM);

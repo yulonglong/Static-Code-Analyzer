@@ -5,6 +5,8 @@
 #include <vector>
 #include <unordered_map>
 
+typedef string SType;
+
 class Query
 {
     public:
@@ -12,9 +14,8 @@ class Query
 		std::string getSelectedSyn();
         void addRelationship(Relationship);
         std::vector<Relationship> getRelVect();
-		enum SType{ASSIGN, IF, WHILE, BOOLEAN};
-		void addSynTable(std::unordered_map<std::string, Query::SType>);
-		std::unordered_map<std::string, Query::SType> getSynTable();
+		void addSynTable(std::unordered_map<std::string, SType>);
+		std::unordered_map<std::string, SType> getSynTable();
 
 	private:
         std::string selectedSyn; 

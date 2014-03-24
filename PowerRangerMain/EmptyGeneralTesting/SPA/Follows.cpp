@@ -29,15 +29,82 @@ BOOLEAN Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-STMTNUM Follows::getFollows(STMTNUM s1) {
-	return followsTable[s1];
+BOOLEAN Follows::isFollows(SType t, STMTNUM s) {
+	STMTNUM temp = followsTable[s];
+	//Need to add exception handling
+	if (table.getType(temp).compare(t)==0) {
+		return true;
+	}
+	return false;
 }
 
-STMTNUM Follows::getFollowedBy(STMTNUM s2) {
-	return followedByTable[s2];	
+BOOLEAN Follows::isFollowedBy(SType t, STMTNUM s) {
+	STMTNUM temp = followedByTable[s];
+	//Need to add exception handling
+	if (table.getType(temp).compare(t)==0) {
+		return true;
+	}
+	return false;
 }
 
-vector<STMTNUM> getAll(Query::SType s){
-	vector<STMTNUM> v;
+BOOLEAN Follows::isFollows(SType t1, SType t2) {
+	vector<STMTNUM>::iterator it = followsTable.begin();
+	for(;it!= followsTable.end();++it){
+		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
+			if(table.getType(*it).compare(table.getType(*it2)) == 0)
+				return true;
+		}
+	}	
+	return false;
+}
+
+STMTNUM Follows::getFollows(SType t, STMTNUM s) {
+	if(table.getType(followsTable[s]).compare(t) == 0){
+		return followsTable[s];
+	}
+	return -1;
+}
+
+STMTNUM Follows::getFollowedBy(SType t, STMTNUM s) {
+	TypeTable table;
+	if(table.getType(followedByTable[s]).compare(t) == 0){
+		return followedByTable[s];
+	}
+}
+
+vector<STMTNUM> Follows::getFollows(SType t1, SType t2,SType t3) {
+	vector<STMTNUM> v (1,-1);
+	vector<STMTNUM>::iterator it = followsTable.begin();
+	for(;it!= followsTable.end();++it){
+		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
+			if(table.getType(*it).compare(t2) == 0){
+				if(table.getType(*it2).compare(table.getType(t3)) == 0){
+					v = table.getStmtNum(t1);
+					return v;
+				}
+			}		
+		}
+	}
+	return v;
+}
+
+vector<STMTNUM> Follows::getFollowedBy(SType t1, SType t2,SType t3) {
+	vector<STMTNUM> v (1,-1);
+	vector<STMTNUM>::iterator it = followsTable.begin();
+	for(;it!= followedByTable.end();++it){
+		for(vector<STMTNUM>::iterator it2 = it;it2!=followedByTable.end();++it2){
+			if(table.getType(*it).compare(t2) == 0){
+				if(table.getType(*it2).compare(table.getType(t3)) == 0){
+					v = table.getStmtNum(t1);
+					return v;
+				}
+			}		
+		}
+	}
+	return v;
+}
+
+vector<STMTNUM> getAll(SType t){
+	vector<STMTNUM> v (1,-1);
 	return v;
 }

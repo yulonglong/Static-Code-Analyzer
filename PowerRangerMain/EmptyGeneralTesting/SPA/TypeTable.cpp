@@ -8,16 +8,16 @@ TypeTable::TypeTable() {
 }
 
 
-void TypeTable::insertStmtNumAndType(STMTNUM s,TYPE t) {
+void TypeTable::insertStmtNumAndType(STMTNUM s,SType t) {
 	typeMap[s]=t;
 }
 
 
-TYPE TypeTable:: getType (STMTNUM s) {
+SType TypeTable:: getType (STMTNUM s) {
 	return typeMap.at(s);
 }
 
-LIST TypeTable:: getStmtNum (TYPE t) {
+LIST TypeTable:: getStmtNum (SType t) {
 	LIST list;
 	for (map<int,string>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
 		if(it->second.compare(t) == 0) {
