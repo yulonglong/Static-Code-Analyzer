@@ -1,7 +1,5 @@
 #include "TestWrapper.h"
-
-VarTable varTable;
-ProcTable procTable;
+#include "PKB.h"
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -24,7 +22,12 @@ TestWrapper::TestWrapper() {
 void TestWrapper::parse(std::string filename) {
 	// call your parser to do the parsing
 	// ...rest of your code...
-	parseCode(filename, varTable, procTable);
+	PKB* pkb = PKB::getInstance();
+	Node* ASTRoot;
+	VarTable varTable = *pkb->getVarTable(); // is this correct?? idk:(
+	ProcTable procTable = *pkb->getProcTable();
+
+	ASTRoot = parseCode(filename, varTable, procTable);
 }
 
 // method to evaluating a query

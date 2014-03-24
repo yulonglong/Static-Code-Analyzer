@@ -10,15 +10,31 @@
 #include "Node.h"
 
 typedef short PROC;
+using namespace std;
 
 class VarTable;  // no need to #include "VarTable.h" as all I need is pointer
+class ProcTable; 
+
 
 class PKB {
-public:
-	static VarTable* varTable; 
-	static int setProcToAST(PROC p, Node* r);
-	static Node* getRootAST (PROC p);
+private: 
+	static bool instanceFlag; 
+	static PKB *pkb;
+	PKB(); // private constructor 
 
+
+public:
+	static PKB* getInstance(); 
+	static VarTable* getVarTable();
+	static ProcTable* getProcTable();
+
+	VarTable* varTable; 
+	int setProcToAST(PROC p, Node* r);
+	
+	Node* getRootAST(PROC p);
+
+
+	~PKB();
 };
 
 #endif

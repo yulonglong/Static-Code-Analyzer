@@ -9,7 +9,7 @@ int main(){
 	Node* ASTRoot;
 	VarTable varTable;
 	ProcTable procTable;
-	ASTRoot = parse("testCodeInput.txt",varTable,procTable);
+	ASTRoot = parseCode("testCodeInput.txt",varTable,procTable);
 	//comment this function to stop printing
 	ASTRoot->printPreOrderExpressionTree(ASTRoot);
 
