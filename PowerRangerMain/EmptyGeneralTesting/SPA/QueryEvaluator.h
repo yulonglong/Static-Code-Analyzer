@@ -5,16 +5,17 @@
 #include <iostream>
 #include "Relationship.h"
 #include "Query.h"
+#include "TypeTable.h"
 #include <vector>
 
 
 class QueryEvaluator{ 
 private:
-	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, Query::SType>, std::string);
+	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, SType>, std::string);
 	std::vector<int> evaluateFollowsStar(Relationship);
 	std::vector<int> evaluateParent(Relationship);
 	std::vector<int> evaluateParentStar(Relationship);
-	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, Query::SType>);
+	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, SType>);
 	bool evaluateFollowsStarBoolean(Relationship);
 	bool evaluateParentBoolean(Relationship);
 	bool evaluateParentStarBoolean(Relationship);

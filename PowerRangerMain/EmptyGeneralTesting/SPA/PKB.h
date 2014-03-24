@@ -23,6 +23,7 @@ private:
 	PKB(); // private constructor 
 
 
+
 public:
 	static PKB* getInstance(); 
 	static VarTable* getVarTable();

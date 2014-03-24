@@ -25,14 +25,14 @@ public:
 	Follows();
 	VOID setFollows(STMTNUM, STMTNUM);
 	BOOLEAN isFollows(STMTNUM, STMTNUM);
-	BOOLEAN isFollows(Query::SType, STMTNUM);
-	BOOLEAN isFollowedBy(Query::SType, STMTNUM);
-	BOOLEAN	isFollows(Query::SType, Query::SType);
-	STMTNUM getFollows(Query::SType, STMTNUM);
-	STMTNUM getFollowedBy(Query::SType, STMTNUM);
-	vector<STMTNUM> getFollows(Query::SType, Query::SType, Query::SType);
-	vector<STMTNUM> getFollowedBy(Query::SType, Query::SType, Query::SType); // argument order: selectedSyn, token 1, token 2
-	vector<STMTNUM> getAll(Query::SType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet
+	BOOLEAN isFollows(SType, STMTNUM);
+	BOOLEAN isFollowedBy(SType, STMTNUM);
+	BOOLEAN	isFollows(SType, SType);
+	STMTNUM getFollows(SType, STMTNUM);
+	STMTNUM getFollowedBy(SType, STMTNUM);
+	vector<STMTNUM> getFollows(SType, SType, SType);
+	vector<STMTNUM> getFollowedBy(SType, SType, SType); // argument order: selectedSyn, token 1, token 2
+	vector<STMTNUM> getAll(SType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet
 }; 
 
 #endif
