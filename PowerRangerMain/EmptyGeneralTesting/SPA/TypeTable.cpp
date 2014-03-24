@@ -8,19 +8,19 @@ TypeTable::TypeTable() {
 }
 
 
-VOID TypeTable::insertStmtNumAndType(STMTNUM,TYPE) {
-	typeMap[STMTNUM]=TYPE;
+void TypeTable::insertStmtNumAndType(STMTNUM s,TYPE t) {
+	typeMap[s]=t;
 }
 
 
-TYPE TypeTable:: getTYPE (STMTNUM) {
-	return typeMap.at(STMTNUM);
+TYPE TypeTable:: getType (STMTNUM s) {
+	return typeMap.at(s);
 }
 
-LIST TypeTable:: getStmtNum (TYPE) {
+LIST TypeTable:: getStmtNum (TYPE t) {
 	LIST list;
-	for (map<char,int>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
-		if(it->second.compare(TYPE) == 0) {
+	for (map<int,string>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
+		if(it->second.compare(t) == 0) {
 			list.push_back (it->first);
 		}
 	}
