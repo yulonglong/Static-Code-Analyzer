@@ -12,17 +12,17 @@
 
 using namespace std;
 typedef int STMTNUM;
-typedef string TYPE;
+typedef string SType;
 typedef vector<STMTNUM> LIST;
 
 class TypeTable {
 private:
-	map<STMTNUM,TYPE> typeMap;
+	map<STMTNUM,SType> typeMap;
 public: 
 	TypeTable();
-	void insertStmtNumAndType(STMTNUM,TYPE);
-	TYPE getType (STMTNUM);
-	LIST getStmtNum (TYPE);
+	void insertStmtNumAndType(STMTNUM,SType);
+	SType getType (STMTNUM);
+	LIST getStmtNum (SType);
 };
 
 #endif

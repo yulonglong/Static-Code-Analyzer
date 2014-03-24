@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include "TypeTable.h"
 
 using namespace std;
 typedef int STMTNUM;
@@ -16,6 +17,10 @@ typedef bool BOOLEAN;
 typedef vector<STMTNUM> LIST;
 
 class Parent {
+private:
+	vector<vector<STMTNUM>> parentTable;
+	vector<STMTNUM> childrenTable;
+	TypeTable table;
 public: 
 	Parent();
 	VOID setParent(STMTNUM, STMTNUM);

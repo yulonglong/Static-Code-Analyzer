@@ -2,9 +2,6 @@
 
 #include "Parent.h"
 
-vector<vector<STMTNUM>> parentTable;
-vector<STMTNUM> childrenTable;
-
 // constructor
 Parent::Parent() {
 	// program line 0 is not to be used for the enumeration
@@ -40,12 +37,40 @@ BOOLEAN Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-STMTNUM Parent::getParent(STMTNUM s1) {
+BOOLEAN Parent::isParent(SType t, STMTNUM s) {
+	STMTNUM temp = childrenTable[s];
 	//Need to add exception handling
-	return childrenTable[s1];
+	if (table.getType(temp).compare(t)==0) {
+		return true;
+	}
+	return false;
 }
 
-LIST Parent::getChildren(STMTNUM s1) {
-	//Need to add exception handling
-	return parentTable[s1];
+BOOLEAN Parent::isChildren(SType t, STMTNUM s ){
+	LIST temp = parentTable[s];
+	LIST::iterator it = temp.begin();
+	for(;it!=temp.end();++it){
+		if(table.getType(*it)==t)
+			return true;
+	}
+	return false;
+}
+
+vector<STMTNUM> Parent::getParent(SType t1, SType t2, STMTNUM s) {
+	STMTNUM temp = childrenTable[s];
+	if(table.getType(temp).compare(t2)==0){
+		return table.getStmtNum(t1);
+	}
+	return vector<STMTNUM> (1,-1);
+}
+
+vector<STMTNUM> Parent::getChildren(SType t1, SType t2, STMTNUM s) {
+	vector<STMTNUM> temp = parentTable[s];
+	vector<STMTNUM>::iterator it = temp.begin();
+	for(;it!=temp.end();++it){
+		if(table.getType(*it).compare(t2)==0){
+			return table.getStmtNum(t1);
+		}
+	}
+	return vector<STMTNUM> (1,-1);
 }
