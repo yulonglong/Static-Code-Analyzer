@@ -7,6 +7,10 @@
 
 // include your other headers here
 #include "AbstractWrapper.h"
+#include "VarTable.h"
+#include "ProcTable.h"
+#include "CodeParser.h"
+
 
 class TestWrapper : public AbstractWrapper {
  public:
