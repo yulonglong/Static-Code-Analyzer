@@ -14,7 +14,6 @@
     <ClCompile Include="CodeParser.cpp" />
     <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="Follows.cpp" />
-    <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PKB.cpp" />
@@ -27,7 +26,6 @@
   <ItemGroup>
     <ClInclude Include="CodeParser.h" />
     <ClInclude Include="Follows.h" />
-    <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parent.h" />
     <ClInclude Include="PKB.h" />
