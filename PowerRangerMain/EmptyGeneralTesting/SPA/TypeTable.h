@@ -20,8 +20,8 @@ private:
 	map<STMTNUM,TYPE> typeMap;
 public: 
 	TypeTable();
-	VOID insertStmtNumAndType(STMTNUM,TYPE);
-	TYPE getTYPE (STMTNUM);
+	void insertStmtNumAndType(STMTNUM,TYPE);
+	TYPE getType (STMTNUM);
 	LIST getStmtNum (TYPE);
 };
 
