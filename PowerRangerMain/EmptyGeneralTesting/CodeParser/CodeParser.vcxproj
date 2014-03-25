@@ -11,24 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DesignExtractor.cpp" />
-    <ClCompile Include="Follows.cpp" />
-    <ClCompile Include="Parent.cpp" />
-    <ClCompile Include="PKB.cpp" />
-    <ClCompile Include="Query.cpp" />
-    <ClCompile Include="QueryEvaluator.cpp" />
-    <ClCompile Include="Relationship.cpp" />
+    <ClInclude Include="CodeParser.h" />
+    <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Follows.h" />
-    <ClInclude Include="Parent.h" />
-    <ClInclude Include="PKB.h" />
-    <ClInclude Include="Query.h" />
-    <ClInclude Include="QueryEvaluator.h" />
-    <ClInclude Include="Relationship.h" />
+    <ClCompile Include="CodeParser.cpp" />
+    <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}</ProjectGuid>
+    <ProjectGuid>{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}</ProjectGuid>
     <RootNamespace>SPA</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -59,7 +50,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Table</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -72,7 +62,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Table;$(SolutionDir)CodeParser;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Table</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

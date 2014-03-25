@@ -21,16 +21,10 @@
     <ClCompile Include="Follows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PKB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DesignExtractor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CodeParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Query.cpp">
@@ -50,13 +44,7 @@
     <ClInclude Include="Follows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PKB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CodeParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Query.h">
