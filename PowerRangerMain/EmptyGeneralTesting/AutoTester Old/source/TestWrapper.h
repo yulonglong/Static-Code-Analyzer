@@ -7,6 +7,9 @@
 
 // include your other headers here
 #include "AbstractWrapper.h"
+#include "CodeParser.h"
+#include "PKB.h"
+
 
 class TestWrapper : public AbstractWrapper {
  public:
