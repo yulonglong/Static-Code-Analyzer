@@ -23,12 +23,11 @@ INDEX ProcTable::insertProc(PROCNAME procName) {
 	}
 }
 
-// TODO: if ind is out of range, throw error!
 // Returns the name of a proc at ProTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
 PROCNAME ProcTable::getProcName (INDEX ind){
-	if (ind >= procTable.size()) {
-		// throw error
+	if (ind >= (signed int) procTable.size()) {
+		return "-1";
 	}
 	return procTable[ind];
 }

@@ -11,8 +11,8 @@ using namespace std;
 bool PKB::instanceFlag = false;
 PKB* PKB::pkb = NULL; 
 
-void PKB() {
-}
+// void PKB() {
+// }
 
 PKB* PKB::getInstance() {
 	if (!instanceFlag) {
