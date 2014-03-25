@@ -24,9 +24,10 @@ void TestWrapper::parse(std::string filename) {
 	// ...rest of your code...
 	PKB* pkb = PKB::getInstance();
 	Node* ASTRoot;
-	VarTable varTable = *pkb->getVarTable(); // is this correct?? idk:(
-	ProcTable procTable = *pkb->getProcTable();
-
+	VarTable* varTable1 = pkb->getVarTable(); // is this correct?? idk:(
+	ProcTable* procTable1 = pkb->getProcTable();
+	VarTable varTable;
+	ProcTable procTable;
 	ASTRoot = parseCode(filename, varTable, procTable);
 }
 

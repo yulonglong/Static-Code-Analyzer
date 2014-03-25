@@ -4,29 +4,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "PKB.h"
 using namespace std;
 
-#include "PKB.h"
+
 
 bool PKB::instanceFlag = false;
-PKB* PKB::pkb = NULL; 
-
-// void PKB() {
-// }
+PKB* PKB::pkb = NULL;
 
 PKB* PKB::getInstance() {
-	if (!instanceFlag) {
-		pkb = new PKB();
-		instanceFlag = true; 
-	}
+	pkb = new PKB();
+	instanceFlag=true;
 	return pkb; 
 }
 
-VarTable* getVarTable() {
+
+
+VarTable* PKB::getVarTable() {
 	return NULL;
 }
 
-ProcTable* getProcTable() {
+ProcTable* PKB::getProcTable() {
 	return NULL;
 }
 

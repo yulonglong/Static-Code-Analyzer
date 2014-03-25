@@ -20,14 +20,13 @@ class PKB {
 private: 
 	static bool instanceFlag; 
 	static PKB *pkb;
-	PKB(); // private constructor 
-
+	PKB(){} // private constructor 
 
 
 public:
 	static PKB* getInstance(); 
-	static VarTable* getVarTable();
-	static ProcTable* getProcTable();
+	VarTable* getVarTable();
+	ProcTable* getProcTable();
 
 	VarTable* varTable; 
 	int setProcToAST(PROC p, Node* r);
