@@ -22,12 +22,11 @@ INDEX VarTable::insertVar(VARNAME varName) {
 	}
 }
 
-// TODO: if ind is out of range, throw error!
 // Returns the name of a variable at VarTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
 VARNAME VarTable::getVarName (INDEX ind){
 	if (ind >= (signed int) varTable.size()) {
-		// throw error
+		return "-1";
 	}
 	return varTable[ind];
 }
