@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CODEPARSER_H
 #define CODEPARSER_H
 
