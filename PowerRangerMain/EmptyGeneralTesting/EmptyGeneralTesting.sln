@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Table", "Table\Table.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoTester", "AutoTester\AutoTester.vcxproj", "{20A7FBF3-D972-4220-A6AA-960484999FBB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeParser", "CodeParser\CodeParser.vcxproj", "{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,10 @@ Global
 		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Debug|Win32.Build.0 = Debug|Win32
 		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Release|Win32.ActiveCfg = Release|Win32
 		{20A7FBF3-D972-4220-A6AA-960484999FBB}.Release|Win32.Build.0 = Release|Win32
+		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}.Debug|Win32.Build.0 = Debug|Win32
+		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}.Release|Win32.ActiveCfg = Release|Win32
+		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
