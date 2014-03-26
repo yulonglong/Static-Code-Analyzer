@@ -24,12 +24,18 @@
     <ClCompile Include="TestVarTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestTypeTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestProcTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestVarTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTypeTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
