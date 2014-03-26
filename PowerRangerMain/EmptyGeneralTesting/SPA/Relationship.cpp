@@ -2,14 +2,16 @@
 #include <string>
 #include "Relationship.h"
 
-Relationship(string rn, string v1, string v2)
+// trying to merge revision
+
+Relationship::Relationship(string rn, string v1, string v2)
 {
     relName = rn;
     token1 = v1;
     token2 = v2;
 }
 
-RelType getRelType()
+Relationship::RelType Relationship::getRelType()
 {
      if (relName == "FOLLOWS") {
         return FOLLOWS;
@@ -22,12 +24,12 @@ RelType getRelType()
 	}
 }
 
-string getToken1()
+string Relationship::getToken1()
 {
     return token1;
 }
 
-string getToken2()
+string Relationship::getToken2()
 {
     return token2;
 }
