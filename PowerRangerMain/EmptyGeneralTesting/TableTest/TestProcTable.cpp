@@ -33,17 +33,17 @@ void ProcTableTest::testTableSet()
 	ProcTable procTable;
 
 	// assign a few grades to this student
-	procTable.insertProc("x");
-	procTable.insertProc("y");
-	procTable.insertProc("z");
+	procTable.insertProc("First");
+	procTable.insertProc("Second");
+	procTable.insertProc("Third");
 
 	// verify that the assignment is correct - Note 7
-	CPPUNIT_ASSERT_EQUAL(0, procTable.getProcIndex("x"));
-	CPPUNIT_ASSERT_EQUAL(1, procTable.getProcIndex("y"));
-	CPPUNIT_ASSERT_EQUAL(2, procTable.getProcIndex("z"));
+	CPPUNIT_ASSERT_EQUAL(0, procTable.getProcIndex("First"));
+	CPPUNIT_ASSERT_EQUAL(1, procTable.getProcIndex("Second"));
+	CPPUNIT_ASSERT_EQUAL(2, procTable.getProcIndex("Third"));
 
 	// attempt to retrieve a course that does not exist
-	CPPUNIT_ASSERT_EQUAL(-1, procTable.getProcIndex("a"));
+	CPPUNIT_ASSERT_EQUAL(-1, procTable.getProcIndex("Fourth"));
 
 	return;
 }
