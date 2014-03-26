@@ -2,8 +2,6 @@
 #include <string>
 #include "Relationship.h"
 
-using namespace std;
-
 Relationship::Relationship(string rn, string v1, string v2)
 {
     relName = rn;

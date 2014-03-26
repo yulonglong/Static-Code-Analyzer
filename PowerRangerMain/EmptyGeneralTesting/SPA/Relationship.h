@@ -3,21 +3,23 @@
 
 #include <string>
 
+using namespace std;
+
 class Relationship
 {
     private:
-        std::string relName;
-        std::string token1;
-        std::string token2;
+        string relName;
+        string token1;
+        string token2;
 
     public:
         enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR};
 
-        Relationship(std::string, std::string, std::string);
+        Relationship(string, string, string);
 
         RelType getRelType();
-        std::string getToken1();
-        std::string getToken2();
+        string getToken1();
+        string getToken2();
 };
 
 #endif // RELATIONSHIP_H_INCLUDED
