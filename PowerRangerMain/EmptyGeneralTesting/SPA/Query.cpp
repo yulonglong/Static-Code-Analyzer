@@ -2,34 +2,32 @@
 #include <string>
 #include "Query.h"
 
-using namespace std;
-
-Query::Query(string s)
+Query(string s)
 {
     selectedSyn = s;
 }
 
-string Query::getSelectedSyn()
+string getSelectedSyn()
 {
     return selectedSyn;
 }
 
-void Query::addRelationship(Relationship r)
+void addRelationship(Relationship r)
 {
     relVect.push_back(r);
 }
 
-vector<Relationship> Query::getRelVect()
+vector<Relationship> getRelVect()
 {
     return relVect;
 }
 
-void Query::addSynTable(unordered_map<string, SType> map)
+void addSynTable(unordered_map<string, SType> map)
 {
 	synTable = map;
 }
 
-unordered_map<std::string, SType> Query::getSynTable()
+unordered_map<string, SType> getSynTable()
 {
 	return synTable;
 }

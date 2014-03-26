@@ -2,14 +2,14 @@
 #include <string>
 #include "Relationship.h"
 
-Relationship::Relationship(string rn, string v1, string v2)
+Relationship(string rn, string v1, string v2)
 {
     relName = rn;
     token1 = v1;
     token2 = v2;
 }
 
-Relationship::RelType Relationship::getRelType()
+RelType getRelType()
 {
      if (relName == "FOLLOWS") {
         return FOLLOWS;
@@ -22,12 +22,12 @@ Relationship::RelType Relationship::getRelType()
 	}
 }
 
-string Relationship::getToken1()
+string getToken1()
 {
     return token1;
 }
 
-string Relationship::getToken2()
+string getToken2()
 {
     return token2;
 }
