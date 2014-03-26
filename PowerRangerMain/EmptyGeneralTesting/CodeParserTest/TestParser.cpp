@@ -1,0 +1,77 @@
+#include <cppunit/config/SourcePrefix.h>
+#include "Node.h"
+#include "CodeParser.h"
+#include "TestParser.h"
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void 
+ParserTest::setUp()
+{
+}
+
+void 
+ParserTest::tearDown()
+{
+}
+
+// Registers the fixture into the 'registry'
+CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4 
+
+// method to test the constructor
+void ParserTest::testModifyTable()
+{  // Note 5
+	VarTable varTable;
+	ProcTable procTable;
+	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable);
+
+	string expected = "i";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
+	expected = "y";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
+	expected = "z";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(3));
+
+	expected = "First";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(0));
+	expected = "Second";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(1));
+	expected = "Third";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(2));
+	return;
+}
+
+// method to test the assigning and retrieval of grades
+void ParserTest::testCompleteParser()
+{
+	// create a node
+	VarTable varTable;
+	ProcTable procTable;
+	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable);
+	// assign
+	Node* curr = root;
+	curr = root->getChild()[0];
+	curr = curr->getChild()[0];
+	curr = curr->getChild()[0];
+
+	string expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	// verify that the assignment is correct - Note 7
+	
+
+	return;
+}
