@@ -27,7 +27,7 @@ void Query::addSynTable(unordered_map<string, SType> map)
 	synTable = map;
 }
 
-unordered_map<std::string, SType> Query::getSynTable()
+unordered_map<string, SType> Query::getSynTable()
 {
 	return synTable;
 }
