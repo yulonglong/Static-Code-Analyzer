@@ -6,20 +6,22 @@
 #include <unordered_map>
 #include "TypeTable.h"
 
+using namespace std;
+
 class Query
 {
     public:
-        Query(std::string);
-		std::string getSelectedSyn();
+        Query(string);
+		string getSelectedSyn();
         void addRelationship(Relationship);
-        std::vector<Relationship> getRelVect();
-		void addSynTable(std::unordered_map<std::string, SType>);
-		std::unordered_map<std::string, SType> getSynTable();
+        vector<Relationship> getRelVect();
+		void addSynTable(unordered_map<string, SType>);
+		unordered_map<string, SType> getSynTable();
 
 	private:
-        std::string selectedSyn; 
-        std::vector<Relationship> relVect;
-		std::unordered_map<std::string, SType> synTable;
+        string selectedSyn; 
+        vector<Relationship> relVect;
+		unordered_map<string, SType> synTable;
 };
 
 #endif // QUERY_H_INCLUDED
