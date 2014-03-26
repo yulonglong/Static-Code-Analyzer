@@ -22,7 +22,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( VarTableTest ); // Note 4
 void VarTableTest::testConstructor()
 {  // Note 5
 	// create a student object
-	VarTable procTable;
+	VarTable varTable;
 	return;
 }
 
