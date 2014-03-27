@@ -2,9 +2,6 @@
 
 #include "ProcTable.h"
 
-
-vector<PROCNAME> procTable; 
-
 // constructor
 ProcTable::ProcTable() {
 }
@@ -42,6 +39,6 @@ INDEX ProcTable::getProcIndex (PROCNAME procName){
 	return -1;
 }
 
-INDEX getNumProcedures() {
+INDEX ProcTable::getNumProcedures() {
 	return procTable.size();
 }

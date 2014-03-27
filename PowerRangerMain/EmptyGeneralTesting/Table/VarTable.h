@@ -14,6 +14,8 @@ typedef int INDEX;
 typedef string VARNAME; 
 
 class VarTable {
+private: 
+	vector<VARNAME> varTable; 
 public: 
 	VarTable();
 	INDEX insertVar(VARNAME);
