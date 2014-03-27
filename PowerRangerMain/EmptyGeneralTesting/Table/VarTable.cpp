@@ -2,7 +2,6 @@
 
 #include "VarTable.h"
 
-vector<VARNAME> varTable; 
 
 // constructor
 VarTable::VarTable() {
@@ -41,6 +40,6 @@ INDEX VarTable::getVarIndex (VARNAME varName){
 	return -1;
 }
 
-INDEX getNumVar() {
+INDEX VarTable::getNumVar() {
 	return varTable.size();
 }

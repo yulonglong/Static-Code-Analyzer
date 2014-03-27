@@ -14,12 +14,16 @@ typedef int INDEX;
 typedef string PROCNAME; 
 
 class ProcTable {
+private: 
+	vector<PROCNAME> procTable; 
+
 public:
 	ProcTable();
 	INDEX insertProc(PROCNAME);
 	PROCNAME getProcName (INDEX);
 	INDEX getProcIndex (PROCNAME);
 	INDEX getNumProcedures(); 
+
 };
 
 #endif
