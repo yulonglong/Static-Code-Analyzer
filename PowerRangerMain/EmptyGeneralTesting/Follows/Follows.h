@@ -18,22 +18,21 @@ class Follows {
 private: 
 	vector<STMTNUM> followsTable;
 	vector<STMTNUM> followedByTable;
-	TypeTable table;
+	
 public: 
+	TypeTable table; // public for the sake of unit testing
 	Follows();
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
-	bool isFollows(STMTNUM, STMTNUM);
-	bool isFollows(STYPE, STMTNUM);
-	bool isFollowedBy(STYPE, STMTNUM);
-	bool isFollows(STYPE, STYPE);
-	STMTNUM getFollows(STYPE, STMTNUM);
+	bool isFollows(STMTNUM, STMTNUM); 
+	bool isFollows(STYPE, STMTNUM); // redundant!!; getFollows(STYPE, STMTNUM) returns -1 if no result
+	bool isFollowedBy(STYPE, STMTNUM); // redundant!!
+	bool isFollows(STYPE, STYPE);	
+	STMTNUM getFollows(STYPE, STMTNUM);	
 	STMTNUM getFollowedBy(STYPE, STMTNUM);
 	vector<STMTNUM> getFollows(STYPE, STYPE, STYPE);
 	vector<STMTNUM> getFollowedBy(STYPE, STYPE, STYPE); // argument order: selectedSyn, token 1, token 2
 	vector<STMTNUM> getAll(STYPE); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet // should not be under follows
-	
-
 }; 
 
 #endif

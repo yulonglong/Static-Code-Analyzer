@@ -12,8 +12,6 @@ Follows::Follows() {
 Follows::~Follows() {
 	vector<STMTNUM>().swap(followsTable);
 	vector<STMTNUM>().swap(followedByTable);
-	// followsTable.clear();
-	// followedByTable.clear();
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
@@ -29,7 +27,6 @@ void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
-	//Need to add exception handling
 	if (followsTable[s1] == s2) {
 		return true;
 	}
@@ -37,21 +34,21 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 }
 
 bool Follows::isFollows(STYPE t, STMTNUM s) {
-	STMTNUM temp = followsTable[s];
-	//Need to add exception handling
-	if (table.getType(temp) == t) {
-		return true;
-	}
-	return false;
+	STMTNUM result = getFollows(t, s);
+	bool noResult = (result == -1);
+	if (noResult) {
+		return false;
+	} 
+	return true;
 }
 
 bool Follows::isFollowedBy(STYPE t, STMTNUM s) {
-	STMTNUM temp = followedByTable[s];
-	//Need to add exception handling
-	if (table.getType(temp) == t) {
-		return true;
-	}
-	return false;
+	STMTNUM result = getFollowedBy(t, s);
+	bool noResult = (result == -1);
+	if (noResult) {
+		return false;
+	} 
+	return true;
 }
 
 bool Follows::isFollows(STYPE t1, STYPE t2) {
@@ -65,6 +62,7 @@ bool Follows::isFollows(STYPE t1, STYPE t2) {
 	return false;
 }
 
+// TODO: add exception handling
 STMTNUM Follows::getFollows(STYPE t, STMTNUM s) {
 	if(table.getType(followsTable[s]) == t){
 		return followsTable[s];
@@ -72,14 +70,15 @@ STMTNUM Follows::getFollows(STYPE t, STMTNUM s) {
 	return -1;
 }
 
+// TODO: add exception handling
 STMTNUM Follows::getFollowedBy(STYPE t, STMTNUM s) {
-	TypeTable table;
 	if(table.getType(followedByTable[s]) == t){
 		return followedByTable[s];
 	}
 	return -1;
 }
 
+// TODO: add exception handling
 vector<STMTNUM> Follows::getFollows(STYPE t1, STYPE t2,STYPE t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
@@ -96,6 +95,7 @@ vector<STMTNUM> Follows::getFollows(STYPE t1, STYPE t2,STYPE t3) {
 	return v;
 }
 
+// TODO: add exception handling
 vector<STMTNUM> Follows::getFollowedBy(STYPE t1, STYPE t2,STYPE t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
