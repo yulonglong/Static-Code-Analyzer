@@ -1,0 +1,16 @@
+#include <iostream>
+#include <string>
+#include "QueryParser.h"
+
+using namespace std;
+
+int main(){
+
+	string s;
+	getline(cin, s);
+	QueryParser qp;
+	Query query = qp.parse(s);
+
+	string a;
+	cin >> a;
+}
