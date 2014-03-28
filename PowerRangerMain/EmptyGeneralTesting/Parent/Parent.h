@@ -12,7 +12,6 @@
 
 using namespace std;
 typedef int STMTNUM;
-typedef void VOID;
 typedef bool BOOLEAN;
 typedef vector<STMTNUM> LIST;
 
@@ -20,18 +19,20 @@ class Parent {
 private:
 	vector<vector<STMTNUM>> parentTable;
 	vector<STMTNUM> childrenTable;
-	TypeTable table;
+	
 public: 
+	TypeTable table; // for the sake of unit testing.
 	Parent();
-	VOID setParent(STMTNUM, STMTNUM);
+	~Parent();
+	void setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);
-	BOOLEAN isParent(SType, STMTNUM); // isParent(while, s1) 
-	BOOLEAN isChildren(SType, STMTNUM); 
-	vector<STMTNUM> getParent(SType, SType, STMTNUM); // parent (w, s1) --> returns parents that are while statements
+	BOOLEAN isParent(STYPE, STMTNUM); // isParent(while, s1) 
+	BOOLEAN isChildren(STYPE, STMTNUM); 
+	vector<STMTNUM> getParent(STYPE, STYPE, STMTNUM); // parent (w, s1) --> returns parents that are while statements
 	// what you want to get, 2nd parameter of parent
-	vector<STMTNUM> getChildren(SType, SType, STMTNUM);
+	vector<STMTNUM> getChildren(STYPE, STYPE, STMTNUM);
 	// Parent (s1, w) returns all the while stmts
-	// vector<STMTNUM> getParent(SType, SType, SType);
+	// vector<STMTNUM> getParent(STYPE, STYPE, STYPE);
 };
 
 #endif
