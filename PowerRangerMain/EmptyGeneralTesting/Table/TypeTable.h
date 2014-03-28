@@ -10,20 +10,19 @@
 #include <iterator>
 #include <map>
 
-
 using namespace std;
 typedef int STMTNUM;
 typedef vector<STMTNUM> LIST;
-typedef string SType;
+enum STYPE { ASSIGN, WHILE, IF, CALL } ;
 
 class TypeTable {
 private:
-	map<STMTNUM,SType> typeMap;
+	map<STMTNUM,STYPE> typeMap;
 public: 
 	TypeTable();
-	void insertStmtNumAndType(STMTNUM,SType);
-	SType getType (STMTNUM);
-	LIST getStmtNum (SType);
+	void insertStmtNumAndType(STMTNUM,STYPE);
+	STYPE getType (STMTNUM);
+	LIST getStmtNum (STYPE);
 };
 
 #endif

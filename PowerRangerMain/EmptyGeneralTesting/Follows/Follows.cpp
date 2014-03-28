@@ -36,57 +36,57 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Follows::isFollows(SType t, STMTNUM s) {
+bool Follows::isFollows(STYPE t, STMTNUM s) {
 	STMTNUM temp = followsTable[s];
 	//Need to add exception handling
-	if (table.getType(temp).compare(t)==0) {
+	if (table.getType(temp) == t) {
 		return true;
 	}
 	return false;
 }
 
-bool Follows::isFollowedBy(SType t, STMTNUM s) {
+bool Follows::isFollowedBy(STYPE t, STMTNUM s) {
 	STMTNUM temp = followedByTable[s];
 	//Need to add exception handling
-	if (table.getType(temp).compare(t)==0) {
+	if (table.getType(temp) == t) {
 		return true;
 	}
 	return false;
 }
 
-bool Follows::isFollows(SType t1, SType t2) {
+bool Follows::isFollows(STYPE t1, STYPE t2) {
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
-			if(table.getType(*it).compare(table.getType(*it2)) == 0)
+			if(table.getType(*it)== (table.getType(*it2)))
 				return true;
 		}
 	}	
 	return false;
 }
 
-STMTNUM Follows::getFollows(SType t, STMTNUM s) {
-	if(table.getType(followsTable[s]).compare(t) == 0){
+STMTNUM Follows::getFollows(STYPE t, STMTNUM s) {
+	if(table.getType(followsTable[s]) == t){
 		return followsTable[s];
 	}
 	return -1;
 }
 
-STMTNUM Follows::getFollowedBy(SType t, STMTNUM s) {
+STMTNUM Follows::getFollowedBy(STYPE t, STMTNUM s) {
 	TypeTable table;
-	if(table.getType(followedByTable[s]).compare(t) == 0){
+	if(table.getType(followedByTable[s]) == t){
 		return followedByTable[s];
 	}
 	return -1;
 }
 
-vector<STMTNUM> Follows::getFollows(SType t1, SType t2,SType t3) {
+vector<STMTNUM> Follows::getFollows(STYPE t1, STYPE t2,STYPE t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
-			if(table.getType(*it).compare(t2) == 0){
-				if(table.getType(*it2).compare(t3) == 0){
+			if(table.getType(*it) == t2){
+				if(table.getType(*it2) == t3){
 					v = table.getStmtNum(t1);
 					return v;
 				}
@@ -96,13 +96,13 @@ vector<STMTNUM> Follows::getFollows(SType t1, SType t2,SType t3) {
 	return v;
 }
 
-vector<STMTNUM> Follows::getFollowedBy(SType t1, SType t2,SType t3) {
+vector<STMTNUM> Follows::getFollowedBy(STYPE t1, STYPE t2,STYPE t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followedByTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followedByTable.end();++it2){
-			if(table.getType(*it).compare(t2) == 0){
-				if(table.getType(*it2).compare(t3) == 0){
+			if(table.getType(*it) == t2){
+				if(table.getType(*it2) == t3){
 					v = table.getStmtNum(t1);
 					return v;
 				}
@@ -111,9 +111,3 @@ vector<STMTNUM> Follows::getFollowedBy(SType t1, SType t2,SType t3) {
 	}
 	return v;
 }
-
-vector<STMTNUM> getAll(SType t){
-	vector<STMTNUM> v (1,-1);
-	return v;
-}
-
