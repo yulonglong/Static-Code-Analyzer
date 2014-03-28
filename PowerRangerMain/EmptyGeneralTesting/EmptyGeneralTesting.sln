@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C++ Express 2010
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPA", "SPA\SPA.vcxproj", "{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntegrationTesting", "IntegrationTesting\IntegrationTesting.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
@@ -22,6 +22,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TableTest", "TableTest\TableTest.vcxproj", "{170AC843-B8DA-41C8-8241-10885C7D3AE1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeParserTest", "CodeParserTest\CodeParserTest.vcxproj", "{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Follows", "Follows\Follows.vcxproj", "{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowsTest", "FollowsTest\FollowsTest.vcxproj", "{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,14 @@ Global
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Debug|Win32.Build.0 = Debug|Win32
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Release|Win32.ActiveCfg = Release|Win32
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Release|Win32.Build.0 = Release|Win32
+		{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}.Debug|Win32.Build.0 = Debug|Win32
+		{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}.Release|Win32.ActiveCfg = Release|Win32
+		{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}.Release|Win32.Build.0 = Release|Win32
+		{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}.Debug|Win32.Build.0 = Debug|Win32
+		{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}.Release|Win32.ActiveCfg = Release|Win32
+		{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
