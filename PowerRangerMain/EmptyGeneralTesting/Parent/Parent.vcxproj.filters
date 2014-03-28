@@ -15,37 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Parent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Parent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PKB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DesignExtractor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Query.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Relationship.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QueryEvaluator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="PKB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Query.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Relationship.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryEvaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
