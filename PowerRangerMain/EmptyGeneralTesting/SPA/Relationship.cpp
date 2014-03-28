@@ -1,8 +1,4 @@
-#include <iostream>
-#include <string>
 #include "Relationship.h"
-
-// trying to merge revision
 
 Relationship::Relationship(string rn, string v1, string v2)
 {

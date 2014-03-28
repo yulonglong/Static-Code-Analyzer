@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include "Query.h"
 
 Query::Query(string s)
@@ -27,7 +25,7 @@ void Query::addSynTable(unordered_map<string, SType> map)
 	synTable = map;
 }
 
-unordered_map<string, SType> Query::getSynTable()
+unordered_map<string, Query::SType> Query::getSynTable()
 {
 	return synTable;
 }

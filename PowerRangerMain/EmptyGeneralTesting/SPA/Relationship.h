@@ -2,10 +2,10 @@
 #define RELATIONSHIP_H
 
 #include <string>
+#include <iostream>
+#include <string>
 
 using namespace std;
-
-// trying to merge revision
 
 class Relationship
 {

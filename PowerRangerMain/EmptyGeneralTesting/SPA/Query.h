@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-#include "TypeTable.h"
 
 using namespace std;
 
@@ -15,6 +14,7 @@ class Query
 		string getSelectedSyn();
         void addRelationship(Relationship);
         vector<Relationship> getRelVect();
+		enum SType{ASSIGN, IF, WHILE, BOOLEAN};
 		void addSynTable(unordered_map<string, SType>);
 		unordered_map<string, SType> getSynTable();
 
