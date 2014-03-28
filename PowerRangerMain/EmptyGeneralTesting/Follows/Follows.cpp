@@ -9,7 +9,14 @@ Follows::Follows() {
 	followedByTable.assign(5, -1);
 }
 
-VOID Follows::setFollows(STMTNUM s1, STMTNUM s2) {
+Follows::~Follows() {
+	vector<STMTNUM>().swap(followsTable);
+	vector<STMTNUM>().swap(followedByTable);
+	// followsTable.clear();
+	// followedByTable.clear();
+}
+
+void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 	if (s1 >= (signed int) followsTable.size()) {
 		followsTable.resize(s1+1, -1);
 	}
@@ -21,7 +28,7 @@ VOID Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 	followedByTable[s2] = s1; 
 }
 
-BOOLEAN Follows::isFollows(STMTNUM s1, STMTNUM s2) {
+bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	//Need to add exception handling
 	if (followsTable[s1] == s2) {
 		return true;
@@ -29,7 +36,7 @@ BOOLEAN Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-BOOLEAN Follows::isFollows(SType t, STMTNUM s) {
+bool Follows::isFollows(SType t, STMTNUM s) {
 	STMTNUM temp = followsTable[s];
 	//Need to add exception handling
 	if (table.getType(temp).compare(t)==0) {
@@ -38,7 +45,7 @@ BOOLEAN Follows::isFollows(SType t, STMTNUM s) {
 	return false;
 }
 
-BOOLEAN Follows::isFollowedBy(SType t, STMTNUM s) {
+bool Follows::isFollowedBy(SType t, STMTNUM s) {
 	STMTNUM temp = followedByTable[s];
 	//Need to add exception handling
 	if (table.getType(temp).compare(t)==0) {
@@ -47,7 +54,7 @@ BOOLEAN Follows::isFollowedBy(SType t, STMTNUM s) {
 	return false;
 }
 
-BOOLEAN Follows::isFollows(SType t1, SType t2) {
+bool Follows::isFollows(SType t1, SType t2) {
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
@@ -109,3 +116,4 @@ vector<STMTNUM> getAll(SType t){
 	vector<STMTNUM> v (1,-1);
 	return v;
 }
+

@@ -71,7 +71,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\Table.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\Follows.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Link>
