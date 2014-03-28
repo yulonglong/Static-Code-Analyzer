@@ -6,69 +6,57 @@
 #include <string>
 using namespace std;
 
-void 
-ParentTest::setUp()
-{
+class Parent;
+Parent* parentTable; 
+
+void ParentTest::setUp() {
+	parentTable = new Parent();
 }
 
-void 
-ParentTest::tearDown()
-{
+void ParentTest::tearDown() {
+	parentTable->~Parent(); 
 }
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ParentTest ); // Note 4 
 
-// method to test the constructor
-void ParentTest::testConstructor()
-{  // Note 5
-	/*
-	Node* node= new Node("y","variable",15);
-	string expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, node->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, node->getType());
-	Node* expectedNode = NULL;
-	CPPUNIT_ASSERT_EQUAL(expectedNode, node->getParent());
-	int expectedInt = 15;
-	CPPUNIT_ASSERT_EQUAL(expectedInt, node->getProgLine());
-	*/
+void ParentTest::testParentUsingStmtNum() {  // Note 5
+	parentTable->setParent(6, 7);
+	parentTable->setParent(6, 8);
+	parentTable->setParent(6, 9);
+	parentTable->setParent(10, 11);
+	parentTable->setParent(10, 12);
+
+	CPPUNIT_ASSERT(parentTable->isParent(6, 7) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(10, 11) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(5, 6) == false);
+	CPPUNIT_ASSERT(parentTable->isParent(6, 10) == false);
 	return;
 }
 
-// method to test the assigning and retrieval of grades
-void ParentTest::testType()
-{
-	/*
-	// create a node
-	Node* parent = new Node();
-	Node* child = new Node();
-	// assign
-	parent->setType("variable");
-	parent->setData("x");
-	child->setType("stmtLst");
-	child->setParent(parent);
-	parent->setChild(child);
+void ParentTest::testParentUsingStmtType() {
+	parentTable->setParent(6, 7);
+	parentTable->setParent(6, 8);
+	parentTable->setParent(6, 9);
+	parentTable->setParent(10, 11);
+	parentTable->setParent(10, 12);
+	parentTable->table.insertStmtNumAndType(6, WHILE);
+	parentTable->table.insertStmtNumAndType(7, ASSIGN);
+	parentTable->table.insertStmtNumAndType(8, CALL);
+	parentTable->table.insertStmtNumAndType(9, ASSIGN);
+	parentTable->table.insertStmtNumAndType(10, IF);
+	parentTable->table.insertStmtNumAndType(11, ASSIGN);
+	parentTable->table.insertStmtNumAndType(12, ASSIGN);
+	
+	CPPUNIT_ASSERT(parentTable->isParent(WHILE, 9) == true);
+	// CPPUNIT_ASSERT(parentTable->isParent(10, 11) == true);
+	// CPPUNIT_ASSERT(parentTable->isParent(5, 6) == false);
+	// CPPUNIT_ASSERT(parentTable->isParent(6, 10) == false);
+	
 
-	// verify that the assignment is correct - Note 7
-	string expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, parent->getType());
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, parent->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, child->getType());
+	return;
+}
 
-	Node* expectedNode = parent->getChild()[0];
-
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getType());
-
-	expectedNode = child->getParent();
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getType());
-	*/
-
+void ParentTest::testChildrenUsingStmtType() {
 	return;
 }
