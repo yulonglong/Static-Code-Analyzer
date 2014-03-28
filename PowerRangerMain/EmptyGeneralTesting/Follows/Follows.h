@@ -24,14 +24,14 @@ public:
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
 	bool isFollows(STMTNUM, STMTNUM);
-	bool isFollows(SType, STMTNUM);
-	bool isFollowedBy(SType, STMTNUM);
-	bool isFollows(SType, SType);
-	STMTNUM getFollows(SType, STMTNUM);
-	STMTNUM getFollowedBy(SType, STMTNUM);
-	vector<STMTNUM> getFollows(SType, SType, SType);
-	vector<STMTNUM> getFollowedBy(SType, SType, SType); // argument order: selectedSyn, token 1, token 2
-	vector<STMTNUM> getAll(SType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet
+	bool isFollows(STYPE, STMTNUM);
+	bool isFollowedBy(STYPE, STMTNUM);
+	bool isFollows(STYPE, STYPE);
+	STMTNUM getFollows(STYPE, STMTNUM);
+	STMTNUM getFollowedBy(STYPE, STMTNUM);
+	vector<STMTNUM> getFollows(STYPE, STYPE, STYPE);
+	vector<STMTNUM> getFollowedBy(STYPE, STYPE, STYPE); // argument order: selectedSyn, token 1, token 2
+	vector<STMTNUM> getAll(STYPE); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet // should not be under follows
 	
 
 }; 
