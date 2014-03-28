@@ -6,69 +6,44 @@
 #include <string>
 using namespace std;
 
-void 
-FollowsTest::setUp()
+
+class Follows;
+Follows* followsTable; 
+
+void FollowsTest::setUp()
 {
+	
+	followsTable = new Follows();
+
 }
 
-void 
-FollowsTest::tearDown()
+void FollowsTest::tearDown()
 {
+	followsTable->~Follows(); 
 }
-
+	
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( FollowsTest ); // Note 4 
 
-// method to test the constructor
-void FollowsTest::testConstructor()
+void FollowsTest::testIsFollowsUsingStmtNum()
 {  // Note 5
-	/*
-	Node* node= new Node("y","variable",15);
-	string expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, node->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, node->getType());
-	Node* expectedNode = NULL;
-	CPPUNIT_ASSERT_EQUAL(expectedNode, node->getParent());
-	int expectedInt = 15;
-	CPPUNIT_ASSERT_EQUAL(expectedInt, node->getProgLine());
-	*/
+	followsTable->setFollows(1, 2);
+	followsTable->setFollows(2, 3);
+	followsTable->setFollows(4, 5);
+	followsTable->setFollows(5, 6);
+	followsTable->setFollows(6, 10);
+	followsTable->setFollows(10, 12);
+	
+	CPPUNIT_ASSERT(followsTable->isFollows(5, 6) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(6, 7) == false);
+	CPPUNIT_ASSERT(followsTable->isFollows(6, 10) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(10, 11) == false);
+	
 	return;
 }
 
-// method to test the assigning and retrieval of grades
-void FollowsTest::testType()
+void FollowsTest::testIsFollowsUsingStmtType()
 {
-	/*
-	// create a node
-	Node* parent = new Node();
-	Node* child = new Node();
-	// assign
-	parent->setType("variable");
-	parent->setData("x");
-	child->setType("stmtLst");
-	child->setParent(parent);
-	parent->setChild(child);
-
-	// verify that the assignment is correct - Note 7
-	string expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, parent->getType());
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, parent->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, child->getType());
-
-	Node* expectedNode = parent->getChild()[0];
-
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getType());
-
-	expectedNode = child->getParent();
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, expectedNode->getType());
-	*/
-
+	
 	return;
 }
