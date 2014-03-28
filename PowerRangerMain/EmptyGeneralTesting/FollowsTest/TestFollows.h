@@ -8,6 +8,9 @@ class FollowsTest : public CPPUNIT_NS::TestFixture // Note 2
 { 
 	CPPUNIT_TEST_SUITE( FollowsTest ); // Note 3 
 	CPPUNIT_TEST( testIsFollowsUsingStmtNum );
+	CPPUNIT_TEST( testFollowsDestructor );
+	CPPUNIT_TEST( testFollowsUsingStmtType );
+	CPPUNIT_TEST( testGetFollowsUsingStmtType );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -15,11 +18,9 @@ public:
 	void tearDown();
 
 	void testIsFollowsUsingStmtNum();
-	void testIsFollowsUsingStmtType();
-	void testIsfollowedByUsingStmtType();
+	void testFollowsDestructor();
+	void testFollowsUsingStmtType();
 	void testGetFollowsUsingStmtType();
-	void testGetfollowedByUsingStmtType();
-	void testGetAll();
 };
 #endif
     
