@@ -13,11 +13,11 @@ class QueryEvaluator{
 private:
 	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, STYPE>, std::string);
 	std::vector<int> evaluateFollowsStar(Relationship);
-	std::vector<int> evaluateParent(Relationship);
+	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, STYPE>, std::string);
 	std::vector<int> evaluateParentStar(Relationship);
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, STYPE>);
 	bool evaluateFollowsStarBoolean(Relationship);
-	bool evaluateParentBoolean(Relationship);
+	bool evaluateParentBoolean(Relationship, std::unordered_map<std::string, STYPE>);
 	bool evaluateParentStarBoolean(Relationship);
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 public:
