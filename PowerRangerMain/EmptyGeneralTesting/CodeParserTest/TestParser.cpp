@@ -75,3 +75,104 @@ void ParserTest::testCompleteParser()
 
 	return;
 }
+
+void ParserTest::testParserSource1()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Node* root = parseCode("Source1.txt",varTable,procTable);
+
+	Node* curr = root;
+	
+	string expected = "root";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "program";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+	expected = "Mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "procedure";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "Mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "stmtLst";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+	expected = "A1";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+    curr = root;
+
+	curr = curr->getChild()[1];
+	expected = "mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "procedure";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "stmtLst";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[1];
+    expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[1];
+	expected = "A1";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	return;
+}
+
+void ParserTest::testParserSource2()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Node* root = parseCode("Source2.txt",varTable,procTable);
+
+	Node* curr = root;
+	
+	string expected = "root";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "program";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+	expected = "ABC";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "procedure";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "ABC";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "stmtLst";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[3];
+    expected = "4";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	CPPUNIT_ASSERT_EQUAL(4, curr->getProgLine());
+	expected = "while";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	return;
+}
