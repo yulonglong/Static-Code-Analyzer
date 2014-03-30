@@ -15,6 +15,6 @@
 #include "ProcTable.h"
 #include "VarTable.h"
 
-Node* parseCode(std::string,VarTable varTable,ProcTable procTable);
+Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable);
 
 #endif
