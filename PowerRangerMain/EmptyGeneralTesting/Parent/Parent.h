@@ -25,14 +25,14 @@ public:
 	Parent();
 	~Parent();
 	void setParent(STMTNUM, STMTNUM);
-	BOOLEAN isParent(STMTNUM, STMTNUM);
-	BOOLEAN isParent(STYPE, STMTNUM); // isParent(while, s1) 
-	BOOLEAN isChildren(STYPE, STMTNUM); 
-	vector<STMTNUM> getParent(STYPE, STYPE, STMTNUM); // parent (w, s1) --> returns parents that are while statements
-	// what you want to get, 2nd parameter of parent
-	vector<STMTNUM> getChildren(STYPE, STYPE, STMTNUM);
-	// Parent (s1, w) returns all the while stmts
-	// vector<STMTNUM> getParent(STYPE, STYPE, STYPE);
+	BOOLEAN isParent(STMTNUM, STMTNUM);// Select BOOLEAN such that Parent(1,2)
+	BOOLEAN isParent(STYPE, STYPE); // Select BOOLEAN such that Parent(w,a)
+	BOOLEAN isParent(STYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
+	BOOLEAN isChildren(STYPE, STMTNUM); // Select BOOLEAN such that Parent(w,3)
+	vector<STMTNUM> getParent(STYPE, STYPE); // Select w such that Parent(w,a)
+	vector<STMTNUM> getChildren(STYPE, STYPE); //Select a such that Parent(w,a)
+	vector<STMTNUM> getParent(STYPE, STMTNUM); // Select w such that Parent(w,3)
+	vector<STMTNUM> getChildren(STYPE, STMTNUM); //Select a such that Parent(1,a)
 };
 
 #endif

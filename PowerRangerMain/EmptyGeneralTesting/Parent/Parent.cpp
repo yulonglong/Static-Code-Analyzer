@@ -64,7 +64,7 @@ BOOLEAN Parent::isChildren(STYPE t, STMTNUM s){
 	return false;
 }
 
-vector<STMTNUM> Parent::getParent(STYPE t1, STYPE t2, STMTNUM s) {
+/*vector<STMTNUM> Parent::getParent(STYPE t1, STYPE t2, STMTNUM s) {
 	STMTNUM temp = childrenTable[s];
 	if(table.getType(temp) == t2){
 		return table.getStmtNum(t1);
@@ -81,4 +81,14 @@ vector<STMTNUM> Parent::getChildren(STYPE t1, STYPE t2, STMTNUM s) {
 		}
 	}
 	return vector<STMTNUM> (1,-1);
+}*/
+
+vector<STMTNUM> Parent::getParent(STYPE t1, STYPE t2){
+	vector<STMTNUM> v;
+	return v;
+}
+
+vector<STMTNUM> Parent::getChildren(STYPE t1, STYPE t2){
+	vector<STMTNUM> v;
+	return v;
 }
