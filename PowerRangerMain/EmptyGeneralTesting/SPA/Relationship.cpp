@@ -7,13 +7,14 @@ Relationship::Relationship(string rn, string v1, string v2)
     token2 = v2;
 }
 
+
 Relationship::RelType Relationship::getRelType()
 {
-     if (relName == "FOLLOWS") {
+     if (relName == "Follows") {
         return FOLLOWS;
-    } else if (relName == "FOLLOWSSTAR"){
+    } else if (relName == "Follows*"){
         return FOLLOWSSTAR;
-    } else if (relName == "PARENT"){
+    } else if (relName == "Parent"){
         return PARENT;
     } else{
         return PARENTSTAR;

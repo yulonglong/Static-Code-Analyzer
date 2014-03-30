@@ -40,8 +40,9 @@ public:
 	// PARSE ONE STRING CONTAINING SYNONYMS DECLARATION AND QUERY WITH LIMITATIONS:
 	// 1. can only handle synonym declaration for assign, while and if.
 	// 2. query is limited to follows, followsstar, parent, parentstar
-	// 3. relationship keyword must be typed in UPPERCASE, e.g. select a such that FOLLOWS(a, 2);
-	// other keywords are expected to be in lowercase, i.e. select, such that, assign, while, if.
+	// 3. relationship and select keywords must be CAPITALIZED, e.g. Select a such that FOLLOWS(a, 2);
+	// 4. boolean keyword must be in uppercase, i.e. BOOLEAN
+	// other keywords are expected to be in lowercase, i.e. such that, assign, while, if.
 	Query parse(string);
 };
 

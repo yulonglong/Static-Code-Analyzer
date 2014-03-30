@@ -1,5 +1,7 @@
 // Preconditions:
-// READ HEADER FILE
+// Assume that first line is always the synonym declaration followed by queries
+// Assume that syntax and usage is always correct
+// limitations: relationships in query must be CAPITALIZED
 
 #include "QueryParser.h"
 
@@ -23,7 +25,6 @@ Query QueryParser::parse(string s){
 	while (token != NULL)
 	{
 		string vs(token);
-		cout << vs << endl;
 		v.push_back(vs);
 		token = strtok_s(NULL, seps, &nextToken);
 	}
@@ -68,15 +69,15 @@ vector<string> QueryParser::parseQuery(string q){
 	{
 		string vs(token);
 		// getting synonym that is selected
-		if (vs.compare("select") == 0){
+		if (vs.compare("Select") == 0){
 			token = strtok_s(NULL, seps, &nextToken);
 			vs = token;
 			v.push_back(vs);
 		}
 
 		// getting relationships
-		if (vs.compare("FOLLOWS") == 0 || vs.compare("PARENT") == 0 ||
-			vs.compare("FOLLOWSTAR") == 0 || vs.compare("PARENTSTAR") == 0){
+		if (vs.compare("Follows") == 0 || vs.compare("Parent") == 0 ||
+			vs.compare("Follows*") == 0 || vs.compare("Parent*") == 0){
 			v.push_back(vs);
 			token = strtok_s(NULL, seps, &nextToken);
 			vs = token;
@@ -128,6 +129,7 @@ unordered_map<string, Query::SType> QueryParser::parseSynonyms(string s)
 		}
 	}
 
+	map.insert(make_pair("BOOLEAN", Query::BOOLEAN));
 	return map;
 }
 
