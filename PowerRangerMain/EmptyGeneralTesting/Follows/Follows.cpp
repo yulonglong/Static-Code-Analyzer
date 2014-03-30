@@ -33,7 +33,7 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Follows::isFollows(STYPE t, STMTNUM s) {
+/*bool Follows::isFollows(STYPE t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -49,7 +49,7 @@ bool Follows::isFollowedBy(STYPE t, STMTNUM s) {
 		return false;
 	} 
 	return true;
-}
+}*/
 
 bool Follows::isFollows(STYPE t1, STYPE t2) {
 	vector<STMTNUM>::iterator it = followsTable.begin();

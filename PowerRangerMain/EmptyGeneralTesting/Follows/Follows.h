@@ -25,8 +25,6 @@ public:
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
 	bool isFollows(STMTNUM, STMTNUM); 
-	bool isFollows(STYPE, STMTNUM); // redundant!!; getFollows(STYPE, STMTNUM) returns -1 if no result
-	bool isFollowedBy(STYPE, STMTNUM); // redundant!!
 	bool isFollows(STYPE, STYPE);	
 	STMTNUM getFollows(STYPE, STMTNUM);	
 	STMTNUM getFollowedBy(STYPE, STMTNUM);
