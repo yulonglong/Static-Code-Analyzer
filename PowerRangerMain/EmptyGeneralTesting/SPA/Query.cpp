@@ -20,12 +20,12 @@ vector<Relationship> Query::getRelVect()
     return relVect;
 }
 
-void Query::addSynTable(unordered_map<string, SType> map)
+void Query::addSynTable(unordered_map<string, STYPE> map)
 {
 	synTable = map;
 }
 
-unordered_map<string, Query::SType> Query::getSynTable()
+unordered_map<string, STYPE> Query::getSynTable()
 {
 	return synTable;
 }
