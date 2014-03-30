@@ -9,6 +9,8 @@ class ParserTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST_SUITE( ParserTest ); // Note 3 
 	CPPUNIT_TEST( testModifyTable );
 	CPPUNIT_TEST( testCompleteParser );
+	CPPUNIT_TEST( testParserSource1 );
+	CPPUNIT_TEST( testParserSource2 );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -20,6 +22,8 @@ public:
 
 	// method to test the assigning and retrieval of grades
 	void testCompleteParser();
+	void testParserSource1();
+	void testParserSource2();
 };
 #endif
     
