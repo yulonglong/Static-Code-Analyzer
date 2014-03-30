@@ -3,6 +3,7 @@
 #include "QueryEvaluator.h"
 #include <ctype.h>
 #include "Follows.h"
+#include "Parent.h"
 
 
 using namespace std;
@@ -63,8 +64,29 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 			answers = answers && evaluateParentStarBoolean(*it);
 		}
 	}
-	//WHAT IS THIS RETURN VALUEEE. YOHANES RETURN FALSE AS DEFAULT HERE
-	return false;
+	return answers;
+}
+
+bool evaluateParentBoolean(Relationship r, unordered_map<string, STYPE> m){
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	Parent p;
+	if(isdigit(tk1[0]) && isdigit(tk2[0])){
+		return p.isParent(atoi(tk1.c_str()), atoi(tk2.c_str()));
+	}
+	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
+		unordered_map<string, STYPE>::iterator i2 = m.find(tk2);
+		return f.isFollows(i1->second, i2->second);
+	}
+	else if(isalpha(tk1[0])){
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
+		return (f.getFollows(i1->second, atoi(tk2.c_str()))==-1)?false:true;
+	}
+	else {
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk2);
+		return (f.getFollowedBy(i1->second, atoi(tk1.c_str()))==-1)?false:true;
+	}
 }
 
 bool evaluateFollowsBoolean(Relationship r, unordered_map<string, STYPE> m){
@@ -81,11 +103,11 @@ bool evaluateFollowsBoolean(Relationship r, unordered_map<string, STYPE> m){
 	}
 	else if(isalpha(tk1[0])){
 		unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
-		return f.isFollows(i1->second, atoi(tk2.c_str()));
+		return (f.getFollows(i1->second, atoi(tk2.c_str()))==-1)?false:true;
 	}
 	else {
 		unordered_map<string, STYPE>::iterator i1 = m.find(tk2);
-		return f.isFollowedBy(i1->second, atoi(tk1.c_str()));
+		return (f.getFollowedBy(i1->second, atoi(tk1.c_str()))==-1)?false:true;
 	}
 }
 
