@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "Follows.h"
 
+
 using namespace std;
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
@@ -16,8 +17,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			string token1 = it->getToken1();
 			string token2 = it->getToken2();
 			string selectedSyn = q.getSelectedSyn();
-			unordered_map<string, SType> m = q.getSynTable();
-			std::unordered_map<string, SType>::iterator i = q.getSynTable().find(selectedSyn);
+			unordered_map<string, STYPE> m = q.getSynTable();
+			std::unordered_map<string, STYPE>::iterator i = q.getSynTable().find(selectedSyn);
 
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
@@ -66,7 +67,7 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return false;
 }
 
-bool evaluateFollowsBoolean(Relationship r, unordered_map<string, SType> m){
+bool evaluateFollowsBoolean(Relationship r, unordered_map<string, STYPE> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows f;
@@ -74,16 +75,16 @@ bool evaluateFollowsBoolean(Relationship r, unordered_map<string, SType> m){
 		return f.isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()));
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		unordered_map<string, SType>::iterator i1 = m.find(tk1);
-		unordered_map<string, SType>::iterator i2 = m.find(tk2);
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
+		unordered_map<string, STYPE>::iterator i2 = m.find(tk2);
 		return f.isFollows(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0])){
-		unordered_map<string, SType>::iterator i1 = m.find(tk1);
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
 		return f.isFollows(i1->second, atoi(tk2.c_str()));
 	}
 	else {
-		unordered_map<string, SType>::iterator i1 = m.find(tk2);
+		unordered_map<string, STYPE>::iterator i1 = m.find(tk2);
 		return f.isFollowedBy(i1->second, atoi(tk1.c_str()));
 	}
 }
@@ -111,14 +112,14 @@ vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	return queryAnswers;
 }
 
-vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, SType> m, string selectedSyn){
+vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, STYPE> m, string selectedSyn){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows f;
 	vector<int> answer;
-	unordered_map<string, SType>::iterator i1 = m.find(tk1);
-	unordered_map<string, SType>::iterator i2 = m.find(tk2);
-	unordered_map<string, SType>::iterator i3 = m.find(selectedSyn);
+	unordered_map<string, STYPE>::iterator i1 = m.find(tk1);
+	unordered_map<string, STYPE>::iterator i2 = m.find(tk2);
+	unordered_map<string, STYPE>::iterator i3 = m.find(selectedSyn);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		return f.getFollows(i3->second, i2->second, i1->second);
 	}
