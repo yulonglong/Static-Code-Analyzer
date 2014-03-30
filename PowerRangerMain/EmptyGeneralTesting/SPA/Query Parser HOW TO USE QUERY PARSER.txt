@@ -11,6 +11,49 @@ int main(){
 	QueryParser qp;
 	Query query = qp.parse(s);
 
+	cout << "Query decomposition: " << endl;
+
+	vector<Relationship> relVect = 
+	query.getRelVect();
+
+	vector<string> relationshipType;
+	vector<string> statementType;
+
+	relationshipType.push_back("Follows");
+	relationshipType.push_back("Follows*");
+	relationshipType.push_back("Parent");
+	relationshipType.push_back("Parent*");
+
+	statementType.push_back("assign");
+	statementType.push_back("if");
+	statementType.push_back("while");
+	statementType.push_back("BOOLEAN");
+
+	for(int i = 0; i < relVect.size(); i++){
+		Relationship r = relVect.at(i);
+		Relationship::RelType relType = r.getRelType();
+		string token1 = r.getToken1();
+		string token2 = r.getToken2();
+
+		cout << "Relationship type: " ;
+		cout << relationshipType.at(relType) << endl;
+		cout << "Token 1: ";
+		cout << token1 << endl;
+		cout << "Token 2: ";
+		cout << token2 << endl;
+	}
+
+	string ssyn = 
+	query.getSelectedSyn();
+	cout << "Selected synonym: ";
+	cout << ssyn << endl;
+
+	unordered_map<string, Query::SType> synTable = 
+	query.getSynTable();
+	Query::SType sType = synTable.at(ssyn);
+	cout << "SSyn type: ";
+	cout << statementType.at(sType) << endl;
+
 	string a;
 	cin >> a;
 }
