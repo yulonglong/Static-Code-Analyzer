@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPA", "SPA\SPA.vcxproj", "{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntegrationTesting", "IntegrationTesting\IntegrationTesting.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
@@ -30,6 +30,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Parent", "Parent\Parent.vcxproj", "{BFDB0BE7-5AD9-474B-8B8C-B7D158FCC03D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParentTest", "ParentTest\ParentTest.vcxproj", "{729844E7-9297-434D-8444-36C95A34CA86}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QueryEvaluator", "QueryEvaluator\QueryEvaluator.vcxproj", "{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{729844E7-9297-434D-8444-36C95A34CA86}.Debug|Win32.Build.0 = Debug|Win32
 		{729844E7-9297-434D-8444-36C95A34CA86}.Release|Win32.ActiveCfg = Release|Win32
 		{729844E7-9297-434D-8444-36C95A34CA86}.Release|Win32.Build.0 = Release|Win32
+		{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}.Debug|Win32.Build.0 = Debug|Win32
+		{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}.Release|Win32.ActiveCfg = Release|Win32
+		{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

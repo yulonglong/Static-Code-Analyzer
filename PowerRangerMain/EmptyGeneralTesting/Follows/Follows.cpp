@@ -2,6 +2,7 @@
 
 #include "Follows.h"
 
+
 // constructor
 Follows::Follows() {
 	// Note: program line 0 is not to be used for the enumeration of program lines
@@ -33,7 +34,7 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-/*bool Follows::isFollows(STYPE t, STMTNUM s) {
+/*bool Follows::isFollows(Query::SynType t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -42,7 +43,7 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return true;
 }
 
-bool Follows::isFollowedBy(STYPE t, STMTNUM s) {
+bool Follows::isFollowedBy(Query::SynType t, STMTNUM s) {
 	STMTNUM result = getFollowedBy(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -51,7 +52,7 @@ bool Follows::isFollowedBy(STYPE t, STMTNUM s) {
 	return true;
 }*/
 
-bool Follows::isFollows(STYPE t1, STYPE t2) {
+bool Follows::isFollows(SynType t1, Query::SynType t2) {
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
@@ -63,7 +64,7 @@ bool Follows::isFollows(STYPE t1, STYPE t2) {
 }
 
 // TODO: add exception handling
-STMTNUM Follows::getFollows(STYPE t, STMTNUM s) {
+STMTNUM Follows::getFollows(Query::SynType t, STMTNUM s) {
 	if(table.getType(followsTable[s]) == t){
 		return followsTable[s];
 	}
@@ -71,7 +72,7 @@ STMTNUM Follows::getFollows(STYPE t, STMTNUM s) {
 }
 
 // TODO: add exception handling
-STMTNUM Follows::getFollowedBy(STYPE t, STMTNUM s) {
+STMTNUM Follows::getFollowedBy(Query::SynType t, STMTNUM s) {
 	if(table.getType(followedByTable[s]) == t){
 		return followedByTable[s];
 	}
@@ -79,7 +80,7 @@ STMTNUM Follows::getFollowedBy(STYPE t, STMTNUM s) {
 }
 
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollows(STYPE t1, STYPE t2,STYPE t3) {
+vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
@@ -96,7 +97,7 @@ vector<STMTNUM> Follows::getFollows(STYPE t1, STYPE t2,STYPE t3) {
 }
 
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollowedBy(STYPE t1, STYPE t2,STYPE t3) {
+vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followedByTable.end();++it){
