@@ -26,13 +26,13 @@ public:
 	~Parent();
 	void setParent(STMTNUM, STMTNUM);
 	BOOLEAN isParent(STMTNUM, STMTNUM);// Select BOOLEAN such that Parent(1,2)
-	BOOLEAN isParent(STYPE, STYPE); // Select BOOLEAN such that Parent(w,a)
-	BOOLEAN isParent(STYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
-	BOOLEAN isChildren(STYPE, STMTNUM); // Select BOOLEAN such that Parent(w,3)
-	vector<STMTNUM> getParent(STYPE, STYPE); // Select w such that Parent(w,a)
-	vector<STMTNUM> getChildren(STYPE, STYPE); //Select a such that Parent(w,a)
-	vector<STMTNUM> getParent(STYPE, STMTNUM); // Select w such that Parent(w,3)
-	vector<STMTNUM> getChildren(STYPE, STMTNUM); //Select a such that Parent(1,a)
+	BOOLEAN isParent(Query::SynType, Query::SynType); // Select BOOLEAN such that Parent(w,a)
+	BOOLEAN isParent(Query::SynType, STMTNUM); // Select BOOLEAN such that Parent(3,a)
+	BOOLEAN isChildren(Query::SynType, STMTNUM); // Select BOOLEAN such that Parent(w,3)
+	vector<STMTNUM> getParent(Query::SynType, Query::SynType); // Select w such that Parent(w,a)
+	vector<STMTNUM> getChildren(Query::SynType, Query::SynType); //Select a such that Parent(w,a)
+	vector<STMTNUM> getParent(Query::SynType, STMTNUM); // Select w such that Parent(w,3)
+	vector<STMTNUM> getChildren(Query::SynType, STMTNUM); //Select a such that Parent(1,a)
 };
 
 #endif

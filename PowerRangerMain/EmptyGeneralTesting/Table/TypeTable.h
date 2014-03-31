@@ -9,6 +9,7 @@
 #include <vector>
 #include <iterator>
 #include <map>
+#include "Query.h"
 
 using namespace std;
 typedef int STMTNUM;
@@ -17,12 +18,12 @@ enum STYPE { ASSIGN, WHILE, IF, CALL } ;
 
 class TypeTable {
 private:
-	map<STMTNUM,STYPE> typeMap;
+	map<STMTNUM,Query::SynType> typeMap;
 public: 
 	TypeTable();
-	void insertStmtNumAndType(STMTNUM,STYPE);
-	STYPE getType (STMTNUM);
-	LIST getStmtNum (STYPE);
+	void insertStmtNumAndType(STMTNUM,Query::SynType);
+	Query::SynType getType (STMTNUM);
+	LIST getStmtNum (Query::SynType);
 };
 
 #endif

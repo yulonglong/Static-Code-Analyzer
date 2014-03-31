@@ -8,18 +8,18 @@ TypeTable::TypeTable() {
 }
 
 
-void TypeTable::insertStmtNumAndType(STMTNUM s,STYPE t) {
+void TypeTable::insertStmtNumAndType(STMTNUM s,Query::SynType t) {
 	typeMap[s]=t;
 }
 
 
-STYPE TypeTable:: getType (STMTNUM s) {
+Query::SynType TypeTable:: getType (STMTNUM s) {
 	return typeMap.at(s);
 }
 
-LIST TypeTable:: getStmtNum (STYPE t) {
+LIST TypeTable:: getStmtNum (Query::SynType t) {
 	LIST list;
-	for (map<int,STYPE>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
+	for (map<int,Query::SynType>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
 		if(it->second == t) {
 			list.push_back (it->first);
 		}
