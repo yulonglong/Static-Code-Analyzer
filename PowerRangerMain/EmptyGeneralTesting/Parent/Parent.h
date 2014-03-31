@@ -30,7 +30,9 @@ public:
 	BOOLEAN isParent(STYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
 	BOOLEAN isChildren(STYPE, STMTNUM); // Select BOOLEAN such that Parent(w,3)
 	vector<STMTNUM> getParent(STYPE, STYPE); // Select w such that Parent(w,a)
+	vector<STMTNUM> getParent(STYPE, STYPE,STMTNUM);
 	vector<STMTNUM> getChildren(STYPE, STYPE); //Select a such that Parent(w,a)
+	vector<STMTNUM> getChildren(STYPE, STYPE,STMTNUM);
 	vector<STMTNUM> getParent(STYPE, STMTNUM); // Select w such that Parent(w,3)
 	vector<STMTNUM> getChildren(STYPE, STMTNUM); //Select a such that Parent(1,a)
 };
