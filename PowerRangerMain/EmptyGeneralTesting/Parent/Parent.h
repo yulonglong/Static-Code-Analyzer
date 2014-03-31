@@ -13,12 +13,11 @@
 using namespace std;
 typedef int STMTNUM;
 typedef bool BOOLEAN;
-typedef vector<STMTNUM> LIST;
 
 class Parent {
 private:
-	vector<vector<STMTNUM>> parentTable;
-	vector<STMTNUM> childrenTable;
+	vector<vector<STMTNUM>> parentTable; //given a parent STMTNUM, return the children
+	vector<STMTNUM> childrenTable; //given a children STMTNUM, return the parent
 	
 public: 
 	TypeTable table; // for the sake of unit testing.
@@ -30,11 +29,11 @@ public:
 	BOOLEAN isParent(STYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
 	BOOLEAN isChildren(STYPE, STMTNUM); // Select BOOLEAN such that Parent(w,3)
 	vector<STMTNUM> getParent(STYPE, STYPE); // Select w such that Parent(w,a)
+	vector<STMTNUM> getParent(STYPE, STMTNUM); // Select w such that Parent(w,3)
 	vector<STMTNUM> getParent(STYPE, STYPE,STMTNUM);
 	vector<STMTNUM> getChildren(STYPE, STYPE); //Select a such that Parent(w,a)
-	vector<STMTNUM> getChildren(STYPE, STYPE,STMTNUM);
-	vector<STMTNUM> getParent(STYPE, STMTNUM); // Select w such that Parent(w,3)
 	vector<STMTNUM> getChildren(STYPE, STMTNUM); //Select a such that Parent(1,a)
+	vector<STMTNUM> getChildren(STYPE, STYPE,STMTNUM);
 };
 
 #endif
