@@ -2,6 +2,9 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include <iostream>
 
+#include <CodeParser.h>
+#include <VarTable.h>
+#include <ProcTable.h>
 
 using namespace std;
 
@@ -12,10 +15,18 @@ CPPUNIT_NS::Test *suite = CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTes
 CppUnit::TextUi::TestRunner runner;
 
 //parse the SIMPLE soource code into the parser
-//Parse();
+string fileName = "Source1"; 
+VarTable* varTable; 
+varTable = new VarTable();
+ProcTable* procTable; 
+procTable = new ProcTable();
+
+parseCode(fileName, *varTable, *procTable);
 
 //Call of DesignExtractor
 //Extract();
+
+
 
 runner.addTest(suite);
 bool wasSucessful = runner.run();
