@@ -28,7 +28,7 @@ Parse(fileName, varTable, procTable);
 
 string s = "assign a; Select a;";
 
-ParseAndEvaluate();
+ParseAndEvaluate(s);
 
 // ouput result to screen 
 
