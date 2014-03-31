@@ -25,12 +25,12 @@ public:
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
 	bool isFollows(STMTNUM, STMTNUM); 
-	bool isFollows(STYPE, STYPE);	
-	STMTNUM getFollows(STYPE, STMTNUM);	
-	STMTNUM getFollowedBy(STYPE, STMTNUM);
-	vector<STMTNUM> getFollows(STYPE, STYPE, STYPE); //Select s1 such that Follows(s1,s2)
-	vector<STMTNUM> getFollowedBy(STYPE, STYPE, STYPE); // argument order: selectedSyn, token 1, token 2
-	vector<STMTNUM> getAll(STYPE); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet // should not be under follows
+	bool isFollows(SynType, Query::SynType);	
+	STMTNUM getFollows(Query::SynType, STMTNUM);	
+	STMTNUM getFollowedBy(Query::SynType, STMTNUM);
+	vector<STMTNUM> getFollows(Query::SynType, Query::SynType, Query::SynType); //Select s1 such that Follows(s1,s2)
+	vector<STMTNUM> getFollowedBy(Query::SynType, Query::SynType, Query::SynType); // argument order: selectedSyn, token 1, token 2
+	vector<STMTNUM> getAll(Query::SynType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet // should not be under follows
 }; 
 
 #endif
