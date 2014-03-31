@@ -33,8 +33,8 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	}
 	return false;
 }
-
-/*bool Follows::isFollows(Query::SynType t, STMTNUM s) {
+/*
+bool Follows::isFollows(Query::SynType t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -50,9 +50,9 @@ bool Follows::isFollowedBy(Query::SynType t, STMTNUM s) {
 		return false;
 	} 
 	return true;
-}*/
-
-bool Follows::isFollows(SynType t1, Query::SynType t2) {
+}
+*/
+bool Follows::isFollows(Query::SynType t1, Query::SynType t2) {
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
 		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
@@ -78,9 +78,9 @@ STMTNUM Follows::getFollowedBy(Query::SynType t, STMTNUM s) {
 	}
 	return -1;
 }
-
+/*
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
+vector<STMTNUM> Follows::getFollows(Query.SynType t1, Query::SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
@@ -97,7 +97,7 @@ vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::
 }
 
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
+vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query.SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followedByTable.end();++it){
@@ -112,3 +112,4 @@ vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2,Quer
 	}
 	return v;
 }
+*/
