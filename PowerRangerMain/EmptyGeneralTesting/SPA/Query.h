@@ -1,7 +1,6 @@
 #ifndef QUERY_H
 #define QUERY_H
 #include "Relationship.h"
-#include "TypeTable.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -15,14 +14,14 @@ class Query
 		string getSelectedSyn();
         void addRelationship(Relationship);
         vector<Relationship> getRelVect();
-	//	enum STYPE{ASSIGN, IF, WHILE, BOOLEAN};
-		void addSynTable(unordered_map<string, STYPE>);
-		unordered_map<string, STYPE> getSynTable();
+		enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN};
+		void addSynTable(unordered_map<string, Query::SynType>);
+		unordered_map<string, Query::SynType> getSynTable();
 
 	private:
         string selectedSyn; 
         vector<Relationship> relVect;
-		unordered_map<string, STYPE> synTable;
+		unordered_map<string, Query::SynType> synTable;
 };
 
 #endif // QUERY_H_INCLUDED

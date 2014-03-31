@@ -19,16 +19,16 @@ private:
 	void addQuery(Query);
 	
 	// PARSE THE SYNONYMS DECLARATION
-	unordered_map<string, Query::SType> parseSynonyms(string);
+	unordered_map<string, Query::SynType> parseSynonyms(string);
 
 	// PARSE ONE QUERY STRING TO A VECTOR OF TOKENS
 	vector<string> parseQuery(string);
 
 	// MAKE A QUERY OBJECT FROM A VECTOR OF TOKENS AND A SYNONYM MAP
-	Query makeQuery(vector<string>, unordered_map<string, Query::SType>);
+	Query makeQuery(vector<string>, unordered_map<string, Query::SynType>);
 
 	// MAP OF SYNONYMS AND THEIR TYPES
-	unordered_map<string, Query::SType> synMap;
+	unordered_map<string, Query::SynType> synMap;
 
 public:
 	// DEFAULT CONSTRUCTOR

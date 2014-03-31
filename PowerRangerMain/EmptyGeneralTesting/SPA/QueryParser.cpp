@@ -13,34 +13,74 @@ QueryParser::QueryParser(){
 Query QueryParser::parse(string s){
 	vector<string> v;
 	int sLength = s.length() + 1;
-	char *str = new char[sLength];
-	strcpy_s(str, sLength, s.c_str());
 
-	char seps[] = ";";
-	char *token = NULL;
-	char *nextToken = NULL;
+	string s2 = s;
+	vector <string> v2;
+	int s2Length = s2.length() + 1;
+	char *str2 = new char[s2Length];
+	strcpy_s(str2, s2Length, s2.c_str());
 
-	token = strtok_s(str, seps, &nextToken);
+	char seps2[] = " ;,()";
+	char *token2 = NULL;
+	char *nextToken2 = NULL;
 
-	while (token != NULL)
+	token2 = strtok_s(str2, seps2, &nextToken2);
+
+	while (token2 != NULL)
 	{
-		string vs(token);
-		v.push_back(vs);
-		token = strtok_s(NULL, seps, &nextToken);
+		string vs2(token2);
+		v2.push_back(vs2);
+		token2 = strtok_s(NULL, seps2, &nextToken2);
+	}
+
+	int selectIndex = 0;
+	try{
+		while (v2.at(selectIndex).compare("Select") != 0){
+			selectIndex++;
+		}
+	}
+	catch(...){
+		Query q("INVALID");
+		return q;
 	}
 	
-	string synLine = v.at(0);
-	synMap = parseSynonyms(synLine);
-	Query query = makeQuery(parseQuery(v.at(1)), synMap);
-	addQuery(query);
-	return query;
+	if (selectIndex != 0){
+		// DIVIDE THE STRING INTO TWO PARTS, DIVIDED BY ";"
+		char *str = new char[sLength];
+		strcpy_s(str, sLength, s.c_str());
+
+		char seps[] = ";";
+		char *token = NULL;
+		char *nextToken = NULL;
+
+		token = strtok_s(str, seps, &nextToken);
+
+		while (token != NULL)
+		{
+			string vs(token);
+			v.push_back(vs);
+			token = strtok_s(NULL, seps, &nextToken);
+		}
+	
+		string synLine = v.at(0);
+		synMap = parseSynonyms(synLine);
+		Query query = makeQuery(parseQuery(v.at(1)), synMap);
+		addQuery(query);
+		return query;
+
+	} else {
+		synMap.insert(make_pair("BOOLEAN", Query::BOOLEAN));
+		Query query2 = makeQuery(parseQuery(s), synMap);
+		addQuery(query2);
+		return query2;
+	}
 }
 
 vector<Query> QueryParser::getQueries(){
 	return queries;
 }
 
-Query QueryParser::makeQuery(vector<string> v, unordered_map<string, Query::SType> map){
+Query QueryParser::makeQuery(vector<string> v, unordered_map<string, Query::SynType> map){
 	Query query(v.at(0));
 	query.addSynTable(map);
 
@@ -92,7 +132,7 @@ vector<string> QueryParser::parseQuery(string q){
 	return v;
 }
 
-unordered_map<string, Query::SType> QueryParser::parseSynonyms(string s)
+unordered_map<string, Query::SynType> QueryParser::parseSynonyms(string s)
 {
 	vector<string> v;
 	int sLength = s.length() + 1;
@@ -112,7 +152,7 @@ unordered_map<string, Query::SType> QueryParser::parseSynonyms(string s)
 		token = strtok_s(NULL, seps, &nextToken);
 	}
 	
-	unordered_map<string, Query::SType> map;
+	unordered_map<string, Query::SynType> map;
 	
 	for(size_t i = 0; i < v.size(); i++){
 		string temp1 = v.at(i);
@@ -123,7 +163,10 @@ unordered_map<string, Query::SType> QueryParser::parseSynonyms(string s)
 			map.insert(make_pair(temp2, Query::ASSIGN));
 		} else if (temp1.compare("while") == 0) {
 			map.insert(make_pair(temp2, Query::WHILE));
-		} else {
+		} else if (temp1.compare("stmt") == 0){
+			map.insert(make_pair(temp2, Query::STMT));
+		}
+		else {
 			map.insert(make_pair(temp2, Query::IF)); 
 			// unsafe, create another type for invalid
 		}
