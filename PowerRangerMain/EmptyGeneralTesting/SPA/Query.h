@@ -9,12 +9,14 @@ using namespace std;
 
 class Query
 {
+	public:
+		enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN};
     public:
         Query(string);
 		string getSelectedSyn();
         void addRelationship(Relationship);
         vector<Relationship> getRelVect();
-		enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN};
+		
 		void addSynTable(unordered_map<string, Query::SynType>);
 		unordered_map<string, Query::SynType> getSynTable();
 

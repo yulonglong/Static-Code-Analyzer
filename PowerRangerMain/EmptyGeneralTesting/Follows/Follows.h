@@ -25,7 +25,7 @@ public:
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
 	bool isFollows(STMTNUM, STMTNUM); 
-	bool isFollows(SynType, Query::SynType);	
+	bool isFollows(Query::SynType, Query::SynType);	
 	STMTNUM getFollows(Query::SynType, STMTNUM);	
 	STMTNUM getFollowedBy(Query::SynType, STMTNUM);
 	vector<STMTNUM> getFollows(Query::SynType, Query::SynType, Query::SynType); //Select s1 such that Follows(s1,s2)
