@@ -31,8 +31,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Parent", "Parent\Parent.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParentTest", "ParentTest\ParentTest.vcxproj", "{729844E7-9297-434D-8444-36C95A34CA86}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParentStar", "ParentStar\ParentStar.vcxproj", "{7BA7672F-17F4-4EFC-81C4-CD06BC18B703}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -87,10 +85,6 @@ Global
 		{729844E7-9297-434D-8444-36C95A34CA86}.Debug|Win32.Build.0 = Debug|Win32
 		{729844E7-9297-434D-8444-36C95A34CA86}.Release|Win32.ActiveCfg = Release|Win32
 		{729844E7-9297-434D-8444-36C95A34CA86}.Release|Win32.Build.0 = Release|Win32
-		{7BA7672F-17F4-4EFC-81C4-CD06BC18B703}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7BA7672F-17F4-4EFC-81C4-CD06BC18B703}.Debug|Win32.Build.0 = Debug|Win32
-		{7BA7672F-17F4-4EFC-81C4-CD06BC18B703}.Release|Win32.ActiveCfg = Release|Win32
-		{7BA7672F-17F4-4EFC-81C4-CD06BC18B703}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
