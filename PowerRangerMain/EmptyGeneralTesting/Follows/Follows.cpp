@@ -78,9 +78,9 @@ STMTNUM Follows::getFollowedBy(Query::SynType t, STMTNUM s) {
 	}
 	return -1;
 }
-/*
+
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollows(Query.SynType t1, Query::SynType t2,Query::SynType t3) {
+vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followsTable.end();++it){
@@ -95,9 +95,10 @@ vector<STMTNUM> Follows::getFollows(Query.SynType t1, Query::SynType t2,Query::S
 	}
 	return v;
 }
-
+//WHEN I INCLUDE THE FOLLOWING I CAN"T BUILD THE ENTIRE FOLLOWS. THANKS FOR REVIEWING(:
+/*
 // TODO: add exception handling
-vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query.SynType t2,Query::SynType t3) {
+vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query.SynType t2, Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
 	for(;it!= followedByTable.end();++it){
@@ -111,5 +112,4 @@ vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query.SynType t2,Query
 		}
 	}
 	return v;
-}
-*/
+}*/
