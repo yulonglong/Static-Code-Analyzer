@@ -123,10 +123,7 @@ unordered_map<string, Query::SType> QueryParser::parseSynonyms(string s)
 			map.insert(make_pair(temp2, Query::ASSIGN));
 		} else if (temp1.compare("while") == 0) {
 			map.insert(make_pair(temp2, Query::WHILE));
-		} else if (temp1.compare("stmt") == 0){
-			map.insert(make_pair(temp2, Query::STMT));
-		}
-		else {
+		} else {
 			map.insert(make_pair(temp2, Query::IF)); 
 			// unsafe, create another type for invalid
 		}

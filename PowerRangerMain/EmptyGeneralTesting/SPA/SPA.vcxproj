@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DesignExtractor.cpp" />
+    <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="Query.cpp" />
     <ClCompile Include="QueryEvaluator.cpp" />
