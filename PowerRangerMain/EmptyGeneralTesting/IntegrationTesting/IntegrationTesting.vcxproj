@@ -55,14 +55,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;%(AdditionalIncludeDirectories);$(SolutionDir)CodeParser;$(SolutionDir)Table;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;%(AdditionalIncludeDirectories);$(SolutionDir)CodeParser;$(SolutionDir)Table;$(SolutionDir)SPA;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;%(AdditionalDependencies)$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;%(AdditionalDependencies)$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\SPA.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
