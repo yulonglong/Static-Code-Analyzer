@@ -1,8 +1,8 @@
-procedure ABC {
+procedure ABC{
   i  =1;							
  b =   200  ;						
 	c =a   ;					
-while a {
+while a{
    while beta {						
         oSCar= 1 + beta + tmp;			
         while tmp {					
@@ -15,11 +15,14 @@ while a {
             b=0;					
             c = delta    +l  +width+Romeo ; }	
             while c {					
-              c = c+1  	; } 			
+              c = c+1  	; 
+} 			
             x = x+ 1	; }
 	a =3;}				
           a =   2; }					
    w= w+ 1 ;						
-   w=w + 1;}
-  w=w+1;}
+   w=w + 1;
+}
+  w=w+1;
+}
 
