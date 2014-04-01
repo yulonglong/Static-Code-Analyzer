@@ -179,7 +179,6 @@ void IntegrateTest::testParserSource2()
 }
 
 // void IntegrateTest::testPQLSource1() {
-	// testParseSource1();
 
 	string s1 = "assign a; Select a such that Follows(a, 7)";
 	string s2 = "assign a; Select a such that Follows(3, a)";

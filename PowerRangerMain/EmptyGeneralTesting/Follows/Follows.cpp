@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Follows.h"
-
+#include <stdexcept>      // std::out_of_range
+#include <iostream>
 
 // constructor
 Follows::Follows() {
@@ -28,10 +29,20 @@ void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
-	if (followsTable[s1] == s2) {
-		return true;
+	STMTNUM num = -1; 
+	try {
+		num = followsTable.at(s1);
+	} 
+	//const std::out_of_range& oor
+	catch (...) {
+		return false;
+		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 	}
-	return false;
+	if (num != -1 && num == s2){
+		return true;
+	} 
+	return false; 
+
 }
 
 bool Follows::isFollows(Query::SynType t, STMTNUM s) {
@@ -53,33 +64,162 @@ bool Follows::isFollowedBy(Query::SynType t, STMTNUM s) {
 }
 
 bool Follows::isFollows(Query::SynType t1, Query::SynType t2) {
-	vector<STMTNUM>::iterator it = followsTable.begin();
-	for(;it!= followsTable.end();++it){
-		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
-			if(table.getType(*it)== (table.getType(*it2)))
-				return true;
+	STMTNUM j = -1; 
+	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
+		j = -1; 
+		try {
+			// cout << "Try: i is " << i << endl; 
+			j = followsTable[i];
+			// cout << "Try: j is " << j << endl; 
+			
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
 		}
-	}	
+
+		try {
+			if (j != -1) {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				}
+			}
+		} catch (...) {
+			// if that stmtnum doesnt have a type in typetable
+			continue; 
+		}
+	}
 	return false;
 }
 
-// TODO: add exception handling
 STMTNUM Follows::getFollows(Query::SynType t, STMTNUM s) {
-	if(table.getType(followsTable[s]) == t){
-		return followsTable[s];
+	STMTNUM num = -1; 
+	try {
+		num = followsTable.at(s);
+	} 
+	//const std::out_of_range& oor
+	catch (...) {
+		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 	}
-	return -1;
+	if (num != -1 && table.getType(num) == t){
+		return num;
+	} 
+	return -1; 
 }
 
-// TODO: add exception handling
+
 STMTNUM Follows::getFollowedBy(Query::SynType t, STMTNUM s) {
-	if(table.getType(followedByTable[s]) == t){
-		return followedByTable[s];
+	STMTNUM num = -1; 
+	try {
+		num = followedByTable.at(s);
+	} 
+	//const std::out_of_range& oor
+	catch (...) {
+		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 	}
-	return -1;
+	if (num != -1 && table.getType(num) == t){
+		return num;
+	} 
+	return -1; 
 }
 
-// TODO: add exception handling
+vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2) {
+	vector<STMTNUM> list; 
+	STMTNUM j = -1; 
+	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
+		j = -1; 
+		try {
+			// cout << "Try: i is " << i << endl; 
+			j = followsTable[i];
+			// cout << "Try: j is " << j << endl; 
+			
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
+		}
+
+		try {
+			if (j != -1) {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+
+				}
+			}
+		} catch (...) {
+			// if that stmtnum doesnt have a type in typetable
+			continue; 
+		}
+	}
+	return list;
+}
+
+vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2) {
+	vector<STMTNUM> list; 
+	STMTNUM j = -1; 
+	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
+		j = -1; 
+		try {
+			// cout << "Try: i is " << i << endl; 
+			j = followsTable[i];
+			// cout << "Try: j is " << j << endl; 
+			
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
+		}
+
+		try {
+			if (j != -1) {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(j);
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(j);
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(j);
+
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(j);
+
+				}
+			}
+		} catch (...) {
+			// if that stmtnum doesnt have a type in typetable
+			continue; 
+		}
+	}
+	return list;
+}
+
+
+// TODO: Throw away
+/*
 vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
@@ -95,8 +235,10 @@ vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::
 	}
 	return v;
 }
+*/
 
-// TODO: add exception handling
+// TODO: Throw away
+/*
 vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2, Query::SynType t3) {
 	vector<STMTNUM> v (1,-1);
 	vector<STMTNUM>::iterator it = followsTable.begin();
@@ -112,3 +254,4 @@ vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2, Que
 	}
 	return v;
 }
+*/

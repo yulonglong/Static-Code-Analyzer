@@ -23,16 +23,22 @@ public:
 	TypeTable table; // public for the sake of unit testing
 	Follows();
 	~Follows();
+
 	void setFollows(STMTNUM, STMTNUM);
-	bool isFollows(STMTNUM, STMTNUM);
-	bool isFollows(Query::SynType, STMTNUM);	
-	bool isFollowedBy(Query::SynType, STMTNUM);	
-	bool isFollows(Query::SynType, Query::SynType);	
-	STMTNUM getFollows(Query::SynType, STMTNUM);	
-	STMTNUM getFollowedBy(Query::SynType, STMTNUM);
-	vector<STMTNUM> getFollows(Query::SynType, Query::SynType, Query::SynType); //Select s1 such that Follows(s1,s2)
-	vector<STMTNUM> getFollowedBy(Query::SynType, Query::SynType, Query::SynType); // argument order: selectedSyn, token 1, token 2
-	vector<STMTNUM> getAll(Query::SynType); // API that query evaluator needs but should be classified under extra APIs instead which doesnt exist yet // should not be under follows
+
+	// testIsFollowsUsingStmtNum
+	bool isFollows(STMTNUM, STMTNUM);	
+
+	// testFollowsUsingStmtType
+	bool isFollows(Query::SynType, STMTNUM);	// done testing!!
+	bool isFollowedBy(Query::SynType, STMTNUM);	 // done testing!!
+	bool isFollows(Query::SynType, Query::SynType);	// done testing!!
+
+	// testGetFollowsUsingStmtType
+	STMTNUM getFollows(Query::SynType, STMTNUM);	// done testing!!
+	STMTNUM getFollowedBy(Query::SynType, STMTNUM); // done testing!!
+	vector<STMTNUM> getFollows(Query::SynType, Query::SynType);	 //Select s1 such that getFollows(s1, s2)
+	vector<STMTNUM> getFollowedBy(Query::SynType, Query::SynType);	 //Select s2 such that getFollows(s1, s2)
 }; 
 
 #endif
