@@ -38,7 +38,7 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 }
 
 // TODO: Need to add exception handling
-BOOLEAN Parent::isParent(STMTNUM s1, STMTNUM s2) {
+bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	if (childrenTable[s2] == s1) {
 		return true;
 	}
@@ -46,7 +46,7 @@ BOOLEAN Parent::isParent(STMTNUM s1, STMTNUM s2) {
 }
 
 // TODO: Need to add exception handling
-BOOLEAN Parent::isParent(Query::SynType t, STMTNUM s) {
+bool Parent::isParent(Query::SynType t, STMTNUM s) {
 	STMTNUM temp = childrenTable[s];
 	if (table.getType(temp) == t) {
 		return true;
@@ -54,9 +54,9 @@ BOOLEAN Parent::isParent(Query::SynType t, STMTNUM s) {
 	return false;
 }
 
-BOOLEAN Parent::isChildren(Query::SynType t, STMTNUM s){
-	LIST temp = parentTable[s];
-	LIST::iterator it = temp.begin();
+bool Parent::isChildren(Query::SynType t, STMTNUM s){
+	vector<STMTNUM> temp = parentTable[s];
+	vector<STMTNUM>::iterator it = temp.begin();
 	for(;it!=temp.end();++it){
 		if(table.getType(*it)==t)
 			return true;
@@ -64,7 +64,7 @@ BOOLEAN Parent::isChildren(Query::SynType t, STMTNUM s){
 	return false;
 }
 
-/*vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2, STMTNUM s) {
+vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2, STMTNUM s) {
 	STMTNUM temp = childrenTable[s];
 	if(table.getType(temp) == t2){
 		return table.getStmtNum(t1);
@@ -81,14 +81,50 @@ vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2, STMTNU
 		}
 	}
 	return vector<STMTNUM> (1,-1);
-}*/
+}
 
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2){
-	vector<STMTNUM> v;
-	return v;
+	return vector<STMTNUM> (1,-1);
 }
 
 vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2){
 	vector<STMTNUM> v;
-	return v;
+	return vector<STMTNUM> (1,-1);
+}
+
+STMTNUM Parent::getParent(Query::SynType t1, STMTNUM s){
+	STMTNUM temp = childrenTable[s];
+	if(table.getType(temp) == t1)
+		return temp;
+	return -1;
+}
+
+vector<STMTNUM> Parent::getChildren(Query::SynType t1, STMTNUM s){
+	vector<STMTNUM> temp = parentTable[s];
+	vector<STMTNUM> ans;
+	vector<STMTNUM>::iterator it = temp.begin();
+	for(;it!=temp.end();++it){
+		if(table.getType(*it)==t1)
+			ans.push_back(*it);
+	}
+	return ans;
+}
+
+
+//For parentStar
+STMTNUM Parent::getParent(STMTNUM s){
+	try{
+		return childrenTable[s];
+	} catch (...){
+		return -1;
+	}
+
+}
+
+vector<STMTNUM> Parent::getChildren(STMTNUM s){
+	try{
+		return parentTable[s];
+	} catch (...){
+		return vector<STMTNUM> (1,-1);
+	}
 }

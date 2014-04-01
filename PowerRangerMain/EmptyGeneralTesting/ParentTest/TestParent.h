@@ -1,5 +1,7 @@
 #ifndef TestParent_h
 #define TestParent_h
+#include "Parent.h"
+#include "TypeTable.h"
 
 // Note 1
 #include <cppunit/extensions/HelperMacros.h>

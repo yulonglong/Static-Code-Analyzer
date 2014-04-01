@@ -34,8 +34,8 @@ void TypeTableTest::testTableSet()
 	typeTable.insertStmtNumAndType(15, WHILE);
 	typeTable.insertStmtNumAndType(21, ASSIGN);
 
-	LIST expected;
-	LIST result;
+	vector<STMTNUM> expected;
+	vector<STMTNUM> result;
 	expected.push_back(4);
 	result = typeTable.getStmtNum(IF);
 	// verify that the assignment is correct - Note 7

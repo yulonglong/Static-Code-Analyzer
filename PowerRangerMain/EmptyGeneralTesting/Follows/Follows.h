@@ -24,7 +24,9 @@ public:
 	Follows();
 	~Follows();
 	void setFollows(STMTNUM, STMTNUM);
-	bool isFollows(STMTNUM, STMTNUM); 
+	bool isFollows(STMTNUM, STMTNUM);
+	bool isFollows(Query::SynType, STMTNUM);	
+	bool isFollowedBy(Query::SynType, STMTNUM);	
 	bool isFollows(Query::SynType, Query::SynType);	
 	STMTNUM getFollows(Query::SynType, STMTNUM);	
 	STMTNUM getFollowedBy(Query::SynType, STMTNUM);
