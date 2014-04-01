@@ -310,6 +310,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 					follows.setFollows(prevProgLine,progLine);
 				}
 			}
+
+
 		}
 		else if(tokens[0]=="while"){
 			if(tokens.size()!=2){

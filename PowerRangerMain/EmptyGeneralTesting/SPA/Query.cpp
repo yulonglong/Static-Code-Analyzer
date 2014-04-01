@@ -1,5 +1,30 @@
 #include "Query.h"
 
+Query::SynType Query::getSynType(string word)
+{
+	if(word=="assign"){
+		return Query::ASSIGN;
+	}
+	else if(word=="if"){
+		return Query::IF;
+	}
+	else if(word=="while"){
+		return Query::WHILE;
+	}
+	else if(word=="stmt"){
+		return Query::STMT;
+	}
+	else if(word=="boolean"){
+		return Query::BOOLEAN;
+	}
+	else if(word=="call"){
+		return Query::CALL;
+	}
+	else{
+		return Query::INVALID;
+	}
+}
+
 Query::Query(string s)
 {
     selectedSyn = s;
