@@ -64,6 +64,7 @@ bool Parent::isChildren(Query::SynType t, STMTNUM s){
 	return false;
 }
 
+/*
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2, STMTNUM s) {
 	STMTNUM temp = childrenTable[s];
 	if(table.getType(temp) == t2){
@@ -82,7 +83,7 @@ vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2, STMTNU
 	}
 	return vector<STMTNUM> (1,-1);
 }
-
+*/
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2){
 	return vector<STMTNUM> (1,-1);
 }
