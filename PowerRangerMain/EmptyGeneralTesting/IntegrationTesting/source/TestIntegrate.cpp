@@ -2,7 +2,7 @@
 #include "Node.h"
 #include "CodeParser.h"
 #include "Testintegrate.h"
-// #include "QueryParser.h"
+#include "QueryParser.h"
 
 
 #include <iostream>
@@ -178,7 +178,7 @@ void IntegrateTest::testParserSource2()
 	return;
 }
 
-// void IntegrateTest::testPQLSource1() {
+ void IntegrateTest::testPQLSource1() {
 
 	string s1 = "assign a; Select a such that Follows(a, 7)";
 	string s2 = "assign a; Select a such that Follows(3, a)";
@@ -199,7 +199,7 @@ void IntegrateTest::testParserSource2()
 	string s16 = "assign a; Select a such that Parent(11, a)";
 
 	// TODO: run query parser;
-	/*QueryParser qp;
+	QueryParser qp;
 
 	Query q1 = qp.parse(s1);
 	Query q2 = qp.parse(s2);
@@ -216,9 +216,9 @@ void IntegrateTest::testParserSource2()
 	Query q13 = qp.parse(s13);
 	Query q14 = qp.parse(s14);
 	Query q15 = qp.parse(s15);
-	Query q16 = qp.parse(s16);*/
+	Query q16 = qp.parse(s16);
 
 	// TODO: run evaluate on query
 
 	// TODO: compare result with expected result
-// }
+ }
