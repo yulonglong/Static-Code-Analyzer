@@ -32,6 +32,7 @@ public:
 	void setParent(Node* newParent);
 	void setProgLine(int newProgLine);
 	void printPreOrderExpressionTree(Node* root);
+	void stringPreOrderExpressionTree(Node* root,std::string &word);
 };
 
 #endif

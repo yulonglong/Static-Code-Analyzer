@@ -84,3 +84,23 @@ void Node::printPreOrderExpressionTree(Node* root){
 	}
 	return;
 }
+
+void Node::stringPreOrderExpressionTree(Node* root,string &word){
+	
+	if(root->getParent()!=NULL){
+		char buffer[5000];
+		sprintf_s(buffer,"Parent %d.) %s : %s\n",root->getParent()->getProgLine(),root->getParent()->getData().c_str(),root->getParent()->getType().c_str());
+		string temp = buffer;
+		word = word+ buffer;
+	}
+	char buffer[5000];
+
+	sprintf_s(buffer, "%d.) %s : %s\n",root->getProgLine(),root->getData().c_str(), root->getType().c_str());
+	string temp = buffer;
+	word = word+ buffer;
+	
+	for(unsigned i=0;i<root->getChild().size();i++){
+		stringPreOrderExpressionTree(root->getChild(i),word);
+	}
+	return;
+}
