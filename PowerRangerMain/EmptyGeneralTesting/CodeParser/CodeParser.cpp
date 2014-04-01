@@ -224,6 +224,13 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 		//checking syntax whether there are matching open and close curly bracket
 		//and the presence of semi colon
+		if(tokens.size()==1){
+			if(tokens[0]=="}"){
+				valid=true;
+				closeBracket++;
+			}
+		}
+
 		while(!valid){
 			int tokenLastIndex = tokens.size()-1;
 			if(tokens[tokenLastIndex]=="{"){
@@ -253,17 +260,12 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 		}
 
 		//checking for curly bracket matching
-		if(bracket.empty()){
-			if(openBracket==0){
-				return NULL;
-			}
-			else if(tokens[0]!="procedure"){
-				return NULL;
-			}
+		if((bracket.size()==0)&&(openBracket==0)&&(tokens.size()>0)){
+			cout << "ERROR in parsing code" << endl;
 		}
 		
 		//updating and editing the programLine number 
-		if((tokens[0]!="procedure")&&(tokens[0]!="else")){
+		if((tokens[0]!="procedure")&&(tokens[0]!="else")&&(tokens.size()>=2)){
 			char buffer[30];
 			progLineCounter++;
 			progLine=progLineCounter;
@@ -446,7 +448,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				bracket.push(1);
 			} 
 		}
-		else{//if it is an assignment
+		else if((tokens.size()>=3)&&(tokens[1]=="=")){//if it is an assignment
+
 			Node* modifiedVar = new Node(tokens[0],"variable",progLine);
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
 			tokens.erase(tokens.begin(),tokens.begin()+2);
@@ -482,6 +485,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			typeTable.insertStmtNumAndType(progLine,Query::ASSIGN);
 			
 		}
+
+
 		//cout << "close bracket "  << bracket.size() << endl;
 		//int size = containerNode.size()-1;
 		//cout << containerNode[size]->getData() << " "<<  containerNode[size]->getType()<< endl;
@@ -498,7 +503,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				containerNode.erase(containerNode.begin()+size);
 			}
 			else if(bracket.size()==0){
-				cout << "ERROR" << endl;
+				cout << "ERROR in parsing code" << endl;
 			}
 			closeBracket--;
 		}
