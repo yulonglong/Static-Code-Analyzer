@@ -39,7 +39,7 @@ void TypeTableTest::testTableSet()
 	vector<STMTNUM> expected;
 	vector<STMTNUM> result;
 	expected.push_back(4);
-	result = typeTable.getStmtNum(Query::IF);
+	result = typeTable.getAllStmts(Query::IF);
 	// verify that the assignment is correct - Note 7
 	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
 
@@ -47,14 +47,14 @@ void TypeTableTest::testTableSet()
 	result.clear();
 	expected.push_back(0);
 	expected.push_back(15);
-	result = typeTable.getStmtNum(Query::WHILE);
+	result = typeTable.getAllStmts(Query::WHILE);
 	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
 	CPPUNIT_ASSERT_EQUAL(expected[1], result[1]);
 
 	expected.clear();
 	result.clear();
 	expected.push_back(21);
-	result = typeTable.getStmtNum(Query::ASSIGN);
+	result = typeTable.getAllStmts(Query::ASSIGN);
 	CPPUNIT_ASSERT_EQUAL(expected[0],result[0]);
 
 	Query::SynType expectedType;
@@ -69,7 +69,7 @@ void TypeTableTest::testTableSet()
 
 	expected.clear();
 	result.clear();
-	result =  typeTable.getStmtNum(Query::CALL);
+	result =  typeTable.getAllStmts(Query::CALL);
 	CPPUNIT_ASSERT_EQUAL(expected.size(), result.size());
 
 	return;
