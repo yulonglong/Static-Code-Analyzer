@@ -45,6 +45,22 @@ void ParserTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(1));
 	expected = "Third";
 	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(2));
+
+	CPPUNIT_ASSERT_EQUAL(false,parent.isParent(1,2));
+	CPPUNIT_ASSERT_EQUAL(false,parent.isParent(3,2));
+	CPPUNIT_ASSERT_EQUAL(true,parent.isParent(6,7));
+	CPPUNIT_ASSERT_EQUAL(true,parent.isParent(6,8));
+	CPPUNIT_ASSERT_EQUAL(true,parent.isParent(6,9));
+	CPPUNIT_ASSERT_EQUAL(true,parent.isParent(10,11));
+	CPPUNIT_ASSERT_EQUAL(true,parent.isParent(10,12));
+	CPPUNIT_ASSERT_EQUAL(false,parent.isParent(11,12));
+
+	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(1,2));
+	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(2,3));
+	CPPUNIT_ASSERT_EQUAL(false,follows.isFollows(1,3));
+	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(4,5));
+	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(5,6));
+	CPPUNIT_ASSERT_EQUAL(false,follows.isFollows(6,7));
 	return;
 }
 

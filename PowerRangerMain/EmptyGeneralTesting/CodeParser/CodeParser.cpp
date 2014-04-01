@@ -160,6 +160,8 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
+
+//real parsing
 Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows &follows,Parent &parent){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
@@ -293,6 +295,21 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows 
 			
 			currParent->setChild(currCall);
 			currCall->setParent(currParent);
+
+			//set parent
+			int parentProgLine = currParent->getProgLine();
+			if(parentProgLine!=-1){
+				parent.setParent(parentProgLine,progLine);
+			}
+			//setFollows
+			string parentType = currParent->getType();
+			if(parentType=="stmtLst"){
+				int parentChildSize = currParent->getChild().size();
+				if(parentChildSize>=2){
+					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
+					follows.setFollows(prevProgLine,progLine);
+				}
+			}
 		}
 		else if(tokens[0]=="while"){
 			if(tokens.size()!=2){
@@ -313,9 +330,25 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows 
 			Node* whileRoot = new Node(controlVar,stmtLst,stringProgLine,"while",progLine);
 			controlVar->setParent(whileRoot);
 			stmtLst->setParent(whileRoot);
-			
+
 			currParent->setChild(whileRoot);
 			whileRoot->setParent(currParent);
+
+			//set parent
+			int parentProgLine = currParent->getProgLine();
+			if(parentProgLine!=-1){
+				parent.setParent(parentProgLine,progLine);
+			}
+			//setFollows
+			string parentType = currParent->getType();
+			if(parentType=="stmtLst"){
+				int parentChildSize = currParent->getChild().size();
+				if(parentChildSize>=2){
+					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
+					follows.setFollows(prevProgLine,progLine);
+				}
+			}
+
 			containerNode.push_back(stmtLst);
 			
 			if(openBracket){
@@ -350,6 +383,22 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows 
 			
 			currParent->setChild(ifRoot);
 			ifRoot->setParent(currParent);
+
+			//set parent
+			int parentProgLine = currParent->getProgLine();
+			if(parentProgLine!=-1){
+				parent.setParent(parentProgLine,progLine);
+			}
+			//setFollows
+			string parentType = currParent->getType();
+			if(parentType=="stmtLst"){
+				int parentChildSize = currParent->getChild().size();
+				if(parentChildSize>=2){
+					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
+					follows.setFollows(prevProgLine,progLine);
+				}
+			}
+
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
 			
@@ -383,6 +432,23 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows 
 				
 			currParent->setChild(assignRoot);
 			assignRoot->setParent(currParent);
+
+			//set parent
+			int parentProgLine = currParent->getProgLine();
+			if(parentProgLine!=-1){
+				parent.setParent(parentProgLine,progLine);
+			}
+			//setFollows
+			string parentType = currParent->getType();
+			if(parentType=="stmtLst"){
+				int parentChildSize = currParent->getChild().size();
+				if(parentChildSize>=2){
+					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
+					follows.setFollows(prevProgLine,progLine);
+				}
+			}
+
+			
 		}
 		//cout << "close bracket "  << bracket.size() << endl;
 		//int size = containerNode.size()-1;
