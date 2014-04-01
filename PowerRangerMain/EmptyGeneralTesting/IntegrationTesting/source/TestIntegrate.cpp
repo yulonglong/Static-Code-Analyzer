@@ -205,7 +205,8 @@ void IntegrateTest::testParserSource2()
 	string s10 = "stmt s; Select s such that Parent(s, 9)";
 	string s11 = "while w; Select w such that Parent(w, 11)";
 	string s12 = "assign a; Select a such that Parent(a, 3)";
-	string s13 = "while w; assign a; Select w such that Parent(w, a)";
+	// string s13 = "while w; assign a; Select w such that Parent(w, a)";
+	string s13 = "while w, assign a; Select w such that Parent(w, a)";
 	string s14 = "Select BOOLEAN such that Parent(4, 9)";
 	string s15 = "while w; Select BOOLEAN such that Parent(4, w)";
 	string s16 = "assign a; Select a such that Parent(11, a)";
