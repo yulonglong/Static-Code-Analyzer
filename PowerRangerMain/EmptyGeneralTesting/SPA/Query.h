@@ -10,7 +10,7 @@ using namespace std;
 class Query
 {
 	public:
-		enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN};
+		enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL};
     public:
         Query(string);
 		string getSelectedSyn();

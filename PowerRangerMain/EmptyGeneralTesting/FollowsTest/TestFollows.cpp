@@ -1,6 +1,7 @@
 #include <cppunit/config/SourcePrefix.h>
 #include "Follows.h"
 #include "TestFollows.h"
+#include "Query.h"
 
 #include <iostream>
 #include <string>
@@ -55,23 +56,23 @@ void FollowsTest::testFollowsUsingStmtType() {
 	followsTable->setFollows(14, 15);
 	followsTable->setFollows(16, 17);
 	
-	followsTable->table.insertStmtNumAndType(1, ASSIGN);
-	followsTable->table.insertStmtNumAndType(2, ASSIGN);
-	followsTable->table.insertStmtNumAndType(3, CALL);
-	followsTable->table.insertStmtNumAndType(5, ASSIGN);
-	followsTable->table.insertStmtNumAndType(6, WHILE);
-	followsTable->table.insertStmtNumAndType(10, IF);
+	followsTable->table.insertStmtNumAndType(1, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(2, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(3, Query::CALL);
+	followsTable->table.insertStmtNumAndType(5, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(6, Query::WHILE);
+	followsTable->table.insertStmtNumAndType(10, Query::IF);
 
-	CPPUNIT_ASSERT(followsTable->isFollows(WHILE, 5) == true);
-	CPPUNIT_ASSERT(followsTable->isFollows(IF, 6) == true);
-	CPPUNIT_ASSERT(followsTable->isFollows(ASSIGN, 1) == true);
-	CPPUNIT_ASSERT(followsTable->isFollows(CALL, 2) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::WHILE, 5) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::IF, 6) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::ASSIGN, 1) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::CALL, 2) == true);
 
-	CPPUNIT_ASSERT(followsTable->isFollowedBy(ASSIGN, 6) == true);
-	CPPUNIT_ASSERT(followsTable->isFollowedBy(WHILE, 10) == true);
+	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::ASSIGN, 6) == true);
+	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::WHILE, 10) == true);
 	// need exception handling in getFollowedBy
-	// CPPUNIT_ASSERT(followsTable->isFollowedBy(ASSIGN, 12) == false);
-	CPPUNIT_ASSERT(followsTable->isFollowedBy(IF, 13) == true);
+	// CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::ASSIGN, 12) == false);
+	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::IF, 13) == true);
 
 	return;
 }
@@ -90,23 +91,23 @@ void FollowsTest::testGetFollowsUsingStmtType() {
 	followsTable->setFollows(14, 15);
 	followsTable->setFollows(16, 17);
 	
-	followsTable->table.insertStmtNumAndType(1, ASSIGN);
-	followsTable->table.insertStmtNumAndType(2, ASSIGN);
-	followsTable->table.insertStmtNumAndType(3, CALL);
-	followsTable->table.insertStmtNumAndType(5, ASSIGN);
-	followsTable->table.insertStmtNumAndType(6, WHILE);
-	followsTable->table.insertStmtNumAndType(10, IF);
+	followsTable->table.insertStmtNumAndType(1, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(2, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(3, Query::CALL);
+	followsTable->table.insertStmtNumAndType(5, Query::ASSIGN);
+	followsTable->table.insertStmtNumAndType(6, Query::WHILE);
+	followsTable->table.insertStmtNumAndType(10, Query::IF);
 
-	CPPUNIT_ASSERT(followsTable->getFollows(WHILE, 5) == 6);
-	CPPUNIT_ASSERT(followsTable->getFollows(IF, 6) == 10);
-	CPPUNIT_ASSERT(followsTable->getFollows(ASSIGN, 1) == 2);
-	CPPUNIT_ASSERT(followsTable->getFollows(CALL, 2) == 3);
-	CPPUNIT_ASSERT(followsTable->getFollows(ASSIGN, 6) == -1);
+	CPPUNIT_ASSERT(followsTable->getFollows(Query::WHILE, 5) == 6);
+	CPPUNIT_ASSERT(followsTable->getFollows(Query::IF, 6) == 10);
+	CPPUNIT_ASSERT(followsTable->getFollows(Query::ASSIGN, 1) == 2);
+	CPPUNIT_ASSERT(followsTable->getFollows(Query::CALL, 2) == 3);
+	CPPUNIT_ASSERT(followsTable->getFollows(Query::ASSIGN, 6) == -1);
 
-	CPPUNIT_ASSERT(followsTable->getFollowedBy(ASSIGN, 6) == 5);
-	CPPUNIT_ASSERT(followsTable->getFollowedBy(WHILE, 10) == 6);
+	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::ASSIGN, 6) == 5);
+	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::WHILE, 10) == 6);
 	// need exception handling in getFollowedBy
-	// CPPUNIT_ASSERT(followsTable->getFollowedBy(ASSIGN, 12) == -1);
-	CPPUNIT_ASSERT(followsTable->getFollowedBy(IF, 13) == 10);	
+	// CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::ASSIGN, 12) == -1);
+	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::IF, 13) == 10);	
 	return;
 }
