@@ -229,7 +229,27 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				valid=true;
 				closeBracket++;
 			}
+			else if(tokens[0]=="{"){
+				valid=true;
+				openBracket++;
+			}
 		}
+		else if (tokens.size()==2){
+			//cout << tokens[0] << endl;
+			if((tokens[0]=="procedure")||(tokens[0]=="while")||(tokens[0]=="if")||(tokens[0]=="else")){
+				int length=tokens[1].length()-1;
+				string lastChar = tokens[1].substr(length);
+				if(lastChar=="{"){
+					tokens[1] = tokens[1].substr(0,length);
+					openBracket++;
+					valid=true;
+				}
+				else{
+					valid=true;
+				}
+			}
+		}
+
 
 		while(!valid){
 			int tokenLastIndex = tokens.size()-1;
@@ -241,6 +261,9 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			else if(tokens[tokenLastIndex]=="}"){
 				closeBracket++;
 				tokens.erase(tokens.begin()+tokenLastIndex);
+				if(tokens.size()==0){
+					valid=true;
+				}
 			}
 			else if(tokens[tokenLastIndex]==";"){
 				valid=true;
@@ -258,9 +281,12 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				tokens.push_back(lastChar);
 			}
 		}
-
+		if(openBracket>0){
+			bracket.push(1);
+		} 
+		
 		//checking for curly bracket matching
-		if((bracket.size()==0)&&(openBracket==0)&&(tokens.size()>0)){
+		if((bracket.size()==0)&&(openBracket==0)&&(tokens.size()>0)&&(tokens[0]!="procedure")){
 			cout << "ERROR in parsing code" << endl;
 		}
 		
@@ -303,9 +329,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			stmtLst->setParent(procRoot);
 			containerNode.push_back(stmtLst);
 			
-			if(openBracket>0){
-				bracket.push(1);
-			} 
 		}
 		else if (tokens[0]=="call"){
 			if(tokens.size()!=2){
@@ -382,9 +405,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			containerNode.push_back(stmtLst);
 			
-			if(openBracket){
-				bracket.push(1);
-			} 
 		
 		}
 		else if(tokens[0]=="if"){
@@ -434,19 +454,13 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
-			
-			if(openBracket>0){
-				bracket.push(1);
-			}  
+			 
 		}
 		else if (tokens[0]=="else"){
 			if(tokens.size()!=1){
 				return NULL;
 			}
 			
-			if(openBracket>0){
-				bracket.push(1);
-			} 
 		}
 		else if((tokens.size()>=3)&&(tokens[1]=="=")){//if it is an assignment
 
