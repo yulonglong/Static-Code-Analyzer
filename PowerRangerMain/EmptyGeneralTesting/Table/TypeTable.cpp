@@ -17,8 +17,8 @@ Query::SynType TypeTable:: getType (STMTNUM s) {
 	return typeMap.at(s);
 }
 
-LIST TypeTable:: getStmtNum (Query::SynType t) {
-	LIST list;
+vector<STMTNUM> TypeTable:: getStmtNum (Query::SynType t) {
+	vector<STMTNUM> list;
 	for (map<int,Query::SynType>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
 		if(it->second == t) {
 			list.push_back (it->first);

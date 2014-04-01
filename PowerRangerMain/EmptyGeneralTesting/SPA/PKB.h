@@ -13,8 +13,8 @@ typedef short PROC;
 using namespace std;
 
 class VarTable;  // no need to #include "VarTable.h" as all I need is pointer
-class ProcTable; 
-
+class ProcTable;
+class TypeTable;
 
 class PKB {
 private: 

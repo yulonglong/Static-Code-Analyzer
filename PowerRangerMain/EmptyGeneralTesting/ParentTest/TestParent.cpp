@@ -1,5 +1,4 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "Parent.h"
 #include "TestParent.h"
 
 #include <iostream>
