@@ -26,7 +26,9 @@ void IntegrateTest::testModifyTable()
 {  // Note 5
 	VarTable varTable;
 	ProcTable procTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable);
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,follows,parent);
 
 	string expected = "i";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
@@ -52,7 +54,9 @@ void IntegrateTest::testCompleteParser()
 	// create a node
 	VarTable varTable;
 	ProcTable procTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable);
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,follows,parent);
 	// assign
 	Node* curr = root;
 	curr = root->getChild()[0];
@@ -81,7 +85,9 @@ void IntegrateTest::testParserSource1()
 {
 	VarTable varTable;
 	ProcTable procTable;
-	Node* root = parseCode("Source1.txt",varTable,procTable);
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("Source1.txt",varTable,procTable,follows,parent);
 
 	Node* curr = root;
 	
@@ -147,7 +153,9 @@ void IntegrateTest::testParserSource2()
 {
 	VarTable varTable;
 	ProcTable procTable;
-	Node* root = parseCode("Source2.txt",varTable,procTable);
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("Source2.txt",varTable,procTable,follows,parent);
 
 	Node* curr = root;
 	
