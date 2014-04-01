@@ -49,11 +49,9 @@ void ParentTest::testParentUsingStmtType() {
 	parentTable->table.insertStmtNumAndType(12, Query::ASSIGN);
 	
 	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 9) == true);
-	// CPPUNIT_ASSERT(parentTable->isParent(10, 11) == true);
-	// CPPUNIT_ASSERT(parentTable->isParent(5, 6) == false);
-	// CPPUNIT_ASSERT(parentTable->isParent(6, 10) == false);
+	CPPUNIT_ASSERT(parentTable->isParent(Query::IF, 12) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 5) == true);
 	
-
 	return;
 }
 

@@ -62,17 +62,27 @@ void FollowsTest::testFollowsUsingStmtType() {
 	followsTable->table.insertStmtNumAndType(5, Query::ASSIGN);
 	followsTable->table.insertStmtNumAndType(6, Query::WHILE);
 	followsTable->table.insertStmtNumAndType(10, Query::IF);
+	followsTable->table.insertStmtNumAndType(13, Query::ASSIGN);
 
 	CPPUNIT_ASSERT(followsTable->isFollows(Query::WHILE, 5) == true);
 	CPPUNIT_ASSERT(followsTable->isFollows(Query::IF, 6) == true);
 	CPPUNIT_ASSERT(followsTable->isFollows(Query::ASSIGN, 1) == true);
 	CPPUNIT_ASSERT(followsTable->isFollows(Query::CALL, 2) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::IF, 5) == false);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::WHILE, 10) == false);
 
 	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::ASSIGN, 6) == true);
 	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::WHILE, 10) == true);
-	// need exception handling in getFollowedBy
-	// CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::ASSIGN, 12) == false);
+	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::ASSIGN, 12) == false); 
 	CPPUNIT_ASSERT(followsTable->isFollowedBy(Query::IF, 13) == true);
+	
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::ASSIGN, Query::ASSIGN) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::ASSIGN, Query::WHILE) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::WHILE, Query::ASSIGN) == false);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::WHILE, Query::STMT) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::STMT, Query::STMT) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::STMT, Query::IF) == true);
+	CPPUNIT_ASSERT(followsTable->isFollows(Query::ASSIGN, Query::STMT) == true);
 
 	return;
 }
@@ -106,8 +116,32 @@ void FollowsTest::testGetFollowsUsingStmtType() {
 
 	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::ASSIGN, 6) == 5);
 	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::WHILE, 10) == 6);
-	// need exception handling in getFollowedBy
-	// CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::ASSIGN, 12) == -1);
+	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::ASSIGN, 12) == -1);
 	CPPUNIT_ASSERT(followsTable->getFollowedBy(Query::IF, 13) == 10);	
+	
+	vector<STMTNUM> list = followsTable->getFollows(Query::WHILE, Query::IF); 
+	CPPUNIT_ASSERT(list.size(), 1);	
+	CPPUNIT_ASSERT(list.at(0), 6);	
+
+	list = followsTable->getFollowedBy(Query::WHILE, Query::IF); 
+	CPPUNIT_ASSERT(list.size() == 1);	
+	CPPUNIT_ASSERT(list.at(0) == 10);	
+	
+
+	list = followsTable->getFollows(Query::ASSIGN, Query::WHILE); 
+	CPPUNIT_ASSERT(list.size() == 1);	
+	CPPUNIT_ASSERT(list.at(0) == 5);	
+
+	list = followsTable->getFollowedBy(Query::ASSIGN, Query::WHILE); 
+	CPPUNIT_ASSERT(list.size() == 1);	
+	CPPUNIT_ASSERT(list.at(0) == 6);	
+	
+	/*
+	cout << list.size() << endl;
+	for (int i=0; i<list.size(); i++) {
+		cout << list.at(i) << endl;
+	}
+	*/
+	
 	return;
 }
