@@ -1,9 +1,11 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "TypeTable.h"
+
 #include "TestTypeTable.h"
+#include "TypeTable.h"
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 void 
 TypeTableTest::setUp()
@@ -29,15 +31,15 @@ void TypeTableTest::testTableSet()
 {
 	TypeTable typeTable;
 
-	typeTable.insertStmtNumAndType(0, WHILE);
-	typeTable.insertStmtNumAndType(4, IF);
-	typeTable.insertStmtNumAndType(15, WHILE);
-	typeTable.insertStmtNumAndType(21, ASSIGN);
+	typeTable.insertStmtNumAndType(0, Query::WHILE);
+	typeTable.insertStmtNumAndType(4, Query::IF);
+	typeTable.insertStmtNumAndType(15, Query::WHILE);
+	typeTable.insertStmtNumAndType(21, Query::ASSIGN);
 
 	vector<STMTNUM> expected;
 	vector<STMTNUM> result;
 	expected.push_back(4);
-	result = typeTable.getStmtNum(IF);
+	result = typeTable.getStmtNum(Query::IF);
 	// verify that the assignment is correct - Note 7
 	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
 
@@ -45,29 +47,29 @@ void TypeTableTest::testTableSet()
 	result.clear();
 	expected.push_back(0);
 	expected.push_back(15);
-	result = typeTable.getStmtNum(WHILE);
+	result = typeTable.getStmtNum(Query::WHILE);
 	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
 	CPPUNIT_ASSERT_EQUAL(expected[1], result[1]);
 
 	expected.clear();
 	result.clear();
 	expected.push_back(21);
-	result = typeTable.getStmtNum(ASSIGN);
+	result = typeTable.getStmtNum(Query::ASSIGN);
 	CPPUNIT_ASSERT_EQUAL(expected[0],result[0]);
 
-	STYPE expectedType;
-	expectedType = WHILE;
+	Query::SynType expectedType;
+	expectedType = Query::WHILE;
 	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(0));
-	expectedType = IF;
+	expectedType = Query::IF;
 	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(4));
-	expectedType = WHILE;
+	expectedType = Query::WHILE;
 	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(15));
-	expectedType = ASSIGN;
+	expectedType = Query::ASSIGN;
 	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(21));
 
 	expected.clear();
 	result.clear();
-	result =  typeTable.getStmtNum(CALL);
+	result =  typeTable.getStmtNum(Query::CALL);
 	CPPUNIT_ASSERT_EQUAL(expected.size(), result.size());
 
 	return;
