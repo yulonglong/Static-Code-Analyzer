@@ -160,7 +160,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable){
+Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable,Follows &follows,Parent &parent){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
