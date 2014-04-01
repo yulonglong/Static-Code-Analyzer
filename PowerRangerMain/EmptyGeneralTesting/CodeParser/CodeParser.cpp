@@ -160,6 +160,26 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
+void tokenizeTokens(string word, vector<string> &storage){
+	string token ="";
+	for(int i=0;i<(int) word.length();i++){
+		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
+			if(token.length()>0){
+				storage.push_back(token);
+			}
+			token = word[i];
+			storage.push_back(token);
+			token ="";
+		}
+		else{
+			token = token + word[i];
+		}
+	}
+	if(token.length()>0){
+		storage.push_back(token);
+	}
+	return;
+}
 
 //real parsing
 Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows,Parent &parent){
@@ -186,8 +206,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 		}
 
 		//initializing variables needed
-		bool openBracket=false;
-		bool closeBracket=false;
+		int openBracket = 0;
+		int closeBracket = 0;
 		bool valid=false;
 		istringstream istream(word);
 		vector<string> tokens;
@@ -195,20 +215,24 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 		//getting all the tokens from the line
 		while(istream>>singleToken){
-			tokens.push_back(singleToken);
+			tokenizeTokens(singleToken,tokens);
 		}
+		/*
+		for(int i=0;i<tokens.size();i++){
+			cout << tokens[i] << endl;
+		}*/
 
 		//checking syntax whether there are matching open and close curly bracket
 		//and the presence of semi colon
 		while(!valid){
 			int tokenLastIndex = tokens.size()-1;
 			if(tokens[tokenLastIndex]=="{"){
-				openBracket=true;
+				openBracket++;
 				valid=true;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 			}
 			else if(tokens[tokenLastIndex]=="}"){
-				closeBracket=true;
+				closeBracket++;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 			}
 			else if(tokens[tokenLastIndex]==";"){
@@ -216,7 +240,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				tokens.erase(tokens.begin()+tokenLastIndex);
 			}
 			else if(tokens[tokenLastIndex]==";}"){
-				closeBracket=true;
+				closeBracket++;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 				valid=true;
 			}
@@ -230,7 +254,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 		//checking for curly bracket matching
 		if(bracket.empty()){
-			if(!openBracket){
+			if(openBracket==0){
 				return NULL;
 			}
 			else if(tokens[0]!="procedure"){
@@ -277,7 +301,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			stmtLst->setParent(procRoot);
 			containerNode.push_back(stmtLst);
 			
-			if(openBracket){
+			if(openBracket>0){
 				bracket.push(1);
 			} 
 		}
@@ -409,7 +433,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
 			
-			if(openBracket){
+			if(openBracket>0){
 				bracket.push(1);
 			}  
 		}
@@ -418,7 +442,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				return NULL;
 			}
 			
-			if(openBracket){
+			if(openBracket>0){
 				bracket.push(1);
 			} 
 		}
@@ -462,19 +486,23 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 		//int size = containerNode.size()-1;
 		//cout << containerNode[size]->getData() << " "<<  containerNode[size]->getType()<< endl;
 		
-		if((bracket.size()==1)&&(closeBracket)){
-			currProcName = "";
-			bracket.pop();
+		while(closeBracket>0){
+			if((bracket.size()==1)&&(closeBracket==1)){
+				currProcName = "";
+				bracket.pop();
+			}
+			else if(bracket.size()>1){
+				bracket.pop();
+				int size = containerNode.size()-1;
+				//printInOrderExpressionTree(containerNode[size-1]);
+				containerNode.erase(containerNode.begin()+size);
+			}
+			else if(bracket.size()==0){
+				cout << "ERROR" << endl;
+			}
+			closeBracket--;
 		}
-		else if((bracket.size()>1)&&(closeBracket)){
-			bracket.pop();
-			int size = containerNode.size()-1;
-			//printInOrderExpressionTree(containerNode[size-1]);
-			containerNode.erase(containerNode.begin()+size);
-		}
-		else if(bracket.size()==0){
-			cout << "ERROR" << endl;
-		}
+	
 		//cout << stringProgLine << ". " << word << endl;
 	}
 	

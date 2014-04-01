@@ -14,6 +14,7 @@ class ParserTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST( testFullParserOwnSource );
 	CPPUNIT_TEST( testFullParserSource1 );
 	CPPUNIT_TEST( testFullParserSource2 );
+	CPPUNIT_TEST( testFullParserSource2messy );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -30,6 +31,7 @@ public:
 	void testFullParserOwnSource();
 	void testFullParserSource1();
 	void testFullParserSource2();
+	void testFullParserSource2messy();
 };
 #endif
     

@@ -298,3 +298,30 @@ void ParserTest::testFullParserSource2()
 		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
 	}
 }
+
+void ParserTest::testFullParserSource2messy()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Follows follows;
+	Parent parent;
+	TypeTable typeTable;
+	Node* root = parseCode("Source2messy.txt",varTable,procTable,typeTable,follows,parent);
+
+		ifstream infile;
+	infile.open("expectedSource2.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource2.txt does not exists"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
