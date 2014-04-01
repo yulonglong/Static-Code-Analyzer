@@ -321,7 +321,9 @@ void ParserTest::testFullParserSource2messy()
 		}
 		string resultFullTree;
 		root->stringPreOrderExpressionTree(root, resultFullTree);
-
+	
 		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+
+	
 	}
 }
