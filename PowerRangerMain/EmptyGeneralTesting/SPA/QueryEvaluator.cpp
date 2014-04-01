@@ -12,6 +12,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
 	Follows f;
+	TypeTable t;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {
@@ -23,7 +24,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
-					answers.push_back( f.getAll(i->second));
+					answers.push_back( t.getAllStmts(i->second));
 				}
 				else {
 					answers.push_back(evaluateFollows(*it, m, q.getSelectedSyn()));
@@ -44,7 +45,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateParentBoolean(*it, m)){
-					answers.push_back(f.getAll(i->second));
+					answers.push_back(t.getAllStmts(i->second));
 				}
 				else {
 					answers.push_back(evaluateParent(*it, m, q.getSelectedSyn()));
@@ -158,10 +159,10 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
 	unordered_map<string, Query::SynType>::iterator i3 = m.find(selectedSyn);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		return f.getFollows(i3->second, i2->second, i1->second);
+		return f.getFollows(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		return f.getFollowedBy(i3->second, i2->second, i1->second);
+		return f.getFollowedBy(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
 		answer.push_back(f.getFollows(i1->second, atoi(tk2.c_str())));
@@ -188,7 +189,8 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 		return p.getChildren(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
-		return p.getParent(i1->second, atoi(tk2.c_str()));
+		answer.push_back( p.getParent(i1->second, atoi(tk2.c_str())));
+		return answer;
 	}
 	else {
 		return p.getChildren(i2->second, atoi(tk1.c_str()));
