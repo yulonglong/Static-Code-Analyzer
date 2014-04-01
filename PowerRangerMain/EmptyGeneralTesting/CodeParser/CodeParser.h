@@ -14,7 +14,9 @@
 #include "Node.h"
 #include "ProcTable.h"
 #include "VarTable.h"
+#include "Follows.h"
+#include "Parent.h"
 
-Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable);
+Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable, Follows &follows, Parent &parent);
 
 #endif
