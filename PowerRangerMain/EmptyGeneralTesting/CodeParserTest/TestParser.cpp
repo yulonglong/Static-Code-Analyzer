@@ -4,6 +4,7 @@
 #include "TestParser.h"
 
 #include <iostream>
+#include <fstream>
 #include <string>
 using namespace std;
 
@@ -183,4 +184,85 @@ void ParserTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
 
 	return;
+}
+
+
+void ParserTest::testFullParserOwnSource()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,follows,parent);
+
+	ifstream infile;
+	infile.open("expectedCodeParserTestIn.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedCodeParserTestIn.txt does not exists"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+
+void ParserTest::testFullParserSource1()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("Source1.txt",varTable,procTable,follows,parent);
+
+	ifstream infile;
+	infile.open("expectedSource1.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource1.txt does not exists"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+
+void ParserTest::testFullParserSource2()
+{
+	VarTable varTable;
+	ProcTable procTable;
+	Follows follows;
+	Parent parent;
+	Node* root = parseCode("Source2.txt",varTable,procTable,follows,parent);
+
+		ifstream infile;
+	infile.open("expectedSource2.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource2.txt does not exists"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
 }
