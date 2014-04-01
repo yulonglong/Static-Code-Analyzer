@@ -62,6 +62,15 @@ void ParserTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(4,5));
 	CPPUNIT_ASSERT_EQUAL(true,follows.isFollows(5,6));
 	CPPUNIT_ASSERT_EQUAL(false,follows.isFollows(6,7));
+
+	CPPUNIT_ASSERT_EQUAL(Query::ASSIGN,typeTable.getType(1));
+	CPPUNIT_ASSERT_EQUAL(Query::ASSIGN,typeTable.getType(2));
+	CPPUNIT_ASSERT_EQUAL(Query::CALL,typeTable.getType(3));
+	CPPUNIT_ASSERT_EQUAL(Query::WHILE,typeTable.getType(6));
+	CPPUNIT_ASSERT_EQUAL(Query::CALL,typeTable.getType(8));
+	CPPUNIT_ASSERT_EQUAL(Query::IF,typeTable.getType(10));
+	CPPUNIT_ASSERT_EQUAL(Query::ASSIGN,typeTable.getType(11));
+
 	return;
 }
 

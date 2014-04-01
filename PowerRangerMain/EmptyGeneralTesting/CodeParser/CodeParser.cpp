@@ -310,7 +310,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 					follows.setFollows(prevProgLine,progLine);
 				}
 			}
-
+			//setTypeTable
+			typeTable.insertStmtNumAndType(progLine,Query::CALL);
 
 		}
 		else if(tokens[0]=="while"){
@@ -350,6 +351,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 					follows.setFollows(prevProgLine,progLine);
 				}
 			}
+			//setTypeTable
+			typeTable.insertStmtNumAndType(progLine,Query::WHILE);
 
 			containerNode.push_back(stmtLst);
 			
@@ -400,6 +403,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 					follows.setFollows(prevProgLine,progLine);
 				}
 			}
+			//setTypeTable
+			typeTable.insertStmtNumAndType(progLine,Query::IF);
 
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
@@ -449,7 +454,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 					follows.setFollows(prevProgLine,progLine);
 				}
 			}
-
+			//setTypeTable
+			typeTable.insertStmtNumAndType(progLine,Query::ASSIGN);
 			
 		}
 		//cout << "close bracket "  << bracket.size() << endl;
