@@ -22,7 +22,7 @@ public:
 
 	void insertStmtNumAndType(STMTNUM,Query::SynType);
 	Query::SynType getType (STMTNUM);
-	vector<STMTNUM> getStmtNum (Query::SynType);
+	vector<STMTNUM> getAllStmts (Query::SynType);
 };
 
 #endif
