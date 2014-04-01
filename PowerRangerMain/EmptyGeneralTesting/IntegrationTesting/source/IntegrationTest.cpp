@@ -4,7 +4,6 @@
 #include <CodeParser.h>
 #include <VarTable.h>
 #include <ProcTable.h>
-// #include <QueryParser.h>
 
 using namespace std;
 

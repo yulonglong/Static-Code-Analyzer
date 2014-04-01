@@ -2,6 +2,8 @@
 #include "Node.h"
 #include "CodeParser.h"
 #include "Testintegrate.h"
+// #include <QueryParser.h>
+
 
 #include <iostream>
 #include <string>
@@ -175,3 +177,14 @@ void IntegrateTest::testParserSource2()
 
 	return;
 }
+
+// void IntegrateTest::testPQLSource1() {
+	// testParseSource1();
+	string s;
+
+	// TODO: run query parser;
+
+	// TODO: run evaluate on query
+
+	// TODO: compare result with expected result
+// }
