@@ -6,6 +6,7 @@
 #include "Relationship.h"
 #include "Query.h"
 #include "TypeTable.h"
+#include "Follows.h"
 #include <vector>
 
 
@@ -22,7 +23,7 @@ private:
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 public:
 	QueryEvaluator();
-	std::vector<int> evaluateQuery(Query);
+	std::vector<int> evaluateQuery(Query, Follows);
 	bool evaluateQueryBoolean(Query);
 };
 #endif

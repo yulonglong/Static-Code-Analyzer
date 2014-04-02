@@ -11,10 +11,9 @@ using namespace std;
 QueryEvaluator::QueryEvaluator(){
 }
 
-vector<int> QueryEvaluator::evaluateQuery(Query q){
+vector<int> QueryEvaluator::evaluateQuery(Query q, Follows f){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
-	Follows f;
 	TypeTable t;
 	unordered_map<string, Query::SynType> m = q.getSynTable();
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
@@ -25,7 +24,6 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			string selectedSyn = q.getSelectedSyn();
 			
 			std::unordered_map<string, Query::SynType>::iterator i = q.getSynTable().find(selectedSyn);
-
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back( t.getAllStmts(i->second));
@@ -168,7 +166,8 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 		return f.getFollowedBy(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
-		answer.push_back(f.getFollows(i1->second, atoi(tk2.c_str())));
+		answer.push_back(f.getFollowedBy(i1->second, atoi(tk2.c_str())));
+
 		return answer;
 	}
 	else {
