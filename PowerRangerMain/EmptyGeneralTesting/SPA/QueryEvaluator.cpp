@@ -8,6 +8,8 @@
 
 
 using namespace std;
+QueryEvaluator::QueryEvaluator(){
+}
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
