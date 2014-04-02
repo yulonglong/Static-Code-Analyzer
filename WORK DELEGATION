@@ -44,29 +44,118 @@ Ipsita:
 
 -----------------------------------------------------------------------------------------------
 
+[DEADLINE FOR EVERYONE: SUNDAY 13th APRIL]
 ---REPORT---
 Note: 
 Please read the requirements for your component 
-before commencing work to avoid redoing multiple times 
-or delaying the workflow. 
+before commencing work to avoid redoing or delaying the workflow. 
 Assignment 4 can be found in our repo. 
 
 Adinda:	
--
+-4. UML diagrams
+Include any UML diagrams that you found useful. For each diagram, explain how you used it (e.g., in
+project planning, communication, test planning or in other situations), and comment on the value
+the diagram added to your project.
 
-Hisyam: 
-- 
+
+-7. Query processing
+7.1 Validating program queries
+Describe query validation rules. An example of query validation rules is: “Checking if all relationships
+have correct number and types of arguments”. DO NOT provide procedural description
+(pseudocode) of how Query Pre‐processor checks the rules. Very briefly (1/2 page maximum),
+describe how you encode validation rules, and how you perform query validation.
+7.2 Design and implementation of Query Evaluator
+Describe the data representation for program queries (query tree).
+Describe how your Query Evaluator works. (can ask lacie to do after you are done)
+
+
+Hisyam: (Ipsita will help to do System Testing)
+- 8. Testing 
+Describe your approach to testing.
+Comment on the testing experience gained from this project.
+Be sure that you understand the role of the given AutoTester, integrate it with your SPA, and use it
+to automate regression testing throughout the project.
+8.1 Describe your test plan
+8.2 Provide examples of test cases of different categories (this is in addition to the system
+acceptance tests you submit with your SPA code)
+	1) Unit Testing
+		a) Provide TWO samples of specific unit test cases for SPA Front‐end, and two for Query
+		Processor.
+		b) If you used assertions, describe how and show examples.
+	2) Integration Testing
+		a) UML sequence diagrams show communication among SPA components. Use sequence
+		diagrams to plan integration testing and indicate which integrations you have tested.
+		b) Provide TWO sample integration test cases.
+	
+	3) System (Validation) Testing [Ipsita]
+		a) Provide TWO sample test cases.
+	Document each test case in a standard way as follows:
+	Test Purpose: Explain what you intend to test in this test case.
+	Required Test Inputs: Explain what program module (or the whole system) you test and what
+	input must be fed to this test case.
+	Expected Test Results: Specify the expected results for this test case
+
+
+
 
 Lacie:
--
+- PLS CREATE A SKELETON SO THAT EVERYONE CAN FILL IN THEIR PARTS [Deadline: ??]
+
+-2. Scope of the prototype implementation
+Indicate whether you have met basic requirements for the prototype described in the assignment.
+Describe any bonus features and how you tested them.
+
+-6. Coding standards and experiences
+1) State coding standards adopted by your team.
+2) Comment on what you have done to enhance the correspondence between abstract APIs
+(specified in Assignment 4), and their concrete API counterparts (C++ classes).
+
 
 Kester: 
--
+-3. Documentation of abstract APIs (replace all the assignment 3's APIs and include proper descriptions)
+Include a complete list of APIs of all design abstractions (similar to what you wrote in Assignment 3),
+not only the ones you have implemented in the prototype. 
+
+-5. Comments on design decisions [Refer to Assignment 4's "7. A check list of implementation issues"]
+We will pay much attention to evaluating design decisions only in CS3202. For the prototype, it is up
+to you if and how you comment on your design.
+
+
 
 Yolim: 
--
+-9. Discussion
+Free format. Here are examples of issues that you might address: 
+1) What worked fine for you? What was a problem?
+2) What would you do differently if you were to start the project again?
+3) Comment on the experience gained in this project in respect to:
+a) Working in the team,
+b) Complexity of the SPA problem and program solution,
+c) What you have learnt in this project course.
+4) Comment on the tools used for the project
+a) Were the recommended tools useful?
+b) What other tools did you use (if any), and in what ways were they useful?
+c) What were the problems you faced when using each tool?
+d) In which areas would you like to have had more tool support?
+5) What management lessons have you learned?
+6) Suggest how this project course can be improved.
+
+
 
 Ipsita:
--
+-1. Development plan
+Plan the activities for each team member. Activity is a smaller work unit than task. For example, you may have
+an activity such as testing the interface to AST. Tasks consist of activities. Define activities of a size that you
+feel comfortable planning with.
 
-
+- 8. Testing 
+Describe your approach to testing.
+Comment on the testing experience gained from this project.
+Be sure that you understand the role of the given AutoTester, integrate it with your SPA, and use it
+to automate regression testing throughout the project.
+	3) System (Validation) Testing [Ipsita]
+		a) Provide TWO sample test cases.
+	Document each test case in a standard way as follows:
+	Test Purpose: Explain what you intend to test in this test case.
+	Required Test Inputs: Explain what program module (or the whole system) you test and what
+	input must be fed to this test case.
+	Expected Test Results: Specify the expected results for this test case
