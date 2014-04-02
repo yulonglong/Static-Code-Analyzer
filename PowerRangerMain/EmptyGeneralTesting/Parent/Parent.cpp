@@ -64,11 +64,11 @@ bool Parent::isChildren(Query::SynType t, STMTNUM s){
 	return false;
 }
 
-/*
+
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2, STMTNUM s) {
 	STMTNUM temp = childrenTable[s];
 	if(table.getType(temp) == t2){
-		return table.getStmtNum(t1);
+		return table.getAllStmts(t1);
 	}
 	return vector<STMTNUM> (1,-1);
 }
@@ -78,12 +78,12 @@ vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2, STMTNU
 	vector<STMTNUM>::iterator it = temp.begin();
 	for(;it!=temp.end();++it){
 		if(table.getType(*it) == t2){
-			return table.getStmtNum(t1);
+			return table.getAllStmts(t1);
 		}
 	}
 	return vector<STMTNUM> (1,-1);
 }
-*/
+
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2){
 	return vector<STMTNUM> (1,-1);
 }
