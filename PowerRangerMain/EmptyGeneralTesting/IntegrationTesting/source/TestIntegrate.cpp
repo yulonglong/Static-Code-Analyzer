@@ -3,6 +3,7 @@
 #include "CodeParser.h"
 #include "Testintegrate.h"
 #include "QueryParser.h"
+#include "QueryEvaluator.h"
 
 
 #include <iostream>
@@ -191,6 +192,9 @@ void IntegrateTest::testParserSource2()
 }
 
  void IntegrateTest::testPQLSource1() {
+	string expected="";
+	vector<Relationship> v;
+	
 
 	string s1 = "assign a; Select a such that Follows(a, 7)";
 	string s2 = "assign a; Select a such that Follows(3, a)";
@@ -215,6 +219,21 @@ void IntegrateTest::testParserSource2()
 	QueryParser qp;
 
 	Query q1 = qp.parse(s1);
+	v = q1.getRelVect();
+	expected = "a";
+	Relationship r = v[0];
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r.getRelType());
+	CPPUNIT_ASSERT_EQUAL(expected, q1.getSelectedSyn());
+
+	QueryEvaluator qe;
+	Follows f;
+	TypeTable t;
+	f.setFollows(6,7);
+	t.insertStmtNumAndType(6, Query::ASSIGN);
+	vector<int> vec = qe.evaluateQuery(q1);
+	CPPUNIT_ASSERT_EQUAL(6, vec[0]);
+
+
 	Query q2 = qp.parse(s2);
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
