@@ -47,9 +47,41 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Parent::isParent(Query::SynType t, Query::SynType t2){
-	bool v;
-	return v;
+bool Parent::isParent(Query::SynType t1, Query::SynType t2) {
+	vector<STMTNUM> list; 
+	STMTNUM j = -1; 
+	for (vector<STMTNUM>::size_type i = 0; i != childrenTable.size(); i++) {
+		j = -1; 
+		try {
+			j = childrenTable[i];
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
+		}
+		try {
+			if (j != -1) {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					return true;
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					return true;
+
+				}
+			}
+		} catch (...) {
+			// if that stmtnum doesnt have a type in typetable
+			continue; 
+		}
+	}
+	return false;
 }
 
 bool Parent::isParent(Query::SynType t, STMTNUM s) {
@@ -103,10 +135,81 @@ vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2, STMTNU
 }
 
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2){
-	return vector<STMTNUM> (1,-1);
+	vector<STMTNUM> list; 
+	STMTNUM j = -1; 
+	for (vector<STMTNUM>::size_type i = 0; i != childrenTable.size(); i++) {
+		j = -1; 
+		try {
+			j = childrenTable[i];
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
+		}
+		try {
+			if (j != -1) {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+
+				}
+			}
+		} catch (...) {
+			// if that stmtnum doesnt have a type in typetable
+			continue; 
+		}
+	}
+	if(list.empty())
+		return vector<STMTNUM> (1,-1);
+	return list;
 }
 
 vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2){
+	vector<STMTNUM> list; 
+	vector<STMTNUM> temp;
+	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
+		try {
+			temp = parentTable[i];
+		} catch (...) {
+			//const std::out_of_range& oor
+			// cout << "Catch: j is " << j << endl; 
+			continue;
+		}
+		for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
+			STMTNUM j = temp[k];
+			try {
+				if (t1 == Query::STMT && t2 == Query::STMT) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 == Query::STMT && t2 != Query::STMT && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 != Query::STMT && t2 == Query::STMT && table.getType(i) == t1) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				} else if (t1 != Query::STMT && t2 != Query::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+					// cout << i << "  " << j << endl; 
+					list.push_back(i);
+				}
+			} catch (...) {
+				// if that stmtnum doesnt have a type in typetable
+				continue; 
+			}
+		}
+	}
+	if(list.empty())
+		return vector<STMTNUM> (1,-1);
+	return list;
+
 	vector<STMTNUM> v;
 	return vector<STMTNUM> (1,-1);
 }

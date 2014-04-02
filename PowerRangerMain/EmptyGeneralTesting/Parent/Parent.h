@@ -16,8 +16,8 @@ typedef int STMTNUM;
 
 class Parent {
 private:
-	vector<vector<STMTNUM>> parentTable;
-	vector<STMTNUM> childrenTable;
+	vector<vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
+	vector<STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num
 	
 public: 
 	TypeTable table; // for the sake of unit testing.
