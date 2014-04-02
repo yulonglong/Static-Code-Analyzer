@@ -1,10 +1,43 @@
 #pragma once
 
-#include "CodeParser.h"
+#include "Parser.h"
+#include <string>
+#include <cstdlib>
+#include <cstdio>
+#include <iostream>
+#include <sstream>
+#include <fstream>
+#include <stack>
+#include <vector>
 using namespace std;
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable){
+
+void printPreOrderExpressionTree(Node* root){
+	if(root->getParent()!=NULL){
+		cout << "Parent " << root->getParent()->getProgLine() << ".) "<< root->getParent()->getData() << " : " << root->getParent()->getType() << endl;
+	}
+	cout << root->getProgLine() << ".) " << root->getData() << " : " << root->getType() << endl;
+	
+	for(unsigned i=0;i<root->getChild().size();i++){
+		printPreOrderExpressionTree(root->getChild(i));
+	}
+	return;
+}
+
+void printInOrderExpressionTree(Node* root){
+	if(root->getChild(0)!=NULL){
+		printInOrderExpressionTree(root->getChild(0));
+	}
+	cout << root->getData() << " : " << root->getType() << " ";
+	if(root->getChild(1)!=NULL){
+		printInOrderExpressionTree(root->getChild(1));
+	}
+	return;
+}
+//end Node class
+
+Node* constructExpressionTree(vector<string> tokens,int newProgLine){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -25,9 +58,6 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 				type="constant";
 			}
 			else{
-				//insert to var table
-				varTable.insertVar(tokens[i]);
-				//end insertion
 				type="variable";
 			}
 			Node* curr = new Node(tokens[i],type,newProgLine);
@@ -160,29 +190,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-void tokenizeTokens(string word, vector<string> &storage){
-	string token ="";
-	for(int i=0;i<(int) word.length();i++){
-		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
-			if(token.length()>0){
-				storage.push_back(token);
-			}
-			token = word[i];
-			storage.push_back(token);
-			token ="";
-		}
-		else{
-			token = token + word[i];
-		}
-	}
-	if(token.length()>0){
-		storage.push_back(token);
-	}
-	return;
-}
-
-//real parsing
-Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows,Parent &parent){
+Node* parse(string filename){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -206,8 +214,8 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 		}
 
 		//initializing variables needed
-		int openBracket = 0;
-		int closeBracket = 0;
+		bool openBracket=false;
+		bool closeBracket=false;
 		bool valid=false;
 		istringstream istream(word);
 		vector<string> tokens;
@@ -215,62 +223,28 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 		//getting all the tokens from the line
 		while(istream>>singleToken){
-			tokenizeTokens(singleToken,tokens);
+			tokens.push_back(singleToken);
 		}
-		/*
-		for(int i=0;i<tokens.size();i++){
-			cout << tokens[i] << endl;
-		}*/
 
 		//checking syntax whether there are matching open and close curly bracket
 		//and the presence of semi colon
-		if(tokens.size()==1){
-			if(tokens[0]=="}"){
-				valid=true;
-				closeBracket++;
-			}
-			else if(tokens[0]=="{"){
-				valid=true;
-				openBracket++;
-			}
-		}
-		else if (tokens.size()==2){
-			//cout << tokens[0] << endl;
-			if((tokens[0]=="procedure")||(tokens[0]=="while")||(tokens[0]=="if")||(tokens[0]=="else")){
-				int length=tokens[1].length()-1;
-				string lastChar = tokens[1].substr(length);
-				if(lastChar=="{"){
-					tokens[1] = tokens[1].substr(0,length);
-					openBracket++;
-					valid=true;
-				}
-				else{
-					valid=true;
-				}
-			}
-		}
-
-
 		while(!valid){
 			int tokenLastIndex = tokens.size()-1;
 			if(tokens[tokenLastIndex]=="{"){
-				openBracket++;
+				openBracket=true;
 				valid=true;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 			}
 			else if(tokens[tokenLastIndex]=="}"){
-				closeBracket++;
+				closeBracket=true;
 				tokens.erase(tokens.begin()+tokenLastIndex);
-				if(tokens.size()==0){
-					valid=true;
-				}
 			}
 			else if(tokens[tokenLastIndex]==";"){
 				valid=true;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 			}
 			else if(tokens[tokenLastIndex]==";}"){
-				closeBracket++;
+				closeBracket=true;
 				tokens.erase(tokens.begin()+tokenLastIndex);
 				valid=true;
 			}
@@ -281,21 +255,23 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				tokens.push_back(lastChar);
 			}
 		}
-		if(openBracket>0){
-			bracket.push(1);
-		} 
-		
+
 		//checking for curly bracket matching
-		if((bracket.size()==0)&&(openBracket==0)&&(tokens.size()>0)&&(tokens[0]!="procedure")){
-			cout << "ERROR in parsing code" << endl;
+		if(bracket.empty()){
+			if(!openBracket){
+				return NULL;
+			}
+			else if(tokens[0]!="procedure"){
+				return NULL;
+			}
 		}
 		
 		//updating and editing the programLine number 
-		if((tokens[0]!="procedure")&&(tokens[0]!="else")&&(tokens.size()>=2)){
+		if((tokens[0]!="procedure")&&(tokens[0]!="else")){
 			char buffer[30];
 			progLineCounter++;
 			progLine=progLineCounter;
-			_itoa_s(progLine,buffer,10);
+			itoa(progLine,buffer,10);
 			stringProgLine = buffer;
 			stringProgLine = stringProgLine;
 		}
@@ -312,11 +288,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			}
 			string procName;
 			procName=tokens[1];
-
-			//insert to proc table
-			procTable.insertProc(procName);
-			//end insertion
-
 			currProcName = procName;
 			
 			Node* stmtLst = new Node(procName, "stmtLst");
@@ -329,6 +300,9 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			stmtLst->setParent(procRoot);
 			containerNode.push_back(stmtLst);
 			
+			if(openBracket){
+				bracket.push(1);
+			} 
 		}
 		else if (tokens[0]=="call"){
 			if(tokens.size()!=2){
@@ -344,24 +318,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			
 			currParent->setChild(currCall);
 			currCall->setParent(currParent);
-
-			//set parent
-			int parentProgLine = currParent->getProgLine();
-			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
-			}
-			//setFollows
-			string parentType = currParent->getType();
-			if(parentType=="stmtLst"){
-				int parentChildSize = currParent->getChild().size();
-				if(parentChildSize>=2){
-					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
-				}
-			}
-			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::CALL);
-
 		}
 		else if(tokens[0]=="while"){
 			if(tokens.size()!=2){
@@ -369,10 +325,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			}
 			string controlVarName;
 			controlVarName=tokens[1];
-
-			//insert to var table
-			varTable.insertVar(controlVarName);
-			//end insertion
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -382,29 +334,14 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			Node* whileRoot = new Node(controlVar,stmtLst,stringProgLine,"while",progLine);
 			controlVar->setParent(whileRoot);
 			stmtLst->setParent(whileRoot);
-
+			
 			currParent->setChild(whileRoot);
 			whileRoot->setParent(currParent);
-
-			//set parent
-			int parentProgLine = currParent->getProgLine();
-			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
-			}
-			//setFollows
-			string parentType = currParent->getType();
-			if(parentType=="stmtLst"){
-				int parentChildSize = currParent->getChild().size();
-				if(parentChildSize>=2){
-					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
-				}
-			}
-			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::WHILE);
-
 			containerNode.push_back(stmtLst);
 			
+			if(openBracket){
+				bracket.push(1);
+			} 
 		
 		}
 		else if(tokens[0]=="if"){
@@ -413,10 +350,6 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			}
 			string controlVarName;
 			controlVarName=tokens[1];
-
-			//insert to var table
-			varTable.insertVar(controlVarName);
-			//end insertion
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -434,41 +367,28 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			
 			currParent->setChild(ifRoot);
 			ifRoot->setParent(currParent);
-
-			//set parent
-			int parentProgLine = currParent->getProgLine();
-			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
-			}
-			//setFollows
-			string parentType = currParent->getType();
-			if(parentType=="stmtLst"){
-				int parentChildSize = currParent->getChild().size();
-				if(parentChildSize>=2){
-					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
-				}
-			}
-			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::IF);
-
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
-			 
+			
+			if(openBracket){
+				bracket.push(1);
+			}  
 		}
 		else if (tokens[0]=="else"){
 			if(tokens.size()!=1){
 				return NULL;
 			}
 			
+			if(openBracket){
+				bracket.push(1);
+			} 
 		}
-		else if((tokens.size()>=3)&&(tokens[1]=="=")){//if it is an assignment
-
+		else{//if it is an assignment
 			Node* modifiedVar = new Node(tokens[0],"variable",progLine);
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
-			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable);
+			Node* expressionRoot = constructExpressionTree(ans,progLine);
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
 			assignRoot->setChild(expressionRoot);
@@ -480,51 +400,27 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				
 			currParent->setChild(assignRoot);
 			assignRoot->setParent(currParent);
-
-			//set parent
-			int parentProgLine = currParent->getProgLine();
-			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
-			}
-			//setFollows
-			string parentType = currParent->getType();
-			if(parentType=="stmtLst"){
-				int parentChildSize = currParent->getChild().size();
-				if(parentChildSize>=2){
-					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
-				}
-			}
-			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::ASSIGN);
-			
 		}
-
-
 		//cout << "close bracket "  << bracket.size() << endl;
 		//int size = containerNode.size()-1;
 		//cout << containerNode[size]->getData() << " "<<  containerNode[size]->getType()<< endl;
 		
-		while(closeBracket>0){
-			if((bracket.size()==1)&&(closeBracket==1)){
-				currProcName = "";
-				bracket.pop();
-			}
-			else if(bracket.size()>1){
-				bracket.pop();
-				int size = containerNode.size()-1;
-				//printInOrderExpressionTree(containerNode[size-1]);
-				containerNode.erase(containerNode.begin()+size);
-			}
-			else if(bracket.size()==0){
-				cout << "ERROR in parsing code" << endl;
-			}
-			closeBracket--;
+		if((bracket.size()==1)&&(closeBracket)){
+			currProcName = "";
+			bracket.pop();
 		}
-	
-		//cout << stringProgLine << ". " << word << endl;
+		else if((bracket.size()>1)&&(closeBracket)){
+			bracket.pop();
+			int size = containerNode.size()-1;
+			//printInOrderExpressionTree(containerNode[size-1]);
+			containerNode.erase(containerNode.begin()+size);
+		}
+		else if(bracket.size()==0){
+			cout << "ERROR" << endl;
+		}
+		cout << stringProgLine << ". " << word << endl;
 	}
 	
-	//printPreOrderExpressionTree(root);
+	printPreOrderExpressionTree(root);
 	return root;
 }
