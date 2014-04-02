@@ -50,7 +50,7 @@ void ParentTest::testParentUsingStmtType() {
 	
 	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 9) == true);
 	CPPUNIT_ASSERT(parentTable->isParent(Query::IF, 12) == true);
-	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 5) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 5) == false);
 	
 	return;
 }

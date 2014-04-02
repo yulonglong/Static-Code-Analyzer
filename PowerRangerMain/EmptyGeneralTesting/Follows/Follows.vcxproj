@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Follows.cpp" />
+    <ClCompile Include="FollowsStar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h" />
+    <ClInclude Include="FollowsStar.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3AE7FC5A-9B2A-4DE3-8CAA-3EB8C2776438}</ProjectGuid>

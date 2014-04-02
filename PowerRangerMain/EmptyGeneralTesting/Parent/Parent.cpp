@@ -37,49 +37,62 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	childrenTable[s2] = s1; 
 }
 
-// TODO: Need to add exception handling
 bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
-	if (childrenTable[s2] == s1) {
-		return true;
+	try{
+		if (childrenTable[s2] == s1) {
+			return true;
+		}
+	} catch(...){
 	}
 	return false;
 }
 
-// TODO: Need to add exception handling
 bool Parent::isParent(Query::SynType t, STMTNUM s) {
-	STMTNUM temp = childrenTable[s];
-	if (table.getType(temp) == t) {
-		return true;
+	try{
+		STMTNUM temp = childrenTable[s];
+		if (table.getType(temp) == t) {
+			return true;
+		}
+	}catch(...){
 	}
 	return false;
 }
 
 bool Parent::isChildren(Query::SynType t, STMTNUM s){
-	vector<STMTNUM> temp = parentTable[s];
-	vector<STMTNUM>::iterator it = temp.begin();
-	for(;it!=temp.end();++it){
-		if(table.getType(*it)==t)
-			return true;
+	try{
+		vector<STMTNUM> temp = parentTable[s];
+		vector<STMTNUM>::iterator it = temp.begin();
+		for(;it!=temp.end();++it){
+			if(table.getType(*it)==t)
+				return true;
+		}
+	}catch(...){
 	}
 	return false;
 }
 
 
 vector<STMTNUM> Parent::getParent(Query::SynType t1, Query::SynType t2, STMTNUM s) {
-	STMTNUM temp = childrenTable[s];
-	if(table.getType(temp) == t2){
-		return table.getAllStmts(t1);
+	try{
+		STMTNUM temp = childrenTable[s];
+		if(table.getType(temp) == t2){
+			return table.getAllStmts(t1);
+		}
+	}catch(...){
 	}
 	return vector<STMTNUM> (1,-1);
 }
 
 vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2, STMTNUM s) {
-	vector<STMTNUM> temp = parentTable[s];
-	vector<STMTNUM>::iterator it = temp.begin();
-	for(;it!=temp.end();++it){
-		if(table.getType(*it) == t2){
-			return table.getAllStmts(t1);
+	try{
+		vector<STMTNUM> temp = parentTable[s];
+		vector<STMTNUM>::iterator it = temp.begin();
+		for(;it!=temp.end();++it){
+			if(table.getType(*it) == t2){
+				return table.getAllStmts(t1);
+			}
 		}
+	}catch(...){
 	}
 	return vector<STMTNUM> (1,-1);
 }
@@ -94,21 +107,27 @@ vector<STMTNUM> Parent::getChildren(Query::SynType t1, Query::SynType t2){
 }
 
 STMTNUM Parent::getParent(Query::SynType t1, STMTNUM s){
-	STMTNUM temp = childrenTable[s];
-	if(table.getType(temp) == t1)
-		return temp;
+	try{
+		STMTNUM temp = childrenTable[s];
+		if(table.getType(temp) == t1)
+			return temp;
+	}catch(...){
+	}
 	return -1;
 }
 
 vector<STMTNUM> Parent::getChildren(Query::SynType t1, STMTNUM s){
-	vector<STMTNUM> temp = parentTable[s];
-	vector<STMTNUM> ans;
-	vector<STMTNUM>::iterator it = temp.begin();
-	for(;it!=temp.end();++it){
-		if(table.getType(*it)==t1)
-			ans.push_back(*it);
+	try{
+		vector<STMTNUM> temp = parentTable[s];
+		vector<STMTNUM> ans;
+		vector<STMTNUM>::iterator it = temp.begin();
+		for(;it!=temp.end();++it){
+			if(table.getType(*it)==t1)
+				ans.push_back(*it);
+		}
+	}catch(...){
 	}
-	return ans;
+	return vector<STMTNUM> (1,-1);
 }
 
 

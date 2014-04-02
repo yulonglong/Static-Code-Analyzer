@@ -18,9 +18,15 @@
     <ClCompile Include="Follows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FollowsStar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowsStar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
