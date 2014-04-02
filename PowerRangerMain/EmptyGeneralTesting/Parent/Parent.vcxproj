@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Parent.h" />
+    <ClInclude Include="ParentStar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Parent.cpp" />
+    <ClCompile Include="ParentStar.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BFDB0BE7-5AD9-474B-8B8C-B7D158FCC03D}</ProjectGuid>
