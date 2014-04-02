@@ -196,7 +196,7 @@ void IntegrateTest::testParserSource2()
 	vector<Relationship> v;
 	
 
-	string s1 = "assign a; Select a such that Follows(a, 7)";
+	string s1 = "assign a; Select a such that Follows(a, 2)";
 	string s2 = "assign a; Select a such that Follows(3, a)";
 	string s3 = "stmt s; Select s such that Follows(4, s)";
 	string s4 = "Select BOOLEAN such that Follows(6, 7)";
@@ -222,16 +222,28 @@ void IntegrateTest::testParserSource2()
 	v = q1.getRelVect();
 	expected = "a";
 	Relationship r = v[0];
+	unordered_map<string, Query::SynType> m = q1.getSynTable();
+	
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r.getRelType());
 	CPPUNIT_ASSERT_EQUAL(expected, q1.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, r.getToken1());
+	expected = "2";
+	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2());
+
+	unordered_map<string, Query::SynType>::iterator i1 = m.find(r.getToken1());
+	unordered_map<string, Query::SynType>::iterator i2 = m.find(r.getToken2());
+
+	CPPUNIT_ASSERT_EQUAL(Query::ASSIGN, i1->second);
+	cout<<i1->second<<endl;
 
 	QueryEvaluator qe;
 	Follows f;
-	TypeTable t;
-	f.setFollows(6,7);
-	t.insertStmtNumAndType(6, Query::ASSIGN);
-	vector<int> vec = qe.evaluateQuery(q1);
-	CPPUNIT_ASSERT_EQUAL(6, vec[0]);
+	f.setFollows(1,2);
+	f.table.insertStmtNumAndType(1, Query::ASSIGN);
+	vector<int> vec = qe.evaluateQuery(q1, f);
+	
+	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
+	
 
 
 	Query q2 = qp.parse(s2);

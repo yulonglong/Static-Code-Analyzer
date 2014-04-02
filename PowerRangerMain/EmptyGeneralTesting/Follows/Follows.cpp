@@ -110,6 +110,7 @@ STMTNUM Follows::getFollows(Query::SynType t, STMTNUM s) {
 	//const std::out_of_range& oor
 	catch (...) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
+		cout<<"In catch block"<<endl;
 	}
 	if (num != -1 && table.getType(num) == t){
 		return num;
@@ -121,13 +122,17 @@ STMTNUM Follows::getFollows(Query::SynType t, STMTNUM s) {
 STMTNUM Follows::getFollowedBy(Query::SynType t, STMTNUM s) {
 	STMTNUM num = -1; 
 	try {
+		cout<<"In Try Block"<<endl;
 		num = followedByTable.at(s);
+		cout<<"NUM="<<num<<endl;
 	} 
 	//const std::out_of_range& oor
 	catch (...) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
+		cout<<"In catch block"<<endl;
 	}
 	if (num != -1 && table.getType(num) == t){
+		cout<<"SHOULD BE IN HERE"<<endl;
 		return num;
 	} 
 	return -1; 
