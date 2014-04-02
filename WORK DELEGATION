@@ -1,0 +1,72 @@
+WORK DELEGATION
+
+---CODE---
+Note: 
+Deadlines mean when the work should be completed and committed to the repo by that day's midnight.
+It should be made available for everyone else. 
+If for any reason anyone is not able to deliver, please notify group 24 hours before the deadline.
+(so that someone else may help you:) )
+This is common courtesy. Thank you for your cooperation.
+
+Adinda:	
+- Query validation implementation. Add unit testing. [Deadline: Sat]
+- Test cases for invalid queries in autotester format. Write Queries3-1.txt (pls read the autotester pdf)
+[Deadline: Sat]
+
+Hisyam: 
+- Think of how QE is going to solve pattern (Make some notes; so that its faster to implement next time) [Deadline: Sat]
+- Implement autotester. Try with source1, queries1-1, source2, queries2-1, 2-2, 2-3. 
+Test intensively for iteration 1 and 2 [Deadline: Sun]
+- Test cases for Miniteraton 3. Write Queries3-2.txt, Queries3-3.txt, Queries3-4.txt. 
+(each having at least 10 queries) [Deadline: Sun]
+
+
+Lacie:
+- Integrate testing between PKB and PQL. [Deadline: Thu]
+- Implement parentstar and followstar. [Deadline: Thu]
+- Write .h file for Modifies and Uses. [Deadline: Thu]
+- Implement Query Evaluator stuff for Modifies and Uses. Add unit testing for each.
+Integration testing of PKB and PQL for this. [Deadline: Mon]
+
+Kester: 
+- Help Hisyam with autotester testing (Test intensively for iteration 1 and 2) [Deadline: Sun]
+- Integrate Parser with Modifies and Uses [Deadline: Mon]
+
+
+Yolim: 
+- Fix the PKB's structure [Deadline: Wed]
+- Implement Uses API based on Lacie's .h [Deadline: Sat]
+- Uses Unit Testing [Deadline: Sat]
+
+Ipsita:
+- Implement Modifies API based on Lacie's .h [Deadline: Sat]
+- Modifies Unit Testing [Deadline: Sat]
+
+-----------------------------------------------------------------------------------------------
+
+---REPORT---
+Note: 
+Please read the requirements for your component 
+before commencing work to avoid redoing multiple times 
+or delaying the workflow. 
+Assignment 4 can be found in our repo. 
+
+Adinda:	
+-
+
+Hisyam: 
+- 
+
+Lacie:
+-
+
+Kester: 
+-
+
+Yolim: 
+-
+
+Ipsita:
+-
+
+
