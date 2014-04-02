@@ -12,7 +12,7 @@
 class QueryEvaluator{ 
 private:
 	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, Query::SynType>, std::string);
-	std::vector<int> evaluateFollowsStar(Relationship);
+	std::vector<int> evaluateFollowsStar(Relationship, std::unordered_map<std::string, Query::SynType>, std::string);
 	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, Query::SynType>, std::string);
 	std::vector<int> evaluateParentStar(Relationship);
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, Query::SynType>);

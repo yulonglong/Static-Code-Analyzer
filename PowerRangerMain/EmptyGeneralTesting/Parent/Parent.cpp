@@ -47,6 +47,11 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
+bool Parent::isParent(Query::SynType t, Query::SynType t2){
+	bool v;
+	return v;
+}
+
 bool Parent::isParent(Query::SynType t, STMTNUM s) {
 	try{
 		STMTNUM temp = childrenTable[s];
