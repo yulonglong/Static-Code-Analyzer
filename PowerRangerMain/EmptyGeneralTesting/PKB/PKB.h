@@ -19,20 +19,20 @@ class PKB {
 private: 
 	//static bool instanceFlag; 
 	//static PKB *pkb;
-	VarTable *varTable;
-	ProcTable *procTable;
-	TypeTable *typeTable;
-	Parent *parent;
-	Follows *follows;
+	VarTable varTable;
+	ProcTable procTable;
+	TypeTable typeTable;
+	Parent parent;
+	Follows follows;
 public:
 	PKB();
 	~PKB();
 
-	VarTable* getVarTable();
-	ProcTable* getProcTable();
-	TypeTable* getTypeTable();
-	Parent* getParent();
-	Follows* getFollows();
+	VarTable getVarTable();
+	ProcTable getProcTable();
+	TypeTable getTypeTable();
+	Parent getParent();
+	Follows getFollows();
 	
 };
 

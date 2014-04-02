@@ -13,22 +13,22 @@ PKB::~PKB(){
 }
 
 
-VarTable* PKB::getVarTable(){
+VarTable PKB::getVarTable(){
 	return varTable;
 }
 
-ProcTable* PKB::getProcTable(){
+ProcTable PKB::getProcTable(){
 	return procTable;
 }
 
-TypeTable* PKB::getTypeTable(){
+TypeTable PKB::getTypeTable(){
 	return typeTable;
 }
 
-Parent* PKB::getParent(){
+Parent PKB::getParent(){
 	return parent;
 }
 
-Follows* PKB::getFollows(){
+Follows PKB::getFollows(){
 	return follows;
 }
