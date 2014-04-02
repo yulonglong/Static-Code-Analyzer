@@ -1,9 +1,9 @@
-﻿Build started 2/4/2014 12:09:58 AM.
+﻿Build started 2/4/2014 12:17:35 PM.
      1>Project "C:\SPA\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" on node 2 (rebuild target(s)).
      1>_PrepareForClean:
          Deleting file "Release\QueryEvaluator.lastbuildstate".
        InitializeBuildStatus:
-         Creating "Release\QueryEvaluator.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Release\QueryEvaluator.unsuccessfulbuild".
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\Table /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\Follows /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\Parent /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\SPA\QueryEvaluator.cpp
          QueryEvaluator.cpp
@@ -17,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.84
+Time Elapsed 00:00:00.89

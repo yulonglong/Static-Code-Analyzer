@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "Follows.h"
 #include "Parent.h"
+#include <set>
 
 
 using namespace std;
@@ -13,27 +14,28 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<vector<int>> answers;
 	Follows f;
 	TypeTable t;
+	unordered_map<string, Query::SynType> m = q.getSynTable();
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {
 			string token1 = it->getToken1();
 			string token2 = it->getToken2();
 			string selectedSyn = q.getSelectedSyn();
-			unordered_map<string, Query::SynType> m = q.getSynTable();
+			
 			std::unordered_map<string, Query::SynType>::iterator i = q.getSynTable().find(selectedSyn);
 
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back( t.getAllStmts(i->second));
 				}
-				else {
-					answers.push_back(evaluateFollows(*it, m, q.getSelectedSyn()));
-				}
+			}
+			else {
+				answers.push_back(evaluateFollows(*it, m, q.getSelectedSyn()));
 			}
 			break;
 									}
 		case Relationship::FOLLOWSSTAR:
-			answers.push_back(evaluateFollowsStar(*it));
+			answers.push_back(evaluateFollowsStar(*it, m, q.getSelectedSyn()));
 			break;
 		case Relationship::PARENT:
 			{
@@ -83,7 +85,7 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return answers;
 }
 
-bool evaluateParentBoolean(Relationship r, unordered_map<string, Query::SynType> m){
+bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string, Query::SynType> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Parent p;
@@ -105,7 +107,7 @@ bool evaluateParentBoolean(Relationship r, unordered_map<string, Query::SynType>
 	}
 }
 
-bool evaluateFollowsBoolean(Relationship r, unordered_map<string, Query::SynType> m){
+bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string, Query::SynType> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows f;
@@ -157,7 +159,6 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	vector<int> answer;
 	unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
-	unordered_map<string, Query::SynType>::iterator i3 = m.find(selectedSyn);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		return f.getFollows(i1->second, i2->second);
 	}
@@ -172,6 +173,34 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 		answer.push_back(f.getFollows(i2->second, atoi(tk1.c_str())));
 		return answer;
 	}
+}
+
+vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, Query::SynType> m, string selectedSyn){
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Follows f;
+	TypeTable t;
+	set<int> answer;
+	vector<int> selected;
+	int stmtNumber = 0;
+	unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
+
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		selected = t.getAllStmts(i2->second);
+
+		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); ++it){
+			while(stmtNumber!=-1){
+
+			}
+		}
+	}
+	return selected;
+}
+
+bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r){
+	bool v;
+	return v;
 }
 
 vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, Query::SynType> m, string selectedSyn){
@@ -196,3 +225,14 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 		return p.getChildren(i2->second, atoi(tk1.c_str()));
 	}
 }
+
+vector<int> QueryEvaluator::evaluateParentStar(Relationship r){
+	vector<int> v;
+	return v;
+}
+
+bool QueryEvaluator::evaluateParentStarBoolean(Relationship r){
+	bool v;
+	return v;
+}
+
