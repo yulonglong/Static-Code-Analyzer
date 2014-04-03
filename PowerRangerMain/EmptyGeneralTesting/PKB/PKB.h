@@ -23,8 +23,8 @@ using namespace std;
 
 class PKB {
 private: 
-	static bool instanceFlag; 
-	static PKB *pkb;
+	//static bool instanceFlag; 
+	//static PKB *pkb;
 
 	PKB();
 	
@@ -35,7 +35,7 @@ private:
 	Follows follows;
 	
 public:
-	static PKB* getInstance();	// to be used to get instance of singleton class 
+	//static PKB* getInstance();	// to be used to get instance of singleton class 
 	
 	~PKB();
 
