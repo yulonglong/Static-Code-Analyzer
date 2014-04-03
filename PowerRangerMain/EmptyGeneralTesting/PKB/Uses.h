@@ -6,15 +6,6 @@
 #include "TypeTable.h"
 
 using namespace std;
-#ifndef MODIFIES_H
-#define MODIFIES_H
-
-#pragma once
-#include <iostream>
-#include "TypeTable.h"
-
-typedef int STMTNUM;
-using namespace std;
 
 class Uses {
 public:

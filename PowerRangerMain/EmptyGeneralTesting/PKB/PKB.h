@@ -15,17 +15,28 @@
 
 using namespace std;
 
+/* TO USE PKB:
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	pkb->method(); 
+*/
+
 class PKB {
 private: 
-	//static bool instanceFlag; 
-	//static PKB *pkb;
+	static bool instanceFlag; 
+	static PKB *pkb;
+
+	PKB();
+	
 	VarTable varTable;
 	ProcTable procTable;
 	TypeTable typeTable;
 	Parent parent;
 	Follows follows;
+	
 public:
-	PKB();
+	static PKB* getInstance();	// to be used to get instance of singleton class 
+	
 	~PKB();
 
 	VarTable getVarTable();
