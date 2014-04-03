@@ -5,7 +5,8 @@
 #include <iostream>
 
 // constructor
-Follows::Follows() {
+Follows::Follows(TypeTable tab) {
+	table = tab;
 	// Note: program line 0 is not to be used for the enumeration of program lines
 	followsTable.assign(5, -1);
 	followedByTable.assign(5, -1);

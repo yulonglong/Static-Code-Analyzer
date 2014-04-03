@@ -7,6 +7,8 @@ using namespace std;
 
 PKB::PKB(){
 	// private constructor
+	parent = Parent(typeTable);
+	follows = Follows(typeTable);
 }
 
 PKB::~PKB(){
