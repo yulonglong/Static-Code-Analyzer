@@ -23,11 +23,11 @@ void TestWrapper::parse(std::string filename) {
 	//KESTER FILL IN THIS.. basically call your parser.. i will only pass you the pkb pointer..
 	//So something like parser(pkb);
 
-	VarTable varTable;
-	ProcTable procTable;
-	TypeTable typeTable;
-	Follows follows;
-	Parent parent;
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();
+	TypeTable typeTable = pkb.getTypeTable();
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
 
 	Node* ASTRoot = parseCode(filename,varTable,procTable,typeTable,follows,parent);
 	// call your parser to do the parsing

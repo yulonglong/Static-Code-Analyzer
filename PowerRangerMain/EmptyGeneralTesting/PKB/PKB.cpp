@@ -10,22 +10,21 @@ PKB::PKB(){
 }
 
 PKB::~PKB(){
-	instanceFlag = false;
 }
 
 
-PKB* PKB::getInstance() {
-	if(!instanceFlag)
-    {
-        pkb = new PKB();
-        instanceFlag = true;
-        return pkb;
-    }
-    else
-    {
-        return pkb;
-    }
-}
+//PKB* PKB::getInstance() {
+//	if(!instanceFlag)
+//    {
+//        pkb = new PKB();
+//        instanceFlag = true;
+//        return pkb;
+//    }
+//    else
+//    {
+//        return pkb;
+//    }
+//}
 
 VarTable PKB::getVarTable(){
 	return varTable;
