@@ -20,7 +20,7 @@ private:
 	
 public: 
 	TypeTable table; // for the sake of unit testing.
-	Parent();
+	Parent(TypeTable);
 	~Parent();
 	void setParent(STMTNUM, STMTNUM);
 	bool isParent(STMTNUM, STMTNUM);// Select BOOLEAN such that Parent(1,2)

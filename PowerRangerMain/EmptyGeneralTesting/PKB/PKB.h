@@ -23,7 +23,7 @@ using namespace std;
 
 class PKB {
 private: 
-	//static bool instanceFlag; 
+	/*static bool instanceFlag;*/ 
 	//static PKB *pkb;
 
 	PKB();
