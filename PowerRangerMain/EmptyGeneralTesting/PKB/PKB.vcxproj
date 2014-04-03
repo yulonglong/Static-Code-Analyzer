@@ -84,10 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h" />
+    <ClInclude Include="Modifies.h" />
     <ClInclude Include="Parent.h" />
     <ClInclude Include="PKB.h" />
     <ClInclude Include="ProcTable.h" />
     <ClInclude Include="TypeTable.h" />
+    <ClInclude Include="Uses.h" />
     <ClInclude Include="VarTable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
