@@ -1,4 +1,6 @@
 #include "TestWrapper.h"
+#include "QueryParser.h"
+#include "CodeParser.h"
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -9,7 +11,7 @@ AbstractWrapper* WrapperFactory::createWrapper() {
 // Do not modify the following line
 volatile bool TestWrapper::GlobalStop = false;
 
-// a default constructor
+// a default constrSuctor
 TestWrapper::TestWrapper() {
   // create any objects here as instance variables of this class
   // as well as any initialization required for your spa program
@@ -21,6 +23,13 @@ void TestWrapper::parse(std::string filename) {
 	//KESTER FILL IN THIS.. basically call your parser.. i will only pass you the pkb pointer..
 	//So something like parser(pkb);
 
+	VarTable varTable;
+	ProcTable procTable;
+	TypeTable typeTable;
+	Follows follows;
+	Parent parent;
+
+	Node* ASTRoot = parseCode(filename,varTable,procTable,typeTable,follows,parent);
 	// call your parser to do the parsing
   // ...rest of your code...
 }
