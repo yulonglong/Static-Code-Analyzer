@@ -3,6 +3,13 @@
 #include "Parent.h"
 
 // constructor
+Parent::Parent() {
+	vector<STMTNUM> temp;
+	temp.assign(1,-1);
+	parentTable.assign(5, temp);
+	childrenTable.assign(5, -1);
+}
+
 Parent::Parent(TypeTable tab) {
 	table = tab;
 	vector<STMTNUM> temp;
