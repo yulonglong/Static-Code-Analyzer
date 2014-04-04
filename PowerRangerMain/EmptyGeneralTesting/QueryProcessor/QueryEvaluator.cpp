@@ -183,6 +183,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 	TypeTable t = pkb->getTypeTable();
 	set<int> answer;
 	vector<int> selected;
+	vector<int> vectorAnswer;
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
@@ -246,12 +247,12 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 	}
 
 	//Select a such that Follows*(3, a)
-	else if(selectedSyn==tk2){
-		stmtNumber = atoi(tk2.c_str());
+	else {
+		stmtNumber = atoi(tk1.c_str());
 		do{			
-			stmtNumber = f.getFollowedBy(TypeTable::STMT, stmtNumber);
+			stmtNumber = f.getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=1){
-				if(t.getType(stmtNumber)==i1->second){
+				if(t.getType(stmtNumber)==i2->second){
 					answer.insert(stmtNumber);
 				}
 			}
@@ -261,22 +262,44 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			
 		}while(true);
 	}
-	return selected;
+
+	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));
+
+	return vectorAnswer;
 }
 
-/*set<int> QueryEvaluator::evaluateFollowsStarWithOneStmtnum(TypeTable::SynType s, int stmtNumber){
+bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
 	Follows f = pkb->getFollows();
-	do{
-		stmtNumber = f.getFollows(i2->second, stmtNumber);
-		answer.insert(stmtNumber);
-		if(t.getType(stmtNumber)!=i1->second)
-			break;
-	}while(stmtNumber!=-1);
-}*/
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+	int stmtnum=0;
+	vector<int> temp;
 
-bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r){
-	bool v;
-	return v;
+	bool flag = false;
+
+	if(isdigit(tk1[0]) && isdigit(tk2[0])){
+		stmtnum = atoi(tk1.c_str());
+		while(stmtnum!=-1){
+			stmtnum = f.getFollows(TypeTable::STMT, stmtnum);
+			if(stmtnum==atoi(tk2.c_str()))
+				flag = true;
+			if(stmtnum>atoi(tk2.c_str()))
+				break;
+		}
+	}
+	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || isdigit(tk2[0])){
+		temp = evaluateFollowsStar(r, m, tk1);
+	}
+	else{
+		temp = evaluateFollowsStar(r, m, tk2);
+	}
+
+	if(!temp.empty())
+		flag = true;
+
+	return flag;
 }
 
 vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
