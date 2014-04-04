@@ -4,6 +4,7 @@
 #include "Testintegrate.h"
 #include "QueryParser.h"
 #include "QueryEvaluator.h"
+#include "PKB.h"
 
 
 #include <iostream>
@@ -235,14 +236,14 @@ void IntegrateTest::testParserSource2()
 
 	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN, i1->second);
 	cout<<i1->second<<endl;
-
-	QueryEvaluator qe;
+	PKB pkb;
+	/*QueryEvaluator qe;
 	Follows f = qe.pkb->getFollows();
 	f.setFollows(1,2);
 	f.table.insertStmtNumAndType(1, TypeTable::ASSIGN);
 	vector<int> vec = qe.evaluateQuery(q1);
 	
-	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(2, vec[0]);*/
 	
 
 
