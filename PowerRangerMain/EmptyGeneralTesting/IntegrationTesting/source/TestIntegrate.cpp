@@ -222,7 +222,7 @@ void IntegrateTest::testParserSource2()
 	v = q1.getRelVect();
 	expected = "a";
 	Relationship r = v[0];
-	unordered_map<string, Query::SynType> m = q1.getSynTable();
+	unordered_map<string, TypeTable::SynType> m = q1.getSynTable();
 	
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r.getRelType());
 	CPPUNIT_ASSERT_EQUAL(expected, q1.getSelectedSyn());
@@ -230,17 +230,17 @@ void IntegrateTest::testParserSource2()
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2());
 
-	unordered_map<string, Query::SynType>::iterator i1 = m.find(r.getToken1());
-	unordered_map<string, Query::SynType>::iterator i2 = m.find(r.getToken2());
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(r.getToken1());
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(r.getToken2());
 
-	CPPUNIT_ASSERT_EQUAL(Query::ASSIGN, i1->second);
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN, i1->second);
 	cout<<i1->second<<endl;
 
 	QueryEvaluator qe;
-	Follows f;
+	Follows f = qe.pkb->getFollows();
 	f.setFollows(1,2);
 	f.table.insertStmtNumAndType(1, TypeTable::ASSIGN);
-	vector<int> vec = qe.evaluateQuery(q1, f);
+	vector<int> vec = qe.evaluateQuery(q1);
 	
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
 	

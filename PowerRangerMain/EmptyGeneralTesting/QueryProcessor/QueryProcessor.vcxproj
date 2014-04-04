@@ -12,11 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Query.cpp" />
+    <ClCompile Include="QueryEvaluator.cpp" />
     <ClCompile Include="QueryParser.cpp" />
     <ClCompile Include="Relationship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Query.h" />
+    <ClInclude Include="QueryEvaluator.h" />
     <ClInclude Include="QueryParser.h" />
     <ClInclude Include="Relationship.h" />
   </ItemGroup>
@@ -66,7 +68,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Table;$(SolutionDir)CodeParser;$(SolutionDir)Follows;$(SolutionDir)Parent;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Table;$(SolutionDir)CodeParser;$(SolutionDir)Follows;$(SolutionDir)Parent;$(SolutionDir)PKB;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -1,21 +1,21 @@
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include "QueryEvaluator.h"
 #include <ctype.h>
-#include "Follows.h"
-#include "Parent.h"
 #include <set>
 
 
 using namespace std;
 QueryEvaluator::QueryEvaluator(){
+
 }
 
-vector<int> QueryEvaluator::evaluateQuery(Query q, Follows f){
+vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
-	TypeTable t;
-	unordered_map<string, Query::SynType> m = q.getSynTable();
+	TypeTable t = pkb->getTypeTable();
+	Follows f = pkb->getFollows();
+	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {
@@ -23,7 +23,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q, Follows f){
 			string token2 = it->getToken2();
 			string selectedSyn = q.getSelectedSyn();
 			
-			std::unordered_map<string, Query::SynType>::iterator i = q.getSynTable().find(selectedSyn);
+			std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back( t.getAllStmts(i->second));
@@ -42,8 +42,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q, Follows f){
 			string token1 = it->getToken1();
 			string token2 = it->getToken2();
 			string selectedSyn = q.getSelectedSyn();
-			unordered_map<string, Query::SynType> m = q.getSynTable();
-			std::unordered_map<string, Query::SynType>::iterator i = q.getSynTable().find(selectedSyn);
+			unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+			std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
 
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateParentBoolean(*it, m)){
@@ -67,7 +67,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q, Follows f){
 bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	bool answers = true;
-	Follows f;
+	Follows f = pkb->getFollows();
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: 
@@ -85,46 +85,46 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return answers;
 }
 
-bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string, Query::SynType> m){
+bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string, TypeTable::SynType> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Parent p;
+	Parent p = pkb->getParent();
 	if(isdigit(tk1[0]) && isdigit(tk2[0])){
 		return p.isParent(atoi(tk1.c_str()), atoi(tk2.c_str()));
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
-		unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 		return p.isParent(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0])){
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 		return p.isParent(i1->second, atoi(tk2.c_str()));
 	}
 	else {
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk2);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
 		return p.isChildren(i1->second, atoi(tk1.c_str()));
 	}
 }
 
-bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string, Query::SynType> m){
+bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string, TypeTable::SynType> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Follows f;
+	Follows f = pkb->getFollows();
 	if(isdigit(tk1[0]) && isdigit(tk2[0])){
 		return f.isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()));
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
-		unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 		return f.isFollows(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0])){
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 		return (f.getFollows(i1->second, atoi(tk2.c_str()))==-1)?false:true;
 	}
 	else {
-		unordered_map<string, Query::SynType>::iterator i1 = m.find(tk2);
+		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
 		return (f.getFollowedBy(i1->second, atoi(tk1.c_str()))==-1)?false:true;
 	}
 }
@@ -152,13 +152,13 @@ vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	return queryAnswers;
 }
 
-vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, Query::SynType> m, string selectedSyn){
+vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Follows f;
+	Follows f = pkb->getFollows();
 	vector<int> answer;
-	unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		return f.getFollows(i1->second, i2->second);
 	}
@@ -176,42 +176,117 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	}
 }
 
-vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, Query::SynType> m, string selectedSyn){
+vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
-	Follows f;
-	TypeTable t;
+	Follows f = pkb->getFollows();
+	TypeTable t = pkb->getTypeTable();
 	set<int> answer;
 	vector<int> selected;
 	int stmtNumber = 0;
-	unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
+	//Select w such that Follows*(w, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		selected = t.getAllStmts(i2->second);
+		selected = t.getAllStmts(i1->second);	//get all while statements
 
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); ++it){
-			while(stmtNumber!=-1){
-
-			}
+		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
+			stmtNumber = f.getFollows(TypeTable::STMT, *it);
+			do{			
+				if(stmtNumber!=1){
+					if(t.getType(stmtNumber)==i2->second){
+						answer.insert(*it);
+						break;
+					}
+				}
+				else{
+					break;
+				}
+				stmtNumber = f.getFollows(TypeTable::STMT, stmtNumber);
+			}while(true);
 		}
+	}
+
+	//Select a such that Follows*(w, a)
+	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		selected = t.getAllStmts(i1->second);
+
+		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
+			stmtNumber = f.getFollows(TypeTable::STMT, *it);
+			do{			
+				if(stmtNumber!=1){
+					if(t.getType(stmtNumber)==i2->second){
+						answer.insert(stmtNumber);
+					}
+				}
+				else{
+					break;
+				}
+				stmtNumber = f.getFollows(TypeTable::STMT, stmtNumber);
+			}while(true);
+		}
+	}
+
+	//Select a such that Follows*(a, 13)
+	else if(selectedSyn==tk1){
+		stmtNumber = atoi(tk2.c_str());
+		do{			
+			stmtNumber = f.getFollowedBy(TypeTable::STMT, stmtNumber);
+			if(stmtNumber!=1){
+				if(t.getType(stmtNumber)==i1->second){
+					answer.insert(stmtNumber);
+				}
+			}
+			else{
+				break;
+			}
+			
+		}while(true);
+	}
+
+	//Select a such that Follows*(3, a)
+	else if(selectedSyn==tk2){
+		stmtNumber = atoi(tk2.c_str());
+		do{			
+			stmtNumber = f.getFollowedBy(TypeTable::STMT, stmtNumber);
+			if(stmtNumber!=1){
+				if(t.getType(stmtNumber)==i1->second){
+					answer.insert(stmtNumber);
+				}
+			}
+			else{
+				break;
+			}
+			
+		}while(true);
 	}
 	return selected;
 }
+
+/*set<int> QueryEvaluator::evaluateFollowsStarWithOneStmtnum(TypeTable::SynType s, int stmtNumber){
+	Follows f = pkb->getFollows();
+	do{
+		stmtNumber = f.getFollows(i2->second, stmtNumber);
+		answer.insert(stmtNumber);
+		if(t.getType(stmtNumber)!=i1->second)
+			break;
+	}while(stmtNumber!=-1);
+}*/
 
 bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r){
 	bool v;
 	return v;
 }
 
-vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, Query::SynType> m, string selectedSyn){
+vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Parent p;
+	Parent p = pkb->getParent();
 	vector<int> answer;
-	unordered_map<string, Query::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, Query::SynType>::iterator i2 = m.find(tk2);
-	unordered_map<string, Query::SynType>::iterator i3 = m.find(selectedSyn);
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+	unordered_map<string, TypeTable::SynType>::iterator i3 = m.find(selectedSyn);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		return p.getParent(i1->second, i2->second);
 	}

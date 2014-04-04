@@ -1,9 +1,10 @@
+#pragma once
 #ifndef QUERYPARSER_H
 #define QUERYPARSER_H
 
 #include "Query.h"
 #include "Relationship.h"
-#include "TypeTable.h"
+#include "PKB.h"
 #include <string>
 #include <vector>
 #include <cstring>
@@ -19,16 +20,16 @@ private:
 	void addQuery(Query);
 	
 	// PARSE THE SYNONYMS DECLARATION
-	unordered_map<string, Query::SynType> parseSynonyms(string);
+	unordered_map<string, TypeTable::SynType> parseSynonyms(string);
 
 	// PARSE ONE QUERY STRING TO A VECTOR OF TOKENS
 	vector<string> parseQuery(string);
 
 	// MAKE A QUERY OBJECT FROM A VECTOR OF TOKENS AND A SYNONYM MAP
-	Query makeQuery(vector<string>, unordered_map<string, Query::SynType>);
+	Query makeQuery(vector<string>, unordered_map<string, TypeTable::SynType>);
 
 	// MAP OF SYNONYMS AND THEIR TYPES
-	unordered_map<string, Query::SynType> synMap;
+	unordered_map<string, TypeTable::SynType> synMap;
 
 public:
 	// DEFAULT CONSTRUCTOR

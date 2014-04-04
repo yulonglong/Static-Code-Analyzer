@@ -69,7 +69,7 @@ Query QueryParser::parse(string s){
 		return query;
 
 	} else {
-		synMap.insert(make_pair("BOOLEAN", Query::BOOLEAN));
+		synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 		Query query2 = makeQuery(parseQuery(s), synMap);
 		addQuery(query2);
 		return query2;
@@ -80,7 +80,7 @@ vector<Query> QueryParser::getQueries(){
 	return queries;
 }
 
-Query QueryParser::makeQuery(vector<string> v, unordered_map<string, Query::SynType> map){
+Query QueryParser::makeQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map){
 	Query query(v.at(0));
 	query.addSynTable(map);
 
@@ -132,7 +132,7 @@ vector<string> QueryParser::parseQuery(string q){
 	return v;
 }
 
-unordered_map<string, Query::SynType> QueryParser::parseSynonyms(string s)
+unordered_map<string, TypeTable::SynType> QueryParser::parseSynonyms(string s)
 {
 	vector<string> v;
 	int sLength = s.length() + 1;
@@ -152,7 +152,7 @@ unordered_map<string, Query::SynType> QueryParser::parseSynonyms(string s)
 		token = strtok_s(NULL, seps, &nextToken);
 	}
 	
-	unordered_map<string, Query::SynType> map;
+	unordered_map<string, TypeTable::SynType> map;
 	
 	for(size_t i = 0; i < v.size(); i++){
 		string temp1 = v.at(i);
@@ -160,19 +160,19 @@ unordered_map<string, Query::SynType> QueryParser::parseSynonyms(string s)
 		string temp2 = v.at(i);
 		
 		if (temp1.compare("assign") == 0){
-			map.insert(make_pair(temp2, Query::ASSIGN));
+			map.insert(make_pair(temp2, TypeTable::ASSIGN));
 		} else if (temp1.compare("while") == 0) {
-			map.insert(make_pair(temp2, Query::WHILE));
+			map.insert(make_pair(temp2, TypeTable::WHILE));
 		} else if (temp1.compare("stmt") == 0){
-			map.insert(make_pair(temp2, Query::STMT));
+			map.insert(make_pair(temp2, TypeTable::STMT));
 		}
 		else {
-			map.insert(make_pair(temp2, Query::IF)); 
+			map.insert(make_pair(temp2, TypeTable::IF)); 
 			// unsafe, create another type for invalid
 		}
 	}
 
-	map.insert(make_pair("BOOLEAN", Query::BOOLEAN));
+	map.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	return map;
 }
 
