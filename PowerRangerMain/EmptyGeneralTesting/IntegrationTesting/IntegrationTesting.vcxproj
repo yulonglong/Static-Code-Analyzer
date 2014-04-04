@@ -55,14 +55,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)CodeParser;$(SolutionDir)Table;$(SolutionDir)SPA;$(SolutionDir)Follows;$(SolutionDir)Parent;$(SolutionDir)QueryEvaluator;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)CodeParser;$(SolutionDir)PKB;$(SolutionDir)QueryEvaluator;$(SolutionDir)QueryProcessor</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Follows.lib;$(SolutionDir)$(Configuration)\Parent.lib;$(SolutionDir)$(Configuration)\QueryEvaluator.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\QueryEvaluator.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

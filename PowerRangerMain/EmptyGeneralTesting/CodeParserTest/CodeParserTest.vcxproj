@@ -63,7 +63,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)Table;$(SolutionDir)CodeParser;$(SolutionDir)Follows;$(SolutionDir)Parent;$(SolutionDir)SPA</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)PKB;$(SolutionDir)CodeParser</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -71,7 +71,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\Follows.lib;$(SolutionDir)$(Configuration)\SPA.lib;$(SolutionDir)$(Configuration)\Table.lib;$(SolutionDir)$(Configuration)\Parent.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -239,7 +239,7 @@ void IntegrateTest::testParserSource2()
 	QueryEvaluator qe;
 	Follows f;
 	f.setFollows(1,2);
-	f.table.insertStmtNumAndType(1, Query::ASSIGN);
+	f.table.insertStmtNumAndType(1, TypeTable::ASSIGN);
 	vector<int> vec = qe.evaluateQuery(q1, f);
 	
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
