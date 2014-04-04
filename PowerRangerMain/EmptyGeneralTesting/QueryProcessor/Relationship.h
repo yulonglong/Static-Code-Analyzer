@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RELATIONSHIP_H
 #define RELATIONSHIP_H
 

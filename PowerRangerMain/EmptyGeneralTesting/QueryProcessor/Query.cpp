@@ -1,6 +1,6 @@
 #include "Query.h"
 
-Query::SynType Query::getSynType(string word)
+/*Query::SynType Query::getSynType(string word)
 {
 	if(word=="assign"){
 		return Query::ASSIGN;
@@ -23,7 +23,7 @@ Query::SynType Query::getSynType(string word)
 	else{
 		return Query::INVALID;
 	}
-}
+}*/
 
 Query::Query(string s)
 {
@@ -45,12 +45,12 @@ vector<Relationship> Query::getRelVect()
     return relVect;
 }
 
-void Query::addSynTable(unordered_map<string, SynType> map)
+void Query::addSynTable(unordered_map<string, TypeTable::SynType> map)
 {
 	synTable = map;
 }
 
-unordered_map<string, Query::SynType> Query::getSynTable()
+unordered_map<string, TypeTable::SynType> Query::getSynTable()
 {
 	return synTable;
 }

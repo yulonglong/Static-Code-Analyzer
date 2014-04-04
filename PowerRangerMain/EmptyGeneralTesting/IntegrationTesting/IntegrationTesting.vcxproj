@@ -62,7 +62,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\QueryEvaluator.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\QueryProcessor.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
