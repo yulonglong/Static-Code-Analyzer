@@ -21,6 +21,7 @@ private:
 public: 
 	TypeTable table; // public for the sake of unit testing
 	Follows(TypeTable);
+	Follows();
 	~Follows();
 
 	void setFollows(STMTNUM, STMTNUM);
