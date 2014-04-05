@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable){
+Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, Uses &uses){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -25,8 +25,9 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 				type="constant";
 			}
 			else{
-				//insert to var table
+				//insert to var table, and set uses
 				varTable.insertVar(tokens[i]);
+				uses.setUses(newProgLine,tokens[i]);
 				//end insertion
 				type="variable";
 			}
@@ -466,9 +467,17 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			Node* modifiedVar = new Node(tokens[0],"variable",progLine);
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
+
+			//insert to var table and set modifies
+			varTable.insertVar(tokens[0]); //insert left side variable
+			modifies.setModifies(progLine,tokens[0]);
+			//end insertion
+
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
-			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable);
+			
+			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,uses);
+
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
 			assignRoot->setChild(expressionRoot);
