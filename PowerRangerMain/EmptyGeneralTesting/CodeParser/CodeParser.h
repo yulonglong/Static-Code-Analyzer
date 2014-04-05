@@ -12,6 +12,7 @@
 #include <stack>
 #include <vector>
 #include "Node.h"
+#include "PKB.h"
 #include "ProcTable.h"
 #include "VarTable.h"
 #include "TypeTable.h"
@@ -19,6 +20,11 @@
 #include "Parent.h"
 #include "Query.h"
 
+
 Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows, Parent &parent);
 
+class CodeParser{
+public:
+	static void parserDriver(PKB);
+};
 #endif
