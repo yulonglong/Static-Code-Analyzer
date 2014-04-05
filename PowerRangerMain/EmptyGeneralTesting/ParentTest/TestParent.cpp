@@ -1,5 +1,4 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "Query.h"
 #include "TestParent.h"
 
 #include <iostream>
@@ -40,17 +39,17 @@ void ParentTest::testParentUsingStmtType() {
 	parentTable->setParent(6, 9);
 	parentTable->setParent(10, 11);
 	parentTable->setParent(10, 12);
-	parentTable->table.insertStmtNumAndType(6, Query::WHILE);
-	parentTable->table.insertStmtNumAndType(7, Query::ASSIGN);
-	parentTable->table.insertStmtNumAndType(8, Query::CALL);
-	parentTable->table.insertStmtNumAndType(9, Query::ASSIGN);
-	parentTable->table.insertStmtNumAndType(10, Query::IF);
-	parentTable->table.insertStmtNumAndType(11, Query::ASSIGN);
-	parentTable->table.insertStmtNumAndType(12, Query::ASSIGN);
+	parentTable->table.insertStmtNumAndType(6, TypeTable::WHILE);
+	parentTable->table.insertStmtNumAndType(7, TypeTable::ASSIGN);
+	parentTable->table.insertStmtNumAndType(8, TypeTable::CALL);
+	parentTable->table.insertStmtNumAndType(9, TypeTable::ASSIGN);
+	parentTable->table.insertStmtNumAndType(10, TypeTable::IF);
+	parentTable->table.insertStmtNumAndType(11, TypeTable::ASSIGN);
+	parentTable->table.insertStmtNumAndType(12, TypeTable::ASSIGN);
 	
-	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 9) == true);
-	CPPUNIT_ASSERT(parentTable->isParent(Query::IF, 12) == true);
-	CPPUNIT_ASSERT(parentTable->isParent(Query::WHILE, 5) == false);
+	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::WHILE, 9) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::IF, 12) == true);
+	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::WHILE, 5) == false);
 	
 	return;
 }

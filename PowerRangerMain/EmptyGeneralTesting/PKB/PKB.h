@@ -26,7 +26,7 @@ private:
 	/*static bool instanceFlag;*/ 
 	//static PKB *pkb;
 
-	PKB();
+	
 	
 	VarTable varTable;
 	ProcTable procTable;
@@ -36,7 +36,7 @@ private:
 	
 public:
 	//static PKB* getInstance();	// to be used to get instance of singleton class 
-	
+	PKB();
 	~PKB();
 
 	VarTable getVarTable();

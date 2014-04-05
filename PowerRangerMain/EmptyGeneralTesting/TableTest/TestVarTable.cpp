@@ -1,5 +1,5 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "VarTable.h"
+
 #include "TestVarTable.h"
 
 #include <iostream>

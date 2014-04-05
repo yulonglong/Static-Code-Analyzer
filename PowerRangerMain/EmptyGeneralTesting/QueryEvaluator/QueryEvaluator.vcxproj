@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\SPA\QueryEvaluator.h" />
+    <ClInclude Include="QueryEvaluator.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SPA\QueryEvaluator.cpp" />
+    <ClCompile Include="QueryEvaluator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9AC08404-E5A2-4C9C-9B75-50EE754EF48B}</ProjectGuid>
@@ -60,7 +60,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)SPA</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PKB;$(SolutionDir)QueryProcessor;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
