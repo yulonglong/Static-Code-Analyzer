@@ -27,8 +27,8 @@ vector<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
 	return list;
 }
 
-bool isType(TypeTable::SynType type, STMTNUM stmt) {
-	if (type == STMT || typeMap[stmt] == type) {
+bool TypeTable::isType(TypeTable::SynType type, STMTNUM stmt) {
+	if (type == STMT || typeMap.at(stmt) == type) {
 		return true;
 	}
 	return false;
