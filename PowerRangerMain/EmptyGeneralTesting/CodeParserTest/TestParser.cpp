@@ -33,16 +33,20 @@ void ParserTest::testModifyTable()
 	Follows follows = pkb.getFollows();
 	Parent parent = pkb.getParent();
 	TypeTable typeTable = pkb.getTypeTable();
+	Modifies modifies = pkb.getModifies();
+	Uses uses = pkb.getUses();
 	Node* root = pkb.getASTRoot();
 
-	string expected = "i";
+	string expected = "x";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
-	expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
 	expected = "z";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
+	expected = "i";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
+	expected = "y";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(3));
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(4));
 
 	expected = "First";
 	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(0));
@@ -75,6 +79,16 @@ void ParserTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(TypeTable::IF,typeTable.getType(10));
 	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable.getType(11));
 
+	/*
+	CPPUNIT_ASSERT_EQUAL(false,modifies.isModifies(2,"x"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies.isModifies(3,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(4,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(5,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(13,"z"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(16,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies.isModifies(21,"v"));
+	*/
 	return;
 }
 

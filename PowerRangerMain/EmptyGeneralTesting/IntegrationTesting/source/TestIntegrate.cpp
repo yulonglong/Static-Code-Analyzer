@@ -37,14 +37,17 @@ void IntegrateTest::testModifyTable()
 	TypeTable typeTable = pkb.getTypeTable();
 	Node* root = pkb.getASTRoot();
 
-	string expected = "i";
+	string expected = "x";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
-	expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
 	expected = "z";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
+	expected = "i";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
+	expected = "y";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(3));
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(4));
+
 
 	expected = "First";
 	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(0));
