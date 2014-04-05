@@ -373,6 +373,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			//insert to var table
 			varTable.insertVar(controlVarName);
+			uses.setUses(progLine,controlVarName);
 			//end insertion
 			
 			int index = containerNode.size()-1;
@@ -415,8 +416,9 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			string controlVarName;
 			controlVarName=tokens[1];
 
-			//insert to var table
+			//insert to var table, and set uses
 			varTable.insertVar(controlVarName);
+			uses.setUses(progLine,controlVarName);
 			//end insertion
 			
 			int index = containerNode.size()-1;

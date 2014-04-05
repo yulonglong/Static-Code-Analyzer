@@ -89,6 +89,15 @@ void ParserTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(true,modifies.isModifies(16,"z"));
 	CPPUNIT_ASSERT_EQUAL(false,modifies.isModifies(21,"v"));
 	*/
+	
+	/*
+	CPPUNIT_ASSERT_EQUAL(false,uses.isUses(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses.isUses(6,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,uses.isUses(7,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses.isUses(7,"y"));
+	CPPUNIT_ASSERT_EQUAL(true,uses.isUses(1,"z"));
+	CPPUNIT_ASSERT_EQUAL(true,uses.isUses(2,"y"));
+	*/
 	return;
 }
 
