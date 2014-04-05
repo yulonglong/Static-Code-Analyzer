@@ -81,6 +81,7 @@
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="ProcTable.cpp" />
     <ClCompile Include="TypeTable.cpp" />
+    <ClCompile Include="Uses.cpp" />
     <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>

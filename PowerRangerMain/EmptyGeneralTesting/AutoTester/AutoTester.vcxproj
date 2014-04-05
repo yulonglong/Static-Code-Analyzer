@@ -70,14 +70,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)PKB;$(SolutionDir)QueryProcessor;$(SolutionDir)CodeParser;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)PKB;$(SolutionDir)QueryProcessor;$(SolutionDir)CodeParser</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\AutoTesterLib.lib;$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\PKB.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)lib\AutoTesterLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -1,6 +1,5 @@
 #include "TestWrapper.h"
-#include "QueryParser.h"
-#include "CodeParser.h"
+
 
 // implementation code of WrapperFactory - do NOT modify the next 5 lines
 AbstractWrapper* WrapperFactory::wrapper = 0;
@@ -19,17 +18,8 @@ TestWrapper::TestWrapper() {
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
+	CodeParser::parserDriver(pkb);
 
-	//KESTER FILL IN THIS.. basically call your parser.. i will only pass you the pkb pointer..
-	//So something like parser(pkb);
-
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();
-	TypeTable typeTable = pkb.getTypeTable();
-	Follows follows = pkb.getFollows();
-	Parent parent = pkb.getParent();
-
-	//Node* ASTRoot = parseCode(filename,varTable,procTable,typeTable,follows,parent);
 	// call your parser to do the parsing
   // ...rest of your code...
 }

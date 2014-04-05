@@ -4,6 +4,9 @@
 using namespace std;
 
 
+void CodeParser::parserDriver(PKB pkb){
+}
+
 Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable){
 	stack<Node*> st;
 	int length = tokens.size();

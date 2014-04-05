@@ -34,7 +34,6 @@ Kester:
 
 
 Yolim: 
-- Fix the PKB's structure [Deadline: Wed]
 - Implement Uses API based on Lacie's .h [Deadline: Sat]
 - Uses Unit Testing [Deadline: Sat]
 
