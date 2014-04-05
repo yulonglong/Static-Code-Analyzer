@@ -30,7 +30,7 @@ Integration testing of PKB and PQL for this. [Deadline: Mon]
 
 Kester: 
 - Help Hisyam with autotester testing (Test intensively for iteration 1 and 2) [Deadline: Sun]
-- Integrate Parser with Modifies and Uses [Deadline: Mon] [DONE ON 02 APRIL 2014]
+- Integrate Parser with Modifies and Uses [Deadline: Mon]
 
 
 Yolim: 
@@ -38,7 +38,7 @@ Yolim:
 - Uses Unit Testing [Deadline: Sat]
 
 Ipsita:
-- Implement Modifies API based on Lacie's .h [Deadline: Sat]
+- Implement Modifies API based on Lacie's .h [Deadline: Sat] DONE 
 - Modifies Unit Testing [Deadline: Sat]
 
 -----------------------------------------------------------------------------------------------
