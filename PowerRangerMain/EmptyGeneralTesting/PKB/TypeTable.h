@@ -15,7 +15,7 @@ typedef int STMTNUM;
 
 class TypeTable {
 public:
-	enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL,INVALID};
+	enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL, INVALID};
 	static SynType getSynType(std::string);
 
 private:
@@ -26,6 +26,8 @@ public:
 	void insertStmtNumAndType(STMTNUM,SynType);
 	SynType getType(STMTNUM);
 	vector<STMTNUM> getAllStmts(SynType);
+	bool isType(SynType, STMTNUM); 
+
 };
 
 #endif
