@@ -9,6 +9,8 @@ PKB::PKB(){
 	// private constructor
 	parent = Parent(typeTable);
 	follows = Follows(typeTable);
+	modifies = Modifies(typeTable,varTable);
+	uses = Uses(varTable);
 }
 
 PKB::~PKB(){
@@ -48,6 +50,18 @@ Follows PKB::getFollows(){
 	return follows;
 }
 
+Modifies PKB::getModifies(){
+	return modifies;
+}
+
+Uses PKB::getUses(){
+	return uses;
+}
+
+Node* PKB::getASTRoot(){
+	return ASTRoot;
+}
+
 void PKB::setVarTable(VarTable newVarTable){
 	varTable = newVarTable;
 }
@@ -65,4 +79,16 @@ void PKB::setParent(Parent newParent){
 }
 void PKB::setFollows(Follows newFollows){
 	follows = newFollows;
+}
+
+void PKB::setModifies(Modifies newModifies){
+	modifies = newModifies;
+}
+
+void PKB::setUses(Uses newUses){
+	uses = newUses;
+}
+
+void PKB::setASTRoot(Node* newASTRoot){
+	ASTRoot = newASTRoot;
 }

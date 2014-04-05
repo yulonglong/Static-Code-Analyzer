@@ -3,6 +3,12 @@
 #include "Uses.h"
 
 //Constructor
+Uses::Uses(){
+	vector<STMTNUM> temp (1,-1);
+	usesTable.assign(5, temp);
+}
+
+
 Uses::Uses(VarTable table){
 	varTable = table;
 	vector<STMTNUM> temp (1,-1);

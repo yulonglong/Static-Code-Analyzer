@@ -2,6 +2,12 @@
 
 #include "Modifies.h"
 
+Modifies::Modifies() {
+	vector<STMTNUM> temp;
+	temp.assign(1,-1);
+	modifiesTable.assign(5, temp);
+}
+
 	
 Modifies::Modifies(TypeTable tt, VarTable vt) {
 	typeTable = tt;

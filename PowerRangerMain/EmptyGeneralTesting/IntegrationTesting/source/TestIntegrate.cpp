@@ -26,12 +26,16 @@ CPPUNIT_TEST_SUITE_REGISTRATION( IntegrateTest ); // Note 4
 // method to test the constructor
 void IntegrateTest::testModifyTable()
 {  // Note 5
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,typeTable,follows,parent);
+	// create a node
+	PKB pkb;
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	string expected = "i";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
@@ -55,12 +59,15 @@ void IntegrateTest::testModifyTable()
 void IntegrateTest::testCompleteParser()
 {
 	// create a node
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,typeTable,follows,parent);
+	PKB pkb;
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 	// assign
 	Node* curr = root;
 	curr = root->getChild()[0];
@@ -87,12 +94,16 @@ void IntegrateTest::testCompleteParser()
 
 void IntegrateTest::testParserSource1()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source1.txt",varTable,procTable,typeTable,follows,parent);
+	// create a node
+	PKB pkb;
+	parserDriver("Source1.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	Node* curr = root;
 	
@@ -156,12 +167,16 @@ void IntegrateTest::testParserSource1()
 
 void IntegrateTest::testParserSource2()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source2.txt",varTable,procTable,typeTable,follows,parent);
+	// create a node
+	PKB pkb;
+	parserDriver("Source2.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	Node* curr = root;
 	

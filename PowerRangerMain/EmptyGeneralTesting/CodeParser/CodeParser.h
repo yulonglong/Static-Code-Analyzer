@@ -19,10 +19,11 @@
 #include "Follows.h"
 #include "Parent.h"
 #include "Query.h"
+#include "Modifies.h"
+#include "Uses.h"
 
 
 Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows, Parent &parent);
-
-void parserDriver(std::string filename,PKB);
+void parserDriver(std::string filename,PKB &pkb);
 
 #endif
