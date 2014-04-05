@@ -44,6 +44,12 @@ public:
 	TypeTable getTypeTable();
 	Parent getParent();
 	Follows getFollows();
+
+	void setVarTable(VarTable newVarTable);
+	void setProcTable(ProcTable newProcTable);
+	void setTypeTable(TypeTable newTypeTable);
+	void setParent(Parent newParent);
+	void setFollows(Follows newFollows);
 	
 };
 
