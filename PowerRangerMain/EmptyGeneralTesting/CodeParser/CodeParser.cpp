@@ -182,7 +182,7 @@ void tokenizeTokens(string word, vector<string> &storage){
 }
 
 //real parsing
-Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows,Parent &parent){
+Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows,Parent &parent, Modifies &modifies, Uses &uses){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -529,18 +529,24 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 	return root;
 }
 
-void parserDriver(string filename,PKB pkb){
+void parserDriver(string filename,PKB &pkb){
 	VarTable varTable = pkb.getVarTable();
 	ProcTable procTable = pkb.getProcTable();
 	TypeTable typeTable = pkb.getTypeTable();
 	Parent parent = pkb.getParent();
 	Follows follows = pkb.getFollows();
+	Modifies modifies = pkb.getModifies();
+	Uses uses = pkb.getUses();
 
-	parseCode(filename,varTable,procTable,typeTable,follows,parent);
+	Node* root;
+	root = parseCode(filename,varTable,procTable,typeTable,follows,parent,modifies,uses);
 
 	pkb.setVarTable(varTable);
 	pkb.setProcTable(procTable);
 	pkb.setTypeTable(typeTable);
 	pkb.setParent(parent);
 	pkb.setFollows(follows);
+	pkb.setModifies(modifies);
+	pkb.setUses(uses);
+	pkb.setASTRoot(root);
 }

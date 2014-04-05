@@ -24,12 +24,16 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4
 // method to test the constructor
 void ParserTest::testModifyTable()
 {  // Note 5
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,typeTable,follows,parent);
+	
+	PKB pkb;
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	string expected = "i";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
@@ -78,13 +82,16 @@ void ParserTest::testModifyTable()
 void ParserTest::testCompleteParser()
 {
 	// create a node
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,typeTable,follows,parent);
-	// assign
+	PKB pkb;
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
+
 	Node* curr = root;
 	curr = root->getChild()[0];
 	curr = curr->getChild()[0];
@@ -110,12 +117,15 @@ void ParserTest::testCompleteParser()
 
 void ParserTest::testParserSource1()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source1.txt",varTable,procTable,typeTable,follows,parent);
+	PKB pkb;
+	parserDriver("Source1.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	Node* curr = root;
 	
@@ -179,12 +189,15 @@ void ParserTest::testParserSource1()
 
 void ParserTest::testParserSource2()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source2.txt",varTable,procTable,typeTable,follows,parent);
+	PKB pkb;
+	parserDriver("Source2.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	Node* curr = root;
 	
@@ -218,12 +231,16 @@ void ParserTest::testParserSource2()
 
 void ParserTest::testFullParserOwnSource()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("CodeParserTestIn.txt",varTable,procTable,typeTable,follows,parent);
+	// create a node
+	PKB pkb;
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	ifstream infile;
 	infile.open("expectedCodeParserTestIn.txt",ios::in);
@@ -246,12 +263,16 @@ void ParserTest::testFullParserOwnSource()
 
 void ParserTest::testFullParserSource1()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source1.txt",varTable,procTable,typeTable,follows,parent);
+	// create a node
+	PKB pkb;
+	parserDriver("Source1.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 	ifstream infile;
 	infile.open("expectedSource1.txt",ios::in);
@@ -274,12 +295,15 @@ void ParserTest::testFullParserSource1()
 
 void ParserTest::testFullParserSource2()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source2.txt",varTable,procTable,typeTable,follows,parent);
+	PKB pkb;
+	parserDriver("Source2.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 		ifstream infile;
 	infile.open("expectedSource2.txt",ios::in);
@@ -301,12 +325,15 @@ void ParserTest::testFullParserSource2()
 
 void ParserTest::testFullParserSource2messy()
 {
-	VarTable varTable;
-	ProcTable procTable;
-	Follows follows;
-	Parent parent;
-	TypeTable typeTable;
-	Node* root = parseCode("Source2messy.txt",varTable,procTable,typeTable,follows,parent);
+	PKB pkb;
+	parserDriver("Source2messy.txt",pkb);
+
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();;
+	Follows follows = pkb.getFollows();
+	Parent parent = pkb.getParent();
+	TypeTable typeTable = pkb.getTypeTable();
+	Node* root = pkb.getASTRoot();
 
 		ifstream infile;
 	infile.open("expectedSource2.txt",ios::in);

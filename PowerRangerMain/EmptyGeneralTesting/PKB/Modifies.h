@@ -22,6 +22,7 @@ private:
 
 public:	
 	Modifies(TypeTable, VarTable);
+	Modifies();
 	~Modifies();
 
 	void setModifies(STMTNUM, VARNAME);
