@@ -20,7 +20,7 @@ private:
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateFollowsStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateParentBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
-	bool evaluateParentStarBoolean(Relationship);
+	bool evaluateParentStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 	//std::set<int> evaluateFollowsStarWithOneStmtnum(TypeTable::SynType, int);
 	//std::set<int> evaluateFollowedByStarWithOneStmtnum(TypeTable::SynType, int);

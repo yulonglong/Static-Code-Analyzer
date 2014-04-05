@@ -78,8 +78,10 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 			break;
 		case Relationship::PARENT:
 			answers = answers && evaluateParentBoolean(*it, q.getSynTable());
+			break;
 		case Relationship::PARENTSTAR:
-			answers = answers && evaluateParentStarBoolean(*it);
+			//answers = answers && evaluateParentStarBoolean(*it);
+			break;
 		}
 	}
 	return answers;
@@ -399,8 +401,40 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 	return vectorAnswer;
 }
 
-bool QueryEvaluator::evaluateParentStarBoolean(Relationship r){
-	bool v;
-	return v;
+bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Parent p = pkb->getParent();
+	int stmtnum=0;
+	vector<int> temp;
+
+	bool flag = false;
+
+	//Parent*(1,8)
+	if(isdigit(tk1[0]) && isdigit(tk2[0])){
+		stmtnum = atoi(tk2.c_str());
+		while(stmtnum!=-1){
+			stmtnum = p.getParent(stmtnum);
+			if(stmtnum==atoi(tk2.c_str()))
+				flag = true;
+			if(stmtnum<atoi(tk2.c_str()))
+				break;
+		}
+	}
+
+	//Parent*(w, a) Parent*(w, 3)
+	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || isdigit(tk2[0])){
+		temp = evaluateParentStar(r, m, tk1);
+	}
+
+	//Parent*(3, a)
+	else{
+		temp = evaluateFollowsStar(r, m, tk2);
+	}
+
+	if(!temp.empty())
+		flag = true;
+
+	return flag;
 }
 
