@@ -1,5 +1,5 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "ProcTable.h"
+
 #include "TestProcTable.h"
 
 #include <iostream>

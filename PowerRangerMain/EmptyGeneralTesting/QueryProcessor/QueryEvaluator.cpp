@@ -56,7 +56,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 									}
 		case Relationship::PARENTSTAR:
-			//answers.push_back(evaluateParentStar(*it));
+			answers.push_back(evaluateParentStar(*it));
 			break;
 		}
 	}
@@ -74,14 +74,12 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 			answers = answers && evaluateFollowsBoolean(*it, q.getSynTable());
 			break;
 		case Relationship::FOLLOWSSTAR:
-			//answers = answers && evaluateFollowsStarBoolean(*it);
+			answers = answers && evaluateFollowsStarBoolean(*it);
 			break;
 		case Relationship::PARENT:
 			answers = answers && evaluateParentBoolean(*it, q.getSynTable());
-			break;
 		case Relationship::PARENTSTAR:
-			//answers = answers && evaluateParentStarBoolean(*it);
-			break;
+			answers = answers && evaluateParentStarBoolean(*it);
 		}
 	}
 	return answers;
@@ -274,6 +272,8 @@ bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_m
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Follows f = pkb->getFollows();
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	int stmtnum=0;
 	vector<int> temp;
 
@@ -325,116 +325,13 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 	}
 }
 
-
-
-vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Parent p = pkb->getParent();
-	TypeTable t = pkb->getTypeTable();
-	set<int> answer;
-	vector<int> selected;
-	vector<int> vectorAnswer;
-	int stmtNumber = 0;
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-
-	//Select w such that Parent*(w, a)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		selected = t.getAllStmts(i2->second);	//get all assign statements
-
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			stmtNumber = p.getParent(*it);
-			answer.insert(stmtNumber);
-			stmtNumber = p.getParent(stmtNumber);
-			while(stmtNumber!=-1){
-				answer.insert(stmtNumber);
-				stmtNumber = p.getParent(stmtNumber);
-			}
-		}
-	}
-
-	//Select a such that Parent*(w, a)
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-
-		selected = t.getAllStmts(i2->second);	//get all assign statements
-
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			stmtNumber = p.getParent(*it);
-			if(stmtNumber!=-1)
-				answer.insert(stmtNumber);
-		}
-	}
-
-	//Select w such that Parent*(w, 13)
-	else if(selectedSyn==tk1){
-
-		stmtNumber = atoi(tk2.c_str());
-		stmtNumber = p.getParent(stmtNumber);
-
-		while(stmtNumber!=-1){
-			answer.insert(stmtNumber);
-			stmtNumber = p.getParent(stmtNumber);
-		}
-	}
-
-	//Select a such that Parent*(3, a)
-	else {
-		
-		selected = t.getAllStmts(i2->second);
-		
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){			
-			stmtNumber = p.getParent(*it);
-			while(stmtNumber!=-1){
-				if(stmtNumber == atoi(tk1.c_str())){
-					answer.insert(*it);	
-					break;
-				}
-				stmtNumber = p.getParent(stmtNumber);
-			}
-			
-		}
-	}
-
-	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));
-
-	return vectorAnswer;
+vector<int> QueryEvaluator::evaluateParentStar(Relationship r){
+	vector<int> v;
+	return v;
 }
 
-bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Parent p = pkb->getParent();
-	int stmtnum=0;
-	vector<int> temp;
-
-	bool flag = false;
-
-	//Parent*(1,8)
-	if(isdigit(tk1[0]) && isdigit(tk2[0])){
-		stmtnum = atoi(tk2.c_str());
-		while(stmtnum!=-1){
-			stmtnum = p.getParent(stmtnum);
-			if(stmtnum==atoi(tk2.c_str()))
-				flag = true;
-			if(stmtnum<atoi(tk2.c_str()))
-				break;
-		}
-	}
-
-	//Parent*(w, a) Parent*(w, 3)
-	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || isdigit(tk2[0])){
-		temp = evaluateParentStar(r, m, tk1);
-	}
-
-	//Parent*(3, a)
-	else{
-		temp = evaluateFollowsStar(r, m, tk2);
-	}
-
-	if(!temp.empty())
-		flag = true;
-
-	return flag;
+bool QueryEvaluator::evaluateParentStarBoolean(Relationship r){
+	bool v;
+	return v;
 }
 

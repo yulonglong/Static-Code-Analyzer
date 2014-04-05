@@ -29,7 +29,7 @@ void TestWrapper::parse(std::string filename) {
 	Follows follows = pkb.getFollows();
 	Parent parent = pkb.getParent();
 
-	Node* ASTRoot = parseCode(filename,varTable,procTable,typeTable,follows,parent);
+	//Node* ASTRoot = parseCode(filename,varTable,procTable,typeTable,follows,parent);
 	// call your parser to do the parsing
   // ...rest of your code...
 }

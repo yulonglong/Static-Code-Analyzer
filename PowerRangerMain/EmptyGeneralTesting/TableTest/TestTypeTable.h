@@ -3,6 +3,7 @@
 
 // Note 1
 #include <cppunit/extensions/HelperMacros.h>
+#include "TypeTable.h"
 
 class TypeTableTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
