@@ -12,7 +12,7 @@ void TypeTable::insertStmtNumAndType(STMTNUM s,TypeTable::SynType t) {
 	typeMap[s]=t;
 }
 
-// Throws exception
+// Throws exception; whoever calls please catch
 TypeTable::SynType TypeTable::getType(STMTNUM s) {
 	return typeMap.at(s);
 }
@@ -27,3 +27,9 @@ vector<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
 	return list;
 }
 
+bool isType(TypeTable::SynType type, STMTNUM stmt) {
+	if (type == STMT || typeMap[stmt] == type) {
+		return true;
+	}
+	return false;
+}
