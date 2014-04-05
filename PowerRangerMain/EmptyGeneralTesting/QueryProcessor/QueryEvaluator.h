@@ -16,7 +16,7 @@ private:
 	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
-	std::vector<int> evaluateParentStar(Relationship);
+	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateFollowsStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateParentBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
