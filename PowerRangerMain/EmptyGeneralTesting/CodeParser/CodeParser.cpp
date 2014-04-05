@@ -4,9 +4,6 @@
 using namespace std;
 
 
-void CodeParser::parserDriver(PKB pkb){
-}
-
 Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable){
 	stack<Node*> st;
 	int length = tokens.size();
@@ -530,4 +527,20 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 	
 	//printPreOrderExpressionTree(root);
 	return root;
+}
+
+void parserDriver(string filename,PKB pkb){
+	VarTable varTable = pkb.getVarTable();
+	ProcTable procTable = pkb.getProcTable();
+	TypeTable typeTable = pkb.getTypeTable();
+	Parent parent = pkb.getParent();
+	Follows follows = pkb.getFollows();
+
+	parseCode(filename,varTable,procTable,typeTable,follows,parent);
+
+	pkb.setVarTable(varTable);
+	pkb.setProcTable(procTable);
+	pkb.setTypeTable(typeTable);
+	pkb.setParent(parent);
+	pkb.setFollows(follows);
 }

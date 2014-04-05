@@ -47,3 +47,22 @@ Parent PKB::getParent(){
 Follows PKB::getFollows(){
 	return follows;
 }
+
+void PKB::setVarTable(VarTable newVarTable){
+	varTable = newVarTable;
+}
+
+void PKB::setProcTable(ProcTable newProcTable){
+	procTable = newProcTable;
+}
+
+void PKB::setTypeTable(TypeTable newTypeTable){
+	typeTable = newTypeTable;
+}
+
+void PKB::setParent(Parent newParent){
+	parent = newParent;
+}
+void PKB::setFollows(Follows newFollows){
+	follows = newFollows;
+}

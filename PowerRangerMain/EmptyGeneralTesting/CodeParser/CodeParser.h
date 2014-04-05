@@ -23,8 +23,6 @@
 
 Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows, Parent &parent);
 
-class CodeParser{
-public:
-	static void parserDriver(PKB);
-};
+void parserDriver(std::string filename,PKB);
+
 #endif
