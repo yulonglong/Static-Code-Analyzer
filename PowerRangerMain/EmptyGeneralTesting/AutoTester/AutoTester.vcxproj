@@ -42,6 +42,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\Code\PowerRanger\PowerRangerMain\EmptyGeneralTesting\QueryProcessor;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,11 +82,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\TestWrapper.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="source\AbstractWrapper.h" />
     <ClInclude Include="source\TestWrapper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\TestWrapper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
