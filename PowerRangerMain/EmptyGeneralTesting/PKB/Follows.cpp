@@ -110,7 +110,8 @@ bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
 }
 
 STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
-	STMTNUM num = -1; 
+	STMTNUM num = -1;
+
 	try {
 		num = followsTable.at(s);
 	} 
@@ -120,6 +121,7 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 		cout<<"In catch block"<<endl;
 	}
 	if (num != -1 && table.getType(num) == t){
+		cout<<"NUM IS"<<num<<endl;
 		return num;
 	} 
 	return -1; 

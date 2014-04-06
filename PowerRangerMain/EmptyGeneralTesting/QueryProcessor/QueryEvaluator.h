@@ -11,7 +11,7 @@
 
 
 class QueryEvaluator{ 
-private:
+public:
 
 	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
@@ -24,9 +24,10 @@ private:
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 	//std::set<int> evaluateFollowsStarWithOneStmtnum(TypeTable::SynType, int);
 	//std::set<int> evaluateFollowedByStarWithOneStmtnum(TypeTable::SynType, int);
+	std::string func(TypeTable::SynType);
 
 public:
-	QueryEvaluator();
+	QueryEvaluator(PKB);
 	PKB *pkb;
 	std::vector<int> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);
