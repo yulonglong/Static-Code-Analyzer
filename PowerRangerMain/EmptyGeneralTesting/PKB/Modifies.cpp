@@ -36,7 +36,6 @@ VarTable Modifies::getVarTable() {
 }
 */
 
-// if set modifies is called for the same stmtnum twice, then dont insert twice!!
 void Modifies::setModifies(STMTNUM s, VARNAME v) {
 	vector<STMTNUM> temp;
 	temp.assign(1,-1);
@@ -44,18 +43,24 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 		modifiesTable.resize(s+1, temp);
 	}
 	
-	vector<STMTNUM> temp1 = modifiesTable.at(s);
+	vector<int> temp1 = modifiesTable.at(s);
 	int varIndex = varTable.getVarIndex(v);
 
 	if (temp1.at(0) == -1) { // may throw exception
 		temp1[0] = varIndex;
 	} else {
+		for(std::vector<int>::iterator it = temp1.begin(); it != temp1.end(); ++it) {
+			if (*it == varIndex) {
+				return;
+			}
+		}
 		temp1.push_back(varIndex);
 	}
 	modifiesTable[s] = temp1;
 
 }
 
+// TODO: Implementation
 bool Modifies::isModifies(TYPE s, TYPE t) {	
 	//Select s such that Modifies(a, v) parameter order: selected type, first token, second token (first parameter can be w or a or s)
 	
@@ -64,14 +69,25 @@ bool Modifies::isModifies(TYPE s, TYPE t) {
 
 bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	//Select w such that Modifies(1, "y")
-	vector<VARNAME> vec = getModifies(s);
+	int varIndex = varTable.getVarIndex(v);
+	vector<int> modifies; 
 
-	vector<VARNAME>::iterator it = vec.begin();
-	for (; it!=vec.end(); ++it) {
-		if (v.compare(*it) == 0) {
-			return true; 
+	if (varIndex == -1) {
+		return false;
+	}
+
+	try {
+		modifies = modifiesTable.at(s);
+	} catch (...) {
+		return false;
+	}
+
+	for(vector<int>::iterator it = modifies.begin(); it != modifies.end(); ++it) {
+		if (*it == varIndex) {
+			return true;
 		}
 	}
+
 	return false;
 }
 
