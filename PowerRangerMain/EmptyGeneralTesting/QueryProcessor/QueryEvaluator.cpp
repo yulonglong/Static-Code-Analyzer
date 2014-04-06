@@ -6,16 +6,18 @@
 
 
 using namespace std;
-QueryEvaluator::QueryEvaluator(){
-
+QueryEvaluator::QueryEvaluator(PKB p){
+	pkb = &p;
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
+
 	TypeTable t = pkb->getTypeTable();
 	Follows f = pkb->getFollows();
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {
@@ -26,7 +28,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
-					answers.push_back( t.getAllStmts(i->second));
+					answers.push_back(t.getAllStmts(i->second));
 				}
 			}
 			else {
@@ -113,6 +115,7 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows f = pkb->getFollows();
+
 	if(isdigit(tk1[0]) && isdigit(tk2[0])){
 		return f.isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()));
 	}
@@ -161,21 +164,32 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	vector<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		return f.getFollows(i1->second, i2->second);
+		return f.getFollowedBy(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		return f.getFollowedBy(i1->second, i2->second);
+		return f.getFollows(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
 		answer.push_back(f.getFollowedBy(i1->second, atoi(tk2.c_str())));
-
 		return answer;
 	}
 	else {
+		cout<<"HIE"<<endl;
 		answer.push_back(f.getFollows(i2->second, atoi(tk1.c_str())));
 		return answer;
 	}
+}
+
+string QueryEvaluator::func(TypeTable::SynType t){
+	switch(t){
+	case TypeTable::ASSIGN:
+		return "assign";
+	case TypeTable::WHILE:
+		return "while";
+	}
+	return "hi";
 }
 
 vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){

@@ -47,7 +47,8 @@ Parent PKB::getParent(){
 }
 
 Follows PKB::getFollows(){
-	return follows;
+	Follows f = follows;
+	return f;
 }
 
 Modifies PKB::getModifies(){
