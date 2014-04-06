@@ -62,6 +62,9 @@ public:
 	void setUses(Uses newUses);
 	void setASTRoot(Node* newASTRoot);
 	
+	void updateVarTable();
+	void updateProcTable();
+	void updateTypeTable();
 };
 
 #endif

@@ -231,41 +231,6 @@ vector<STMTNUM> Follows::getFollowedBy(TypeTable::SynType t1, TypeTable::SynType
 	return list;
 }
 
-
-// TODO: Throw away
-/*
-vector<STMTNUM> Follows::getFollows(Query::SynType t1, Query::SynType t2,Query::SynType t3) {
-	vector<STMTNUM> v (1,-1);
-	vector<STMTNUM>::iterator it = followsTable.begin();
-	for(;it!= followsTable.end();++it){
-		for(vector<STMTNUM>::iterator it2 = it;it2!=followsTable.end();++it2){
-			if(table.getType(*it) == t2){
-				if(table.getType(*it2) == t3){
-					v = table.getStmtNum(t1);
-					return v;
-				}
-			}		
-		}
-	}
-	return v;
+void Follows::updateTable(TypeTable tab){
+	table = tab;
 }
-*/
-
-// TODO: Throw away
-/*
-vector<STMTNUM> Follows::getFollowedBy(Query::SynType t1, Query::SynType t2, Query::SynType t3) {
-	vector<STMTNUM> v (1,-1);
-	vector<STMTNUM>::iterator it = followsTable.begin();
-	for(;it!= followedByTable.end();++it){
-		for(vector<STMTNUM>::iterator it2 = it;it2!=followedByTable.end();++it2){
-			if(table.getType(*it) == t2){
-				if(table.getType(*it2) == t3){
-					v = table.getStmtNum(t1);
-					return v;
-				}
-			}		
-		}
-	}
-	return v;
-}
-*/

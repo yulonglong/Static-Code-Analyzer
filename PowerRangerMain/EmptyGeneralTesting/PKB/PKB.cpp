@@ -93,3 +93,14 @@ void PKB::setUses(Uses newUses){
 void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
+
+void PKB::updateTypeTable(){
+	parent.updateTable(typeTable);
+	follows.updateTable(typeTable);
+}
+
+void PKB::updateProcTable(){
+}
+
+void PKB::updateVarTable(){
+}
