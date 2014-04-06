@@ -262,3 +262,7 @@ vector<STMTNUM> Parent::getChildren(STMTNUM s){
 		return vector<STMTNUM> (1,-1);
 	}
 }
+
+void Parent::updateTable(TypeTable tab){
+	table = tab;
+}

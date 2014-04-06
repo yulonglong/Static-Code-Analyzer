@@ -39,6 +39,8 @@ public:
 	STMTNUM getFollowedBy(TypeTable::SynType, STMTNUM); // done testing!!
 	vector<STMTNUM> getFollows(TypeTable::SynType, TypeTable::SynType);	 //Select s1 such that getFollows(s1, s2)
 	vector<STMTNUM> getFollowedBy(TypeTable::SynType, TypeTable::SynType);	 //Select s2 such that getFollows(s1, s2)
+
+	void updateTable(TypeTable);
 }; 
 
 #endif

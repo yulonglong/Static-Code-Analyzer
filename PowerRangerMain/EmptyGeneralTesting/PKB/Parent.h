@@ -18,6 +18,7 @@ private:
 	vector<vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
 	vector<STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num
 	
+	
 public: 
 	TypeTable table; // for the sake of unit testing.
 	Parent(TypeTable);
@@ -34,6 +35,7 @@ public:
 	vector<STMTNUM> getChildren(TypeTable::SynType, TypeTable::SynType); //Select a such that Parent(w,a)
 	STMTNUM getParent(TypeTable::SynType, STMTNUM); 
 	vector<STMTNUM> getChildren(TypeTable::SynType, STMTNUM); 
+	void updateTable(TypeTable);
 
 	//For parentStar
 	STMTNUM getParent(STMTNUM); 
