@@ -14,12 +14,14 @@
     <ClCompile Include="Query.cpp" />
     <ClCompile Include="QueryEvaluator.cpp" />
     <ClCompile Include="QueryParser.cpp" />
+    <ClCompile Include="QueryProcessor.cpp" />
     <ClCompile Include="Relationship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Query.h" />
     <ClInclude Include="QueryEvaluator.h" />
     <ClInclude Include="QueryParser.h" />
+    <ClInclude Include="QueryProcessor.h" />
     <ClInclude Include="Relationship.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
