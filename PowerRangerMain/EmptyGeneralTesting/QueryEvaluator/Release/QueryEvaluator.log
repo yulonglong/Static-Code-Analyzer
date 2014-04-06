@@ -1,13 +1,13 @@
-﻿Build started 5/4/2014 11:18:33 PM.
-     1>Project "D:\My Uni\Semester 4\CS3201\Main project\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" on node 2 (build target(s)).
+﻿Build started 7/4/2014 3:19:13 AM.
+     1>Project "F:\Code\PowerRanger\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" on node 3 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release\QueryEvaluator.unsuccessfulbuild".
+         Creating "Release\QueryEvaluator.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\My Uni\Semester 4\CS3201\Main project\PowerRangerMain\EmptyGeneralTesting\PKB" /I"D:\My Uni\Semester 4\CS3201\Main project\PowerRangerMain\EmptyGeneralTesting\QueryProcessor" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QueryEvaluator.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IF:\Code\PowerRanger\PowerRangerMain\EmptyGeneralTesting\PKB /IF:\Code\PowerRanger\PowerRangerMain\EmptyGeneralTesting\QueryProcessor /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QueryEvaluator.cpp
          QueryEvaluator.cpp
      1>c1xx : fatal error C1083: Cannot open source file: 'QueryEvaluator.cpp': No such file or directory
-     1>Done Building Project "D:\My Uni\Semester 4\CS3201\Main project\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" (build target(s)) -- FAILED.
+     1>Done Building Project "F:\Code\PowerRanger\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" (build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.04
+Time Elapsed 00:00:03.10
