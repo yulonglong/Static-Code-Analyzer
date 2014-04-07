@@ -2,7 +2,7 @@
 
 #include "TypeTable.h"
 
-bool TypeTable::instanceFlag=true;
+bool TypeTable::instanceFlag=false;
 TypeTable* TypeTable::typeTable=NULL;
 
 // constructor

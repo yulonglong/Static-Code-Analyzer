@@ -2,7 +2,7 @@
 
 #include "VarTable.h"
 
-bool VarTable::instanceFlag=true;
+bool VarTable::instanceFlag=false;
 VarTable* VarTable::varTable=NULL;
 
 // constructor

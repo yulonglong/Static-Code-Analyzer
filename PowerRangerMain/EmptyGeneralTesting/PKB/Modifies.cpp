@@ -2,7 +2,7 @@
 
 #include "Modifies.h"
 
-bool Modifies::instanceFlag=true;
+bool Modifies::instanceFlag=false;
 Modifies* Modifies::modifies=NULL;
 
 Modifies::Modifies() {

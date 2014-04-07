@@ -4,7 +4,7 @@
 #include <stdexcept>      // std::out_of_range
 #include <iostream>
 
-bool Follows::instanceFlag=true;
+bool Follows::instanceFlag=false;
 Follows* Follows::follows=NULL;
 
 // constructor

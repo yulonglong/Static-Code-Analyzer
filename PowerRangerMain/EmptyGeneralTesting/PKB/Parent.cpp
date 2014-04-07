@@ -2,7 +2,7 @@
 
 #include "Parent.h"
 
-bool Parent::instanceFlag=true;
+bool Parent::instanceFlag=false;
 Parent* Parent::parent=NULL;
 
 // constructor

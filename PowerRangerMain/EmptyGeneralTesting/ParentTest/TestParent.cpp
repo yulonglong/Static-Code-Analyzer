@@ -17,7 +17,7 @@ void ParentTest::setUp() {
 }
 
 void ParentTest::tearDown() {
-	/*parent->~Parent(); */
+	parent->~Parent(); 
 }
 
 // Registers the fixture into the 'registry'
@@ -38,11 +38,11 @@ void ParentTest::testParentUsingStmtNum() {  // Note 5
 }
 
 void ParentTest::testParentUsingStmtType() {
-	/*parentTable->setParent(6, 7);
-	parentTable->setParent(6, 8);
-	parentTable->setParent(6, 9);
-	parentTable->setParent(10, 11);
-	parentTable->setParent(10, 12);
+	parent->setParent(6, 7);
+	parent->setParent(6, 8);
+	parent->setParent(6, 9);
+	parent->setParent(10, 11);
+	parent->setParent(10, 12);
 	typeTable->insertStmtNumAndType(6, TypeTable::WHILE);
 	typeTable->insertStmtNumAndType(7, TypeTable::ASSIGN);
 	typeTable->insertStmtNumAndType(8, TypeTable::CALL);
@@ -51,9 +51,9 @@ void ParentTest::testParentUsingStmtType() {
 	typeTable->insertStmtNumAndType(11, TypeTable::ASSIGN);
 	typeTable->insertStmtNumAndType(12, TypeTable::ASSIGN);
 	
-	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::WHILE, 9) == true);
-	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::IF, 12) == true);
-	CPPUNIT_ASSERT(parentTable->isParent(TypeTable::WHILE, 5) == false);*/
+	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 9) == true);
+	CPPUNIT_ASSERT(parent->isParent(TypeTable::IF, 12) == true);
+	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 5) == false);
 	
 	return;
 }
