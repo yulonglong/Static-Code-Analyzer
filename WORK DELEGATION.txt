@@ -14,19 +14,12 @@ Adinda:
 [Deadline: Sat]
 
 Hisyam: 
-- Think of how QE is going to solve pattern (Make some notes; so that its faster to implement next time) [Deadline: Sat]
 - Implement autotester. Try with source1, queries1-1, source2, queries2-1, 2-2, 2-3. 
-Test intensively for iteration 1 and 2 [Deadline: Sun]
-- Test cases for Miniteraton 3. Write Queries3-2.txt, Queries3-3.txt, Queries3-4.txt. 
-(each having at least 10 queries) [Deadline: Sun]
-
+Test intensively for iteration 1 and 2 [Deadline: Wed]
+- Integration testing of PKB and PQL for this. [Deadline: Tue]
 
 Lacie:
-- Integrate testing between PKB and PQL. [Deadline: Thu]
-- Implement parentstar and followstar. [Deadline: Thu]
-- Write .h file for Modifies and Uses. [Deadline: Thu]
 - Implement Query Evaluator stuff for Modifies and Uses. Add unit testing for each.
-Integration testing of PKB and PQL for this. [Deadline: Mon]
 
 Kester: 
 - Help Hisyam with autotester testing (Test intensively for iteration 1 and 2) [Deadline: Sun]
@@ -38,8 +31,9 @@ Yolim:
 - Uses Unit Testing [Deadline: Sat]
 
 Ipsita:
-- Implement Modifies API based on Lacie's .h [Deadline: Sat] DONE 
 - Modifies Unit Testing [Deadline: Sat]
+- Test cases for Miniteraton 3. Write Queries3-2.txt, Queries3-3.txt, Queries3-4.txt. 
+(each having at least 10 queries) [Deadline: Sun]
 
 -----------------------------------------------------------------------------------------------
 
@@ -98,7 +92,7 @@ acceptance tests you submit with your SPA code)
 
 
 Lacie:
-- PLS CREATE A SKELETON SO THAT EVERYONE CAN FILL IN THEIR PARTS [Deadline: ??]
+- PLS CREATE A SKELETON SO THAT EVERYONE CAN FILL IN THEIR PARTS [Deadline: WED]
 
 -2. Scope of the prototype implementation
 Indicate whether you have met basic requirements for the prototype described in the assignment.

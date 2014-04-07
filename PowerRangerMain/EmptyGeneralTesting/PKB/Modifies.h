@@ -12,6 +12,7 @@
 #include "VarTable.h"
 
 typedef TypeTable::SynType TYPE; 
+typedef int VARINDEX;
 
 
 class Modifies {
@@ -27,9 +28,9 @@ public:
 
 	void setModifies(STMTNUM, VARNAME);
 	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")
-	bool isModifies(TYPE, TYPE);		//Select s such that Modifies(a, v) parameter order: selected type, first token, second token (first parameter can be w or a or s)
+	vector<STMTNUM> getModifies(TYPE);			//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.
+	vector<VARINDEX> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
 	vector<STMTNUM> getModifies(TYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
-	vector<VARNAME> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
 };
 
 #endif
