@@ -451,3 +451,75 @@ bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_ma
 	return flag;
 }
 
+vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, string selectedSyn) {
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Modifies mod = pkb->getModifies();
+	TypeTable t = pkb->getTypeTable();
+	vector<int> selected;
+	set<int> answer;
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	//Select a Modifies(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		selected = mod.getModifies(i1->second);
+		return selected;
+	}
+
+	//Select v Modifies(a,v)
+	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		selected = t.getAllStmts(TypeTable::ASSIGN);
+		vector<int> modifiedVar;
+		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){	
+			modifiedVar = mod.getModifies(*it);
+			answer.insert(modifiedVar.begin(), modifiedVar.end());
+		}
+		selected.clear();
+		copy(answer.begin(), answer.end(), back_inserter(selected));
+		return selected;
+	}
+
+	//Modifies(a, "x")
+	else if(isalpha(tk1[0])){
+		string varName = tk2.substr(1,tk2.length()-2);
+		return mod.getModifies(i1->second, varName);
+	}
+
+	//Select v such that Modifies(1, v);
+	else {
+		return mod.getModifies(atoi(tk1.c_str()));
+	}
+}
+
+bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Modifies mod = pkb->getModifies();
+	TypeTable t = pkb->getTypeTable();
+
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	//Modifies(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		vector<int>ans = mod.getModifies(i1->second);
+		if(!ans.empty()){
+			return true;
+		}
+	}
+
+	//Modifies(a, "x")
+	else if(isalpha(tk1[0])){
+		vector<int> ans = mod.getModifies(i1->second, tk2.substr(1,tk2.length()-2));
+		if(!ans.empty())
+			return true;
+	}
+
+	//Modifies(1, "x")
+	else{
+		return mod.isModifies(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
+	}
+
+	return false;
+}
