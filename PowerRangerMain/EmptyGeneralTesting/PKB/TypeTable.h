@@ -20,9 +20,13 @@ public:
 
 private:
 	map<STMTNUM,SynType> typeMap;
+	static bool instanceFlag;
+	static TypeTable *typeTable;
 
 public: 
 	TypeTable();
+	~TypeTable();
+	static TypeTable* getInstance();	// to be used to get instance of singleton class 
 	void insertStmtNumAndType(STMTNUM,SynType);
 	SynType getType(STMTNUM);
 	vector<STMTNUM> getAllStmts(SynType);

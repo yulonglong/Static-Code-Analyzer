@@ -2,9 +2,28 @@
 
 #include "TypeTable.h"
 
+bool TypeTable::instanceFlag=true;
+TypeTable* TypeTable::typeTable=NULL;
 
 // constructor
 TypeTable::TypeTable() {
+}
+
+TypeTable::~TypeTable(){
+}
+
+
+TypeTable* TypeTable::getInstance() {
+	if(!instanceFlag)
+    {
+        typeTable = new TypeTable();
+        instanceFlag = true;
+        return typeTable;
+    }
+    else
+    {
+        return typeTable;
+    }
 }
 
 

@@ -15,9 +15,13 @@ typedef string VARNAME;
 
 class VarTable {
 private: 
-	vector<VARNAME> varTable; 
+	vector<VARNAME> variableTable; 
+	static bool instanceFlag;
+	static VarTable *varTable;
 public: 
 	VarTable();
+	~VarTable();
+	static VarTable* getInstance();	// to be used to get instance of singleton class 
 	INDEX insertVar(VARNAME);
 	VARNAME getVarName (INDEX);
 	INDEX getVarIndex (VARNAME);

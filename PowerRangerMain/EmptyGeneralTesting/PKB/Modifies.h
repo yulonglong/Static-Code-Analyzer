@@ -18,14 +18,17 @@ typedef int VARINDEX;
 class Modifies {
 private:
 	vector<vector<STMTNUM>> modifiesTable; 
-	TypeTable typeTable; 
-	VarTable varTable; 
+	TypeTable *typeTable; 
+	VarTable *varTable; 
+	static bool instanceFlag;
+	static Modifies *modifies;
 
 public:	
-	Modifies(TypeTable, VarTable);
+	Modifies(TypeTable*, VarTable*);
 	Modifies();
 	~Modifies();
-
+	static Modifies* getInstance();	// to be used to get instance of singleton class
+	static Modifies* getInstance(TypeTable*, VarTable*);	// to be used to get instance of singleton class 
 	void setModifies(STMTNUM, VARNAME);
 	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")
 	vector<STMTNUM> getModifies(TYPE);			//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.

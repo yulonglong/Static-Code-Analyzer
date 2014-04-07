@@ -2,6 +2,9 @@
 
 #include "Modifies.h"
 
+bool Modifies::instanceFlag=true;
+Modifies* Modifies::modifies=NULL;
+
 Modifies::Modifies() {
 	vector<STMTNUM> temp;
 	temp.assign(1,-1);
@@ -9,7 +12,7 @@ Modifies::Modifies() {
 }
 
 	
-Modifies::Modifies(TypeTable tt, VarTable vt) {
+Modifies::Modifies(TypeTable *tt, VarTable *vt) {
 	typeTable = tt;
 	varTable = vt;
 	vector<STMTNUM> temp;
@@ -20,6 +23,32 @@ Modifies::Modifies(TypeTable tt, VarTable vt) {
 Modifies::~Modifies() {
 	vector<vector<STMTNUM>> v;
 	v.swap(modifiesTable);
+}
+
+Modifies* Modifies::getInstance() {
+	if(!instanceFlag)
+    {
+        modifies = new Modifies();
+        instanceFlag = true;
+        return modifies;
+    }
+    else
+    {
+        return modifies;
+    }
+}
+
+Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt) {
+	if(!instanceFlag)
+    {
+        modifies = new Modifies(tt,vt);
+        instanceFlag = true;
+        return modifies;
+    }
+    else
+    {
+        return modifies;
+    }
 }
 
 /*
@@ -44,7 +73,7 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 	}
 	
 	vector<int> temp1 = modifiesTable.at(s);
-	int varIndex = varTable.getVarIndex(v);
+	int varIndex = varTable->getVarIndex(v);
 
 	if (temp1.at(0) == -1) { // may throw exception
 		temp1[0] = varIndex;
@@ -63,7 +92,7 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 
 bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	//Select w such that Modifies(1, "y")
-	int varIndex = varTable.getVarIndex(v);
+	int varIndex = varTable->getVarIndex(v);
 	vector<int> modifies; 
 
 	if (varIndex == -1) {
@@ -90,7 +119,7 @@ vector<STMTNUM> Modifies::getModifies(TYPE t) {
 	vector<VARINDEX> list; 
 
 	for (vector<STMTNUM>::size_type i = 1; i != modifiesTable.size(); i++) {
-		if (t == TypeTable::STMT || typeTable.getType(i) == t) {
+		if (t == TypeTable::STMT || typeTable->getType(i) == t) {
 			list = modifiesTable.at(i);
 			if (list.size() != 0 && list.at(0) != -1) {
 				toReturn.push_back(i);
@@ -105,10 +134,10 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 	// Select a such that Modifies(a, "x")	return -1 if doesn't exist
 	// iterate through all stmt numbers, if it is of type TYPE, then get the list, for each of the items check if equals to v, if yes, then add the stmt number to the vector
 	vector<STMTNUM> toReturn; 
-	int varIndex = varTable.getVarIndex(v);
+	int varIndex = varTable->getVarIndex(v);
 	
 	for (vector<int>::size_type i = 1; i != modifiesTable.size(); i++) {
-		if (t == TypeTable::STMT || typeTable.getType(i) == t) {
+		if (t == TypeTable::STMT || typeTable->getType(i) == t) {
 			vector<int> list = modifiesTable.at(i); 
 			vector<int>::iterator it = list.begin();
 			for (; it!=list.end(); ++it) {
@@ -135,7 +164,7 @@ vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {
 		if (*it == -1) {
 			return toReturn; // return empty vector
 		}
-		toReturn.push_back(varTable.getVarName(*it));
+		toReturn.push_back(varTable->getVarName(*it));
 
 	}
 	*/
