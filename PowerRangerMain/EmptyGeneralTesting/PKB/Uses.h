@@ -11,11 +11,13 @@ using namespace std;
 class Uses {
 private:
 	vector<vector<STMTNUM>> usesTable;
-	VarTable varTable;
+	
 public:
 	Uses(VarTable,TypeTable);
 	TypeTable typeTable; // for the sake of unit testing.
+	VarTable varTable;
 	Uses();
+	~Uses();
 	void setUses(STMTNUM, VARNAME);
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
 	bool isUses(TypeTable::SynType, TypeTable::SynType);	//Select s such that Uses(a, v) parameter order: selected type, first token, second token
