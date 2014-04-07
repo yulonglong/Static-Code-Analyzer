@@ -60,12 +60,6 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 
 }
 
-// TODO: Implementation
-bool Modifies::isModifies(TYPE s, TYPE t) {	
-	//Select s such that Modifies(a, v) parameter order: selected type, first token, second token (first parameter can be w or a or s)
-	
-	return true;
-}
 
 bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	//Select w such that Modifies(1, "y")
@@ -91,6 +85,22 @@ bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	return false;
 }
 
+vector<STMTNUM> Modifies::getModifies(TYPE t) {	
+	vector<STMTNUM> toReturn;
+	vector<VARINDEX> list; 
+
+	for (vector<STMTNUM>::size_type i = 1; i != modifiesTable.size(); i++) {
+		if (t == TypeTable::STMT || typeTable.getType(i) == t) {
+			list = modifiesTable.at(i);
+			if (list.size() != 0 && list.at(0) != -1) {
+				toReturn.push_back(i);
+			}
+		}
+	}
+
+	return toReturn;
+}
+
 vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {	
 	// Select a such that Modifies(a, "x")	return -1 if doesn't exist
 	// iterate through all stmt numbers, if it is of type TYPE, then get the list, for each of the items check if equals to v, if yes, then add the stmt number to the vector
@@ -111,27 +121,24 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 	return toReturn;
 }
 
-
-vector<VARNAME> Modifies::getModifies(STMTNUM stmt) {	
+vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {	
 	//Select v such that Modifies(1, v)	return empty vector if doesnt exist };
-	vector<VARNAME> v;
-	vector<int> varIndexVector; 
-
+	vector<VARINDEX> toReturn;
+	
 	try {
-		varIndexVector = modifiesTable.at(stmt);
+		toReturn = modifiesTable.at(stmt);
 	} catch (...) {
-		return v; 	// return empty vector
 	}
-
+	/*
 	vector<int>::iterator it = varIndexVector.begin();
 	for (; it!=varIndexVector.end(); ++it) {
 		if (*it == -1) {
-			return v; // return empty vector
+			return toReturn; // return empty vector
 		}
-		v.push_back(varTable.getVarName(*it));
+		toReturn.push_back(varTable.getVarName(*it));
 
 	}
-
-	return v;
+	*/
+	return toReturn;
 }
 
