@@ -10,7 +10,7 @@ PKB::PKB(){
 	parent = Parent(typeTable);
 	follows = Follows(typeTable);
 	modifies = Modifies(typeTable,varTable);
-	uses = Uses(varTable);
+	uses = Uses(varTable,typeTable);
 }
 
 PKB::~PKB(){
