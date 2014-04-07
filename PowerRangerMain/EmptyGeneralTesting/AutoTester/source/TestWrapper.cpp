@@ -12,11 +12,12 @@ volatile bool TestWrapper::GlobalStop = false;
 
 // a default constrSuctor
 TestWrapper::TestWrapper() {
+	pkb = PKB::getInstance();
 }
 
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
-	parserDriver(filename, pkb);
+	parserDriver(filename,pkb);
 }
 
 // method to evaluating a query

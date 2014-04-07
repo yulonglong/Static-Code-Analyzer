@@ -11,13 +11,16 @@ using namespace std;
 class Uses {
 private:
 	vector<vector<STMTNUM>> usesTable;
-	
+	static bool instanceFlag;
+	static Uses *uses;
+	TypeTable *typeTable; // for the sake of unit testing.
+	VarTable *varTable;
 public:
-	Uses(VarTable,TypeTable);
-	TypeTable typeTable; // for the sake of unit testing.
-	VarTable varTable;
 	Uses();
+	Uses(TypeTable*,VarTable*);
 	~Uses();
+	static Uses* getInstance();	// to be used to get instance of singleton class
+	static Uses* getInstance(TypeTable*,VarTable*);	// to be used to get instance of singleton class
 	void setUses(STMTNUM, VARNAME);
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
 	bool isUses(TypeTable::SynType, TypeTable::SynType);	//Select s such that Uses(a, v) parameter order: selected type, first token, second token

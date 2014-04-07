@@ -2,8 +2,28 @@
 
 #include "ProcTable.h"
 
+bool ProcTable::instanceFlag=true;
+ProcTable* ProcTable::procTable=NULL;
+
 // constructor
 ProcTable::ProcTable() {
+}
+
+ProcTable::~ProcTable(){
+}
+
+
+ProcTable* ProcTable::getInstance() {
+	if(!instanceFlag)
+    {
+        procTable = new ProcTable();
+        instanceFlag = true;
+        return procTable;
+    }
+    else
+    {
+        return procTable;
+    }
 }
 
 // If procName is not in the ProcTable, inserts procName into the
@@ -13,8 +33,8 @@ INDEX ProcTable::insertProc(PROCNAME procName) {
 	bool containsVariable = (procIndex != -1);
 		
 	if (!containsVariable) {
-		procTable.emplace_back(procName);
-		return procTable.size()-1;  // return new index for this varName
+		procedureTable.emplace_back(procName);
+		return procedureTable.size()-1;  // return new index for this varName
 	} else {
 		return procIndex;
 	}
@@ -23,16 +43,16 @@ INDEX ProcTable::insertProc(PROCNAME procName) {
 // Returns the name of a proc at ProTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
 PROCNAME ProcTable::getProcName (INDEX ind){
-	if (ind >= (signed int) procTable.size()) {
+	if (ind >= (signed int) procedureTable.size()) {
 		return "-1";
 	}
-	return procTable[ind];
+	return procedureTable[ind];
 }
 
 // If procName is in procTable, returns its index; otherwise, returns -1 (special value)
 INDEX ProcTable::getProcIndex (PROCNAME procName){
-	for(std::vector<PROCNAME>::size_type i = 0; i != procTable.size(); i++) {
-		if (procName == procTable[i]) {
+	for(std::vector<PROCNAME>::size_type i = 0; i != procedureTable.size(); i++) {
+		if (procName == procedureTable[i]) {
 			return i; 
 		}
 	}
@@ -40,5 +60,5 @@ INDEX ProcTable::getProcIndex (PROCNAME procName){
 }
 
 INDEX ProcTable::getNumProcedures() {
-	return procTable.size();
+	return procedureTable.size();
 }

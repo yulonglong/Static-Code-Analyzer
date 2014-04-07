@@ -540,24 +540,24 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 	return root;
 }
 
-void parserDriver(string filename,PKB &pkb){
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();
-	TypeTable typeTable = pkb.getTypeTable();
-	Parent parent = pkb.getParent();
-	Follows follows = pkb.getFollows();
-	Modifies modifies = pkb.getModifies();
-	Uses uses = pkb.getUses();
+void parserDriver(string filename,PKB *pkb){
+	//VarTable varTable = pkb.getVarTable();
+	//ProcTable procTable = pkb.getProcTable();
+	//TypeTable typeTable = pkb.getTypeTable();
+	//Parent parent = pkb.getParent();
+	//Follows follows = pkb.getFollows();
+	//Modifies modifies = pkb.getModifies();
+	//Uses uses = pkb.getUses();
 
-	Node* root;
-	root = parseCode(filename,varTable,procTable,typeTable,follows,parent,modifies,uses);
+	//Node* root;
+	//root = parseCode(filename,varTable,procTable,typeTable,follows,parent,modifies,uses);
 
-	pkb.setVarTable(varTable);
-	pkb.setProcTable(procTable);
-	pkb.setTypeTable(typeTable);
-	pkb.setParent(parent);
-	pkb.setFollows(follows);
-	pkb.setModifies(modifies);
-	pkb.setUses(uses);
-	pkb.setASTRoot(root);
+	//pkb.setVarTable(varTable);
+	//pkb.setProcTable(procTable);
+	//pkb.setTypeTable(typeTable);
+	//pkb.setParent(parent);
+	//pkb.setFollows(follows);
+	//pkb.setModifies(modifies);
+	//pkb.setUses(uses);
+	//pkb.setASTRoot(root);
 }

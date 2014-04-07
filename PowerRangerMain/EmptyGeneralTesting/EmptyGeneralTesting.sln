@@ -43,8 +43,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DesignExtractor", "DesignEx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QueryProcessor", "QueryProcessor\QueryProcessor.vcxproj", "{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModifiesTest", "ModifiesTest\ModifiesTest.vcxproj", "{8451706D-FDDF-42CA-8B71-58031A695CBE}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UsesTest", "UsesTest\UsesTest.vcxproj", "{59E9B056-B2CE-42D0-B99F-B0AE25DF5CAE}"
 EndProject
 Global
@@ -105,10 +103,6 @@ Global
 		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Debug|Win32.Build.0 = Debug|Win32
 		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Release|Win32.ActiveCfg = Release|Win32
 		{DC21A1EA-D2C6-4D14-A2B4-E025B64BDE81}.Release|Win32.Build.0 = Release|Win32
-		{8451706D-FDDF-42CA-8B71-58031A695CBE}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8451706D-FDDF-42CA-8B71-58031A695CBE}.Debug|Win32.Build.0 = Debug|Win32
-		{8451706D-FDDF-42CA-8B71-58031A695CBE}.Release|Win32.ActiveCfg = Release|Win32
-		{8451706D-FDDF-42CA-8B71-58031A695CBE}.Release|Win32.Build.0 = Release|Win32
 		{59E9B056-B2CE-42D0-B99F-B0AE25DF5CAE}.Debug|Win32.ActiveCfg = Debug|Win32
 		{59E9B056-B2CE-42D0-B99F-B0AE25DF5CAE}.Debug|Win32.Build.0 = Debug|Win32
 		{59E9B056-B2CE-42D0-B99F-B0AE25DF5CAE}.Release|Win32.ActiveCfg = Release|Win32

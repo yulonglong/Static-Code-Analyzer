@@ -4,6 +4,9 @@
 #include <stdexcept>      // std::out_of_range
 #include <iostream>
 
+bool Follows::instanceFlag=true;
+Follows* Follows::follows=NULL;
+
 // constructor
 Follows::Follows() {
 	// Note: program line 0 is not to be used for the enumeration of program lines
@@ -11,8 +14,8 @@ Follows::Follows() {
 	followedByTable.assign(5, -1);
 }
 
-Follows::Follows(TypeTable tab) {
-	table = tab;
+Follows::Follows(TypeTable *table) {
+	typeTable = table;
 	// Note: program line 0 is not to be used for the enumeration of program lines
 	followsTable.assign(5, -1);
 	followedByTable.assign(5, -1);
@@ -21,6 +24,32 @@ Follows::Follows(TypeTable tab) {
 Follows::~Follows() {
 	vector<STMTNUM>().swap(followsTable);
 	vector<STMTNUM>().swap(followedByTable);
+}
+
+Follows* Follows::getInstance() {
+	if(!instanceFlag)
+    {
+        follows = new Follows();
+        instanceFlag = true;
+        return follows;
+    }
+    else
+    {
+        return follows;
+    }
+}
+
+Follows* Follows::getInstance(TypeTable *table) {
+	if(!instanceFlag)
+    {
+        follows = new Follows(table);
+        instanceFlag = true;
+        return follows;
+    }
+    else
+    {
+        return follows;
+    }
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
@@ -90,13 +119,13 @@ bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && table.getType(j) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && table.getType(i) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					return true;
 				}
@@ -120,7 +149,7 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		cout<<"In catch block"<<endl;
 	}
-	if (num != -1 && table.getType(num) == t){
+	if (num != -1 && typeTable->getType(num) == t){
 		cout<<"NUM IS"<<num<<endl;
 		return num;
 	} 
@@ -140,7 +169,7 @@ STMTNUM Follows::getFollowedBy(TypeTable::SynType t, STMTNUM s) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		cout<<"In catch block"<<endl;
 	}
-	if (num != -1 && table.getType(num) == t){
+	if (num != -1 && typeTable->getType(num) == t){
 		cout<<"SHOULD BE IN HERE"<<endl;
 		return num;
 	} 
@@ -168,14 +197,14 @@ vector<STMTNUM> Follows::getFollows(TypeTable::SynType t1, TypeTable::SynType t2
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && table.getType(j) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && table.getType(i) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 
@@ -210,14 +239,14 @@ vector<STMTNUM> Follows::getFollowedBy(TypeTable::SynType t1, TypeTable::SynType
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(j);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && table.getType(j) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(j);
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && table.getType(i) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(j);
 
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && table.getType(i) == t1 && table.getType(j) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(j);
 
@@ -229,8 +258,4 @@ vector<STMTNUM> Follows::getFollowedBy(TypeTable::SynType t1, TypeTable::SynType
 		}
 	}
 	return list;
-}
-
-void Follows::updateTable(TypeTable tab){
-	table = tab;
 }

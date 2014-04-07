@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void queryDriver(string query, list<string> &result, PKB &pkb){
+void queryDriver(string query, list<string> &result, PKB *pkb){
 	cout<<"Begin Parse query"<<endl;
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);

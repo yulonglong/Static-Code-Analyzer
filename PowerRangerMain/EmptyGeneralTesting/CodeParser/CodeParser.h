@@ -24,6 +24,6 @@
 
 
 //Node* parseCode(std::string,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows, Parent &parent);
-void parserDriver(std::string filename,PKB &pkb);
+void parserDriver(std::string filename,PKB *pkb);
 
 #endif

@@ -15,10 +15,13 @@ typedef string PROCNAME;
 
 class ProcTable {
 private: 
-	vector<PROCNAME> procTable; 
-
+	vector<PROCNAME> procedureTable; 
+	static bool instanceFlag;
+	static ProcTable *procTable;
 public:
 	ProcTable();
+	~ProcTable();
+	static ProcTable* getInstance();	// to be used to get instance of singleton class 
 	INDEX insertProc(PROCNAME);
 	PROCNAME getProcName (INDEX);
 	INDEX getProcIndex (PROCNAME);
