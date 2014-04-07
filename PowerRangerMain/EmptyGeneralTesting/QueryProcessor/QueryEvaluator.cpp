@@ -176,7 +176,6 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 		return answer;
 	}
 	else {
-		cout<<"HIE"<<endl;
 		answer.push_back(f.getFollows(i2->second, atoi(tk1.c_str())));
 		return answer;
 	}
