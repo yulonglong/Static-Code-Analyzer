@@ -2,7 +2,7 @@
 
 #include "PKB.h"
 
-bool PKB::instanceFlag=true;
+bool PKB::instanceFlag=false;
 PKB* PKB::pkb=NULL;
 
 

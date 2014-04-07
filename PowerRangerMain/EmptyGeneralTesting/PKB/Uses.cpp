@@ -2,7 +2,7 @@
 
 #include "Uses.h"
 
-bool Uses::instanceFlag=true;
+bool Uses::instanceFlag=false;
 Uses* Uses::uses=NULL;
 
 //Constructor

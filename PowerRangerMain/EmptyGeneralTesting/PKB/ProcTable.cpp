@@ -2,7 +2,7 @@
 
 #include "ProcTable.h"
 
-bool ProcTable::instanceFlag=true;
+bool ProcTable::instanceFlag=false;
 ProcTable* ProcTable::procTable=NULL;
 
 // constructor
