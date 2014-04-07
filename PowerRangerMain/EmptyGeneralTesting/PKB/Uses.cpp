@@ -8,6 +8,9 @@ Uses::Uses(){
 	usesTable.assign(5, temp);
 }
 
+Uses::~Uses(){
+}
+
 
 Uses::Uses(VarTable table,TypeTable table2){
 	varTable = table;
@@ -39,7 +42,9 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 			if(index==*it)
 				return true;
 		}
+		return false;
 	}catch(...){
+		return false;
 	}
 }
 
