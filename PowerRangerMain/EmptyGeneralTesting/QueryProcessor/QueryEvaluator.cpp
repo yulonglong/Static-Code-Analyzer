@@ -523,3 +523,76 @@ bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<
 
 	return false;
 }
+
+vector<int> QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, string selectedSyn) {
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Uses *use = pkb->getUses();
+	TypeTable *t = pkb->getTypeTable();
+	vector<int> selected;
+	set<int> answer;
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	//Select a Uses(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		selected = use->getUses(i1->second);
+		return selected;
+	}
+
+	//Select v Uses(a,v)
+	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		selected = t->getAllStmts(TypeTable::ASSIGN);
+		vector<int> usedVar;
+		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){	
+			usedVar = use->getUses(*it);
+			answer.insert(usedVar.begin(), usedVar.end());
+		}
+		selected.clear();
+		copy(answer.begin(), answer.end(), back_inserter(selected));
+		return selected;
+	}
+
+	//Select a Uses(a, "x")
+	else if(isalpha(tk1[0])){
+		string varName = tk2.substr(1,tk2.length()-2);
+		return use->getUses(i1->second, varName);
+	}
+
+	//Select v such that Uses(1, v);
+	else {
+		return use->getUses(atoi(tk1.c_str()));
+	}
+}
+
+bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+	Uses *use = pkb->getUses();
+	TypeTable *t = pkb->getTypeTable();
+
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	//Uses(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		vector<int>ans = use->getUses(i1->second);
+		if(!ans.empty()){
+			return true;
+		}
+	}
+
+	//Uses(a, "x")
+	else if(isalpha(tk1[0])){
+		vector<int> ans = use->getUses(i1->second, tk2.substr(1,tk2.length()-2));
+		if(!ans.empty())
+			return true;
+	}
+
+	//Modifies(1, "x")
+	else{
+		return use->isUses(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
+	}
+
+	return false;
+}
