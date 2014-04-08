@@ -23,9 +23,10 @@ public:
 	static Uses* getInstance(TypeTable*,VarTable*);	// to be used to get instance of singleton class
 	void setUses(STMTNUM, VARNAME);
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
-	bool isUses(TypeTable::SynType, TypeTable::SynType);	//Select s such that Uses(a, v) parameter order: selected type, first token, second token
-	vector<int> getUses(TypeTable::SynType, VARNAME);	//Select a such that Uses(a, "x")	return -1 if doesn't exist
-	vector<string> getModified(TypeTable::SynType);		//Select v such that Uses(1, v)	return empty vector if doesnt exist
+	bool isUses(TypeTable::SynType, TypeTable::SynType);	//THIS METHOD IS NO LONGER NEEDED. ABLE TO REMOVE(:
+	vector<int> getUses(TypeTable::SynType, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
+	vector<int> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
+	vector<int> getUses(TypeTable::SynType);//Select a such that Uses(a, v); return empty vector if does not exist
 };
 
 #endif
