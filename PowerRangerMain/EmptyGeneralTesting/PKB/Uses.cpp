@@ -84,7 +84,7 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 	try{
 		INDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> ans;
-		for(int i=0;i<usesTable.size();i++){
+		for(size_t i=0;i<usesTable.size();i++){
 			vector<STMTNUM> temp = usesTable[i];
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){

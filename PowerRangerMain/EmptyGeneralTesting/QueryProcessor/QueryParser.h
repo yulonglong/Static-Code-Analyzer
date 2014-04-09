@@ -1,18 +1,72 @@
-#pragma once
 #ifndef QUERYPARSER_H
 #define QUERYPARSER_H
 
 #include "Query.h"
 #include "Relationship.h"
-#include "PKB.h"
 #include <string>
 #include <vector>
-#include <cstring>
 
 using namespace std;
 
 class QueryParser{
 private:
+	// VALIDATION 
+	int sLength;
+	int declarationCounter;
+	int selectCounter;
+	int statementCounter;
+	int tokenCounter;
+	int expressionTokenCounter;
+	int selectCase;
+	string s;
+	string nextToken;
+	string statement;
+	string declarationString;
+	vector<string> statements;
+	vector<string> tokens;
+	vector<string> expressionTokens;
+	vector<string> selectStatement;
+
+	void generateTokens();
+	string getFirstToken();
+	string getNextToken();
+	bool generateStatements();
+	string getNextStatement();
+	bool generateSelectTokens();
+	bool generateExpressionTokens();
+	string getNextExpressionToken();
+
+	bool match(string);
+	bool declaration();
+	bool select();
+	bool designEntity();
+	bool synonym();
+	bool ident();
+	bool relRef();
+	bool entRef();
+	bool stmtRef();
+	bool integer();
+	bool suchThat();
+	bool pattern();
+	bool tokenizePattern(string);
+	bool tokenizeSuchthat(string);
+
+	bool synAssign();
+	bool expressionSpec();
+	bool xpSpec1();
+	bool xpSpec2();
+	bool xpSpec3();
+	bool factor();
+	bool varName();
+
+	bool modifiesS();
+	bool usesS();
+	bool parent(); 
+	bool parentT(); 
+	bool follows(); 
+	bool followsT();
+
+	// PARSING
 	// RECORD ALL THE QUERIES PARSED
 	vector<Query> queries;
 
@@ -20,7 +74,7 @@ private:
 	void addQuery(Query);
 	
 	// PARSE THE SYNONYMS DECLARATION
-	unordered_map<string, TypeTable::SynType> parseSynonyms(string);
+	unordered_map<string, TypeTable::SynType> parseSynonyms();
 
 	// PARSE ONE QUERY STRING TO A VECTOR OF TOKENS
 	vector<string> parseQuery(string);
@@ -32,19 +86,15 @@ private:
 	unordered_map<string, TypeTable::SynType> synMap;
 
 public:
-	// DEFAULT CONSTRUCTOR
 	QueryParser();
 
-	// GET ALL THE QUERIES PARSED IN THIS SESSION
-	vector<Query> getQueries();
+	// VALIDATION
+	bool validate(string);
+	vector<string> getStatements();
 
-	// PARSE ONE STRING CONTAINING SYNONYMS DECLARATION AND QUERY WITH LIMITATIONS:
-	// 1. can only handle synonym declaration for assign, while and if.
-	// 2. query is limited to follows, followsstar, parent, parentstar
-	// 3. relationship and select keywords must be CAPITALIZED, e.g. Select a such that FOLLOWS(a, 2);
-	// 4. boolean keyword must be in uppercase, i.e. BOOLEAN
-	// other keywords are expected to be in lowercase, i.e. such that, assign, while, if.
-	Query parse(string);
+	// PARSING
+	vector<Query> getQueries();
+	Query parse();
 };
 
 #endif

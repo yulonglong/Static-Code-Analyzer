@@ -12,20 +12,17 @@ using namespace std;
 
 class Query
 {
-	//public:
-		//enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL,INVALID};
-		//static SynType getSynType(std::string);
     public:
-        Query(string);
+        Query();
 		string getSelectedSyn();
-        void addRelationship(Relationship);
+		void setSelectedSyn(string s);
         vector<Relationship> getRelVect();
-		
-		void addSynTable(unordered_map<string, TypeTable::SynType>);
 		unordered_map<string, TypeTable::SynType> getSynTable();
+		void setSynTable(unordered_map<string, TypeTable::SynType>);
+		void addRelationship(Relationship);
 
 	private:
-        string selectedSyn; 
+		string selectedSyn; 
         vector<Relationship> relVect;
 		unordered_map<string, TypeTable::SynType> synTable;
 };
