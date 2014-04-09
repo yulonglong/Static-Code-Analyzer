@@ -16,7 +16,11 @@ Relationship::RelType Relationship::getRelType()
         return FOLLOWSSTAR;
     } else if (relName == "Parent"){
         return PARENT;
-    } else{
+    } else if(relName == "Modifies"){
+		return MODIFIES;
+	} else if(relName=="Uses"){
+		return USES;
+	}else{
         return PARENTSTAR;
 	}
 }
