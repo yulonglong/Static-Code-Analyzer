@@ -25,6 +25,7 @@ Modifies::~Modifies() {
 	v.swap(modifiesTable);
 }
 
+
 Modifies* Modifies::getInstance() {
 	if(!instanceFlag)
     {
@@ -51,20 +52,10 @@ Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt) {
     }
 }
 
-/*
 vector<vector<STMTNUM>> Modifies::getModifiesTable() {
 	return modifiesTable;
-}
 
-TypeTable Modifies::getTypeTable() {
-	return typeTable;
 }
-
-VarTable Modifies::getVarTable() {
-	return varTable;
-}
-*/
-
 void Modifies::setModifies(STMTNUM s, VARNAME v) {
 	vector<STMTNUM> temp;
 	temp.assign(1,-1);
@@ -157,6 +148,11 @@ vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {
 	try {
 		toReturn = modifiesTable.at(stmt);
 	} catch (...) {
+	}
+
+	if (toReturn.size() == 1 && toReturn.at(0) == -1) {
+		vector<VARINDEX> vec;
+		toReturn = vec; 
 	}
 	/*
 	vector<int>::iterator it = varIndexVector.begin();
