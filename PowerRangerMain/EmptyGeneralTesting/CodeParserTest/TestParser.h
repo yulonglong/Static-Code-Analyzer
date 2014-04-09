@@ -24,7 +24,6 @@ public:
 	// method to test the constructor
 	void testModifyTable();
 
-	// method to test the assigning and retrieval of grades
 	void testCompleteParser();
 	void testParserSource1();
 	void testParserSource2();
