@@ -16,7 +16,7 @@ class Relationship
         string token2;
 
     public:
-        enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR};
+        enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR, MODIFIES, USES};
 
         Relationship(string, string, string);
 

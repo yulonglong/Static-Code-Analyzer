@@ -19,13 +19,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		string token1 = it->getToken1();
+		string token2 = it->getToken2();
+		string selectedSyn = q.getSelectedSyn();
+		std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
 		switch(it->getRelType()){
-		case Relationship::FOLLOWS: {
-			string token1 = it->getToken1();
-			string token2 = it->getToken2();
-			string selectedSyn = q.getSelectedSyn();
-			
-			std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
+		case Relationship::FOLLOWS: {	
+
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
@@ -37,16 +37,20 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 									}
 		case Relationship::FOLLOWSSTAR:
-			answers.push_back(evaluateFollowsStar(*it, m, q.getSelectedSyn()));
+			{	
+
+			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				if(evaluateFollowsStarBoolean(*it, m)){
+					answers.push_back(t->getAllStmts(i->second));
+				}
+			}
+			else {
+				answers.push_back(evaluateFollowsStar(*it, m, q.getSelectedSyn()));
+			}
 			break;
+									}
 		case Relationship::PARENT:
 			{
-			string token1 = it->getToken1();
-			string token2 = it->getToken2();
-			string selectedSyn = q.getSelectedSyn();
-			unordered_map<string, TypeTable::SynType> m = q.getSynTable();
-			std::unordered_map<string, TypeTable::SynType>::iterator i = q.getSynTable().find(selectedSyn);
-
 			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateParentBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
@@ -58,8 +62,46 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 									}
 		case Relationship::PARENTSTAR:
-			//answers.push_back(evaluateParentStar(*it));
+			{	
+
+			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				if(evaluateParentStarBoolean(*it, m)){
+					answers.push_back(t->getAllStmts(i->second));
+				}
+			}
+			else {
+				answers.push_back(evaluateParentStar(*it, m, q.getSelectedSyn()));
+			}
 			break;
+									}
+
+		case Relationship::MODIFIES:
+			{	
+
+			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				if(evaluateModifiesBoolean(*it, m)){
+					answers.push_back(t->getAllStmts(i->second));
+				}
+			}
+			else {
+				answers.push_back(evaluateModifies(*it, m, q.getSelectedSyn()));
+			}
+			break;
+									}
+
+		case Relationship::USES:
+			{	
+
+			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				if(evaluateUsesBoolean(*it, m)){
+					answers.push_back(t->getAllStmts(i->second));
+				}
+			}
+			else {
+				answers.push_back(evaluateUses(*it, m, q.getSelectedSyn()));
+			}
+			break;
+									}
 		}
 	}
 
