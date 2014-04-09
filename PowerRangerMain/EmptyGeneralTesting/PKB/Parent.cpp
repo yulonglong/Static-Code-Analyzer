@@ -61,6 +61,8 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	}
 
 	vector<STMTNUM> temp1 = parentTable[s1];
+	if(temp1==temp)
+			temp1.clear();
 	temp1.push_back(s2);
 	parentTable[s1] = temp1;
 

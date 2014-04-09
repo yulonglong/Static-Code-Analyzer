@@ -2,6 +2,7 @@
 #define TestUses_h
 #include "Uses.h"
 #include "TypeTable.h"
+#include "PKB.h"
 
 // Note 1
 #include <cppunit/extensions/HelperMacros.h>
