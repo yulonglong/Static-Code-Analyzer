@@ -29,6 +29,7 @@ public:
 	~Modifies();
 	static Modifies* getInstance();	// to be used to get instance of singleton class
 	static Modifies* getInstance(TypeTable*, VarTable*);	// to be used to get instance of singleton class 
+	vector<vector<STMTNUM>> getModifiesTable(); // only for unit testing.
 	void setModifies(STMTNUM, VARNAME);
 	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")
 	vector<STMTNUM> getModifies(TYPE);			//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.
