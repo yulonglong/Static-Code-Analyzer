@@ -33,6 +33,7 @@ PKB* PKB::getInstance() {
     }
 }
 
+
 VarTable* PKB::getVarTable(){
 	return varTable;
 }
@@ -61,9 +62,14 @@ Uses* PKB::getUses(){
 	return uses;
 }
 
-//Node* PKB::getASTRoot(){
-//	return ASTRoot;
-//}
+Node* PKB::getASTRoot(){
+	return ASTRoot;
+}
+
+void PKB::setASTRoot(Node* newASTRoot){
+	ASTRoot = newASTRoot;
+}
+
 //
 //void PKB::setVarTable(VarTable newVarTable){
 //	varTable = newVarTable;
@@ -92,9 +98,7 @@ Uses* PKB::getUses(){
 //	uses = newUses;
 //}
 //
-//void PKB::setASTRoot(Node* newASTRoot){
-//	ASTRoot = newASTRoot;
-//}
+
 //
 //void PKB::updateTypeTable(){
 //	parent.updateTable(typeTable);

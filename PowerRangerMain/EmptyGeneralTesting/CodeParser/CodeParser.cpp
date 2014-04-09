@@ -541,16 +541,17 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 }
 
 void parserDriver(string filename,PKB *pkb){
-	//VarTable varTable = pkb.getVarTable();
-	//ProcTable procTable = pkb.getProcTable();
-	//TypeTable typeTable = pkb.getTypeTable();
-	//Parent parent = pkb.getParent();
-	//Follows follows = pkb.getFollows();
-	//Modifies modifies = pkb.getModifies();
-	//Uses uses = pkb.getUses();
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Parent* parent = pkb->getParent();
+	Follows* follows = pkb->getFollows();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
 
-	//Node* root;
-	//root = parseCode(filename,varTable,procTable,typeTable,follows,parent,modifies,uses);
+	Node* root = pkb->getASTRoot();
+	root = parseCode(filename,*varTable,*procTable,*typeTable,*follows,*parent,*modifies,*uses);
+	pkb->setASTRoot(root);
 
 	//pkb.setVarTable(varTable);
 	//pkb.setProcTable(procTable);
