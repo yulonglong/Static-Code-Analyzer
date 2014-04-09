@@ -23,56 +23,99 @@ void IntegrateTest::tearDown()
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( IntegrateTest ); // Note 4 
 
-// method to test the constructor
 void IntegrateTest::testModifyTable()
 {  // Note 5
-	// create a node
-	/*
-	PKB pkb;
+	
+	PKB *pkb;
+	pkb = PKB::getInstance();
 	parserDriver("CodeParserTestIn.txt",pkb);
 
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();;
-	Follows follows = pkb.getFollows();
-	Parent parent = pkb.getParent();
-	TypeTable typeTable = pkb.getTypeTable();
-	Node* root = pkb.getASTRoot();
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	Node* root = pkb->getASTRoot();
 
 	string expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(0));
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(0));
 	expected = "z";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(1));
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(1));
 	expected = "i";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(2));
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(2));
 	expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(3));
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(3));
 	expected = "v";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable.getVarName(4));
-
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(4));
 
 	expected = "First";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(0));
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(0));
 	expected = "Second";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(1));
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(1));
 	expected = "Third";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable.getProcName(2));
-	return;*/
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(2));
+
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(1,2));
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(3,2));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,7));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,8));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,9));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,11));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,12));
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(11,12));
+
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(1,2));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(2,3));
+	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(1,3));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(4,5));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(5,6));
+	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(6,7));
+
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(1));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(2));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(3));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::WHILE,typeTable->getType(6));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(8));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::IF,typeTable->getType(10));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(11));
+
+	
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,"x"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,"z"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,"v"));
+	
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"y"));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
+	
+	return;
 }
 
-// method to test the assigning and retrieval of grades
 void IntegrateTest::testCompleteParser()
 {
-/*	// create a node
-	PKB pkb;
+	// create a node
+	PKB* pkb;
+	pkb = PKB::getInstance();
 	parserDriver("CodeParserTestIn.txt",pkb);
 
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();;
-	Follows follows = pkb.getFollows();
-	Parent parent = pkb.getParent();
-	TypeTable typeTable = pkb.getTypeTable();
-	Node* root = pkb.getASTRoot();
-	// assign
+	
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+		
 	Node* curr = root;
 	curr = root->getChild()[0];
 	curr = curr->getChild()[0];
@@ -89,25 +132,26 @@ void IntegrateTest::testCompleteParser()
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
 	expected = "variable";
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
+	
 	// verify that the assignment is correct - Note 7
 	
 
-	return;*/
+	return;
 }
+
 
 void IntegrateTest::testParserSource1()
 {
-	/*// create a node
-	PKB pkb;
+	PKB* pkb;
+	pkb = PKB::getInstance();
 	parserDriver("Source1.txt",pkb);
 
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();;
-	Follows follows = pkb.getFollows();
-	Parent parent = pkb.getParent();
-	TypeTable typeTable = pkb.getTypeTable();
-	Node* root = pkb.getASTRoot();
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
 
 	Node* curr = root;
 	
@@ -166,21 +210,21 @@ void IntegrateTest::testParserSource1()
 	expected = "variable";
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
 
-	return;*/
+	return;
 }
 
 void IntegrateTest::testParserSource2()
 {
-/*	// create a node
-	PKB pkb;
+	PKB* pkb;
+	pkb = PKB::getInstance();
 	parserDriver("Source2.txt",pkb);
 
-	VarTable varTable = pkb.getVarTable();
-	ProcTable procTable = pkb.getProcTable();;
-	Follows follows = pkb.getFollows();
-	Parent parent = pkb.getParent();
-	TypeTable typeTable = pkb.getTypeTable();
-	Node* root = pkb.getASTRoot();
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
 
 	Node* curr = root;
 	
@@ -208,7 +252,7 @@ void IntegrateTest::testParserSource2()
 	expected = "while";
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
 
-	return;*/
+	return;
 }
 
  void IntegrateTest::testPQLSource1() {
@@ -239,8 +283,8 @@ void IntegrateTest::testParserSource2()
 	QueryParser qp;
 	PKB pkb;
 	QueryEvaluator qe(pkb);
-	Follows f = qe.pkb->getFollows();
-	TypeTable t = qe.pkb->getTypeTable();
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 1
 	Query q1 = qp.parse(s1);
@@ -256,11 +300,9 @@ void IntegrateTest::testParserSource2()
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2());
 
-	f.setFollows(1,2);
-	t.insertStmtNumAndType(1, TypeTable::ASSIGN);
-	t.insertStmtNumAndType(2, TypeTable::ASSIGN);
-	qe.pkb->setFollows(f);
-	qe.pkb->setTypeTable(t);
+	f->setFollows(1,2);
+	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
 	CPPUNIT_ASSERT(qe.evaluateFollowsBoolean(r,m)==true);
 	/*
 
