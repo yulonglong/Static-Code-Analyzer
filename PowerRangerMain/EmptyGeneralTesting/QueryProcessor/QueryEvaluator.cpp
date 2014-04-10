@@ -26,7 +26,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {	
 
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -39,7 +39,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::FOLLOWSSTAR:
 			{	
 
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsStarBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -51,7 +51,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 									}
 		case Relationship::PARENT:
 			{
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateParentBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -64,7 +64,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::PARENTSTAR:
 			{	
 
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateParentStarBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -78,7 +78,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::MODIFIES:
 			{	
 
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateModifiesBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -92,7 +92,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::USES:
 			{	
 
-			if((!isdigit(token1[0]) && !isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateUsesBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
@@ -141,14 +141,17 @@ bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string,
 	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+		cout<<"Calling isParent(TYPE, TYPE)"<<endl;
 		return p->isParent(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0])){
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+		cout<<"Calling isParent(TYPE, STMTNUM)"<<endl;
 		return p->isParent(i1->second, atoi(tk2.c_str()));
 	}
 	else {
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
+		cout<<"Calling isChildren(TYPE, STMTNUM)"<<endl;
 		return p->isChildren(i1->second, atoi(tk1.c_str()));
 	}
 }
@@ -159,24 +162,29 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 	Follows *f = pkb->getFollows();
 
 	if(isdigit(tk1[0]) && isdigit(tk2[0])){
+		cout<<"Calling isFollows(STMTNUM, STMTNUM)"<<endl;
 		return f->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()));
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+		cout<<"Calling isFollows(TYPE, TYPE)"<<endl;
 		return f->isFollows(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0])){
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+		cout<<"Calling getFollows(TYPE, STMTNUM)"<<endl;
 		return (f->getFollows(i1->second, atoi(tk2.c_str()))==-1)?false:true;
 	}
 	else {
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
+		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
 		return (f->getFollowedBy(i1->second, atoi(tk1.c_str()))==-1)?false:true;
 	}
 }
 
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
+	cout<<"Intersecting Answers"<<endl;
 	vector<int> first = ans[0];
 	vector<int> queryAnswers;
 	for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
@@ -208,16 +216,20 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		cout<<"Calling getFollowedBy(TYPE, TYPE)"<<endl;
 		return f->getFollowedBy(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		cout<<"Calling getFollows(TYPE, TYPE)"<<endl;
 		return f->getFollows(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
+		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
 		answer.push_back(f->getFollowedBy(i1->second, atoi(tk2.c_str())));
 		return answer;
 	}
 	else {
+		cout<<"Calling getFollows(TYPE, STMTNUM)"<<endl;
 		answer.push_back(f->getFollows(i2->second, atoi(tk1.c_str())));
 		return answer;
 	}

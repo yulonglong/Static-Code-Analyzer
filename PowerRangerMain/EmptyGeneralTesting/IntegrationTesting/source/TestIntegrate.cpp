@@ -287,7 +287,8 @@ void IntegrateTest::testParserSource2()
 	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 1
-	Query q1 = qp.parse(s1);
+	qp.validate(s1);
+	Query q1 = qp.parse();
 	v = q1.getRelVect();
 	expected = "a";
 	Relationship r = v[0];
@@ -327,7 +328,7 @@ void IntegrateTest::testParserSource2()
 	
 	vector<int> vec = qe.evaluateFollows(r, m, q2.getSelectedSyn());
 	//cout<<vec[0]<<endl;
-	*/
+	
 	
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
@@ -348,3 +349,5 @@ void IntegrateTest::testParserSource2()
 
 	// TODO: compare result with expected result
  }
+
+ */
