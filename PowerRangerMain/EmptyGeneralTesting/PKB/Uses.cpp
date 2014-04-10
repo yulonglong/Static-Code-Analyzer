@@ -118,7 +118,7 @@ vector<INDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return v
 vector<INDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(a, v); return empty vector if does not exist
 	try{
 		vector<INDEX> ans;
-		for(STMTNUM i=0;i<usesTable.size();i++){
+		for(size_t i=0;i<usesTable.size();i++){
 			if(!usesTable[i].empty() && usesTable[i]!=vector<int> (1,-1)){
 				if(typeTable->getType(i)==type)
 					ans.push_back(i);
