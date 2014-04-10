@@ -31,7 +31,7 @@ public:
 	std::string func(TypeTable::SynType);
 
 public:
-	QueryEvaluator(PKB);
+	QueryEvaluator(PKB*);
 	PKB *pkb;
 	std::vector<int> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);

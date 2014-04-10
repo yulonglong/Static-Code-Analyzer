@@ -1,13 +1,15 @@
-﻿Build started 4/9/2014 3:49:20 PM.
-     1>Project "C:\Users\a0080415\Downloads\CS3201\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" on node 2 (build target(s)).
-     1>InitializeBuildStatus:
+﻿Build started 10/4/2014 7:14:03 PM.
+     1>Project "C:\Users\Sony\Dropbox\NUS\~Year 2 Sem 2\CS3201 Software Engineering Project I\~PROJECT\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\QueryEvaluator.lastbuildstate".
+       InitializeBuildStatus:
          Creating "Release\QueryEvaluator.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\a0080415\Downloads\CS3201\PowerRangerMain\EmptyGeneralTesting\PKB /IC:\Users\a0080415\Downloads\CS3201\PowerRangerMain\EmptyGeneralTesting\QueryProcessor /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QueryEvaluator.cpp
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\Sony\Dropbox\NUS\~Year 2 Sem 2\CS3201 Software Engineering Project I\~PROJECT\PowerRangerMain\EmptyGeneralTesting\PKB" /I"C:\Users\Sony\Dropbox\NUS\~Year 2 Sem 2\CS3201 Software Engineering Project I\~PROJECT\PowerRangerMain\EmptyGeneralTesting\QueryProcessor" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QueryEvaluator.cpp
          QueryEvaluator.cpp
      1>c1xx : fatal error C1083: Cannot open source file: 'QueryEvaluator.cpp': No such file or directory
-     1>Done Building Project "C:\Users\a0080415\Downloads\CS3201\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" (build target(s)) -- FAILED.
+     1>Done Building Project "C:\Users\Sony\Dropbox\NUS\~Year 2 Sem 2\CS3201 Software Engineering Project I\~PROJECT\PowerRangerMain\EmptyGeneralTesting\QueryEvaluator\QueryEvaluator.vcxproj" (rebuild target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.21
+Time Elapsed 00:00:00.98

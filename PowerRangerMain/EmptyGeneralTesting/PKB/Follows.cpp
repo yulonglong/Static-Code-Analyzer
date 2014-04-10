@@ -53,15 +53,18 @@ Follows* Follows::getInstance(TypeTable *table) {
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
-	if (s1 >= (signed int) followsTable.size()) {
+	if (s1 >= followsTable.size()) {
 		followsTable.resize(s1+1, -1);
 	}
 	followsTable[s1] = s2;
 
-	if (s2 >= (signed int) followedByTable.size()) {
+	if (s2 >= followedByTable.size()) {
 		followedByTable.resize(s2+1, -1);
 	}
 	followedByTable[s2] = s1; 
+	cout << "follows(" << s1 << ", " << s2 << ")" << endl ; 
+	cout << "size: " << followedByTable.size()<<endl;
+
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
@@ -158,19 +161,23 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 
 
 STMTNUM Follows::getFollowedBy(TypeTable::SynType t, STMTNUM s) {
-	STMTNUM num = -1; 
+	int num = -1; 
+	
+	cout << "hello1234" << endl; 
+
+	cout<<"followsize" << followedByTable.size();
 	try {
-		//cout<<"In Try Block"<<endl;
-		num = followedByTable.at(s);
-		//cout<<"NUM="<<num<<endl;
+		cout<<"In Try Block halo"<<endl;
+		num = followedByTable[s];
+		cout<<"NUM="<<num<<endl;
 	} 
 	//const std::out_of_range& oor
 	catch (...) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
-		//cout<<"In catch block"<<endl;
+		cout<<"In catch block"<<endl;
 	}
 	if (num != -1 && typeTable->getType(num) == t){
-		// cout<<"SHOULD BE IN HERE"<<endl;
+		cout<<"SHOULD BE IN HERE"<<endl;
 		return num;
 	} 
 	return -1; 
