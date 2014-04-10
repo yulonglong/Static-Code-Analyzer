@@ -1,4 +1,4 @@
-3
+5
 cat: Iteration 1 requirements
 1 - Follows, Typed, ImplStmtLine :: Which statement is followed by statement in line 7
 assign a;
@@ -14,4 +14,14 @@ none
 stmt s;
 Select s such that Follows(4, s)
 5
+5000
+4 - Follows, Boolean :: Is Follows(6, 7) true
+
+Select BOOLEAN such that Follows(6, 7)
+true
+5000
+5 - Follows, Boolean :: Is Follows(5, 6) true
+
+Select BOOLEAN such that Follows(5, 6)
+false
 5000
