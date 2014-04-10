@@ -6,8 +6,8 @@
 
 
 using namespace std;
-QueryEvaluator::QueryEvaluator(PKB p){
-	pkb = &p;
+QueryEvaluator::QueryEvaluator(PKB* p){
+	pkb = p;
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
@@ -179,7 +179,12 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 	else {
 		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
 		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
-		return (f->getFollowedBy(i1->second, atoi(tk1.c_str()))==-1)?false:true;
+		bool temp;
+		try{
+			temp = f->getFollowedBy(i1->second, atoi(tk1.c_str()))==-1?false:true;
+		}catch(...){
+		}
+		return temp;
 	}
 }
 
@@ -225,7 +230,17 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	}
 	else if(selectedSyn==tk1){
 		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
-		answer.push_back(f->getFollowedBy(i1->second, atoi(tk2.c_str())));
+		cout<<"here1"<<endl;
+		int temp;
+		try{
+			cout<<"try"<<endl;
+			cout<< i1->second<<endl; 
+			cout<< atoi(tk2.c_str())<<endl; 
+			temp = f->getFollowedBy(i1->second, atoi(tk2.c_str()));
+		}catch(...){
+			cout<<"error hereee"<<endl;
+		}
+		answer.push_back(temp);
 		return answer;
 	}
 	else {

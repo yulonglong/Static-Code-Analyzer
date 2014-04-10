@@ -16,7 +16,7 @@ typedef int STMTNUM;
 class Follows {
 private: 
 	vector<STMTNUM> followsTable;
-	vector<STMTNUM> followedByTable;
+	
 	static bool instanceFlag;
 	static Follows *follows;
 	
@@ -27,6 +27,8 @@ public:
 	~Follows();
 	static Follows* getInstance();	// to be used to get instance of singleton class
 	static Follows* getInstance(TypeTable*);	// to be used to get instance of singleton class
+
+	vector<STMTNUM> followedByTable;
 
 	void setFollows(STMTNUM, STMTNUM);
 

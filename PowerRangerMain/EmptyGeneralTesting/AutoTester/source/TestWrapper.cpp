@@ -18,9 +18,11 @@ TestWrapper::TestWrapper() {
 // method for parsing the SIMPLE source
 void TestWrapper::parse(std::string filename) {
 	parserDriver(filename,pkb);
+	cout<< "autotester size " << pkb->getFollows()->followedByTable.size()<<endl;
 }
 
 // method to evaluating a query
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
+	cout<< "autoteste 222 size " << pkb->getFollows()->followedByTable.size()<<endl;
 	queryDriver(query, results, pkb);
 }

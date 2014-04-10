@@ -143,6 +143,5 @@ void FollowsTest::testGetFollowsUsingStmtType() {
 		cout << list.at(i) << endl;
 	}
 	*/
-	
 	return;
 }

@@ -21,7 +21,6 @@ Test intensively for iteration 1 and 2 [Deadline: Wed]
 - Start writing your part for report [Deadline: Fri]
 
 Lacie:
-- REPORT SKELETON very impt [Deadline: Wed]
 - Add QueryEvaluator unit testing. [Deadline: Thu]
 - Implement pattern and unit testng [Deadline: Fri]
 - Start writing your part for report [Deadline: Sun]
@@ -31,13 +30,10 @@ Kester:
 - Start writing your part for report [Deadline: Fri]
 
 Yolim: 
-- Uses Unit Testing [Deadline: Wed]
-- Uses the last few unimplemented methods [Deadline: Wed]
 - Write source4.txt. Write queries 4-1.txt with complex queries with a mixture of modifies+pattern, follows+pattern etc[Deadline: Thu]
 - Start writing your part for report [Deadline: Sun]
 
 Ipsita:
-- Modifies Unit Testing [Deadline: Wed]
 - Test cases for Miniteraton 3. Write Queries3-2.txt, Queries3-3.txt, Queries3-4.txt. 
 (each having at least 10 queries) [Deadline: Thu]
 - Start writing your part for report [Deadline: Sun]
