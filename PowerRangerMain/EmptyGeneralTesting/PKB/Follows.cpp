@@ -146,6 +146,7 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 
 	try {
 		num = followsTable.at(s);
+		cout<<"num = "<<num<<endl;
 	} 
 	//const std::out_of_range& oor
 	catch (...) {
