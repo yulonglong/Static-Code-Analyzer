@@ -2,41 +2,41 @@
 cat: Iteration 3 requirements including Modifies and Uses relationships
 1 - Modifies, Typed, ImplStmtLine ::
 assign a;
-Select a such that Modifies(a, "c");
+Select a such that Modifies(a, "c")
 3,15,17
 5000
 2 - Modifies, Typed, ImplStmtLine ::
 assign a;
-Select a such that Modifies(a, "x");
+Select a such that Modifies(a, "x")
 10,18
 5000
 3 - Modifies, Typed, ImplStmtLine ::
 var v;
-Select v such that Modifies(8, v);
+Select v such that Modifies(8, v)
 8
 5000
 4 - Modifies, Typed, ImplStmtLine ::
 var v;
-Select v such that Modifies(15, v);
+Select v such that Modifies(15, v)
 c
 5000
 5 - Uses, Typed, ImplStmtLine ::
 assign a;
-Select a such that Uses(a, "c");
+Select a such that Uses(a, "c")
 17
 5000
 6 - Uses, Typed, ImplStmtLine ::
 assign a;
-Select a such that Uses(a, "x");
+Select a such that Uses(a, "x")
 9,10,18
 5000
 7 - Uses, Typed, ImplStmtLine ::
 var v;
-Select v such that Uses(8, v);
+Select v such that Uses(8, v)
 I, k, j1k, chArlie
 5000
 8 - Uses, Typed, ImplStmtLine ::
 var v;
-Select v such that Uses(15, v);
+Select v such that Uses(15, v)
 delta, width, Romeo
 5000

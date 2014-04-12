@@ -20,9 +20,10 @@ Relationship::RelType Relationship::getRelType()
 		return MODIFIES;
 	} else if(relName=="Uses"){
 		return USES;
-	}else{
+	} else if (relName == "Parent*") {
         return PARENTSTAR;
-	}
+	} else
+		return PATTERN;
 }
 
 string Relationship::getToken1()
