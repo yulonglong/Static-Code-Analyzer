@@ -13,7 +13,7 @@ none
 3 - Follows, Typed, ImplStmtLine :: Which statement is followed by statement in line 19
 stmt s;
 Select s such that Follows(s, 19)
-9
+11
 5000
 4 - Follows, Boolean :: Is Follows(7, 9) true
 
