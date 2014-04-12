@@ -253,11 +253,13 @@ vector<STMTNUM> Parent::getParent(TypeTable::SynType t1, TypeTable::SynType t2){
 }
 
 STMTNUM Parent::getParent(TypeTable::SynType t1, STMTNUM s){
+	cout<<"called"<<endl;
 	try{
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->getType(temp) == t1)
 			return temp;
 	}catch(...){
+		return -1;
 	}
 	return -1;
 }
@@ -284,6 +286,7 @@ vector<STMTNUM> Parent::getChildren(TypeTable::SynType t1, STMTNUM s){
 //For parentStar
 STMTNUM Parent::getParent(STMTNUM s){
 	try{
+		cout<<"called"<<endl;
 		return childrenTable.at(s);
 	} catch (...){
 		return -1;
