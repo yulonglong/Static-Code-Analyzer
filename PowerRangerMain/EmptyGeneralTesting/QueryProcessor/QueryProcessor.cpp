@@ -21,7 +21,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 				result.push_back("true");
 			else
 				result.push_back("false");
-			cout<<"End Evaluate query"<<endl;
+			cout<<"End Evaluate query"<<endl<<endl<<endl<<endl;
 		}
 		else {
 			cout<<"End Parse query"<<endl;

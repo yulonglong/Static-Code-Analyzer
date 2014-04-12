@@ -12,7 +12,9 @@ class ParentTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST_SUITE( ParentTest ); // Note 3 
 	CPPUNIT_TEST( testParentUsingStmtNum );
 	CPPUNIT_TEST( testParentUsingStmtType );
-	CPPUNIT_TEST( testChildrenUsingStmtType );
+	CPPUNIT_TEST( testAllBoolean );
+	CPPUNIT_TEST( testGetParent );
+	CPPUNIT_TEST( testGetChildren );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -21,7 +23,9 @@ public:
 
 	void testParentUsingStmtNum();
 	void testParentUsingStmtType();
-	void testChildrenUsingStmtType();
+	void testAllBoolean();
+	void testGetParent();
+	void testGetChildren();
 };
 #endif
     
