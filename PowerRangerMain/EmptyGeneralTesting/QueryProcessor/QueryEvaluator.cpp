@@ -3,6 +3,7 @@
 #include "QueryEvaluator.h"
 #include <ctype.h>
 #include <set>
+#include <stack>
 
 
 using namespace std;
@@ -674,5 +675,91 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 		return use->isUses(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
 	}
 
+	return false;
+}
+
+vector<int> QueryEvaluator::evaluatePattern(string leftHandSide, std::string rightHandSide) {
+	vector<int> answers;
+
+	Node* root = pkb->getASTRoot();
+	stack<Node> st;
+	st.push(*root);
+	while(!st.empty()) {
+		Node nd = st.top();
+		if(nd.getType().compare("assign")==0) {
+			vector<Node*> children = nd.getChild();
+			Node childOne = *children.at(0);
+			Node childTwo = *children.at(1);
+			if(evaluateRightHandSide(leftHandSide, childOne) && evaluateLeftHandSide(rightHandSide, childTwo))
+				answers.push_back(nd.getProgLine());
+		}
+		else {
+			vector<Node*> children = nd.getChild();
+			for(int i=0; i<children.size(); i++) {
+				Node child = *children.at(i);
+				st.push(child);
+			}
+		}
+	}
+
+	return answers;
+}
+
+bool QueryEvaluator::evaluateRightHandSide(string IDENT, Node rightHand) {
+	if(IDENT.compare("_") == 0)
+		return true;
+	else if(IDENT.compare(rightHand.getData()) == 0)
+		return true;
+	else 
+		return false;
+}
+
+bool QueryEvaluator::evaluateLeftHandSide(string pattern, Node leftHand) {
+	if(pattern.compare("_") == 0)
+		return true;
+	else if(pattern.find("+") == string::npos){
+		pattern = pattern.substr(1, pattern.length()-1);
+		stack<Node> st;
+		st.push(leftHand);
+		while(!st.empty()) {
+			Node nd = st.top();
+			if(nd.getData().compare(pattern) == 0)
+				return true;
+			else {
+				vector<Node*> children = nd.getChild();
+				for(int i=0; i<children.size(); i++) {
+					Node child = *children.at(i);
+					st.push(child);
+				}
+			}
+		}
+	}
+	else {
+		pattern = pattern.substr(1, pattern.length()-1);
+		unsigned pos = pattern.find("+");
+		string right = pattern.substr(0, pos);
+		string left = pattern.substr(pos);
+
+		stack<Node> st;
+		st.push(leftHand);
+		while(!st.empty()) {
+			Node nd = st.top();
+			if(nd.getType().compare("operator")==0 && nd.getData().compare("+")==0) {
+				vector<Node*> children = nd.getChild();
+				Node childOne = *children.at(0);
+				Node childTwo = *children.at(1);
+				if(childOne.getData().compare(right)==0 && childTwo.getData().compare(left)==0)
+					return true;
+			}
+			else {
+				vector<Node*> children = nd.getChild();
+				for(int i=0; i<children.size(); i++) {
+					Node child = *children.at(i);
+					st.push(child);
+				}
+			}
+
+		}
+	}
 	return false;
 }
