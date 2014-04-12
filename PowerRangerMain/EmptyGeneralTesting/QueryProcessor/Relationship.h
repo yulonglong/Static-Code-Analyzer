@@ -23,6 +23,7 @@ class Relationship
         RelType getRelType();
         string getToken1();
         string getToken2();
+
 };
 
 #endif // RELATIONSHIP_H_INCLUDED
