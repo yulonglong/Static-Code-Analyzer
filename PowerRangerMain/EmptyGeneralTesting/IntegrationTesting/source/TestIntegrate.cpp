@@ -330,10 +330,32 @@ void IntegrateTest::testParserSource2()
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken2()); 
 	
-	vector<int> vec = qe.evaluateFollows(r, m, q2.getSelectedSyn());
+	vector<int> vec = qe.evaluateFollows(r2, m2, q2.getSelectedSyn());
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
 
 	//Query 3 stmt s; Select s such that Follows(4, s)
+	
+	Query q3;
+	q3.setSelectedSyn("s");
+	Relationship r3("Follows", "4", "s");
+	q3.addRelationship(r3);
+	unordered_map<string,TypeTable::SynType> m3;
+	m3.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
+	q2.setSynTable(m3);
+	
+	f->setFollows(2, 3);
+	f->setFollows(3, 4);
+	f->setFollows(4, 7);
+	f->setFollows(5, 6);
+	t->insertStmtNumAndType(3, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(4, TypeTable::WHILE);
+	t->insertStmtNumAndType(5, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(6, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(7, TypeTable::ASSIGN);
+	
+	vec.clear();
+	vec = qe.evaluateFollows(r3, m3, q3.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(7, vec[0]);
 	
 	/*
 	Query q3 = qp.parse(s3);

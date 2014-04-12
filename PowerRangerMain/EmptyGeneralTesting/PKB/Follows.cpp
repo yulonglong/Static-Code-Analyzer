@@ -152,7 +152,7 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		// cout<<"In catch block"<<endl;
 	}
-	if (num != -1 && typeTable->getType(num) == t){
+	if (num != -1 && typeTable->isType(t,num)){
 		//cout<<"NUM IS"<<num<<endl;
 		return num;
 	} 
@@ -176,7 +176,7 @@ STMTNUM Follows::getFollowedBy(TypeTable::SynType t, STMTNUM s) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		cout<<"In catch block"<<endl;
 	}
-	if (num != -1 && typeTable->getType(num) == t){
+	if (num != -1 && typeTable->isType(t, num)){
 		cout<<"SHOULD BE IN HERE"<<endl;
 		return num;
 	} 
