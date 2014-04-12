@@ -23,4 +23,5 @@ void TestWrapper::parse(std::string filename) {
 // method to evaluating a query
 void TestWrapper::evaluate(std::string query, std::list<std::string>& results){
 	queryDriver(query, results, pkb);
+	cout<<endl<<endl<<endl<<endl;
 }
