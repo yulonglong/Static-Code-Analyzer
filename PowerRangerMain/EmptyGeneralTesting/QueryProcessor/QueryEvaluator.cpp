@@ -274,9 +274,11 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 
 	//Select w such that Follows*(w, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		cout<<"Handling Follows*(type, type) with first token selected"<<endl;
 		selected = t->getAllStmts(i1->second);	//get all while statements
 
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
+			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
 				if(stmtNumber!=1){
@@ -288,6 +290,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 				else{
 					break;
 				}
+				cout<<"Calling getFollows(type, stmtnum)"<<endl;
 				stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			}while(true);
 		}
@@ -295,12 +298,15 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 
 	//Select a such that Follows*(w, a)
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		cout<<"Handling Follows*(type, type) with second token selected"<<endl;
 		selected = t->getAllStmts(i1->second);
 
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
+			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
 				if(stmtNumber!=1){
+					cout<<"Calling TypeTable->isType"<<endl;
 					if(t->isType(i2->second, stmtNumber)){
 						answer.insert(stmtNumber);
 					}
@@ -308,6 +314,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 				else{
 					break;
 				}
+				cout<<"Calling getFollows(type, stmtnum)"<<endl;
 				stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			}while(true);
 		}
@@ -315,10 +322,13 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 
 	//Select a such that Follows*(a, 13)
 	else if(selectedSyn==tk1){
+		cout<<"Handling Follows*(type, stmtnum)"<<endl;
 		stmtNumber = atoi(tk2.c_str());
 		do{			
+			cout<<"Calling getFollowedBy(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=1){
+				cout<<"Calling TypeTable::isType"<<endl;
 				if(t->isType(i1->second, stmtNumber)){
 					answer.insert(stmtNumber);
 				}
@@ -332,8 +342,10 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 
 	//Select a such that Follows*(3, a)
 	else {
+		cout<<"Handling Follows*(stmtnum, type)"<<endl;
 		stmtNumber = atoi(tk1.c_str());
 		do{			
+			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=1){
 				if(t->isType(i2->second, stmtNumber)){

@@ -266,7 +266,7 @@ void IntegrateTest::testParserSource2()
 	string s4 = "Select BOOLEAN such that Follows(6, 7)";
 	string s5 = "Select BOOLEAN such that Follows(5, 6)";
 
-	string s6 = "while w; Select w such that Follows(3, w)";
+	string s6 = "while w; Select w such that Follows*(3, w)";
 	string s7 = "while w; Select w such that Follows(4, w)";
 	string s8 = "stmt s; Select s such that Follows(s, 19)";
 	string s9 = "Select BOOLEAN such that Follows(15, 16)";
@@ -301,13 +301,20 @@ void IntegrateTest::testParserSource2()
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2());
 
-	f->setFollows(1,2);
+	/*f->setFollows(1,2);
 	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
-	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
-	CPPUNIT_ASSERT(qe.evaluateFollowsBoolean(r,m)==true);
+	t->insertStmtNumAndType(2, TypeTable::ASSIGN);*/
+	CPPUNIT_ASSERT(qe.evaluateQueryBoolean(q1)==true);
 	
 	
 	//Query 2 assign a; Select a such that Follows(1, a)
+	qp.validate(s2);
+	Query q2 = qp.parse();
+	v = q2.getRelVect();
+	Relationship r2 = v[0];
+	unordered_map<string, TypeTable::SynType> m2 = q2.getSynTable();
+	
+	/*
 	Query q2;
 	q2.setSelectedSyn("a");
 	Relationship r2("Follows", "1", "a");
@@ -317,11 +324,8 @@ void IntegrateTest::testParserSource2()
 	q2.setSynTable(m2);
 
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m2.find(r.getToken1());
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m2.find(r.getToken2());
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m2.find(r.getToken2());*/
 
-	cout<<"HIE"<<endl;
-
-	
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r2.getRelType());
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, q2.getSelectedSyn());
@@ -330,33 +334,89 @@ void IntegrateTest::testParserSource2()
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken2()); 
 	
-	vector<int> vec = qe.evaluateFollows(r2, m2, q2.getSelectedSyn());
+	vector<int> vec = qe.evaluateQuery(q2);
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
 
 	//Query 3 stmt s; Select s such that Follows(4, s)
-	
+	qp.validate(s3);
+	Query q3 = qp.parse();
+	v = q3.getRelVect();
+	Relationship r3 = v[0];
+	unordered_map<string, TypeTable::SynType> m3 = q3.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r3.getRelType());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, q3.getSelectedSyn());
+	expected = "4";
+	CPPUNIT_ASSERT_EQUAL(expected, r3.getToken1());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, r3.getToken2()); 
+	/*
 	Query q3;
 	q3.setSelectedSyn("s");
 	Relationship r3("Follows", "4", "s");
 	q3.addRelationship(r3);
 	unordered_map<string,TypeTable::SynType> m3;
 	m3.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
-	q2.setSynTable(m3);
-	
-	f->setFollows(2, 3);
-	f->setFollows(3, 4);
-	f->setFollows(4, 7);
-	f->setFollows(5, 6);
-	t->insertStmtNumAndType(3, TypeTable::ASSIGN);
-	t->insertStmtNumAndType(4, TypeTable::WHILE);
-	t->insertStmtNumAndType(5, TypeTable::ASSIGN);
-	t->insertStmtNumAndType(6, TypeTable::ASSIGN);
-	t->insertStmtNumAndType(7, TypeTable::ASSIGN);
+	q2.setSynTable(m3);*/
 	
 	vec.clear();
-	vec = qe.evaluateFollows(r3, m3, q3.getSelectedSyn());
-	CPPUNIT_ASSERT_EQUAL(7, vec[0]);
+	vec = qe.evaluateQuery(q3);
+	CPPUNIT_ASSERT_EQUAL(23, vec[0]);
+
+	//Query 4 Select BOOLEAN such that Follows(6, 7)
+	qp.validate(s4);
+	Query q4 = qp.parse();
+	v = q4.getRelVect();
+	Relationship r4 = v[0];
+	unordered_map<string, TypeTable::SynType> m4 = q4.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r4.getRelType());
+	expected = "BOOLEAN";
+	CPPUNIT_ASSERT_EQUAL(expected, q4.getSelectedSyn());
+	expected = "6";
+	CPPUNIT_ASSERT_EQUAL(expected, r4.getToken1());
+	expected = "7";
+	CPPUNIT_ASSERT_EQUAL(expected, r4.getToken2()); 
+
+	CPPUNIT_ASSERT_EQUAL(true, qe.evaluateQueryBoolean(q4));
+
+	//Query 5 Select BOOLEAN such that Follows(5, 6)
+	qp.validate(s5);
+	Query q5 = qp.parse();
+	v = q5.getRelVect();
+	Relationship r5 = v[0];
+	unordered_map<string, TypeTable::SynType> m5 = q5.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r5.getRelType());
+	expected = "BOOLEAN";
+	CPPUNIT_ASSERT_EQUAL(expected, q5.getSelectedSyn());
+	expected = "5";
+	CPPUNIT_ASSERT_EQUAL(expected, r5.getToken1());
+	expected = "6";
+	CPPUNIT_ASSERT_EQUAL(expected, r5.getToken2()); 
+
+	CPPUNIT_ASSERT_EQUAL(false, qe.evaluateQueryBoolean(q5));
+	/*
+	//Query 6 while w; Select w such that Follows*(3, w)
+	qp.validate(s6);
+	Query q6 = qp.parse();
+	v = q6.getRelVect();
+	Relationship r6 = v[0];
+	unordered_map<string, TypeTable::SynType> m6 = q6.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r6.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q6.getSelectedSyn());
+	expected = "3";
+	CPPUNIT_ASSERT_EQUAL(expected, r6.getToken1());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, r6.getToken2()); 
 	
+	
+	vec.clear();
+	vec = qe.evaluateQuery(q6);
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);	
 	/*
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
