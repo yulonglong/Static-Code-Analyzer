@@ -62,6 +62,7 @@ void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 		followedByTable.resize(s2+1, -1);
 	}
 	followedByTable[s2] = s1; 
+	cout << "Set follows(" << s1 << ", " << s2 << ")" << endl; 
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
