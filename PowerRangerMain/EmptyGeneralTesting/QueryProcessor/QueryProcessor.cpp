@@ -26,7 +26,6 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		else {
 			cout<<"End Parse query"<<endl;
 			cout<<"Begin Evaluate query"<<endl;
-			cout<< "autoteste 333 size " << pkb->getFollows()->followedByTable.size()<<endl;
 			vector<int> ans = qe.evaluateQuery(parsedQuery);
 			for(size_t i = 0; i < ans.size(); i++)
 				if(ans.at(i) != -1)

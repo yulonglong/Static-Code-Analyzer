@@ -230,15 +230,10 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 	}
 	else if(selectedSyn==tk1){
 		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
-		cout<<"here1"<<endl;
 		int temp;
 		try{
-			cout<<"try"<<endl;
-			cout<< i1->second<<endl; 
-			cout<< atoi(tk2.c_str())<<endl; 
 			temp = f->getFollowedBy(i1->second, atoi(tk2.c_str()));
 		}catch(...){
-			cout<<"error hereee"<<endl;
 		}
 		answer.push_back(temp);
 		return answer;
