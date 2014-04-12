@@ -32,6 +32,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 				if(ans.at(i) != -1)
 					result.push_back(to_string(static_cast<long long>(ans.at(i))));
 			cout<<"End Evaluate query"<<endl;
+		}
 		
 	}
 }
