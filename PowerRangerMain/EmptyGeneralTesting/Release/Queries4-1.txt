@@ -2,18 +2,16 @@
 cat: Iteration 2 requirements but only Follows and Parent relationships
 1 - Pattern ImplStmtLine ::
 assign a; while w;
-Select a such that pattern a (“b”,_)
+Select a such that pattern a (b,_)
 2
 5000
-
 2 - Pattern ImplStmtLine ::
 assign a; while w;
-Select a such that pattern a (“f”,"_a+b_")
+Select a such that pattern a (f,_a+b_)
 10
 5000
-
-2 - Pattern ImplStmtLine ::
+3 - Pattern ImplStmtLine ::
 assign a; while w;
-Select a such that Follows (w, a) pattern a (“lacie”,_)
+Select a such that Follows (w, a) pattern a (lacie,_)
 8
 5000

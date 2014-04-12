@@ -1,0 +1,272 @@
+44
+cat: All Queries
+1 - Modifies, Typed :: 
+assign a;
+Select a such that Modifies(a, "oSCar")
+6, 8
+5000
+2 - Modifies, Typed :: 
+assign a; variable v;
+Select a such that Modifies (a,v)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+3 - Modifies :: 
+assign a;
+Select a such that Modifies (a,_)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+4 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,"oSCar")
+4, 5, 6, 7, 8 
+5000
+5 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+6 - Uses :: 
+assign a;
+Select a such that Uses (a, "beta")
+6
+5000
+7 - Uses :: 
+assign a; variable v;
+Select a such that Uses (a,v)
+3, 6, 8, 10, 13, 15, 17, 18, 20
+5000
+8 - Uses :: 
+stmt s;
+Select s such that Uses (s,"delta")
+4, 5, 9, 11, 12, 15
+5000
+9 - Uses :: 
+stmt s;
+Select s such that Uses (s,_)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 20
+5000
+10 - Parent :: 
+stmt s;
+Select s such that Parent(s,6)
+5
+5000
+11 - Parent :: 
+stmt s;
+Select s such that Parent(5,s)
+6, 7, 9, 19
+5000
+12 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s,6)
+4, 5
+5000
+13 - ParentStar :: 
+stmt s;
+Select s such that Parent* (5,s)
+6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+5000
+14 - Follows :: 
+stmt s;
+Select s such that Follows (s,4)
+3
+5000
+15 - Follows :: 
+stmt s;
+Select s such that Follows (4,s)
+none
+5000
+16 - Follows :: 
+stmt s;
+Select s such that Follows (7,s)
+9
+5000
+17 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (7,s)
+9, 19
+5000
+18 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (1, s)
+2, 3, 4
+5000
+19 - Pattern :: 
+assign a;
+Select a pattern a(_,_"x"_)
+10, 18
+5000
+20 - Pattern :: 
+assign a, a1;
+Select a such that Modifies (a, "x") pattern a1(_,_)
+10, 18
+5000
+21 - Follows, Pattern :: 
+stmt s; assign a;
+Select s such that Follows (s,4) pattern a(_,_"x"_)
+3
+5000
+22 - Modifes, Pattern :: 
+assign a; variable v; assign a1;
+Select a such that Modifies (a,v) pattern a("x",_"beta"_)
+none
+5000
+23 - Uses, Pattern :: 
+assign a;
+Select a such that Uses (a,"beta") pattern a("oSCar", _"beta"_)
+6
+5000
+24 - Modifies, while :: 
+while w;
+Select w such that Modifies (w, "oSCar")
+4, 5, 7
+5000
+25 - Uses, while :: 
+while w;
+Select w such that Uses (w, "x")
+4, 5, 9, 11
+5000
+26 - Follows, Pattern :: 
+stmt s; assign a;
+Select s such that Follows (1, s) pattern a(_, _"x"_)
+2
+5000
+27 - Follows :: 
+assign a;
+Select a such that Follows (1, a)
+2
+5000
+28 - Modifies :: 
+stmt s; variable v;
+Select v such that Modifies (s, v)
+i, b, c, oSCar, x, Romeo, a, w
+5000
+29 - Typed :: 
+assign a;
+Select a
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20
+5000
+30 - Modifies :: 
+variable v;
+Select v
+I, Romeo, a, b, beta, c, chArlie, delta, i, j1k, k, l, left, oSCar, right, tmp, w, width, x
+5000
+31 - Invalid :: 
+assign a, a1;
+Select a such that Modifies(a,a1);
+
+5000
+32 - Modifies, Pattern :: 
+assign a; stmt s; variable v; assign a1; variable v2;
+Select a such that Modifies (s,v) pattern a1(v2, _"beta"_)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+33 - Uses, Pattern :: 
+assign a; stmt s; variable v; assign a1; variable v2;
+Select a such that Uses (s,v) pattern a1(v2, _"asd"_)
+none
+5000
+34 - Multiple, Uses :: 
+assign a;
+Select a such that Uses(a,"delta") such that Uses(a, "Romeo")
+15
+5000
+35 - Multiple, Modifies, Parent :: 
+assign a; stmt s;
+Select s such that Parent (s, a) such that Modifies (s, "oSCar")
+4, 5, 7
+5000
+36 - Indirect :: 
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1(v,_)
+3, 10, 13, 15, 17, 18, 20
+5000
+37 - Indirect :: 
+assign a; stmt s;
+Select s such that Parent(s,a) pattern a("x",_)
+9, 11
+5000
+38 - Indirect :: 
+while w; assign a;
+Select w such that Follows(w,a) pattern a(_,_"x"_)
+16
+5000
+39 - Indirect :: 
+while w; assign a;
+Select w such that Parent(w,a) pattern a(_,_"x"_)
+9, 11
+5000
+40 - Direct :: 
+assign a; variable v;
+Select a such that Uses (a,v) pattern a(v,_)
+10, 13, 17, 18, 20
+5000
+41 - Indirect :: 
+assign a, a1;
+Select a such that Follows(a1, a) pattern a1(_,_"Romeo"_)
+14
+5000
+42 - Constant :: 
+constant c;
+Select c
+0, 1, 200, 2
+5000
+43 - ProgLine :: 
+prog_line n;
+Select n
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+44 - Follows :: 
+stmt s;
+Select s such that Follows(s,s)
+
+5000
+45 - Follows :: 
+while w;
+Select w such that Follows(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+46 - Follows, Pattern :: 
+stmt s; assign a;
+Select a such that Follows (s,s) pattern a (_, _"Romeo"_)
+
+5000
+47 - Follows :: 
+while w, w1;
+Select w such that Follows (w,w1)
+7, 12
+5000
+48 - Follows, All :: 
+while w;
+Select w such that Follows (_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+49 - Follows, Pattern, indirect :: 
+while w; assign a;
+Select w such that Follows(w,a) pattern a("x",_)
+16
+5000
+50 - Uses, Pattern, indirect :: 
+assign a;
+Select a such that Uses(a,"x") pattern a("x" , _"x"_)
+10, 18
+5000
+51 - Parent :: 
+while w, w1;
+Select w such that Parent(w,w1)
+4, 5, 9, 11
+5000
+52 - FollowsStar :: 
+while w;
+Select w such that Follows*(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+53 - Parent :: 
+while w; assign a;
+Select w such that Parent(w,a)
+4, 5, 7, 9, 11, 12, 16
+5000
+54 - Follows :: 
+while w; assign a;
+Select a such that Follows(a,w)
+3, 6, 10
+5000
