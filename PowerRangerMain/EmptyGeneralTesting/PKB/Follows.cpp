@@ -141,7 +141,6 @@ bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
 
 STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 	STMTNUM num = -1;
-	cout<<"In get Follows"<<endl;
 	try {
 		num = followsTable.at(s);
 	} 

@@ -1,4 +1,4 @@
-12
+14
 cat: Iteration 2 requirements but only Follows and Parent relationships
 1 - Follows, Typed, ImplStmtLine :: Which while statement follows statment in line 3
 while w;
@@ -59,4 +59,14 @@ true
 assign a;
 Select a such that Parent(11, a)
 18
+5000
+13 - Follows, ImplStmtLine :: getFollowedBy(s, 19)?
+stmt s;
+Select s such that Follows(s, 19)
+11
+5000
+14 - Follows, ImplStmtLine :: getFollowedBy(a, 19)?
+assign a;
+Select a such that Follows(a, 19)
+none
 5000
