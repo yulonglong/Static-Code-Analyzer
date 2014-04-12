@@ -102,6 +102,10 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			}
 			break;
 									}
+		case Relationship::PATTERN:
+			{
+				answers.push_back(evaluatePattern(token1, token2));
+			}
 		}
 	}
 
