@@ -3,7 +3,7 @@ procedure YuLongLong{
 b=6;
 c=5;
 d=a;
-d=d+2
+d=d+2;
 d= a+b+c+d;
 while hakase{
 	lacie = 10;
