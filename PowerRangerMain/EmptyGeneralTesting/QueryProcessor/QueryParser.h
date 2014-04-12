@@ -27,6 +27,8 @@ private:
 	vector<string> expressionTokens;
 	vector<string> selectStatement;
 
+	void bootstrap();
+
 	void generateTokens();
 	string getFirstToken();
 	string getNextToken();
