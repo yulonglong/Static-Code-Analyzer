@@ -13,6 +13,7 @@ QueryParser::QueryParser(){
 // ===============VALIDATION PART OF THE CODES==================//
 
 bool QueryParser::validate(string st){
+	selectStatement.clear();
 	s = st;
 
 	if (!generateStatements()) return false;

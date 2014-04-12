@@ -280,7 +280,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
 				if(stmtNumber!=1){
-					if(t->getType(stmtNumber)==i2->second){
+					if(t->isType(i2->second,stmtNumber)){
 						answer.insert(*it);
 						break;
 					}
@@ -301,7 +301,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
 				if(stmtNumber!=1){
-					if(t->getType(stmtNumber)==i2->second){
+					if(t->isType(i2->second, stmtNumber)){
 						answer.insert(stmtNumber);
 					}
 				}
@@ -319,7 +319,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 		do{			
 			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=1){
-				if(t->getType(stmtNumber)==i1->second){
+				if(t->isType(i1->second, stmtNumber)){
 					answer.insert(stmtNumber);
 				}
 			}
@@ -336,7 +336,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 		do{			
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=1){
-				if(t->getType(stmtNumber)==i2->second){
+				if(t->isType(i2->second, stmtNumber)){
 					answer.insert(stmtNumber);
 				}
 			}

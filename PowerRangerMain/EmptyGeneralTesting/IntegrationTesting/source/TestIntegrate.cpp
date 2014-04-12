@@ -281,12 +281,12 @@ void IntegrateTest::testParserSource2()
 
 	// TODO: run query parser;
 	QueryParser qp;
-	PKB pkb;
+	PKB* pkb = PKB::getInstance();
 	QueryEvaluator qe(pkb);
 	Follows* f = qe.pkb->getFollows();
 	TypeTable* t = qe.pkb->getTypeTable();
 
-	//Query 1
+	//Query 1 assign a; Select a such that Follows(1, 2)
 	qp.validate(s1);
 	Query q1 = qp.parse();
 	v = q1.getRelVect();
@@ -305,31 +305,37 @@ void IntegrateTest::testParserSource2()
 	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
 	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
 	CPPUNIT_ASSERT(qe.evaluateFollowsBoolean(r,m)==true);
-	/*
+	
+	
+	//Query 2 assign a; Select a such that Follows(1, a)
+	Query q2;
+	q2.setSelectedSyn("a");
+	Relationship r2("Follows", "1", "a");
+	q2.addRelationship(r2);
+	unordered_map<string,TypeTable::SynType> m2;
+	m2.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q2.setSynTable(m2);
 
-	//Query 2
-	Query q2 = qp.parse(s2);
-	v = q2.getRelVect();
-	r = v[0];
-	m = q2.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m2.find(r.getToken1());
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m2.find(r.getToken2());
 
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(r.getToken1());
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(r.getToken2());
+	cout<<"HIE"<<endl;
 
 	
-
-	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r.getRelType());
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r2.getRelType());
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, q2.getSelectedSyn());
 	expected = "1";
-	CPPUNIT_ASSERT_EQUAL(expected, r.getToken1());
+	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken1());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2()); 
+	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken2()); 
 	
 	vector<int> vec = qe.evaluateFollows(r, m, q2.getSelectedSyn());
-	//cout<<vec[0]<<endl;
+	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
+
+	//Query 3 stmt s; Select s such that Follows(4, s)
 	
-	
+	/*
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
 	Query q5 = qp.parse(s5);
@@ -348,6 +354,7 @@ void IntegrateTest::testParserSource2()
 	// TODO: run evaluate on query
 
 	// TODO: compare result with expected result
+ */
  }
 
- */
+ 
