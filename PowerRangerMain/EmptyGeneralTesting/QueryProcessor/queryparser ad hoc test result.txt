@@ -1,0 +1,133 @@
+assign as; while ww2; while w2;
+
+INVALID QUERY
+
+=================================
+
+assign as; while ww2; while w2; Select as  such that Modifies ( 2 , as )
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: as
+SSyn type: assign
+Relationship type: Modifies
+Argument 1: 2
+Argument 2: as
+
+=================================
+
+assign as; while ww2; while w2; Select as
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: as
+SSyn type: assign
+
+=================================
+
+Select BOOLEAN meh meh
+
+INVALID QUERY
+
+=================================
+
+Select as
+
+INVALID QUERY
+
+=================================
+
+assign a; while w; Select a such that Uses(2, a)
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: a
+SSyn type: assign
+Relationship type: Uses
+Argument 1: 2
+Argument 2: a
+
+=================================
+
+assign a; while w; Select a pattern a (_"x+y"_, _)
+
+INVALID QUERY
+
+=================================
+
+Select a pattern a (x, _"x+y"_) such that Uses(2, a)
+
+INVALID QUERY
+
+=================================
+
+assign a; while w; Select a pattern a (x, _"x+y"_) such that Uses(2, a)
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: a
+SSyn type: assign
+Relationship type: Pattern
+Argument 1: x
+Argument 2: _"x+y"_
+Relationship type: Uses
+Argument 1: 2
+Argument 2: a
+
+=================================
+
+assign a; while w; Select a pattern a (x, _"x"_) such that Uses(2, a)
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: a
+SSyn type: assign
+Relationship type: Pattern
+Argument 1: x
+Argument 2: _"x"_
+Relationship type: Uses
+Argument 1: 2
+Argument 2: a
+
+=================================
+
+assign a; while w; Select a such that Uses(2, a) pattern a (x, _"x+y"_)
+
+VALID QUERY
+
+Query decomposition:
+Selected synonym: a
+SSyn type: assign
+Relationship type: Uses
+Argument 1: 2
+Argument 2: a
+Relationship type: Pattern
+Argument 1: x
+Argument 2: _"x+y"_
+
+=================================
+
+    bla
+
+INVALID QUERY
+
+=================================
+
+assign a; while w; Select a such that Modifies(2, w)
+
+VALID QUERYS
+
+Query decomposition:
+Selected synonym: a
+SSyn type: assign
+Relationship type: Modifies
+Argument 1: 2
+Argument 2: w
+
+=================================
+
