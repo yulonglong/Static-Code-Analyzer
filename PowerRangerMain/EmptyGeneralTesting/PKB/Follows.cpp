@@ -143,13 +143,13 @@ bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
 
 STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 	STMTNUM num = -1;
-
+	cout<<"In get Follows"<<endl;
 	try {
 		num = followsTable.at(s);
 		cout<<"num = "<<num<<endl;
 	} 
 	//const std::out_of_range& oor
-	catch (...) {
+	catch (std::out_of_range) {
 		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		// cout<<"In catch block"<<endl;
 	}

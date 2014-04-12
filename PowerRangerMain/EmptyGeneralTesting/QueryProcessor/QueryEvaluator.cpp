@@ -281,7 +281,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
-				if(stmtNumber!=1){
+				if(stmtNumber!=-1){
 					if(t->isType(i2->second,stmtNumber)){
 						answer.insert(*it);
 						break;
@@ -305,7 +305,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
-				if(stmtNumber!=1){
+				if(stmtNumber!=-1){
 					cout<<"Calling TypeTable->isType"<<endl;
 					if(t->isType(i2->second, stmtNumber)){
 						answer.insert(stmtNumber);
@@ -327,7 +327,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 		do{			
 			cout<<"Calling getFollowedBy(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
-			if(stmtNumber!=1){
+			if(stmtNumber!=-1){
 				cout<<"Calling TypeTable::isType"<<endl;
 				if(t->isType(i1->second, stmtNumber)){
 					answer.insert(stmtNumber);
@@ -347,7 +347,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 		do{			
 			cout<<"Calling getFollows(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
-			if(stmtNumber!=1){
+			if(stmtNumber!=-1){
 				if(t->isType(i2->second, stmtNumber)){
 					answer.insert(stmtNumber);
 				}

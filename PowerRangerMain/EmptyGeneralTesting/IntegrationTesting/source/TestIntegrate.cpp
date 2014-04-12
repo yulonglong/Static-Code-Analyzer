@@ -397,7 +397,7 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r5.getToken2()); 
 
 	CPPUNIT_ASSERT_EQUAL(false, qe.evaluateQueryBoolean(q5));
-	/*
+	
 	//Query 6 while w; Select w such that Follows*(3, w)
 	qp.validate(s6);
 	Query q6 = qp.parse();
@@ -416,7 +416,7 @@ void IntegrateTest::testParserSource2()
 	
 	vec.clear();
 	vec = qe.evaluateQuery(q6);
-	CPPUNIT_ASSERT_EQUAL(4, vec[0]);	
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 	/*
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
