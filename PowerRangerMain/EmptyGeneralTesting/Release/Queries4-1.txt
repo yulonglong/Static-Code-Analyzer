@@ -7,7 +7,7 @@ Select a pattern a ("b", _)
 5000
 2 - Pattern ImplStmtLine ::
 assign a; while w;
-Select a such that pattern a ("lacie", _)
+Select a pattern a ("lacie", _)
 8
 5000
 3 - Pattern ImplStmtLine ::

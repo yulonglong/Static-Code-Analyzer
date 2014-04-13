@@ -11,12 +11,12 @@ Select a such that Modifies(a, "x")
 10,18
 5000
 3 - Modifies, Typed, ImplStmtLine ::
-var v;
+variable v;
 Select v such that Modifies(8, v)
 oSCar
 5000
 4 - Modifies, Typed, ImplStmtLine ::
-var v;
+variable v;
 Select v such that Modifies(15, v)
 c
 5000
@@ -31,12 +31,12 @@ Select a such that Uses(a, "x")
 10,18
 5000
 7 - Uses, Typed, ImplStmtLine ::
-var v;
+variable v;
 Select v such that Uses(8, v)
 I, k, j1k, chArlie
 5000
 8 - Uses, Typed, ImplStmtLine ::
-var v;
+variable v;
 Select v such that Uses(15, v)
 delta, width, Romeo
 5000
