@@ -13,7 +13,7 @@ Select a such that Modifies(a, "x")
 3 - Modifies, Typed, ImplStmtLine ::
 var v;
 Select v such that Modifies(8, v)
-8
+oSCar
 5000
 4 - Modifies, Typed, ImplStmtLine ::
 var v;
@@ -28,7 +28,7 @@ Select a such that Uses(a, "c")
 6 - Uses, Typed, ImplStmtLine ::
 assign a;
 Select a such that Uses(a, "x")
-9,10,18
+10,18
 5000
 7 - Uses, Typed, ImplStmtLine ::
 var v;
