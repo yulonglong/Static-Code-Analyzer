@@ -35,6 +35,7 @@ public:
 
 public:
 	QueryEvaluator(PKB*);
+	~QueryEvaluator();
 	PKB *pkb;
 	std::vector<int> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);
