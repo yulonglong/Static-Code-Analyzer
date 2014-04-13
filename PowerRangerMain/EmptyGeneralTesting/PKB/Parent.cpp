@@ -99,13 +99,13 @@ bool Parent::isParent(TypeTable::SynType t1, TypeTable::SynType t2) {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i) == t1) {
 					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
 					// cout << i << "  " << j << endl; 
 					return true;
 				}
@@ -122,7 +122,7 @@ bool Parent::isParent(TypeTable::SynType t1, TypeTable::SynType t2) {
 bool Parent::isParent(TypeTable::SynType t, STMTNUM s) {
 	try{
 		STMTNUM temp = childrenTable.at(s);
-		if (typeTable->getType(temp) == t) {
+		if (typeTable->isType(t,temp)) {
 			return true;
 		}
 	}catch(...){
@@ -135,7 +135,7 @@ bool Parent::isChildren(TypeTable::SynType t, STMTNUM s){
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
-			if(typeTable->getType(*it)==t)
+			if(typeTable->isType(t,*it))
 				return true;
 		}
 	}catch(...){
@@ -147,7 +147,7 @@ bool Parent::isChildren(TypeTable::SynType t, STMTNUM s){
 vector<STMTNUM> Parent::getParent(TypeTable::SynType t1, TypeTable::SynType t2, STMTNUM s) {
 	try{
 		STMTNUM temp = childrenTable.at(s);
-		if(typeTable->getType(temp) == t2){
+		if(typeTable->isType(t2,temp) == t2){
 			return typeTable->getAllStmts(t1);
 		}
 	}catch(...){
@@ -160,7 +160,7 @@ vector<STMTNUM> Parent::getChildren(TypeTable::SynType t1, TypeTable::SynType t2
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
-			if(typeTable->getType(*it) == t2){
+			if(typeTable->isType(t2,*it)){
 				return typeTable->getAllStmts(t1);
 			}
 		}
@@ -186,13 +186,13 @@ vector<STMTNUM> Parent::getChildren(TypeTable::SynType t1, TypeTable::SynType t2
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,i)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(j) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,j)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t1 && typeTable->getType(i) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,i)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 
@@ -226,15 +226,15 @@ vector<STMTNUM> Parent::getParent(TypeTable::SynType t1, TypeTable::SynType t2){
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 					break;
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 					break;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 					break;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
 					// cout << i << "  " << j << endl; 
 					list.push_back(i);
 					break;
@@ -256,7 +256,7 @@ STMTNUM Parent::getParent(TypeTable::SynType t1, STMTNUM s){
 	cout<<"called"<<endl;
 	try{
 		STMTNUM temp = childrenTable.at(s);
-		if(typeTable->getType(temp) == t1)
+		if(typeTable->isType(t1,temp))
 			return temp;
 	}catch(...){
 		return -1;
@@ -270,7 +270,7 @@ vector<STMTNUM> Parent::getChildren(TypeTable::SynType t1, STMTNUM s){
 		vector<STMTNUM> ans;
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();it++){
-			if(typeTable->getType(*it)==t1)
+			if(typeTable->isType(t1,*it))
 				ans.push_back(*it);
 		}
 		if(ans.empty())

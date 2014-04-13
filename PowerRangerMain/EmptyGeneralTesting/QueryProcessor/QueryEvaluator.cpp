@@ -55,16 +55,20 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 									}
 		case Relationship::PARENT:
 			{
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
-				if(evaluateParentBoolean(*it, m)){
-					answers.push_back(t->getAllStmts(i->second));
+				cout<<"In evaluateQuery case PARENT"<<endl;
+				if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+					if(evaluateParentBoolean(*it, m)){
+						cout<<"Called evaluateParentBoolean"<<endl;
+						answers.push_back(t->getAllStmts(i->second));
+					}
 				}
 				else {
+					cout<<"Called evaluateParent"<<endl;
 					answers.push_back(evaluateParent(*it, m, q.getSelectedSyn()));
 				}
+
+				break;
 			}
-			break;
-									}
 		case Relationship::PARENTSTAR:
 			{	
 
@@ -198,30 +202,33 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	cout<<"Intersecting Answers"<<endl;
-	vector<int> first = ans[0];
-	vector<int> queryAnswers;
-	cout<<"Before for loop"<<endl;
-	for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
-		cout<<"In 1st for loop"<<endl;
-		bool insert = true;
-		for(vector<vector<int>>::iterator it1 = ans.begin()+1; it1!=ans.end(); it1++){
-			bool change = true;
-			cout<<"In 2nd for loop"<<endl;
-			for(vector<int>::iterator it2 = it1->begin(); it2!=it1->end(); it2++){
-				if(*it3==*it2)
-					change = false;
+	if(!ans.empty()){
+		vector<int> first = ans[0];
+		vector<int> queryAnswers;
+		cout<<"Before for loop"<<endl;
+		for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
+			cout<<"In 1st for loop"<<endl;
+			bool insert = true;
+			for(vector<vector<int>>::iterator it1 = ans.begin()+1; it1!=ans.end(); it1++){
+				bool change = true;
+				cout<<"In 2nd for loop"<<endl;
+				for(vector<int>::iterator it2 = it1->begin(); it2!=it1->end(); it2++){
+					if(*it3==*it2)
+						change = false;
+				}
+				if(change) {
+					insert = false;
+					break;
+				}
 			}
-			if(change) {
-				insert = false;
-				break;
+			if(insert){
+				queryAnswers.push_back(*it3);
 			}
 		}
-		if(insert){
-			queryAnswers.push_back(*it3);
-		}
+		return queryAnswers;
 	}
-	cout<<"end"<<endl;
-	return queryAnswers;
+	vector<int> emptyVec;
+	return emptyVec;
 }
 
 vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
@@ -412,16 +419,20 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	unordered_map<string, TypeTable::SynType>::iterator i3 = m.find(selectedSyn);
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		cout<<"Calling getParent(TYPE, TYPE)"<<endl;
 		return p->getParent(i1->second, i2->second);
 	}
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
+		cout<<"Calling getChildren(TYPE, TYPE)"<<endl;
 		return p->getChildren(i1->second, i2->second);
 	}
 	else if(selectedSyn==tk1){
+		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
 		answer.push_back( p->getParent(i1->second, atoi(tk2.c_str())));
 		return answer;
 	}
 	else {
+		cout<<"Calling getChildren(TYPE, STMTNUM)"<<endl;
 		return p->getChildren(i2->second, atoi(tk1.c_str()));
 	}
 }
