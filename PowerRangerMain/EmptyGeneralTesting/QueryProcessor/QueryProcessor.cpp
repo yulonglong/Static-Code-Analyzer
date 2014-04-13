@@ -6,15 +6,15 @@ using namespace std;
 
 
 void queryDriver(string query, list<string> &result, PKB *pkb){
-	cout<<"Begin Parse query"<<endl;
+	cout<<"Begin parse query"<<endl;
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);
 
 	bool isValid = qp.validate(query);
 	if (isValid) {
 		Query parsedQuery = qp.parse();
-		cout<<"End Parse query"<<endl;
-		cout<<"Begin Evaluate query"<<endl;
+		cout<<"End parse query"<<endl;
+		cout<<"Begin evaluate query"<<endl;
 		if(parsedQuery.getSelectedSyn() == "BOOLEAN") {
 			bool ans = qe.evaluateQueryBoolean(parsedQuery);
 			if(ans)
@@ -37,6 +37,8 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 					result.push_back(to_string(static_cast<long long>(ans.at(i))));
 			}
 		}
-		cout<<"End Evaluate query"<<endl;
+		cout<<"End evaluate query"<<endl;
+	} else{
+		cout<<"Query is invalid"<<endl;
 	}
 }

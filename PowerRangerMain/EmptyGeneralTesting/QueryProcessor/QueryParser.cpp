@@ -57,6 +57,8 @@ bool QueryParser::validate(string st){
 	for (size_t i = 0; i < selectStatement.size(); i++){
 		//cout << selectStatement.at(i) << endl;
 	}
+
+	return true;
 }
 
 bool QueryParser::generateStatements(){
@@ -588,6 +590,8 @@ bool QueryParser::suchThat(){
 	nextToken = getNextToken();
 
 	if (!relRef()) return false;
+
+	return true;
 }
 
 bool QueryParser::pattern(){
@@ -701,6 +705,8 @@ bool QueryParser::synAssign(){
 bool QueryParser::expressionSpec(){
 	if(xpSpec1() || xpSpec2() || xpSpec3());
 	else return false;
+
+	return true;
 }
 
 bool QueryParser::xpSpec1(){
@@ -864,6 +870,8 @@ bool QueryParser::entRef(){
 		nextToken = var;
 		if(!ident()) return false;
 	} else return false;
+
+	return true;
 }
 
 bool QueryParser::stmtRef(){
