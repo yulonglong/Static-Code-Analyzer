@@ -87,11 +87,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			{	
 
 			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				cout<<"Calling evaluateModifiesBoolean"<<endl;
 				if(evaluateModifiesBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
 				}
 			}
 			else {
+				cout<<"Calling evaluateModifies"<<endl;
 				answers.push_back(evaluateModifies(*it, m, q.getSelectedSyn()));
 			}
 			break;
@@ -562,6 +564,7 @@ vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<
 
 	//Select a Modifies(a,v)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+		cout<<"Calling getModifies(TYPE)"<<endl;
 		selected = mod->getModifies(i1->second);
 		return selected;
 	}
@@ -571,6 +574,7 @@ vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<
 		selected = t->getAllStmts(TypeTable::ASSIGN);
 		vector<int> modifiedVar;
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){	
+			cout<<"Calling getModifies(STMTNUM)"<<endl;
 			modifiedVar = mod->getModifies(*it);
 			answer.insert(modifiedVar.begin(), modifiedVar.end());
 		}
@@ -582,11 +586,13 @@ vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<
 	//Modifies(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
+		cout<<"Calling getModifies(TYPE, varName)"<<endl;
 		return mod->getModifies(i1->second, varName);
 	}
 
 	//Select v such that Modifies(1, v);
 	else {
+		cout<<"Calling getModifies(STMTNUM)"<<endl;
 		return mod->getModifies(atoi(tk1.c_str()));
 	}
 }
