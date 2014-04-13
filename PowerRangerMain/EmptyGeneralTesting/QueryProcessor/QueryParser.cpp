@@ -1106,6 +1106,7 @@ unordered_map<string, TypeTable::SynType> QueryParser::parseSynonyms()
 	}
 	
 	unordered_map<string, TypeTable::SynType> map;
+	map.clear();
 	
 	for(size_t i = 0; i < v.size(); i++){
 		string temp1 = v.at(i);
