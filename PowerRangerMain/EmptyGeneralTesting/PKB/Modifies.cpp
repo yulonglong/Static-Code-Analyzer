@@ -111,7 +111,7 @@ vector<STMTNUM> Modifies::getModifies(TYPE t) {
 	vector<VARINDEX> list; 
 
 	for (vector<STMTNUM>::size_type i = 1; i != modifiesTable.size(); i++) {
-		if (t == TypeTable::STMT || typeTable->getType(i) == t) {
+		if (t == TypeTable::STMT || typeTable->isType(t,i)) {
 			list = modifiesTable.at(i);
 			if (list.size() != 0 && list.at(0) != -1) {
 				toReturn.push_back(i);
@@ -129,7 +129,7 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 	int varIndex = varTable->getVarIndex(v);
 	
 	for (vector<int>::size_type i = 1; i != modifiesTable.size(); i++) {
-		if (t == TypeTable::STMT || typeTable->getType(i) == t) {
+		if (t == TypeTable::STMT || typeTable->isType(t,i)) {
 			vector<int> list = modifiesTable.at(i); 
 			vector<int>::iterator it = list.begin();
 			for (; it!=list.end(); ++it) {

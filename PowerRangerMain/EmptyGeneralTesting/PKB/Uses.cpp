@@ -89,7 +89,7 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
-					if(typeTable->getType(i)==t)
+					if(typeTable->isType(t,i))
 						ans.push_back(i);
 				}
 			}
@@ -120,7 +120,7 @@ vector<INDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(
 		vector<INDEX> ans;
 		for(size_t i=0;i<usesTable.size();i++){
 			if(!usesTable[i].empty() && usesTable[i]!=vector<int> (1,-1)){
-				if(typeTable->getType(i)==type)
+				if(typeTable->isType(type,i))
 					ans.push_back(i);
 			}
 		}
