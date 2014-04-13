@@ -12,13 +12,13 @@ Select a pattern a ("lacie", _)
 5000
 3 - Pattern ImplStmtLine ::
 assign a; while w;
-Select a such that Follows (w, a) pattern a ("lacie",_)
-8
+Select a such that Follows (a, w) pattern a ("d",_)
+4, 5, 6
 5000
 4 - Pattern ImplStmtLine ::
 assign a; while w;
 Select a pattern a (_ , _)
-1, 2, 3, 4, 5, 6, 7, 8, 10, 11
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11
 5000
 5 - Pattern ImplStmtLine ::
 assign a; while w;
@@ -38,5 +38,5 @@ Select a pattern a ("d", _)
 7 - Pattern ImplStmtLine ::
 assign a; while w;
 Select a pattern a (_, _"d"_)
-6, 7
+5, 6
 5000

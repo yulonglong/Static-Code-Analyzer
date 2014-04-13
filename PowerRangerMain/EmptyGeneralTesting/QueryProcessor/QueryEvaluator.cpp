@@ -1,5 +1,6 @@
 //#include <iostream>
 #include <string>
+#include <algorithm>
 #include "QueryEvaluator.h"
 #include <ctype.h>
 #include <set>
@@ -705,16 +706,20 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 vector<int> QueryEvaluator::evaluatePattern(string leftHandSide, std::string rightHandSide) {
 	vector<int> answers;
 
+	leftHandSide.erase(std::remove(leftHandSide.begin(), leftHandSide.end(), '\"'), leftHandSide.end());
+	rightHandSide.erase(std::remove(rightHandSide.begin(), rightHandSide.end(), '\"'), rightHandSide.end());
+
 	Node* root = pkb->getASTRoot();
 	stack<Node> st;
 	st.push(*root);
 	while(!st.empty()) {
 		Node nd = st.top();
+		st.pop();
 		if(nd.getType().compare("assign")==0) {
 			vector<Node*> children = nd.getChild();
 			Node childOne = *children.at(0);
 			Node childTwo = *children.at(1);
-			if(evaluateRightHandSide(leftHandSide, childOne) && evaluateLeftHandSide(rightHandSide, childTwo))
+			if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
 				answers.push_back(nd.getProgLine());
 		}
 		else {
@@ -729,7 +734,7 @@ vector<int> QueryEvaluator::evaluatePattern(string leftHandSide, std::string rig
 	return answers;
 }
 
-bool QueryEvaluator::evaluateRightHandSide(string IDENT, Node rightHand) {
+bool QueryEvaluator::evaluateLeftHandSide(string IDENT, Node rightHand) {
 	if(IDENT.compare("_") == 0)
 		return true;
 	else if(IDENT.compare(rightHand.getData()) == 0)
@@ -738,15 +743,16 @@ bool QueryEvaluator::evaluateRightHandSide(string IDENT, Node rightHand) {
 		return false;
 }
 
-bool QueryEvaluator::evaluateLeftHandSide(string pattern, Node leftHand) {
+bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
 	if(pattern.compare("_") == 0)
 		return true;
 	else if(pattern.find("+") == string::npos){
-		pattern = pattern.substr(1, pattern.length()-1);
+		pattern = pattern.substr(1, pattern.length()-2);
 		stack<Node> st;
 		st.push(leftHand);
 		while(!st.empty()) {
 			Node nd = st.top();
+			st.pop();
 			if(nd.getData().compare(pattern) == 0)
 				return true;
 			else {
@@ -759,15 +765,16 @@ bool QueryEvaluator::evaluateLeftHandSide(string pattern, Node leftHand) {
 		}
 	}
 	else {
-		pattern = pattern.substr(1, pattern.length()-1);
+		pattern = pattern.substr(1, pattern.length()-2);
 		unsigned pos = pattern.find("+");
 		string right = pattern.substr(0, pos);
-		string left = pattern.substr(pos);
+		string left = pattern.substr(pos+1);
 
 		stack<Node> st;
 		st.push(leftHand);
 		while(!st.empty()) {
 			Node nd = st.top();
+			st.pop();
 			if(nd.getType().compare("operator")==0 && nd.getData().compare("+")==0) {
 				vector<Node*> children = nd.getChild();
 				Node childOne = *children.at(0);
