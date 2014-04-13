@@ -1,0 +1,7 @@
+1
+cat: Iteration 2 requirements but only Follows and Parent relationships
+1 - Pattern ImplStmtLine ::
+assign a; while w;
+Select a pattern a (_,_"d+2"_)
+5,6
+5000
