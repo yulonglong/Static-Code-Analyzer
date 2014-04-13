@@ -31,7 +31,6 @@ void QueryParser::bootstrap(){
 
 
 bool QueryParser::validate(string st){
-	selectStatement.clear();
 	s = st;
 	bootstrap();
 	
@@ -224,6 +223,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE LEADING SPACES
 	while(patternClause.at(0) == ' '){
+		if (patternClause.length() == 1) return false;
 		patternClause = patternClause.substr(1);
 	}
 
@@ -235,6 +235,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE TRAILING SPACES
 	while(synAssign.at(synAssign.length() -1) == ' '){
+		if (synAssign.length() == 1) return false;
 		synAssign = synAssign.substr(0, synAssign.length() -1);
 	}
 
@@ -244,6 +245,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE LEADING SPACES
 	while(patternClause.at(0) == ' '){
+		if (patternClause.length() == 1) return false;
 		patternClause = patternClause.substr(1);
 	}
 
@@ -256,6 +258,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE TRAILING SPACES
 	while(arg1.at(arg1.length() -1) == ' '){
+		if (arg1.length() == 1) return false;
 		arg1 = arg1.substr(0, arg1.length() -1);
 	}
 
@@ -265,6 +268,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE LEADING SPACES
 	while(patternClause.at(0) == ' '){
+		if (patternClause.length() == 1) return false;
 		patternClause = patternClause.substr(1);
 	}
 
@@ -277,6 +281,7 @@ bool QueryParser::tokenizePattern(string patternClause){
 
 	// REMOVE TRAILING SPACES
 	while(arg2.at(arg2.length() -1) == ' '){
+		if (arg2.length() == 1) return false;
 		arg2 = arg2.substr(0, arg2.length() -1);
 	}
 
@@ -321,6 +326,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE LEADING SPACES
 	while(suchthatClause.at(0) == ' '){
+		if (suchthatClause.length() == 1) return false;
 		suchthatClause = suchthatClause.substr(1);
 	}
 
@@ -334,6 +340,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE LEADING SPACES
 	while(suchthatClause.at(0) == ' '){
+		if (suchthatClause.length() == 1) return false;
 		suchthatClause = suchthatClause.substr(1);
 	}
 
@@ -345,6 +352,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE TRAILING SPACES
 	while(relref.at(relref.length() -1) == ' '){
+		if (suchthatClause.length() == 1) return false;
 		relref = relref.substr(0, relref.length() -1);
 	}
 
@@ -354,6 +362,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE LEADING SPACES
 	while(suchthatClause.at(0) == ' '){
+		if (suchthatClause.length() == 1) return false;
 		suchthatClause = suchthatClause.substr(1);
 	}
 
@@ -366,6 +375,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE TRAILING SPACES
 	while(arg1.at(arg1.length() -1) == ' '){
+		if (arg1.length() == 1) return false;
 		arg1 = arg1.substr(0, arg1.length() -1);
 	}
 
@@ -375,6 +385,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE LEADING SPACES
 	while(suchthatClause.at(0) == ' '){
+		if (suchthatClause.length() == 1) return false;
 		suchthatClause = suchthatClause.substr(1);
 	}
 
@@ -387,6 +398,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 
 	// REMOVE TRAILING SPACES
 	while(arg2.at(arg2.length() -1) == ' '){
+		if (arg2.length() == 1) return false;
 		arg2 = arg2.substr(0, arg2.length() -1);
 	}
 
@@ -398,8 +410,8 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 	if(suchthatClause.length() > 0){
 		//cout << "removing trailing spaces in such that clause..." << endl;
 		while(suchthatClause.at(suchthatClause.length() -1) == ' '){
+			if (suchthatClause.length() == 1) return false;
 			suchthatClause = suchthatClause.substr(0, suchthatClause.length() -1);
-			if (suchthatClause.length() == 0) break;
 		}
 		if (suchthatClause.length() > 0) return false;
 	}
