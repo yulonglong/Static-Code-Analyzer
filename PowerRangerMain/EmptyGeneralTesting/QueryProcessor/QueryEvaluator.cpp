@@ -11,6 +11,9 @@ QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
 }
 
+QueryEvaluator::~QueryEvaluator(){
+}
+
 vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
@@ -197,10 +200,13 @@ vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	cout<<"Intersecting Answers"<<endl;
 	vector<int> first = ans[0];
 	vector<int> queryAnswers;
+	cout<<"Before for loop"<<endl;
 	for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
+		cout<<"In 1st for loop"<<endl;
 		bool insert = true;
 		for(vector<vector<int>>::iterator it1 = ans.begin()+1; it1!=ans.end(); it1++){
 			bool change = true;
+			cout<<"In 2nd for loop"<<endl;
 			for(vector<int>::iterator it2 = it1->begin(); it2!=it1->end(); it2++){
 				if(*it3==*it2)
 					change = false;
@@ -214,6 +220,7 @@ vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 			queryAnswers.push_back(*it3);
 		}
 	}
+	cout<<"end"<<endl;
 	return queryAnswers;
 }
 

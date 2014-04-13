@@ -23,196 +23,6 @@ void IntegrateTest::tearDown()
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( IntegrateTest ); // Note 4 
 
-void IntegrateTest::testModifyTable()
-{  // Note 5
-	
-	PKB *pkb;
-	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
-
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Modifies* modifies = pkb->getModifies();
-	Uses* uses = pkb->getUses();
-	Node* root = pkb->getASTRoot();
-
-	string expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(0));
-	expected = "z";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(1));
-	expected = "i";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(2));
-	expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(3));
-	expected = "v";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(4));
-
-	expected = "First";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(0));
-	expected = "Second";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(1));
-	expected = "Third";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(2));
-
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(1,2));
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(3,2));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,7));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,8));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,9));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,11));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,12));
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(11,12));
-
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(1,2));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(2,3));
-	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(1,3));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(4,5));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(5,6));
-	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(6,7));
-
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(1));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(2));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(3));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::WHILE,typeTable->getType(6));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(8));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::IF,typeTable->getType(10));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(11));
-
-	
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,"x"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,"z"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,"v"));
-	
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"y"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
-	
-	return;
-}
-
-void IntegrateTest::testCompleteParser()
-{
-	// create a node
-	PKB* pkb;
-	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
-
-	
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Node* root = pkb->getASTRoot();
-		
-	Node* curr = root;
-	curr = root->getChild()[0];
-	curr = curr->getChild()[0];
-	curr = curr->getChild()[0];
-
-	string expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-	
-	// verify that the assignment is correct - Note 7
-	
-
-	return;
-}
-
-
-void IntegrateTest::testParserSource1()
-{
-	PKB* pkb;
-	pkb = PKB::getInstance();
-	parserDriver("Source1.txt",pkb);
-
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Node* root = pkb->getASTRoot();
-
-	Node* curr = root;
-	
-	string expected = "root";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "program";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-	expected = "Mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "procedure";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "Mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-	expected = "A1";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-    curr = root;
-
-	curr = curr->getChild()[1];
-	expected = "mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "procedure";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[1];
-    expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[1];
-	expected = "A1";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	return;
-}
-
 void IntegrateTest::testParserSource2()
 {
 	PKB* pkb;
@@ -267,8 +77,8 @@ void IntegrateTest::testParserSource2()
 	string s5 = "Select BOOLEAN such that Follows(5, 6)";
 
 	string s6 = "while w; Select w such that Follows*(3, w)";
-	string s7 = "while w; Select w such that Follows(4, w)";
-	string s8 = "stmt s; Select s such that Follows(s, 19)";
+	string s7 = "assign a; Select a such that Follows*(13, a)";
+	string s8 = "stmt s; Select s such that Follows*(s, 19)";
 	string s9 = "Select BOOLEAN such that Follows(15, 16)";
 	string s10 = "stmt s; Select s such that Parent(s, 9)";
 	string s11 = "while w; Select w such that Parent(w, 11)";
@@ -417,6 +227,57 @@ void IntegrateTest::testParserSource2()
 	vec.clear();
 	vec = qe.evaluateQuery(q6);
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+
+	//Query 7 assign a; Select a such that Follows*(13, a)
+	qp.validate(s7);
+	Query q7 = qp.parse();
+	v = q7.getRelVect();
+	Relationship r7 = v[0];
+	unordered_map<string, TypeTable::SynType> m7 = q7.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r7.getRelType());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, q7.getSelectedSyn());
+	expected = "13";
+	CPPUNIT_ASSERT_EQUAL(expected, r7.getToken1());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r7.getToken2()); 
+	
+	
+	vec.clear();
+	vec = qe.evaluateQuery(q7);
+	CPPUNIT_ASSERT_EQUAL(14, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(15, vec[1]);
+
+	//Query 8 stmt s; Select s such that Follows*(s, 19)
+	qp.validate(s8);
+	Query q8 = qp.parse();
+	v = q8.getRelVect();
+	Relationship r8 = v[0];
+	unordered_map<string, TypeTable::SynType> m8 = q8.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r8.getRelType());
+	expected = "19";
+	CPPUNIT_ASSERT_EQUAL(expected, r8.getToken2()); 
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, q8.getSelectedSyn());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, r8.getToken1());
+
+	
+	
+	vec.clear();
+	vec = qe.evaluateQuery(q8);
+	bool a = f->isFollows(6, 10);
+	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}
+
+	CPPUNIT_ASSERT_EQUAL(10, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[1]);
+
+
+
 	/*
 	Query q3 = qp.parse(s3);
 	Query q4 = qp.parse(s4);
@@ -440,3 +301,198 @@ void IntegrateTest::testParserSource2()
  }
 
  
+void IntegrateTest::testModifyTable()
+{  // Note 5
+	
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	Node* root = pkb->getASTRoot();
+
+	string expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(0));
+	expected = "z";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(1));
+	expected = "i";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(2));
+	expected = "y";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(3));
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(4));
+
+	expected = "First";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(0));
+	expected = "Second";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(1));
+	expected = "Third";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(2));
+
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(1,2));
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(3,2));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,7));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,8));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,9));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,11));
+	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,12));
+	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(11,12));
+
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(1,2));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(2,3));
+	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(1,3));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(4,5));
+	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(5,6));
+	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(6,7));
+
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(1));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(2));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(3));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::WHILE,typeTable->getType(6));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(8));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::IF,typeTable->getType(10));
+	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(11));
+
+	
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,"x"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,"z"));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,"v"));
+	
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,"i"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"x"));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"y"));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
+	
+	return;
+	
+}
+
+void IntegrateTest::testCompleteParser()
+{
+	
+	// create a node
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	parserDriver("CodeParserTestIn.txt",pkb);
+
+	
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+		
+	Node* curr = root;
+	curr = root->getChild()[0];
+	curr = curr->getChild()[0];
+	curr = curr->getChild()[0];
+
+	string expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+	
+	// verify that the assignment is correct - Note 7
+	
+
+	return;
+	
+}
+
+
+void IntegrateTest::testParserSource1()
+{
+	
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	parserDriver("Source1.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	Node* curr = root;
+	
+	string expected = "root";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "program";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+	expected = "Mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "procedure";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "Mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "stmtLst";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+	expected = "A1";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+    curr = root;
+
+	curr = curr->getChild()[1];
+	expected = "mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "procedure";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[0];
+    expected = "mini";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "stmtLst";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[1];
+    expected = "=";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "assign";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	curr = curr->getChild()[1];
+	expected = "A1";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "variable";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+	return;
+	
+}
+
