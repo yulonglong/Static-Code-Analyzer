@@ -53,7 +53,6 @@ Include any UML diagrams that you found useful. For each diagram, explain how yo
 project planning, communication, test planning or in other situations), and comment on the value
 the diagram added to your project.
 
-
 -7. Query processing
 7.1 Validating program queries
 Describe query validation rules. An example of query validation rules is: “Checking if all relationships
@@ -65,13 +64,14 @@ Describe the data representation for program queries (query tree).
 Describe how your Query Evaluator works. (can ask lacie to do after you are done)
 
 
-Hisyam: (Ipsita will help to do System Testing)
+Hisyam: 
 - 8. Testing 
-Describe your approach to testing.
-Comment on the testing experience gained from this project.
-Be sure that you understand the role of the given AutoTester, integrate it with your SPA, and use it
+
+[Ipsita]Describe your approach to testing.
+[Ipsita]Comment on the testing experience gained from this project.
+[Ipsita]Be sure that you understand the role of the given AutoTester, integrate it with your SPA, and use it
 to automate regression testing throughout the project.
-8.1 Describe your test plan
+[Ipsita]8.1 Describe your test plan 
 8.2 Provide examples of test cases of different categories (this is in addition to the system
 acceptance tests you submit with your SPA code)
 	1) Unit Testing
@@ -83,7 +83,7 @@ acceptance tests you submit with your SPA code)
 		diagrams to plan integration testing and indicate which integrations you have tested.
 		b) Provide TWO sample integration test cases.
 	
-	3) System (Validation) Testing [Ipsita]
+	3) System (Validation) Testing 
 		a) Provide TWO sample test cases.
 	Document each test case in a standard way as follows:
 	Test Purpose: Explain what you intend to test in this test case.

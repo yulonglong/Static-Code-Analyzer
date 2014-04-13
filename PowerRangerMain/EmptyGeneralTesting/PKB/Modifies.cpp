@@ -77,7 +77,7 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 		temp1.push_back(varIndex);
 	}
 	modifiesTable[s] = temp1;
-	// cout << "Set modifies(" << s << ", " << v << ")" << endl; 
+	cout << "Set modifies(" << s << ", " << v << ")" << endl; 
 
 }
 

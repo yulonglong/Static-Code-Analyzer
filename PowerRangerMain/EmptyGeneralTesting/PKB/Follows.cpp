@@ -53,12 +53,12 @@ Follows* Follows::getInstance(TypeTable *table) {
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
-	if (s1 >= followsTable.size()) {
+	if (s1 >= (signed int) followsTable.size()) {
 		followsTable.resize(s1+1, -1);
 	}
 	followsTable[s1] = s2;
 
-	if (s2 >= followedByTable.size()) {
+	if (s2 >= (signed int) followedByTable.size()) {
 		followedByTable.resize(s2+1, -1);
 	}
 	followedByTable[s2] = s1; 
