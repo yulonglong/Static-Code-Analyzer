@@ -27,7 +27,7 @@ Lacie:
 
 Kester: 
 - Help Hisyam with autotester testing (Test intensively for iteration 1 and 2) [Deadline: hisyam's deadline]
-- Start writing your part for report [Deadline: Fri]
+- Start writing your part for report [Done on 13 Apr 10 pm]
 
 Yolim: 
 - Write source4.txt. Write queries 4-1.txt with complex queries with a mixture of modifies+pattern, follows+pattern etc[Deadline: Thu]
