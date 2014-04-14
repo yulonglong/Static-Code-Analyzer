@@ -63,6 +63,7 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 		usesTable[s] = temp1;
 	}catch(...){
 	}
+	cout << "Set Uses(" << s << ", " << v << ")" << endl; 
 }
 
 bool Uses::isUses(STMTNUM s, VARNAME v){
