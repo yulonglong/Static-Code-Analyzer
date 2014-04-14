@@ -12,8 +12,6 @@
 #include "VarTable.h"
 
 typedef TypeTable::SynType TYPE; 
-typedef int VARINDEX;
-
 
 class Modifies {
 private:

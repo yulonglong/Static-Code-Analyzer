@@ -10,7 +10,7 @@
 #include <iterator>
 
 using namespace std;
-typedef int INDEX;
+typedef int VARINDEX;
 typedef string VARNAME; 
 
 class VarTable {
@@ -22,10 +22,10 @@ public:
 	VarTable();
 	~VarTable();
 	static VarTable* getInstance();	// to be used to get instance of singleton class 
-	INDEX insertVar(VARNAME);
-	VARNAME getVarName (INDEX);
-	INDEX getVarIndex (VARNAME);
-	INDEX getNumVar(); 
+	VARINDEX insertVar(VARNAME);
+	VARNAME getVarName (VARINDEX);
+	VARINDEX getVarIndex (VARNAME);
+	int getNumVar(); 
 };
 
 #endif

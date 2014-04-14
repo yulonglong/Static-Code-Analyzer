@@ -7,6 +7,7 @@
 #include "VarTable.h"
 
 using namespace std;
+typedef TypeTable::SynType TYPE;
 
 class Uses {
 private:
@@ -23,9 +24,9 @@ public:
 	static Uses* getInstance(TypeTable*,VarTable*);	// to be used to get instance of singleton class
 	void setUses(STMTNUM, VARNAME);
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
-	vector<int> getUses(TypeTable::SynType, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
-	vector<INDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
-	vector<int> getUses(TypeTable::SynType);//Select a such that Uses(a, v); return empty vector if does not exist
+	vector<STMTNUM> getUses(TYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
+	vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
+	vector<STMTNUM> getUses(TYPE);//Select a such that Uses(a, v); return empty vector if does not exist
 };
 
 #endif

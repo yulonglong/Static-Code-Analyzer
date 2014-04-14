@@ -11,7 +11,7 @@
 #include "TypeTable.h"
 
 using namespace std;
-typedef int STMTNUM;
+typedef TypeTable::SynType TYPE; 
 
 class Follows {
 private: 
@@ -36,15 +36,15 @@ public:
 	bool isFollows(STMTNUM, STMTNUM);	
 
 	// testFollowsUsingStmtType
-	bool isFollows(TypeTable::SynType, STMTNUM);	// done testing!!
-	bool isFollowedBy(TypeTable::SynType, STMTNUM);	 // done testing!!
-	bool isFollows(TypeTable::SynType, TypeTable::SynType);	// done testing!!
+	bool isFollows(TYPE, STMTNUM);	
+	bool isFollowedBy(TYPE, STMTNUM);	
+	bool isFollows(TYPE, TYPE);
 
 	// testGetFollowsUsingStmtType
-	STMTNUM getFollows(TypeTable::SynType, STMTNUM);	// done testing!!
-	STMTNUM getFollowedBy(TypeTable::SynType, STMTNUM); // done testing!!
-	vector<STMTNUM> getFollows(TypeTable::SynType, TypeTable::SynType);	 //Select s1 such that getFollows(s1, s2)
-	vector<STMTNUM> getFollowedBy(TypeTable::SynType, TypeTable::SynType);	 //Select s2 such that getFollows(s1, s2)
+	STMTNUM getFollows(TYPE, STMTNUM);	
+	STMTNUM getFollowedBy(TYPE, STMTNUM); 
+	vector<STMTNUM> getFollows(TYPE, TYPE);	 //Select s1 such that getFollows(s1, s2)
+	vector<STMTNUM> getFollowedBy(TYPE, TYPE);	 //Select s2 such that getFollows(s1, s2)
 }; 
 
 #endif

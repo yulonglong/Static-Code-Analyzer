@@ -12,7 +12,8 @@
 #include "TypeTable.h"
 
 using namespace std;
-typedef int STMTNUM;
+typedef TypeTable::SynType TYPE;
+
 
 class Parent {
 private:
@@ -31,15 +32,15 @@ public:
 
 	void setParent(STMTNUM, STMTNUM);
 	bool isParent(STMTNUM, STMTNUM);// Select BOOLEAN such that Parent(1,2)
-	bool isParent(TypeTable::SynType, TypeTable::SynType); // Select BOOLEAN such that Parent(w,a)
-	bool isParent(TypeTable::SynType, STMTNUM); // Select BOOLEAN such that Parent(3,a)
-	bool isChildren(TypeTable::SynType, STMTNUM); // Select BOOLEAN such that Parent(w,3)
-	vector<STMTNUM> getParent(TypeTable::SynType, TypeTable::SynType,STMTNUM); 
-	vector<STMTNUM> getChildren(TypeTable::SynType, TypeTable::SynType,STMTNUM);
-	vector<STMTNUM> getParent(TypeTable::SynType, TypeTable::SynType); // Select w such that Parent(w,a)
-	vector<STMTNUM> getChildren(TypeTable::SynType, TypeTable::SynType); //Select a such that Parent(w,a)
-	STMTNUM getParent(TypeTable::SynType, STMTNUM); 
-	vector<STMTNUM> getChildren(TypeTable::SynType, STMTNUM); 
+	bool isParent(TYPE, TYPE); // Select BOOLEAN such that Parent(w,a)
+	bool isParent(TYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
+	bool isChildren(TYPE, STMTNUM); // Select BOOLEAN such that Parent(w,3)
+	vector<STMTNUM> getParent(TYPE, TYPE,STMTNUM); 
+	vector<STMTNUM> getChildren(TYPE, TYPE,STMTNUM);
+	vector<STMTNUM> getParent(TYPE, TYPE); // Select w such that Parent(w,a)
+	vector<STMTNUM> getChildren(TYPE, TYPE); //Select a such that Parent(w,a)
+	STMTNUM getParent(TYPE, STMTNUM); 
+	vector<STMTNUM> getChildren(TYPE, STMTNUM); 
 
 	//For parentStar
 	STMTNUM getParent(STMTNUM); 
