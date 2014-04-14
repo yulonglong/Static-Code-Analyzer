@@ -1,0 +1,5 @@
+Invalid Query: 	20, 21, 26, 31-39, 47, 49, 51
+Constant:	42
+ProgLine:	43
+Pattern: 	40
+
