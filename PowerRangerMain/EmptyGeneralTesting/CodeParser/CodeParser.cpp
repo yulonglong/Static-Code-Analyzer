@@ -4,7 +4,7 @@
 using namespace std;
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, Uses &uses){
+Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, Uses &uses, const vector<Node*> &containerNode){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -25,10 +25,23 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 				type="constant";
 			}
 			else{
-				//insert to var table, and set uses
+
+				//insert to var table
 				varTable.insertVar(tokens[i]);
-				uses.setUses(newProgLine,tokens[i]);
 				//end insertion
+
+				//set uses
+				uses.setUses(newProgLine,tokens[i]);
+				
+				for(unsigned int index = 0;index<containerNode.size();index++){
+					Node* currPointer = containerNode[index];
+					int currProgLine = currPointer->getProgLine();
+					if(currProgLine > 0){
+						uses.setUses(currProgLine,tokens[i]);
+					}
+				}
+				//end set uses
+
 				type="variable";
 			}
 			Node* curr = new Node(tokens[i],type,newProgLine);
@@ -373,8 +386,19 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			//insert to var table
 			varTable.insertVar(controlVarName);
-			uses.setUses(progLine,controlVarName);
 			//end insertion
+
+			//set uses
+			uses.setUses(progLine,controlVarName);
+			
+			for(unsigned int index=0;index<containerNode.size();index++){
+				Node* currPointer = containerNode[index];
+				int currProgLine = currPointer->getProgLine();
+				if(currProgLine > 0){
+					uses.setUses(currProgLine,controlVarName);
+				}
+			}
+			//end set uses
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -416,10 +440,22 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			string controlVarName;
 			controlVarName=tokens[1];
 
-			//insert to var table, and set uses
+			
+			//insert to var table
 			varTable.insertVar(controlVarName);
-			uses.setUses(progLine,controlVarName);
 			//end insertion
+
+			//set uses
+			uses.setUses(progLine,controlVarName);
+			
+			for(unsigned int index=0;index<containerNode.size();index++){
+				Node* currPointer = containerNode[index];
+				int currProgLine = currPointer->getProgLine();
+				if(currProgLine > 0){
+					uses.setUses(currProgLine,controlVarName);
+				}
+			}
+			//end set uses
 			
 			int index = containerNode.size()-1;
 			Node* currParent = containerNode[index];
@@ -470,15 +506,28 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			Node* modifiedVar = new Node(tokens[0],"variable",progLine);
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
 
-			//insert to var table and set modifies
+			//insert to var table
 			varTable.insertVar(tokens[0]); //insert left side variable
-			modifies.setModifies(progLine,tokens[0]);
 			//end insertion
+			
+			//set modifies
+			modifies.setModifies(progLine,tokens[0]);
+			
+			for(unsigned int index=0;index<containerNode.size();index++){
+				Node* currPointer = containerNode[index];
+				int currProgLine = currPointer->getProgLine();
+				if(currProgLine > 0){
+					modifies.setModifies(currProgLine,tokens[0]);
+				}
+			}
+			//end set modifies
+
+
 
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
 			
-			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,uses);
+			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,uses,containerNode);
 
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
