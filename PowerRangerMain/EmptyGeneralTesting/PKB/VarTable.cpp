@@ -62,3 +62,11 @@ VARINDEX VarTable::getVarIndex (VARNAME varName){
 int VarTable::getNumVar() {
 	return variableTable.size();
 }
+
+vector<VARINDEX> VarTable::getAllVarIndex() {
+	vector<VARINDEX> toReturn;
+	for (int i=0; i< (signed int) variableTable.size(); i++) {
+		toReturn.emplace_back(i);
+	}
+	return toReturn; 
+}

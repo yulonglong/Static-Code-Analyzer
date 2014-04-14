@@ -45,5 +45,7 @@ void VarTableTest::testTableSet()
 	// attempt to retrieve a course that does not exist
 	CPPUNIT_ASSERT_EQUAL(-1, varTable.getVarIndex("a"));
 
+	vector<VARINDEX> v = varTable.getAllVarIndex();
+	CPPUNIT_ASSERT_EQUAL(3, (signed int) v.size());
 	return;
 }

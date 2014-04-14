@@ -26,6 +26,7 @@ public:
 	VARNAME getVarName (VARINDEX);
 	VARINDEX getVarIndex (VARNAME);
 	int getNumVar(); 
+	vector<VARINDEX> getAllVarIndex(); 
 };
 
 #endif
