@@ -7,9 +7,7 @@ class QueryEvaluatorTest: public CPPUNIT_NS::TestFixture
 {
 	CPPUNIT_TEST_SUITE( QueryEvaluatorTest );
 	CPPUNIT_TEST( testEvaluateFollows );
-	CPPUNIT_TEST( testEvaluateFollowsBoolean );
 	CPPUNIT_TEST( testEvaluateParent );
-	CPPUNIT_TEST( testEvaluateParentBoolean );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -17,9 +15,7 @@ public:
 	void tearDown();
 
 	void testEvaluateFollows();
-	void testEvaluateFollowsBoolean();
 	void testEvaluateParent();
-	void testEvaluateParentBoolean();
 
 };
 #endif
