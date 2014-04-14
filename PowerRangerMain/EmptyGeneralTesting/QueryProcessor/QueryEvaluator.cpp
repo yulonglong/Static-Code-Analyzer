@@ -143,8 +143,14 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 									}
 		case Relationship::PATTERN:
-			{
-				answers.push_back(evaluatePattern(token1, token2));
+			{	
+				//code to get syn-assign
+				//if(q.getSelectedSyn().compare(syn-assign) == 0)
+					answers.push_back(evaluatePattern(token1, token2));
+				//else {
+				//	vector<int> proxy = evaluatePattern(token1, token2);
+				//	if(proxy.size()==0)
+				//		answers.push_back(proxy);
 			}
 		}
 	}
