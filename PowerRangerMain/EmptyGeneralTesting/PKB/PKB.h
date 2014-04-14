@@ -53,18 +53,6 @@ public:
 
 	void setASTRoot(Node* newASTRoot);
 
-	//void setVarTable(VarTable newVarTable);
-	//void setProcTable(ProcTable newProcTable);
-	//void setTypeTable(TypeTable newTypeTable);
-	//void setParent(Parent newParent);
-	//void setFollows(Follows newFollows);
-	//void setModifies(Modifies newModifies);
-	//void setUses(Uses newUses);
-	
-	
-	//void updateVarTable();
-	//void updateProcTable();
-	//void updateTypeTable();
 };
 
 #endif

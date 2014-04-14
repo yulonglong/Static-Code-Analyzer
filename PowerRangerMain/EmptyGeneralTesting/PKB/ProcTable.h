@@ -10,7 +10,7 @@
 #include <iterator>
 
 using namespace std;
-typedef int INDEX;
+typedef int PROCINDEX;
 typedef string PROCNAME; 
 
 class ProcTable {
@@ -22,10 +22,10 @@ public:
 	ProcTable();
 	~ProcTable();
 	static ProcTable* getInstance();	// to be used to get instance of singleton class 
-	INDEX insertProc(PROCNAME);
-	PROCNAME getProcName (INDEX);
-	INDEX getProcIndex (PROCNAME);
-	INDEX getNumProcedures(); 
+	PROCINDEX insertProc(PROCNAME);
+	PROCNAME getProcName (PROCINDEX);
+	PROCINDEX getProcIndex (PROCNAME);
+	int getNumProcedures(); 
 
 };
 

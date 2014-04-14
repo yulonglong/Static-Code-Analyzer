@@ -82,7 +82,7 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 
 }
 
-bool Follows::isFollows(TypeTable::SynType t, STMTNUM s) {
+bool Follows::isFollows(TYPE t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -91,7 +91,7 @@ bool Follows::isFollows(TypeTable::SynType t, STMTNUM s) {
 	return true;
 }
 
-bool Follows::isFollowedBy(TypeTable::SynType t, STMTNUM s) {
+bool Follows::isFollowedBy(TYPE t, STMTNUM s) {
 	STMTNUM result = getFollowedBy(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -100,7 +100,7 @@ bool Follows::isFollowedBy(TypeTable::SynType t, STMTNUM s) {
 	return true;
 }
 
-bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
+bool Follows::isFollows(TYPE t1, TYPE t2) {
 	STMTNUM j = -1; 
 	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
 		j = -1; 
@@ -139,7 +139,7 @@ bool Follows::isFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
 	return false;
 }
 
-STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
+STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
 	STMTNUM num = -1;
 	try {
 		num = followsTable.at(s);
@@ -157,7 +157,7 @@ STMTNUM Follows::getFollows(TypeTable::SynType t, STMTNUM s) {
 }
 
 
-STMTNUM Follows::getFollowedBy(TypeTable::SynType t, STMTNUM s) {
+STMTNUM Follows::getFollowedBy(TYPE t, STMTNUM s) {
 	int num = -1; 
 	
 	try {
@@ -173,7 +173,7 @@ STMTNUM Follows::getFollowedBy(TypeTable::SynType t, STMTNUM s) {
 	return -1; 
 }
 
-vector<STMTNUM> Follows::getFollows(TypeTable::SynType t1, TypeTable::SynType t2) {
+vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
@@ -215,7 +215,7 @@ vector<STMTNUM> Follows::getFollows(TypeTable::SynType t1, TypeTable::SynType t2
 	return list;
 }
 
-vector<STMTNUM> Follows::getFollowedBy(TypeTable::SynType t1, TypeTable::SynType t2) {
+vector<STMTNUM> Follows::getFollowedBy(TYPE t1, TYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {

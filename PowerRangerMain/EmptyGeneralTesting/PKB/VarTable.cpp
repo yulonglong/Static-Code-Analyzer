@@ -28,7 +28,7 @@ VarTable* VarTable::getInstance() {
 
 // If varName is not in the VarTable, inserts varName into the
 // VarTable and returns its index. Otherwise, return its index and the table remains unchanged.
-INDEX VarTable::insertVar(VARNAME varName) {
+VARINDEX VarTable::insertVar(VARNAME varName) {
 	int varIndex = getVarIndex(varName);
 	bool containsVar = (varIndex != -1);
 		
@@ -42,7 +42,7 @@ INDEX VarTable::insertVar(VARNAME varName) {
 
 // Returns the name of a variable at VarTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
-VARNAME VarTable::getVarName (INDEX ind){
+VARNAME VarTable::getVarName (VARINDEX ind){
 	if (ind >= (signed int) variableTable.size()) {
 		return "-1";
 	}
@@ -50,7 +50,7 @@ VARNAME VarTable::getVarName (INDEX ind){
 }
 
 // If varName is in VarTable, returns its index; otherwise, returns -1 (special value)
-INDEX VarTable::getVarIndex (VARNAME varName){
+VARINDEX VarTable::getVarIndex (VARNAME varName){
 	for(std::vector<VARNAME>::size_type i = 0; i != variableTable.size(); i++) {
 		if (varName == variableTable[i]) {
 			return i; 
@@ -59,6 +59,6 @@ INDEX VarTable::getVarIndex (VARNAME varName){
 	return -1;
 }
 
-INDEX VarTable::getNumVar() {
+int VarTable::getNumVar() {
 	return variableTable.size();
 }
