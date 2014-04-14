@@ -70,6 +70,7 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 		childrenTable.resize(s2+1, -1);
 	}
 	childrenTable[s2] = s1; 
+	cout << "Set parent (" << s1 << ", " << s2 << ")" << endl; 
 }
 
 bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
@@ -151,6 +152,7 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2, STMTNUM s) {
 			return typeTable->getAllStmts(t1);
 		}
 	}catch(...){
+		cout<<"error";
 	}
 	return vector<STMTNUM> (1,-1);
 }
@@ -209,6 +211,7 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 }
 
 vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
+	cout<<"getParent("<<t1<<","<<t2<<endl;
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
 	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
