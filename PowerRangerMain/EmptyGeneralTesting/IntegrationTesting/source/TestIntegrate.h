@@ -7,7 +7,6 @@
 class IntegrateTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( IntegrateTest ); // Note 3 
-	CPPUNIT_TEST( testModifyTable );
 	CPPUNIT_TEST( testParserSource2 );
 	CPPUNIT_TEST( testPQLSource1 );
 	CPPUNIT_TEST_SUITE_END();
@@ -15,9 +14,6 @@ class IntegrateTest : public CPPUNIT_NS::TestFixture // Note 2
 public:
 	void setUp();
 	void tearDown();
-
-	// method to test the constructor
-	void testModifyTable();
 
 	// method to test the assigning and retrieval of grades
 	void testParserSource2();
