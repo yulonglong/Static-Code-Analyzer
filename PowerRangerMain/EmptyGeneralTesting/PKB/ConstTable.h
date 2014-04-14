@@ -11,7 +11,7 @@
 
 using namespace std;
 typedef int CONSTINDEX;
-typedef int CONSTVALUE; 
+typedef string CONSTVALUE; 
 
 class ConstTable {
 private: 
