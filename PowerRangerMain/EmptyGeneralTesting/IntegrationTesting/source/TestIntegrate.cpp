@@ -643,7 +643,7 @@ void IntegrateTest::testParserSource2()
 	vec = qe.evaluateQuery(q25);
 	cout<<"After evaluating"<<endl;
 	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
+		cout<<"HI"<<*i<<endl;
 	}
 	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
