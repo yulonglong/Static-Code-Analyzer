@@ -82,6 +82,7 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 
 vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
 	try{
+
 		INDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> ans;
 		for(size_t i=0;i<usesTable.size();i++){
@@ -89,7 +90,9 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
-					if(typeTable->isType(t,i))
+					if(t==TypeTable::STMT)
+						ans.push_back(i);
+					else if(typeTable->isType(t,i))
 						ans.push_back(i);
 				}
 			}
