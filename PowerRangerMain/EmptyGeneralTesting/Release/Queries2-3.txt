@@ -6,7 +6,7 @@ Select a such that Follows(_,_)
 1,2,3,6,8,10,13,14,15,17,18,19,20
 5000
 2 - Typed, ImplStmtLine :: What are all the assignment statement lines
-variable v; 
-Select v
-around 19
+assign a; 
+Select a such that Parent(a,_)
+1 2 3 6 10 13 14 21
 5000
