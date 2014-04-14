@@ -25,6 +25,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( IntegrateTest ); // Note 4
 
 void IntegrateTest::testModifyTable()
 {  // Note 5
+	/*
 	
 	PKB *pkb;
 	pkb = PKB::getInstance();
@@ -99,123 +100,7 @@ void IntegrateTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
 	
 	return;
-	
-}
-
-void IntegrateTest::testCompleteParser()
-{
-	
-	// create a node
-	PKB* pkb;
-	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
-
-	
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Node* root = pkb->getASTRoot();
-		
-	Node* curr = root;
-	curr = root->getChild()[0];
-	curr = curr->getChild()[0];
-	curr = curr->getChild()[0];
-
-	string expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-
-	expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-	
-	// verify that the assignment is correct - Note 7
-	
-
-	return;
-	
-}
-
-
-void IntegrateTest::testParserSource1()
-{
-	
-	PKB* pkb;
-	pkb = PKB::getInstance();
-	parserDriver("Source1.txt",pkb);
-
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Node* root = pkb->getASTRoot();
-
-	Node* curr = root;
-	
-	string expected = "root";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "program";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-	expected = "Mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "procedure";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "Mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-	expected = "A1";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-    curr = root;
-
-	curr = curr->getChild()[1];
-	expected = "mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "procedure";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[0];
-    expected = "mini";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "stmtLst";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[1];
-    expected = "=";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "assign";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	curr = curr->getChild()[1];
-	expected = "A1";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
-	expected = "variable";
-	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
-
-	return;
-	
+*/	
 }
 
 void IntegrateTest::testParserSource2()
@@ -278,11 +163,11 @@ void IntegrateTest::testParserSource2()
 	string s10 = "stmt s; Select s such that Parent(s, 9)";
 	string s11 = "while w; Select w such that Parent(w, 11)";
 	string s12 = "assign a; Select a such that Parent(a, 3)";
-	// string s13 = "while w; assign a; Select w such that Parent(w, a)";
-	string s13 = "while w, assign a; Select w such that Parent(w, a)";
+	string s13 = "while w; assign a; Select w such that Parent(w, a)";
 	string s14 = "Select BOOLEAN such that Parent(4, 9)";
-	string s15 = "while w; Select BOOLEAN such that Parent(4, w)";
-	string s16 = "assign a; Select a such that Parent(11, a)";
+	string s15 = "while w; Select w such that Parent(4, w)";
+	string s16 = "assign a; Select a such that Parent*(11, a)";
+	string s17 = "while w; Select w such that Parent*(w, 17)";
 
 	// TODO: run query parser;
 	QueryParser qp;
@@ -461,13 +346,9 @@ void IntegrateTest::testParserSource2()
 	
 	vec.clear();
 	vec = qe.evaluateQuery(q8);
-	bool a = f->isFollows(6, 10);
-	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
-	}
 
-	//CPPUNIT_ASSERT_EQUAL(10, vec[0]);
-	//CPPUNIT_ASSERT_EQUAL(11, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(10, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[1]);
 
 	//Query 9 Select BOOLEAN such that Follows*(1, 3)
 	qp.validate(s9);
@@ -504,7 +385,7 @@ void IntegrateTest::testParserSource2()
 	vec = qe.evaluateQuery(q10);
 	CPPUNIT_ASSERT_EQUAL(5, vec[0]);
 
-	/*
+	
 	//Query 11 while w; Select w such that Parent(w, 11)
 	qp.validate(s11);
 	Query q11 = qp.parse();
@@ -513,36 +394,311 @@ void IntegrateTest::testParserSource2()
 	unordered_map<string, TypeTable::SynType> m11 = q11.getSynTable();
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r11.getRelType());
-	expected = "s";
+	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, q11.getSelectedSyn());
-	expected = "s";
+	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r11.getToken1());
-	expected = "9";
+	expected = "11";
 	CPPUNIT_ASSERT_EQUAL(expected, r11.getToken2()); 
 
-	vec = qe.evaluateQuery(q10);
+	vec = qe.evaluateQuery(q11);
+	CPPUNIT_ASSERT_EQUAL(9, vec[0]);
+
+	//Query 12 assign a; Select a such that Parent(a, 3)
+	qp.validate(s12);
+	Query q12 = qp.parse();
+	v = q12.getRelVect();
+	Relationship r12 = v[0];
+	unordered_map<string, TypeTable::SynType> m12 = q12.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r12.getRelType());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, q12.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r12.getToken1());
+	expected = "3";
+	CPPUNIT_ASSERT_EQUAL(expected, r12.getToken2()); 
+
+	vec = qe.evaluateQuery(q12);
+	CPPUNIT_ASSERT_EQUAL(-1, vec[0]);
+	
+	//Query 13 while w; assign a; Select w such that Parent(w, a)
+	qp.validate(s13);
+	Query q13 = qp.parse();
+	v = q13.getRelVect();
+	Relationship r13 = v[0];
+	unordered_map<string, TypeTable::SynType> m13 = q13.getSynTable();
+	
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r13.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q13.getSelectedSyn());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, r13.getToken1());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r13.getToken2()); 
+
+	vec = qe.evaluateQuery(q13);
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(7, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(9, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
+	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+
+	//Query 14 Select BOOLEAN such that Parent(4, 9)
+	qp.validate(s14);
+	Query q14 = qp.parse();
+	v = q14.getRelVect();
+	Relationship r14 = v[0];
+	unordered_map<string, TypeTable::SynType> m14 = q14.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r14.getRelType());
+	expected = "BOOLEAN";
+	CPPUNIT_ASSERT_EQUAL(expected, q14.getSelectedSyn());
+	expected = "4";
+	CPPUNIT_ASSERT_EQUAL(expected, r14.getToken1());
+	expected = "9";
+	CPPUNIT_ASSERT_EQUAL(expected, r14.getToken2()); 
+
+	CPPUNIT_ASSERT_EQUAL(false, qe.evaluateQueryBoolean(q14));
+
+	//Query 15 while w; Select w such that Parent(4, w)
+	qp.validate(s15);
+	Query q15 = qp.parse();
+	v = q15.getRelVect();
+	Relationship r15 = v[0];
+	unordered_map<string, TypeTable::SynType> m15 = q15.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r15.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q15.getSelectedSyn());
+	expected = "4";
+	CPPUNIT_ASSERT_EQUAL(expected, r15.getToken1());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, r15.getToken2()); 
+
+	vec = qe.evaluateQuery(q15);
 	CPPUNIT_ASSERT_EQUAL(5, vec[0]);
 
-	/*
-	Query q3 = qp.parse(s3);
-	Query q4 = qp.parse(s4);
-	Query q5 = qp.parse(s5);
-	Query q6 = qp.parse(s6);
-	Query q7 = qp.parse(s7);
-	Query q8 = qp.parse(s8);
-	Query q9 = qp.parse(s9);
-	Query q10 = qp.parse(s10);
-	Query q11 = qp.parse(s11);
-	Query q12 = qp.parse(s12);
-	Query q13 = qp.parse(s13);
-	Query q14 = qp.parse(s14);
-	Query q15 = qp.parse(s15);
-	Query q16 = qp.parse(s16);
+	//Query 16 assign a; Select a such that Parent*(11, a)
+	qp.validate(s16);
+	Query q16 = qp.parse();
+	v = q16.getRelVect();
+	Relationship r16 = v[0];
+	unordered_map<string, TypeTable::SynType> m16 = q16.getSynTable();
 
-	// TODO: run evaluate on query
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENTSTAR, r16.getRelType());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, q16.getSelectedSyn());
+	expected = "11";
+	CPPUNIT_ASSERT_EQUAL(expected, r16.getToken1());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r16.getToken2()); 
 
-	// TODO: compare result with expected result
- */
+	vec = qe.evaluateQuery(q16);
+	CPPUNIT_ASSERT_EQUAL(13, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(14, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(15, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(17, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(18, vec[4]);
+
+	//Query 17 while w; Select w such that Parent*(w, 17)
+	qp.validate(s17);
+	Query q17 = qp.parse();
+	v = q17.getRelVect();
+	Relationship r17 = v[0];
+	unordered_map<string, TypeTable::SynType> m17 = q17.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENTSTAR, r17.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q17.getSelectedSyn());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, r17.getToken1());
+	expected = "17";
+	CPPUNIT_ASSERT_EQUAL(expected, r17.getToken2()); 
+
+	vec = qe.evaluateQuery(q17);
+
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(9, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(16, vec[4]);
+
+
+	//MODIFIES AND USES TESTS
+	//Query 18
+	string s18 = "assign a; Select a such that Modifies(a, \"x\")";
+	qp.validate(s18);
+	Query q18 = qp.parse();
+	v = q18.getRelVect();
+	Relationship r18 = v[0];
+	unordered_map<string, TypeTable::SynType> m18 = q18.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r18.getRelType());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, q18.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r18.getToken1());
+	expected = "\"x\"";
+	CPPUNIT_ASSERT_EQUAL(expected, r18.getToken2()); 
+	
+	vec = qe.evaluateQuery(q18);
+	CPPUNIT_ASSERT_EQUAL(10, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(18, vec[1]);
+
+	//Query 19
+	string s19 = "stmt s; Select s such that Modifies(s, \"Romeo\")";
+	qp.validate(s19);
+	Query q19 = qp.parse();
+	v = q19.getRelVect();
+	Relationship r19 = v[0];
+	unordered_map<string, TypeTable::SynType> m19 = q19.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r19.getRelType());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, q19.getSelectedSyn());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, r19.getToken1());
+	expected = "\"Romeo\"";
+	CPPUNIT_ASSERT_EQUAL(expected, r19.getToken2()); 
+
+	vec = qe.evaluateQuery(q19);
+	CPPUNIT_ASSERT_EQUAL(13, vec[0]);
+
+	//Query 20
+	string s20 = "assign a; variable v; Select s such that Modifies(a, v)";
+	qp.validate(s20);
+	Query q20 = qp.parse();
+	v = q20.getRelVect();
+	Relationship r20 = v[0];
+	unordered_map<string, TypeTable::SynType> m20 = q20.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r20.getRelType());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, q20.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r20.getToken1());
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, r20.getToken2()); 
+
+	vec = qe.evaluateQuery(q20);
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(6, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(8, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(10, vec[5]);
+	CPPUNIT_ASSERT_EQUAL(13, vec[6]);
+	CPPUNIT_ASSERT_EQUAL(14, vec[7]);
+	CPPUNIT_ASSERT_EQUAL(15, vec[8]);
+	CPPUNIT_ASSERT_EQUAL(17, vec[9]);
+	CPPUNIT_ASSERT_EQUAL(18, vec[10]);
+	CPPUNIT_ASSERT_EQUAL(19, vec[11]);
+	CPPUNIT_ASSERT_EQUAL(20, vec[12]);
+	CPPUNIT_ASSERT_EQUAL(21, vec[13]);
+	CPPUNIT_ASSERT_EQUAL(22, vec[14]);
+	CPPUNIT_ASSERT_EQUAL(23, vec[15]);
+
+	//Query 21
+	string s21 = "while w; assign a; variable v; Select w such that Modifies(a, v)";
+	qp.validate(s21);
+	Query q21 = qp.parse();
+	v = q21.getRelVect();
+	Relationship r21 = v[0];
+	unordered_map<string, TypeTable::SynType> m21 = q21.getSynTable();
+	std::unordered_map<string, TypeTable::SynType>::iterator i = m21.find(q21.getSelectedSyn());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, i->first);
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r21.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q21.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r21.getToken1());
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, r21.getToken2()); 
+
+	vec = qe.evaluateQuery(q21);
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(7, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(9, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
+	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+
+	//Query 22
+	string s22 = "while w; assign a; variable v; Select w such that Uses(a, v)";
+	qp.validate(s22);
+	Query q22 = qp.parse();
+	v = q22.getRelVect();
+	Relationship r22 = v[0];
+	unordered_map<string, TypeTable::SynType> m22 = q22.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r22.getRelType());
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, q22.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r22.getToken1());
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, r22.getToken2()); 
+
+	vec = qe.evaluateQuery(q22);
+	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(7, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(9, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
+	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+
+	//Query 23
+	string s23 = "stmt s; Select s such that Modifies(s, \"x\")";
+	qp.validate(s23);
+	Query q23 = qp.parse();
+	v = q23.getRelVect();
+	Relationship r23 = v[0];
+	unordered_map<string, TypeTable::SynType> m23 = q23.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r23.getRelType());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, q23.getSelectedSyn());
+	expected = "s";
+	CPPUNIT_ASSERT_EQUAL(expected, r23.getToken1());
+	expected = "\"x\"";
+	CPPUNIT_ASSERT_EQUAL(expected, r23.getToken2()); 
+
+	vec = qe.evaluateQuery(q23);
+	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}
+	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+
+	//Query 24 Select boolean such that follows*(4 19)
+	string s24 = "Select BOOLEAN such that Follows*(4, 19)";
+	qp.validate(s24);
+	Query q24 = qp.parse();
+	v = q24.getRelVect();
+	Relationship r24 = v[0];
+	unordered_map<string, TypeTable::SynType> m24 = q24.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r24.getRelType());
+	expected = "BOOLEAN";
+	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
+	expected = "4";
+	CPPUNIT_ASSERT_EQUAL(expected, r24.getToken1());
+	expected = "19";
+	CPPUNIT_ASSERT_EQUAL(expected, r24.getToken2()); 
+
+	bool flag = qe.evaluateQueryBoolean(q24);
+	cout<<"FLAG IS"<<flag<<endl;
+	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
  }
+
 
  
