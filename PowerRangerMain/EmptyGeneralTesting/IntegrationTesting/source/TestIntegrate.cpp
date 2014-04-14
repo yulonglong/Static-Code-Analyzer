@@ -619,6 +619,33 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
 	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
 	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+	
+	
+	//Query 25
+	string s25 = "assign a; Select a such that Follows(a, _)";
+	bool flag = qp.validate(s25);
+	cout<<"Flag is" <<flag<<endl;
+	Query q25 = qp.parse();
+	cout<<"After parse"<<endl;
+	v = q25.getRelVect();
+	Relationship r25 = v[0];
+	unordered_map<string, TypeTable::SynType> m25 = q25.getSynTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r25.getRelType());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn());
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken1());
+	expected = "_";
+	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
+
+	cout<<"Before evaluating"<<endl;
+	vec = qe.evaluateQuery(q25);
+	cout<<"After evaluating"<<endl;
+	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}
+	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
  }
 

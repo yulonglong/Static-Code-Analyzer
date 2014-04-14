@@ -36,4 +36,12 @@ string Relationship::getToken2()
     return token2;
 }
 
+void Relationship::setToken1(string tk1){
+	token1 = tk1;
+}
+
+void Relationship::setToken2(string tk2){
+	token2 = tk2;
+}
+
 

@@ -16,21 +16,46 @@ QueryEvaluator::~QueryEvaluator(){
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
+	cout<<"In evaluateQuery"<<endl;
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
-
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
-
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		string token1 = it->getToken1();
 		string token2 = it->getToken2();
+
+		if(token1==token2){
+			answers.clear();
+			break;
+		}
+
 		string selectedSyn = q.getSelectedSyn();
 		unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
+
+		if(token1=="_"){
+			it->setToken1("s1");
+			m.insert(make_pair<string, TypeTable::SynType>("s1", TypeTable::STMT));
+			q.setSynTable(m);
+		}
+
+		if(token2=="_" && ((it->getRelType())!=Relationship::MODIFIES) && ((it->getRelType())!=Relationship::USES)){
+			it->setToken2("s2");
+			m.insert(make_pair<string, TypeTable::SynType>("s2", TypeTable::STMT));
+			q.setSynTable(m);
+		}
+
+		if(token2=="_" && (((it->getRelType())==Relationship::MODIFIES) || ((it->getRelType())==Relationship::USES))){
+			it->setToken2("v");
+			m.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+			q.setSynTable(m);
+		}
+
+		cout<<"here1"<<endl;
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {	
-
+			cout<<"In Follows"<<endl;
 			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
@@ -128,7 +153,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
 		answers.push_back(t->getAllStmts(i->second));
 	}
-
+	cout<<"here2"<<endl;
 	return intersectAnswers(answers);	
 }
 
