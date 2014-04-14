@@ -21,11 +21,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<vector<int>> answers;
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
+	cout<<"Before for loop"<<endl;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+
 		string token1 = it->getToken1();
 		string token2 = it->getToken2();
 
-		if(token1==token2){
+		if(token1==token2 && token1!="_"){
 			answers.clear();
 			break;
 		}
@@ -52,7 +54,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			q.setSynTable(m);
 		}
 
-		cout<<"here1"<<endl;
+		cout<<"just before switch"<<endl;
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {	
 			cout<<"In Follows"<<endl;
@@ -162,8 +164,6 @@ vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 	if(!ans.empty()){
 		vector<int> first = ans[0];
 		vector<int> queryAnswers;
-		cout<<"Before for loop"<<endl;
-		cout<<"FIRST IS EMPTY: "<<first.empty()<<endl;
 		for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
 			cout<<"In 1st for loop"<<endl;
 			bool insert = true;
