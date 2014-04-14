@@ -622,7 +622,7 @@ void IntegrateTest::testParserSource2()
 	
 	
 	//Query 25
-	string s25 = "assign a; Select a such that Follows(a, _)";
+	string s25 = "assign a; Select a such that Follows(_ , _)";
 	bool flag = qp.validate(s25);
 	cout<<"Flag is" <<flag<<endl;
 	Query q25 = qp.parse();
@@ -634,7 +634,7 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r25.getRelType());
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn());
-	expected = "a";
+	expected = "_";
 	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken1());
 	expected = "_";
 	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
