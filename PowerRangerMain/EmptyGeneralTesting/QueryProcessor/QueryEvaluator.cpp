@@ -156,6 +156,9 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		if(i->second!=TypeTable::VARIABLE){
 			answers.push_back(t->getAllStmts(i->second));
 		}
+		else if(i->second==TypeTable::PROGLINE){
+			answers.push_back(t->getAllStmts(TypeTable::STMT));
+		}
 		else{
 			VarTable *v = pkb->getVarTable();
 			answers.push_back(v->getAllVarIndex());
