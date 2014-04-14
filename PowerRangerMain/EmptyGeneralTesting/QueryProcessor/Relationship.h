@@ -23,6 +23,8 @@ class Relationship
         RelType getRelType();
         string getToken1();
         string getToken2();
+		void setToken1(string);
+		void setToken2(string);
 
 };
 
