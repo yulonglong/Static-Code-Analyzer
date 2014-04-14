@@ -534,10 +534,11 @@ bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_ma
 	if(isdigit(tk1[0]) && isdigit(tk2[0])){
 		stmtnum = atoi(tk2.c_str());
 		while(stmtnum!=-1){
+			cout<<"STMTNUM IS "<<stmtnum<<endl;
 			stmtnum = p->getParent(stmtnum);
-			if(stmtnum==atoi(tk2.c_str()))
+			if(stmtnum==atoi(tk1.c_str()))
 				flag = true;
-			if(stmtnum<atoi(tk2.c_str()))
+			if(stmtnum<atoi(tk1.c_str()))
 				break;
 		}
 	}
