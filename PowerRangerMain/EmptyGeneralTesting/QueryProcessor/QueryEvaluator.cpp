@@ -153,7 +153,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		string selectedSyn = q.getSelectedSyn();
 		unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
-		answers.push_back(t->getAllStmts(i->second));
+		if(i->second!=TypeTable::VARIABLE){
+			answers.push_back(t->getAllStmts(i->second));
+		}
+		else{
+			VarTable *v = pkb->getVarTable();
+			answers.push_back(v->getAllVarIndex());
+		}
 	}
 	cout<<"here2"<<endl;
 	return intersectAnswers(answers);	
