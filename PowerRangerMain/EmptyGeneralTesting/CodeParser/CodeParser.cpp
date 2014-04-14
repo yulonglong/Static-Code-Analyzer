@@ -35,7 +35,7 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 				type="constant";
 
 				//set constTable
-				//constTable.insertConst(tokens[i]);
+				constTable.insertConst(tokens[i]);
 				//end setting of constTable
 			}
 			else{
