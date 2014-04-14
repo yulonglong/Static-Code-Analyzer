@@ -1,5 +1,5 @@
 14
-cat: Iteration 2 requirements but only Follows and Parent relationships
+cat: Pattern relationships
 1 - Pattern ImplStmtLine ::
 assign a; while w;
 Select a pattern a ("b", _)
@@ -13,7 +13,7 @@ Select a pattern a ("lacie", _)
 3 - Pattern ImplStmtLine ::
 assign a; while w;
 Select a such that Follows (a, w) pattern a ("d",_)
-4, 5, 6
+6
 5000
 4 - Pattern ImplStmtLine ::
 assign a; while w;

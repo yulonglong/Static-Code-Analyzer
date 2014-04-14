@@ -1,13 +1,13 @@
 procedure YuLongLong{
-	a = 7;
-b=6;
-c=5;
-d=a;
-d=d+2;
-d= a+b+c+d;
-while hakase{
+	a = 7; 
+b=6;	
+c=5;		
+d=a;		
+d=d+2;		
+d= a+b+c+d;		
+while hakase{	
 	lacie = 10;
-natalie = 9;
+natalie = 9;		
 	f = lacie+natalie+a+b+c;
-	g = a+c+b+f;}
+	g = a+c+b+f;}	
 }

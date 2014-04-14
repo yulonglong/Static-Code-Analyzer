@@ -122,20 +122,20 @@ void FollowsTest::testGetFollowsUsingStmtType() {
 	
 	vector<STMTNUM> list = follows->getFollows(TypeTable::WHILE, TypeTable::IF); 
 	CPPUNIT_ASSERT(list.size() == 1);	
-	CPPUNIT_ASSERT(list.at(0) == 6);	
+	CPPUNIT_ASSERT(list.at(0) == 10);	
 
 	list = follows->getFollowedBy(TypeTable::WHILE, TypeTable::IF); 
 	CPPUNIT_ASSERT(list.size() == 1);	
-	CPPUNIT_ASSERT(list.at(0) == 10);	
+	CPPUNIT_ASSERT(list.at(0) == 6);	
 	
 
 	list = follows->getFollows(TypeTable::ASSIGN, TypeTable::WHILE); 
 	CPPUNIT_ASSERT(list.size() == 1);	
-	CPPUNIT_ASSERT(list.at(0) == 5);	
+	CPPUNIT_ASSERT(list.at(0) == 6);	
 
 	list = follows->getFollowedBy(TypeTable::ASSIGN, TypeTable::WHILE); 
 	CPPUNIT_ASSERT(list.size() == 1);	
-	CPPUNIT_ASSERT(list.at(0) == 6);	
+	CPPUNIT_ASSERT(list.at(0) == 5);	
 	
 	/*
 	cout << list.size() << endl;
