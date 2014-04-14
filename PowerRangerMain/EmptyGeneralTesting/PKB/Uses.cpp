@@ -63,7 +63,6 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 		usesTable[s] = temp1;
 	}catch(...){
 	}
-	cout << "Set Uses(" << s << ", " << v << ")" << endl; 
 }
 
 bool Uses::isUses(STMTNUM s, VARNAME v){
@@ -83,6 +82,7 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 
 vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
 	try{
+
 		VARINDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> ans;
 		for(size_t i=0;i<usesTable.size();i++){
@@ -90,15 +90,13 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
-					if(t==TypeTable::STMT){
+					if(t==TypeTable::STMT)
 						ans.push_back(i);
-					}
-					else if(typeTable->isType(t,i)){
+					else if(typeTable->isType(t,i))
 						ans.push_back(i);
-					}
 				}
 			}
-		}		
+		}
 		if(ans.empty())
 			return vector<int> (1,-1);
 		else

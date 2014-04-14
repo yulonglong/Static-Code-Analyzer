@@ -17,7 +17,7 @@ void ParentTest::setUp() {
 }
 
 void ParentTest::tearDown() {
-	parent->~Parent(); 
+	parent->~Parent();
 }
 
 // Registers the fixture into the 'registry'
@@ -39,6 +39,8 @@ void ParentTest::testParentUsingStmtNum() {  // Note 5
 
 void ParentTest::testParentUsingStmtType() {
 	parent->setParent(6, 7);
+	//parent->setParent(6, 20);
+	////parent->setParent(20, 21);
 	parent->setParent(6, 8);
 	parent->setParent(6, 9);
 	parent->setParent(10, 11);
@@ -50,12 +52,17 @@ void ParentTest::testParentUsingStmtType() {
 	typeTable->insertStmtNumAndType(10, TypeTable::IF);
 	typeTable->insertStmtNumAndType(11, TypeTable::ASSIGN);
 	typeTable->insertStmtNumAndType(12, TypeTable::ASSIGN);
+	//typeTable->insertStmtNumAndType(20, TypeTable::WHILE);
+	//typeTable->insertStmtNumAndType(21, TypeTable::WHILE);
 	
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 9) == true);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::IF, 12) == true);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 5) == false);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::CALL, 55) == false);
 	
+	//vector<int> ans (1,6);
+	//ans.push_back(20);
+	//CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE) == ans);
 	return;
 }
 
@@ -133,7 +140,7 @@ void ParentTest::testGetParent() {
 	ans.clear();
 	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
-	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,13) == ans);
+	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,100) == ans);
 
 	return;
 }
@@ -195,5 +202,29 @@ void ParentTest::testGetChildren() {
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,13) == ans);
 
+	return;
+}
+
+void ParentTest::testNew() {
+	parent->setParent(6, 7);
+	parent->setParent(6, 20);
+	parent->setParent(20, 21);
+	parent->setParent(6, 8);
+	parent->setParent(6, 9);
+	parent->setParent(10, 11);
+	parent->setParent(10, 12);
+	typeTable->insertStmtNumAndType(6, TypeTable::WHILE);
+	typeTable->insertStmtNumAndType(7, TypeTable::ASSIGN);
+	typeTable->insertStmtNumAndType(8, TypeTable::CALL);
+	typeTable->insertStmtNumAndType(9, TypeTable::ASSIGN);
+	typeTable->insertStmtNumAndType(10, TypeTable::IF);
+	typeTable->insertStmtNumAndType(11, TypeTable::ASSIGN);
+	typeTable->insertStmtNumAndType(12, TypeTable::ASSIGN);
+	typeTable->insertStmtNumAndType(20, TypeTable::WHILE);
+	typeTable->insertStmtNumAndType(21, TypeTable::WHILE);
+	
+	vector<int> ans (1,6);
+	ans.push_back(20);
+	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE) == ans);
 	return;
 }

@@ -15,6 +15,7 @@ class ParentTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST( testAllBoolean );
 	CPPUNIT_TEST( testGetParent );
 	CPPUNIT_TEST( testGetChildren );
+	CPPUNIT_TEST( testNew );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -26,6 +27,7 @@ public:
 	void testAllBoolean();
 	void testGetParent();
 	void testGetChildren();
+	void testNew();
 };
 #endif
     
