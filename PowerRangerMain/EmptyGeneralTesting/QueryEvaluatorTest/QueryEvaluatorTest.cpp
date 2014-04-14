@@ -33,10 +33,13 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	Follows *f = pkb->getFollows();
 	TypeTable *t = pkb->getTypeTable();
 	f->setFollows(1, 2);
+	cout<<"After setFollows"<<endl;
 	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+	cout<<"After inserting into table"<<endl;
 
 	
 	vector<int> vec = qe.evaluateQuery(q);
+	cout<<"After evaluateQuery"<<endl;
 	cout<<vec.empty()<<endl;
 	//cout<<vec[0]<<endl;
 	//CPPUNIT_ASSERT_EQUAL(1, vec[0]);

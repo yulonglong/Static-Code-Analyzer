@@ -21,7 +21,6 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
-	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		string token1 = it->getToken1();
@@ -121,6 +120,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 				answers.push_back(evaluatePattern(token1, token2));
 			}
 		}
+	}
+
+	if(relations.empty()){
+		string selectedSyn = q.getSelectedSyn();
+		unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
+		answers.push_back(t->getAllStmts(i->second));
 	}
 
 	return intersectAnswers(answers);	
