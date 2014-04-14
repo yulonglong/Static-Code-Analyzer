@@ -4,7 +4,17 @@
 using namespace std;
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, Uses &uses, const vector<Node*> &containerNode){
+bool isAllDigit(string input){
+	for(int i=0;i<(int)input.length();i++){
+		if(!isdigit(input[i])){
+			return false;
+		}
+	}
+	return true;
+}
+
+
+Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, ConstTable &constTable, Uses &uses, const vector<Node*> &containerNode){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -21,8 +31,12 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 		}
 		else{
 			string type;
-			if(isdigit(tokens[i][0])){
+			if(isAllDigit(tokens[i])){
 				type="constant";
+
+				//set constTable
+				//constTable.insertConst(tokens[i]);
+				//end setting of constTable
 			}
 			else{
 
@@ -44,6 +58,7 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 
 				type="variable";
 			}
+
 			Node* curr = new Node(tokens[i],type,newProgLine);
 			st.push(curr);
 		}
@@ -196,7 +211,7 @@ void tokenizeTokens(string word, vector<string> &storage){
 }
 
 //real parsing
-Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, Follows &follows,Parent &parent, Modifies &modifies, Uses &uses){
+Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, ConstTable &constTable, Follows &follows,Parent &parent, Modifies &modifies, Uses &uses){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -527,7 +542,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
 			
-			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,uses,containerNode);
+			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,constTable,uses,containerNode);
 
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
@@ -593,13 +608,20 @@ void parserDriver(string filename,PKB *pkb){
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();
 	TypeTable* typeTable = pkb->getTypeTable();
+	ConstTable* constTable = pkb->getConstTable();
 	Parent* parent = pkb->getParent();
 	Follows* follows = pkb->getFollows();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
 
 	Node* root = pkb->getASTRoot();
-	root = parseCode(filename,*varTable,*procTable,*typeTable,*follows,*parent,*modifies,*uses);
+
+	try{
+		root = parseCode(filename,*varTable,*procTable,*typeTable,*constTable,*follows,*parent,*modifies,*uses);
+	}
+	catch(...){
+		cout << "ERROR IN PARSING SOURCE CODE! EXCEPTION CAUGHT!" << endl;
+	}
 	pkb->setASTRoot(root);
 
 	//pkb.setVarTable(varTable);
