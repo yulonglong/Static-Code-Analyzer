@@ -30,6 +30,7 @@ private:
 	void bootstrap();
 
 	void generateTokens();
+	bool generateDeclarationTokens();
 	string getFirstToken();
 	string getNextToken();
 	bool generateStatements();
