@@ -1,5 +1,5 @@
 1
-cat: Iteration 2 requirements but only Follows and Parent relationships
+cat: Pattern
 1 - Pattern ImplStmtLine ::
 assign a; while w;
 aaaaaaaaaaaaaaaaaaaaaaaaa

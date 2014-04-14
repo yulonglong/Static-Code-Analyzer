@@ -117,18 +117,8 @@ bool Follows::isFollows(TYPE t1, TYPE t2) {
 
 		try {
 			if (j != -1) {
-				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
-					return true;
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					return true;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
-					// cout << i << "  " << j << endl; 
-					return true;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					return true;
+				if (typeTable->isType(t1, i) && typeTable->isType(t2, j)) {
+					return true; 
 				}
 			}
 		} catch (...) {
@@ -144,13 +134,10 @@ STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
 	try {
 		num = followsTable.at(s);
 	} 
-	//const std::out_of_range& oor
 	catch (std::out_of_range) {
-		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 		// cout<<"In catch block"<<endl;
 	}
 	if (num != -1 && typeTable->isType(t,num)){
-		//cout<<"NUM IS"<<num<<endl;
 		return num;
 	} 
 	return -1; 
@@ -159,15 +146,13 @@ STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
 
 STMTNUM Follows::getFollowedBy(TYPE t, STMTNUM s) {
 	int num = -1; 
-	
 	try {
 		num = followedByTable[s];
 	} 
-	//const std::out_of_range& oor
 	catch (...) {
-		// std::cerr << "Out of Range error: " << oor.what() << '\n';
+		return -1; 
 	}
-	if (num != -1 && typeTable->isType(t, num)){
+	if (num != 0 && num != -1 && typeTable->isType(t, num)){
 		return num;
 	} 
 	return -1; 
@@ -191,20 +176,8 @@ vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
 
 		try {
 			if (j != -1) {
-				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-
+				if (typeTable->isType(t1, i) && typeTable->isType(t2, j)) {
+					list.push_back(j);
 				}
 			}
 		} catch (...) {
@@ -233,21 +206,11 @@ vector<STMTNUM> Follows::getFollowedBy(TYPE t1, TYPE t2) {
 
 		try {
 			if (j != -1) {
-				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(j);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(j);
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->getType(i) == t1) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(j);
-
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->getType(i) == t1 && typeTable->getType(j) == t2) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(j);
-
+				if (typeTable->isType(t1, i) && typeTable->isType(t2, j)) {
+					cout << i << "  " << j << endl; 
+					list.push_back(i);
 				}
+
 			}
 		} catch (...) {
 			// if that stmtnum doesnt have a type in typetable
