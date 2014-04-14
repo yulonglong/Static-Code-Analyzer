@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConstTable.cpp" />
     <ClCompile Include="Follows.cpp" />
     <ClCompile Include="Modifies.cpp" />
     <ClCompile Include="Parent.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="VarTable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConstTable.h" />
     <ClInclude Include="Follows.h" />
     <ClInclude Include="Modifies.h" />
     <ClInclude Include="Parent.h" />

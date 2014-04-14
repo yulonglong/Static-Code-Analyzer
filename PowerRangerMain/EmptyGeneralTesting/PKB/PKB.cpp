@@ -46,6 +46,10 @@ TypeTable* PKB::getTypeTable(){
 	return typeTable;
 }
 
+ConstTable* PKB::getConstTable(){
+	return constTable;
+}
+
 Parent* PKB::getParent(){
 	return parent;
 }

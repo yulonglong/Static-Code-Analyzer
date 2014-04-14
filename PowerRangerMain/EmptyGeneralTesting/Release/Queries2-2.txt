@@ -46,7 +46,7 @@ Select s such that Parent*(s, 12)
 4,5,9,11
 5000
 10 - Parent*, ImplStmtLine ::
-stms s;
+stmt s;
 Select s such that Parent*(s, 11)
 4,5,9
 5000

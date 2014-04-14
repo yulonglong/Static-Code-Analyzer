@@ -10,6 +10,7 @@
 #include "ProcTable.h"
 #include "VarTable.h"
 #include "TypeTable.h"
+#include "ConstTable.h"
 #include "Parent.h"
 #include "Follows.h"
 #include "Node.h"
@@ -32,6 +33,7 @@ private:
 	VarTable *varTable;
 	ProcTable *procTable;
 	TypeTable *typeTable;
+	ConstTable *constTable;
 	Parent *parent;
 	Follows *follows;
 	Modifies *modifies;
@@ -45,6 +47,7 @@ public:
 	VarTable* getVarTable();
 	ProcTable* getProcTable();
 	TypeTable* getTypeTable();
+	ConstTable* getConstTable();
 	Parent* getParent();
 	Follows* getFollows();
 	Modifies* getModifies();
