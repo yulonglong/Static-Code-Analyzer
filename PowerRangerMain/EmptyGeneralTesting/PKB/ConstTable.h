@@ -23,6 +23,10 @@ public:
 	~ConstTable();
 	static ConstTable* getInstance();	// to be used to get instance of singleton class 
 	CONSTINDEX insertConst(CONSTVALUE);
+	CONSTVALUE getConst (CONSTINDEX);
+	CONSTINDEX getConstIndex (CONSTVALUE);
+	int getNumConst(); 
+	vector<CONSTINDEX> getAllConstIndex(); 
 };
 
 #endif
