@@ -273,7 +273,7 @@ void ParserTest::testFullParserOwnSource()
 	ifstream infile;
 	infile.open("expectedCodeParserTestIn.txt",ios::in);
 	if(infile.fail()){
-		cout << "expectedCodeParserTestIn.txt does not exists"<< endl;
+		cout << "expectedCodeParserTestIn.txt does not exist"<< endl;
 	}
 	else{
 		string word;
@@ -306,7 +306,7 @@ void ParserTest::testFullParserSource1()
 	ifstream infile;
 	infile.open("expectedSource1.txt",ios::in);
 	if(infile.fail()){
-		cout << "expectedSource1.txt does not exists"<< endl;
+		cout << "expectedSource1.txt does not exist"<< endl;
 	}
 	else{
 		string word;
@@ -338,7 +338,7 @@ void ParserTest::testFullParserSource2()
 		ifstream infile;
 	infile.open("expectedSource2.txt",ios::in);
 	if(infile.fail()){
-		cout << "expectedSource2.txt does not exists"<< endl;
+		cout << "expectedSource2.txt does not exist"<< endl;
 	}
 	else{
 		string word;
@@ -369,7 +369,103 @@ void ParserTest::testFullParserSource2messy()
 		ifstream infile;
 	infile.open("expectedSource2.txt",ios::in);
 	if(infile.fail()){
-		cout << "expectedSource2.txt does not exists"<< endl;
+		cout << "expectedSource2.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+
+void ParserTest::testFullParserSource3()
+{
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	parserDriver("Source3.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	ifstream infile;
+	infile.open("expectedSource3.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource3.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+
+void ParserTest::testFullParserSource4()
+{
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	parserDriver("Source4.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	ifstream infile;
+	infile.open("expectedSource4.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource4.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+
+void ParserTest::testFullParserSource5()
+{
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	parserDriver("Source5.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	ifstream infile;
+	infile.open("expectedSource5.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource5.txt does not exist"<< endl;
 	}
 	else{
 		string word;
