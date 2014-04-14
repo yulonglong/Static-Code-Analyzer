@@ -752,28 +752,58 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 
 vector<int> QueryEvaluator::evaluatePattern(string leftHandSide, std::string rightHandSide) {
 	vector<int> answers;
+	VarTable* varTable = pkb->getVarTable();
 
 	leftHandSide.erase(std::remove(leftHandSide.begin(), leftHandSide.end(), '\"'), leftHandSide.end());
 	rightHandSide.erase(std::remove(rightHandSide.begin(), rightHandSide.end(), '\"'), rightHandSide.end());
-
-	Node* root = pkb->getASTRoot();
-	stack<Node> st;
-	st.push(*root);
-	while(!st.empty()) {
-		Node nd = st.top();
-		st.pop();
-		if(nd.getType().compare("assign")==0) {
-			vector<Node*> children = nd.getChild();
-			Node childOne = *children.at(0);
-			Node childTwo = *children.at(1);
-			if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
-				answers.push_back(nd.getProgLine());
+	
+	if(leftHandSide.compare("v")==0) {
+		vector<int> varIndexs = varTable->getAllVarIndex();
+		for(int i=0; i<varIndexs.size(); i++) {
+			leftHandSide = varTable->getVarName(varIndexs.at(i));
+			Node* root = pkb->getASTRoot();
+			stack<Node> st;
+			st.push(*root);
+			while(!st.empty()) {
+				Node nd = st.top();
+				st.pop();
+				if(nd.getType().compare("assign")==0) {
+					vector<Node*> children = nd.getChild();
+					Node childOne = *children.at(0);
+					Node childTwo = *children.at(1);
+					if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
+						answers.push_back(nd.getProgLine());
+				}
+				else {
+					vector<Node*> children = nd.getChild();
+					for(int i=0; i<children.size(); i++) {
+						Node child = *children.at(i);
+						st.push(child);
+					}
+				}
+			}
 		}
-		else {
-			vector<Node*> children = nd.getChild();
-			for(int i=0; i<children.size(); i++) {
-				Node child = *children.at(i);
-				st.push(child);
+	}
+	else {
+		Node* root = pkb->getASTRoot();
+		stack<Node> st;
+		st.push(*root);
+		while(!st.empty()) {
+			Node nd = st.top();
+			st.pop();
+			if(nd.getType().compare("assign")==0) {
+				vector<Node*> children = nd.getChild();
+				Node childOne = *children.at(0);
+				Node childTwo = *children.at(1);
+				if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
+					answers.push_back(nd.getProgLine());
+			}
+			else {
+				vector<Node*> children = nd.getChild();
+				for(int i=0; i<children.size(); i++) {
+					Node child = *children.at(i);
+					st.push(child);
+				}
 			}
 		}
 	}
