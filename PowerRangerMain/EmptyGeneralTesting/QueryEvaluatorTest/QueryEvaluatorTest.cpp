@@ -61,12 +61,12 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Query 3 assign a; Select a such that Follows(w, a);
 	Query q3;
 	Relationship r3("Follows", "w", "a");
-	q2.addRelationship(r3);
+	q3.addRelationship(r3);
 	unordered_map<string,TypeTable::SynType> m3;
 	m3.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
 	m3.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
-	q2.setSelectedSyn("a");
-	q2.setSynTable(m3);
+	q3.setSelectedSyn("a");
+	q3.setSynTable(m3);
 
 	f->setFollows(2, 3);
 	f->setFollows(3, 7);
