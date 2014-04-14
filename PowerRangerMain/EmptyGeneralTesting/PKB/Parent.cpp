@@ -222,29 +222,31 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
 			// cout << "Catch: j is " << j << endl; 
 			continue;
 		}
-		for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
-			STMTNUM j = temp.at(k);
-			try {
-				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-					break;
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-					break;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-					break;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i);
-					break;
+		if(temp.at(0)!=-1){
+			for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
+				STMTNUM j = temp.at(k);
+				try {
+					if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
+						// cout << i << "  " << j << endl; 
+						list.push_back(i);
+						break;
+					} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
+						// cout << i << "  " << j << endl; 
+						list.push_back(i);
+						break;
+					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
+						// cout << i << "  " << j << endl; 
+						list.push_back(i);
+						break;
+					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
+						// cout << i << "  " << j << endl; 
+						list.push_back(i);
+						break;
+					}
+				} catch (...) {
+					// if that stmtnum doesnt have a type in typetable
+					continue; 
 				}
-			} catch (...) {
-				// if that stmtnum doesnt have a type in typetable
-				continue; 
 			}
 		}
 	}
