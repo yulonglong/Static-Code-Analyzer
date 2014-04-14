@@ -679,25 +679,25 @@ void IntegrateTest::testParserSource2()
 	}
 	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
-	//Query 24 Select boolean such that follows*(4 19)
-	string s24 = "Select BOOLEAN such that Follows*(4, 19)";
+	//Select BOOLEAN such that Parent*(4, 17)
+	string s24 = "Select BOOLEAN such that Parent*(9, 18)";
 	qp.validate(s24);
 	Query q24 = qp.parse();
 	v = q24.getRelVect();
 	Relationship r24 = v[0];
 	unordered_map<string, TypeTable::SynType> m24 = q24.getSynTable();
 
-	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r24.getRelType());
+	CPPUNIT_ASSERT_EQUAL(Relationship::PARENTSTAR, r24.getRelType());
 	expected = "BOOLEAN";
 	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
-	expected = "4";
+	expected = "9";
 	CPPUNIT_ASSERT_EQUAL(expected, r24.getToken1());
-	expected = "19";
+	expected = "18";
 	CPPUNIT_ASSERT_EQUAL(expected, r24.getToken2()); 
 
 	bool flag = qe.evaluateQueryBoolean(q24);
-	cout<<"FLAG IS"<<flag<<endl;
-	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	cout<<"FLAG is "<<flag <<endl;
+
  }
 
 

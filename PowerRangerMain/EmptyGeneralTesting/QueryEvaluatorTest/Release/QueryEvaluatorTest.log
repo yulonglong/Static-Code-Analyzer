@@ -1,10 +1,9 @@
-﻿Build started 13/4/2014 3:43:20 PM.
+﻿Build started 14/4/2014 4:44:04 PM.
      1>Project "C:\SPA\PowerRangerMain\EmptyGeneralTesting\QueryEvaluatorTest\QueryEvaluatorTest.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Touching "Release\QueryEvaluatorTest.unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\source /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\include /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\QueryProcessor /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\PKB /IC:\SPA\PowerRangerMain\EmptyGeneralTesting\CodeParser /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt QueryEvaluatorTest.cpp
-         QueryEvaluatorTest.cpp
+         All outputs are up-to-date.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\SPA\PowerRangerMain\EmptyGeneralTesting\Release\QueryEvaluatorTest.exe" /NOLOGO C:\SPA\PowerRangerMain\EmptyGeneralTesting\lib\cppunit.lib C:\SPA\PowerRangerMain\EmptyGeneralTesting\Release\PKB.lib C:\SPA\PowerRangerMain\EmptyGeneralTesting\Release\QueryProcessor.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\QueryEvaluatorTest.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\SPA\PowerRangerMain\EmptyGeneralTesting\Release\QueryEvaluatorTest.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\SPA\PowerRangerMain\EmptyGeneralTesting\Release\QueryEvaluatorTest.lib" /MACHINE:X86 Release\Main.obj
          Release\QueryEvaluatorTest.obj
@@ -17,4 +16,4 @@
 
 Build FAILED.
 
-Time Elapsed 00:00:02.16
+Time Elapsed 00:00:00.24
