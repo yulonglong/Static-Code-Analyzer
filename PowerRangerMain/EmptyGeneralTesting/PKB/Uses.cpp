@@ -51,7 +51,7 @@ Uses::Uses(TypeTable *tt,VarTable *vt){
 
 void Uses::setUses(STMTNUM s,VARNAME v){
 	try{
-		INDEX index = varTable->getVarIndex(v);
+		VARINDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> temp (1,-1);
 		if (s >= (signed int) usesTable.size()) {
 			usesTable.resize(s+1, temp);
@@ -67,7 +67,7 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 
 bool Uses::isUses(STMTNUM s, VARNAME v){
 	try{
-		INDEX index = varTable->getVarIndex(v);
+		VARINDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> temp = usesTable[s];
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
@@ -82,21 +82,22 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 
 vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
 	try{
-
-		INDEX index = varTable->getVarIndex(v);
+		VARINDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> ans;
 		for(size_t i=0;i<usesTable.size();i++){
 			vector<STMTNUM> temp = usesTable[i];
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
-					if(t==TypeTable::STMT)
+					if(t==TypeTable::STMT){
 						ans.push_back(i);
-					else if(typeTable->isType(t,i))
+					}
+					else if(typeTable->isType(t,i)){
 						ans.push_back(i);
+					}
 				}
 			}
-		}
+		}		
 		if(ans.empty())
 			return vector<int> (1,-1);
 		else
@@ -106,21 +107,21 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 	}
 }
 
-vector<INDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
+vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
 	try{
-		vector<INDEX> temp = usesTable[s];
+		vector<VARINDEX> temp = usesTable[s];
 		if(temp==vector<int> (1,-1))
 			temp.clear();
 		return temp;
 	}catch(...){
-		vector<INDEX> temp;
+		vector<VARINDEX> temp;
 		return temp;
 	}
 }
 
-vector<INDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(a, v); return empty vector if does not exist
+vector<VARINDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(a, v); return empty vector if does not exist
 	try{
-		vector<INDEX> ans;
+		vector<VARINDEX> ans;
 		for(size_t i=0;i<usesTable.size();i++){
 			if(!usesTable[i].empty() && usesTable[i]!=vector<int> (1,-1)){
 				if(typeTable->isType(type,i))
@@ -131,7 +132,7 @@ vector<INDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(
 			ans.clear();
 		return ans;
 	}catch(...){
-		vector<INDEX> ans;
+		vector<VARINDEX> ans;
 		return ans;
 	}
 }
