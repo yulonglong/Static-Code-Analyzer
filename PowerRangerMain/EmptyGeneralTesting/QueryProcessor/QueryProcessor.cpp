@@ -24,7 +24,11 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		}
 		else {
 			vector<int> ans = qe.evaluateQuery(parsedQuery);
-			if(parsedQuery.getSelectedSyn().compare("v")==0) {
+			unordered_map<string, TypeTable::SynType> m = parsedQuery.getSynTable();
+			unordered_map<string, TypeTable::SynType>::iterator i = m.find(parsedQuery.getSelectedSyn());
+			TypeTable tt = *pkb->getTypeTable();
+
+			if(i->second == 6) {
 				VarTable* varTable = pkb->getVarTable();
 
 				for(size_t i = 0; i < ans.size(); i++)
