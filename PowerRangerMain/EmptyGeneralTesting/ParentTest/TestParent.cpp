@@ -17,7 +17,10 @@ void ParentTest::setUp() {
 }
 
 void ParentTest::tearDown() {
-	parent->~Parent();
+	pkb->~PKB();
+	pkb = new PKB();
+	parent = Parent::getInstance();
+	typeTable = TypeTable::getInstance();
 }
 
 // Registers the fixture into the 'registry'
@@ -39,8 +42,6 @@ void ParentTest::testParentUsingStmtNum() {  // Note 5
 
 void ParentTest::testParentUsingStmtType() {
 	parent->setParent(6, 7);
-	//parent->setParent(6, 20);
-	////parent->setParent(20, 21);
 	parent->setParent(6, 8);
 	parent->setParent(6, 9);
 	parent->setParent(10, 11);
@@ -52,17 +53,11 @@ void ParentTest::testParentUsingStmtType() {
 	typeTable->insertStmtNumAndType(10, TypeTable::IF);
 	typeTable->insertStmtNumAndType(11, TypeTable::ASSIGN);
 	typeTable->insertStmtNumAndType(12, TypeTable::ASSIGN);
-	//typeTable->insertStmtNumAndType(20, TypeTable::WHILE);
-	//typeTable->insertStmtNumAndType(21, TypeTable::WHILE);
 	
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 9) == true);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::IF, 12) == true);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::WHILE, 5) == false);
 	CPPUNIT_ASSERT(parent->isParent(TypeTable::CALL, 55) == false);
-	
-	//vector<int> ans (1,6);
-	//ans.push_back(20);
-	//CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE) == ans);
 	return;
 }
 
@@ -90,7 +85,6 @@ void ParentTest::testAllBoolean() {
 	CPPUNIT_ASSERT(parent->isChildren(TypeTable::ASSIGN, 10) == true);
 	CPPUNIT_ASSERT(parent->isChildren(TypeTable::CALL, 10) == false);
 	CPPUNIT_ASSERT(parent->isChildren(TypeTable::CALL, 55) == false);
-
 	return;
 }
 
@@ -141,7 +135,6 @@ void ParentTest::testGetParent() {
 	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,100) == ans);
-
 	return;
 }
 
@@ -179,7 +172,6 @@ void ParentTest::testGetChildren() {
 	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,12) == ans);
 
-
 	ans.clear();
 	ans.push_back(8);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::CALL) == ans);
@@ -201,7 +193,6 @@ void ParentTest::testGetChildren() {
 	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,13) == ans);
-
 	return;
 }
 

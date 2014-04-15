@@ -18,6 +18,15 @@ PKB::PKB(){
 }
 
 PKB::~PKB(){
+	varTable->~VarTable();
+	procTable->~ProcTable();
+	typeTable->~TypeTable();
+	constTable->~ConstTable();
+	parent->~Parent();
+	follows->~Follows();
+	modifies->~Modifies();
+	uses->~Uses();
+	instanceFlag=false;
 }
 
 
@@ -74,44 +83,3 @@ Node* PKB::getASTRoot(){
 void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
-
-//
-//void PKB::setVarTable(VarTable newVarTable){
-//	varTable = newVarTable;
-//}
-//
-//void PKB::setProcTable(ProcTable newProcTable){
-//	procTable = newProcTable;
-//}
-//
-//void PKB::setTypeTable(TypeTable newTypeTable){
-//	typeTable = newTypeTable;
-//}
-//
-//void PKB::setParent(Parent newParent){
-//	parent = newParent;
-//}
-//void PKB::setFollows(Follows newFollows){
-//	follows = newFollows;
-//}
-//
-//void PKB::setModifies(Modifies newModifies){
-//	modifies = newModifies;
-//}
-//
-//void PKB::setUses(Uses newUses){
-//	uses = newUses;
-//}
-//
-
-//
-//void PKB::updateTypeTable(){
-//	parent.updateTable(typeTable);
-//	follows.updateTable(typeTable);
-//}
-//
-//void PKB::updateProcTable(){
-//}
-//
-//void PKB::updateVarTable(){
-//}
