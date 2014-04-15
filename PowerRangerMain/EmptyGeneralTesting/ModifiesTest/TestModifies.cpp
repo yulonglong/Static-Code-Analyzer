@@ -48,20 +48,24 @@ void ModifiesTest::setUp() {
 }
 
 void ModifiesTest::tearDown() {
-	modifies->~Modifies(); 
+	pkb->~PKB();
+	pkb = new PKB();
+	modifies = Modifies::getInstance();
+	typeTable = TypeTable::getInstance();
+	varTable = VarTable::getInstance();
 }
 	
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
 
 void ModifiesTest::testSetModifies() {  // Note 5
-	vector<vector<STMTNUM>> vec = modifies->getModifiesTable();
-	CPPUNIT_ASSERT(vec.at(1).size() == 1);
-	CPPUNIT_ASSERT(varTable->getVarName(vec.at(1).at(0)) == "x");
+	map<STMTNUM, vector<VARINDEX>> map = modifies->getModifiesTable();
+	CPPUNIT_ASSERT(map.at(1).size() == 1);
+	CPPUNIT_ASSERT(varTable->getVarName(map.at(1).at(0)) == "x");
 
-	CPPUNIT_ASSERT(vec.at(6).size() == 2);
-	CPPUNIT_ASSERT(varTable->getVarName(vec.at(6).at(0)) == "x");
-	CPPUNIT_ASSERT(varTable->getVarName(vec.at(6).at(1)) == "i");
+	CPPUNIT_ASSERT(map.at(6).size() == 2);
+	CPPUNIT_ASSERT(varTable->getVarName(map.at(6).at(0)) == "x");
+	CPPUNIT_ASSERT(varTable->getVarName(map.at(6).at(1)) == "i");
 	return;
 }
 
@@ -88,12 +92,19 @@ void ModifiesTest::testGetModifies() {
 	CPPUNIT_ASSERT(list.at(0) == 6);
 		
 	list = modifies->getModifies(TypeTable::WHILE, "z");
-	CPPUNIT_ASSERT(list.size() == 0);
+	CPPUNIT_ASSERT(list.size() == 1);
+	CPPUNIT_ASSERT(list.at(0) == -1);
 
 }
 
 void ModifiesTest::testIsModifies() {
 	CPPUNIT_ASSERT(modifies->isModifies(1, "x") == true);
+	CPPUNIT_ASSERT(modifies->isModifies(2, "y") == false);
+	CPPUNIT_ASSERT(modifies->isModifies(2, "z") == true);
 	CPPUNIT_ASSERT(modifies->isModifies(3, "x") == false);
+	CPPUNIT_ASSERT(modifies->isModifies(4, "x") == true);
+	CPPUNIT_ASSERT(modifies->isModifies(5, "x") == false);
+	CPPUNIT_ASSERT(modifies->isModifies(111, "ashfwnelw") == false);
+	CPPUNIT_ASSERT(modifies->isModifies(-150, "ashfwnelw") == false);
 
 }
