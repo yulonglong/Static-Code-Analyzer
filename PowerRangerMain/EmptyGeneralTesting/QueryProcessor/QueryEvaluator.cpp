@@ -106,6 +106,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 				}
 			}
 			else {
+				cout<<"Calling evaluateParentStar"<<endl;
 				answers.push_back(evaluateParentStar(*it, m, q.getSelectedSyn()));
 			}
 			break;
@@ -522,13 +523,13 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 
 	//Select a such that Parent*(w, a)
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-
+		cout<<"In supposed area"<<endl;
 		selected = t->getAllStmts(i2->second);	//get all assign statements
 
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
 			stmtNumber = p->getParent(*it);
 			if(stmtNumber!=-1)
-				answer.insert(stmtNumber);
+				answer.insert(*it);
 		}
 	}
 
