@@ -607,4 +607,26 @@ void IntegrateTest::testParserSource2()
 	}
 	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
+	//Query 24 constant c; Select c;
+	string s24 = "constant c; Select c";
+	qp.validate(s24);
+	Query q24 = qp.parse();
+	ConstTable *c = pkb->getConstTable();
+
+	expected = "c";
+	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
+
+	vec = qe.evaluateQuery(q24);
+
+	expected = "1";
+	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[0]));
+	expected = "200";
+	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[1]));
+	expected = "0";
+	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[2]));
+	expected = "3";
+	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[3]));
+	expected = "2";
+	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[4]));
+
  }
