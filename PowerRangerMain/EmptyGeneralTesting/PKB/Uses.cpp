@@ -89,10 +89,14 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
-					if(t==TypeTable::STMT)
+					if(t==TypeTable::STMT){
 						ans.push_back(i->first);
-					else if(typeTable->isType(t,i->first))
+						break;
+					}
+					else if(typeTable->isType(t,i->first)){
 						ans.push_back(i->first);
+						break;
+					}
 				}
 			}
 		}
