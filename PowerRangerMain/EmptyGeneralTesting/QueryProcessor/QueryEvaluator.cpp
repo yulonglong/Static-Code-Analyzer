@@ -159,9 +159,9 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::PATTERN:
 			{	
 				if (q.getSelectedSyn().compare(q.getPatternSyn()) == 0)
-					answers.push_back(evaluatePattern(token1, token2));
+					answers.push_back(evaluatePattern(q, token1, token2));
 				else {
-					vector<int> proxy = evaluatePattern(token1, token2);
+					vector<int> proxy = evaluatePattern(q, token1, token2);
 					if(proxy.size()==0)
 						answers.push_back(proxy);
 				}
@@ -784,14 +784,16 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 	return false;
 }
 
-vector<int> QueryEvaluator::evaluatePattern(string leftHandSide, std::string rightHandSide) {
+vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::string rightHandSide) {
 	vector<int> answers;
 	VarTable* varTable = pkb->getVarTable();
 
 	leftHandSide.erase(std::remove(leftHandSide.begin(), leftHandSide.end(), '\"'), leftHandSide.end());
 	rightHandSide.erase(std::remove(rightHandSide.begin(), rightHandSide.end(), '\"'), rightHandSide.end());
+
+	unordered_map<string, TypeTable::SynType>::iterator iterate = q.getSynTable().find(leftHandSide);
 	
-	if(leftHandSide.compare("v")==0) {
+	if(iterate->second == 6) {
 		vector<int> varIndexs = varTable->getAllVarIndex();
 		for(int i=0; i<varIndexs.size(); i++) {
 			leftHandSide = varTable->getVarName(varIndexs.at(i));

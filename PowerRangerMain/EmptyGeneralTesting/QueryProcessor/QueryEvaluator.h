@@ -19,7 +19,7 @@ private:
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
-	std::vector<int> evaluatePattern(std::string, std::string);
+	std::vector<int> evaluatePattern(Query, std::string, std::string);
 	bool evaluateRightHandSide(std::string, Node);
 	bool evaluateLeftHandSide(std::string, Node);
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
