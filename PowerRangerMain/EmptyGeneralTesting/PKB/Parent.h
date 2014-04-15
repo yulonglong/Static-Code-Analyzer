@@ -17,8 +17,8 @@ typedef TypeTable::SynType TYPE;
 
 class Parent {
 private:
-	vector<vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
-	vector<STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num
+	map<STMTNUM,vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
+	map<STMTNUM,STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
 	static bool instanceFlag;
 	static Parent *parent;
 	TypeTable *typeTable; // for the sake of unit testing.

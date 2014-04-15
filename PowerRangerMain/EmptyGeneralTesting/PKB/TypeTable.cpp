@@ -10,6 +10,8 @@ TypeTable::TypeTable() {
 }
 
 TypeTable::~TypeTable(){
+	typeMap.clear();
+	instanceFlag=false;
 }
 
 

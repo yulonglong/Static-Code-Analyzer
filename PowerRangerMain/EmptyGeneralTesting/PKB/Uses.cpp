@@ -7,12 +7,11 @@ Uses* Uses::uses=NULL;
 
 //Constructor
 Uses::Uses(){
-	vector<STMTNUM> temp (1,-1);
-	usesTable.assign(5, temp);
 }
 
 Uses::~Uses(){
 	usesTable.clear();
+	instanceFlag=false;
 }
 
 Uses* Uses::getInstance() {
@@ -45,22 +44,22 @@ Uses* Uses::getInstance(TypeTable* tt, VarTable* vt) {
 Uses::Uses(TypeTable *tt,VarTable *vt){
 	typeTable = tt;
 	varTable = vt;
-	vector<STMTNUM> temp (1,-1);
-	usesTable.assign(5, temp);
 }
 
 void Uses::setUses(STMTNUM s,VARNAME v){
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
-		vector<STMTNUM> temp (1,-1);
-		if (s >= (signed int) usesTable.size()) {
-			usesTable.resize(s+1, temp);
+
+		vector<STMTNUM> existing;
+		try{
+			existing = usesTable.at(s);
+			usesTable.erase(s);
 		}
-		vector<STMTNUM> temp1 = usesTable[s];
-		if(temp1==temp)
-			temp1.clear();
-		temp1.push_back(index);
-		usesTable[s] = temp1;
+		catch(...){
+		}
+		existing.push_back(index);
+		usesTable.insert(pair<STMTNUM,vector<STMTNUM>>(s,existing));
+		cout<<"setUses("<<s<<","<<v<<")"<<" var Index = "<<index<<endl;
 	}catch(...){
 	}
 }
@@ -68,9 +67,9 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 bool Uses::isUses(STMTNUM s, VARNAME v){
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
-		vector<STMTNUM> temp = usesTable[s];
+		vector<STMTNUM> temp = usesTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
-		for(;it!=temp.end();++it){
+		for(;it!=temp.end();it++){
 			if(index==*it)
 				return true;
 		}
@@ -85,15 +84,15 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 
 		VARINDEX index = varTable->getVarIndex(v);
 		vector<STMTNUM> ans;
-		for(size_t i=0;i<usesTable.size();i++){
-			vector<STMTNUM> temp = usesTable[i];
+		for(map<STMTNUM,vector<STMTNUM>>::iterator i = usesTable.begin(); i != usesTable.end(); i++){
+			vector<STMTNUM> temp = i->second;
 			vector<STMTNUM>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
 				if(*it==index){
 					if(t==TypeTable::STMT)
-						ans.push_back(i);
-					else if(typeTable->isType(t,i))
-						ans.push_back(i);
+						ans.push_back(i->first);
+					else if(typeTable->isType(t,i->first))
+						ans.push_back(i->first);
 				}
 			}
 		}
@@ -108,9 +107,7 @@ vector<int> Uses::getUses(TypeTable::SynType t, VARNAME v){	//Select a such that
 
 vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
 	try{
-		vector<VARINDEX> temp = usesTable[s];
-		if(temp==vector<int> (1,-1))
-			temp.clear();
+		vector<VARINDEX> temp = usesTable.at(s);
 		return temp;
 	}catch(...){
 		vector<VARINDEX> temp;
@@ -121,14 +118,12 @@ vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	retur
 vector<VARINDEX> Uses::getUses(TypeTable::SynType type){	//Select a such that Uses(a, v); return empty vector if does not exist
 	try{
 		vector<VARINDEX> ans;
-		for(size_t i=0;i<usesTable.size();i++){
-			if(!usesTable[i].empty() && usesTable[i]!=vector<int> (1,-1)){
-				if(typeTable->isType(type,i))
-					ans.push_back(i);
+		for(map<STMTNUM,vector<STMTNUM>>::iterator i = usesTable.begin(); i != usesTable.end(); i++){
+			if(!i->second.empty()){
+				if(typeTable->isType(type,i->first))
+					ans.push_back(i->first);
 			}
 		}
-		if(ans==vector<int> (1,-1))
-			ans.clear();
 		return ans;
 	}catch(...){
 		vector<VARINDEX> ans;
