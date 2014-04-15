@@ -20,6 +20,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<vector<int>> answers;
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
+	VarTable *var = pkb->getVarTable();
+
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 
 		string token1 = it->getToken1();
@@ -52,10 +54,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			q.setSynTable(m);
 		}
 
-		cout<<"just before switch"<<endl;
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS: {	
-			cout<<"In Follows"<<endl;
 			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				if(evaluateFollowsBoolean(*it, m)){
 					answers.push_back(t->getAllStmts(i->second));
@@ -81,15 +81,12 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 									}
 		case Relationship::PARENT:
 			{
-				cout<<"In evaluateQuery case PARENT"<<endl;
 				if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 					if(evaluateParentBoolean(*it, m)){
-						cout<<"Called evaluateParentBoolean"<<endl;
 						answers.push_back(t->getAllStmts(i->second));
 					}
 				}
 				else {
-					cout<<"Called evaluateParent"<<endl;
 					answers.push_back(evaluateParent(*it, m, q.getSelectedSyn()));
 				}
 
@@ -104,7 +101,6 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 				}
 			}
 			else {
-				cout<<"Calling evaluateParentStar"<<endl;
 				answers.push_back(evaluateParentStar(*it, m, q.getSelectedSyn()));
 			}
 			break;
@@ -116,9 +112,16 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
 				cout<<"Calling evaluateModifiesBoolean"<<endl;
 				if(evaluateModifiesBoolean(*it, m)){
-					cout<<"type is"<<convertEnumToString(i->second)<<endl;
-					cout<<"i->first = "<< i->first<<endl;
-					answers.push_back(t->getAllStmts(i->second));
+					switch(i->second){
+					case TypeTable::VARIABLE:{
+						answers.push_back(var->getAllVarIndex());
+						break;
+											 }
+					default: {
+						answers.push_back(t->getAllStmts(i->second));
+						break;
+							 }
+					}
 				}
 			}
 			else {
@@ -132,8 +135,20 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			{	
 
 			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+				cout<<"Calling evaluate uses boolean"<<endl;
 				if(evaluateUsesBoolean(*it, m)){
-					answers.push_back(t->getAllStmts(i->second));
+					cout<<"called evaluate uses boolean"<<endl;
+					switch(i->second){
+					case TypeTable::VARIABLE:{
+						cout<<"pushing back"<<endl;
+						answers.push_back(var->getAllVarIndex());
+						break;
+											 }
+					default: {
+						answers.push_back(t->getAllStmts(i->second));
+						break;
+							 }
+					}
 				}
 			}
 			else {
@@ -155,19 +170,14 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	}
 
 	if(relations.empty()){
-		cout<<"relations is empty"<<endl;
 		string sel = q.getSelectedSyn();
-		cout<<"selectedSyn is "<<sel<<endl;
 		unordered_map<string, TypeTable::SynType>::iterator iterate = q.getSynTable().find(sel);
-		cout<<"Type is"<<convertEnumToString(iterate->second)<<endl;
 		switch(iterate->second){
 		case TypeTable::VARIABLE:{
-			VarTable *v = pkb->getVarTable();
-			answers.push_back(v->getAllVarIndex());		
+			answers.push_back(var->getAllVarIndex());		
 			break;
 								 }
 		case TypeTable::PROGLINE:{
-			cout<<"SHOULD BE DETECTED"<<endl;
 			answers.push_back(t->getAllStmts(TypeTable::STMT));
 			break;
 								 }
