@@ -1,4 +1,4 @@
-1
+7
 cat: Meaningless Queries
 1 - Typed, ImplStmtLine :: What are all the assignment statement lines
 assign a; 
@@ -9,4 +9,34 @@ Select a such that Follows(_,_)
 assign a; 
 Select a such that Parent(a,_)
 1 2 3 6 10 13 14 21
+5000
+3 - ImplStmtLine :: 
+stmt stmt; 
+Select stmt
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+5000
+4 - ImplStmtLine :: 
+prog_line p; 
+Select p
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23
+5000
+5 - ImplStmtLine :: 
+variable v;
+Select v
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie#, x, left, right, Romeo, delta, width, w, l
+5000
+6 - ImplStmtLine :: 
+constant c; 
+Select c
+1, 200, 2, 3
+5000
+7 - ImplStmtLine :: 
+assign a; 
+Select a
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23
+5000
+8 - ImplStmtLine :: 
+while w; 
+Select w
+4, 5, 7, 9, 11, 12, 16
 5000
