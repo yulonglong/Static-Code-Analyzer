@@ -1,5 +1,5 @@
-8
-cat: Iteration 3 requirements including Modifies and Uses relationships
+16
+cat: Modifies and Uses relationships
 1 - Modifies, Typed, ImplStmtLine ::
 assign a;
 Select a such that Modifies(a, "c")
@@ -20,23 +20,63 @@ variable v;
 Select v such that Modifies(15, v)
 c
 5000
-5 - Uses, Typed, ImplStmtLine ::
+5 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select BOOLEAN such that Modifies(4, v)
+true
+5000
+6 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(5, "oSCar")
+none
+5000
+7 - Modifies, Typed, ImplStmtLine ::
+while w;
+Select w such that Modifies(w, "Romeo")
+4, 5, 9, 11, 12
+5000
+8 - Uses, Typed, ImplStmtLine ::
 assign a;
 Select a such that Uses(a, "c")
 17
 5000
-6 - Uses, Typed, ImplStmtLine ::
+9 - Uses, Typed, ImplStmtLine ::
 assign a;
 Select a such that Uses(a, "x")
 10,18
 5000
-7 - Uses, Typed, ImplStmtLine ::
+10 - Uses, Typed, ImplStmtLine ::
 variable v;
 Select v such that Uses(8, v)
 I, k, j1k, chArlie
 5000
-8 - Uses, Typed, ImplStmtLine ::
+11 - Uses, Typed, ImplStmtLine ::
 variable v;
 Select v such that Uses(15, v)
 delta, width, Romeo, l
+5000
+12 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "beta")
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
+5000
+13 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "hello")
+none
+5000
+14 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "k")
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
+5000
+15 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(5, "hello")
+none
+5000
+16 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(90, "hello")
+none
 5000

@@ -135,7 +135,7 @@ STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
 		num = followsTable.at(s);
 	} 
 	catch (std::out_of_range) {
-		// cout<<"In catch block"<<endl;
+		return -1; 
 	}
 	if (num != 0 && num != -1 && typeTable->isType(t,num)){
 		return num;
