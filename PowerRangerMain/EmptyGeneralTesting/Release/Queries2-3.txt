@@ -3,12 +3,11 @@ cat: Meaningless Queries
 1 - Typed, ImplStmtLine :: What are all the assignment statement lines
 assign a; 
 Select a such that Follows(_,_)
-1,2,3,6,8,10,13,14,15,17,18,19,20
+1,2,3,6,8,10,13,14,15,17,18,19,20,21,22,23
 5000
 2 - Typed, ImplStmtLine :: What are all the assignment statement lines
 assign a; 
 Select a such that Parent(a,_)
-1 2 3 6 10 13 14 21
 5000
 3 - ImplStmtLine :: 
 stmt stmt; 
@@ -28,7 +27,7 @@ i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie#, x, left, right, Romeo, delta,
 6 - ImplStmtLine :: 
 constant c; 
 Select c
-1, 200, 2, 3
+0, 1, 200, 2, 3
 5000
 7 - ImplStmtLine :: 
 assign a; 
