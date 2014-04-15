@@ -144,8 +144,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 									}
 		case Relationship::PATTERN:
 			{	
-				//code to get syn-assign
-				//if(q.getSelectedSyn().compare(syn-assign) == 0)
+				//
+				//if(q.getSelectedSyn().compare(q.getPatternSyn()) == 0)
 					answers.push_back(evaluatePattern(token1, token2));
 				//else {
 				//	vector<int> proxy = evaluatePattern(token1, token2);
