@@ -35,6 +35,14 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 					if(ans.at(i) != -1)
 						result.push_back(varTable->getVarName(ans.at(i)));
 			}
+			else if(i->second == 7) {
+				ConstTable* constTable = pkb->getConstTable();
+
+				for(size_t i = 0; i < ans.size(); i++)
+					if(ans.at(i) != -1)
+						result.push_back(constTable->getConst(ans.at(i)));
+			}
+
 			else {
 			for(size_t i = 0; i < ans.size(); i++)
 				if(ans.at(i) != -1)
