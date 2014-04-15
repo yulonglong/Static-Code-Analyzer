@@ -485,7 +485,15 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r19.getToken2()); 
 
 	vec = qe.evaluateQuery(q19);
-	CPPUNIT_ASSERT_EQUAL(13, vec[0]);
+	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}*/
+	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(9, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(11, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(12, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(13, vec[5]);
 
 	//Query 20
 	string s20 = "assign a; variable v; Select s such that Modifies(a, v)";
@@ -578,14 +586,14 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
 
 	//Query 23
-	string s23 = "stmt s; Select s such that Modifies(s, \"x\")";
+	string s23 = "stmt s; Select s such that Uses(s, \"x\")";
 	qp.validate(s23);
 	Query q23 = qp.parse();
 	v = q23.getRelVect();
 	Relationship r23 = v[0];
 	unordered_map<string, TypeTable::SynType> m23 = q23.getSynTable();
 
-	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r23.getRelType());
+	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r23.getRelType());
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, q23.getSelectedSyn());
 	expected = "s";
@@ -599,55 +607,4 @@ void IntegrateTest::testParserSource2()
 	}
 	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
-	//Query 24
-	string s24 = "while w; Select w";
-	qp.validate(s24);
-	Query q24 = qp.parse();
-	unordered_map<string, TypeTable::SynType> m24 = q24.getSynTable();
-
-	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
-
-	vec = qe.evaluateQuery(q24);
-	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
-	}
-	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
-	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
-	CPPUNIT_ASSERT_EQUAL(7, vec[2]);
-	CPPUNIT_ASSERT_EQUAL(9, vec[3]);
-	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
-	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
-	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
-	
-	
-	//Query 25
-	string s25 = "assign a; Select a such that Follows(_ , _)";
-	bool flag = qp.validate(s25);
-	cout<<"Flag is" <<flag<<endl;
-	Query q25 = qp.parse();
-	cout<<"After parse"<<endl;
-	v = q25.getRelVect();
-	Relationship r25 = v[0];
-	unordered_map<string, TypeTable::SynType> m25 = q25.getSynTable();
-
-	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r25.getRelType());
-	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn());
-	expected = "_";
-	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken1());
-	expected = "_";
-	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
-
-	cout<<"Before evaluating"<<endl;
-	vec = qe.evaluateQuery(q25);
-	cout<<"After evaluating"<<endl;
-	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<"HI"<<*i<<endl;
-	}
-	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
-
  }
-
-
- 
