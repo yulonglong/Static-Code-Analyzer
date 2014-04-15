@@ -9,7 +9,6 @@ QueryParser::QueryParser(){
 	tokenCounter = 0;
 	expressionTokenCounter = 0;
 	selectCase = 0;
-	declarationString = "";
 }
 
 // ===============VALIDATION PART OF THE CODES==================//
@@ -19,6 +18,7 @@ void QueryParser::bootstrap(){
 	tokens.clear();
 	expressionTokens.clear();
 	selectStatement.clear();
+	synMap.clear();
 
 	declarationCounter = 0;
 	selectCounter = 0;
@@ -26,7 +26,6 @@ void QueryParser::bootstrap(){
 	tokenCounter = 0;
 	expressionTokenCounter = 0;
 	selectCase = 0;
-	declarationString = "";
 }
 
 
@@ -51,11 +50,9 @@ bool QueryParser::validate(string st){
 
 	if (selectCounter != 1) return false;
 
-	cout << endl << "declaration string: " << declarationString << endl;
-
-	cout << endl << "selectStatement vector: " << endl;
+	//cout << endl << "selectStatement vector: " << endl;
 	for (size_t i = 0; i < selectStatement.size(); i++){
-		cout << selectStatement.at(i) << endl;
+		//cout << selectStatement.at(i) << endl;
 	}
 
 	return true;
@@ -64,7 +61,7 @@ bool QueryParser::validate(string st){
 bool QueryParser::generateStatements(){
 	// DIVIDE THE QUERY STRING INTO STATEMENTS, SEPARATED BY SEMICOLON
 	// STORE THEM INTO STATEMENTS VECTOR
-	cout << "generating statements..." << endl;
+	//cout << "generating statements..." << endl;
 	statements.clear();
 	char *str = new char[s.length() + 1];
 	strcpy_s(str, s.length() + 1, s.c_str());
@@ -77,7 +74,7 @@ bool QueryParser::generateStatements(){
 
 	while (token != NULL)
 	{
-		cout << "token: " << token << endl;
+		//cout << "token: " << token << endl;
 		string vs(token);
 		// TRIM THE LEADING SPACES
 		while(vs.at(0) == ' '){
@@ -90,9 +87,9 @@ bool QueryParser::generateStatements(){
 		token = strtok_s(NULL, seps, &nextToken);
 	}
 
-	cout << endl << "content of statements of size " << statements.size() << ": " << endl;
+	//cout << endl << "content of statements of size " << statements.size() << ": " << endl;
 	for(size_t i = 0; i < statements.size(); i++){
-		cout << statements.at(i) << endl;
+		//cout << statements.at(i) << endl;
 	}
 
 	// TAKES CARE OF EMPTY STRING
@@ -101,7 +98,7 @@ bool QueryParser::generateStatements(){
 }
 
 void QueryParser::generateTokens(){
-	cout << "generating tokens..." <<endl;
+	//cout << "generating tokens..." <<endl;
 	tokens.clear();
 	// GENERATE TOKENS FROM STATEMENT, STORE THEM IN TOKENS VECTOR
 	char *stat = new char[statement.length() + 1];
@@ -119,16 +116,16 @@ void QueryParser::generateTokens(){
 		token = strtok_s(NULL, seps, &nextToken);
 	}
 
-	cout << endl;
-	cout << "tokens: " << endl;
+	//cout << endl;
+	//cout << "tokens: " << endl;
 	for (size_t i = 0; i < tokens.size(); i++){
-		cout << tokens.at(i) <<endl;
+		//cout << tokens.at(i) <<endl;
 	}
-	cout << endl;
+	//cout << endl;
 }
 
 bool QueryParser::generateSelectTokens(){
-	cout << endl << "entering generate select tokens..." << endl;
+	//cout << endl << "entering generate select tokens..." << endl;
 	tokens.clear();
 
 	int patternIndex = statement.find("pattern");
@@ -152,19 +149,19 @@ bool QueryParser::generateSelectTokens(){
 		// BOTH SUCH THAT AND PATTERN EXIST
 		if(patternIndex < suchthatIndex){
 			// PATTERN APPEARS FIRST
-			cout << "such that index: " << suchthatIndex << endl;
-			cout << "statement: " << statement << endl;
+			//cout << "such that index: " << suchthatIndex << endl;
+			//cout << "statement: " << statement << endl;
 			patternClause = statement.substr(patternIndex, suchthatIndex - 9);
-			cout << "pattern clause: " << patternClause << endl;
+			//cout << "pattern clause: " << patternClause << endl;
 			suchthatClause = statement.substr(suchthatIndex);
-			cout << "such that clause: " << suchthatClause << endl;
+			//cout << "such that clause: " << suchthatClause << endl;
 			selectCase = 3;
 		} else{
 			// SUCH THAT APPEARS FIRST
 			patternClause = statement.substr(patternIndex);
-			cout << "pattern clause: " << patternClause << endl;
+			//cout << "pattern clause: " << patternClause << endl;
 			suchthatClause = statement.substr(suchthatIndex, patternIndex-9);
-			cout << "such that clause: " << suchthatClause << endl;
+			//cout << "such that clause: " << suchthatClause << endl;
 			selectCase = 4;
 		}
 	}
@@ -211,9 +208,9 @@ bool QueryParser::generateSelectTokens(){
 		else if (!tokenizePattern(patternClause)) return false;
 	}
 
-	cout << endl << "SELECT TOKENS!!!: " << endl;
+	//cout << endl << "SELECT TOKENS!!!: " << endl;
 	for(size_t i = 0; i<tokens.size(); i++){
-		cout << tokens.at(i) <<endl;
+		//cout << tokens.at(i) <<endl;
 	}
 	return true;
 }
@@ -291,9 +288,9 @@ bool QueryParser::tokenizePattern(string patternClause){
 	tokens.push_back(")");
 
 	patternClause = patternClause.substr(closeBracketIndex + 1);
-	cout << "pattern clause: " << patternClause << endl;
+	//cout << "pattern clause: " << patternClause << endl;
 	if(patternClause.length() > 0){
-		cout << "removing trailing spaces in pattern clause..." << endl;
+		//cout << "removing trailing spaces in pattern clause..." << endl;
 		while(patternClause.at(patternClause.length() -1) == ' '){
 			patternClause = patternClause.substr(0, patternClause.length() -1);
 			if (patternClause.length() == 0) break;
@@ -408,9 +405,9 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 	tokens.push_back(")");
 
 	suchthatClause = suchthatClause.substr(closeBracketIndex + 1);
-	cout << "such that clause: " << suchthatClause << endl;
+	//cout << "such that clause: " << suchthatClause << endl;
 	if(suchthatClause.length() > 0){
-		cout << "removing trailing spaces in such that clause..." << endl;
+		//cout << "removing trailing spaces in such that clause..." << endl;
 		while(suchthatClause.at(suchthatClause.length() -1) == ' '){
 			suchthatClause = suchthatClause.substr(0, suchthatClause.length() -1);
 			if (suchthatClause.length() == 0) break;
@@ -439,7 +436,7 @@ bool QueryParser::tokenizeSuchthat(string suchthatClause){
 }
 
 string QueryParser::getFirstToken(){
-	cout << "getting first token..." << endl;
+	//cout << "getting first token..." << endl;
 	char *stat = new char[statement.length() + 1];
 	strcpy_s(stat, statement.length() + 1, statement.c_str());
 
@@ -453,75 +450,139 @@ string QueryParser::getFirstToken(){
 }
 
 string QueryParser::getNextToken(){
-	cout << "getting next token... ";
+	//cout << "getting next token... ";
 	string nextToken = tokens.at(tokenCounter);
 	tokenCounter++;
-	cout << nextToken << endl;
+	//cout << nextToken << endl;
 	return nextToken;
 }
 
 string QueryParser::getNextExpressionToken(){
-	cout << "getting next expression token... ";
+	//cout << "getting next expression token... ";
 	string nextExpressionToken = expressionTokens.at(expressionTokenCounter);
 	expressionTokenCounter++;
-	cout << nextExpressionToken << endl;
+	//cout << nextExpressionToken << endl;
 	return nextExpressionToken;
 }
 
 string QueryParser::getNextStatement(){
-	cout << "getting next statement..." << endl;
+	//cout << "getting next statement..." << endl;
 	string nextStatement = statements.at(statementCounter);
 	statementCounter++;
 	return nextStatement;
 }
 
 bool QueryParser::declaration(){
-	cout << "entering declaration..." << endl;
+	//cout << "entering declaration..." << endl;
 	if (!designEntity()) return false;
 
-	generateTokens();
-	// if(!generateDeclarationTokens()) return false;
+	if(!generateDeclarationTokens()) return false;
 
-	nextToken = getNextToken();
-	if(synonym());
-	else return false;
+	string design_entity = tokens.at(0);
+	TypeTable::SynType syntype;
+
+	if (design_entity == "assign"){
+		syntype = TypeTable::ASSIGN;
+	} else if (design_entity == "stmt"){
+		syntype = TypeTable::STMT;
+	} else if (design_entity == "while"){
+		syntype = TypeTable::WHILE;
+	} else if (design_entity == "variable"){
+		syntype = TypeTable::VARIABLE;
+	} else if (design_entity == "constant"){
+		syntype = TypeTable::CONSTANT;
+	} else if (design_entity == "prog_line"){
+		syntype = TypeTable::PROGLINE;
+	} else return false;
+
+	for (size_t i = 1; i < tokens.size(); i++){
+		nextToken = tokens.at(i);
+		if(synonym()){
+			synMap.insert(make_pair(tokens.at(i), syntype));
+		} else return false;
+	}
 
 	declarationCounter++;
-	declarationString = declarationString + statement + " ";
-	cout << "DECLARATION STRING: " << declarationString <<endl;
 	return true;
 }
 
 bool QueryParser::generateDeclarationTokens(){
-	tokens.clear();
+	//cout << "enter generate declaration tokens..." << endl;
 
+	tokens.clear();
+	//cout << "finding the first word..." << endl;
 	// find the first word
+	
 	int spaceIndex = statement.find(" ");
 	if(spaceIndex == -1) return false;
 
 	string keyword = statement.substr(0, spaceIndex);
+	//cout << "keyword is: " << keyword << endl;
+	tokens.push_back(keyword);
+
 	statement = statement.substr(spaceIndex);
+	//cout << "statement is: " << statement << endl;
 
 	// remove leading spaces
 	while(statement.at(0) == ' '){
+		//cout << "removing leading space..."<< endl;
 		statement = statement.substr(1);
+		//cout << "statement is: " << statement << endl;
 		if (statement.length() == 0) return false;
 	}
 
 	int comaIndex = statement.find(",");
+
 	while(comaIndex!=-1){
 		string syn = statement.substr(0, comaIndex);
-		if (syn.at(syn.length() -1) == ' '){
-			syn = syn.substr(0, syn.length()-2);
+		//cout << "synonym is: " << syn << endl;
+		
+		// remove leading spaces
+		while(syn.at(0) == ' '){
+			//cout << "removing leading spaces..." << endl;
+			syn = syn.substr(1);
 			if (syn.length() == 0) return false;
 		}
+
+
+		// remove trailing spaces
+		while (syn.at(syn.length() -1) == ' '){
+			//cout << "removing trailing spaces..." << endl;
+			syn = syn.substr(0, syn.length()-1);
+			if (syn.length() == 0) return false;
+		}
+
+		tokens.push_back(syn);
+		statement = statement.substr(comaIndex+1);
+		comaIndex = statement.find(",");
+	}
+
+	if (statement.length() != 0){
+		// remove leading spaces
+		while(statement.at(0) == ' '){
+			statement = statement.substr(1);
+			if (statement.length() == 0) break;
+		}
+
+		// remove trailing spaces
+		while (statement.at(statement.length() -1) == ' '){
+			statement = statement.substr(0, statement.length()-1);
+			if (statement.length() == 0) break;
+		}
+
+		tokens.push_back(statement);
+	}
+
+	//cout << endl << "DECLARATION TOKENS" << endl;
+	for(size_t i = 0; i < tokens.size(); i++){
+		//cout << tokens.at(i) << endl;
 	}
 
 	return true;
 }
 
 bool QueryParser::designEntity(){
-	cout << "entering design entity..." << endl;
+	//cout << "entering design entity..." << endl;
 	if (nextToken.compare("stmt") == 0 || nextToken.compare("assign") == 0 ||
 		nextToken.compare("while") == 0 || nextToken.compare("variable") == 0 ||
 		nextToken.compare ("constant") == 0 || nextToken.compare("prog_line") == 0){
@@ -530,7 +591,7 @@ bool QueryParser::designEntity(){
 }
 
 bool QueryParser::synonym(){
-	cout << "entering synonym..." << endl;
+	//cout << "entering synonym..." << endl;
 	if (ident()){
 		return true;	
 	}
@@ -538,7 +599,7 @@ bool QueryParser::synonym(){
 }
 
 bool QueryParser::ident(){
-	cout << "entering ident..." << endl;
+	//cout << "entering ident..." << endl;
 	int nextTokenLength = nextToken.length() + 1;
 	char *id = new char[nextTokenLength];
 	strcpy_s(id, nextTokenLength, nextToken.c_str());
@@ -563,8 +624,8 @@ bool QueryParser::ident(){
 }
 
 bool QueryParser::select(){
-	cout << "entering select..." << endl;
-	cout << "declaration counter..." << declarationCounter << endl;
+	//cout << "entering select..." << endl;
+	//cout << "declaration counter..." << declarationCounter << endl;
 	
 	if (!match("Select")) return false;
 	selectStatement.push_back("Select");
@@ -651,22 +712,22 @@ bool QueryParser::pattern(){
 }
 
 bool QueryParser::generateExpressionTokens(){
-	cout << endl << "entering generate expression tokens..." << endl;
+	//cout << endl << "entering generate expression tokens..." << endl;
 	expressionTokens.clear();
 	// CONVERT NEXTTOKEN TO EXPRESSION TOKENS
 
-	cout<< "nextToken is..." << nextToken << endl;
+	//cout<< "nextToken is..." << nextToken << endl;
 	if (nextToken.length() == 0) return false;
 
 	// FIRST CHARACTER MUST BE AN UNDERSCORE
 	int underscoreIndex = nextToken.find("_");
 	if (underscoreIndex != 0 || underscoreIndex == -1) return false;
-	cout << "first character passes..." << endl;
+	//cout << "first character passes..." << endl;
 	expressionTokens.push_back("_");
 	
 	if(nextToken.length() > 1) {
 		nextToken = nextToken.substr(1);
-		cout<< "nextToken is..." << nextToken << endl;
+		//cout<< "nextToken is..." << nextToken << endl;
 	} else return true;
 
 	// THE REST IS OPTIONAL
@@ -677,7 +738,7 @@ bool QueryParser::generateExpressionTokens(){
 	if (doubleQuoteIndex != -1 && doubleQuoteIndex == 0){
 		expressionTokens.push_back("\"");
 		nextToken = nextToken.substr(1);
-		cout<< "nextToken is..." << nextToken << endl;
+		//cout<< "nextToken is..." << nextToken << endl;
 	}
 
 	int plusIndex = -1;
@@ -689,7 +750,7 @@ bool QueryParser::generateExpressionTokens(){
 		expressionTokens.push_back(factor);
 		expressionTokens.push_back("+");
 		nextToken = nextToken.substr(plusIndex + 1);
-		cout<< "nextToken is..." << nextToken << endl;
+		//cout<< "nextToken is..." << nextToken << endl;
 	}
 
 	doubleQuoteIndex = -1;
@@ -701,7 +762,7 @@ bool QueryParser::generateExpressionTokens(){
 		expressionTokens.push_back(factor);
 		expressionTokens.push_back("\"");
 		nextToken = nextToken.substr(doubleQuoteIndex + 1);
-		cout<< "nextToken is..." << nextToken << endl;
+		//cout<< "nextToken is..." << nextToken << endl;
 	}
 
 	underscoreIndex = -1;
@@ -710,23 +771,22 @@ bool QueryParser::generateExpressionTokens(){
 	}
 	if (underscoreIndex != -1 && underscoreIndex == 0){
 		expressionTokens.push_back("_");
-		cout << "nextToken.length()... " << nextToken.length() << endl;
+		//cout << "nextToken.length()... " << nextToken.length() << endl;
 		if (underscoreIndex != nextToken.length() - 1) return false;
 	}
-	cout << "last character passes..." << endl << endl;
+	//cout << "last character passes..." << endl << endl;
 
-	cout << endl << "expressionTokens: " << endl;
+	//cout << endl << "expressionTokens: " << endl;
 	for(size_t i = 0; i < expressionTokens.size(); i++){
-		cout << expressionTokens.at(i);
+		//cout << expressionTokens.at(i);
 	}
-	cout << endl;
+	//cout << endl;
 	return true;
 }
 
 bool QueryParser::synAssign(){
-	if (declarationString.length() == 0) return false;
-	unordered_map<string, TypeTable::SynType> map = parseSynonyms();
-	if (map.at(nextToken) != TypeTable::ASSIGN) return false;
+	if (declarationCounter == 0) return false;
+	if (synMap.at(nextToken) != TypeTable::ASSIGN) return false;
 	return true;
 }
 
@@ -834,7 +894,7 @@ bool QueryParser::factor(){
 }
 
 bool QueryParser::varName(){
-	cout << "entering varName..." << endl;
+	//cout << "entering varName..." << endl;
 	int nextTokenLength = nextToken.length() + 1;
 	char *id = new char[nextTokenLength];
 	strcpy_s(id, nextTokenLength, nextToken.c_str());
@@ -864,10 +924,10 @@ bool QueryParser::relRef(){
 }
 
 bool QueryParser::modifiesS(){
-	cout << "entering modifies..." << endl;
+	//cout << "entering modifies..." << endl;
 
 	if (!match("Modifies")) {
-		cout << "NOT A MODIFIES STATEMENT" << endl;
+		//cout << "NOT A MODIFIES STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -909,7 +969,7 @@ bool QueryParser::stmtRef(){
 }
 
 bool QueryParser::integer(){
-	cout << "entering integer..." << endl;
+	//cout << "entering integer..." << endl;
 	int nextTokenLength = nextToken.length() + 1;
 	char *id = new char[nextTokenLength];
 	strcpy_s(id, nextTokenLength, nextToken.c_str());
@@ -932,10 +992,10 @@ bool QueryParser::integer(){
 }
 
 bool QueryParser::usesS(){
-	cout << "entering uses..." << endl;
+	//cout << "entering uses..." << endl;
 
 	if (!match("Uses")) {
-		cout << "NOT A USES STATEMENT" << endl;
+		//cout << "NOT A USES STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -958,10 +1018,10 @@ bool QueryParser::usesS(){
 }
 
 bool QueryParser::parent(){
-	cout << "entering parent..." << endl;
+	//cout << "entering parent..." << endl;
 
 	if (!match("Parent")) {
-		cout << "NOT A PARENT STATEMENT" << endl;
+		//cout << "NOT A PARENT STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -984,10 +1044,10 @@ bool QueryParser::parent(){
 }
 
 bool QueryParser::parentT(){
-	cout << "entering parent*..." << endl;
+	//cout << "entering parent*..." << endl;
 
 	if (!match("Parent*")) {
-		cout << "NOT A PARENT* STATEMENT" << endl;
+		//cout << "NOT A PARENT* STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -1010,10 +1070,10 @@ bool QueryParser::parentT(){
 }
 
 bool QueryParser::follows(){
-	cout << "entering follows..." << endl;
+	//cout << "entering follows..." << endl;
 
 	if (!match("Follows")) {
-		cout << "NOT A FOLLOWS STATEMENT" << endl;
+		//cout << "NOT A FOLLOWS STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -1036,10 +1096,10 @@ bool QueryParser::follows(){
 }
 
 bool QueryParser::followsT(){
-	cout << "entering follows*..." << endl;
+	//cout << "entering follows*..." << endl;
 
 	if (!match("Follows*")) {
-		cout << "NOT A FOLLOWS* STATEMENT" << endl;
+		//cout << "NOT A FOLLOWS* STATEMENT" << endl;
 		return false;
 	}
 	nextToken = getNextToken();
@@ -1077,17 +1137,10 @@ vector<string> QueryParser::getStatements(){
 // ===============PARSING PART OF THE CODES================ //
 
 Query QueryParser::parse(){
-	if(declarationString.length() != 0){
-		synMap = parseSynonyms();
-		Query query = makeQuery(selectStatement, synMap);
-		addQuery(query);
-		return query;
-	} else {
-		synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
-		Query query2 = makeQuery(selectStatement, synMap);
-		addQuery(query2);
-		return query2;
-	}
+	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	Query query = makeQuery(selectStatement, synMap);
+	addQuery(query);
+	return query;
 }
 
 vector<Query> QueryParser::getQueries(){
@@ -1106,6 +1159,7 @@ Query QueryParser::makeQuery(vector<string> v, unordered_map<string, TypeTable::
 			query.addRelationship(rel);
 			i = i+2;
 		} else if (v.at(i) == "pattern"){
+			query.setPatternSyn(v.at(i+1));
 			Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
 			query.addRelationship(rel);
 			i = i+3;
@@ -1114,52 +1168,52 @@ Query QueryParser::makeQuery(vector<string> v, unordered_map<string, TypeTable::
 	return query;
 }
 
-unordered_map<string, TypeTable::SynType> QueryParser::parseSynonyms()
-{
-	vector<string> v;
-	char * str = new char [declarationString.length() + 1];
-	strcpy_s(str, declarationString.length() + 1, declarationString.c_str());
-
-	char seps[] = " ";
-	char * token = NULL;
-	char * nextToken = NULL;
-
-	token = strtok_s(str, seps, &nextToken);
-
-	while (token != NULL)
-	{
-		string vs(token);
-		v.push_back(vs);
-		token = strtok_s(NULL, seps, &nextToken);
-	}
-	
-	unordered_map<string, TypeTable::SynType> map;
-	
-	for(size_t i = 0; i < v.size(); i++){
-		string temp1 = v.at(i);
-		i++;
-		string temp2 = v.at(i);
-		
-		if (temp1.compare("assign") == 0){
-			map.insert(make_pair(temp2, TypeTable::ASSIGN));
-		} else if (temp1.compare("while") == 0){
-			map.insert(make_pair(temp2, TypeTable::WHILE));
-		} else if (temp1.compare("stmt") == 0){
-			map.insert(make_pair(temp2, TypeTable::STMT));
-		} else if (temp1.compare("prog_line") == 0){
-			map.insert(make_pair(temp2, TypeTable::PROGLINE));
-		} else if (temp1.compare("variable") == 0){
-			map.insert(make_pair(temp2, TypeTable::VARIABLE));
-		} else if (temp1.compare("constant") == 0){
-			map.insert(make_pair(temp2, TypeTable::CONSTANT));
-		} else {
-			map.insert(make_pair(temp2, TypeTable::INVALID)); 
-		}
-	}
-
-	map.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
-	return map;
-}
+//unordered_map<string, TypeTable::SynType> QueryParser::parseSynonyms()
+//{
+//	vector<string> v;
+//	char * str = new char [declarationString.length() + 1];
+//	strcpy_s(str, declarationString.length() + 1, declarationString.c_str());
+//
+//	char seps[] = " ";
+//	char * token = NULL;
+//	char * nextToken = NULL;
+//
+//	token = strtok_s(str, seps, &nextToken);
+//
+//	while (token != NULL)
+//	{
+//		string vs(token);
+//		v.push_back(vs);
+//		token = strtok_s(NULL, seps, &nextToken);
+//	}
+//	
+//	unordered_map<string, TypeTable::SynType> map;
+//	
+//	for(size_t i = 0; i < v.size(); i++){
+//		string temp1 = v.at(i);
+//		i++;
+//		string temp2 = v.at(i);
+//		
+//		if (temp1.compare("assign") == 0){
+//			map.insert(make_pair(temp2, TypeTable::ASSIGN));
+//		} else if (temp1.compare("while") == 0){
+//			map.insert(make_pair(temp2, TypeTable::WHILE));
+//		} else if (temp1.compare("stmt") == 0){
+//			map.insert(make_pair(temp2, TypeTable::STMT));
+//		} else if (temp1.compare("prog_line") == 0){
+//			map.insert(make_pair(temp2, TypeTable::PROGLINE));
+//		} else if (temp1.compare("variable") == 0){
+//			map.insert(make_pair(temp2, TypeTable::VARIABLE));
+//		} else if (temp1.compare("constant") == 0){
+//			map.insert(make_pair(temp2, TypeTable::CONSTANT));
+//		} else {
+//			map.insert(make_pair(temp2, TypeTable::INVALID)); 
+//		}
+//	}
+//
+//	map.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+//	return map;
+//}
 
 void QueryParser::addQuery(Query q){
 	queries.push_back(q);
