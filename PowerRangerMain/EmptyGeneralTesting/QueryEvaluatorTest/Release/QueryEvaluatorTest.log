@@ -1,4 +1,4 @@
-﻿Build started 15/4/2014 4:43:09 PM.
+﻿Build started 15/4/2014 9:20:49 PM.
      1>Project "C:\SPA\PowerRangerMain\EmptyGeneralTesting\QueryEvaluatorTest\QueryEvaluatorTest.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\QueryEvaluatorTest.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -18,4 +18,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.02
+Time Elapsed 00:00:05.24

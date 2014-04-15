@@ -16,12 +16,10 @@ QueryEvaluator::~QueryEvaluator(){
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
-	cout<<"In evaluateQuery"<<endl;
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
-	cout<<"Before for loop"<<endl;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 
 		string token1 = it->getToken1();
@@ -640,7 +638,7 @@ vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<
 	//Modifies(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
-		cout<<"Calling getModifies(TYPE, varName)"<<endl;
+		cout<<"Calling getModifies(TYPE, varName) "<<varName<<endl;
 		return mod->getModifies(i1->second, varName);
 	}
 

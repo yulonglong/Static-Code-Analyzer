@@ -332,3 +332,214 @@ void QueryEvaluatorTest::testEvaluateParent(){
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(4, vec[1]);
 }
+
+void QueryEvaluatorTest::testEvaluateModifies(){
+	QueryEvaluator qe(pkb);
+
+	//Query 1 assign a; Select a such that Modifies(a, "x");
+	Query q;
+	Relationship r("Modifies", "a", "\"x\"");
+	q.addRelationship(r);
+	unordered_map<string,TypeTable::SynType> map;
+	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q.setSelectedSyn("a");
+	q.setSynTable(map);
+
+	Modifies *m = Modifies::getInstance();
+	TypeTable *t = TypeTable::getInstance();
+	VarTable *v = pkb->getVarTable();
+
+	//modifies(1, "x")
+	v->insertVar("x");
+	m->setModifies(1, "x");
+	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+
+	vector<int> vec = qe.evaluateQuery(q);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+
+	//Query 2 variable v; Select v such that Modifies(1, v);
+	Query q2;
+	Relationship r2("Modifies", "1", "v");
+	q2.addRelationship(r2);
+	unordered_map<string,TypeTable::SynType> map2;
+	map2.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	q2.setSelectedSyn("v");
+	q2.setSynTable(map2);
+
+	vec = qe.evaluateQuery(q2);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	string expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, v->getVarName(vec[0]));
+
+	//Query 3 variable v; Select v such that Modifies(a, v);
+	Query q3;
+	Relationship r3("Modifies", "a", "v");
+	q3.addRelationship(r3);
+	unordered_map<string,TypeTable::SynType> map3;
+	map3.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	map3.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q3.setSelectedSyn("v");
+	q3.setSynTable(map3);
+
+	vec = qe.evaluateQuery(q3);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, v->getVarName(vec[0]));
+
+	//Query 4 assign a; Select a such that Modifies(a, v);
+	Query q4;
+	Relationship r4("Modifies", "a", "v");
+	q4.addRelationship(r4);
+	unordered_map<string,TypeTable::SynType> map4;
+	map4.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	map4.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q4.setSelectedSyn("a");
+	q4.setSynTable(map4);
+
+	vec = qe.evaluateQuery(q4);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+
+	//Query 5 Select BOOLEAN such that Modifies(1, "x");
+	Query q5;
+	Relationship r5("Modifies", "1", "\"x\"");
+	q5.addRelationship(r5);
+	unordered_map<string,TypeTable::SynType> map5;
+	q5.setSelectedSyn("BOOLEAN");
+	q5.setSynTable(map5);
+
+	bool flag = qe.evaluateQueryBoolean(q5);
+	CPPUNIT_ASSERT_EQUAL(true, flag);
+
+	//Query 6 stmt s; assign a; Select s such that Modifies(a, "x");
+	Query q6;
+	Relationship r6("Modifies", "a", "\"x\"");
+	q6.addRelationship(r6);
+	unordered_map<string,TypeTable::SynType> map6;
+	map6.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
+	map6.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q6.setSelectedSyn("s");
+	q6.setSynTable(map6);
+
+	vec = qe.evaluateQuery(q6);
+	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}*/
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(4, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(7, vec[4]);
+
+}
+
+void QueryEvaluatorTest::testEvaluateUses(){
+	QueryEvaluator qe(pkb);
+
+	//Query 1 assign a; Select a such that Uses(a, "x");
+	Query q;
+	Relationship r("Uses", "a", "\"x\"");
+	q.addRelationship(r);
+	unordered_map<string,TypeTable::SynType> map;
+	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q.setSelectedSyn("a");
+	q.setSynTable(map);
+
+	Uses *u = Uses::getInstance();
+	TypeTable *t = TypeTable::getInstance();
+	VarTable *v = pkb->getVarTable();
+
+	//uses(1, "x")
+	v->insertVar("x");
+	u->setUses(1, "x");
+	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+
+	vector<int> vec = qe.evaluateQuery(q);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+
+	
+	//Query 2 variable v; Select v such that Modifies(1, v);
+	Query q2;
+	Relationship r2("Uses", "1", "v");
+	q2.addRelationship(r2);
+	unordered_map<string,TypeTable::SynType> map2;
+	map2.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	q2.setSelectedSyn("v");
+	q2.setSynTable(map2);
+
+	vec = qe.evaluateQuery(q2);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	string expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, v->getVarName(vec[0]));
+	
+	//Query 3 variable v; Select v such that Modifies(a, v);
+	Query q3;
+	Relationship r3("Uses", "a", "v");
+	q3.addRelationship(r3);
+	unordered_map<string,TypeTable::SynType> map3;
+	map3.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	map3.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q3.setSelectedSyn("v");
+	q3.setSynTable(map3);
+
+	vec = qe.evaluateQuery(q3);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, v->getVarName(vec[0]));
+	
+	//Query 4 assign a; Select a such that Modifies(a, v);
+	Query q4;
+	Relationship r4("Uses", "a", "v");
+	q4.addRelationship(r4);
+	unordered_map<string,TypeTable::SynType> map4;
+	map4.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	map4.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q4.setSelectedSyn("a");
+	q4.setSynTable(map4);
+
+	vec = qe.evaluateQuery(q4);
+	cout<<vec.empty()<<endl;
+	cout<<vec[0]<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+	
+	//Query 5 Select BOOLEAN such that Modifies(1, "x");
+	Query q5;
+	Relationship r5("Uses", "1", "\"x\"");
+	q5.addRelationship(r5);
+	unordered_map<string,TypeTable::SynType> map5;
+	q5.setSelectedSyn("BOOLEAN");
+	q5.setSynTable(map5);
+
+	bool flag = qe.evaluateQueryBoolean(q5);
+	CPPUNIT_ASSERT_EQUAL(true, flag);
+
+	//Query 6 stmt s; assign a; Select s such that Modifies(a, "x");
+	Query q6;
+	Relationship r6("Uses", "a", "\"x\"");
+	q6.addRelationship(r6);
+	unordered_map<string,TypeTable::SynType> map6;
+	map6.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
+	map6.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	q6.setSelectedSyn("s");
+	q6.setSynTable(map6);
+
+	vec = qe.evaluateQuery(q6);
+	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+		cout<<*i<<endl;
+	}*/
+	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
+	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
+	CPPUNIT_ASSERT_EQUAL(4, vec[3]);
+	CPPUNIT_ASSERT_EQUAL(7, vec[4]);
+	
+}
