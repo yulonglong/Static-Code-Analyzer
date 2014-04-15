@@ -646,10 +646,43 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
 
 	vec = qe.evaluateQuery(q25);
-	
-	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){	
-		cout<<varT->getVarName(*i)<<endl;
-	}
-	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
+	expected = "i";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[0]));
+	expected = "b";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[1]));
+	expected = "c";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[2]));
+	expected = "a";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[3]));
+	expected = "beta";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[4]));
+	expected = "oSCar";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[5]));
+	expected = "tmp";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[6]));
+	expected = "I";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[7]));
+	expected = "k";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[8]));
+	expected = "j1k";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[9]));
+	expected = "chArlie#";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[10]));
+	expected = "x";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[11]));
+	expected = "left";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[12]));
+	expected = "right";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[13]));
+	expected = "Romeo";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[14]));
+	expected = "delta";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[15]));
+	expected = "l";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[16]));
+	expected = "width";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[17]));
+	expected = "w";
+	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[18]));
  }
