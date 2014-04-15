@@ -3,8 +3,8 @@
 #define QUERY_H
 
 #include "Relationship.h"
-#include "PKB.h"
 #include <string>
+#include "TypeTable.h"
 #include <vector>
 #include <unordered_map>
 
@@ -16,6 +16,8 @@ class Query
         Query();
 		string getSelectedSyn();
 		void setSelectedSyn(string s);
+		string getPatternSyn();
+		void setPatternSyn(string s);
         vector<Relationship> getRelVect();
 		unordered_map<string, TypeTable::SynType> getSynTable();
 		void setSynTable(unordered_map<string, TypeTable::SynType>);
@@ -23,6 +25,7 @@ class Query
 
 	private:
 		string selectedSyn; 
+		string patternSyn;
         vector<Relationship> relVect;
 		unordered_map<string, TypeTable::SynType> synTable;
 };

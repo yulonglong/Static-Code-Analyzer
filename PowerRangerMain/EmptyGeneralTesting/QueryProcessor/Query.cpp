@@ -8,6 +8,14 @@ void Query::setSelectedSyn(string s){
 	selectedSyn = s;
 }
 
+void Query::setPatternSyn(string s){
+	patternSyn = s;
+}
+
+string Query::getPatternSyn(){
+	return patternSyn;
+}
+
 string Query::getSelectedSyn()
 {
     return selectedSyn;

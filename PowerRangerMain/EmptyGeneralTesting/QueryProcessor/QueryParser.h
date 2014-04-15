@@ -21,7 +21,6 @@ private:
 	string s;
 	string nextToken;
 	string statement;
-	string declarationString;
 	vector<string> statements;
 	vector<string> tokens;
 	vector<string> expressionTokens;
@@ -77,7 +76,7 @@ private:
 	void addQuery(Query);
 	
 	// PARSE THE SYNONYMS DECLARATION
-	unordered_map<string, TypeTable::SynType> parseSynonyms();
+	// unordered_map<string, TypeTable::SynType> parseSynonyms();
 
 	// PARSE ONE QUERY STRING TO A VECTOR OF TOKENS
 	vector<string> parseQuery(string);
