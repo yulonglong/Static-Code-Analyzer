@@ -629,4 +629,27 @@ void IntegrateTest::testParserSource2()
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[4]));
 
+	//Query 25
+	string s25 = "variable v; Select v such that Uses(5, \"beta\")";
+	qp.validate(s25);
+	Query q25 = qp.parse();
+	v = q25.getRelVect();
+	Relationship r25 = v[0];
+	VarTable *varT = pkb->getVarTable();
+
+	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r25.getRelType());
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn());
+	expected = "5";
+	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken1());
+	expected = "\"beta\"";
+	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
+
+	vec = qe.evaluateQuery(q25);
+	
+	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){	
+		cout<<varT->getVarName(*i)<<endl;
+	}
+	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+
  }
