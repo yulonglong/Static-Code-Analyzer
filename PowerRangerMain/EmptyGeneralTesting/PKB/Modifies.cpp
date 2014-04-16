@@ -126,6 +126,7 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 				for (it = temp.begin(); it!=temp.end(); ++it) {
 					if (*it == varIndex) {
 						toReturn.push_back(i);
+						break;
 					}
 				}		
 			}
