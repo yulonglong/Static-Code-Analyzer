@@ -11,7 +11,7 @@ typedef TypeTable::SynType TYPE;
 
 class Uses {
 private:
-	map<STMTNUM,vector<STMTNUM>> usesTable;
+	vector<vector<VARINDEX>> usesTable;
 	static bool instanceFlag;
 	static Uses *uses;
 	TypeTable *typeTable; // for the sake of unit testing.
