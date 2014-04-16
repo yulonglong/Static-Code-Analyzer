@@ -15,21 +15,20 @@ typedef TypeTable::SynType TYPE;
 
 class Follows {
 private: 
-	vector<STMTNUM> followsTable;
-	
+	//vector<STMTNUM> followsTable;
+	//vector<STMTNUM> followedByTable;
+	map<STMTNUM,STMTNUM> followsTable;
 	static bool instanceFlag;
 	static Follows *follows;
+	TypeTable *typeTable; // public for the sake of unit testing
 	
 public: 
-	TypeTable *typeTable; // public for the sake of unit testing
 	Follows(TypeTable*);
 	Follows();
 	~Follows();
-	static Follows* getInstance();	// to be used to get instance of singleton class
-	static Follows* getInstance(TypeTable*);	// to be used to get instance of singleton class
-
-	vector<STMTNUM> followedByTable;
-
+	static Follows* getInstance();
+	static Follows* getInstance(TypeTable*);	
+	
 	void setFollows(STMTNUM, STMTNUM);
 
 	// testIsFollowsUsingStmtNum
