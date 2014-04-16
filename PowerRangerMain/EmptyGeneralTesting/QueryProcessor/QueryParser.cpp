@@ -609,10 +609,10 @@ bool QueryParser::designEntity(){
 
 bool QueryParser::synonym(){
 	//cout << "entering synonym..." << endl;
-	if (ident()){
-		return true;	
+	if (!ident()){
+		return false;	
 	}
-	return false;
+	return true;
 }
 
 bool QueryParser::ident(){
@@ -621,28 +621,36 @@ bool QueryParser::ident(){
 	char *id = new char[nextTokenLength];
 	strcpy_s(id, nextTokenLength, nextToken.c_str());
 
+	//cout << endl << endl << "IDENT() --> nextToken is..." << nextToken << endl;
+
 	// CHECK IF THE FIRST CHARACTER IS A LETTER
 	int ascii = id[0];
 	if((ascii > 64 && ascii < 93) || (ascii > 96 && ascii < 123));
 	else return false;
 
-	// IF THERE IS MORE THAN ONE CHARACTER, CHECK IF OTHER CHARAS ARE NOT LETTER OR DIGIT
-	// WARNING HEX SIGN!
-	if (nextToken.length() > 1){
-		for(size_t i = 1; i < nextToken.length(); i++){
+	// IF THERE IS MORE THAN ONE CHARACTER, CHECK IF OTHER CHARAS ARE NOT LETTER OR DIGIT OR HEX SIGN
+	// hex sign: 35
+	// numbers: 48-57
+	// uppercase letters: 65-90
+	// lowercase letters: 97-122
+
+	//cout << nextToken << endl;
+	int len = nextToken.length();
+	if (len > 1){
+		for(size_t i = 0; i < len; i++){
+			//cout << "id " << i << ": " << id[i] << endl;
 			ascii = id[i];
-			if((ascii > 64 && ascii < 93) || (ascii > 96 && ascii < 123) || ascii == 35 || (ascii > 47 && ascii < 58)){
-				cout << id[i] << endl;
-			}
-			else return false;
+			if((ascii >=97 && ascii <=122) || (ascii >= 65 && ascii <=90) ||
+				(ascii >= 48 && ascii <=57 || ascii == 35)){
+					// do nothing, move on to next character
+			} else return false;
 		}
-	} 
+	}
 	return true;
 }
 
 bool QueryParser::select(){
 	//cout << "entering select..." << endl;
-	//cout << "declaration counter..." << declarationCounter << endl;
 	
 	if (!match("Select")) return false;
 	selectStatement.push_back("Select");
@@ -971,11 +979,16 @@ bool QueryParser::entRef(){
 		return true;
 	} else if (nextToken.at(0) == '"'){
 		if (nextToken.at(nextToken.length()-1) != '"') return false;
-		string var = nextToken.substr(1, nextToken.length() -1);
+		string var = nextToken.substr(1, nextToken.length() -2);
+		//cout << "var is: " << var << endl;
 		nextToken = var;
-		if(!ident()) return false;
+		if(!ident()){
+			//cout << "NOT A VALID IDENTIFIER" << endl;
+			return false;
+		}
 	} else return false;
 
+	//cout << "A VALID IDENTIFIER" << endl;
 	return true;
 }
 
