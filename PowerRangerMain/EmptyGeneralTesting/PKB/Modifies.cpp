@@ -6,12 +6,16 @@ bool Modifies::instanceFlag=false;
 Modifies* Modifies::modifies=NULL;
 
 Modifies::Modifies() {
+	vector<VARINDEX> temp (1,-1);
+	modifiesTable.assign(1,temp);
 }
 
 	
 Modifies::Modifies(TypeTable *tt, VarTable *vt) {
 	typeTable = tt;
 	varTable = vt;
+	vector<VARINDEX> temp (1,-1);
+	modifiesTable.assign(1,temp);
 }
 
 //TODO: delete
@@ -45,29 +49,25 @@ Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt) {
     }
 }
 
-map<STMTNUM,vector<VARINDEX>> Modifies::getModifiesTable() {
+vector<vector<VARINDEX>> Modifies::getModifiesTable() {
 	return modifiesTable;
-
 }
 
 void Modifies::setModifies(STMTNUM s, VARNAME v) {
 	try {
 		VARINDEX index = varTable->getVarIndex(v);
-		vector<VARINDEX> existing;
 
-		try {
-			existing = modifiesTable.at(s);
-			modifiesTable.erase(s);
-		} catch (...){
+		vector<VARINDEX> temp (1,-1);
+		if (s >= (signed int) modifiesTable.size()) {
+			modifiesTable.resize(s+1, temp);
 		}
-
-		existing.push_back(index);
-		modifiesTable.insert(pair<STMTNUM,vector<VARINDEX>>(s,existing));
-		cout<<"setModifies("<<s<<","<<v<<")"<<endl;
-
+		vector<VARINDEX> temp1 = modifiesTable.at(s);
+		if(temp1==temp)
+			temp1.clear();
+		temp1.push_back(index);
+		modifiesTable[s] = temp1;
 	} catch (...){
 	}
-
 }
 
 
@@ -93,14 +93,15 @@ bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 
 vector<STMTNUM> Modifies::getModifies(TYPE type) {	
 	try {
-		vector<STMTNUM> toReturn;
-		for (map<STMTNUM,vector<VARINDEX>>::iterator i = modifiesTable.begin(); i != modifiesTable.end(); i++){
-			if (!i->second.empty()) {
-				if (typeTable->isType(type, i->first)) {
-					toReturn.push_back(i->first);
-				}
+		vector<VARINDEX> toReturn;
+		for(size_t i=0;i<modifiesTable.size();i++){
+			if(!modifiesTable.at(i).empty() && modifiesTable.at(i)!=vector<int> (1,-1)){
+				if(typeTable->isType(type,i))
+					toReturn.push_back(i);
 			}
 		}
+		if(toReturn==vector<int> (1,-1))
+			toReturn.clear();
 		return toReturn;
 	} catch(...){
 		vector<STMTNUM> toReturn;
@@ -118,13 +119,13 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 		}
 		vector<STMTNUM> toReturn;
 
-		for (map<STMTNUM,vector<VARINDEX>>::iterator i = modifiesTable.begin(); i != modifiesTable.end(); i++) {
-			if (typeTable->isType(t, i->first))  {
-				vector<VARINDEX> temp = i->second;
+		for (vector<int>::size_type i = 1; i != modifiesTable.size(); i++) {
+			if (typeTable->isType(t, i))  {
+				vector<VARINDEX> temp = modifiesTable.at(i); 
 				vector<VARINDEX>::iterator it;
 				for (it = temp.begin(); it!=temp.end(); ++it) {
 					if (*it == varIndex) {
-						toReturn.push_back(i->first);
+						toReturn.push_back(i);
 					}
 				}		
 			}

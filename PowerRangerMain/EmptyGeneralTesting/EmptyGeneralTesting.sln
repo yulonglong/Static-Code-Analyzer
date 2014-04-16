@@ -19,6 +19,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeParserTest", "CodeParserTest\CodeParserTest.vcxproj", "{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FollowsTest", "FollowsTest\FollowsTest.vcxproj", "{6F00B0C1-F2A5-4CE1-8703-FD0268EE872C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A28F6BBC-5250-4FDB-9B56-E18978C61FF2} = {A28F6BBC-5250-4FDB-9B56-E18978C61FF2}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParentTest", "ParentTest\ParentTest.vcxproj", "{729844E7-9297-434D-8444-36C95A34CA86}"
 	ProjectSection(ProjectDependencies) = postProject

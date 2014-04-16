@@ -1,15 +1,14 @@
 #include <cppunit/config/SourcePrefix.h>
-#include "PKB.h"
+
 #include "TestFollows.h"
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-class Follows;
-TypeTable *typeTable;
-Follows *follows; 
-PKB *pkb;
+TypeTable* typeTable;
+Follows* follows; 
+PKB* pkb;
 
 void FollowsTest::setUp() {
 	pkb = PKB::getInstance();
