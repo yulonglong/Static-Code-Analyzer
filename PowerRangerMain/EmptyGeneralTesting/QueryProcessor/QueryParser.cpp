@@ -63,6 +63,23 @@ bool QueryParser::generateStatements(){
 	// STORE THEM INTO STATEMENTS VECTOR
 	//cout << "generating statements..." << endl;
 	statements.clear();
+
+	//=====================================================================
+	// comment this part out if you want the end semicolon to be flexible
+	//=====================================================================
+
+	// remove trailing spaces
+	while(s.at(s.length()-1) == ' '){
+		s = s.substr(0, s.length()-1);
+	}
+
+	// check if end is semicolon
+	if(s.at(s.length()-1) == ';'){
+		return false;
+	}
+
+	//=======================================================================
+
 	char *str = new char[s.length() + 1];
 	strcpy_s(str, s.length() + 1, s.c_str());
 
