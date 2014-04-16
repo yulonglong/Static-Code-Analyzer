@@ -28,7 +28,7 @@ true
 6 - Modifies, Typed, ImplStmtLine ::
 variable v;
 Select v such that Modifies(5, "oSCar")
-none
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
 5000
 7 - Modifies, Typed, ImplStmtLine ::
 while w;
