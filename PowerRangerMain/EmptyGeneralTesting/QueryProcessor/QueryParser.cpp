@@ -629,12 +629,12 @@ bool QueryParser::ident(){
 	// IF THERE IS MORE THAN ONE CHARACTER, CHECK IF OTHER CHARAS ARE NOT LETTER OR DIGIT
 	// WARNING HEX SIGN!
 	if (nextToken.length() > 1){
-		for(size_t i = 1; i < nextToken.length()-1; i++){
+		for(size_t i = 1; i < nextToken.length(); i++){
 			ascii = id[i];
-			if (ascii <= 47 || (ascii > 58 && ascii < 65) || (ascii > 90 && ascii < 97) || ascii > 122){
-				return false;
-				break;
+			if((ascii > 64 && ascii < 93) || (ascii > 96 && ascii < 123) || ascii == 35 || (ascii > 47 && ascii < 58)){
+				cout << id[i] << endl;
 			}
+			else return false;
 		}
 	} 
 	return true;
