@@ -59,7 +59,7 @@ void ModifiesTest::tearDown() {
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
 
 void ModifiesTest::testSetModifies() {  // Note 5
-	map<STMTNUM, vector<VARINDEX>> map = modifies->getModifiesTable();
+	vector<vector<VARINDEX>> map = modifies->getModifiesTable();
 	CPPUNIT_ASSERT(map.at(1).size() == 1);
 	CPPUNIT_ASSERT(varTable->getVarName(map.at(1).at(0)) == "x");
 
@@ -78,7 +78,7 @@ void ModifiesTest::testGetModifies() {
 	CPPUNIT_ASSERT(varTable->getVarName(v.at(0)) == "x");
 	
 	v = modifies->getModifies(3); 
-	CPPUNIT_ASSERT(v.size() == 0);
+	CPPUNIT_ASSERT(v.at(0) == -1);
 
 	vector<int> list = modifies->getModifies(TypeTable::ASSIGN, "x");
 	CPPUNIT_ASSERT(list.size() == 4);

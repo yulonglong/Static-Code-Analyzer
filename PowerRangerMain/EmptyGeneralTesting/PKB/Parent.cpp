@@ -7,10 +7,16 @@ Parent* Parent::parent=NULL;
 
 // constructor
 Parent::Parent() {
+	vector<STMTNUM> temp (1,-1);
+	parentTable.assign(1, temp);
+	childrenTable.assign(1, -1);
 }
 
 Parent::Parent(TypeTable *table) {
 	typeTable = table;
+	vector<STMTNUM> temp (1,-1);
+	parentTable.assign(1, temp);
+	childrenTable.assign(1, -1);
 }
 
 Parent::~Parent() {
@@ -43,19 +49,25 @@ TypeTable* Parent::getTypeTable(){
 }
 
 void Parent::setParent(STMTNUM s1, STMTNUM s2) {
-	vector<STMTNUM> existing;
 	try{
-		existing = parentTable.at(s1);
-		parentTable.erase(s1);
-	}
-	catch(...){
-	}
-	existing.push_back(s2);
-	parentTable.insert(pair<STMTNUM,vector<STMTNUM>>(s1,existing));
-	
-	childrenTable.insert(pair<STMTNUM,STMTNUM>(s2,s1)); 
+		vector<STMTNUM> temp;
+		temp.assign(1,-1);
+		if (s1 >= (signed int) parentTable.size()) {
+			parentTable.resize(s1+1, temp);
+		}
 
-	cout << "Set parent (" << s1 << ", " << s2 << ")" << endl; 
+		vector<STMTNUM> temp1 = parentTable.at(s1);
+		if(temp1==temp)
+			temp1.clear();
+		temp1.push_back(s2);
+		parentTable[s1] = temp1;
+
+		if (s2 >= (signed int)childrenTable.size()) {
+			childrenTable.resize(s2+1, -1);
+		}
+		childrenTable[s2] = s1; 
+	}catch(...){
+	}
 }
 
 bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
@@ -71,28 +83,22 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 bool Parent::isParent(TYPE t1, TYPE t2) {
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
-	for (map<STMTNUM,vector<STMTNUM>>::iterator i = parentTable.begin(); i != parentTable.end(); i++) {
+	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
 		try {
-			temp = parentTable.at(i->first);
+			temp = parentTable.at(i);
 		} catch (...) {
-			//const std::out_of_range& oor
-			// cout << "Catch: j is " << j << endl; 
 			continue;
 		}
 		for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
 			STMTNUM j = temp.at(k);
 			try {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
 					return true;
 				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
-					// cout << i << "  " << j << endl; 
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i->first)) {
-					// cout << i << "  " << j << endl; 
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i->first) && typeTable->isType(t2,j)) {
-					// cout << i << "  " << j << endl; 
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
 					return true;
 				}
 			} catch (...) {
@@ -101,7 +107,6 @@ bool Parent::isParent(TYPE t1, TYPE t2) {
 			}
 		}
 	}
-	
 	return false;
 }
 
@@ -158,30 +163,23 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2, STMTNUM s) {
 vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
-	for (map<STMTNUM,STMTNUM>::iterator i = childrenTable.begin(); i != childrenTable.end(); i++) {
+	for (vector<STMTNUM>::size_type i = 0; i != childrenTable.size(); i++) {
 		j = -1; 
 		try {
-			j = i->second;
+			j = childrenTable.at(i);
 		} catch (...) {
-			//const std::out_of_range& oor
-			// cout << "Catch: j is " << j << endl; 
 			continue;
 		}
 		try {
 			if (j != -1) {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i->first);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,i->first)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i->first);
+					list.push_back(i);
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,i)) {
+					list.push_back(i);
 				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,j)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i->first);
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,i->first)) {
-					// cout << i << "  " << j << endl; 
-					list.push_back(i->first);
-
+					list.push_back(i);
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,i)) {
+					list.push_back(i);
 				}
 			}
 		} catch (...) {
@@ -195,14 +193,12 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 }
 
 vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
-	vector<STMTNUM> list; 
+	vector<STMTNUM> ans; 
 	vector<STMTNUM> temp;
-	for (map<STMTNUM,vector<STMTNUM>>::iterator i = parentTable.begin(); i != parentTable.end(); i++) {
+	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
 		try {
-			temp = parentTable.at(i->first);
+			temp = parentTable.at(i);
 		} catch (...) {
-			//const std::out_of_range& oor
-			// cout << "Catch: j is " << j << endl; 
 			continue;
 		}
 		if(temp.at(0)!=-1){
@@ -211,19 +207,19 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
 				try {
 					if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 						// cout << i << "  " << j << endl; 
-						list.push_back(i->first);
+						ans.push_back(i);
 						break;
 					} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						list.push_back(i->first);
+						ans.push_back(i);
 						break;
-					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i->first)) {
+					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
 						// cout << i << "  " << j << endl; 
-						list.push_back(i->first);
+						ans.push_back(i);
 						break;
-					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i->first) && typeTable->isType(t2,j)) {
+					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						list.push_back(i->first);
+						ans.push_back(i);
 						break;
 					}
 				} catch (...) {
@@ -233,11 +229,9 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
 			}
 		}
 	}
-	if(list.empty())
+	if(ans.empty())
 		return vector<STMTNUM> (1,-1);
-	return list;
-
-	return vector<STMTNUM> (1,-1);
+	return ans;
 }
 
 STMTNUM Parent::getParent(TYPE t1, STMTNUM s){

@@ -15,9 +15,8 @@ typedef TypeTable::SynType TYPE;
 
 class Follows {
 private: 
-	//vector<STMTNUM> followsTable;
-	//vector<STMTNUM> followedByTable;
-	map<STMTNUM,STMTNUM> followsTable;
+	vector<STMTNUM> followsTable;
+	vector<STMTNUM> followedByTable;
 	static bool instanceFlag;
 	static Follows *follows;
 	TypeTable *typeTable; // public for the sake of unit testing
