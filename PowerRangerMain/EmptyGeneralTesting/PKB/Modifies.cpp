@@ -14,6 +14,7 @@ Modifies::Modifies(TypeTable *tt, VarTable *vt) {
 	varTable = vt;
 }
 
+//TODO: delete
 Modifies::~Modifies() {
 	modifiesTable.clear();
 	instanceFlag=false;
