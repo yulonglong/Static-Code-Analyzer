@@ -150,16 +150,6 @@ assign a; stmt s; variable v; assign a1; variable v2;
 Select a such that Uses (s,v) pattern a1(v2, _"asd"_)
 none
 5000
-31 - Multiple, Uses :: 
-assign a;
-Select a such that Uses(a,"delta") such that Uses(a, "Romeo")
-15
-5000
-32 - Multiple, Modifies, Parent :: 
-assign a; stmt s;
-Select s such that Parent (s, a) such that Modifies (s, "oSCar")
-4, 5, 7
-5000
 33 - Indirect :: 
 assign a, a1; variable v;
 Select a such that Uses (a, v) pattern a1(v,_)
