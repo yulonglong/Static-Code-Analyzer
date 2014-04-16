@@ -6,7 +6,7 @@ procedure ABC {
      while beta {						
         oSCar  = 1 + beta + tmp;			
         while tmp {					
-            oSCar = I + k + j1k + chArlie#;
+            oSCar = I + k + j1k + chArlie;
 	}		
 	while x {					
             x = x + 1;					
