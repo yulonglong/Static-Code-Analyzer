@@ -107,9 +107,9 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 									}
 
 		case Relationship::MODIFIES:
-			{	
+			{
 
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if(selectedSyn!=token1 && selectedSyn!=token2) { //if first char is a digit, then the token must be a number
 				cout<<"Calling evaluateModifiesBoolean"<<endl;
 				if(evaluateModifiesBoolean(*it, m)){
 					switch(i->second){
@@ -134,7 +134,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::USES:
 			{	
 
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
+			if(selectedSyn!=token1 && selectedSyn!=token2) { //if first char is a digit, then the token must be a number
 				cout<<"Calling evaluate uses boolean"<<endl;
 				if(evaluateUsesBoolean(*it, m)){
 					cout<<"called evaluate uses boolean"<<endl;
@@ -243,6 +243,11 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 		case Relationship::PARENTSTAR:
 			answers = answers && evaluateParentStarBoolean(*it, q.getSynTable());
 			break;
+		case Relationship::MODIFIES:
+			answers = answers && evaluateModifiesBoolean(*it, q.getSynTable());
+			break;
+		case Relationship::USES:
+			answers = answers && evaluateUsesBoolean(*it, q.getSynTable());
 		}
 	}
 	return answers;
