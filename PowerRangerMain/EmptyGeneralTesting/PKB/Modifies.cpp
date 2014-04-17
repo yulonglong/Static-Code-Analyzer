@@ -73,6 +73,7 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 
 bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	//Select w such that Modifies(1, "y")
+	cout << "calling isModifies("<<s<<", "<<v<<"hello"<<endl;
 	try {
 		VARINDEX index = varTable->getVarIndex(v);
 		if (index == -1) {

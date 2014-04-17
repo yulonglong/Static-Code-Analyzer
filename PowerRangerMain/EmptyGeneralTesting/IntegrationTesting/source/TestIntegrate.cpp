@@ -667,7 +667,7 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[8]));
 	expected = "j1k";
 	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[9]));
-	expected = "chArlie#";
+	expected = "chArlie";
 	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[10]));
 	expected = "x";
 	CPPUNIT_ASSERT_EQUAL(expected, varT->getVarName(vec[11]));
