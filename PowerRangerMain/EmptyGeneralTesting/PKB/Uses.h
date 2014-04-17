@@ -14,14 +14,14 @@ private:
 	vector<vector<VARINDEX>> usesTable;
 	static bool instanceFlag;
 	static Uses *uses;
-	TypeTable *typeTable; // for the sake of unit testing.
+	TypeTable *typeTable;
 	VarTable *varTable;
 public:
 	Uses();
 	Uses(TypeTable*,VarTable*);
 	~Uses();
 	static Uses* getInstance();	// to be used to get instance of singleton class
-	static Uses* getInstance(TypeTable*,VarTable*);	// to be used to get instance of singleton class
+	static Uses* getInstance(TypeTable*,VarTable*);	// constructor
 	void setUses(STMTNUM, VARNAME);
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
 	vector<STMTNUM> getUses(TYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist

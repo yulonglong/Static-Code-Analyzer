@@ -141,7 +141,6 @@ vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
 				continue;
 			}
 			if (j!=-1 && typeTable->isType(t1, i) && typeTable->isType(t2, j))  {
-				//cout << i->first << " ,g "<< i->second<<endl; 
 				list.push_back(j);
 			}
 		}
@@ -152,9 +151,6 @@ vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
 	} catch (...) {
 		return vector<STMTNUM> (1,-1);
 	}
-
-	//return vector<STMTNUM> (1,-1);
-	// return list;
 }
 
 vector<STMTNUM> Follows::getFollowedBy(TYPE t1, TYPE t2) {
