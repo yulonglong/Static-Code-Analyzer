@@ -22,7 +22,7 @@ Select p
 5 - ImplStmtLine :: 
 variable v;
 Select v
-i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie#, x, left, right, Romeo, delta, width, w, l
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, width, w, l
 5000
 6 - ImplStmtLine :: 
 constant c; 
