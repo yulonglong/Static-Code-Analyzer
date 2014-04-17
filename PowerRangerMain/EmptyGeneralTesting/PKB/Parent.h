@@ -21,14 +21,13 @@ private:
 	vector<STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
 	static bool instanceFlag;
 	static Parent *parent;
-	TypeTable *typeTable; // for the sake of unit testing.
+	TypeTable *typeTable; 
 public: 
 	Parent();
 	Parent(TypeTable*);
 	~Parent();
 	static Parent* getInstance();	// to be used to get instance of singleton class 
-	static Parent* getInstance(TypeTable*);	// to be used to get instance of singleton class
-	TypeTable* getTypeTable();
+	static Parent* getInstance(TypeTable*);	// constructor
 
 	void setParent(STMTNUM, STMTNUM);
 	bool isParent(STMTNUM, STMTNUM);// Select BOOLEAN such that Parent(1,2)

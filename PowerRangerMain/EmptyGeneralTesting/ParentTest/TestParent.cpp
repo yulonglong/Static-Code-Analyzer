@@ -196,7 +196,7 @@ void ParentTest::testGetChildren() {
 	return;
 }
 
-void ParentTest::testNew() {
+void ParentTest::testDoubleWhile() {
 	parent->setParent(6, 7);
 	parent->setParent(6, 20);
 	parent->setParent(20, 21);
