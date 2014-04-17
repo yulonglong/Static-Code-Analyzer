@@ -49,6 +49,7 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	try{
 		vector<STMTNUM> temp;
 		temp.assign(1,-1);
+		//Resize if needed
 		if (s1 >= (signed int) parentTable.size()) {
 			parentTable.resize(s1+1, temp);
 		}
@@ -59,6 +60,7 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 		temp1.push_back(s2);
 		parentTable[s1] = temp1;
 
+		//Resize if needed
 		if (s2 >= (signed int)childrenTable.size()) {
 			childrenTable.resize(s2+1, -1);
 		}
@@ -77,10 +79,10 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Parent::isParent(TYPE t1, TYPE t2) {
+bool Parent::isParent(TYPE t1, TYPE t2) { //Select BOOLEAN such that isParent(t1,t2)
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
-	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
+	for (vector<STMTNUM>::size_type i = 1; i != parentTable.size(); i++) {
 		try {
 			temp = parentTable.at(i);
 		} catch (...) {

@@ -82,11 +82,11 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 	}
 }
 
-vector<int> Uses::getUses(TYPE t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
+vector<VARINDEX> Uses::getUses(TYPE t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
 		vector<VARINDEX> ans;
-		for(size_t i=0;i<usesTable.size();i++){
+		for(size_t i=1;i<usesTable.size();i++){
 			vector<VARINDEX> temp = usesTable.at(i);
 			vector<VARINDEX>::iterator it = temp.begin();
 			for(;it!=temp.end();++it){
@@ -126,7 +126,7 @@ vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	retur
 vector<VARINDEX> Uses::getUses(TYPE type){	//Select a such that Uses(a, v); return empty vector if does not exist
 	try{
 		vector<VARINDEX> ans;
-		for(size_t i=0;i<usesTable.size();i++){
+		for(size_t i=1;i<usesTable.size();i++){
 			if(!usesTable.at(i).empty() && usesTable.at(i)!=vector<int> (1,-1)){
 				if(typeTable->isType(type,i))
 					ans.push_back(i);
