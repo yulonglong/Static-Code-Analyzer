@@ -19,7 +19,7 @@ public:
 	static SynType getSynType(std::string);
 
 private:
-	map<STMTNUM,SynType> typeMap;
+	vector<SynType> typeMap;
 	static bool instanceFlag;
 	static TypeTable *typeTable;
 

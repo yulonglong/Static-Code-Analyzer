@@ -7,6 +7,7 @@ TypeTable* TypeTable::typeTable=NULL;
 
 // constructor
 TypeTable::TypeTable() {
+	typeMap.assign(1, INVALID);
 }
 
 TypeTable::~TypeTable(){
@@ -30,27 +31,38 @@ TypeTable* TypeTable::getInstance() {
 
 
 void TypeTable::insertStmtNumAndType(STMTNUM s,TypeTable::SynType t) {
+	//Resize if needed
+	if (s >= (signed int) typeMap.size()) {
+		typeMap.resize(s+1, INVALID);
+	}
 	typeMap[s]=t;
 }
 
-// Throws exception; whoever calls please catch
 TypeTable::SynType TypeTable::getType(STMTNUM s) {
-	return typeMap.at(s);
+	try{
+		return typeMap.at(s);
+	}catch(...){
+		return INVALID;
+	}
 }
 
 vector<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
 	vector<STMTNUM> list;
-	for (map<int,TypeTable::SynType>::iterator it=typeMap.begin(); it!=typeMap.end(); ++it){
-		if (t == STMT || it->second == t) {
-			list.push_back (it->first);
+	for (size_t i=1; i!=typeMap.size(); i++){
+		if (t == STMT || typeMap.at(i) == t) {
+			list.push_back (i);
 		}
 	}
 	return list;
 }
 
 bool TypeTable::isType(TypeTable::SynType type, STMTNUM stmt) {
-	if (type == STMT || typeMap.at(stmt) == type) {
-		return true;
+	try{
+		if (type == STMT || typeMap.at(stmt) == type) {
+			return true;
+		}
+		return false;
+	}catch(...){
+		return false;
 	}
-	return false;
 }
