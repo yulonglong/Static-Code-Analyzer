@@ -1,0 +1,115 @@
+-1.) root : program
+Parent -1.) root : program
+-1.) YuLongLong : procedure
+Parent -1.) YuLongLong : procedure
+-1.) YuLongLong : stmtLst
+Parent -1.) YuLongLong : stmtLst
+1.) = : assign
+Parent 1.) = : assign
+1.) a : variable
+Parent 1.) = : assign
+1.) 7 : constant
+Parent -1.) YuLongLong : stmtLst
+2.) = : assign
+Parent 2.) = : assign
+2.) b : variable
+Parent 2.) = : assign
+2.) 6 : constant
+Parent -1.) YuLongLong : stmtLst
+3.) = : assign
+Parent 3.) = : assign
+3.) c : variable
+Parent 3.) = : assign
+3.) 5 : constant
+Parent -1.) YuLongLong : stmtLst
+4.) = : assign
+Parent 4.) = : assign
+4.) d : variable
+Parent 4.) = : assign
+4.) a : variable
+Parent -1.) YuLongLong : stmtLst
+5.) = : assign
+Parent 5.) = : assign
+5.) d : variable
+Parent 5.) = : assign
+5.) + : operator
+Parent 5.) + : operator
+5.) d : variable
+Parent 5.) + : operator
+5.) 2 : constant
+Parent -1.) YuLongLong : stmtLst
+6.) = : assign
+Parent 6.) = : assign
+6.) d : variable
+Parent 6.) = : assign
+6.) + : operator
+Parent 6.) + : operator
+6.) + : operator
+Parent 6.) + : operator
+6.) + : operator
+Parent 6.) + : operator
+6.) a : variable
+Parent 6.) + : operator
+6.) b : variable
+Parent 6.) + : operator
+6.) c : variable
+Parent 6.) + : operator
+6.) d : variable
+Parent -1.) YuLongLong : stmtLst
+7.) 7 : while
+Parent 7.) 7 : while
+7.) hakase : variable
+Parent 7.) 7 : while
+7.) 7 : stmtLst
+Parent 7.) 7 : stmtLst
+8.) = : assign
+Parent 8.) = : assign
+8.) lacie : variable
+Parent 8.) = : assign
+8.) 10 : constant
+Parent 7.) 7 : stmtLst
+9.) = : assign
+Parent 9.) = : assign
+9.) natalie : variable
+Parent 9.) = : assign
+9.) 9 : constant
+Parent 7.) 7 : stmtLst
+10.) = : assign
+Parent 10.) = : assign
+10.) f : variable
+Parent 10.) = : assign
+10.) + : operator
+Parent 10.) + : operator
+10.) + : operator
+Parent 10.) + : operator
+10.) + : operator
+Parent 10.) + : operator
+10.) + : operator
+Parent 10.) + : operator
+10.) lacie : variable
+Parent 10.) + : operator
+10.) natalie : variable
+Parent 10.) + : operator
+10.) a : variable
+Parent 10.) + : operator
+10.) b : variable
+Parent 10.) + : operator
+10.) c : variable
+Parent 7.) 7 : stmtLst
+11.) = : assign
+Parent 11.) = : assign
+11.) g : variable
+Parent 11.) = : assign
+11.) + : operator
+Parent 11.) + : operator
+11.) + : operator
+Parent 11.) + : operator
+11.) + : operator
+Parent 11.) + : operator
+11.) a : variable
+Parent 11.) + : operator
+11.) c : variable
+Parent 11.) + : operator
+11.) b : variable
+Parent 11.) + : operator
+11.) f : variable
