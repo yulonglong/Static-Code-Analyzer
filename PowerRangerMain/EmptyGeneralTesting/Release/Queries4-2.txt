@@ -1,7 +1,0 @@
-1
-cat: Pattern
-1 - Pattern ImplStmtLine ::
-assign a; while w;
-aaaaaaaaaaaaaaaaaaaaaaaaa
-
-5000
