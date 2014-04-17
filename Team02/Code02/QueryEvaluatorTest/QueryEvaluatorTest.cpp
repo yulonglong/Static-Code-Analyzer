@@ -434,7 +434,7 @@ void QueryEvaluatorTest::testEvaluateModifies(){
 	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
 	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
 	CPPUNIT_ASSERT_EQUAL(4, vec[3]);
-	CPPUNIT_ASSERT_EQUAL(7, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[4]);
 
 }
 
@@ -540,6 +540,6 @@ void QueryEvaluatorTest::testEvaluateUses(){
 	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
 	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
 	CPPUNIT_ASSERT_EQUAL(4, vec[3]);
-	CPPUNIT_ASSERT_EQUAL(7, vec[4]);
+	CPPUNIT_ASSERT_EQUAL(5, vec[4]);
 	
 }
