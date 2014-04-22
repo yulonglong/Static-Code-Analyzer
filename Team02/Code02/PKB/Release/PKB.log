@@ -1,0 +1,34 @@
+﻿Build started 18/4/2014 5:09:17 AM.
+     1>Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\PKB\PKB.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\PKB.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\DesignExtractor" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\CodeParser" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\QueryProcessor" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ConstTable.cpp Follows.cpp Modifies.cpp Parent.cpp PKB.cpp ProcTable.cpp TypeTable.cpp Uses.cpp VarTable.cpp
+         ConstTable.cpp
+         Follows.cpp
+         Modifies.cpp
+         Parent.cpp
+         PKB.cpp
+         ProcTable.cpp
+         TypeTable.cpp
+         Uses.cpp
+         VarTable.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\PKB.lib" /NOLOGO /LTCG Release\ConstTable.obj
+         Release\Follows.obj
+         Release\Modifies.obj
+         Release\Parent.obj
+         Release\PKB.obj
+         Release\ProcTable.obj
+         Release\TypeTable.obj
+         Release\Uses.obj
+         Release\VarTable.obj
+         PKB.vcxproj -> D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\PKB.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\PKB.unsuccessfulbuild".
+         Touching "Release\PKB.lastbuildstate".
+     1>Done Building Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\PKB\PKB.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.92

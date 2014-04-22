@@ -1,0 +1,26 @@
+﻿Build started 18/4/2014 5:09:37 AM.
+     1>Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\CodeParserTest\CodeParserTest.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\CodeParserTest.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\source" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\include" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\PKB" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\CodeParser" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp TestNode.cpp TestParser.cpp
+         Main.cpp
+         TestNode.cpp
+         TestParser.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParserTest.exe" /NOLOGO "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\lib\cppunit.lib" "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\PKB.lib" "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParser.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\CodeParserTest.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParserTest.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParserTest.lib" /MACHINE:X86 Release\Main.obj
+         Release\TestNode.obj
+         Release\TestParser.obj
+         Generating code
+         Finished generating code
+         CodeParserTest.vcxproj -> D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParserTest.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\CodeParserTest.exe;#1" /manifest Release\CodeParserTest.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\CodeParserTest.unsuccessfulbuild".
+         Touching "Release\CodeParserTest.lastbuildstate".
+     1>Done Building Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\CodeParserTest\CodeParserTest.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.95
