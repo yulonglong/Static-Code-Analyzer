@@ -1,0 +1,31 @@
+﻿Build started 18/4/2014 5:09:22 AM.
+     1>Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\QueryProcessor\QueryProcessor.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\QueryProcessor.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Table" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\CodeParser" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Follows" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Parent" /I"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\PKB" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Query.cpp QueryEvaluator.cpp QueryParser.cpp QueryProcessor.cpp Relationship.cpp
+         Query.cpp
+         QueryEvaluator.cpp
+     1>QueryEvaluator.cpp(810): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryEvaluator.cpp(827): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryEvaluator.cpp(851): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryEvaluator.cpp(885): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryEvaluator.cpp(912): warning C4018: '<' : signed/unsigned mismatch
+         QueryParser.cpp
+         QueryProcessor.cpp
+         Relationship.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\QueryProcessor.lib" /NOLOGO /LTCG Release\Query.obj
+         Release\QueryEvaluator.obj
+         Release\QueryParser.obj
+         Release\QueryProcessor.obj
+         Release\Relationship.obj
+         QueryProcessor.vcxproj -> D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\Release\QueryProcessor.lib
+       FinalizeBuildStatus:
+         Deleting file "Release\QueryProcessor.unsuccessfulbuild".
+         Touching "Release\QueryProcessor.lastbuildstate".
+     1>Done Building Project "D:\My Uni\Semester 4\CS3201\Main project\Team02\Code02\QueryProcessor\QueryProcessor.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.42
