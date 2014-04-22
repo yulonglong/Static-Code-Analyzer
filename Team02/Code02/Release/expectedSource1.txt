@@ -1,0 +1,55 @@
+-1.) root : program
+Parent -1.) root : program
+-1.) Mini : procedure
+Parent -1.) Mini : procedure
+-1.) Mini : stmtLst
+Parent -1.) Mini : stmtLst
+1.) = : assign
+Parent 1.) = : assign
+1.) A1 : variable
+Parent 1.) = : assign
+1.) 29 : constant
+Parent -1.) Mini : stmtLst
+2.) = : assign
+Parent 2.) = : assign
+2.) a1 : variable
+Parent 2.) = : assign
+2.) 31 : constant
+Parent -1.) Mini : stmtLst
+3.) = : assign
+Parent 3.) = : assign
+3.) i : variable
+Parent 3.) = : assign
+3.) 51 : constant
+Parent -1.) root : program
+-1.) mini : procedure
+Parent -1.) mini : procedure
+-1.) mini : stmtLst
+Parent -1.) mini : stmtLst
+4.) = : assign
+Parent 4.) = : assign
+4.) i : variable
+Parent 4.) = : assign
+4.) a1 : variable
+Parent -1.) mini : stmtLst
+5.) = : assign
+Parent 5.) = : assign
+5.) a1 : variable
+Parent 5.) = : assign
+5.) A1 : variable
+Parent -1.) root : program
+-1.) q : procedure
+Parent -1.) q : procedure
+-1.) q : stmtLst
+Parent -1.) q : stmtLst
+6.) = : assign
+Parent 6.) = : assign
+6.) q : variable
+Parent 6.) = : assign
+6.) A1 : variable
+Parent -1.) q : stmtLst
+7.) = : assign
+Parent 7.) = : assign
+7.) A1 : variable
+Parent 7.) = : assign
+7.) 90 : constant
