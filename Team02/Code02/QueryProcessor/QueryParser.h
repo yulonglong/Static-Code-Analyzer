@@ -87,6 +87,8 @@ private:
 	// MAP OF SYNONYMS AND THEIR TYPES
 	unordered_map<string, TypeTable::SynType> synMap;
 
+	void reorderSelectStatement();
+
 public:
 	QueryParser();
 
