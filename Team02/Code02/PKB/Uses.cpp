@@ -85,6 +85,8 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 vector<int> Uses::getUses(TYPE t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
+		if(index==-1)
+			return vector<VARINDEX> (1,-1);
 		vector<VARINDEX> ans;
 		for(size_t i=0;i<usesTable.size();i++){
 			vector<VARINDEX> temp = usesTable.at(i);
