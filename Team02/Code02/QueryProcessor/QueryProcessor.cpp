@@ -51,7 +51,6 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		}
 		cout<<"End evaluate query"<<endl;
 	} else{
-		result.push_back("Query is invalid");
 		cout<<"Query is invalid"<<endl;
 	}
 }

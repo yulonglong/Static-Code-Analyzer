@@ -904,8 +904,17 @@ bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
 				vector<Node*> children = nd.getChild();
 				Node childOne = *children.at(0);
 				Node childTwo = *children.at(1);
+				cout<<"currNode: "<< nd.getData()<< " " << nd.getProgLine() <<endl;
+				cout<<"left, right: "<< childOne.getData() << " " << childTwo.getData()<< endl;
 				if(childOne.getData().compare(right)==0 && childTwo.getData().compare(left)==0)
 					return true;
+				else {
+					vector<Node*> children = nd.getChild();
+					for(int i=0; i<  children.size(); i++) {
+						Node child = *children.at(i);
+						st.push(child);
+					}
+				}
 			}
 			else {
 				vector<Node*> children = nd.getChild();
