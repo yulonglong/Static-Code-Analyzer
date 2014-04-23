@@ -70,6 +70,8 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 bool Uses::isUses(STMTNUM s, VARNAME v){
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
+		if(index==-1)
+			return false;
 		vector<VARINDEX> temp = usesTable.at(s);
 		vector<VARINDEX>::iterator it = temp.begin();
 		for(;it!=temp.end();it++){
