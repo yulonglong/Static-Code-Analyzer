@@ -36,6 +36,11 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
 
+		if(selectedSyn!=(i->first)){
+			answers.clear();
+			break;
+		}
+
 		if(token1=="_"){
 			it->setToken1("s1");
 			m.insert(make_pair<string, TypeTable::SynType>("s1", TypeTable::STMT));
@@ -788,7 +793,7 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 			return true;
 	}
 
-	//Modifies(1, "x")
+	//Uses(1, "x")
 	else{
 		return use->isUses(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
 	}
