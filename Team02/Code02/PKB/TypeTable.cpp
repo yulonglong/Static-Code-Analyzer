@@ -15,6 +15,43 @@ TypeTable::~TypeTable(){
 	instanceFlag=false;
 }
 
+TypeTable::SynType TypeTable::getSynType(std::string input){
+	for(int i=0;i<(int)input.length();i++){
+		input[i] = tolower(input[i]);
+	}
+	
+	
+	if(input=="assign"){
+		return TypeTable::ASSIGN;
+	}
+	else if(input=="if"){
+		return TypeTable::IF;
+	}
+	else if(input=="while"){
+		return TypeTable::WHILE;
+	}
+	else if(input=="stmt"){
+		return TypeTable::STMT;
+	}
+	else if(input=="boolean"){
+		return TypeTable::BOOLEAN;
+	}
+	else if(input=="call"){
+		return TypeTable::CALL;
+	}
+	else if(input=="variable"){
+		return TypeTable::VARIABLE;
+	}
+	else if(input=="constant"){
+		return TypeTable::CONSTANT;
+	}
+	else if(input=="prog_line"){
+		return TypeTable::PROGLINE;
+	}
+	else{
+		return TypeTable::INVALID;
+	}
+}
 
 TypeTable* TypeTable::getInstance() {
 	if(!instanceFlag)
