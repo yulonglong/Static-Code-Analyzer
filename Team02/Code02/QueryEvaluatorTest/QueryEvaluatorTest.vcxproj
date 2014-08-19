@@ -21,6 +21,7 @@
     <ProjectGuid>{DF9F6533-00E6-47D2-B2AB-D1558AECA4F2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>StudentUnitTest</RootNamespace>
+    <ProjectName>TestQueryEvaluator</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
