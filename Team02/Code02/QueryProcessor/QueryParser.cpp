@@ -7,7 +7,7 @@ QueryParser::QueryParser(){
 	varName = "([A-Za-z][A-Za-z0-9#_]*)";
 	select = "([Ss]elect)";
 	suchThat = "(such)\\s+(that)";
-	freeString = "(.+)";
+	freeString = "(\\S+)";
 	designEntity = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line|plus|minus|times)";
 	relRef = "([Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Mm]odifies\\*|[Uu]ses|[Uu]ses\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
 	pattern = "(pattern)";
@@ -107,10 +107,25 @@ Query QueryParser::parse(string queryStr, bool &valid){
 	string querySubStr;
 	while(getline(istream,querySubStr,';')){
 		bool validDesignEntity = parseDesignEntity(querySubStr);
-		bool validSelectOnly = parseSelectOnly(querySubStr);
-		bool validPattern = parsePattern(querySubStr);
-		bool validRelational = parseRelational(querySubStr);
+		if(validDesignEntity){
+			continue;
+		}
 		bool validRelationalWithPattern = parseRelationalWithPattern(querySubStr);
+		if(validRelationalWithPattern){
+			continue;
+		}
+		bool validRelational = parseRelational(querySubStr);
+		if(validRelational){
+			continue;
+		}
+		bool validPattern = parsePattern(querySubStr);
+		if(validPattern){
+			continue;
+		}
+		bool validSelectOnly = parseSelectOnly(querySubStr);
+		if(validSelectOnly){
+			continue;
+		}
 		if((validDesignEntity|validSelectOnly|validPattern|validRelational|validRelationalWithPattern)==false){
 			valid = false;
 			Query queryDummy;
