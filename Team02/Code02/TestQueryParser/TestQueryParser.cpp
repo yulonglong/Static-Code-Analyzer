@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//TestQueryParser.cpp
+
 #include <cppunit/config/SourcePrefix.h>
 #include "Relationship.h"
 #include "Query.h"

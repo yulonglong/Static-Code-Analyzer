@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//Node.cpp
+
 #pragma once
 #include "Node.h"
 using namespace std;

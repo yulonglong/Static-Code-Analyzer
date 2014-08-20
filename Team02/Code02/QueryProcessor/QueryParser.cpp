@@ -1,4 +1,7 @@
-﻿#include "QueryParser.h"
+﻿//@author Steven Kester Yuwono
+//QueryParser.cpp
+
+#include "QueryParser.h"
 #include <regex>
 #include <sstream>
 using namespace std;

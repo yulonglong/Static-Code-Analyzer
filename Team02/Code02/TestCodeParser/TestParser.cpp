@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//TestParser.cpp
+
 #include <cppunit/config/SourcePrefix.h>
 #include "Node.h"
 #include "CodeParser.h"

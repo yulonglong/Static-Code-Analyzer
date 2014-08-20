@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//CodeParser.h
+
 #pragma once
 #ifndef CODEPARSER_H
 #define CODEPARSER_H

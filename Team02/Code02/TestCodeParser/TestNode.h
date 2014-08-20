@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//TestNode.h
+
 #ifndef TestNode_h
 #define TestNode_h
 

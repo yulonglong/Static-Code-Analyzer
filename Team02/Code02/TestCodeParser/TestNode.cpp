@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//TestNode.cpp
+
 #include <cppunit/config/SourcePrefix.h>
 #include "Node.h"
 #include "TestNode.h"

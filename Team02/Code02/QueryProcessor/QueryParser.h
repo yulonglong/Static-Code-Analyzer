@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//QueryParser.h
+
 #ifndef QUERYPARSER_H
 #define QUERYPARSER_H
 

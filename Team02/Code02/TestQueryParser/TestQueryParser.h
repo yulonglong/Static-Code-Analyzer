@@ -1,4 +1,7 @@
-﻿#ifndef TestQueryParser_h
+﻿//@author Steven Kester Yuwono
+//TestQueryParser.h
+
+#ifndef TestQueryParser_h
 #define TestQueryParser_h
 
 // Note 1
