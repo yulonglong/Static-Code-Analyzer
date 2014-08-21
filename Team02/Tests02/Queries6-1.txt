@@ -3,60 +3,60 @@ cat: Errors From Prototype Grading
 1 - Uses ::
 stmt s;
 Select s such that Uses (s,"wrong")
-solution 
+
 5000
 2 - Uses ::
 stmt x;
 Select x such that Uses(x,"left")
-solution
+3, 5, 7, 9, 18, 20, 26, 30, 33, 34
 5000
 3 - Uses, Pattern ::
 assign a;
 Select a such that Uses(a,"x") pattern a("x",_"left+x"_)
-solution
+18
 5000
 4 - Pattern ::
 assign a; 
 Select a such that pattern a(_,_"iter +1")
-solution
+16, 23, 36
 5000
 5 - Pattern ::
 assign a; 
 Select a such that pattern a(_,_"iter+ 1")
-solution
+16, 23, 36
 5000
 6 - Pattern ::
 assign a; variable v; 
 Select v pattern a(v,_"x+left"_)
-solution 
+ 
 5000
 7 - Pattern ::
 assign a; 
 Select a pattern a(_,_"x+left"_)
-solution
+5, 7, 30, 33, 34
 5000
 8 - Uses ::
 while w; stmt s; 
 Select w such that Uses (s,"wrong")
-solution
+
 5000
 9 - Uses ::
 stmt s; 
 Select s such that Uses (s,"wrong")
-solution
+
 5000
 10 - Pattern ::
 assign a; variable v; 
 Select pattern a(v,_)
-solution 
+
 5000
 11 - FollowsStar, Pattern ::
 assign a; 
 Select a such that Follows* (25,a) pattern a("x",_"x+left"_)
-solution
+33
 5000
 12 - Uses, Pattern ::
 assign a; variable v; 
 Select v such that Uses(a,v) pattern a(v,_)
-solution
+
 5000
