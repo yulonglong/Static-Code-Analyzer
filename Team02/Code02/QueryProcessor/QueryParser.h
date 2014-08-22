@@ -36,7 +36,7 @@ private:
 
 public:
 	QueryParser();
-	Query parse(string, bool &);
+	Query queryParse(string queryStr, bool& valid);
 };
 
 #endif

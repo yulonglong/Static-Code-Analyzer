@@ -102,7 +102,7 @@ bool QueryParser::parseRelationalWithPattern(string query){
 	return true;
 }
 
-Query QueryParser::parse(string queryStr, bool &valid){
+Query QueryParser::queryParse(string queryStr, bool &valid){
 	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 
 	istringstream istream(queryStr);

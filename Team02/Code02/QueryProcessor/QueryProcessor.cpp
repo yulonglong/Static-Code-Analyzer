@@ -13,7 +13,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	//bool isValid = qp.validate(query);
 	bool isValid = true;
 
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 
 	if(!isValid){
 		cout << "Query Invalid" << endl;
