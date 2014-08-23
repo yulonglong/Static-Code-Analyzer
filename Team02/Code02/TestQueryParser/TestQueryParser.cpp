@@ -28,7 +28,7 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 	string query = "assign a; Select a such that Modifies(a, \"oSCar\")";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -68,7 +68,7 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 	string query = " assign a; variable v; Select a such that Modifies (a,v) ";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -110,7 +110,7 @@ void QueryParserTest::testQueryStmtSelectUses(){
 	string query = "  stmt s  ; Select s such that Uses (s,\"delta\")  ";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -151,7 +151,7 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 	string query = "stmt   s ;   Select   s  such  that Parent*(5,s)  ";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -193,7 +193,7 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 	string query = "assign a, a1; Select a such that Modifies (a, \"x\") pattern a1(_,_) ";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -239,7 +239,7 @@ void QueryParserTest::testQueryComplex1(){
 	string query = " assign a  ;  stmt s; variable v; assign a1; variable v2; Select a such that Uses (s,v) pattern a1  (v2,  _\"asd\"_  )  ";
 	QueryParser qp;
 	bool isValid = true;
-	Query parsedQuery = qp.parse(query,isValid);
+	Query parsedQuery = qp.queryParse(query,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
