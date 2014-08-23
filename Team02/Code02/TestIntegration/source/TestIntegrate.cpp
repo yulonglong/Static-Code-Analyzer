@@ -1,3 +1,6 @@
+//@author Steven Kester Yuwono
+//TestIntegrate.cpp
+
 #include <cppunit/config/SourcePrefix.h>
 #include "Node.h"
 #include "CodeParser.h"
@@ -65,30 +68,10 @@ void IntegrateTest::testParserSource2()
 	return;
 }
 
- void IntegrateTest::testPQLSource1() {
+ void IntegrateTest::testSource2q1() {
 	string expected="";
 	vector<Relationship> v;
 	bool isValid=false;
-	
-
-	string s1 = "assign a; Select a such that Follows(1, 2)";
-	string s2 = "assign a; Select a such that Follows(1, a)";
-	string s3 = "stmt s; Select s such that Follows(4, s)";
-	string s4 = "Select BOOLEAN such that Follows(6, 7)";
-	string s5 = "Select BOOLEAN such that Follows(5, 6)";
-
-	string s6 = "while w; Select w such that Follows*(3, w)";
-	string s7 = "assign a; Select a such that Follows*(13, a)";
-	string s8 = "stmt s; Select s such that Follows*(s, 19)";
-	string s9 = "Select BOOLEAN such that Follows*(1, 3)";
-	string s10 = "stmt s; Select s such that Parent(s, 9)";
-	string s11 = "while w; Select w such that Parent(w, 11)";
-	string s12 = "assign a; Select a such that Parent(a, 3)";
-	string s13 = "while w; assign a; Select w such that Parent(w, a)";
-	string s14 = "Select BOOLEAN such that Parent(4, 9)";
-	string s15 = "while w; Select w such that Parent(4, w)";
-	string s16 = "assign a; Select a such that Parent*(11, a)";
-	string s17 = "while w; Select w such that Parent*(w, 17)";
 
 	// TODO: run query parser;
 	QueryParser qp;
@@ -98,7 +81,9 @@ void IntegrateTest::testParserSource2()
 	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 1 assign a; Select a such that Follows(1, 2)
-	Query q1 = qp.queryParse(s1,isValid);
+	string s1 = "assign a; Select a such that Follows(1, 2)";
+	QueryParser qp1;
+	Query q1 = qp1.queryParse(s1,isValid);
 	v = q1.getRelVect();
 	expected = "a";
 	Relationship r = v[0];
@@ -110,44 +95,58 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken1());
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken2());
-
-	/*f->setFollows(1,2);
-	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
-	t->insertStmtNumAndType(2, TypeTable::ASSIGN);*/
 	CPPUNIT_ASSERT(qe.evaluateQueryBoolean(q1)==true);
+ }
 	
+ void IntegrateTest::testSource2q2() {
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+
 	
 	//Query 2 assign a; Select a such that Follows(1, a)
-	Query q2 = qp.queryParse(s2,isValid);
+	string s2 = "assign a; Select a such that Follows(1, a)";
+	QueryParser qp2;
+	Query q2 = qp2.queryParse(s2,isValid);
 	v = q2.getRelVect();
 	Relationship r2 = v[0];
 	unordered_map<string, TypeTable::SynType> m2 = q2.getSynTable();
 	
-	/*
-	Query q2;
-	q2.setSelectedSyn("a");
-	Relationship r2("Follows", "1", "a");
-	q2.addRelationship(r2);
-	unordered_map<string,TypeTable::SynType> m2;
-	m2.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
-	q2.setSynTable(m2);
-
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m2.find(r.getToken1());
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m2.find(r.getToken2());*/
-
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r2.getRelType());
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, q2.getSelectedSyn());
 	expected = "1";
 	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken1());
 	expected = "a";
-	//CPPUNIT_ASSERT_EQUAL(expected, r2.getToken2()); 
+	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken2()); 
 	
 	vector<int> vec = qe.evaluateQuery(q2);
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
+ }
+
+ void IntegrateTest::testSource2q3(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 3 stmt s; Select s such that Follows(4, s)
-	Query q3 = qp.queryParse(s3,isValid);
+	string s3 = "stmt s; Select s such that Follows(4, s)";
+	QueryParser qp3;
+	Query q3 = qp3.queryParse(s3,isValid);
 	v = q3.getRelVect();
 	Relationship r3 = v[0];
 	unordered_map<string, TypeTable::SynType> m3 = q3.getSynTable();
@@ -159,20 +158,29 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r3.getToken1());
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r3.getToken2()); 
-	/*
-	Query q3;
-	q3.setSelectedSyn("s");
-	Relationship r3("Follows", "4", "s");
-	q3.addRelationship(r3);
-	unordered_map<string,TypeTable::SynType> m3;
-	m3.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
-	q2.setSynTable(m3);*/
 	
+	vector<int> vec;
 	vec.clear();
 	vec = qe.evaluateQuery(q3);
 	CPPUNIT_ASSERT_EQUAL(23, vec[0]);
 
+ }
+
+void IntegrateTest::testSource2q4(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+
 	//Query 4 Select BOOLEAN such that Follows(6, 7)
+	string s4 = "Select BOOLEAN such that Follows(6, 7)";
+	v.clear();
 	Query q4 = qp.queryParse(s4,isValid);
 	v = q4.getRelVect();
 	Relationship r4 = v[0];
@@ -187,8 +195,22 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r4.getToken2()); 
 
 	CPPUNIT_ASSERT_EQUAL(true, qe.evaluateQueryBoolean(q4));
+ }
+
+void IntegrateTest::testSource2q5(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 5 Select BOOLEAN such that Follows(5, 6)
+	string s5 = "Select BOOLEAN such that Follows(5, 6)";
 	Query q5 = qp.queryParse(s5,isValid);
 	v = q5.getRelVect();
 	Relationship r5 = v[0];
@@ -203,8 +225,22 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r5.getToken2()); 
 
 	CPPUNIT_ASSERT_EQUAL(false, qe.evaluateQueryBoolean(q5));
+}
+
+void IntegrateTest::testSource2q6(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 	
 	//Query 6 while w; Select w such that Follows*(3, w)
+	string s6 = "while w; Select w such that Follows*(3, w)";
 	Query q6 = qp.queryParse(s6,isValid);
 	v = q6.getRelVect();
 	Relationship r6 = v[0];
@@ -218,12 +254,27 @@ void IntegrateTest::testParserSource2()
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r6.getToken2()); 
 	
-	
+	vector<int> vec;
 	vec.clear();
 	vec = qe.evaluateQuery(q6);
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 
+}
+
+void IntegrateTest::testSource2q7(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
 	//Query 7 assign a; Select a such that Follows*(13, a)
+	string s7 = "assign a; Select a such that Follows*(13, a)";
 	Query q7 = qp.queryParse(s7,isValid);
 	v = q7.getRelVect();
 	Relationship r7 = v[0];
@@ -237,13 +288,28 @@ void IntegrateTest::testParserSource2()
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r7.getToken2()); 
 	
-	
+	vector<int> vec;
 	vec.clear();
 	vec = qe.evaluateQuery(q7);
 	CPPUNIT_ASSERT_EQUAL(14, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(15, vec[1]);
+}
+
+void IntegrateTest::testSource2q8(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 8 stmt s; Select s such that Follows*(s, 19)
+	string s8 = "stmt s; Select s such that Follows*(s, 19)";
+	v.clear();
 	Query q8 = qp.queryParse(s8,isValid);
 	v = q8.getRelVect();
 	Relationship r8 = v[0];
@@ -257,13 +323,28 @@ void IntegrateTest::testParserSource2()
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r8.getToken1());
 	
+	vector<int> vec;
 	vec.clear();
 	vec = qe.evaluateQuery(q8);
 
 	CPPUNIT_ASSERT_EQUAL(10, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(11, vec[1]);
+}
 
+void IntegrateTest::testSource2q9(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
 	//Query 9 Select BOOLEAN such that Follows*(1, 3)
+	string s9 = "Select BOOLEAN such that Follows*(1, 3)";
 	Query q9 = qp.queryParse(s9,isValid);
 	v = q9.getRelVect();
 	Relationship r9 = v[0];
@@ -278,8 +359,22 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r9.getToken2()); 
 
 	CPPUNIT_ASSERT_EQUAL(true, qe.evaluateQueryBoolean(q9));
+}
 
+void IntegrateTest::testSource2q10(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
 	//Query 10 stmt s; Select s such that Parent(s, 9)
+	string s10 = "stmt s; Select s such that Parent(s, 9)";
 	Query q10 = qp.queryParse(s10,isValid);
 	v = q10.getRelVect();
 	Relationship r10 = v[0];
@@ -293,11 +388,25 @@ void IntegrateTest::testParserSource2()
 	expected = "9";
 	CPPUNIT_ASSERT_EQUAL(expected, r10.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q10);
 	CPPUNIT_ASSERT_EQUAL(5, vec[0]);
+}
 
+void IntegrateTest::testSource2q11(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 	
 	//Query 11 while w; Select w such that Parent(w, 11)
+	string s11 = "while w; Select w such that Parent(w, 11)";
 	Query q11 = qp.queryParse(s11,isValid);
 	v = q11.getRelVect();
 	Relationship r11 = v[0];
@@ -311,10 +420,25 @@ void IntegrateTest::testParserSource2()
 	expected = "11";
 	CPPUNIT_ASSERT_EQUAL(expected, r11.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q11);
 	CPPUNIT_ASSERT_EQUAL(9, vec[0]);
+}
+
+void IntegrateTest::testSource2q12(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 12 assign a; Select a such that Parent(a, 3)
+	string s12 = "assign a; Select a such that Parent(a, 3)";
 	Query q12 = qp.queryParse(s12,isValid);
 	v = q12.getRelVect();
 	Relationship r12 = v[0];
@@ -328,10 +452,25 @@ void IntegrateTest::testParserSource2()
 	expected = "3";
 	CPPUNIT_ASSERT_EQUAL(expected, r12.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q12);
 	CPPUNIT_ASSERT_EQUAL(-1, vec[0]);
-	
+}
+
+void IntegrateTest::testSource2q13(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+		
 	//Query 13 while w; assign a; Select w such that Parent(w, a)
+	string s13 = "while w; assign a; Select w such that Parent(w, a)";
 	Query q13 = qp.queryParse(s13,isValid);
 	v = q13.getRelVect();
 	Relationship r13 = v[0];
@@ -345,6 +484,7 @@ void IntegrateTest::testParserSource2()
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r13.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q13);
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
@@ -353,8 +493,22 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
 	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
 	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+}
 
+void IntegrateTest::testSource2q14(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
 	//Query 14 Select BOOLEAN such that Parent(4, 9)
+	string s14 = "Select BOOLEAN such that Parent(4, 9)";
 	Query q14 = qp.queryParse(s14,isValid);
 	v = q14.getRelVect();
 	Relationship r14 = v[0];
@@ -369,8 +523,22 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r14.getToken2()); 
 
 	CPPUNIT_ASSERT_EQUAL(false, qe.evaluateQueryBoolean(q14));
+}
 
+void IntegrateTest::testSource2q15(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
 	//Query 15 while w; Select w such that Parent(4, w)
+	string s15 = "while w; Select w such that Parent(4, w)";
 	Query q15 = qp.queryParse(s15,isValid);
 	v = q15.getRelVect();
 	Relationship r15 = v[0];
@@ -384,10 +552,26 @@ void IntegrateTest::testParserSource2()
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r15.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q15);
 	CPPUNIT_ASSERT_EQUAL(5, vec[0]);
+}
 
+void IntegrateTest::testSource2q16(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+	
+	
 	//Query 16 assign a; Select a such that Parent*(11, a)
+	string s16 = "assign a; Select a such that Parent*(11, a)";
 	Query q16 = qp.queryParse(s16,isValid);
 	v = q16.getRelVect();
 	Relationship r16 = v[0];
@@ -401,6 +585,7 @@ void IntegrateTest::testParserSource2()
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r16.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q16);
 	CPPUNIT_ASSERT_EQUAL(13, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(14, vec[1]);
@@ -408,7 +593,23 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(17, vec[3]);
 	CPPUNIT_ASSERT_EQUAL(18, vec[4]);
 
+}
+
+
+void IntegrateTest::testSource2q17(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
+
 	//Query 17 while w; Select w such that Parent*(w, 17)
+	string s17 = "while w; Select w such that Parent*(w, 17)";
 	Query q17 = qp.queryParse(s17,isValid);
 	v = q17.getRelVect();
 	Relationship r17 = v[0];
@@ -422,6 +623,7 @@ void IntegrateTest::testParserSource2()
 	expected = "17";
 	CPPUNIT_ASSERT_EQUAL(expected, r17.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q17);
 
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
@@ -429,10 +631,24 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(9, vec[2]);
 	CPPUNIT_ASSERT_EQUAL(11, vec[3]);
 	CPPUNIT_ASSERT_EQUAL(16, vec[4]);
+}
 
+
+void IntegrateTest::testSource2q18(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//MODIFIES AND USES TESTS
 	//Query 18
+	v.clear();
 	string s18 = "assign a; Select a such that Modifies(a, \"x\")";
 	Query q18 = qp.queryParse(s18,isValid);
 	v = q18.getRelVect();
@@ -446,12 +662,28 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, r18.getToken1());
 	expected = "\"x\"";
 	CPPUNIT_ASSERT_EQUAL(expected, r18.getToken2()); 
-	
+
+	vector<int> vec;
 	vec = qe.evaluateQuery(q18);
 	CPPUNIT_ASSERT_EQUAL(10, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(18, vec[1]);
+}
 
+
+void IntegrateTest::testSource2q19(){ 
+	
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 	//Query 19
+	v.clear();
 	string s19 = "stmt s; Select s such that Modifies(s, \"Romeo\")";
 	Query q19 = qp.queryParse(s19,isValid);
 	v = q19.getRelVect();
@@ -466,19 +698,33 @@ void IntegrateTest::testParserSource2()
 	expected = "\"Romeo\"";
 	CPPUNIT_ASSERT_EQUAL(expected, r19.getToken2()); 
 
+	
+	vector<int> vec;
 	vec = qe.evaluateQuery(q19);
-	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
-	}*/
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
 	CPPUNIT_ASSERT_EQUAL(9, vec[2]);
 	CPPUNIT_ASSERT_EQUAL(11, vec[3]);
 	CPPUNIT_ASSERT_EQUAL(12, vec[4]);
 	CPPUNIT_ASSERT_EQUAL(13, vec[5]);
+}
 
+
+void IntegrateTest::testSource2q20(){ 
+	cout << "20" << endl;
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 	//Query 20
-	string s20 = "assign a; variable v; Select s such that Modifies(a, v)";
+	v.clear();
+	string s20 = "assign s; assign a; variable v; Select s such that Modifies(a, v)";
 	Query q20 = qp.queryParse(s20,isValid);
 	v = q20.getRelVect();
 	Relationship r20 = v[0];
@@ -492,6 +738,8 @@ void IntegrateTest::testParserSource2()
 	expected = "v";
 	CPPUNIT_ASSERT_EQUAL(expected, r20.getToken2()); 
 
+	
+	vector<int> vec;
 	vec = qe.evaluateQuery(q20);
 	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
@@ -509,8 +757,23 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(21, vec[13]);
 	CPPUNIT_ASSERT_EQUAL(22, vec[14]);
 	CPPUNIT_ASSERT_EQUAL(23, vec[15]);
+}
+
+
+void IntegrateTest::testSource2q21(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 21
+	v.clear();
 	string s21 = "while w; assign a; variable v; Select w such that Modifies(a, v)";
 	Query q21 = qp.queryParse(s21,isValid);
 	v = q21.getRelVect();
@@ -528,6 +791,7 @@ void IntegrateTest::testParserSource2()
 	expected = "v";
 	CPPUNIT_ASSERT_EQUAL(expected, r21.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q21);
 	CPPUNIT_ASSERT_EQUAL(4, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(5, vec[1]);
@@ -536,6 +800,20 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
 	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
 	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+}
+
+
+void IntegrateTest::testSource2q22(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 22
 	string s22 = "while w; assign a; variable v; Select w such that Uses(a, v)";
@@ -552,6 +830,7 @@ void IntegrateTest::testParserSource2()
 	expected = "v";
 	CPPUNIT_ASSERT_EQUAL(expected, r22.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q22);
 	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
 		cout<<*i<<endl;
@@ -563,8 +842,23 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(11, vec[4]);
 	CPPUNIT_ASSERT_EQUAL(12, vec[5]);
 	CPPUNIT_ASSERT_EQUAL(16, vec[6]);
+}
+
+
+void IntegrateTest::testSource2q23(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 23
+	v.clear();
 	string s23 = "stmt s; Select s such that Uses(s, \"x\")";
 	Query q23 = qp.queryParse(s23,isValid);
 	v = q23.getRelVect();
@@ -579,13 +873,29 @@ void IntegrateTest::testParserSource2()
 	expected = "\"x\"";
 	CPPUNIT_ASSERT_EQUAL(expected, r23.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q23);
 	for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
 		cout<<*i<<endl;
 	}
 	//CPPUNIT_ASSERT_EQUAL(4, vec[0]);
+}
+
+
+void IntegrateTest::testSource2q24(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 24 constant c; Select c;
+	v.clear();
 	string s24 = "constant c; Select c";
 	Query q24 = qp.queryParse(s24,isValid);
 	ConstTable *c = pkb->getConstTable();
@@ -593,6 +903,7 @@ void IntegrateTest::testParserSource2()
 	expected = "c";
 	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q24);
 
 	expected = "1";
@@ -605,8 +916,23 @@ void IntegrateTest::testParserSource2()
 	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[3]));
 	expected = "2";
 	CPPUNIT_ASSERT_EQUAL(expected, c->getConst(vec[4]));
+}
+
+
+void IntegrateTest::testSource2q25(){ 
+	string expected="";
+	vector<Relationship> v;
+	bool isValid=false;
+
+	// TODO: run query parser;
+	QueryParser qp;
+	PKB* pkb = PKB::getInstance();
+	QueryEvaluator qe(pkb);
+	Follows* f = qe.pkb->getFollows();
+	TypeTable* t = qe.pkb->getTypeTable();
 
 	//Query 25
+	v.clear();
 	string s25 = "variable v; Select v such that Uses(5, \"beta\")";
 	Query q25 = qp.queryParse(s25,isValid);
 	v = q25.getRelVect();
@@ -621,6 +947,7 @@ void IntegrateTest::testParserSource2()
 	expected = "\"beta\"";
 	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken2()); 
 
+	vector<int> vec;
 	vec = qe.evaluateQuery(q25);
 
 	expected = "i";
