@@ -8,7 +8,7 @@ Select s such that Uses (s,"wrong")
 2 - Uses ::
 stmt x;
 Select x such that Uses(x,"left")
-3, 5, 7, 9, 18, 20, 26, 30, 33, 34
+3, 5, 7, 8, 9, 18, 19, 20, 24, 26, 27, 29 30, 33, 34
 5000
 3 - Uses, Pattern ::
 assign a;
@@ -18,12 +18,12 @@ Select a such that Uses(a,"x") pattern a("x",_"left+x"_)
 4 - Pattern ::
 assign a; 
 Select a such that pattern a(_,_"iter +1")
-16, 23, 36
+
 5000
 5 - Pattern ::
 assign a; 
 Select a such that pattern a(_,_"iter+ 1")
-16, 23, 36
+
 5000
 6 - Pattern ::
 assign a; variable v; 
