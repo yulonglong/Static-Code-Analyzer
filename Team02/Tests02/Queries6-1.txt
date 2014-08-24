@@ -58,5 +58,5 @@ Select a such that Follows* (25,a) pattern a("x",_"x+left"_)
 12 - Uses, Pattern ::
 assign a; variable v; 
 Select v such that Uses(a,v) pattern a(v,_)
-
+temp, right, iter, x
 5000
