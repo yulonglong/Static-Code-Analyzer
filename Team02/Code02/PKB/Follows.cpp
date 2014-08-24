@@ -9,14 +9,10 @@ Follows* Follows::follows=NULL;
 
 // constructor
 Follows::Follows() {
-	followsTable.assign(5, -1);
-	followedByTable.assign(5, -1);
 }
 
 Follows::Follows(TypeTable *table) {
 	typeTable = table;
-	followsTable.assign(5, -1);
-	followedByTable.assign(5, -1);
 }
 
 // TODO: delete
@@ -47,18 +43,12 @@ Follows* Follows::getInstance(TypeTable *table) {
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
-	if (s1 >= (signed int) followsTable.size()) {
-		followsTable.resize(s1+1, -1);
-	}
 	followsTable[s1] = s2;
-
-	if (s2 >= (signed int) followedByTable.size()) {
-		followedByTable.resize(s2+1, -1);
-	}
-	followedByTable[s2] = s1; 
+	followedByTable[s2] = s1;
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
+	
 	STMTNUM num = -1; 
 	try {
 		num = followsTable.at(s1);

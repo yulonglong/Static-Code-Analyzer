@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
 #include <iterator>
 #include "TypeTable.h"
 #include "VarTable.h"
@@ -15,7 +17,7 @@ typedef TypeTable::SynType TYPE;
 
 class Modifies {
 private:
-	vector<vector<VARINDEX>> modifiesTable;
+	unordered_map<STMTNUM, vector<VARINDEX>> modifiesTable;
 	static bool instanceFlag;
 	static Modifies *modifies;
 	TypeTable *typeTable; 
@@ -27,7 +29,7 @@ public:
 	~Modifies();
 	static Modifies* getInstance();	// to be used to get instance of singleton class
 	static Modifies* getInstance(TypeTable*, VarTable*);	// to be used to get instance of singleton class 
-	vector<vector<VARINDEX>> getModifiesTable(); // only for unit testing.
+	unordered_map<STMTNUM, vector<VARINDEX>> getModifiesTable(); // only for unit testing.
 	void setModifies(STMTNUM, VARNAME);
 	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")
 	vector<STMTNUM> getModifies(TYPE);			//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.

@@ -7,16 +7,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <iterator>
 #include "TypeTable.h"
 
 using namespace std;
-typedef TypeTable::SynType TYPE; 
+typedef TypeTable::SynType TYPE;
+typedef int STMTNUM;
 
 class Follows {
 private: 
-	vector<STMTNUM> followsTable;
-	vector<STMTNUM> followedByTable;
+	unordered_map<STMTNUM,STMTNUM> followsTable;
+	unordered_map<STMTNUM,STMTNUM> followedByTable;
 	static bool instanceFlag;
 	static Follows *follows;
 	TypeTable *typeTable; // public for the sake of unit testing

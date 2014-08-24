@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <algorithm>
 #include <iterator>
 #include "TypeTable.h"
 
@@ -17,8 +19,8 @@ typedef TypeTable::SynType TYPE;
 
 class Parent {
 private:
-	vector<vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
-	vector<STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
+	unordered_map<STMTNUM,vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
+	unordered_map<STMTNUM,STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
 	static bool instanceFlag;
 	static Parent *parent;
 	TypeTable *typeTable; // for the sake of unit testing.

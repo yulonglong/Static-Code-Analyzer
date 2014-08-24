@@ -7,16 +7,10 @@ Parent* Parent::parent=NULL;
 
 // constructor
 Parent::Parent() {
-	vector<STMTNUM> temp (1,-1);
-	parentTable.assign(1, temp);
-	childrenTable.assign(1, -1);
 }
 
 Parent::Parent(TypeTable *table) {
 	typeTable = table;
-	vector<STMTNUM> temp (1,-1);
-	parentTable.assign(1, temp);
-	childrenTable.assign(1, -1);
 }
 
 Parent::~Parent() {
@@ -50,21 +44,17 @@ TypeTable* Parent::getTypeTable(){
 
 void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	try{
-		vector<STMTNUM> temp;
-		temp.assign(1,-1);
-		if (s1 >= (signed int) parentTable.size()) {
-			parentTable.resize(s1+1, temp);
+		vector<STMTNUM> temp (1,s2);
+
+		try{
+			vector<STMTNUM> temp1 = parentTable.at(s1);
+			temp1.push_back(s2);
+			parentTable.erase(s1);
+			parentTable[s1] = temp1;
+		} catch(...){
+			parentTable[s1] = temp;
 		}
 
-		vector<STMTNUM> temp1 = parentTable.at(s1);
-		if(temp1==temp)
-			temp1.clear();
-		temp1.push_back(s2);
-		parentTable[s1] = temp1;
-
-		if (s2 >= (signed int)childrenTable.size()) {
-			childrenTable.resize(s2+1, -1);
-		}
 		childrenTable[s2] = s1; 
 	}catch(...){
 	}
@@ -83,9 +73,9 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 bool Parent::isParent(TYPE t1, TYPE t2) {
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
-	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
+	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
 		try {
-			temp = parentTable.at(i);
+			temp = it->second;
 		} catch (...) {
 			continue;
 		}
@@ -96,9 +86,9 @@ bool Parent::isParent(TYPE t1, TYPE t2) {
 					return true;
 				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
+				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,it->first)) {
 					return true;
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,it->first) && typeTable->isType(t2,j)) {
 					return true;
 				}
 			} catch (...) {
@@ -163,23 +153,23 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2, STMTNUM s) {
 vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
-	for (vector<STMTNUM>::size_type i = 0; i != childrenTable.size(); i++) {
+	for (unordered_map<STMTNUM, STMTNUM>::iterator it = childrenTable.begin(); it != childrenTable.end(); it++) {
 		j = -1; 
 		try {
-			j = childrenTable.at(i);
+			j = it->second;
 		} catch (...) {
 			continue;
 		}
 		try {
 			if (j != -1) {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					list.push_back(i);
-				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,i)) {
-					list.push_back(i);
+					list.push_back(it->first);
+				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,it->first)) {
+					list.push_back(it->first);
 				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,j)) {
-					list.push_back(i);
-				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,i)) {
-					list.push_back(i);
+					list.push_back(it->first);
+				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,it->first)) {
+					list.push_back(it->first);
 				}
 			}
 		} catch (...) {
@@ -189,48 +179,48 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 	}
 	if(list.empty())
 		return vector<STMTNUM> (1,-1);
+	sort(list.begin(),list.end());
 	return list;
 }
 
 vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
 	vector<STMTNUM> ans; 
 	vector<STMTNUM> temp;
-	for (vector<STMTNUM>::size_type i = 0; i != parentTable.size(); i++) {
+	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
 		try {
-			temp = parentTable.at(i);
+			temp = it->second;
 		} catch (...) {
 			continue;
 		}
-		if(temp.at(0)!=-1){
-			for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
+		for (vector<STMTNUM>::size_type k = 0; k != temp.size(); k++) { 
 				STMTNUM j = temp.at(k);
 				try {
 					if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(i);
+						ans.push_back(it->first);
 						break;
 					} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(i);
+						ans.push_back(it->first);
 						break;
-					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,i)) {
+					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,it->first)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(i);
+						ans.push_back(it->first);
 						break;
-					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,i) && typeTable->isType(t2,j)) {
+					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,it->first) && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(i);
+						ans.push_back(it->first);
 						break;
 					}
 				} catch (...) {
 					// if that stmtnum doesnt have a type in typetable
 					continue; 
 				}
-			}
 		}
 	}
 	if(ans.empty())
 		return vector<STMTNUM> (1,-1);
+	sort(ans.begin(),ans.end());
 	return ans;
 }
 
@@ -256,6 +246,7 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, STMTNUM s){
 		}
 		if(ans.empty())
 			return vector<STMTNUM> (1,-1);
+		sort(ans.begin(),ans.end());
 		return ans;
 	}catch(...){
 		return vector<STMTNUM> (1,-1);

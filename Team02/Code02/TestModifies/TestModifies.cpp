@@ -59,7 +59,7 @@ void ModifiesTest::tearDown() {
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
 
 void ModifiesTest::testSetModifies() {  // Note 5
-	vector<vector<VARINDEX>> map = modifies->getModifiesTable();
+	unordered_map<STMTNUM, vector<VARINDEX>> map = modifies->getModifiesTable();
 	CPPUNIT_ASSERT(map.at(1).size() == 1);
 	CPPUNIT_ASSERT(varTable->getVarName(map.at(1).at(0)) == "x");
 

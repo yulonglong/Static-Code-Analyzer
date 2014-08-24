@@ -3,6 +3,8 @@
 
 #pragma once
 #include <iostream>
+#include <unordered_map>
+#include <algorithm>
 #include "TypeTable.h"
 #include "VarTable.h"
 
@@ -11,7 +13,7 @@ typedef TypeTable::SynType TYPE;
 
 class Uses {
 private:
-	vector<vector<VARINDEX>> usesTable;
+	unordered_map<STMTNUM, vector<VARINDEX>> usesTable;
 	static bool instanceFlag;
 	static Uses *uses;
 	TypeTable *typeTable; // for the sake of unit testing.
