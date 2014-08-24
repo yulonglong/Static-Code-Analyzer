@@ -77,7 +77,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	vec = qe.evaluateQuery(q3);
 	cout<<vec.empty()<<endl;
 	cout<<vec[0]<<endl;
-	CPPUNIT_ASSERT_EQUAL(7, vec[0]);
+	CPPUNIT_ASSERT_EQUAL(-1, vec[0]);
 
 	//Query 4 while w; Select w such that Follows(w, a);
 	Query q4;
@@ -387,7 +387,7 @@ void QueryEvaluatorTest::testEvaluateModifies(){
 	vec = qe.evaluateQuery(q3);
 	cout<<vec.empty()<<endl;
 	cout<<vec[0]<<endl;
-	expected = "x";
+	expected = "";
 	CPPUNIT_ASSERT_EQUAL(expected, v->getVarName(vec[0]));
 
 	//Query 4 assign a; Select a such that Modifies(a, v);
