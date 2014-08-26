@@ -28,9 +28,16 @@ private:
 	static const string AFFECTSSTAR;
 
 	//regex string
+	static const string DIGIT;
+	static const string LETTER;
+	static const string INTEGER;
 	static const string IDENT;
+
+	static const string synonym;
+
 	static const string select;
-	static const string suchThat;
+	static const string such;
+	static const string that;
 	static const string freeString;
 	static const string designEntity;
 	static const string relRef;

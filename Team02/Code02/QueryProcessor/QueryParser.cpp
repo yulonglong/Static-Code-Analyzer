@@ -21,13 +21,20 @@ const string QueryParser::AFFECTS = "affects";
 const string QueryParser::AFFECTSSTAR = "affects*";
 
 //constant string for regex pattern
-const string QueryParser::IDENT = "([A-Za-z][A-Za-z0-9#]*)";
-const string QueryParser::select = "([Ss]elect)";
-const string QueryParser::suchThat = "(such)\\s+(that)";
-const string QueryParser::freeString = "(\\S+)";
-const string QueryParser::designEntity = "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line|plus|minus|times)";
-const string QueryParser::relRef = "([Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Mm]odifies\\*|[Uu]ses|[Uu]ses\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
-const string QueryParser::pattern = "(pattern)";
+const string QueryParser::DIGIT = "[0-9]";
+const string QueryParser::LETTER = "[A-Za-z]";
+const string QueryParser::INTEGER = "[0-9]+";
+const string QueryParser::IDENT = "[A-Za-z][A-Za-z0-9#]*";
+
+const string QueryParser::synonym = IDENT;
+
+const string QueryParser::select = "[Ss]elect";
+const string QueryParser::such = "such";
+const string QueryParser::that = "that";
+const string QueryParser::freeString = "\\S+";
+const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
+const string QueryParser::relRef = "[Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Mm]odifies\\*|[Uu]ses|[Uu]ses\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*";
+const string QueryParser::pattern = "pattern";
 
 string stringToLower(string word){
 	for(int i=0;i<(int)word.length();i++){
@@ -43,7 +50,7 @@ QueryParser::QueryParser(){
 
 bool QueryParser::parseDesignEntity(string query){
 	tr1::cmatch res;
-	tr1::regex rx("\\s*" + designEntity + "\\s+(\\s*" + IDENT + "\\s*,)*(\\s*" + IDENT + "\\s*)");
+	tr1::regex rx("\\s*(" + designEntity + ")\\s+(\\s*(" + IDENT + ")\\s*,)*(\\s*(" + IDENT + ")\\s*)");
     tr1::regex_match(query.c_str(), res, rx);
 	
 	if(res.size()==0){
@@ -59,7 +66,7 @@ bool QueryParser::parseDesignEntity(string query){
 	}
 	while(getline(istream,subQuery,',')){
 		tr1::cmatch subRes;
-		tr1::regex subrx("\\s*" + IDENT + "\\s*");
+		tr1::regex subrx("\\s*(" + IDENT + ")\\s*");
 		tr1::regex_match(subQuery.c_str(), subRes, subrx);
 		string variableName = subRes[1];
 		synMap.insert(make_pair(variableName, newType));
@@ -71,7 +78,7 @@ bool QueryParser::parseDesignEntity(string query){
 
 bool QueryParser::parseSelectOnly(string query){
 	tr1::cmatch res;
-	tr1::regex rx("\\s*" + select + "\\s+" + IDENT + "\\s*");
+	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s*");
     tr1::regex_match(query.c_str(), res, rx);
 	if(res.size()==0){
 		return false;
@@ -86,7 +93,7 @@ bool QueryParser::parseSelectOnly(string query){
 bool QueryParser::parsePattern(string query){
 	tr1::cmatch res;
 
-	tr1::regex rx("\\s*" + select + "\\s+" + IDENT + "\\s+" + pattern + "\\s+" + IDENT + "\\s*\\(\\s*" + freeString + "\\s*,\\s*" + freeString + "\\s*\\)\\s*");
+	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
     tr1::regex_match(query.c_str(), res, rx);
 
 	if(res.size()==0){
@@ -99,7 +106,7 @@ bool QueryParser::parsePattern(string query){
 }
 bool QueryParser::parseRelational(string query){
 	tr1::cmatch res;
-	tr1::regex rx("\\s*" + select + "\\s+" + IDENT + "\\s+" + suchThat + "\\s+" + relRef + "\\s*\\(\\s*" + freeString + "\\s*,\\s*" + freeString + "\\s*\\)\\s*");
+	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
     tr1::regex_match(query.c_str(), res, rx);
 	if(res.size()==0){
 		return false;
@@ -113,7 +120,7 @@ bool QueryParser::parseRelational(string query){
 
 bool QueryParser::parseRelationalWithPattern(string query){
 	tr1::cmatch res;
-	tr1::regex rx("\\s*" + select + "\\s+" + IDENT + "\\s+" + suchThat + "\\s+" + relRef + "\\s*\\(\\s*" + freeString + "\\s*,\\s*" + freeString + "\\s*\\)" + "\\s+" + pattern + "\\s+" + IDENT + "\\s*\\(\\s*" + freeString + "\\s*,\\s*" + freeString + "\\s*\\)\\s*");
+	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
     tr1::regex_match(query.c_str(), res, rx);
 	if(res.size()==0){
 		return false;
