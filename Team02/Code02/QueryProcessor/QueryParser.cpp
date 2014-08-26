@@ -20,20 +20,6 @@ const string QueryParser::NEXTSTAR = "next*";
 const string QueryParser::AFFECTS = "affects";
 const string QueryParser::AFFECTSSTAR = "affects*";
 
-//clauses parameter
-const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
-const string QueryParser::usesParam[] = {entRef + "|" + stmtRef , varRef};
-const string QueryParser::callsParam[] = {entRef , entRef};
-const string QueryParser::callsStarParam[] = {entRef , entRef};
-const string QueryParser::parentParam[] = {stmtRef , stmtRef};
-const string QueryParser::parentStarParam[] = {stmtRef , stmtRef};
-const string QueryParser::followsParam[] = {stmtRef , stmtRef};
-const string QueryParser::followsStarParam[] = {stmtRef , stmtRef};
-const string QueryParser::nextParam[] = {lineRef , lineRef};
-const string QueryParser::nextStarParam[] = {lineRef , lineRef};
-const string QueryParser::affectsParam[] = {stmtRef , stmtRef};
-const string QueryParser::affectsStarParam[] = {stmtRef , stmtRef};
-
 //constant string for regex pattern
 const string QueryParser::DIGIT = "[0-9]";
 const string QueryParser::LETTER = "[A-Za-z]";
@@ -56,6 +42,20 @@ const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
 const string QueryParser::relRef = "[Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Uu]ses|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*";
 const string QueryParser::pattern = "pattern";
+
+//clauses parameter
+const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
+const string QueryParser::usesParam[] = {entRef + "|" + stmtRef , varRef};
+const string QueryParser::callsParam[] = {entRef , entRef};
+const string QueryParser::callsStarParam[] = {entRef , entRef};
+const string QueryParser::parentParam[] = {stmtRef , stmtRef};
+const string QueryParser::parentStarParam[] = {stmtRef , stmtRef};
+const string QueryParser::followsParam[] = {stmtRef , stmtRef};
+const string QueryParser::followsStarParam[] = {stmtRef , stmtRef};
+const string QueryParser::nextParam[] = {lineRef , lineRef};
+const string QueryParser::nextStarParam[] = {lineRef , lineRef};
+const string QueryParser::affectsParam[] = {stmtRef , stmtRef};
+const string QueryParser::affectsStarParam[] = {stmtRef , stmtRef};
 
 string stringToLower(string word){
 	for(int i=0;i<(int)word.length();i++){
@@ -202,7 +202,8 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 		tr1::cmatch res;
 		tr1::regex rx("(" + relRef + ")");
 		tr1::regex_match(relationRef.c_str(), res, rx);
-		/*
+		
+		//if match relRef
 		if(res.size()>0){
 			relationRef = stringToLower(relationRef);
 			string param[2];
@@ -277,16 +278,21 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 				tr1::regex_match(param[index].c_str(), subres, subrx);
 				if(subres.size()==0){
 					localValid = false;
-				}
+				}				
 			}
 			
-		}*/
-
-		if(res.size()>0){
-			Relationship rel(v.at(i), v.at(i+1), v.at(i+2));
-			query.addRelationship(rel);
-			i = i+2;
+			if(localValid){
+				Relationship rel(v.at(i), v.at(i+1), v.at(i+2));
+				query.addRelationship(rel);
+				i = i+2;
+			}
+			else{
+				valid = false;
+				return query;
+			}
+			
 		}
+		//if doesnt match relRef
 		else if (v.at(i) == "pattern"){
 			query.setPatternSyn(v.at(i+1));
 			Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
