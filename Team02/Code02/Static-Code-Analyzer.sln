@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C++ Express 2010
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoTester", "AutoTester\AutoTester.vcxproj", "{20A7FBF3-D972-4220-A6AA-960484999FBB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A28F6BBC-5250-4FDB-9B56-E18978C61FF2} = {A28F6BBC-5250-4FDB-9B56-E18978C61FF2}
@@ -30,6 +30,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestIntegration", "TestIntegration\TestIntegration.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestQueryParser", "TestQueryParser\TestQueryParser.vcxproj", "{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DesignExtractor", "DesignExtractor\DesignExtractor.vcxproj", "{13B19EE6-3079-41E7-9159-CBD6537B7C94}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestDesignExtractor", "TestDesignExtractor\TestDesignExtractor.vcxproj", "{3EF3935E-3F16-4947-BBE7-5BF46DF43BDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +93,14 @@ Global
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Debug|Win32.Build.0 = Debug|Win32
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Release|Win32.ActiveCfg = Release|Win32
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Release|Win32.Build.0 = Release|Win32
+		{13B19EE6-3079-41E7-9159-CBD6537B7C94}.Debug|Win32.ActiveCfg = Debug|Win32
+		{13B19EE6-3079-41E7-9159-CBD6537B7C94}.Debug|Win32.Build.0 = Debug|Win32
+		{13B19EE6-3079-41E7-9159-CBD6537B7C94}.Release|Win32.ActiveCfg = Release|Win32
+		{13B19EE6-3079-41E7-9159-CBD6537B7C94}.Release|Win32.Build.0 = Release|Win32
+		{3EF3935E-3F16-4947-BBE7-5BF46DF43BDC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3EF3935E-3F16-4947-BBE7-5BF46DF43BDC}.Debug|Win32.Build.0 = Debug|Win32
+		{3EF3935E-3F16-4947-BBE7-5BF46DF43BDC}.Release|Win32.ActiveCfg = Release|Win32
+		{3EF3935E-3F16-4947-BBE7-5BF46DF43BDC}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
