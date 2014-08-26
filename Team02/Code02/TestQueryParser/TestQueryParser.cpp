@@ -283,3 +283,44 @@ void QueryParserTest::testQueryComplex1(){
 	}
 	return;
 }
+
+
+void QueryParserTest::testQueryValidationModifies(){
+	string query = "assign a; Select a such that Modifies(a, 2)";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+	
+	string selectedSyn = parsedQuery.getSelectedSyn();
+	string patternSyn = parsedQuery.getPatternSyn();
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter= synTable.begin();
+
+	string expectedSelectedSyn = "a";
+	string expectedPatternSyn = "";
+	vector<Relationship> expectedRelVect;
+	Relationship tempRel("Modifies","a","2");
+	expectedRelVect.push_back(tempRel);
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+
+	CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn,selectedSyn);
+	CPPUNIT_ASSERT_EQUAL(expectedPatternSyn,patternSyn);
+	CPPUNIT_ASSERT_EQUAL(expectedRelVect[0].getRelType(),relVect[0].getRelType());
+	CPPUNIT_ASSERT_EQUAL(expectedRelVect[0].getToken1(),relVect[0].getToken1());
+	CPPUNIT_ASSERT_EQUAL(expectedRelVect[0].getToken2(),relVect[0].getToken2());
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	return;
+}
