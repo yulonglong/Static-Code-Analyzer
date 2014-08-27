@@ -333,9 +333,9 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			}
 			else{
 				valid = false;
-				return query;
+				Query queryDummy;
+				return queryDummy;
 			}
-			
 		}
 		//if doesnt match relRef
 		else if (v.at(i) == "pattern"){
