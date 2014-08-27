@@ -58,7 +58,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	cout<<vec[0]<<endl;
 	CPPUNIT_ASSERT_EQUAL(2, vec[0]);
 
-	//Query 3 assign a; Select a such that Follows(w, a);
+	//Query 3 assign a; while w; Select a such that Follows(w, a);
 	Query q3;
 	Relationship r3("Follows", "w", "a");
 	q3.addRelationship(r3);
