@@ -6,20 +6,6 @@
 #include <sstream>
 using namespace std;
 
-//constant string
-const string QueryParser::MODIFIES = "modifies";
-const string QueryParser::USES = "uses";
-const string QueryParser::CALLS = "calls";
-const string QueryParser::CALLSSTAR = "calls*";
-const string QueryParser::PARENT = "parent";
-const string QueryParser::PARENTSTAR = "parent*";
-const string QueryParser::FOLLOWS = "follows";
-const string QueryParser::FOLLOWSSTAR = "follows*";
-const string QueryParser::NEXT = "next";
-const string QueryParser::NEXTSTAR = "next*";
-const string QueryParser::AFFECTS = "affects";
-const string QueryParser::AFFECTSSTAR = "affects*";
-
 //constant string for regex pattern
 const string QueryParser::DIGIT = "[0-9]";
 const string QueryParser::LETTER = "[A-Za-z]";
@@ -42,6 +28,20 @@ const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
 const string QueryParser::relRef = "[Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Uu]ses|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*";
 const string QueryParser::pattern = "pattern";
+
+//constant string
+const string QueryParser::MODIFIES = "modifies";
+const string QueryParser::USES = "uses";
+const string QueryParser::CALLS = "calls";
+const string QueryParser::CALLSSTAR = "calls*";
+const string QueryParser::PARENT = "parent";
+const string QueryParser::PARENTSTAR = "parent*";
+const string QueryParser::FOLLOWS = "follows";
+const string QueryParser::FOLLOWSSTAR = "follows*";
+const string QueryParser::NEXT = "next";
+const string QueryParser::NEXTSTAR = "next*";
+const string QueryParser::AFFECTS = "affects";
+const string QueryParser::AFFECTSSTAR = "affects*";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
@@ -190,6 +190,79 @@ Query QueryParser::queryParse(string queryStr, bool &valid){
 	return query;
 }
 
+void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
+	if(relationRef == MODIFIES){
+		for(int index=0;index<2;index++){
+			tableParam[index] = modifiesParam[index];
+		}
+	}
+	else if(relationRef == USES){
+		for(int index=0;index<2;index++){
+			tableParam[index] = usesParam[index];
+		}
+	}
+	else if(relationRef == CALLS){
+		for(int index=0;index<2;index++){
+			tableParam[index] = callsParam[index];
+		}
+	}
+	else if(relationRef == CALLSSTAR){
+		for(int index=0;index<2;index++){
+			tableParam[index] = callsStarParam[index];
+		}
+	}
+	else if(relationRef == PARENT){
+		for(int index=0;index<2;index++){
+			tableParam[index] = parentParam[index];
+		}
+	}
+	else if(relationRef == PARENTSTAR){
+		for(int index=0;index<2;index++){
+			tableParam[index] = parentStarParam[index];
+		}
+	}
+	else if(relationRef == FOLLOWS){
+		for(int index=0;index<2;index++){
+			tableParam[index] = followsParam[index];
+		}
+	}
+	else if(relationRef == FOLLOWSSTAR){
+		for(int index=0;index<2;index++){
+			tableParam[index] = followsStarParam[index];
+		}
+	}
+	else if(relationRef == NEXT){
+		for(int index=0;index<2;index++){
+			tableParam[index] = nextParam[index];
+		}
+	}
+	else if(relationRef == NEXTSTAR){
+		for(int index=0;index<2;index++){
+			tableParam[index] = nextStarParam[index];
+		}
+	}
+	else if(relationRef == AFFECTS){
+		for(int index=0;index<2;index++){
+			tableParam[index] = affectsParam[index];
+		}
+	}
+	else if(relationRef == AFFECTSSTAR){
+		for(int index=0;index<2;index++){
+			tableParam[index] = affectsStarParam[index];
+		}
+	}
+}
+
+bool QueryParser::regexMatch(string regexPattern, string word){
+	tr1::cmatch subres;
+	tr1::regex subrx("(" + regexPattern + ")" );
+	tr1::regex_match(word.c_str(), subres, subrx);
+	if(subres.size()==0){
+		return false;
+	}
+	return true;
+}
+
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
 	query.setSelectedSyn(v.at(1));
@@ -197,7 +270,8 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 
 	for (size_t i = 2; i < v.size(); i++){
 		string relationRef = v.at(i);
-		bool localValid = true;
+		bool formatValid = true;
+		bool synValid = true;
 
 		tr1::cmatch res;
 		tr1::regex rx("(" + relRef + ")");
@@ -206,82 +280,37 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 		//if match relRef
 		if(res.size()>0){
 			relationRef = stringToLower(relationRef);
+
+			string tableParam[2];
+			deepCopyTableParam(tableParam,relationRef);
+
 			string param[2];
 			param[0] = v.at(i+1);
 			param[1] = v.at(i+2);
 
-			string tableParam[2];
-			if(relationRef == MODIFIES){
-				for(int index=0;index<2;index++){
-					tableParam[index] = modifiesParam[index];
-				}
-			}
-			else if(relationRef == USES){
-				for(int index=0;index<2;index++){
-					tableParam[index] = usesParam[index];
-				}
-			}
-			else if(relationRef == CALLS){
-				for(int index=0;index<2;index++){
-					tableParam[index] = callsParam[index];
-				}
-			}
-			else if(relationRef == CALLSSTAR){
-				for(int index=0;index<2;index++){
-					tableParam[index] = callsStarParam[index];
-				}
-			}
-			else if(relationRef == PARENT){
-				for(int index=0;index<2;index++){
-					tableParam[index] = parentParam[index];
-				}
-			}
-			else if(relationRef == PARENTSTAR){
-				for(int index=0;index<2;index++){
-					tableParam[index] = parentStarParam[index];
-				}
-			}
-			else if(relationRef == FOLLOWS){
-				for(int index=0;index<2;index++){
-					tableParam[index] = followsParam[index];
-				}
-			}
-			else if(relationRef == FOLLOWSSTAR){
-				for(int index=0;index<2;index++){
-					tableParam[index] = followsStarParam[index];
-				}
-			}
-			else if(relationRef == NEXT){
-				for(int index=0;index<2;index++){
-					tableParam[index] = nextParam[index];
-				}
-			}
-			else if(relationRef == NEXTSTAR){
-				for(int index=0;index<2;index++){
-					tableParam[index] = nextStarParam[index];
-				}
-			}
-			else if(relationRef == AFFECTS){
-				for(int index=0;index<2;index++){
-					tableParam[index] = affectsParam[index];
-				}
-			}
-			else if(relationRef == AFFECTSSTAR){
-				for(int index=0;index<2;index++){
-					tableParam[index] = affectsStarParam[index];
-				}
-			}
-
 			for(int index=0;index<2;index++){
-				tr1::cmatch subres;
-				tr1::regex subrx("(" + tableParam[index] + ")" );
-				tr1::regex_match(param[index].c_str(), subres, subrx);
-				if(subres.size()==0){
-					localValid = false;
+				bool match = regexMatch("("+tableParam[index]+")",param[index]);
+				if(!match){
+					formatValid = false;
 				}				
 			}
 			
-			if(localValid){
+			if(formatValid){
+				for(int index=0;index<2;index++){
+					bool match = regexMatch("("+synonym+")",param[index]);
+					//if it is a synonym
+					if(match){
+						unordered_map<string, TypeTable::SynType>::iterator it;
+						it = synMap.find(param[index]);
+						if(it==synMap.end()){
+							synValid=false;
+						}
+					}				
+				}
+
+				
+			}
+			if((formatValid)&&(synValid)){
 				Relationship rel(v.at(i), v.at(i+1), v.at(i+2));
 				query.addRelationship(rel);
 				i = i+2;

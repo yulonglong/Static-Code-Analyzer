@@ -13,6 +13,32 @@ using namespace std;
 
 class QueryParser{
 private:
+	//regex string
+	//lexical rules
+	static const string DIGIT;
+	static const string LETTER;
+	static const string INTEGER;
+	static const string IDENT;
+
+	//auxiliary grammar rules
+	static const string synonym;
+	static const string attrName;
+	static const string entRef;
+	static const string varRef;
+	static const string stmtRef;
+	static const string lineRef;
+	static const string designEntity;
+	static const string attrRef;
+	static const string elem;
+	static const string tuple;
+
+	static const string select;
+	static const string such;
+	static const string that;
+	static const string freeString;
+	static const string relRef;
+	static const string pattern;
+
 	//constant string
 	static const string MODIFIES;
 	static const string USES;
@@ -41,33 +67,6 @@ private:
 	static const string affectsParam[2];
 	static const string affectsStarParam[2];
 
-
-	//regex string
-	//lexical rules
-	static const string DIGIT;
-	static const string LETTER;
-	static const string INTEGER;
-	static const string IDENT;
-
-	//auxiliary grammar rules
-	static const string synonym;
-	static const string attrName;
-	static const string entRef;
-	static const string varRef;
-	static const string stmtRef;
-	static const string lineRef;
-	static const string designEntity;
-	static const string attrRef;
-	static const string elem;
-	static const string tuple;
-
-	static const string select;
-	static const string such;
-	static const string that;
-	static const string freeString;
-	static const string relRef;
-	static const string pattern;
-
 	//query class table
 	vector<string> selectStatement;
 	unordered_map<string, TypeTable::SynType> synMap;
@@ -78,6 +77,8 @@ private:
 	bool parsePattern(string);
 	bool parseRelational(string);
 	bool parseRelationalWithPattern(string);
+	void deepCopyTableParam(string[2], string);
+	bool regexMatch(string, string);
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:
