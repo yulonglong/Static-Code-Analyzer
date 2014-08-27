@@ -6,6 +6,12 @@
 #include "DesignExtractor.h"
 using namespace std;
 
+int counter = -1;
+Node* rootCFGNode;
+Node* currASTNode;
+Node* currCFGNode;
+// Node* CFGRoot;
+// Node* ASTRoot;
 
 void extractorDriver(PKB *pkb) {
 	VarTable* varTable = pkb->getVarTable();
@@ -32,17 +38,22 @@ void extractorDriver(PKB *pkb) {
 
 // actual building of CFG 
 Node* buildCFG(Node &ASTNode) {
-	Node* root; 
+	currASTNode = &ASTNode; 
+	counter++; 
+
 	string ASTNodeType = ASTNode.getType();
 	if (ASTNodeType == "program") {
-		root = new Node("program", "0");
-		//CFGRoot = &currCFGNode;
+		currCFGNode = new Node("program", counter);
+		rootCFGNode = currCFGNode;
+	} else if (ASTNodeType == "procedure") {
+		cout << "this is a procedure" << endl; 
+	} else {
+		cout << "yay!" << endl; 
 	}
 
 	// go through all children of current AST node 
 	for (unsigned i=0;i<ASTNode.getChild().size();i++) {
-		//currASTNode = *ASTRoot.getChild(i); 
-		
+		currCFGNode = buildCFG(*ASTNode.getChild(i));	
 	}
-	return root;
+	return currCFGNode;
 }
