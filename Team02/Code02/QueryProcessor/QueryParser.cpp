@@ -57,24 +57,51 @@ const string QueryParser::nextStarParam[] = {lineRef , lineRef};
 const string QueryParser::affectsParam[] = {stmtRef , stmtRef};
 const string QueryParser::affectsStarParam[] = {stmtRef , stmtRef};
 
-string stringToLower(string word){
+QueryParser::QueryParser(){
+	selectStatement.clear();
+	synMap.clear();
+}
+
+string QueryParser::stringToLower(string word){
 	for(int i=0;i<(int)word.length();i++){
 		word[i] = tolower(word[i]);
 	}
 	return word;
 }
 
-QueryParser::QueryParser(){
-	selectStatement.clear();
-	synMap.clear();
+bool QueryParser::regexMatch(string regexPattern, string word){
+	tr1::cmatch subres;
+	tr1::regex subrx(regexPattern);
+	tr1::regex_match(word.c_str(), subres, subrx);
+	if(subres.size()==0){
+		return false;
+	}
+	return true;
 }
 
+bool QueryParser::regexMatchWithResult(string regexPattern, string word, vector<string> &result){
+	tr1::cmatch subres;
+	tr1::regex subrx(regexPattern);
+	tr1::regex_match(word.c_str(), subres, subrx);
+	if(subres.size()==0){
+		return false;
+	}
+	else{
+		for(unsigned int i=0;i<subres.size();i++){
+			result.push_back(subres[i]);
+		}
+		return true;
+	}
+}
+
+//Query Parsing to ensure it follow sthe proper format
+
 bool QueryParser::parseDesignEntity(string query){
-	tr1::cmatch res;
-	tr1::regex rx("\\s*(" + designEntity + ")\\s+(\\s*(" + IDENT + ")\\s*,)*(\\s*(" + IDENT + ")\\s*)");
-    tr1::regex_match(query.c_str(), res, rx);
+	vector<string> res;
+	string regexPattern = "\\s*(" + designEntity + ")\\s+(\\s*(" + IDENT + ")\\s*,)*(\\s*(" + IDENT + ")\\s*)";
+	bool match = regexMatchWithResult(regexPattern,query,res);
 	
-	if(res.size()==0){
+	if(!match){
 		return false;
 	}
 	string specificDesignEnt = res[1];
@@ -86,22 +113,21 @@ bool QueryParser::parseDesignEntity(string query){
 		getline(istream,subQuery,' ');
 	}
 	while(getline(istream,subQuery,',')){
-		tr1::cmatch subRes;
-		tr1::regex subrx("\\s*(" + IDENT + ")\\s*");
-		tr1::regex_match(subQuery.c_str(), subRes, subrx);
+		vector<string> subRes;
+		regexPattern = "\\s*(" + IDENT + ")\\s*";
+		match = regexMatchWithResult(regexPattern,subQuery,subRes);
 		string variableName = subRes[1];
 		synMap.insert(make_pair(variableName, newType));
 	}
-
 
 	return true;
 }
 
 bool QueryParser::parseSelectOnly(string query){
-	tr1::cmatch res;
-	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s*");
-    tr1::regex_match(query.c_str(), res, rx);
-	if(res.size()==0){
+	vector<string> res;
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s*";
+	bool match = regexMatchWithResult(regexPattern,query,res);
+	if(!match){
 		return false;
 	}
     for(int i=1;i<(int)res.size();i++){
@@ -112,12 +138,10 @@ bool QueryParser::parseSelectOnly(string query){
 }
 
 bool QueryParser::parsePattern(string query){
-	tr1::cmatch res;
-
-	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
-    tr1::regex_match(query.c_str(), res, rx);
-
-	if(res.size()==0){
+	vector<string> res;
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	bool match = regexMatchWithResult(regexPattern,query,res);
+	if(!match){
 		return false;
 	}
     for(int i=1;i<(int)res.size();i++){
@@ -126,10 +150,10 @@ bool QueryParser::parsePattern(string query){
 	return true;
 }
 bool QueryParser::parseRelational(string query){
-	tr1::cmatch res;
-	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
-    tr1::regex_match(query.c_str(), res, rx);
-	if(res.size()==0){
+	vector<string> res;
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	bool match = regexMatchWithResult(regexPattern,query,res);
+	if(!match){
 		return false;
 	}
     for(int i=1;i<(int)res.size();i++){
@@ -140,10 +164,10 @@ bool QueryParser::parseRelational(string query){
 }
 
 bool QueryParser::parseRelationalWithPattern(string query){
-	tr1::cmatch res;
-	tr1::regex rx("\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*");
-    tr1::regex_match(query.c_str(), res, rx);
-	if(res.size()==0){
+	vector<string> res;
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	bool match = regexMatchWithResult(regexPattern,query,res);
+	if(!match){
 		return false;
 	}
     for(int i=1;i<(int)res.size();i++){
@@ -189,6 +213,9 @@ Query QueryParser::queryParse(string queryStr, bool &valid){
 	Query query = constructAndValidateQuery(selectStatement, synMap, valid);
 	return query;
 }
+
+
+//QueryValidation and Create Query
 
 void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
 	if(relationRef == MODIFIES){
@@ -253,16 +280,6 @@ void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
 	}
 }
 
-bool QueryParser::regexMatch(string regexPattern, string word){
-	tr1::cmatch subres;
-	tr1::regex subrx("(" + regexPattern + ")" );
-	tr1::regex_match(word.c_str(), subres, subrx);
-	if(subres.size()==0){
-		return false;
-	}
-	return true;
-}
-
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
 	query.setSelectedSyn(v.at(1));
@@ -307,9 +324,8 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 						}
 					}				
 				}
-
-				
 			}
+
 			if((formatValid)&&(synValid)){
 				Relationship rel(v.at(i), v.at(i+1), v.at(i+2));
 				query.addRelationship(rel);

@@ -71,14 +71,20 @@ private:
 	vector<string> selectStatement;
 	unordered_map<string, TypeTable::SynType> synMap;
 
-	//methods
+	//common methods
+	string stringToLower(string);
+	bool regexMatch(string, string);
+	bool regexMatchWithResult(string, string, vector<string>&);
+
+	//QueryParser methods
 	bool parseDesignEntity(string);
 	bool parseSelectOnly(string);
 	bool parsePattern(string);
 	bool parseRelational(string);
 	bool parseRelationalWithPattern(string);
+
+	//QueryValidatior methods
 	void deepCopyTableParam(string[2], string);
-	bool regexMatch(string, string);
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:

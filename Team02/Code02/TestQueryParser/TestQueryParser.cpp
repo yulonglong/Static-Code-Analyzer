@@ -394,8 +394,19 @@ void QueryParserTest::testQueryModifies1(){
 	return;
 }
 
-void QueryParserTest::testQueryValidationModifies(){
+void QueryParserTest::testQueryValidationModifies1(){
 	string query = "assign a; Select a such that Modifies(a, 2)";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQueryValidationModifies2(){
+	string query = "assign a; Select b such that Modifies(b, 2)";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);

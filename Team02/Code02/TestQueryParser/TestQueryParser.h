@@ -17,7 +17,8 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryComplex1);
 	CPPUNIT_TEST(testQueryFollows1);
 	CPPUNIT_TEST(testQueryModifies1);
-	CPPUNIT_TEST(testQueryValidationModifies);
+	CPPUNIT_TEST(testQueryValidationModifies1);
+	CPPUNIT_TEST(testQueryValidationModifies2);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -32,8 +33,8 @@ public:
 	void testQueryComplex1();
 	void testQueryFollows1();
 	void testQueryModifies1();
-	void testQueryValidationModifies();
-	
+	void testQueryValidationModifies1();
+	void testQueryValidationModifies2();
 };
 #endif
     
