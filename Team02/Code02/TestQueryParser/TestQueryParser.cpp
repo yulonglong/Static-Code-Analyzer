@@ -29,6 +29,9 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -69,6 +72,9 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -111,6 +117,9 @@ void QueryParserTest::testQueryStmtSelectUses(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -152,6 +161,9 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -194,6 +206,9 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -240,6 +255,9 @@ void QueryParserTest::testQueryComplex1(){
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	
 	string selectedSyn = parsedQuery.getSelectedSyn();
 	string patternSyn = parsedQuery.getPatternSyn();
@@ -260,9 +278,9 @@ void QueryParserTest::testQueryComplex1(){
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
 	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
-	expectedSynTable.insert(make_pair("v2", TypeTable::VARIABLE));
-	expectedSynTable.insert(make_pair("a1", TypeTable::ASSIGN));
 	expectedSynTable.insert(make_pair("v", TypeTable::VARIABLE));
+	expectedSynTable.insert(make_pair("a1", TypeTable::ASSIGN));
+	expectedSynTable.insert(make_pair("v2", TypeTable::VARIABLE));
 	
 
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
@@ -281,5 +299,17 @@ void QueryParserTest::testQueryComplex1(){
 		iter++;
 		expectedIter++;
 	}
+	return;
+}
+
+
+void QueryParserTest::testQueryValidationModifies(){
+	string query = "assign a; Select a such that Modifies(a, 2)";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	return;
 }

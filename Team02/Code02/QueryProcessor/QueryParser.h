@@ -27,19 +27,44 @@ private:
 	static const string AFFECTS;
 	static const string AFFECTSSTAR;
 
+	//clauses param
+	static const string modifiesParam[2];
+	static const string usesParam[2];
+	static const string callsParam[2];
+	static const string callsStarParam[2];
+	static const string parentParam[2];
+	static const string parentStarParam[2];
+	static const string followsParam[2];
+	static const string followsStarParam[2];
+	static const string nextParam[2];
+	static const string nextStarParam[2];
+	static const string affectsParam[2];
+	static const string affectsStarParam[2];
+
+
 	//regex string
+	//lexical rules
 	static const string DIGIT;
 	static const string LETTER;
 	static const string INTEGER;
 	static const string IDENT;
 
+	//auxiliary grammar rules
 	static const string synonym;
+	static const string attrName;
+	static const string entRef;
+	static const string varRef;
+	static const string stmtRef;
+	static const string lineRef;
+	static const string designEntity;
+	static const string attrRef;
+	static const string elem;
+	static const string tuple;
 
 	static const string select;
 	static const string such;
 	static const string that;
 	static const string freeString;
-	static const string designEntity;
 	static const string relRef;
 	static const string pattern;
 
