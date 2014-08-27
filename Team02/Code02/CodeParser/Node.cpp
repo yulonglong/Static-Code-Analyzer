@@ -23,6 +23,11 @@ Node::Node(string newData,string newType,int newProgLine){
 	parent=NULL;
 	progLine=newProgLine;
 }
+Node::Node(string newType,int newProgLine){
+	type=newType;
+	parent=NULL;
+	progLine=newProgLine;
+}
 Node::Node(Node* newLeft, Node* newRight, string newData,string newType){
 	data=newData;
 	type=newType;

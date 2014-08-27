@@ -5,6 +5,7 @@
 #include "Node.h"
 #include "DesignExtractor.h"
 #include "TestDesignExtractor.h"
+#include "CodeParser.h"
 #include "PKB.h"
 
 #include <iostream>
@@ -12,99 +13,55 @@
 #include <string>
 using namespace std;
 
-void 
-DesignExtractorTest::setUp()
+void DesignExtractorTest::setUp()
 {
 }
 
-void 
-DesignExtractorTest::tearDown()
+void DesignExtractorTest::tearDown()
 {
 }
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( DesignExtractorTest ); // Note 4 
 
-// method to test TABLE
-/*
-void ParserTest::testModifyTable()
+void DesignExtractorTest::testFullDETestIn()
 {  // Note 5
-	
+
+	// TODO: Make your own AST instead of using parserDriver to generate AST
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	parserDriver("CodeParserTestIn.txt",pkb);
 
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();;
-	Follows* follows = pkb->getFollows();
-	Parent* parent = pkb->getParent();
-	TypeTable* typeTable = pkb->getTypeTable();
-	Modifies* modifies = pkb->getModifies();
-	Uses* uses = pkb->getUses();
-	Node* root = pkb->getASTRoot();
+	// Node* ASTRoot = pkb->getASTRoot();
+	extractorDriver(pkb);
+	Node* CFGRoot = pkb->getCFGRoot();
+	cout << "Built CFG." << endl;
 
-	string expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(0));
-	expected = "z";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(1));
-	expected = "i";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(2));
-	expected = "y";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(3));
-	expected = "v";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(4));
+	string resultFullTree;
+	CFGRoot->stringPreOrderExpressionTree(CFGRoot, resultFullTree);
+	cout << resultFullTree; 	
 
-	expected = "First";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(0));
-	expected = "Second";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(1));
-	expected = "Third";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(2));
-
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(1,2));
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(3,2));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,7));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,8));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(6,9));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,11));
-	CPPUNIT_ASSERT_EQUAL(true,parent->isParent(10,12));
-	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(11,12));
-
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(1,2));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(2,3));
-	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(1,3));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(4,5));
-	CPPUNIT_ASSERT_EQUAL(true,follows->isFollows(5,6));
-	CPPUNIT_ASSERT_EQUAL(false,follows->isFollows(6,7));
-
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(1));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(2));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(3));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::WHILE,typeTable->getType(6));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::CALL,typeTable->getType(8));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::IF,typeTable->getType(10));
-	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(11));
-
+	/*
+	ifstream infile;
+	// infile.open("expectedSource2.txt",ios::in);
+	if(infile.fail()){
+		// cout << "expectedSource2.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		CFGRoot->stringPreOrderExpressionTree(CFGRoot, resultFullTree);
 	
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,"x"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,"z"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,"v"));
-	
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"y"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
-	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+	*/
+
 	return;
 }
-*/
 
 /*
 void ParserTest::testCompleteParser()

@@ -15,9 +15,10 @@ TestWrapper::TestWrapper() {
 	pkb = PKB::getInstance();
 }
 
-// method for parsing the SIMPLE source
+// method for parsing the SIMPLE source and extracting relationships
 void TestWrapper::parse(std::string filename) {
 	parserDriver(filename,pkb);
+	// extractorDriver(pkb); 
 }
 
 // method to evaluating a query

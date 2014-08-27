@@ -17,7 +17,19 @@
 #include "Node.h"
 #include "PKB.h"
 
+class DesignExtractor{
+private:
+	// Node* currASTNode;
+	// Node* currCFGNode;
+	// Node* CFGRoot;
+	// Node* ASTRoot;
+	int progLineCounter; 
+
+public:
+	
+};
+
 void extractorDriver(PKB* pkb);
 Node* buildCFG(Node &ASTroot);
-
+	
 #endif

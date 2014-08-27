@@ -38,6 +38,7 @@ private:
 	Follows *follows;
 	Modifies *modifies;
 	Uses *uses;
+	Node* CFGRoot; 
 	
 public:
 	PKB();
@@ -53,8 +54,10 @@ public:
 	Modifies* getModifies();
 	Uses* getUses();
 	Node* getASTRoot();
+	Node* getCFGRoot();
 
 	void setASTRoot(Node* newASTRoot);
+	void setCFGRoot(Node* newCFGRoot);
 
 };
 

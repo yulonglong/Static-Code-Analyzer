@@ -83,3 +83,11 @@ Node* PKB::getASTRoot(){
 void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
+
+Node* PKB::getCFGRoot(){
+	return CFGRoot;
+}
+
+void PKB::setCFGRoot(Node* newCFGRoot){
+	CFGRoot = newCFGRoot;
+}

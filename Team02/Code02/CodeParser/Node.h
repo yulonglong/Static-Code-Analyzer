@@ -21,6 +21,7 @@ public:
 	Node();
 	Node(std::string newData,std::string newType);
 	Node(std::string newData,std::string newType,int newProgLine);
+	Node(std::string newType,int newProgLine);
 	Node(Node* newLeft, Node* newRight, std::string newData,std::string newType);
 	Node(Node* newLeft, Node* newRight, std::string newData,std::string newType, int newProgLine);
 	std::vector<Node*> getChild();
