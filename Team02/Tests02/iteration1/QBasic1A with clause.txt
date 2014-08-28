@@ -2,8 +2,8 @@
 cat: BASIC queries with entity attribute values and constants (with clause)
 1 - procName ::
 procedure p;
-Select p with p.procName = "First"
-First
+Select p with p.procName = "Main"
+Main
 5000
 2 - procName ::
 procedure p;
@@ -12,7 +12,7 @@ Select p with p.procName = "DoesNotExist"
 5000
 3 - procName, BOOLEAN ::
 procedure p;
-Select BOOLEAN with p.procName = "First"
+Select BOOLEAN with p.procName = "Main"
 TRUE
 5000
 4 - procName, BOOLEAN ::
