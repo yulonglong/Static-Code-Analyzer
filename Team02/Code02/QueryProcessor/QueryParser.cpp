@@ -26,8 +26,16 @@ const string QueryParser::select = "[Ss]elect";
 const string QueryParser::such = "such";
 const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
+const string QueryParser::expr = "[^_]+";
 const string QueryParser::relRef = "[Ff]ollows|[Ff]ollows\\*|[Mm]odifies|[Uu]ses|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*";
-const string QueryParser::pattern = "pattern";
+
+const string QueryParser::expressionSpec = "\"" + expr + "\"" + "|" + "_\"" + expr + "\"_" + "|" + "_";
+const string QueryParser::assignCl = "("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*,\\s*" + "("+expressionSpec+")" + "\\s*\\)\\s*";
+const string QueryParser::ifCl = "("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\)\\s*";
+const string QueryParser::whileCl = "("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\)\\s*";
+const string QueryParser::pattern = assignCl + "|" + whileCl + "|" + ifCl;
+const string QueryParser::patternCond = pattern;
+const string QueryParser::patternCl = "(pattern)\\s+"+patternCond;
 
 //constant string
 const string QueryParser::MODIFIES = "modifies";
@@ -42,6 +50,7 @@ const string QueryParser::NEXT = "next";
 const string QueryParser::NEXTSTAR = "next*";
 const string QueryParser::AFFECTS = "affects";
 const string QueryParser::AFFECTSSTAR = "affects*";
+const string QueryParser::PATTERN = "pattern";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
@@ -139,7 +148,8 @@ bool QueryParser::parseSelectOnly(string query){
 
 bool QueryParser::parsePattern(string query){
 	vector<string> res;
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+" + patternCl;
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	if(!match){
 		return false;
@@ -165,7 +175,8 @@ bool QueryParser::parseRelational(string query){
 
 bool QueryParser::parseRelationalWithPattern(string query){
 	vector<string> res;
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+" + patternCl;
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	if(!match){
 		return false;
@@ -338,11 +349,37 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			}
 		}
 		//if doesnt match relRef
-		else if (v.at(i) == "pattern"){
-			query.setPatternSyn(v.at(i+1));
-			Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
-			query.addRelationship(rel);
-			i = i+3;
+		else if (relationRef == PATTERN){
+			bool patternSynValid = true;
+			string patternSyn = v.at(i+1);
+			unordered_map<string, TypeTable::SynType>::iterator it;
+			it = synMap.find(patternSyn);
+			if(it==synMap.end()){
+				patternSynValid = false;
+			}
+			
+			bool varRefValid = true;
+			string firstParam = v.at(i+2);
+			bool match = regexMatch("("+synonym+")",firstParam);
+			//if it is a synonym
+			if(match){
+				it = synMap.find(firstParam);
+				if(it==synMap.end()){
+					varRefValid = false;
+				}
+			}
+
+			if((patternSynValid)&&(varRefValid)){
+				query.setPatternSyn(v.at(i+1));
+				Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
+				query.addRelationship(rel);
+				i = i+3;
+			}
+			else{
+				valid = false;
+				Query queryDummy;
+				return queryDummy;
+			}
 		}
 	}
 	return query;

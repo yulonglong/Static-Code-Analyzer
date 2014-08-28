@@ -36,8 +36,17 @@ private:
 	static const string such;
 	static const string that;
 	static const string freeString;
+	static const string expr;
 	static const string relRef;
+
+	static const string expressionSpec;
+	static const string assignCl;
+	static const string whileCl;
+	static const string ifCl;
 	static const string pattern;
+	static const string patternCond;
+	static const string patternCl;
+	
 
 	//constant string
 	static const string MODIFIES;
@@ -52,6 +61,7 @@ private:
 	static const string NEXTSTAR;
 	static const string AFFECTS;
 	static const string AFFECTSSTAR;
+	static const string PATTERN;
 
 	//clauses param
 	static const string modifiesParam[2];

@@ -463,7 +463,7 @@ void QueryParserTest::testQueryValidationModifies2(){
 }
 
 void QueryParserTest::testQueryValidationModifies3(){
-	string query = "assign a; Select a such that Modifies(a, 2);";
+	string query = "assign a; Select a such that Modifies(a, \"b\"):";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -473,3 +473,35 @@ void QueryParserTest::testQueryValidationModifies3(){
 	return;
 }
 
+void QueryParserTest::testQueryValidationPattern1(){
+	string query = "assign a; Select a such that Modifies(a, \"b\") pattern a (a, \"_a  *b_\" )";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQueryValidationPattern2(){
+	string query = "assign a; Select a such that Modifies(a, \"b\") pattern a (a, _\"a*b\" )";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQueryValidationPattern3(){
+	string query = "assign a; Select a such that Modifies(a, \"b\") pattern b (a, \"a*b\" )";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
