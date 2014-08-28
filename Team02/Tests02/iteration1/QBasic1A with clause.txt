@@ -1,0 +1,150 @@
+24
+cat: BASIC queries with entity attribute values and constants (with clause)
+1 - procName ::
+procedure p;
+Select p with p.procName = "First"
+First
+5000
+2 - procName ::
+procedure p;
+Select p with p.procName = "DoesNotExist"
+
+5000
+3 - procName, BOOLEAN ::
+procedure p;
+Select BOOLEAN with p.procName = "First"
+TRUE
+5000
+4 - procName, BOOLEAN ::
+procedure p;
+Select BOOLEAN with p.procName = "DoesNotExist"
+FALSE
+5000
+5 - varName ::
+variable v;
+Select v with v.varName = "x"
+x
+5000
+6 - varName ::
+variable v;
+Select v with v.varName = "DoesNotExist"
+
+5000
+7 - varName, BOOLEAN ::
+variable v;
+Select BOOLEAN with v.varName = "iter";
+TRUE
+5000
+8 - varName, BOOLEAN ::
+Select BOOLEAN with v.varName = "DoesNotExist"
+FALSE
+5000
+9 - value ::
+constant c;
+Select c with c.value = 3
+3
+5000
+10 - value ::
+constant c;
+Select c with c.value = 999999999999
+
+5000
+11 - value, BOOLEAN ::
+constant c;
+Select BOOLEAN with c.value = 2
+TRUE
+5000
+12 - value, BOOLEAN ::
+constant c;
+Select BOOLEAN with c.value = 99999999999999
+FALSE
+5000
+13 - stmt# ::
+stmt s;
+Select s with s.stmt# = 17
+17
+5000
+14 - stmt# ::
+stmt s;
+Select s with s.stmt# = 99999
+
+5000
+15 - stmt# ::
+stmt s;
+Select BOOLEAN with s.stmt# = 23
+TRUE
+5000
+16 - stmt# ::
+stmt s;
+Select BOOLEAN with s.stmt# = 999999
+FALSE
+17 - stmt# ::
+assign a;
+Select a with a.stmt# = 12
+12
+5000
+18 - stmt# ::
+assign a;
+Select a with a.stmt# = 27
+
+5000
+13 - stmt#, BOOLEAN ::
+assign a;
+Select BOOLEAN with a.stmt# = 30
+TRUE
+5000
+14 - stmt#, BOOLEAN ::
+assign a;
+Select BOOLEAN with a.stmt# = 19
+FALSE
+5000
+15 - stmt# ::
+while w;
+Select w with w.stmt# = 19
+19
+5000
+16 - stmt# ::
+while w;
+Select w with w.stmt# = 34
+
+5000
+17 - stmt#, BOOLEAN ::
+while w;
+Select BOOLEAN with w.stmt# = 8
+TRUE
+5000
+18 - stmt#, BOOLEAN ::
+while w;
+Select BOOLEAN with w.stmt# = 25
+FALSE
+5000
+19 - stmt# ::
+if i;
+Select i with i.stmt# = 38
+38
+5000
+20 - stmt# ::
+if i;
+Select i with i.stmt# = 1
+
+5000
+21 - stmt#, BOOLEAN ::
+if i;
+Select BOOLEAN with i.stmt# = 38
+TRUE
+5000
+22 - stmt#, BOOLEAN ::
+if i;
+Select BOOLEAN with i.stmt# = 15
+FALSE
+5000
+23 - prog_line# ::
+prog_line pl;
+Select pl with pl.prog_line# = 23
+23
+5000
+24 - prog_line# ::
+prog_line pl;
+Select pl with pl.prog_line# = 15081992
+
+5000
