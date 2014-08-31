@@ -1,0 +1,82 @@
+16
+cat: BASIC queries with Calls*
+1- Calls* > all assignment stsms in the program :: 
+assign a;
+Select a such that Calls* (_,_)
+1, 2, 4, 5, 7, 9, 14, 15, 16, 17, 18
+5000
+2 - Calls* > all while stmt in the program ::
+while w;
+Select w such that Calls* (_,_)
+6
+5000
+3 - Calls* > procedures that call other procedures transitively ::
+procedure p, q;
+Select p such that Calls* (p, q)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+4 - Calls* > procedures that call other procedures transitively;
+procedure p;
+Select p such that Calls* (p, _)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+5 - Calls* > procedures that are called by other procedures transitively ::
+procedure p, q;
+Select q such that Calls* (p, q)
+First, Second, Third, Fourth, Fifth, Sixth, Seventh
+5000
+6 - Calls* > procedures that are called by other procedures transitively ::
+procedure p;
+Select p such that Calls* (_, p)
+First, Second, Third, Fourth, Fifth, Sixth, Seventh
+5000
+7 - Calls* > check if there's a procedure that calls other procedures transitively ::
+procedure p;
+Select BOOLEAN such that Calls* (_, _)
+TRUE
+5000
+8 - Calls* > check if a procedure calls another transitively ::
+procedure p;
+Select BOOLEAN such that Calls* ("First", "Second")
+TRUE
+5000
+9 - Calls* > check if a procedure calls another transitively :: 
+procedure p;
+Select BOOLEAN such that Calls* ("Third", "First")
+FALSE
+5000
+10 - Calls* > check if a procedure calls another transitively :: 
+procedure p;
+Select BOOLEAN such that Calls* ("Second", "First")
+TRUE
+5000
+11 - Calls* > procedures called by a procedure transitively ::
+procedure p;
+Select p such that Calls* ("Second", p)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+12 - Calls* > procedures called by a procedure transitively ::
+procedure p;
+Select p such that Calls* ("Third", p)
+
+5000
+13 - Calls* > procedures calling a procedure transitively ::
+procedure p;
+Select p such that Calls* (p, "Third")
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+14 - Calls* > procedures calling a procedure transitively ::
+procedure p;
+Select p such that Calls* (p, "First")
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+15 - Calls* > procedures calling a procedure transitively ::
+procedure p;
+Select p such that Calls* (p, "Second")
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+16 - Calls* > procedures caling itself transitively ::
+procedure p;
+Select p such that Calls* (p, p)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
