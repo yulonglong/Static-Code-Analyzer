@@ -1,0 +1,77 @@
+15
+cat: BASIC queries with modifies procedure
+1 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, v)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+2 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "x")
+First, Second
+5000
+3 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "wrong")
+
+5000
+4 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("First", "x")
+TRUE
+5000
+5 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("Fourth", _)
+TRUE
+5000
+6 - Modifies ::
+procedure p; variable v; 
+Select BOOLEAN such that Modifies (p, "y")
+TRUE
+5000
+7 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies (p, "wrong")
+FALSE
+5000
+8 - Modifies ::
+procedure p; variable v; 
+Select BOOLEAN such that Modifies ("Third", v)
+TRUE
+5000
+9 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("Fourth", "y")
+TRUE
+5000
+10 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "y")
+First, Second, Fourth, Sixth
+5000
+11 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "z")
+First, Second, Third
+5000
+12 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "wrong")
+
+5000
+13 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies (p, v)
+i, v, x, y, z
+5000
+14 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Second", v)
+i, x, y, z
+5000
+15 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Fourth", v)
+y
+5000
