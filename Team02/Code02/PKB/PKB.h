@@ -16,6 +16,7 @@
 #include "Node.h"
 #include "Modifies.h"
 #include "Uses.h"
+#include "Calls.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ private:
 	Follows *follows;
 	Modifies *modifies;
 	Uses *uses;
+	Calls *calls;
 	Node* CFGRoot; 
 	
 public:
@@ -53,6 +55,7 @@ public:
 	Follows* getFollows();
 	Modifies* getModifies();
 	Uses* getUses();
+	Calls* getCalls();
 	Node* getASTRoot();
 	Node* getCFGRoot();
 

@@ -15,6 +15,7 @@ PKB::PKB(){
 	follows = Follows::getInstance(typeTable);
 	modifies = Modifies::getInstance(typeTable,varTable);
 	uses = Uses::getInstance(typeTable,varTable);
+	calls = Calls::getInstance(procTable);
 }
 
 PKB::~PKB(){
@@ -26,6 +27,7 @@ PKB::~PKB(){
 	follows->~Follows();
 	modifies->~Modifies();
 	uses->~Uses();
+	calls->~Calls();
 	instanceFlag=false;
 }
 
@@ -74,6 +76,10 @@ Modifies* PKB::getModifies(){
 
 Uses* PKB::getUses(){
 	return uses;
+}
+
+Calls* PKB::getCalls(){
+	return calls;
 }
 
 Node* PKB::getASTRoot(){
