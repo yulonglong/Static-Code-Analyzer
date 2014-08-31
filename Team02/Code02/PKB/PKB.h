@@ -59,6 +59,15 @@ public:
 	Node* getASTRoot();
 	Node* getCFGRoot();
 
+	void setToVarTable(VARNAME);
+	void setToProcTable(PROCNAME);
+	void setToConstTable(CONSTVALUE);
+	void setToParent(STMTNUM, STMTNUM);
+	void setToFollows(STMTNUM, STMTNUM);
+	void setToModifies(STMTNUM, VARNAME);
+	void setToUses(STMTNUM, VARNAME);
+	void setToCalls(PROCNAME, PROCNAME);
+
 	void setASTRoot(Node* newASTRoot);
 	void setCFGRoot(Node* newCFGRoot);
 

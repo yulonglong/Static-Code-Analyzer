@@ -82,18 +82,59 @@ Calls* PKB::getCalls(){
 	return calls;
 }
 
-Node* PKB::getASTRoot(){
-	return ASTRoot;
+void PKB::setToVarTable(VARNAME v){
+	varTable = getVarTable();
+	varTable->insertVar(v);
+}
+
+void PKB::setToProcTable(PROCNAME p){
+	procTable = getProcTable();
+	procTable->insertProc(p);
+}
+
+void PKB::setToConstTable(CONSTVALUE c){
+	constTable = getConstTable();
+	constTable->insertConst(c);
+}
+
+
+void PKB::setToParent(STMTNUM s1, STMTNUM s2){
+	parent = getParent();
+	parent->setParent(s1,s2);
+}
+
+void PKB::setToFollows(STMTNUM s1, STMTNUM s2){
+	follows = getFollows();
+	follows->setFollows(s1,s2);
+}
+
+void PKB::setToModifies(STMTNUM s, VARNAME v){
+	modifies = getModifies();
+	modifies->setModifies(s,v);
+}
+
+void PKB::setToUses(STMTNUM s, VARNAME v){
+	uses = getUses();
+	uses->setUses(s,v);
+}
+
+void PKB::setToCalls(PROCNAME p1, PROCNAME p2){
+	calls = getCalls();
+	calls->setCalls(p1,p2);
 }
 
 void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
 
-Node* PKB::getCFGRoot(){
-	return CFGRoot;
-}
-
 void PKB::setCFGRoot(Node* newCFGRoot){
 	CFGRoot = newCFGRoot;
+}
+
+Node* PKB::getASTRoot(){
+	return ASTRoot;
+}
+
+Node* PKB::getCFGRoot(){
+	return CFGRoot;
 }
