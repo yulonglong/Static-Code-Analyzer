@@ -18,9 +18,15 @@
     <ClCompile Include="DesignExtractor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QueueItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DesignExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

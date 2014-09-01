@@ -13,11 +13,14 @@
 #include <sstream>
 #include <fstream>
 #include <stack>
+#include <queue>
 #include <vector>
 #include "Node.h"
 #include "PKB.h"
+#include "QueueItem.h"
 
 void extractorDriver(PKB* pkb);
+void extractRelationships(Node &ASTRoot); 
 Node* buildCFG(Node &ASTroot);
 	
 #endif

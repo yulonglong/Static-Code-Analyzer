@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DesignExtractor.cpp" />
+    <ClCompile Include="QueueItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DesignExtractor.h" />
+    <ClInclude Include="QueueItem.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{13B19EE6-3079-41E7-9159-CBD6537B7C94}</ProjectGuid>
