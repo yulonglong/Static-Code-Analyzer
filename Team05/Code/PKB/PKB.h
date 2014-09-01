@@ -59,6 +59,8 @@ public:
 	Node* getASTRoot();
 	Node* getCFGRoot();
 
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
+
 	void setToVarTable(VARNAME);
 	void setToProcTable(PROCNAME);
 	void setToConstTable(CONSTVALUE);

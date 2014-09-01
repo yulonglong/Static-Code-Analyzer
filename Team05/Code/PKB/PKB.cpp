@@ -82,6 +82,10 @@ Calls* PKB::getCalls(){
 	return calls;
 }
 
+unordered_map<PROCINDEX, vector<CALLSPAIR>> PKB::getCallsTable(){
+	return calls->getCallsTable();
+}
+
 void PKB::setToVarTable(VARNAME v){
 	varTable = getVarTable();
 	varTable->insertVar(v);

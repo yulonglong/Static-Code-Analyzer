@@ -45,6 +45,10 @@ Calls::Calls(ProcTable* pt){
 	procTable = pt;
 }
 
+unordered_map<PROCINDEX, vector<CALLSPAIR>> Calls::getCallsTable(){
+	return callsTable;
+}
+
 void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	try{
 		PROCINDEX index1 = procTable->getProcIndex(p1);

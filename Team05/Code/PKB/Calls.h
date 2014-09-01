@@ -28,6 +28,7 @@ public:
 	~Calls();
 	static Calls* getInstance();	// to be used to get instance of singleton class
 	static Calls* getInstance(ProcTable*);	// to be used to get instance of singleton class 
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
 	void setCalls(PROCNAME, PROCNAME, STMTNUM);
 	bool isCalled(PROCNAME,PROCNAME);
 };
