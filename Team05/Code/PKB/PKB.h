@@ -66,7 +66,8 @@ public:
 	void setToFollows(STMTNUM, STMTNUM);
 	void setToModifies(STMTNUM, VARNAME);
 	void setToUses(STMTNUM, VARNAME);
-	void setToCalls(PROCNAME, PROCNAME);
+	void setToCalls(PROCNAME, PROCNAME, STMTNUM); //kester added the last parameter of STMTNUM, it is the progline in which the procedure is called
+	void setToTypeTable(STMTNUM,TypeTable::SynType); //kester added this it was originally insertStmtNumAndType
 
 	void setASTRoot(Node* newASTRoot);
 	void setCFGRoot(Node* newCFGRoot);

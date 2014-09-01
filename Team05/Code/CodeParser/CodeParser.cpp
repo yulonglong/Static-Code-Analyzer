@@ -17,7 +17,7 @@ bool isAllDigit(string input){
 }
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &varTable, ConstTable &constTable, Uses &uses, const vector<Node*> &containerNode){
+Node* constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, const vector<Node*> &containerNode){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -38,23 +38,23 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, VarTable &v
 				type="constant";
 
 				//set constTable
-				constTable.insertConst(tokens[i]);
+				pkb->setToConstTable(tokens[i]);
 				//end setting of constTable
 			}
 			else{
 
 				//insert to var table
-				varTable.insertVar(tokens[i]);
+				pkb->setToVarTable(tokens[i]);
 				//end insertion
 
 				//set uses
-				uses.setUses(newProgLine,tokens[i]);
+				pkb->setToUses(newProgLine,tokens[i]);
 				
 				for(unsigned int index = 0;index<containerNode.size();index++){
 					Node* currPointer = containerNode[index];
 					int currProgLine = currPointer->getProgLine();
 					if(currProgLine > 0){
-						uses.setUses(currProgLine,tokens[i]);
+						pkb->setToUses(currProgLine,tokens[i]);
 					}
 				}
 				//end set uses
@@ -214,7 +214,7 @@ void tokenizeTokens(string word, vector<string> &storage){
 }
 
 //real parsing
-Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTable &typeTable, ConstTable &constTable, Follows &follows,Parent &parent, Modifies &modifies, Uses &uses){
+Node* parseCode(string filename,PKB *pkb){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -346,7 +346,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			procName=tokens[1];
 
 			//insert to proc table
-			procTable.insertProc(procName);
+			pkb->setToProcTable(procName);
 			//end insertion
 
 			currProcName = procName;
@@ -380,7 +380,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			//set parent
 			int parentProgLine = currParent->getProgLine();
 			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
+				pkb->setToParent(parentProgLine,progLine);
 			}
 			//setFollows
 			string parentType = currParent->getType();
@@ -388,11 +388,14 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				int parentChildSize = currParent->getChild().size();
 				if(parentChildSize>=2){
 					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
+					pkb->setToFollows(prevProgLine,progLine);
 				}
 			}
 			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::CALL);
+			pkb->setToTypeTable(progLine,TypeTable::CALL);
+
+			//setCalls
+			pkb->setToCalls(currProcName,procName,progLine);
 
 		}
 		else if(tokens[0]=="while"){
@@ -403,17 +406,17 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			controlVarName=tokens[1];
 
 			//insert to var table
-			varTable.insertVar(controlVarName);
+			pkb->setToVarTable(controlVarName);
 			//end insertion
 
 			//set uses
-			uses.setUses(progLine,controlVarName);
+			pkb->setToUses(progLine,controlVarName);
 			
 			for(unsigned int index=0;index<containerNode.size();index++){
 				Node* currPointer = containerNode[index];
 				int currProgLine = currPointer->getProgLine();
 				if(currProgLine > 0){
-					uses.setUses(currProgLine,controlVarName);
+					pkb->setToUses(currProgLine,controlVarName);
 				}
 			}
 			//end set uses
@@ -433,7 +436,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			//set parent
 			int parentProgLine = currParent->getProgLine();
 			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
+				pkb->setToParent(parentProgLine,progLine);
 			}
 			//setFollows
 			string parentType = currParent->getType();
@@ -441,11 +444,11 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				int parentChildSize = currParent->getChild().size();
 				if(parentChildSize>=2){
 					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
+					pkb->setToFollows(prevProgLine,progLine);
 				}
 			}
 			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::WHILE);
+			pkb->setToTypeTable(progLine,TypeTable::WHILE);
 
 			containerNode.push_back(stmtLst);
 			
@@ -460,17 +463,17 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 
 			
 			//insert to var table
-			varTable.insertVar(controlVarName);
+			pkb->setToVarTable(controlVarName);
 			//end insertion
 
 			//set uses
-			uses.setUses(progLine,controlVarName);
+			pkb->setToUses(progLine,controlVarName);
 			
 			for(unsigned int index=0;index<containerNode.size();index++){
 				Node* currPointer = containerNode[index];
 				int currProgLine = currPointer->getProgLine();
 				if(currProgLine > 0){
-					uses.setUses(currProgLine,controlVarName);
+					pkb->setToUses(currProgLine,controlVarName);
 				}
 			}
 			//end set uses
@@ -495,7 +498,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			//set parent
 			int parentProgLine = currParent->getProgLine();
 			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
+				pkb->setToParent(parentProgLine,progLine);
 			}
 			//setFollows
 			string parentType = currParent->getType();
@@ -503,11 +506,11 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				int parentChildSize = currParent->getChild().size();
 				if(parentChildSize>=2){
 					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
+					pkb->setToFollows(prevProgLine,progLine);
 				}
 			}
 			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::IF);
+			pkb->setToTypeTable(progLine,TypeTable::IF);
 
 			containerNode.push_back(elseStmt);
 			containerNode.push_back(thenStmt);
@@ -525,17 +528,17 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			Node* assignRoot = new Node(tokens[1],"assign",progLine);
 
 			//insert to var table
-			varTable.insertVar(tokens[0]); //insert left side variable
+			pkb->setToVarTable(tokens[0]); //insert left side variable
 			//end insertion
 			
 			//set modifies
-			modifies.setModifies(progLine,tokens[0]);
+			pkb->setToModifies(progLine,tokens[0]);
 			
 			for(unsigned int index=0;index<containerNode.size();index++){
 				Node* currPointer = containerNode[index];
 				int currProgLine = currPointer->getProgLine();
 				if(currProgLine > 0){
-					modifies.setModifies(currProgLine,tokens[0]);
+					pkb->setToModifies(currProgLine,tokens[0]);
 				}
 			}
 			//end set modifies
@@ -545,7 +548,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			tokens.erase(tokens.begin(),tokens.begin()+2);
 			vector<string> ans = getPostfix (tokens);
 			
-			Node* expressionRoot = constructExpressionTree(ans,progLine,varTable,constTable,uses,containerNode);
+			Node* expressionRoot = constructExpressionTree(ans,progLine,pkb,containerNode);
 
 			assignRoot->setChild(modifiedVar);
 			modifiedVar->setParent(assignRoot);
@@ -562,7 +565,7 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 			//set parent
 			int parentProgLine = currParent->getProgLine();
 			if(parentProgLine!=-1){
-				parent.setParent(parentProgLine,progLine);
+				pkb->setToParent(parentProgLine,progLine);
 			}
 			//setFollows
 			string parentType = currParent->getType();
@@ -570,11 +573,11 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 				int parentChildSize = currParent->getChild().size();
 				if(parentChildSize>=2){
 					int prevProgLine = currParent->getChild(parentChildSize-2)->getProgLine();
-					follows.setFollows(prevProgLine,progLine);
+					pkb->setToFollows(prevProgLine,progLine);
 				}
 			}
 			//setTypeTable
-			typeTable.insertStmtNumAndType(progLine,TypeTable::ASSIGN);
+			pkb->setToTypeTable(progLine,TypeTable::ASSIGN);
 			
 		}
 
@@ -608,19 +611,11 @@ Node* parseCode(string filename,VarTable &varTable,ProcTable &procTable, TypeTab
 }
 
 void parserDriver(string filename,PKB *pkb){
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();
-	TypeTable* typeTable = pkb->getTypeTable();
-	ConstTable* constTable = pkb->getConstTable();
-	Parent* parent = pkb->getParent();
-	Follows* follows = pkb->getFollows();
-	Modifies* modifies = pkb->getModifies();
-	Uses* uses = pkb->getUses();
-
+	
 	Node* root = pkb->getASTRoot();
 
 	try{
-		root = parseCode(filename,*varTable,*procTable,*typeTable,*constTable,*follows,*parent,*modifies,*uses);
+		root = parseCode(filename,pkb);
 	}
 	catch(...){
 		cout << "ERROR IN PARSING SOURCE CODE! EXCEPTION CAUGHT!" << endl;
