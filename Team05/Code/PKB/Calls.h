@@ -12,10 +12,12 @@
 #include <iterator>
 #include "ProcTable.h"
 
+typedef int STMTNUM;
+typedef pair<PROCINDEX,STMTNUM> CALLSPAIR;
 
 class Calls {
 private:
-	unordered_map<PROCINDEX, vector<PROCINDEX>> callsTable;
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable;
 	static bool instanceFlag;
 	static Calls *calls;
 	ProcTable *procTable;
@@ -26,7 +28,7 @@ public:
 	~Calls();
 	static Calls* getInstance();	// to be used to get instance of singleton class
 	static Calls* getInstance(ProcTable*);	// to be used to get instance of singleton class 
-	void setCalls(PROCNAME, PROCNAME);
+	void setCalls(PROCNAME, PROCNAME, STMTNUM);
 	bool isCalled(PROCNAME,PROCNAME);
 };
 

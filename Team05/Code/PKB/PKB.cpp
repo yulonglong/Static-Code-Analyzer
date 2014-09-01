@@ -118,9 +118,14 @@ void PKB::setToUses(STMTNUM s, VARNAME v){
 	uses->setUses(s,v);
 }
 
-void PKB::setToCalls(PROCNAME p1, PROCNAME p2){
+void PKB::setToCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	calls = getCalls();
-	calls->setCalls(p1,p2);
+	calls->setCalls(p1,p2,s);
+}
+
+void PKB::setToTypeTable(STMTNUM s,TypeTable::SynType t){
+	typeTable = getTypeTable();
+	typeTable->insertStmtNumAndType(s,t);
 }
 
 void PKB::setASTRoot(Node* newASTRoot){

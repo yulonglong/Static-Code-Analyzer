@@ -30,9 +30,9 @@ void CallsTest::testSetCalls() {  // Note 5
 	procTable->insertProc("y");
 	procTable->insertProc("z");
 
-	calls->setCalls("x", "y");
-	calls->setCalls("x", "z");
-	calls->setCalls("y", "z");
+	calls->setCalls("x", "y",2);
+	calls->setCalls("x", "z",3);
+	calls->setCalls("y", "z",4);
 
 	CPPUNIT_ASSERT(calls->isCalled("x", "y") == true);
 	CPPUNIT_ASSERT(calls->isCalled("y", "z") == true);

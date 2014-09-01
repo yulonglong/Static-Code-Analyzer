@@ -45,16 +45,17 @@ Calls::Calls(ProcTable* pt){
 	procTable = pt;
 }
 
-void Calls::setCalls(PROCNAME p1, PROCNAME p2){
+void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	try{
 		PROCINDEX index1 = procTable->getProcIndex(p1);
 		PROCINDEX index2 = procTable->getProcIndex(p2);
 
-		vector<PROCINDEX> temp (1,index2);
+		CALLSPAIR tempPair (index2,s);
+		vector<CALLSPAIR> temp (1,tempPair);
 
 		try{
-			vector<PROCINDEX> temp1 = callsTable.at(index1);
-			temp1.push_back(index2);
+			vector<CALLSPAIR> temp1 = callsTable.at(index1);
+			temp1.push_back(tempPair);
 			callsTable.erase(index1);
 			callsTable[index1] = temp1;
 		} catch(...){
@@ -72,10 +73,10 @@ bool Calls::isCalled(PROCNAME p1, PROCNAME p2){
 		if(index1==-1 || index2==-1)
 			return false;
 
-		vector<PROCINDEX> temp = callsTable.at(index1);
-		vector<PROCINDEX>::iterator it = temp.begin();
+		vector<CALLSPAIR> temp = callsTable.at(index1);
+		vector<CALLSPAIR>::iterator it = temp.begin();
 		for(;it!=temp.end();it++){
-			if(index2==*it)
+			if(index2==get<0>(*it))
 				return true;
 		}
 		return false;
