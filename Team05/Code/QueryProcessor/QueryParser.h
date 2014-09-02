@@ -53,6 +53,7 @@ private:
 	static const string NextT;
 	static const string Affects;
 	static const string AffectsT;
+	static const string TESTSTR;
 
 	static const string relRef;
 	static const string relCond;

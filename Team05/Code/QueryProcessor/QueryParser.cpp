@@ -48,7 +48,7 @@ const string QueryParser::freeString = "\\S+";
 const string QueryParser::expr = "[^_]+";
 
 const string QueryParser::ModifiesP = "([Mm]odifies)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
-const string QueryParser::ModifiesS = "[Mm]odifies\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
+const string QueryParser::ModifiesS = "([Mm]odifies)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
 const string QueryParser::UsesP = "([Uu]ses)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
 const string QueryParser::UsesS = "([Uu]ses)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
 const string QueryParser::Calls = "([Cc]alls)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+entRef+")" + "\\s*\\)";
@@ -61,13 +61,16 @@ const string QueryParser::Next = "([Nn]ext)\\s*\\(\\s*("+lineRef+")"+ "\\s*,\\s*
 const string QueryParser::NextT = "([Nn]ext\\*)\\s*\\(\\s*("+lineRef+")"+ "\\s*,\\s*" +"("+lineRef+")" + "\\s*\\)";
 const string QueryParser::Affects = "([Aa]ffects)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
 const string QueryParser::AffectsT = "([Aa]ffects\\*)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
+const string QueryParser::TESTSTR = "\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
 
-//const string QueryParser::relRef = ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT + "|" + 
-//	Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT;
-const string QueryParser::relRef = "[Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*";
 
-const string QueryParser::relCond = relRef;
-const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
+//const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT + "|" + 
+//	Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + ")";
+const string QueryParser::relRef = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*)";
+
+const string QueryParser::relCond = relRef ;
+const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond + TESTSTR;
+//const string QueryParser::suchThatCl = "(such)\\s+(that)";
 const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")";
 
 const string QueryParser::expressionSpec = "\"" + expr + "\"" + "|" + "_\"" + expr + "\"_" + "|" + "_";
@@ -176,8 +179,7 @@ bool QueryParser::parseSelectOnly(string query){
 bool QueryParser::parsePattern(string query){
 	vector<string> res;
 	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+" + patternCl + "\\s*";
-	//string regexPattern = "\\s*" + selectCl + "\\s+" + patternCl + "\\s*";
+	string regexPattern = "\\s*" + selectCl + "\\s+" + patternCl + "\\s*";
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	if(!match){
 		return false;
@@ -189,8 +191,7 @@ bool QueryParser::parsePattern(string query){
 }
 bool QueryParser::parseRelational(string query){
 	vector<string> res;
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
-	//string regexPattern = "\\s*" + selectCl + "\\s+" + suchThatCl + "\\s*";
+	string regexPattern =  "\\s*" + selectCl + "\\s+" + suchThatCl;
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	if(!match){
 		return false;
@@ -205,8 +206,7 @@ bool QueryParser::parseRelational(string query){
 bool QueryParser::parseRelationalWithPattern(string query){
 	vector<string> res;
 	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+" + patternCl + "\\s*";
-	//string regexPattern = "\\s*" + selectCl + "\\s+" + suchThatCl + "\\s+" + patternCl + "\\s*";
+	string regexPattern =  "\\s*" + selectCl + "\\s+" + suchThatCl +"\\s+" + patternCl + "\\s*";
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	if(!match){
 		return false;
