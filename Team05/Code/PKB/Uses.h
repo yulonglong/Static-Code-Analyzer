@@ -29,6 +29,11 @@ public:
 	vector<STMTNUM> getUses(TYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
 	vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
 	vector<STMTNUM> getUses(TYPE);//Select a such that Uses(a, v); return empty vector if does not exist
+
+
+	// uses.setUses(PROCINDEX, vector<int>); // if there already were variables used by this procedure, then just add the 2 vectors
+	// uses.setUses(STMTNUM, vector<int>); 
+
 };
 
 #endif

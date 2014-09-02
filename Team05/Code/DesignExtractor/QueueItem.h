@@ -23,8 +23,10 @@ private:
 	vector<int> callsProgLine; 
 	
 public:
+	QueueItem();
 	QueueItem(int, vector<int>); 
 	int getProcIndex();
 	vector<int> getCallsProgLine(); 
+	void print();
 };	
 #endif
