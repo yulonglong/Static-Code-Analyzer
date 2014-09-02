@@ -48,7 +48,7 @@ void extractorDriver(PKB *pkb) {
 	try {
 		// cout << "Building CFG..." << endl;
 		// CFGRoot = buildCFG(*ASTRoot);
-		//extractRelationships(*ASTRoot, callsTable);
+		extractRelationships(*ASTRoot, callsTable);
 	} catch (...) {
 		cout << "Error in Design Extractor" << endl; 
 	}
@@ -56,7 +56,7 @@ void extractorDriver(PKB *pkb) {
 	// pkb->setCFGRoot(CFGRoot);
 }
 
-/*
+
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
 void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
@@ -71,23 +71,20 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 
 	// Find all the varaibles used, then set uses relationship 
 }
-*/
 
 queue<QueueItem> runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
-	//DFS(0, vector<int>(), callsTable);
+	DFS(0, vector<int>(), callsTable);
 }
 
-/*
+
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	for (int i=0; i<(int) callsTable.at(source).size(); i++) {
 		vector<int> tempProgLine = progLine; 
 		tempProgLine.push_back(callsTable.at(source).at(i).second);
-		DFS(callsTable.at(source).at(i).first, tempProgLine); 
+		DFS(callsTable.at(source).at(i).first, tempProgLine, callsTable); 
 	}
 	// put into queue
-
 }
-*/
 
 // actual building of CFG 
 Node* buildCFG(Node &ASTNode) {
