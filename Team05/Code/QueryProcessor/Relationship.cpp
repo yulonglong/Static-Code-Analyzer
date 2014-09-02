@@ -1,39 +1,72 @@
 #include "Relationship.h"
 
-Relationship::Relationship(string rn, string v1, string v2)
-{
-    relName = rn;
-    token1 = v1;
-    token2 = v2;
+//function to convert a string to lowercase
+string stringToLower(string word){
+	for(int i=0;i<(int)word.length();i++){
+		word[i] = tolower(word[i]);
+	}
+	return word;
 }
 
-
-Relationship::RelType Relationship::getRelType()
+//constructor for normal clause
+Relationship::Relationship(string newRel, string newToken1, string newToken2)
 {
-     if (relName == "Follows") {
+    relName = stringToLower(newRel);
+    token1 = newToken1;
+    token2 = newToken2;
+}
+
+//constructor for with and pattern clause
+Relationship::Relationship(string newRel, string newSyn, string newToken1, string newToken2)
+{
+    relName = stringToLower(newRel);
+    token1 = newToken1;
+    token2 = newToken2;
+}
+
+//get Relationship Type
+Relationship::RelType Relationship::getRelType(){
+     if (relName == "follows") {
         return FOLLOWS;
-    } else if (relName == "Follows*"){
+    } else if (relName == "follows*"){
         return FOLLOWSSTAR;
-    } else if (relName == "Parent"){
+    } else if (relName == "parent"){
         return PARENT;
-    } else if(relName == "Modifies"){
+	} else if (relName == "parent*") {
+	    return PARENTSTAR;
+    } else if (relName == "modifies"){
 		return MODIFIES;
-	} else if(relName=="Uses"){
+	} else if (relName=="uses"){
 		return USES;
-	} else if (relName == "Parent*") {
-        return PARENTSTAR;
-	} else
+	} else if (relName=="calls"){
+		return CALLS;
+	} else if (relName=="calls*"){
+		return CALLSSTAR;
+	} else if (relName=="next"){
+		return NEXT;
+	} else if (relName=="next*"){
+		return NEXTSTAR;
+	} else if (relName=="affects"){
+		return AFFECTS;
+	} else if (relName=="affects*"){
+		return AFFECTSSTAR;
+	} else if (relName=="with"){
+		return WITH;
+	} else if (relName=="pattern"){
 		return PATTERN;
+	}
 }
 
-string Relationship::getToken1()
-{
+string Relationship::getToken1(){
     return token1;
 }
 
-string Relationship::getToken2()
-{
+string Relationship::getToken2(){
     return token2;
+}
+
+string Relationship::getSyn(){
+	return syn;
 }
 
 void Relationship::setToken1(string tk1){
@@ -44,4 +77,6 @@ void Relationship::setToken2(string tk2){
 	token2 = tk2;
 }
 
-
+void Relationship::setSyn(string newSyn){
+	syn = newSyn;
+}
