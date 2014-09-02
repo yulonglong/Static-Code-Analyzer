@@ -222,6 +222,20 @@ Node* parseCode(string filename,PKB *pkb){
 		cout << "ERROR! Failed to open " << filename << endl;
 		return NULL;
 	}
+
+	//a struct to store call clause, setting to call table in PKB at the end of the parsing
+	struct callNode{
+		string parentProcName;
+		string calledProcName;
+		int progLine;
+		callNode(string newParentProcName, string newCalledProcName, int newProgLine) : 
+		parentProcName(newParentProcName), 
+		calledProcName(newCalledProcName),
+		progLine(newProgLine) 
+		{ }
+	};
+	vector<callNode> callStore;
+
 	string word;
 	int progLine=0;
 	int progLineCounter=0;
@@ -394,8 +408,8 @@ Node* parseCode(string filename,PKB *pkb){
 			//setTypeTable
 			pkb->setToTypeTable(progLine,TypeTable::CALL);
 
-			//setCalls
-			pkb->setToCalls(currProcName,procName,progLine);
+			//storeCalls, set at the end
+			callStore.push_back(callNode(currProcName,procName,progLine));
 
 		}
 		else if(tokens[0]=="while"){
@@ -604,6 +618,12 @@ Node* parseCode(string filename,PKB *pkb){
 		}
 	
 		//cout << stringProgLine << ". " << word << endl;
+	}
+
+	//after parsing,
+	//set all calls to PKB that were stored
+	for(int i=0;i<(int)callStore.size();i++){
+		pkb->setToCalls(callStore[i].parentProcName,callStore[i].calledProcName,callStore[i].progLine);
 	}
 	
 	//printPreOrderExpressionTree(root);
