@@ -143,3 +143,48 @@ vector<VARINDEX> Uses::getUses(TYPE type){	//Select a such that Uses(a, v); retu
 		return ans;
 	}
 }
+
+void Uses::setUsesProc(PROCINDEX p, vector<VARINDEX> v) {
+	try {
+		try{
+			vector<VARINDEX> temp;
+			vector<VARINDEX> temp1 = usesProcTable.at(p);
+			temp.reserve(temp1.size()+v.size());
+			temp.insert(temp.end(), v.begin(), v.end());
+			temp.insert(temp.end(), temp1.begin(), temp1.end());
+			sort( temp.begin(), temp.end() );
+			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+			usesProcTable[p] = temp;
+		} catch(...){
+			usesProcTable[p] = v;
+		}
+	} catch (...){
+	}
+}
+
+vector<VARINDEX> Uses::getUsesProc(PROCINDEX p) {	
+	try {
+		return usesProcTable.at(p);
+	} catch(...){
+		vector<VARINDEX> ans;
+		return ans;
+	}
+}
+
+void Uses::setUses(STMTNUM s, vector<VARINDEX> v) {
+	try {
+		try{
+			vector<VARINDEX> temp;
+			vector<VARINDEX> temp1 = usesTable.at(s);
+			temp.reserve(temp1.size()+v.size());
+			temp.insert(temp.end(), v.begin(), v.end());
+			temp.insert(temp.end(), temp1.begin(), temp1.end());
+			sort( temp.begin(), temp.end() );
+			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+			usesTable[s] = temp;
+		} catch(...){
+			usesTable[s] = v;
+		}
+	} catch (...){
+	}
+}

@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "TypeTable.h"
 #include "VarTable.h"
+#include "ProcTable.h"
 
 using namespace std;
 typedef TypeTable::SynType TYPE;
@@ -14,6 +15,7 @@ typedef TypeTable::SynType TYPE;
 class Uses {
 private:
 	unordered_map<STMTNUM, vector<VARINDEX>> usesTable;
+	unordered_map<PROCINDEX, vector<VARINDEX>> usesProcTable;
 	static bool instanceFlag;
 	static Uses *uses;
 	TypeTable *typeTable; // for the sake of unit testing.
@@ -31,8 +33,9 @@ public:
 	vector<STMTNUM> getUses(TYPE);//Select a such that Uses(a, v); return empty vector if does not exist
 
 
-	// uses.setUses(PROCINDEX, vector<int>); // if there already were variables used by this procedure, then just add the 2 vectors
-	// uses.setUses(STMTNUM, vector<int>); 
+	void setUsesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables used by this procedure, then just add the 2 vectors
+	void setUses(STMTNUM, vector<VARINDEX>); // IPSITA -> the parameters cant be the same (although PROCINDEX and STMTNUM looks different, they are both still int)
+	vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
 
 };
 

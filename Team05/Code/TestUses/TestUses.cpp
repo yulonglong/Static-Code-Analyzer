@@ -99,3 +99,17 @@ void UsesTest::testUsesUsingStmtType() {
 void UsesTest::testChildrenUsingStmtType() {
 	return;
 }
+
+void UsesTest::testSetProc() {  // Note 5
+	vector<VARINDEX> temp (1,2);
+	temp.push_back(3);
+	temp.push_back(5);
+
+	uses->setUsesProc(2,temp);
+	vector<VARINDEX> temp1 (1,5);
+	temp1.push_back(7);
+
+	uses->setUsesProc(2,temp1);
+	CPPUNIT_ASSERT(uses->getUsesProc(2).at(3) == 7);
+	return;
+}
