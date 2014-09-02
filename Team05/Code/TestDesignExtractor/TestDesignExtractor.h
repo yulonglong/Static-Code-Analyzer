@@ -10,22 +10,18 @@
 class DesignExtractorTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( DesignExtractorTest ); // Note 3 
-	CPPUNIT_TEST( testGetTablesFromPKB );
-	// CPPUNIT_TEST( testFullDETestIn );
-	// CPPUNIT_TEST( testCompleteParser );
-	// CPPUNIT_TEST( testParserSource1 );
-	// CPPUNIT_TEST( testParserSource2 );
+	CPPUNIT_TEST( testExtractRelationshipsSourceDE1 );
+	// CPPUNIT_TEST( testExtractRelationshipsSourceDE2 );
+	// CPPUNIT_TEST( testFullDesignExtractor );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void setUp();
 	void tearDown();
 
-	void testGetTablesFromPKB(); 
-	void testFullDETestIn();
-	// void testFullDESource1();
-	// void testFullDESource2();
-	// void testFullDESourec3();
+	void testExtractRelationshipsSourceDE1(); 
+	void testExtractRelationshipsSourceDE2(); 
+	void testFullDesignExtractor();
 };
 #endif
     

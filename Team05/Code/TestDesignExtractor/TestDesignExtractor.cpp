@@ -24,15 +24,52 @@ void DesignExtractorTest::tearDown()
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( DesignExtractorTest ); // Note 4 
 
+void DesignExtractorTest::testExtractRelationshipsSourceDE1() {
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE1.txt",pkb);
 
-void DesignExtractorTest::testGetTablesFromPKB() {
+	Node* ASTRoot = pkb->getASTRoot();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	ProcTable* procTable = pkb->getProcTable();
+
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+	callsTable = pkb->getCallsTable();
+
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+
+	// AFTER: check the modifies and uses relationships for all prog lines. check the modifies and uses relationships for all procedures.
+}
+
+
+void DesignExtractorTest::testExtractRelationshipsSourceDE2() {
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE2.txt",pkb);
+
+	Node* ASTRoot = pkb->getASTRoot();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	ProcTable* procTable = pkb->getProcTable();
+
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+	callsTable = pkb->getCallsTable();
+
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+
+
+}
+
+
+void DesignExtractorTest::testFullDesignExtractor() {
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	parserDriver("SourceDE.txt",pkb);
 	
 	extractorDriver(pkb);
 }
-
+/*
 void DesignExtractorTest::testFullDETestIn()
 {  // Note 5
 
@@ -49,7 +86,7 @@ void DesignExtractorTest::testFullDETestIn()
 	CFGRoot->stringPreOrderExpressionTree(CFGRoot, resultFullTree);
 	cout << resultFullTree; 	
 
-	/*
+	
 	ifstream infile;
 	// infile.open("expectedSource2.txt",ios::in);
 	if(infile.fail()){
@@ -66,10 +103,11 @@ void DesignExtractorTest::testFullDETestIn()
 	
 		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
 	}
-	*/
+	
 
 	return;
 }
+*/
 
 /*
 void ParserTest::testCompleteParser()
