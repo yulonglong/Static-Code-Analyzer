@@ -13,7 +13,7 @@ PKB::PKB(){
 	constTable = ConstTable::getInstance();
 	parent = Parent::getInstance(typeTable);
 	follows = Follows::getInstance(typeTable);
-	modifies = Modifies::getInstance(typeTable,varTable);
+	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 	uses = Uses::getInstance(typeTable,varTable);
 	calls = Calls::getInstance(procTable);
 }

@@ -10,10 +10,10 @@ Modifies::Modifies() {
 }
 
 	
-Modifies::Modifies(TypeTable *tt, VarTable *vt) {
+Modifies::Modifies(TypeTable *tt, VarTable *vt, ProcTable *pt) {
 	typeTable = tt;
 	varTable = vt;
-	
+	procTable = pt;
 }
 
 //TODO: delete
@@ -36,9 +36,9 @@ Modifies* Modifies::getInstance() {
     }
 }
 
-Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt) {
+Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt, ProcTable *pt) {
 	if(!instanceFlag) {
-        modifies = new Modifies(tt,vt);
+        modifies = new Modifies(tt,vt, pt);
         instanceFlag = true;
         return modifies;
     }
@@ -153,3 +153,30 @@ vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {
 	}
 }
 
+void Modifies::setModifies(PROCINDEX p, vector<VARINDEX> v) {
+	try {
+		try{
+			vector<VARINDEX> temp;
+			vector<VARINDEX> temp1 = modifiesProcTable.at(p);
+			temp.reserve(temp1.size()+v.size());
+			temp.insert(temp.end(), v.begin(), v.end());
+			temp.insert(temp.end(), temp1.begin(), temp1.end());
+			modifiesProcTable.erase(p);
+			sort( temp.begin(), temp.end() );
+			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+			modifiesProcTable[p] = temp;
+		} catch(...){
+			modifiesProcTable[p] = v;
+		}
+	} catch (...){
+	}
+}
+
+vector<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {	
+	try {
+		return modifiesProcTable.at(p);
+	} catch(...){
+		vector<VARINDEX> ans;
+		return ans;
+	}
+}
