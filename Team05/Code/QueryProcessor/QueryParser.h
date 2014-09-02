@@ -31,13 +31,33 @@ private:
 	static const string attrRef;
 	static const string elem;
 	static const string tuple;
+	static const string resultCl;
 
 	static const string select;
 	static const string such;
 	static const string that;
 	static const string freeString;
 	static const string expr;
+
+	static const string ModifiesP;
+	static const string ModifiesS;
+	static const string UsesP;
+	static const string UsesS;
+	static const string Calls;
+	static const string CallsT;
+	static const string Parent;
+	static const string ParentT;
+	static const string Follows;
+	static const string FollowsT;
+	static const string Next;
+	static const string NextT;
+	static const string Affects;
+	static const string AffectsT;
+
 	static const string relRef;
+	static const string relCond;
+	static const string suchThatCl;
+	static const string selectCl;
 
 	static const string expressionSpec;
 	static const string assignCl;
@@ -49,6 +69,7 @@ private:
 	
 
 	//constant string
+	static const string BOOLEAN;
 	static const string MODIFIES;
 	static const string USES;
 	static const string CALLS;
@@ -62,6 +83,7 @@ private:
 	static const string AFFECTS;
 	static const string AFFECTSSTAR;
 	static const string PATTERN;
+	static const string WITH;
 
 	//clauses param
 	static const string modifiesParam[2];
