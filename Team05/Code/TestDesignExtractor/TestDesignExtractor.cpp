@@ -24,10 +24,18 @@ void DesignExtractorTest::tearDown()
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( DesignExtractorTest ); // Note 4 
 
+
+void DesignExtractorTest::testGetTablesFromPKB() {
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE.txt",pkb);
+	
+	extractorDriver(pkb);
+}
+
 void DesignExtractorTest::testFullDETestIn()
 {  // Note 5
 
-	// TODO: Make your own AST instead of using parserDriver to generate AST
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	parserDriver("CodeParserTestIn.txt",pkb);

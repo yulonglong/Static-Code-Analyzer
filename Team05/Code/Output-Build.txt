@@ -1,0 +1,21 @@
+﻿1>------ Rebuild All started: Project: TestDesignExtractor, Configuration: Release Win32 ------
+1>Build started 2/9/2014 1:52:29 PM.
+1>_PrepareForClean:
+1>  Deleting file "Release\TestDesignExtractor.lastbuildstate".
+1>InitializeBuildStatus:
+1>  Touching "Release\TestDesignExtractor.unsuccessfulbuild".
+1>ClCompile:
+1>  Main.cpp
+1>  TestDesignExtractor.cpp
+1>Link:
+1>  Generating code
+1>  Finished generating code
+1>  TestDesignExtractor.vcxproj -> C:\Users\Sony\Dropbox\NUS\~Year 3 Sem 1\CS3202 Software Engineering Project II\Static-Code-Analyzer\Team05\Code\Release\TestDesignExtractor.exe
+1>FinalizeBuildStatus:
+1>  Deleting file "Release\TestDesignExtractor.unsuccessfulbuild".
+1>  Touching "Release\TestDesignExtractor.lastbuildstate".
+1>
+1>Build succeeded.
+1>
+1>Time Elapsed 00:00:11.44
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

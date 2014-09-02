@@ -19,7 +19,9 @@
 #include "PKB.h"
 #include "QueueItem.h"
 
+
 void extractorDriver(PKB* pkb);
+void getTablesFromPKB(PKB* pkb); 
 void extractRelationships(Node &ASTRoot); 
 Node* buildCFG(Node &ASTroot);
 	
