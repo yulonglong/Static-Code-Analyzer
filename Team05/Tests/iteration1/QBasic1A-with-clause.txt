@@ -1,4 +1,4 @@
-24
+26
 cat: BASIC queries with entity attribute values and constants (with clause)
 1 - procName ::
 procedure p;
@@ -147,4 +147,14 @@ Select pl with pl.prog_line# = 23
 prog_line pl;
 Select pl with pl.prog_line# = 15081992
 
+5000
+25 - prog_line#, boolean ::
+prog_line pl;
+Select BOLLEAN with pl.prog_line# = 1
+TRUE
+5000
+26 - prog_line#, boolean ::
+prog_line pl;
+Select BOOLEAN with pl.prog_line# = 15081992
+FALSE
 5000
