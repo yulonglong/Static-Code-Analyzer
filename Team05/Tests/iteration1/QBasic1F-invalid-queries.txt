@@ -1,0 +1,26 @@
+invalid
+
+prog_line pl; variable v;
+Select pl with pl.prog_line# = v.varName
+
+prog_line pl; variable v;
+Select v with pl.prog_line# = v.varName
+
+prog_line pl; procedure p;
+Select pl with pl.prog_line# = p.procName
+
+prog_line pl; procedure p;
+Select p with pl.prog_line# = p.procName
+
+constant c; variable v;
+Select c with c.value = v.varName
+
+constant c; procedure p;
+Select c with c.value = p.procName
+
+constant c; variable v;
+Select v with c.value = v.varName
+
+constant c; procedure p;
+Select p with c.value = p.procName
+
