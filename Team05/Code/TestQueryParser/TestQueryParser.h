@@ -9,6 +9,7 @@
 
 class QueryParserTest : public CPPUNIT_NS::TestFixture{ 
 	CPPUNIT_TEST_SUITE( QueryParserTest );
+	CPPUNIT_TEST(testQuerySelectOnly);
 	CPPUNIT_TEST(testQueryAssignSelectModifies);
 	CPPUNIT_TEST(testQueryAssignVariableSelectModifies);
 	CPPUNIT_TEST(testQueryStmtSelectUses);
@@ -35,6 +36,7 @@ public:
 	void setUp();
 	void tearDown();
 
+	void testQuerySelectOnly();
 	void testQueryAssignSelectModifies();
 	void testQueryAssignVariableSelectModifies();
 	void testQueryStmtSelectUses();

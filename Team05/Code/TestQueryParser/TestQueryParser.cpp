@@ -24,6 +24,42 @@ QueryParserTest::tearDown(){
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( QueryParserTest );
 
+void QueryParserTest::testQuerySelectOnly(){
+	string query = "assign a; Select a ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	string selectedSyn = parsedQuery.getSelectedSyn();
+	string patternSyn = parsedQuery.getPatternSyn();
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter= synTable.begin();
+
+	string expectedSelectedSyn = "a";
+	string expectedPatternSyn = "";
+	
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	return;
+}
+
 void QueryParserTest::testQueryAssignSelectModifies(){
 	string query = "assign a; Select a such that Modifies(a, \"oSCar\")";
 	QueryParser qp;
