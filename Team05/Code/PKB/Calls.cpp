@@ -88,3 +88,23 @@ bool Calls::isCalls(PROCNAME p1, PROCNAME p2){
 		return false;
 	}
 }
+
+vector<int> Calls::getCalls(){
+	vector<int> ans;
+	return ans;
+}
+
+vector<int> Calls::getCalled(){
+	vector<int> ans;
+	return ans;
+}
+
+vector<int> Calls::getCalls(PROCNAME p){
+	vector<int> ans;
+	return ans;
+}
+
+vector<int> Calls::getCalled(PROCNAME p){
+	vector<int> ans;
+	return ans;
+}

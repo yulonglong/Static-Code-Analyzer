@@ -43,6 +43,30 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
 
 	
+	Modifies *mod = Modifies::getInstance();
+	VarTable *v = pkb->getVarTable();
+
+	//modifies(1, "x")
+	v->insertVar("x");	
+	mod->setModifies(1, "x");
+	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+
+	
+	//Query 1.5 variable v; assign a; Select v such that Follows(a, 2);
+	Query q1p5;
+	Relationship r1p5("Follows", "a", "2");
+	//q1p5.addRelationship(r1p5);
+	unordered_map<string,TypeTable::SynType> m1p5;
+	m1p5.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	m1p5.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	q1p5.setSelectedSyn("v");
+	q1p5.setSynTable(m1p5);
+
+	vec = qe.evaluateQuery(q1p5);
+	string e = "x";
+	CPPUNIT_ASSERT_EQUAL(e, v->getVarName(vec[0]));
+
+	
 	//Query 2 assign a; Select a such that Follows(1, a);
 	Query q2;
 	Relationship r2("Follows", "1", "a");
@@ -358,6 +382,7 @@ void QueryEvaluatorTest::testEvaluateModifies(){
 	cout<<vec.empty()<<endl;
 	cout<<vec[0]<<endl;
 	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
+
 
 	//Query 2 variable v; Select v such that Modifies(1, v);
 	Query q2;

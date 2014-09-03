@@ -189,6 +189,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		}
 	}
 
+	//If there are no relationships in Query
 	if(relations.empty()){
 		string sel = q.getSelectedSyn();
 		unordered_map<string, TypeTable::SynType>::iterator iterate = q.getSynTable().find(sel);
