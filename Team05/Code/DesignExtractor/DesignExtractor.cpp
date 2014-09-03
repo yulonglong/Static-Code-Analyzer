@@ -64,7 +64,7 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
-	printQueue();
+	// printQueue();
 	// For each of the entries in the queue, dequeue and do the following 
 	// For the procedure, find the min and max prog line 
 	// Find all the variables modified, then set modifies relationship for proglines and procedures
@@ -79,25 +79,25 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 		int procIndex = item.getProcIndex();
 		unsigned int firstProgLine = getFirstProgLine(procIndex, ASTRoot, procTable);
 		unsigned int lastProgLine = getLastProgLine(procIndex, ASTRoot, procTable);
-		cout << "Min: " << firstProgLine << ", Max: " << lastProgLine << endl;
+		// cout << "Min: " << firstProgLine << ", Max: " << lastProgLine << endl;
 
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
 			vector<VARINDEX> variablesModifiedByProgLine = modifies.getModifies(i);
 			// SET: procedure procIndex modifies these variables too
-			// modifies.setModifies(procIndex, variablesModifiedByProgLine); // if there already were variables modifies by this procedure, then just add the 2 vectors
+			modifies.setModifiesProc(procIndex, variablesModifiedByProgLine);
 
 			vector<VARINDEX> variablesUsedByProgLine = uses.getUses(i);
 			// SET: procedure procIndex uses these variables too
-			// uses.setUses(procIndex, variablesUsedByProgLine); // if there already were variables modifies by this procedure, then just add the 2 vectors
+			uses.setUsesProc(procIndex, variablesUsedByProgLine); // if there already were variables modifies by this procedure, then just add the 2 vectors
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
 					// SET:
-					// modifies.setModifies(progLine, variablesModifiedByProgLine); 
+					modifies.setModifies(progLine, variablesModifiedByProgLine); 
 					// SET:
-					// uses.setUses(progLine, variablesUsedByProgLine); 
+					uses.setUses(progLine, variablesUsedByProgLine); 
 				}
 			} catch(const std::runtime_error& re) {
 				// specific handling for runtime_error

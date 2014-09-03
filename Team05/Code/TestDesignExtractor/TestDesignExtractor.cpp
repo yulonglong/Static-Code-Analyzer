@@ -24,7 +24,7 @@ void DesignExtractorTest::tearDown()
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( DesignExtractorTest ); // Note 4 
 
-void DesignExtractorTest::testExtractRelationshipsSourceDE1() {
+void DesignExtractorTest::testExtractRelationshipsModifiesProcedure() {
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	parserDriver("SourceDE1.txt",pkb);
@@ -33,33 +33,167 @@ void DesignExtractorTest::testExtractRelationshipsSourceDE1() {
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
 	ProcTable* procTable = pkb->getProcTable();
-
+	VarTable* varTable = pkb->getVarTable();
+	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
 
-	// AFTER: check the modifies and uses relationships for all prog lines. check the modifies and uses relationships for all procedures.
+	vector<VARINDEX> v;
+	v =	modifies->getModifiesProc(0);
+	string expected = "x z y i b d e f w a ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifiesProc(1);
+	expected = "x z y i b d e f ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifiesProc(2);
+	expected = "b d ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifiesProc(3);
+	expected = "e f ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifiesProc(4);
+	expected = "e f w a ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 }
 
-
-void DesignExtractorTest::testExtractRelationshipsSourceDE2() {
+void DesignExtractorTest::testExtractRelationshipsUsesProcedure() {
 	PKB *pkb;
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE2.txt",pkb);
+	parserDriver("SourceDE1.txt",pkb);
 
 	Node* ASTRoot = pkb->getASTRoot();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
 	ProcTable* procTable = pkb->getProcTable();
-
+	VarTable* varTable = pkb->getVarTable();
+	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
 
-
+	vector<VARINDEX> v;
+	v =	uses->getUsesProc(0);
+	string expected = "x z y i c g w ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v = uses->getUsesProc(1);
+	expected = "x z y i c g ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v = uses->getUsesProc(2);
+	expected = "c ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v = uses->getUsesProc(3);
+	expected = "g ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v = uses->getUsesProc(4);
+	expected = "g w ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 }
+
+void DesignExtractorTest::testExtractRelationshipsModifiesStatement() {
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE1.txt",pkb);
+
+	Node* ASTRoot = pkb->getASTRoot();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	ProcTable* procTable = pkb->getProcTable();
+	VarTable* varTable = pkb->getVarTable();
+	
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+	callsTable = pkb->getCallsTable();
+
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	
+	vector<VARINDEX> v;
+	v =	modifies->getModifies(3);
+	string expected = "x z y i b d e f ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifies(5);
+	expected = "e f w a ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifies(6);
+	expected = "b d x i ";
+	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifies(8);
+	expected = "b d ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifies(10);
+	expected = "e f ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	modifies->getModifies(21);
+	expected = "e f ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(22);
+	expected = "w ";
+	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(23);
+	expected = "a ";
+	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+}
+
+void DesignExtractorTest::testExtractRelationshipsUsesStatement() {
+	PKB *pkb;
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE1.txt",pkb);
+
+	Node* ASTRoot = pkb->getASTRoot();
+	Modifies* modifies = pkb->getModifies();
+	Uses* uses = pkb->getUses();
+	ProcTable* procTable = pkb->getProcTable();
+	VarTable* varTable = pkb->getVarTable();
+	
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+	callsTable = pkb->getCallsTable();
+
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	
+	vector<VARINDEX> v;
+	v =	uses->getUses(3);
+	string expected = "x z y i c g ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(5);
+	expected = "g w ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(6);
+	expected = "i x y c  ";
+	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(8);
+	expected = "c ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(10);
+	expected = "g ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(21);
+	expected = "g ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(22);
+	expected = "";
+	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(23);
+	expected = "w ";
+	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+}
+
+// Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
+string DesignExtractorTest::print(vector<VARINDEX> v, VarTable varTable) {
+	string s = "";
+	for (int i=0; i<v.size(); i++) {
+		s += varTable.getVarName(v[i]);
+		s += " ";
+	}
+	return s; 
+}
+
 
 
 void DesignExtractorTest::testFullDesignExtractor() {
