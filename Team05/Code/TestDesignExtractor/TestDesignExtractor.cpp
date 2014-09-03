@@ -32,13 +32,14 @@ void DesignExtractorTest::testExtractRelationshipsModifiesProcedure() {
 	Node* ASTRoot = pkb->getASTRoot();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
+	Parent* parent = pkb->getParent();
 	ProcTable* procTable = pkb->getProcTable();
 	VarTable* varTable = pkb->getVarTable();
 	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	modifies->getModifiesProc(0);
@@ -66,13 +67,14 @@ void DesignExtractorTest::testExtractRelationshipsUsesProcedure() {
 	Node* ASTRoot = pkb->getASTRoot();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
+	Parent* parent = pkb->getParent();
 	ProcTable* procTable = pkb->getProcTable();
 	VarTable* varTable = pkb->getVarTable();
 	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	uses->getUsesProc(0);
@@ -100,13 +102,14 @@ void DesignExtractorTest::testExtractRelationshipsModifiesStatement() {
 	Node* ASTRoot = pkb->getASTRoot();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
+	Parent* parent = pkb->getParent();
 	ProcTable* procTable = pkb->getProcTable();
 	VarTable* varTable = pkb->getVarTable();
 	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 	
 	vector<VARINDEX> v;
 	v =	modifies->getModifies(3);
@@ -116,8 +119,8 @@ void DesignExtractorTest::testExtractRelationshipsModifiesStatement() {
 	expected = "e f w a ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	v =	modifies->getModifies(6);
-	expected = "b d x i ";
-	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	expected = "x i b d ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	v =	modifies->getModifies(8);
 	expected = "b d ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
@@ -146,13 +149,14 @@ void DesignExtractorTest::testExtractRelationshipsUsesStatement() {
 	Node* ASTRoot = pkb->getASTRoot();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
+	Parent* parent = pkb->getParent();
 	ProcTable* procTable = pkb->getProcTable();
 	VarTable* varTable = pkb->getVarTable();
 	
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 	
 	vector<VARINDEX> v;
 	v =	uses->getUses(3);
@@ -162,8 +166,8 @@ void DesignExtractorTest::testExtractRelationshipsUsesStatement() {
 	expected = "g w ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	v =	uses->getUses(6);
-	expected = "i x y c  ";
-	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	expected = "x y i c ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	v =	uses->getUses(8);
 	expected = "c ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));

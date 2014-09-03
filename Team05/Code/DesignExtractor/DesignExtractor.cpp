@@ -37,7 +37,7 @@ void extractorDriver(PKB *pkb) {
 	Node* ASTRoot = pkb->getASTRoot();
 	Node* CFGRoot = pkb->getCFGRoot();
 	
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses);
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 	/*
 	try {
 		// cout << "Building CFG..." << endl;
@@ -60,7 +60,7 @@ void extractorDriver(PKB *pkb) {
 
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
-void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses) {
+void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent) {
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
@@ -98,6 +98,16 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 					modifies.setModifies(progLine, variablesModifiedByProgLine); 
 					// SET:
 					uses.setUses(progLine, variablesUsedByProgLine); 
+					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
+
+					int parentProgLine = parent.getParent(progLine);
+					bool existsParent = (parentProgLine != -1);
+					while (existsParent) {
+						modifies.setModifies(parentProgLine, variablesModifiedByProgLine); 
+						uses.setUses(parentProgLine, variablesUsedByProgLine); 
+						parentProgLine = parent.getParent(parentProgLine);
+						existsParent = (parentProgLine != -1);
+					}
 				}
 			} catch(const std::runtime_error& re) {
 				// specific handling for runtime_error

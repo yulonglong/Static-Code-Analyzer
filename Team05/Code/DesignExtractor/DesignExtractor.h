@@ -21,7 +21,7 @@
 
 
 void extractorDriver(PKB* pkb);
-void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses);
+void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent);
 void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 Node* buildCFG(Node &ASTroot);
