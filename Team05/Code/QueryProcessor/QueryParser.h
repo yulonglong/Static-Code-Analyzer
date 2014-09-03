@@ -53,6 +53,7 @@ private:
 	static const string NextT;
 	static const string Affects;
 	static const string AffectsT;
+	static const string allClause;
 	static const string TESTSTR;
 
 	static const string relRef;
@@ -106,15 +107,13 @@ private:
 
 	//common methods
 	string stringToLower(string);
+	string getNextToken(istringstream &);
 	bool regexMatch(string, string);
 	bool regexMatchWithResult(string, string, vector<string>&);
 
 	//QueryParser methods
 	bool parseDesignEntity(string);
-	bool parseSelectOnly(string);
-	bool parsePattern(string);
-	bool parseRelational(string);
-	bool parseRelationalWithPattern(string);
+	bool parseSelectCl(string);
 
 	//QueryValidatior methods
 	void deepCopyTableParam(string[2], string);
