@@ -22,6 +22,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 	Follows *f = pkb->getFollows();
 	VarTable *var = pkb->getVarTable();
 
+
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 
 		string token1 = it->getToken1();
@@ -41,6 +42,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 		}
 
+		if((it->getRelType())!=Relationship::CALLS){
 		if(token1=="_"){
 			it->setToken1("s1");
 			m.insert(make_pair<string, TypeTable::SynType>("s1", TypeTable::STMT));
@@ -57,6 +59,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			it->setToken2("v");
 			m.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
 			q.setSynTable(m);
+		}
 		}
 
 		switch(it->getRelType()){
@@ -84,6 +87,18 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			}
 			break;
 									}
+
+		case Relationship::CALLS:
+			{
+				
+
+			}
+
+		case Relationship::CALLSSTAR:
+			{
+
+			}
+
 		case Relationship::PARENT:
 			{
 				if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
@@ -258,6 +273,41 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return answers;
 }
 
+bool QueryEvaluator::evaluateCallsBoolean(Relationship r){
+	Calls *call = pkb->getCalls();
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	vector<int> ans; 
+
+	//Calls(p, q)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && tk2=="_")){
+		ans = call->getCalls();
+		if(!ans.empty())
+			return true;
+	}
+
+	//Calls(p, "Second")
+	else if(isalpha(tk1[0]) || tk1=="_"){
+		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
+		if(!ans.empty())
+			return true;
+	}
+
+	//Calls("First", q)
+	else if(isalpha(tk2[0]) || tk2=="_"){
+		ans = call->getCalled(tk2.substr(1,tk2.length()-2));
+		if(!ans.empty())
+			return true;
+	}
+
+	//Calls("First", "Second")
+	else {
+		return call->isCalls(tk1, tk2);
+	}
+
+	return false;
+}
+
 bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string, TypeTable::SynType> m){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -313,6 +363,41 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 		}
 		return temp;
 	}
+}
+
+vector<int> QueryEvaluator::evaluateCalls(Relationship r, string selectedSyn){
+	Calls *call = pkb->getCalls();
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	vector<int> ans; 
+
+	//Select p Calls(p, q) OR Select p Calls(p, _)
+	if((isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1) || (selectedSyn==tk1 && tk2=="_")){
+		ans = call->getCalls();
+	}
+
+	//Select q Calls(p, q) OR Select q Calls(_, q)
+	else if((isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2) || (selectedSyn==tk2 && tk1=="_")){
+		ans = call->getCalled();
+	}
+
+	//Select p Calls(p, "Second")
+	else if(isalpha(tk1[0])){
+		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
+	}
+
+	//Select q Calls("First", q)
+	else if(isalpha(tk2[0]) || tk2=="_"){
+		ans = call->getCalled(tk2.substr(1,tk2.length()-2));
+	}
+
+	else {
+		
+	}
+
+	return ans;
+
+
 }
 
 vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){

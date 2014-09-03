@@ -30,7 +30,12 @@ public:
 	static Calls* getInstance(ProcTable*);	// to be used to get instance of singleton class 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
 	void setCalls(PROCNAME, PROCNAME, STMTNUM);
-	bool isCalled(PROCNAME,PROCNAME);
+	bool isCalls(PROCNAME,PROCNAME);
+	
+	vector<int> getCalls(); //Calls(p,q) Select p
+	vector<int> getCalls(PROCNAME); //Calls (p, "Second") Select p
+	vector<int> getCalled(); //Calls(p,q) Select q
+	vector<int> getCalled(PROCNAME); //Calls("First", q) Select q
 };
 
 #endif

@@ -69,7 +69,7 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	}
 }
 
-bool Calls::isCalled(PROCNAME p1, PROCNAME p2){
+bool Calls::isCalls(PROCNAME p1, PROCNAME p2){
 	try{
 		PROCINDEX index1 = procTable->getProcIndex(p1);
 		PROCINDEX index2 = procTable->getProcIndex(p2);
