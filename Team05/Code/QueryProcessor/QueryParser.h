@@ -13,12 +13,35 @@ using namespace std;
 
 class QueryParser{
 private:
+	//constant string
+	static const string BOOLEAN;
+	static const string MODIFIES;
+	static const string USES;
+	static const string CALLS;
+	static const string CALLSSTAR;
+	static const string PARENT;
+	static const string PARENTSTAR;
+	static const string FOLLOWS;
+	static const string FOLLOWSSTAR;
+	static const string NEXT;
+	static const string NEXTSTAR;
+	static const string AFFECTS;
+	static const string AFFECTSSTAR;
+	static const string PATTERN;
+	static const string WITH;
+
 	//regex string
 	//lexical rules
 	static const string DIGIT;
 	static const string LETTER;
 	static const string INTEGER;
 	static const string IDENT;
+
+	static const string select;
+	static const string such;
+	static const string that;
+	static const string freeString;
+	static const string expr;
 
 	//auxiliary grammar rules
 	static const string synonym;
@@ -33,11 +56,11 @@ private:
 	static const string tuple;
 	static const string resultCl;
 
-	static const string select;
-	static const string such;
-	static const string that;
-	static const string freeString;
-	static const string expr;
+	//for with clause
+	static const string ref;
+	static const string attrCompare;
+	static const string attrCond;
+	static const string withCl;
 
 	static const string ModifiesP;
 	static const string ModifiesS;
@@ -69,23 +92,6 @@ private:
 	static const string patternCond;
 	static const string patternCl;
 	
-
-	//constant string
-	static const string BOOLEAN;
-	static const string MODIFIES;
-	static const string USES;
-	static const string CALLS;
-	static const string CALLSSTAR;
-	static const string PARENT;
-	static const string PARENTSTAR;
-	static const string FOLLOWS;
-	static const string FOLLOWSSTAR;
-	static const string NEXT;
-	static const string NEXTSTAR;
-	static const string AFFECTS;
-	static const string AFFECTSSTAR;
-	static const string PATTERN;
-	static const string WITH;
 
 	//clauses param
 	static const string modifiesParam[2];
