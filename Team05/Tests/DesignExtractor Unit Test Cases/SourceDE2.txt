@@ -1,0 +1,40 @@
+procedure Zero {
+  while a {
+    while beta {						
+      oSCar  = 1 + beta + tmp;			
+      call Second;
+      while tmp {					
+        oSCar = I + k + j1k + chArlie;
+      }		
+      while x {					
+        x = x + 1;					
+        while left {					
+          while right {					
+            Romeo = Romeo + 1;				
+            call First
+            c = delta    + l  + width + Romeo ;
+          }	
+          while c {					
+            c = c + 1   	;
+          } 			
+          x = x + 1	;
+        }
+        a = 3;
+      }				
+      a =   2;
+    }					
+    w = w + 1  ;						
+    w = w + 1;
+  }
+  w = w + 1;
+}
+
+procedure First {
+  may = 5;
+  a = may; 
+}
+
+procedure Second {
+  june = 5;
+  a = june; 
+}

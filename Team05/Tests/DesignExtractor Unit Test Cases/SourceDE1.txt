@@ -20,14 +20,14 @@ procedure Second{
 	x = x * y + z;}	
 
 procedure Third{ 
-	z = 5;			
-	v = z;}		
+	b = 5;			
+	d = c;}		
 
 procedure Fourth{ 
-	x = 5;			
-	z = v;}		
+	e = 5;			
+	f = g;}		
 
 procedure Fifth{ 
 	call Fourth;
-	z = 5;			
-	v = z;}		
+	w = 5;			
+	a = w;}		
