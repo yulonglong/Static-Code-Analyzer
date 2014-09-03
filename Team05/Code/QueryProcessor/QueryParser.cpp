@@ -47,40 +47,41 @@ const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
 const string QueryParser::expr = "[^_]+";
 
-const string QueryParser::ModifiesP = "([Mm]odifies)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
-const string QueryParser::ModifiesS = "([Mm]odifies)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
-const string QueryParser::UsesP = "([Uu]ses)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
-const string QueryParser::UsesS = "([Uu]ses)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+varRef+")" + "\\s*\\)";
-const string QueryParser::Calls = "([Cc]alls)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+entRef+")" + "\\s*\\)";
-const string QueryParser::CallsT = "([Cc]alls\\*)\\s*\\(\\s*("+entRef+")"+ "\\s*,\\s*" +"("+entRef+")" + "\\s*\\)";
-const string QueryParser::Parent = "([Pp]arent)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::ParentT = "([Pp]arent\\*)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::Follows = "([Ff]ollows)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::FollowsT = "([Ff]ollows\\*)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::Next = "([Nn]ext)\\s*\\(\\s*("+lineRef+")"+ "\\s*,\\s*" +"("+lineRef+")" + "\\s*\\)";
-const string QueryParser::NextT = "([Nn]ext\\*)\\s*\\(\\s*("+lineRef+")"+ "\\s*,\\s*" +"("+lineRef+")" + "\\s*\\)";
-const string QueryParser::Affects = "([Aa]ffects)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::AffectsT = "([Aa]ffects\\*)\\s*\\(\\s*("+stmtRef+")"+ "\\s*,\\s*" +"("+stmtRef+")" + "\\s*\\)";
-const string QueryParser::TESTSTR = "\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
+const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::ModifiesS = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::UsesP = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::UsesS = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::Calls = "(?:(?:[Cc]alls)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
+const string QueryParser::CallsT = "(?:(?:[Cc]alls\\*)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
+const string QueryParser::Parent = "(?:(?:[Pp]arent)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::ParentT = "(?:(?:[Pp]arent\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::Follows = "(?:(?:[Ff]ollows)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::FollowsT = "(?:(?:[Ff]ollows\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::Next = "(?:(?:[Nn]ext)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
+const string QueryParser::NextT = "(?:(?:[Nn]ext\\*)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
+const string QueryParser::Affects = "(?:(?:[Aa]ffects)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::AffectsT = "(?:(?:[Aa]ffects\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::TESTSTR = "\\s*\\(\\s*("+freeString+")"+ "\\s*,\\s*" +"("+freeString+")" + "\\s*\\)";
 
+const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT
++ "|" + Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + ")";
+//const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" +  Follows +")";
+const string QueryParser::allClause = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
 
-//const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT + "|" + 
-//	Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + ")";
-const string QueryParser::relRef = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*)";
-
-const string QueryParser::relCond = relRef ;
-const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond + TESTSTR;
+const string QueryParser::relCond = relRef;
+const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond +"\\s*";
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
-const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")";
 
 const string QueryParser::expressionSpec = "\"" + expr + "\"" + "|" + "_\"" + expr + "\"_" + "|" + "_";
-const string QueryParser::assignCl = "("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*,\\s*" + "("+expressionSpec+")" + "\\s*\\)";
-const string QueryParser::ifCl = "("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\)";
-const string QueryParser::whileCl = "("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\)";
+const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
+const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::pattern = "(?:" + assignCl + "|" + whileCl + "|" + ifCl + ")";
 const string QueryParser::patternCond = pattern;
-const string QueryParser::patternCl = "([Pp]attern)\\s+" + patternCond;
+const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + "\\s*)";
 
+//select clause
+const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"\\s+"+"(?:"+suchThatCl+"|"+patternCl+")*";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
@@ -106,6 +107,16 @@ string QueryParser::stringToLower(string word){
 		word[i] = tolower(word[i]);
 	}
 	return word;
+}
+
+string QueryParser::getNextToken(istringstream &istream){
+	string subQuery;
+	while(getline(istream,subQuery,' ')){
+		if(subQuery.length()>0){
+			break;
+		}
+	}
+	return subQuery;
 }
 
 bool QueryParser::regexMatch(string regexPattern, string word){
@@ -138,6 +149,7 @@ bool QueryParser::regexMatchWithResult(string regexPattern, string word, vector<
 bool QueryParser::parseDesignEntity(string query){
 	vector<string> res;
 	string regexPattern = "\\s*(" + designEntity + ")\\s+(\\s*(" + IDENT + ")\\s*,)*(\\s*(" + IDENT + ")\\s*)";
+	//cout << endl << regexPattern << endl << endl;
 	bool match = regexMatchWithResult(regexPattern,query,res);
 	
 	if(!match){
@@ -162,64 +174,85 @@ bool QueryParser::parseDesignEntity(string query){
 	return true;
 }
 
-bool QueryParser::parseSelectOnly(string query){
-	vector<string> res;
-	string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s*";
-	bool match = regexMatchWithResult(regexPattern,query,res);
-	if(!match){
-		return false;
-	}
-    for(int i=1;i<(int)res.size();i++){
-		selectStatement.push_back(res[i]);
-	}
-	return true;
-
-}
-
-bool QueryParser::parsePattern(string query){
-	vector<string> res;
-	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
-	string regexPattern = "\\s*" + selectCl + "\\s+" + patternCl + "\\s*";
-	bool match = regexMatchWithResult(regexPattern,query,res);
-	if(!match){
-		return false;
-	}
-    for(int i=1;i<(int)res.size();i++){
-		selectStatement.push_back(res[i]);
-	}
-	return true;
-}
-bool QueryParser::parseRelational(string query){
-	vector<string> res;
-	string regexPattern =  "\\s*" + selectCl + "\\s+" + suchThatCl;
-	bool match = regexMatchWithResult(regexPattern,query,res);
-	if(!match){
-		return false;
-	}
-    for(int i=1;i<(int)res.size();i++){
-		selectStatement.push_back(res[i]);
-	}
-	return true;
-
-}
-
-bool QueryParser::parseRelationalWithPattern(string query){
+bool QueryParser::parseSelectCl(string query){
 	vector<string> res;
 	//string regexPattern = "\\s*(" + select + ")\\s+(" + IDENT + ")\\s+(" + such + ")\\s+(" + that + ")\\s+(" + relRef + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)" + "\\s+(" + pattern + ")\\s+(" + IDENT + ")\\s*\\(\\s*(" + freeString + ")\\s*,\\s*(" + freeString + ")\\s*\\)\\s*";
-	string regexPattern =  "\\s*" + selectCl + "\\s+" + suchThatCl +"\\s+" + patternCl + "\\s*";
-	bool match = regexMatchWithResult(regexPattern,query,res);
+	string regexPattern =  "\\s*" + selectCl + "\\s*";
+	bool match = regexMatch(regexPattern,query);
 	if(!match){
 		return false;
 	}
-    for(int i=1;i<(int)res.size();i++){
-		selectStatement.push_back(res[i]);
+	
+	istringstream istream(query);
+	string token;
+
+	token = getNextToken(istream);
+	selectStatement.push_back(token);//Select
+	token = getNextToken(istream);
+	selectStatement.push_back(token);//result-Cl
+
+	while(getline(istream,token,' ')){
+		if (token.length()==0){
+			continue;
+		}
+		if (token == such){
+			selectStatement.push_back(token);//push such
+			token = getNextToken(istream);//read that
+			selectStatement.push_back(that);
+
+			string generalToken[3];
+			getline(istream,generalToken[0],'(');
+			getline(istream,generalToken[1],',');
+			getline(istream,generalToken[2],')');
+
+			vector<string> subRes;
+			regexPattern = "\\s*(" + allClause + ")\\s*";
+			match = regexMatchWithResult(regexPattern,generalToken[0],subRes);
+			string clauseName = subRes[1];
+			selectStatement.push_back(clauseName);
+			subRes.clear();
+
+			for(int i=1;i<3;i++){
+				regexPattern = "\\s*(" + freeString + ")\\s*";
+				match = regexMatchWithResult(regexPattern,generalToken[i],subRes);
+				string variableName = subRes[1];
+				selectStatement.push_back(variableName);
+				subRes.clear();
+			}
+
+		}
+		else if(token == PATTERN){//read pattern
+			selectStatement.push_back(token);//push pattern
+
+			string patternToken[3];
+			getline(istream,patternToken[0],'(');
+			getline(istream,patternToken[1],',');
+			getline(istream,patternToken[2],')');
+
+			for(int i=0;i<3;i++){
+				vector<string> subRes;
+				regexPattern = "\\s*(" + freeString + ")\\s*";
+				match = regexMatchWithResult(regexPattern,patternToken[i],subRes);
+				string variableName = subRes[1];
+				selectStatement.push_back(variableName);
+			}
+
+		}
+		else{ // general clause
+		}
 	}
+
+	//for(int i=0;i<(int)selectStatement.size();i++){
+	//	cout << selectStatement[i] << endl;
+	//}
+
+
 	return true;
 }
 
 Query QueryParser::queryParse(string queryStr, bool &valid){
 	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
-
+	//cout << "here" << endl;
 	istringstream istream(queryStr);
 
 	string querySubStr;
@@ -228,28 +261,17 @@ Query QueryParser::queryParse(string queryStr, bool &valid){
 		if(validDesignEntity){
 			continue;
 		}
-		bool validRelationalWithPattern = parseRelationalWithPattern(querySubStr);
-		if(validRelationalWithPattern){
+		bool validSelectCl = parseSelectCl(querySubStr);
+		if(validSelectCl){
 			continue;
 		}
-		bool validRelational = parseRelational(querySubStr);
-		if(validRelational){
-			continue;
-		}
-		bool validPattern = parsePattern(querySubStr);
-		if(validPattern){
-			continue;
-		}
-		bool validSelectOnly = parseSelectOnly(querySubStr);
-		if(validSelectOnly){
-			continue;
-		}
-		if((validDesignEntity|validSelectOnly|validPattern|validRelational|validRelationalWithPattern)==false){
+		if((validDesignEntity|validSelectCl)==false){
 			valid = false;
 			Query queryDummy;
 			return queryDummy;
 		}
 	}
+	
 	valid = true;
 	Query query = constructAndValidateQuery(selectStatement, synMap, valid);
 	return query;
@@ -332,7 +354,7 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 		bool synValid = true;
 
 		tr1::cmatch res;
-		tr1::regex rx("(" + relRef + ")");
+		tr1::regex rx("(" + allClause + ")");
 		tr1::regex_match(relationRef.c_str(), res, rx);
 		
 		//if match relRef
