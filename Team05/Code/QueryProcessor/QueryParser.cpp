@@ -21,7 +21,7 @@ const string QueryParser::NEXTSTAR = "next*";
 const string QueryParser::AFFECTS = "affects";
 const string QueryParser::AFFECTSSTAR = "affects*";
 const string QueryParser::PATTERN = "pattern";
-
+const string QueryParser::WITH = "with";
 
 //constant string for regex pattern
 const string QueryParser::DIGIT = "[0-9]";
@@ -30,16 +30,22 @@ const string QueryParser::INTEGER = "[0-9]+";
 const string QueryParser::IDENT = "[A-Za-z][A-Za-z0-9#]*";
 
 const string QueryParser::synonym = IDENT;
-const string QueryParser::attrName = "procName|varName|value|stmt#";
+const string QueryParser::attrName = "(?:procName|varName|value|stmt#)";
 const string QueryParser::entRef = synonym + "|_|\"" + IDENT +"\"|" + INTEGER;
 const string QueryParser::varRef = synonym + "|_|\"" + IDENT +"\"";
 const string QueryParser::stmtRef = synonym + "|_|" + INTEGER;
 const string QueryParser::lineRef = synonym + "|_|" + INTEGER;
 const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
-const string QueryParser::attrRef = synonym + "." + attrName;
+const string QueryParser::attrRef = "(?:" + synonym + "." + attrName + ")";
 const string QueryParser::elem = synonym + "|" + attrRef;
 const string QueryParser::tuple = elem;
 const string QueryParser::resultCl = tuple + "|" + BOOLEAN;
+
+const string QueryParser::ref = "(?:" + attrRef + "|" + synonym + "|" + "\""+IDENT+"\"" + "|" + INTEGER + ")";
+const string QueryParser::attrCompare = "(?:" + ref + "\\s*=\\s*" + ref + ")";
+const string QueryParser::attrCond = attrCompare;
+//+ "\\s+(?:" +"and\\s+" + attrCompare + "\\s*)*";
+const string QueryParser::withCl = "(?:[Ww]ith\\s+(?:" + attrCond + ")"+"\\s*)";
 
 const string QueryParser::select = "[Ss]elect";
 const string QueryParser::such = "such";
@@ -81,7 +87,7 @@ const string QueryParser::patternCond = pattern;
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + "\\s*)";
 
 //select clause
-const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"\\s+"+"(?:"+suchThatCl+"|"+patternCl+")*";
+const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"\\s+"+"(?:"+suchThatCl+"|"+patternCl+"|"+withCl+")*";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
@@ -233,6 +239,21 @@ bool QueryParser::parseSelectCl(string query){
 				vector<string> subRes;
 				regexPattern = "\\s*(" + freeString + ")\\s*";
 				match = regexMatchWithResult(regexPattern,patternToken[i],subRes);
+				string variableName = subRes[1];
+				selectStatement.push_back(variableName);
+			}
+		}
+		else if(token == WITH){//read with
+			selectStatement.push_back(token);//push with
+
+			string withToken[2];
+			getline(istream,withToken[0],'=');
+			withToken[1]=getNextToken(istream);
+
+			for(int i=0;i<2;i++){
+				vector<string> subRes;
+				regexPattern = "\\s*(" + ref + ")\\s*";
+				match = regexMatchWithResult(regexPattern,withToken[i],subRes);
 				string variableName = subRes[1];
 				selectStatement.push_back(variableName);
 			}
@@ -433,6 +454,81 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 				return queryDummy;
 			}
 		}
+		else if (relationRef == WITH){
+			unordered_map<string, TypeTable::SynType>::iterator it;
+
+			string withSyn[2];
+
+			string withToken[2];
+			withToken[0] = v.at(i+1);
+			withToken[1] = v.at(i+2);
+
+			//check whether first token is a synonym
+			bool withValid1 = true;
+			string firstParam = v.at(i+1);
+			bool match = regexMatch("("+synonym+")",firstParam);
+			//if it is a synonym
+			if(match){
+				it = synMap.find(firstParam);
+				if(it==synMap.end()){//if synonym not found
+					withValid1 = false;
+				}
+			}
+			else{//if not synonym
+				vector<string> result;
+				match = regexMatchWithResult("("+synonym+").("+attrName+")",firstParam,result);
+				if(match){
+					it = synMap.find(result[1]);
+					if(it==synMap.end()){//if synonym not found
+						withValid1 = false;
+					}
+					else{//if it is found
+						withSyn[0]=result[1];
+						withToken[0]=result[2];
+					}
+				}
+			}
+
+			//check whether second token is a synonym
+			bool withValid2 = true;
+			string secondParam = v.at(i+2);
+			match = regexMatch("("+synonym+")",secondParam);
+			//if it is a synonym
+			if(match){
+				it = synMap.find(secondParam);
+				if(it==synMap.end()){//if synonym not found
+					withValid2 = false;
+				}
+			}
+			else{//if not synonym
+				vector<string> result;
+				match = regexMatchWithResult("("+synonym+").("+attrName+")",secondParam,result);
+				if(match){
+					it = synMap.find(result[1]);
+					if(it==synMap.end()){//if synonym not found
+						withValid2 = false;
+					}
+					else{//if it is found
+						withSyn[1]=result[1];
+						withToken[1]=result[2];
+					}
+				}
+			}
+
+			if((withValid1)&&(withValid2)){
+				Relationship rel(v.at(i), withToken[0], withToken[1]);
+				rel.setWithSyn(withSyn[0],0);
+				rel.setWithSyn(withSyn[1],1);
+				query.addRelationship(rel);
+				i = i+2;
+			}
+			else{
+				valid = false;
+				Query queryDummy;
+				return queryDummy;
+			}
+		}
+
 	}
 	return query;
 }

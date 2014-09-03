@@ -16,13 +16,6 @@ Relationship::Relationship(string newRel, string newToken1, string newToken2)
     token2 = newToken2;
 }
 
-//constructor for with and pattern clause
-Relationship::Relationship(string newRel, string newSyn, string newToken1, string newToken2)
-{
-    relName = stringToLower(newRel);
-    token1 = newToken1;
-    token2 = newToken2;
-}
 
 //get Relationship Type
 Relationship::RelType Relationship::getRelType(){
@@ -65,8 +58,12 @@ string Relationship::getToken2(){
     return token2;
 }
 
-string Relationship::getSyn(){
-	return syn;
+string Relationship::getPatternSyn(){
+	return patternSyn;
+}
+
+string Relationship::getWithSyn(int index){
+	return withSyn[index];
 }
 
 void Relationship::setToken1(string tk1){
@@ -77,6 +74,10 @@ void Relationship::setToken2(string tk2){
 	token2 = tk2;
 }
 
-void Relationship::setSyn(string newSyn){
-	syn = newSyn;
+void Relationship::setPatternSyn(string newPatternSyn){
+	patternSyn = newPatternSyn;
+}
+
+void Relationship::setWithSyn(string newWithSyn,int index){
+	withSyn[index] = newWithSyn;
 }

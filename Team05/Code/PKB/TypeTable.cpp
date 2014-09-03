@@ -48,6 +48,9 @@ TypeTable::SynType TypeTable::getSynType(std::string input){
 	else if(input=="prog_line"){
 		return TypeTable::PROGLINE;
 	}
+	else if(input=="procedure"){
+		return TypeTable::PROCEDURE;
+	}
 	else{
 		return TypeTable::INVALID;
 	}
