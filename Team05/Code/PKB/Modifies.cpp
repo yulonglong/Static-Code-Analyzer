@@ -153,7 +153,7 @@ vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {
 	}
 }
 
-void Modifies::setModifies(PROCINDEX p, vector<VARINDEX> v) {
+void Modifies::setModifiesProc(PROCINDEX p, vector<VARINDEX> v) {
 	try {
 		try{
 			vector<VARINDEX> temp;
@@ -178,5 +178,23 @@ vector<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {
 	} catch(...){
 		vector<VARINDEX> ans;
 		return ans;
+	}
+}
+
+void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
+	try {
+		try{
+			vector<VARINDEX> temp;
+			vector<VARINDEX> temp1 = modifiesTable.at(s);
+			temp.reserve(temp1.size()+v.size());
+			temp.insert(temp.end(), v.begin(), v.end());
+			temp.insert(temp.end(), temp1.begin(), temp1.end());
+			sort( temp.begin(), temp.end() );
+			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+			modifiesTable[s] = temp;
+		} catch(...){
+			modifiesTable[s] = v;
+		}
+	} catch (...){
 	}
 }

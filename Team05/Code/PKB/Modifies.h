@@ -38,9 +38,9 @@ public:
 	vector<VARINDEX> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
 	vector<STMTNUM> getModifies(TYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
 
-	void setModifies(PROCINDEX, vector<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
+	void setModifiesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
 	vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
-	//void setModifies(STMTNUM, vector<VARINDEX>); // same as above
+	void setModifies(STMTNUM, vector<VARINDEX>); // same as above
 
 };
 

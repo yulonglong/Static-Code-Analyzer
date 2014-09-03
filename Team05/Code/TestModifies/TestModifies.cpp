@@ -114,11 +114,11 @@ void ModifiesTest::testSetProcModifies() {
 	temp.push_back(3);
 	temp.push_back(5);
 
-	modifies->setModifies(2,temp);
+	modifies->setModifiesProc(2,temp);
 	vector<VARINDEX> temp1 (1,5);
 	temp1.push_back(7);
 
-	modifies->setModifies(2,temp1);
+	modifies->setModifiesProc(2,temp1);
 	CPPUNIT_ASSERT(modifies->getModifiesProc(2).at(3) == 7);
 	return;
 }
