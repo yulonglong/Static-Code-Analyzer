@@ -60,7 +60,8 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 		try{
 			vector<VARINDEX> temp1 = modifiesTable.at(s);
 			temp1.push_back(index);
-			modifiesTable.erase(s);
+			sort( temp1.begin(), temp1.end() );
+			temp1.erase( unique( temp1.begin(), temp1.end() ), temp1.end() );
 			modifiesTable[s] = temp1;
 		} catch(...){
 			modifiesTable[s] = temp;

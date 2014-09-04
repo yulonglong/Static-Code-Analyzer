@@ -111,5 +111,14 @@ void UsesTest::testSetProc() {  // Note 5
 
 	uses->setUsesProc(2,temp1);
 	CPPUNIT_ASSERT(uses->getUsesProc(2).at(3) == 7);
+	
+	
+	varTable->insertVar("x");
+	uses->setUses(1,"x");
+	cout<<uses->getUses(1).size()<<endl;
+	uses->setUses(1,"x");
+	cout<<uses->getUses(1).size()<<endl;
+	uses->setUses(1,"x");
+	cout<<uses->getUses(1).size()<<endl;
 	return;
 }

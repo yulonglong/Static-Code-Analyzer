@@ -120,5 +120,14 @@ void ModifiesTest::testSetProcModifies() {
 
 	modifies->setModifiesProc(2,temp1);
 	CPPUNIT_ASSERT(modifies->getModifiesProc(2).at(3) == 7);
+
+
+	varTable->insertVar("x");
+	modifies->setModifies(1,"x");
+	cout<<modifies->getModifies(1).size()<<endl;
+	modifies->setModifies(1,"x");
+	cout<<modifies->getModifies(1).size()<<endl;
+	modifies->setModifies(1,"x");
+	cout<<modifies->getModifies(1).size()<<endl;
 	return;
 }

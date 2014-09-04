@@ -55,7 +55,8 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 		try{
 			vector<VARINDEX> temp1 = usesTable.at(s);
 			temp1.push_back(index);
-			usesTable.erase(s);
+			sort( temp1.begin(), temp1.end() );
+			temp1.erase( unique( temp1.begin(), temp1.end() ), temp1.end() );
 			usesTable[s] = temp1;
 		} catch(...){
 			usesTable[s] = temp;
