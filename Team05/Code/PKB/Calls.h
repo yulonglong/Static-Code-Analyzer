@@ -32,10 +32,10 @@ public:
 	void setCalls(PROCNAME, PROCNAME, STMTNUM);
 	bool isCalls(PROCNAME,PROCNAME);
 	
-	vector<int> getCalls(); //Calls(p,q) Select p
-	vector<int> getCalls(PROCNAME); //Calls (p, "Second") Select p
-	vector<int> getCalled(); //Calls(p,q) Select q
-	vector<int> getCalled(PROCNAME); //Calls("First", q) Select q
+	vector<PROCINDEX> getCalls(); //Calls(p,q) Select p, return empty if not found
+	vector<PROCINDEX> getCalls(PROCNAME); //Calls (p, "Second") Select p, return empty if not found
+	vector<PROCINDEX> getCalled(); //Calls(p,q) Select q, return empty if not found
+	vector<PROCINDEX> getCalled(PROCNAME); //Calls("First", q) Select q, return empty if not found
 };
 
 #endif

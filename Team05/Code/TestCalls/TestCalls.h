@@ -12,6 +12,7 @@ class CallsTest : public CPPUNIT_NS::TestFixture // Note 2
 { 
 	CPPUNIT_TEST_SUITE( CallsTest ); // Note 3 
 	CPPUNIT_TEST( testSetCalls );
+	CPPUNIT_TEST( testGetCalls );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -19,6 +20,7 @@ public:
 	void tearDown();
 
 	void testSetCalls();
+	void testGetCalls();
 };
 #endif
     
