@@ -1,5 +1,5 @@
 procedure Main {
-	x = 5;
+	x = 8;
 	left = x;
 	right = left + 2;
 	temp = 1;

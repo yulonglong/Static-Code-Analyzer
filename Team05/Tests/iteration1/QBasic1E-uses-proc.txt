@@ -1,4 +1,4 @@
-14
+28
 cat: BASIC queries with uses procedure
 1 - Uses ::
 procedure p; variable v;
@@ -69,4 +69,74 @@ i, x, y, z
 procedure p; variable v;
 Select v such that Uses ("Fourth", v)
 y
+5000
+15 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses (p, v)
+TRUE
+5000
+16 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+17 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses(p, _)
+TRUE
+5000
+18 - Uses ::
+procedure p; variable v;
+Select v such that Uses (p, "v")
+v
+5000
+19 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", "y")
+Fourth
+5000
+20 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Third", "wrong")
+
+5000
+21 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "x")
+x
+5000
+22 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "wrong")
+
+5000
+23 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("First", _)
+First
+5000
+24 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("DoesNotExist", _)
+
+5000
+25 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Fourth", _)
+y
+5000
+26 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("DoesNotExist", _)
+
+5000
+27 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", v)
+Fourth
+5000
+28 - Uses ::
+procecure p; variable v;
+Select p such that Uses ("DoesNotExist", v)
+
 5000

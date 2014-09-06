@@ -1,4 +1,4 @@
-28
+34
 cat: BASIC queries with entity attribute values and constants (with clause)
 1 - procName ::
 procedure p;
@@ -166,15 +166,40 @@ Select p with p.procName = v.varName
 28 - stmt#, value ::
 stmt s; constant c;
 Select s with s.stmt# = c.value
-1, 2, 3, 4, 5, 6
+1, 2, 3, 4, 5, 6, 8
 5000
 28 - stmt#, value ::
 stmt s; constant c;
 Select c with c.value = s.stmt#
-1, 2, 3, 4, 5, 6
+1, 2, 3, 4, 5, 6, 8
 5000
 29 - procName, varName ::
 procedure p; variable v;
 Select v with p.procName = v.varName
 
+5000
+30 - procName, varName ::
+procedure p; variable v, boolean;
+Select BOOLEAN with p.procName = v.varName
+FALSE
+5000
+31 - stmt#, value ::
+constant c; while w;
+Select with w.stmt# = c.value
+8
+5000
+32 - stmt#, value ::
+constant c; if i;
+Select i with i.stmt# = c.value
+
+5000
+33 - stmt#, value, boolean ::
+constant c; if i;
+Select BOOLEAN with i.stmt# = c.value
+FALSE
+5000
+34 - stmt#, value, boolean ::
+constant c; stmt s;
+Select BOOLEAN with s.stmt# = c.value
+TRUE
 5000

@@ -1,4 +1,4 @@
-15
+27
 cat: BASIC queries with modifies procedure
 1 - Modifies ::
 procedure p; variable v;
@@ -74,4 +74,64 @@ i, x, y, z
 procedure p; variable v;
 Select v such that Modifies ("Fourth", v)
 y
+5000
+16 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies(p, v)
+TRUE
+5000
+17 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies(p, _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+18 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies(p, _)
+TRUE
+5000
+19 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies (p, "x")
+x
+5000
+20 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Sixth", "y")
+Sixth
+5000
+21 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Third", "z")
+z
+5000
+22 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Third", "wrong")
+
+5000
+23 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Third", _)
+Third
+5000
+24 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Fourth", _)
+y
+5000
+25 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Fourth", v)
+Fourth
+5000
+26 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("DoesNotExist", v)
+
+5000
+27 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("DoesNotExist", _)
+
 5000
