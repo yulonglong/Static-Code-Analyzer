@@ -77,10 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="TestDesignExtractor.cpp" />
+    <ClCompile Include="TestExtractRelationships.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TestDesignExtractor.h" />
+    <ClInclude Include="TestExtractRelationships.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

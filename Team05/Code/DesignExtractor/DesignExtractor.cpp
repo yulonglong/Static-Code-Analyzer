@@ -38,7 +38,7 @@ void extractorDriver(PKB *pkb) {
 	Node* CFGRoot = pkb->getCFGRoot();
 	
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
-	
+	cout << "DE: Extracted Relationships" << endl;
 	
 	/*
 	try {
@@ -68,7 +68,7 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
-	printQueue();
+	// printQueue();
 	// For each of the entries in the queue, dequeue and do the following 
 	// For the procedure, find the min and max prog line 
 	// Find all the variables modified, then set modifies relationship for proglines and procedures
@@ -197,8 +197,8 @@ void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLS
 		// std::runtime_error which is handled explicitly
 		// cout << "Source: " << source << endl; 
 		// std::cerr << "Error occurred: " << ex.what() << std::endl; 
-		cout << "push to queue from catch: ";
-		QueueItem(source, progLine).print();
+		// cout << "push to queue from catch: ";
+		 // QueueItem(source, progLine).print();
 		queueToProcess.push(QueueItem(source, progLine));
 	} catch(...) {
 		// catch any other errors (that we have no information about)
