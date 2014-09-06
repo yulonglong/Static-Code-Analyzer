@@ -18,7 +18,7 @@ TestWrapper::TestWrapper() {
 // method for parsing the SIMPLE source and extracting relationships
 void TestWrapper::parse(std::string filename) {
 	parserDriver(filename,pkb);
-	// extractorDriver(pkb); 
+	extractorDriver(pkb); 
 }
 
 // method to evaluating a query
