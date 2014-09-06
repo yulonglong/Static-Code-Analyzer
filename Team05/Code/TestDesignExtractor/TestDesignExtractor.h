@@ -12,9 +12,9 @@ class DesignExtractorTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST_SUITE( DesignExtractorTest ); // Note 3 
 	CPPUNIT_TEST( testExtractRelationshipsModifiesProcedure );
 	CPPUNIT_TEST( testExtractRelationshipsUsesProcedure );
-	CPPUNIT_TEST( testExtractRelationshipsModifiesStatement );
-	CPPUNIT_TEST( testExtractRelationshipsUsesStatement );
-	CPPUNIT_TEST( testExtractRelationshipsSourceDE2 );
+	// CPPUNIT_TEST( testExtractRelationshipsModifiesStatement );
+	// CPPUNIT_TEST( testExtractRelationshipsUsesStatement );
+	// CPPUNIT_TEST( testExtractRelationshipsSourceDE2 );
 	// CPPUNIT_TEST( testFullDesignExtractor );
 	CPPUNIT_TEST_SUITE_END();
 

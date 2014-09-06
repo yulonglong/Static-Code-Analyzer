@@ -19,6 +19,7 @@
 #include "PKB.h"
 #include "QueueItem.h"
 
+using namespace std;
 
 void extractorDriver(PKB* pkb);
 void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent);
@@ -29,6 +30,7 @@ Node* buildCFG(Node &ASTroot);
 int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
 int getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
 
+void clear(std::queue<QueueItem> &q);
 void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void printQueue();
 

@@ -38,6 +38,8 @@ void extractorDriver(PKB *pkb) {
 	Node* CFGRoot = pkb->getCFGRoot();
 	
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	
+	
 	/*
 	try {
 		// cout << "Building CFG..." << endl;
@@ -58,13 +60,15 @@ void extractorDriver(PKB *pkb) {
 	// pkb->setCFGRoot(CFGRoot);
 }
 
+
+
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
 void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent) {
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
-	// printQueue();
+	printQueue();
 	// For each of the entries in the queue, dequeue and do the following 
 	// For the procedure, find the min and max prog line 
 	// Find all the variables modified, then set modifies relationship for proglines and procedures
@@ -89,7 +93,7 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 
 			vector<VARINDEX> variablesUsedByProgLine = uses.getUses(i);
 			// SET: procedure procIndex uses these variables too
-			uses.setUsesProc(procIndex, variablesUsedByProgLine); // if there already were variables modifies by this procedure, then just add the 2 vectors
+			uses.setUsesProc(procIndex, variablesUsedByProgLine); 
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
@@ -100,10 +104,14 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 					uses.setUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
+					// cout << "progLine: " << progLine << endl;
 					int parentProgLine = parent.getParent(progLine);
 					bool existsParent = (parentProgLine != -1);
 					while (existsParent) {
+						// cout << "parentProgLine: " << parentProgLine << endl;
+						// SET:
 						modifies.setModifies(parentProgLine, variablesModifiedByProgLine); 
+						// SET:
 						uses.setUses(parentProgLine, variablesUsedByProgLine); 
 						parentProgLine = parent.getParent(parentProgLine);
 						existsParent = (parentProgLine != -1);
@@ -126,21 +134,61 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 
 }
 
+void clear( std::queue<QueueItem> &q ) {
+   std::queue<QueueItem> empty;
+   std::swap( q, empty );
+}
+
 void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
-	DFS(0, vector<int>(), callsTable);
+	// cout << "printing queue again: " << endl;
+	// printQueue();
+	vector<int> emptyVector = vector<int>();
+	DFS(0, emptyVector, callsTable);
 }
 
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	try {
 		// cout << callsTable.at(source).empty() << endl;
-		for (int i=0; i<(int) callsTable.at(source).size(); i++) {
-			vector<int> tempProgLine = progLine; 
-			tempProgLine.push_back(callsTable.at(source).at(i).second);
-			DFS(callsTable.at(source).at(i).first, tempProgLine, callsTable); 
+		vector<CALLSPAIR> v;
+		v = vector<CALLSPAIR>();
+		// cout << "empty v created" << endl;
+		v = callsTable.at(source);
+		// cout << "v updated" << endl;
+		if (!v.empty()) {
+			for (unsigned int i=0; i<callsTable.at(source).size(); i++) {
+				vector<int> tempProgLine = progLine; 
+				tempProgLine.push_back(callsTable.at(source).at(i).second);
+				DFS(callsTable.at(source).at(i).first, tempProgLine, callsTable); 
+			}
+			// cout << "push to queue: ";
+			// QueueItem(source, progLine).print();
+			queueToProcess.push(QueueItem(source, progLine));
+		
+		
+		/*
+		unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1;
+		bool sourceFound = 0;
+		for (it1 = callsTable.begin(); it1!=callsTable.end(); it1++){
+			if (it1->first == source) {
+				sourceFound = 1;
+				break;
+			}
 		}
-		// cout << "push to queue: ";
-		// QueueItem(source, progLine).print();
+		if (sourceFound == 0) {
+			return;
+		}
+		for (vector<CALLSPAIR>::iterator it2 = it1->second.begin(); it2!=it1->second.end(); it2++) {
+			// it2->first is the PROCINDEX; it2->second is the PROGLINE
+			vector<int> tempProgLine = progLine;
+			tempProgLine.push_back(it2->second);
+			DFS(it2->first, tempProgLine, callsTable);
+		}
+		cout << "push to queue: ";
+		QueueItem(source, progLine).print();
 		queueToProcess.push(QueueItem(source, progLine));
+		*/
+
+		}
 	} catch(const std::runtime_error& re) {
 		// specific handling for runtime_error
 		std::cerr << "DE: Runtime error: " << re.what() << std::endl;
@@ -149,8 +197,8 @@ void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLS
 		// std::runtime_error which is handled explicitly
 		// cout << "Source: " << source << endl; 
 		// std::cerr << "Error occurred: " << ex.what() << std::endl; 
-		// cout << "push to queue: ";
-		// QueueItem(source, progLine).print();
+		cout << "push to queue from catch: ";
+		QueueItem(source, progLine).print();
 		queueToProcess.push(QueueItem(source, progLine));
 	} catch(...) {
 		// catch any other errors (that we have no information about)

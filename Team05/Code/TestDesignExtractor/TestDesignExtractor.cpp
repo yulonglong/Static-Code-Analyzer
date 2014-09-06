@@ -133,11 +133,11 @@ void DesignExtractorTest::testExtractRelationshipsModifiesStatement() {
 	
 	v =	modifies->getModifies(22);
 	expected = "w ";
-	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
 	v =	modifies->getModifies(23);
 	expected = "a ";
-	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
 }
 
@@ -180,11 +180,11 @@ void DesignExtractorTest::testExtractRelationshipsUsesStatement() {
 	
 	v =	uses->getUses(22);
 	expected = "";
-	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
 	v =	uses->getUses(23);
 	expected = "w ";
-	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
 }
 
@@ -204,37 +204,38 @@ void DesignExtractorTest::testExtractRelationshipsSourceDE2() {
 	callsTable = pkb->getCallsTable();
 
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
-	//vector<VARINDEX> v;
-	//v =	uses->getUses(1);
-	//string expected = "x z y i c g ";
-	//cout << print(v, *varTable) << endl;
-	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	
-	/*
-	v =	uses->getUses(5);
-	expected = "g w ";
-	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	v =	uses->getUses(6);
-	expected = "x y i c ";
-	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	v =	uses->getUses(8);
-	expected = "c ";
-	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	v =	uses->getUses(10);
-	expected = "g ";
-	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	v =	uses->getUses(21);
-	expected = "g ";
+	vector<VARINDEX> v;
+	v =	uses->getUses(1);
+	string expected = "a beta tmp I k j1k chArlie x left right Romeo c delta l width w may june ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
-	v =	uses->getUses(22);
-	expected = "";
-	// CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	v =	uses->getUses(2);
+	expected = "beta tmp I k j1k chArlie x left right Romeo c delta l width may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 	
-	v =	uses->getUses(23);
-	expected = "w ";
-	//CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-	*/
+	v =	uses->getUses(4);
+	expected = "june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(12);
+	expected = "may ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(1);
+	expected = "a oSCar x Romeo c w may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+	v =	modifies->getModifies(2);
+	expected = "a oSCar x Romeo c may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+	v =	modifies->getModifies(4);
+	expected = "a june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(12);
+	expected = "a may ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
 }
 
 // Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
