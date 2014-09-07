@@ -28,6 +28,10 @@ PKB::~PKB(){
 	modifies->~Modifies();
 	uses->~Uses();
 	calls->~Calls();
+	delete ASTRoot;
+	delete CFGRoot;
+	ASTRoot=NULL;
+	CFGRoot=NULL;
 	instanceFlag=false;
 }
 
