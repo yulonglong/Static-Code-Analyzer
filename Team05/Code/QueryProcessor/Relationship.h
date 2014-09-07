@@ -21,6 +21,7 @@ class Relationship
         enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR, MODIFIES, USES, CALLS, CALLSSTAR, NEXT, NEXTSTAR, AFFECTS, AFFECTSSTAR, WITH, PATTERN};
 
         Relationship(string, string, string);
+		Relationship(string, string, string, string);
 
         RelType getRelType();
         string getToken1();

@@ -16,6 +16,15 @@ Relationship::Relationship(string newRel, string newToken1, string newToken2)
     token2 = newToken2;
 }
 
+//constructor for pattern clause
+Relationship::Relationship(string newRel, string newPatternSyn, string newToken1, string newToken2)
+{
+    relName = stringToLower(newRel);
+	patternSyn = newPatternSyn;
+    token1 = newToken1;
+    token2 = newToken2;
+}
+
 
 //get Relationship Type
 Relationship::RelType Relationship::getRelType(){
