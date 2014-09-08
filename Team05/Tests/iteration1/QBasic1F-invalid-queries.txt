@@ -1,4 +1,4 @@
-62
+69
 cat: syntatically correct queries that are invalid
 1 - type mismatch ::
 prog_line pl; variable v;
@@ -308,5 +308,45 @@ Select w with w.stmt# = number
 62 - type mismatch ::
 if i;
 Select i with i.stmt# = number
+
+5000
+63 - type mismatch ::
+stmt s1, s2;
+Select BOOLEAN such that Calls (s1, s2);
+
+5000
+64 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, s2);
+
+5000
+65 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (p, s1);
+
+5000
+66 - type mismatch ::
+stmt s1; procedure p;
+Select BOOLEAN such that Calls (p, s1);
+
+5000
+67 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, p);
+
+5000
+68 - type mismatch ::
+stmt s1, s2; procedure p;
+Select BOOLEAN such that Calls (s1, p);
+
+5000
+69 - type mismatch ::
+stmt s1, s2; constant c; procedure p;
+Select BOOLEAN such that Calls* (p, c);
+
+5000
+69 - type mismatch ::
+stmt s1, s2; procedure p; constant c;
+Select p such that Calls* (p, c);
 
 5000
