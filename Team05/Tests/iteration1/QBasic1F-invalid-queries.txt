@@ -347,6 +347,6 @@ Select BOOLEAN such that Calls* (p, c);
 5000
 69 - type mismatch ::
 stmt s1, s2; procedure p; constant c;
-Select p such that Calls* (p, c);
+Select p such that Calls* (c, p);
 
 5000
