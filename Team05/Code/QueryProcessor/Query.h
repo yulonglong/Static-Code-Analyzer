@@ -14,8 +14,8 @@ class Query
 {
     public:
         Query();
-		string getSelectedSyn();
-		void setSelectedSyn(string s);
+		vector<int> getSelectedSyn();
+		void setSelectedSyn(vector<int> s);
 		string getPatternSyn();
 		void setPatternSyn(string s);
         vector<Relationship> getRelVect();
@@ -24,7 +24,7 @@ class Query
 		void addRelationship(Relationship);
 
 	private:
-		string selectedSyn; 
+		vector<int> selectedSyn; 
 		string patternSyn;
         vector<Relationship> relVect;
 		unordered_map<string, TypeTable::SynType> synTable;
