@@ -366,7 +366,9 @@ void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
 
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
-	query.setSelectedSyn(v.at(1));
+	vector<string> selectedSyn;
+	selectedSyn.push_back(v.at(1));
+	query.setSelectedSyn(selectedSyn);
 	query.setSynTable(map);
 
 	for (size_t i = 2; i < v.size(); i++){
