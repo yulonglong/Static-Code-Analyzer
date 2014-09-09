@@ -16,7 +16,16 @@ QueryEvaluator::~QueryEvaluator(){
 }
 
 vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
+	vector<Relationship> reorderedRelations;
+	for(vector<Relationship>::iterator it = r.begin(); it!=r.end(); it++){
 
+		//Swap pattern and relationships with non-alpha parameters to the front for first evaluation
+		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0]) ){
+			r.insert(r.begin(), *it);
+			it = r.erase(it);
+		}
+
+	}
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
@@ -40,11 +49,11 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 		}
 
-		vector<int> selectedSyn = q.getSelectedSyn();
+		vector<string> selectedSyn = q.getSelectedSyn();
 		
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
 
-		if(selectedSyn!=(i->first)){
+		if(selectedSyn.at(0)!=(i->first)){
 			answers.clear();
 			break;
 		}
