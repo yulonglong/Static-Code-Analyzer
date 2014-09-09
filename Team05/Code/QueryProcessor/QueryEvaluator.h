@@ -22,6 +22,7 @@ private:
 	std::vector<int> evaluateCalls(Relationship, std::string);
 	std::vector<int> evaluateCallsStar(Relationship);
 	std::vector<int> evaluatePattern(Query, std::string, std::string);
+	std::vector<Relationship> orderRelationship(vector<Relationship>);
 
 	bool evaluateCallsBoolean(Relationship);
 	bool evaluateCallsStarBoolean(Relationship);

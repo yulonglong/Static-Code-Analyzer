@@ -15,12 +15,19 @@ QueryEvaluator::QueryEvaluator(PKB* p){
 QueryEvaluator::~QueryEvaluator(){
 }
 
+vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
+
+}
+
 vector<int> QueryEvaluator::evaluateQuery(Query q){
 	vector<Relationship> relations = q.getRelVect();
 	vector<vector<int>> answers;
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
 	VarTable *var = pkb->getVarTable();
+
+	//retrieving synTable
+	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 
 
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
@@ -33,8 +40,8 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 			break;
 		}
 
-		string selectedSyn = q.getSelectedSyn();
-		unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+		vector<int> selectedSyn = q.getSelectedSyn();
+		
 		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
 
 		if(selectedSyn!=(i->first)){

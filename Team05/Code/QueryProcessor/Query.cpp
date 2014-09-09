@@ -4,7 +4,7 @@ Query::Query()
 {
 }
 
-void Query::setSelectedSyn(vector<int> s){
+void Query::setSelectedSyn(vector<string> s){
 	selectedSyn = s;
 }
 
@@ -16,7 +16,7 @@ string Query::getPatternSyn(){
 	return patternSyn;
 }
 
-vector<int> Query::getSelectedSyn()
+vector<string> Query::getSelectedSyn()
 {
     return selectedSyn;
 }
