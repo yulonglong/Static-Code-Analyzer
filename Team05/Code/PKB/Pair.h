@@ -20,7 +20,6 @@ public:
 
 	Pair(std::string, std::string, std::string, std::string);
 	Pair();
-	~Pair();
 
 };
 

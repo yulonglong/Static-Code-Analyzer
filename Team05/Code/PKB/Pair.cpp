@@ -17,7 +17,3 @@ Pair::Pair(string a1, string a2, string tk1, string tk2){
 	token1 = tk1;
 	token2 = tk2;
 }
-
-Pair::~Pair(){
-
-}

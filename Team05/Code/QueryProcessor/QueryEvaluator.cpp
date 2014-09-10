@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <set>
 #include <stack>
+#include <sstream>
 
 
 using namespace std;
@@ -477,6 +478,34 @@ set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(vector<int> listOfRel, st
 	return setAns;
 }
 
+void QueryEvaluator::removePairs(vector<Pair> p, string token, vector<int> listOfRel){
+	int pairIndex;
+	int pairIndex2;
+	if(p.at(0).token1==token){
+		pairIndex=1;
+	}
+	else{
+		pairIndex=2;
+	}
+
+	for(vector<int>::iterator it=listOfRel.begin(); it!=listOfRel.end(); it++){
+		unordered_map<int, vector<Pair>>::iterator i = relAns.find(*it);
+		vector<Pair> *pr = &i->second;
+		if(pr->at(0).token1==token){
+			pairIndex2=1;
+		}
+		else{
+			pairIndex2=2;
+		}
+
+		for(vector<Pair>::iterator it2=pr->begin(); it2!=pr->end(); it2++){
+			if(pairIndex==1){
+
+			}
+		}
+	}
+}
+
 vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -504,15 +533,30 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
 				for(set<int>::iterator it2 = sb.begin(); it2!=sb.end(); it++){
 					if(f->isFollows(*it, *it2)){
-
+						stringstream out1;
+						stringstream out2;
+						out1 << *it;
+						out2 << *it2;
+						followsAns.push_back(Pair (out1.str(), out2.str(), tk1, tk2));
 					}
 				}
 			}
+
+			//From the new followsAns, delete all Pairs that are eliminated from other relations
 		}
 
 		//If only a exists
 		else if(isExistInLinkages(tk1)){
 
+			//Retrieve all the relations index that evaluated a
+			vector<int> listOfRel1 = linkages.find(tk1)->second;
+
+			//get the set of answers that are previously evaluated by other relations
+			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
+
+			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
+
+			}
 		}
 
 

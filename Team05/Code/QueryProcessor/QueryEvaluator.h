@@ -31,6 +31,7 @@ private:
 	std::vector<std::string> findLinks(std::string);
 
 	std::set<int> retrieveTokenEvaluatedAnswers(std::vector<int> , std::string );
+	void removePairs(vector<Pair>, string, vector<int>);
 
 	bool evaluateCallsBoolean(Relationship);
 	bool evaluateCallsStarBoolean(Relationship);
