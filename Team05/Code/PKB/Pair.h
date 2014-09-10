@@ -13,12 +13,12 @@
 class Pair {
 
 public:
-	std::string ans1;
-	std::string ans2;
+	int ans1;
+	int ans2;
 	string token1;
 	string token2;
 
-	Pair(std::string, std::string, std::string, std::string);
+	Pair(int, int, std::string, std::string);
 	Pair();
 
 };

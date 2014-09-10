@@ -5,8 +5,6 @@
 #include <ctype.h>
 #include <set>
 #include <stack>
-#include <sstream>
-
 
 using namespace std;
 QueryEvaluator::QueryEvaluator(PKB* p){
@@ -549,16 +547,14 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
 				for(set<int>::iterator it2 = sb.begin(); it2!=sb.end(); it++){
 					if(f->isFollows(*it, *it2)){
-						stringstream out1;
-						stringstream out2;
-						out1 << *it;
-						out2 << *it2;
-						followsAns.push_back(Pair (out1.str(), out2.str(), tk1, tk2));
+						followsAns.push_back(Pair (*it, *it2, tk1, tk2));
 					}
 				}
 			}
 
 			//From the new followsAns, delete all Pairs that are eliminated from other relations
+			removePairs(followsAns,tk1,listOfRel1);
+			removePairs(followsAns,tk2,listOfRel2);
 		}
 
 		//If only a exists
@@ -571,7 +567,9 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
+				int followedBy = f->getFollowedBy(i2->second, *it);
 
+				followsAns.push_back(Pair (*it, followedBy, tk1, tk2));
 			}
 		}
 

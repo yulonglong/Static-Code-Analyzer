@@ -1,4 +1,4 @@
-//#include <iostream>
+#include <iostream>
 #include <string>
 #include <algorithm>
 #include "Pair.h"
@@ -11,7 +11,7 @@ using namespace std;
 Pair::Pair(){
 }
 
-Pair::Pair(string a1, string a2, string tk1, string tk2){
+Pair::Pair(int a1, int a2, string tk1, string tk2){
 	ans1=a1;
 	ans2=a2;
 	token1 = tk1;
