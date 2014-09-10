@@ -6,14 +6,18 @@
 #include "Relationship.h"
 #include "Query.h"
 #include "PKB.h"
+#include "Pair.h"
 #include <vector>
 #include <set>
 
 
 class QueryEvaluator{ 
 private:
+	static unordered_map<string, std::vector<int>> linkages;
+	static unordered_map<int, std::vector<Pair>> relAns;
+	static std::vector<Relationship> vecOfRelations;
 
-	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
+	std::vector<int> evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string, int relIndex);
 	std::vector<int> evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
@@ -23,6 +27,10 @@ private:
 	std::vector<int> evaluateCallsStar(Relationship);
 	std::vector<int> evaluatePattern(Query, std::string, std::string);
 	std::vector<Relationship> orderRelationship(vector<Relationship>);
+	std::vector<int> * findAnswerVectorFromToken(std::string);
+	std::vector<std::string> findLinks(std::string);
+
+	std::set<int> retrieveTokenEvaluatedAnswers(std::vector<int> , std::string );
 
 	bool evaluateCallsBoolean(Relationship);
 	bool evaluateCallsStarBoolean(Relationship);
@@ -34,6 +42,8 @@ private:
 	bool evaluateParentStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateModifiesBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateUsesBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
+	bool isExistInLinkages(std::string);
+	bool isLinked(std::string, std::string);
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 	std::string convertEnumToString(TypeTable::SynType);
 

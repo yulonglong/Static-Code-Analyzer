@@ -10,17 +10,21 @@
 using namespace std;
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
+	unordered_map<string, vector<int>> linkages;
+	unordered_map<int, vector<Pair>> relAns;
+
 }
 
 QueryEvaluator::~QueryEvaluator(){
 }
 
+//function that orders the relationship vector for efficiency and faster running time
 vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	vector<Relationship> reorderedRelations;
 	for(vector<Relationship>::iterator it = r.begin(); it!=r.end(); it++){
 
 		//Swap pattern and relationships with non-alpha parameters to the front for first evaluation
-		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0]) ){
+		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0]) || (it->getRelType()==Relationship::WITH && (!isalpha(it->getToken1()[0])|| !isalpha(it->getToken2()[0])))){
 			r.insert(r.begin(), *it);
 			it = r.erase(it);
 		}
@@ -29,15 +33,17 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
-	vector<Relationship> relations = q.getRelVect();
-	vector<vector<int>> answers;
+	//order the relationship vector
+	vector<Relationship> relations = orderRelationship(q.getRelVect());
+	vecOfRelations = relations;
+
+	//declaring all table pointers
 	TypeTable *t = pkb->getTypeTable();
 	Follows *f = pkb->getFollows();
 	VarTable *var = pkb->getVarTable();
 
 	//retrieving synTable
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
-
 
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 
@@ -233,6 +239,7 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 }
 
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
+
 	cout<<"Intersecting Answers"<<endl;
 	if(!ans.empty()){
 		vector<int> first = ans[0];
@@ -417,23 +424,113 @@ vector<int> QueryEvaluator::evaluateCalls(Relationship r, string selectedSyn){
 
 }
 
-vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
+//Returns true if token already exists in linkages
+bool QueryEvaluator::isExistInLinkages(string token){
+	if(linkages.find(token)!=linkages.end()){
+		return true;	
+	}
+
+	return false;
+}
+
+vector<int> * QueryEvaluator::findAnswerVectorFromToken(string token){
+
+	vector<int> *point = &linkages.find(token)->second;
+
+	return point;
+}
+
+//Returns true if tk1 and tk2 are linked
+bool QueryEvaluator::isLinked(string tk1, string tk2){
+
+	for(vector<vector<string>>::iterator it = linkages.begin(); it!=linkages.end(); it++){
+		if(find(it->begin(), it->end(), tk1)!=it->end() && find(it->begin(), it->end(), tk2)!=it->end()){
+			return true;
+		}
+	}
+
+	return false;
+}
+
+vector<string> QueryEvaluator::findLinks(string token){
+	for(vector<vector<string>>::iterator it = linkages.begin(); it!=linkages.end(); it++){
+		if(find(it->begin(), it->end(), token)!=it->end()){
+			return *it;
+		}
+	}
+}
+
+//return set of int answers for a particular syn
+set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(vector<int> listOfRel, string tk){
+	vector<Pair> ans = relAns.find(listOfRel.at(0))->second;
+	set<int> setAns;
+	if(ans.at(0).token1==tk){
+		for(vector<Pair>::iterator it = ans.begin(); it!=ans.end(); it++){
+			setAns.insert(it->ans1);
+		}
+	}else{
+		for(vector<Pair>::iterator it = ans.begin(); it!=ans.end(); it++){
+			setAns.insert(it->ans2);
+		}
+	}
+
+	return setAns;
+}
+
+vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows *f = pkb->getFollows();
-	vector<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		cout<<"Calling getFollowedBy(TYPE, TYPE)"<<endl;
+	vector<Pair> followsAns;
+
+	//Follows(a,b)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
+		//If both tokens are already previously evaluated
+		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+			//Retrieve all the relations index that evaluated a or b
+			vector<int> listOfRel1 = linkages.find(tk1)->second;
+			vector<int> listOfRel2 = linkages.find(tk2)->second;
+
+			//get the set of answers that are previously evaluated by other relations
+			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
+			set<int> sb = retrieveTokenEvaluatedAnswers(listOfRel2, tk2);
+
+			//try all combinations in set A and set B
+			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
+				for(set<int>::iterator it2 = sb.begin(); it2!=sb.end(); it++){
+					if(f->isFollows(*it, *it2)){
+
+					}
+				}
+			}
+		}
+
+		//If only a exists
+		else if(isExistInLinkages(tk1)){
+
+		}
+
+
+		//If only b exists
+		else if(isExistInLinkages(tk2)){
+
+		}
+
+		//If both do not exist
+		else {
+
+		}
 		return f->getFollowedBy(i1->second, i2->second);
-	}
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		cout<<"Calling getFollows(TYPE, TYPE)"<<endl;
 		return f->getFollows(i1->second, i2->second);
 	}
-	else if(selectedSyn==tk1){
+
+	//Follows(a,1)
+	else if(isalpha(tk1[0])){
 		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
 		int temp;
 		try{
@@ -443,10 +540,20 @@ vector<int> QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string
 		answer.push_back(temp);
 		return answer;
 	}
-	else {
+
+	//Follows(1,b)
+	else if(isalpha(tk2[0])){
 		cout<<"Calling getFollows(TYPE, STMTNUM)"<<endl;
 		answer.push_back(f->getFollows(i2->second, atoi(tk1.c_str())));
 		return answer;
+	}
+
+	//Follows(1,2)
+	else {
+		//if Follows(1,2) is verified as false, clear all answers
+		if(!f->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			answer.clear();
+		}
 	}
 }
 
