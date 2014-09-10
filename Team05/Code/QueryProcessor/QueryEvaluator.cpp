@@ -480,27 +480,43 @@ set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(vector<int> listOfRel, st
 
 void QueryEvaluator::removePairs(vector<Pair> p, string token, vector<int> listOfRel){
 	int pairIndex;
-	int pairIndex2;
+	vector<string> list;
 	if(p.at(0).token1==token){
-		pairIndex=1;
+		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
+			list.push_back(iter->ans1);
+		}
 	}
 	else{
-		pairIndex=2;
+		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
+			list.push_back(iter->ans2);
+		}
 	}
 
+	//iterate through all the relations that evaluated the token
 	for(vector<int>::iterator it=listOfRel.begin(); it!=listOfRel.end(); it++){
 		unordered_map<int, vector<Pair>>::iterator i = relAns.find(*it);
 		vector<Pair> *pr = &i->second;
+
+		//find out whether the token is the first or second argument of the relationship
 		if(pr->at(0).token1==token){
-			pairIndex2=1;
+			pairIndex=1;
 		}
 		else{
-			pairIndex2=2;
+			pairIndex=2;
 		}
 
+		//iterate through the relationship pairs
 		for(vector<Pair>::iterator it2=pr->begin(); it2!=pr->end(); it2++){
-			if(pairIndex==1){
 
+			//remove all pairs that are eliminated
+			if(pairIndex==1){
+				if(find(list.begin(),list.end(),it2->ans1)==list.end()){
+					it2 = pr->erase(it2);
+				}
+			}else{
+				if(find(list.begin(),list.end(),it2->ans2)==list.end()){
+					it2 = pr->erase(it2);
+				}
 			}
 		}
 	}
