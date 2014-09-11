@@ -11,6 +11,18 @@
 
 using namespace std;
 
+/*! \brief A QueryParser class to validate and parse User Queries.
+ *  
+ *
+ * Overview: Parser is responsible to :
+ * - Read the query code
+ * - Tokenize the appropriate sentences
+ * - Build a Query class structure to be used by QueryEvaluator
+ * 
+ * 
+ * \see CodeParser, QueryEvaluator
+ */
+
 class QueryParser{
 private:
 	//constant string
@@ -127,6 +139,12 @@ private:
 
 public:
 	QueryParser();
+	/*! \brief queryParser reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a Query class structure.
+	* \param queryStr is the string which contains the query.
+	* (e.g. "assign a; while w; Select a such that Follows(w, a) pattern a ("x", _"x+y"_)")
+	* \param valid is a Boolean pointer to indicate whether the query string is valid or invalid
+	* \return a Query object.
+	*/
 	Query queryParse(string queryStr, bool& valid);
 };
 
