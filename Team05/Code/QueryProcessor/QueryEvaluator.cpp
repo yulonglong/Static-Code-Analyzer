@@ -7,6 +7,14 @@
 #include <stack>
 
 using namespace std;
+
+struct QueryEvaluator::cmp{
+	bool operator()(Pair p1, Pair p2){
+
+		return p1.ans1==p2.ans1 && p1.ans2==p2.ans2 && p1.token1==p2.token1 && p1.token2==p2.token2;
+	}
+};
+
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
 	unordered_map<string, vector<int>> linkages;
@@ -710,6 +718,8 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 	return "null";
 }
 
+
+
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -717,8 +727,8 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	TypeTable *t = pkb->getTypeTable();
 	set<int> answer;
 	vector<int> selected;
+	set<Pair, cmp> followsStarAnsSet;
 	vector<Pair> followsStarAns;
-	vector<int> vectorAnswer;
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
@@ -734,7 +744,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			do{			
 				if(stmtNumber!=-1){
 					if(t->isType(i2->second,stmtNumber)){
-						followsStarAns.push_back(Pair (*it, stmtNumber, tk1, tk2));
+						followsStarAnsSet.insert(Pair (*it, stmtNumber, tk1, tk2));
 					}
 				}
 				else{
@@ -756,7 +766,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			if(stmtNumber!=-1){
 				cout<<"Calling TypeTable::isType"<<endl;
 				if(t->isType(i1->second, stmtNumber)){
-					followsStarAns.push_back(Pair (stmtNumber, atoi(tk2.c_str()), tk1, tk2));
+					followsStarAnsSet.insert(Pair (stmtNumber, atoi(tk2.c_str()), tk1, tk2));
 				}
 			}
 			else{
@@ -775,7 +785,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=-1){
 				if(t->isType(i2->second, stmtNumber)){
-					followsStarAns.push_back(Pair (atoi(tk1.c_str()), stmtNumber, tk1, tk2));
+					followsStarAnsSet.insert(Pair (atoi(tk1.c_str()), stmtNumber, tk1, tk2));
 				}
 			}
 			else{
@@ -792,12 +802,15 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			cout<<"STMTNUM is "<<stmtNumber<<endl;
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber==atoi(tk2.c_str()))
-				followsStarAns.push_back(Pair (1,1,"true","true"));
+				followsStarAnsSet.insert(Pair (1,1,"true","true"));
 			if(stmtNumber>atoi(tk2.c_str()))
-				followsStarAns.push_back(Pair (0,0,"false","false"));
+				followsStarAnsSet.insert(Pair (0,0,"false","false"));
 				break;
 		}
 	}
+
+	//copy set into vector
+	copy(followsStarAnsSet.begin(), followsStarAnsSet.end(),followsStarAns);
 
 	//If both a and b exist in linkages
 	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
@@ -915,14 +928,22 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 		return p->getChildren(i1->second, i2->second);
 	}*/
 
-	else if(selectedSyn==tk1){
+	//Parent(a,3)
+	else if(isalpha(tk1[0])){
 		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
 		answer.push_back( p->getParent(i1->second, atoi(tk2.c_str())));
 		return answer;
 	}
-	else {
+
+	//Parent(3,a)
+	else if(isalpha(tk2[0])){
 		cout<<"Calling getChildren(TYPE, STMTNUM)"<<endl;
 		return p->getChildren(i2->second, atoi(tk1.c_str()));
+	}
+
+	//Parent(1,5)
+	else{
+
 	}
 }
 

@@ -34,6 +34,9 @@ private:
 	void removePairs(std::vector<Pair>, std::string);
 	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
 	void insertLinks(std::string, int);
+	struct cmp {
+		bool operator()(Pair,Pair);	
+	};
 
 	bool evaluateCallsBoolean(Relationship);
 	bool evaluateCallsStarBoolean(Relationship);
@@ -47,6 +50,7 @@ private:
 	bool evaluateUsesBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool isExistInLinkages(std::string);
 	bool isLinked(std::string, std::string);
+	
 	std::vector<int> intersectAnswers(std::vector<std::vector<int> >);
 	std::string convertEnumToString(TypeTable::SynType);
 
