@@ -17,9 +17,9 @@ private:
 	static unordered_map<int, std::vector<Pair>> relAns;
 	static std::vector<Relationship> vecOfRelations;
 
-	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int relIndex);
-	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int relIndex);
-	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
+	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);

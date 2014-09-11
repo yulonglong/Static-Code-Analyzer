@@ -907,44 +907,86 @@ bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_m
 	return flag;
 }*/
 
-vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
+void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
+
 	Parent *p = pkb->getParent();
+	TypeTable *t = pkb->getTypeTable();
+
 	vector<int> answer;
+	vector<Pair> parentAns;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-	unordered_map<string, TypeTable::SynType>::iterator i3 = m.find(selectedSyn);
 
 	//Parent(a,b)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		cout<<"Calling getParent(TYPE, TYPE)"<<endl;
-		return p->getParent(i1->second, i2->second);
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
+		answer = t->getAllStmts(i1->second);
+		
+		for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+			vector<int> children = p->getChildren(i1->second, *it);
+			for(vector<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
+				parentAns.push_back(Pair(*it, *it2, tk1, tk2));
+			}
+		}
 	}
 
-	/*
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		cout<<"Calling getChildren(TYPE, TYPE)"<<endl;
-		return p->getChildren(i1->second, i2->second);
-	}*/
 
 	//Parent(a,3)
 	else if(isalpha(tk1[0])){
 		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
-		answer.push_back( p->getParent(i1->second, atoi(tk2.c_str())));
-		return answer;
+		int parent = p->getParent(i1->second, atoi(tk2.c_str()));
+		parentAns.push_back(Pair(parent, atoi(tk2.c_str()), tk1, tk2));
 	}
 
 	//Parent(3,a)
 	else if(isalpha(tk2[0])){
-		cout<<"Calling getChildren(TYPE, STMTNUM)"<<endl;
-		return p->getChildren(i2->second, atoi(tk1.c_str()));
+		vector<int> children = p->getChildren(i2->second, atoi(tk1.c_str()));
+		for(vector<int>::iterator it=children.begin(); it!=children.end(); it++){
+			parentAns.push_back(Pair(atoi(tk1.c_str()), *it, tk1, tk2));
+		}
 	}
 
 	//Parent(1,5)
 	else{
+		 if(p->isParent(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			 parentAns.push_back(Pair (1,1,"true","true"));
+		 }else{
+			 parentAns.push_back(Pair (0,0,"false","false"));
+		 }
+	}
+
+		//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+		removePairsFromRelAns(&parentAns, tk1, 1);
+		removePairsFromRelAns(&parentAns, tk2, 2);
+		removePairs(parentAns, tk1);
+		removePairs(parentAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&parentAns, tk1, 1);
+		removePairs(parentAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&parentAns, tk2, 2);
+		removePairs(parentAns, tk2);
+		insertLinks(tk2, relIndex);
+	}
+
+	else {
 
 	}
+
+	relAns.insert(make_pair(relIndex, parentAns));
 }
 
 
