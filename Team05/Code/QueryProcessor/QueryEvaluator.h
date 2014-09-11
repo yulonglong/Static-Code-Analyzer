@@ -18,7 +18,7 @@ private:
 	static std::vector<Relationship> vecOfRelations;
 
 	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int relIndex);
-	std::vector<int> evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
+	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int relIndex);
 	std::vector<int> evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
@@ -30,8 +30,10 @@ private:
 	std::vector<int> * findAnswerVectorFromToken(std::string);
 	std::vector<std::string> findLinks(std::string);
 
-	std::set<int> retrieveTokenEvaluatedAnswers(std::vector<int> , std::string );
-	void removePairs(vector<Pair>, string, vector<int>);
+	std::set<int> retrieveTokenEvaluatedAnswers(std::string );
+	void removePairs(std::vector<Pair>, std::string);
+	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
+	void insertLinks(std::string, int);
 
 	bool evaluateCallsBoolean(Relationship);
 	bool evaluateCallsStarBoolean(Relationship);

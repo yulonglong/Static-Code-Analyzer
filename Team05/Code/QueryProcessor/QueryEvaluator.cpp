@@ -460,7 +460,9 @@ vector<string> QueryEvaluator::findLinks(string token){
 }
 
 //return set of int answers for a particular syn
-set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(vector<int> listOfRel, string tk){
+set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
+	vector<int> listOfRel = linkages.find(tk)->second;
+
 	vector<Pair> ans = relAns.find(listOfRel.at(0))->second;
 	set<int> setAns;
 	if(ans.at(0).token1==tk){
@@ -476,8 +478,9 @@ set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(vector<int> listOfRel, st
 	return setAns;
 }
 
-void QueryEvaluator::removePairs(vector<Pair> p, string token, vector<int> listOfRel){
+void QueryEvaluator::removePairs(vector<Pair> p, string token){
 	int pairIndex;
+	vector<int> listOfRel = linkages.find(token)->second;
 	vector<int> list;
 	if(p.at(0).token1==token){
 		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
@@ -535,13 +538,9 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		//If both tokens are already previously evaluated
 		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 
-			//Retrieve all the relations index that evaluated a or b
-			vector<int> listOfRel1 = linkages.find(tk1)->second;
-			vector<int> listOfRel2 = linkages.find(tk2)->second;
-
 			//get the set of answers that are previously evaluated by other relations
-			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
-			set<int> sb = retrieveTokenEvaluatedAnswers(listOfRel2, tk2);
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
+			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
 
 			//try all combinations in set A and set B
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
@@ -553,63 +552,53 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			}
 
 			//From the new followsAns, delete all Pairs that are eliminated from other relations
-			removePairs(followsAns,tk1,listOfRel1);
-			removePairs(followsAns,tk2,listOfRel2);
+			removePairs(followsAns,tk1);
+			removePairs(followsAns,tk2);
 
 			//Add the relationship into linkages
-			vector<int> *pt = &linkages.find(tk1)->second;
-			pt->push_back(relIndex);
-			vector<int> *pt2 = &linkages.find(tk2)->second;
-			pt2->push_back(relIndex);
+			insertLinks(tk1, relIndex);
+			insertLinks(tk2, relIndex);
 		}
 
 		//If only a exists
 		else if(isExistInLinkages(tk1)){
 
-			//Retrieve all the relations index that evaluated a
-			vector<int> listOfRel1 = linkages.find(tk1)->second;
-
 			//get the set of answers that are previously evaluated by other relations
-			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-				int followedBy = f->getFollowedBy(i2->second, *it);
-				if(followedBy!=-1){
-					followsAns.push_back(Pair (*it, followedBy, tk1, tk2));
-				}
-			}
-
-			//Delete the redundant pairs
-			removePairs(followsAns,tk1,listOfRel1);
-
-			//Add the relationship into linkages
-			vector<int> *pt = &linkages.find(tk1)->second;
-			pt->push_back(relIndex);
-		}
-
-
-		//If only b exists
-		else if(isExistInLinkages(tk2)){
-
-			//Retrieve all the relations index that evaluated a
-			vector<int> listOfRel2 = linkages.find(tk2)->second;
-
-			//get the set of answers that are previously evaluated by other relations
-			set<int> sb = retrieveTokenEvaluatedAnswers(listOfRel2, tk2);
-
-			for(set<int>::iterator it=sb.begin(); it!=sb.end(); it++){
-				int follows = f->getFollows(i1->second, *it);
+				int follows = f->getFollows(i2->second, *it);
 				if(follows!=-1){
 					followsAns.push_back(Pair (*it, follows, tk1, tk2));
 				}
 			}
 
 			//Delete the redundant pairs
-			removePairs(followsAns,tk2,listOfRel2);
+			removePairs(followsAns,tk1);
 
 			//Add the relationship into linkages
-			vector<int> *pt = &linkages.find(tk2)->second;
-			pt->push_back(relIndex);
+			insertLinks(tk1, relIndex);
+		}
+
+
+		//If only b exists
+		else if(isExistInLinkages(tk2)){
+
+			//get the set of answers that are previously evaluated by other relations
+			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
+
+			for(set<int>::iterator it=sb.begin(); it!=sb.end(); it++){
+				int followedBy = f->getFollowedBy(i1->second, *it);
+				if(followedBy!=-1){
+					followsAns.push_back(Pair (*it, followedBy, tk1, tk2));
+				}
+			}
+
+			//Delete the redundant pairs
+			removePairs(followsAns,tk2);
+
+			//Add the relationship into linkages
+			insertLinks(tk2, relIndex);
 
 		}
 
@@ -617,8 +606,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		else {
 
 			//Retrieve both a and b from PKB
-			vector<int> first = f->getFollows(i1->second, i2->second);
-			vector<int> second = f->getFollowedBy(i1->second, i2->second);
+			vector<int> first = f->getFollowedBy(i1->second, i2->second);
+			vector<int> second = f->getFollows(i1->second, i2->second);
 
 			for(int i=0; i<first.size(); i++){
 				followsAns.push_back(Pair (first.at(i), second.at(i), tk1, tk2));
@@ -633,11 +622,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	else if(isalpha(tk1[0])){
 		if(isExistInLinkages(tk1)){
 
-			//Retrieve all the relations index that evaluated a
-			vector<int> listOfRel1 = linkages.find(tk1)->second;
-
 			//get the set of answers that are previously evaluated by other relations
-			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel1, tk1);
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
 				if(f->isFollows(*it, atoi(tk2.c_str()))){
@@ -646,7 +632,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			}
 
 			//Delete the redundant pairs
-			removePairs(followsAns,tk1,listOfRel1);
+			removePairs(followsAns,tk1);
 
 			//Add the relationship into linkages
 			vector<int> *pt = &linkages.find(tk1)->second;
@@ -657,7 +643,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		else {
 
 			//Retrieve a from PKB and push it into the answer vector
-			int first = f->getFollows(i1->second, atoi(tk2.c_str()));
+			int first = f->getFollowedBy(i1->second, atoi(tk2.c_str()));
 
 			followsAns.push_back(Pair (first, atoi(tk2.c_str()), tk1, tk2));
 
@@ -668,11 +654,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	else if(isalpha(tk2[0])){
 		if(isExistInLinkages(tk2)){
 
-			//Retrieve all the relations index that evaluated b
-			vector<int> listOfRel2 = linkages.find(tk2)->second;
-
 			//get the set of answers that are previously evaluated by other relations
-			set<int> sa = retrieveTokenEvaluatedAnswers(listOfRel2, tk2);
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk2);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
 				if(f->isFollows(atoi(tk1.c_str()), *it)){
@@ -681,7 +664,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			}
 
 			//Delete the redundant pairs
-			removePairs(followsAns,tk2,listOfRel2);
+			removePairs(followsAns,tk2);
 
 			//Add the relationship into linkages
 			vector<int> *pt = &linkages.find(tk2)->second;
@@ -692,7 +675,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		else {
 
 			//Retrieve a from PKB and push it into the answer vector
-			int second = f->getFollowedBy(i2->second, atoi(tk1.c_str()));
+			int second = f->getFollows(i2->second, atoi(tk1.c_str()));
 
 			followsAns.push_back(Pair (atoi(tk1.c_str()), second, tk1, tk2));
 
@@ -727,68 +710,44 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 	return "null";
 }
 
-vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
+void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Follows *f = pkb->getFollows();
 	TypeTable *t = pkb->getTypeTable();
 	set<int> answer;
 	vector<int> selected;
+	vector<Pair> followsStarAns;
 	vector<int> vectorAnswer;
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Select w such that Follows*(w, a)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		cout<<"Handling Follows*(type, type) with first token selected"<<endl;
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
 		selected = t->getAllStmts(i1->second);	//get all while statements
 
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			cout<<"Calling getFollows(type, stmtnum)"<<endl;
+
 			stmtNumber = f->getFollows(TypeTable::STMT, *it);
 			do{			
 				if(stmtNumber!=-1){
 					if(t->isType(i2->second,stmtNumber)){
-						answer.insert(*it);
-						break;
+						followsStarAns.push_back(Pair (*it, stmtNumber, tk1, tk2));
 					}
 				}
 				else{
 					break;
 				}
-				cout<<"Calling getFollows(type, stmtnum)"<<endl;
-				stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
-			}while(true);
-		}
-	}
 
-	//Select a such that Follows*(w, a)
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		cout<<"Handling Follows*(type, type) with second token selected"<<endl;
-		selected = t->getAllStmts(i1->second);
-
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			cout<<"Calling getFollows(type, stmtnum)"<<endl;
-			stmtNumber = f->getFollows(TypeTable::STMT, *it);
-			do{			
-				if(stmtNumber!=-1){
-					cout<<"Calling TypeTable->isType"<<endl;
-					if(t->isType(i2->second, stmtNumber)){
-						answer.insert(stmtNumber);
-					}
-				}
-				else{
-					break;
-				}
-				cout<<"Calling getFollows(type, stmtnum)"<<endl;
 				stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			}while(true);
 		}
 	}
 
 	//Select a such that Follows*(a, 13)
-	else if(selectedSyn==tk1){
+	else if(isalpha(tk1[0])){
 		cout<<"Handling Follows*(type, stmtnum)"<<endl;
 		stmtNumber = atoi(tk2.c_str());
 		do{			
@@ -797,7 +756,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			if(stmtNumber!=-1){
 				cout<<"Calling TypeTable::isType"<<endl;
 				if(t->isType(i1->second, stmtNumber)){
-					answer.insert(stmtNumber);
+					followsStarAns.push_back(Pair (stmtNumber, atoi(tk2.c_str()), tk1, tk2));
 				}
 			}
 			else{
@@ -816,7 +775,7 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=-1){
 				if(t->isType(i2->second, stmtNumber)){
-					answer.insert(stmtNumber);
+					followsStarAns.push_back(Pair (atoi(tk1.c_str()), stmtNumber, tk1, tk2));
 				}
 			}
 			else{
@@ -826,9 +785,65 @@ vector<int> QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<st
 		}while(true);
 	}
 
-	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));
+	//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 
-	return vectorAnswer;
+		removePairsFromRelAns(&followsStarAns, tk1, 1);
+		removePairsFromRelAns(&followsStarAns, tk2, 2);
+		removePairs(followsStarAns, tk1);
+		removePairs(followsStarAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&followsStarAns, tk1, 1);
+		removePairs(followsStarAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&followsStarAns, tk2, 2);
+		removePairs(followsStarAns, tk2);
+		insertLinks(tk2, relIndex);
+	}
+
+	else {
+
+	}
+
+	relAns.insert(make_pair(relIndex, followsStarAns));
+}
+
+void QueryEvaluator::insertLinks(string tk, int relIndex){
+	//Add the relationship into linkages
+	vector<int> *pt = &linkages.find(tk)->second;
+	pt->push_back(relIndex);
+}
+
+void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string tk, int pairIndex){
+	
+	//Retrieve the set of int of the token that was evaluated
+	set<int> s = retrieveTokenEvaluatedAnswers(tk);
+
+	//Delete it from the ans pairs made
+	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
+		if(pairIndex==1){
+
+			//if ans from relationsAns is not found in the set, remove it
+			if(s.find(it->ans1)==s.end()){
+				relationsAns->erase(it);
+			}
+		}
+		else {
+
+			if(s.find(it->ans2)==s.end()){
+				relationsAns->erase(it);
+			}
+		}
+	}
 }
 
 bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
