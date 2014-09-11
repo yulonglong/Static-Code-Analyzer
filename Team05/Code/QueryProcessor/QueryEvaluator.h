@@ -21,7 +21,7 @@ private:
 	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
-	std::vector<int> evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
+	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	std::vector<int> evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	std::vector<int> evaluateCalls(Relationship, std::string);
 	std::vector<int> evaluateCallsStar(Relationship);

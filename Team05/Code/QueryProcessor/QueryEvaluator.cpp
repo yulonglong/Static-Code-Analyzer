@@ -1065,6 +1065,7 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 	return vectorAnswer;
 }
 
+/*
 bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -1101,25 +1102,31 @@ bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_ma
 		flag = true;
 
 	return flag;
-}
+}*/
 
-vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, string selectedSyn) {
+void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Modifies *mod = pkb->getModifies();
 	TypeTable *t = pkb->getTypeTable();
+	VarTable *varTab = pkb->getVarTable();
 	vector<int> selected;
-	set<int> answer;
+	vector<Pair> modAns;
+	vector<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	//Select a Modifies(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		cout<<"Calling getModifies(TYPE)"<<endl;
-		selected = mod->getModifies(i1->second);
-		return selected;
+	//Modifies(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		selected = t->getAllStmts(i1->second);
+		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			answer = mod->getModifies(*it);
+			for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+				modAns.push_back(Pair (*it, *it2, tk1, tk2));
+			}
+		}
 	}
-
+	/*
 	//Select v Modifies(a,v)
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
 		selected = t->getAllStmts(TypeTable::ASSIGN);
@@ -1132,22 +1139,70 @@ vector<int> QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<
 		selected.clear();
 		copy(answer.begin(), answer.end(), back_inserter(selected));
 		return selected;
-	}
+	}*/
 
 	//Modifies(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
-		cout<<"Calling getModifies(TYPE, varName) "<<varName<<endl;
-		return mod->getModifies(i1->second, varName);
+
+		answer = mod->getModifies(i1->second,varName);
+		for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+			modAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+		}
+
 	}
 
 	//Select v such that Modifies(1, v);
-	else {
-		cout<<"Calling getModifies(STMTNUM)"<<endl;
-		return mod->getModifies(atoi(tk1.c_str()));
+	else if(isalpha(tk2[0])){
+		selected = mod->getModifies(atoi(tk1.c_str()));
+		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			modAns.push_back(Pair (atoi(tk1.c_str()), *it, tk1, tk2));
+		}
 	}
+
+	//Modifies(1, "x")
+	else {
+		string varName = tk2.substr(1,tk2.length()-2);
+		if(mod->isModifies(atoi(tk1.c_str()), varName)){
+			 modAns.push_back(Pair (1,1,"true","true"));
+		 }else{
+			 modAns.push_back(Pair (0,0,"false","false"));
+		 }
+	}
+
+			//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+		removePairsFromRelAns(&modAns, tk1, 1);
+		removePairsFromRelAns(&modAns, tk2, 2);
+		removePairs(modAns, tk1);
+		removePairs(modAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&modAns, tk1, 1);
+		removePairs(modAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&modAns, tk2, 2);
+		removePairs(modAns, tk2);
+		insertLinks(tk2, relIndex);
+	}
+
+	else {
+
+	}
+
+	relAns.insert(make_pair(relIndex, modAns));
 }
 
+/*
 bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -1185,7 +1240,7 @@ bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<
 	}
 
 	return false;
-}
+}*/
 
 vector<int> QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, string selectedSyn) {
 	string tk1=r.getToken1();
