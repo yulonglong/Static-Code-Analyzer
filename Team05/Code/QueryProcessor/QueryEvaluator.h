@@ -40,7 +40,7 @@ private:
 	bool evaluateRightHandSide(std::string, Node);
 	bool evaluateLeftHandSide(std::string, Node);
 	bool evaluateFollowsBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
-	bool evaluateFollowsStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
+	//bool evaluateFollowsStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateParentBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateParentStarBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);
 	bool evaluateModifiesBoolean(Relationship, std::unordered_map<std::string, TypeTable::SynType>);

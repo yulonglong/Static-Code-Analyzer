@@ -767,7 +767,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	}
 
 	//Select a such that Follows*(3, a)
-	else {
+	else if(isalpha(tk2[0])){
 		cout<<"Handling Follows*(stmtnum, type)"<<endl;
 		stmtNumber = atoi(tk1.c_str());
 		do{			
@@ -783,6 +783,20 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			}
 			
 		}while(true);
+	}
+
+	//Follows*(1,2)
+	else {
+		stmtNumber = atoi(tk1.c_str());
+		while(stmtNumber!=-1){
+			cout<<"STMTNUM is "<<stmtNumber<<endl;
+			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
+			if(stmtNumber==atoi(tk2.c_str()))
+				followsStarAns.push_back(Pair (1,1,"true","true"));
+			if(stmtNumber>atoi(tk2.c_str()))
+				followsStarAns.push_back(Pair (0,0,"false","false"));
+				break;
+		}
 	}
 
 	//If both a and b exist in linkages
@@ -846,6 +860,7 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 	}
 }
 
+/*
 bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -877,7 +892,7 @@ bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_m
 		flag = true;
 
 	return flag;
-}
+}*/
 
 vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
 	string tk1 = r.getToken1();
@@ -887,14 +902,19 @@ vector<int> QueryEvaluator::evaluateParent(Relationship r, unordered_map<string,
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	unordered_map<string, TypeTable::SynType>::iterator i3 = m.find(selectedSyn);
+
+	//Parent(a,b)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		cout<<"Calling getParent(TYPE, TYPE)"<<endl;
 		return p->getParent(i1->second, i2->second);
 	}
+
+	/*
 	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
 		cout<<"Calling getChildren(TYPE, TYPE)"<<endl;
 		return p->getChildren(i1->second, i2->second);
-	}
+	}*/
+
 	else if(selectedSyn==tk1){
 		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
 		answer.push_back( p->getParent(i1->second, atoi(tk2.c_str())));
