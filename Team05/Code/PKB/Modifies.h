@@ -40,9 +40,11 @@ public:
 
 	void setModifiesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
 	vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
+	void setModifies(STMTNUM, vector<VARINDEX>); // same as above
+
+	//Additional Methods to implement:
 	vector<PROCINDEX> getModifiesProcVar(VARNAME); //get all the procedures that modifies the variable with varname
 	bool isModifiesProc(PROCNAME, VARNAME); //returns true if procname modifies varname
-	void setModifies(STMTNUM, vector<VARINDEX>); // same as above
 
 };
 

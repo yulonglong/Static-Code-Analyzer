@@ -189,3 +189,13 @@ void Uses::setUses(STMTNUM s, vector<VARINDEX> v) {
 	} catch (...){
 	}
 }
+
+vector<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
+	vector<PROCINDEX> p;
+
+	return p;
+}
+
+bool Uses::isUsesProc(PROCNAME, VARNAME){
+	return true;
+}

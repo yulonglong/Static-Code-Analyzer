@@ -32,11 +32,14 @@ public:
 	vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
 	vector<STMTNUM> getUses(TYPE);//Select a such that Uses(a, v); return empty vector if does not exist
 
-
 	void setUsesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables used by this procedure, then just add the 2 vectors
 	void setUses(STMTNUM, vector<VARINDEX>); // IPSITA -> the parameters cant be the same (although PROCINDEX and STMTNUM looks different, they are both still int)
 	vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
 
+
+	//Additional Methods to implement:
+	vector<PROCINDEX> getUsesProcVar(VARNAME);
+	bool isUsesProc(PROCNAME, VARNAME);
 };
 
 #endif

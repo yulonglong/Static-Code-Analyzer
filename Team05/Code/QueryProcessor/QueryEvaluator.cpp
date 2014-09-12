@@ -1117,8 +1117,6 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	//Select proc not done
-
 	//Modifies(a,v)
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
 
@@ -1287,59 +1285,135 @@ bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<
 	return false;
 }*/
 
-vector<int> QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, string selectedSyn) {
+void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Uses *use = pkb->getUses();
 	TypeTable *t = pkb->getTypeTable();
 	VarTable *varTab = pkb->getVarTable();
+	ProcTable *proc = pkb->getProcTable();
 	vector<int> selected;
-	set<int> answer;
+	vector<int> answer;
+	vector<Pair> usesAns;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Uses(a,v)
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		selected = t->getAllStmts(i1->second);
-		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-			answer = mod->getModifies(*it);
-			for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
-				modAns.push_back(Pair (*it, *it2, tk1, tk2));
+
+		//If first token is of procedure type
+		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+
+			selected = proc->getAllProcIndexes();
+
+			//iterate through all procedures
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = use->getUsesProc(*it);
+				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+					usesAns.push_back(Pair (*it, *it2, tk1, tk2));
+				}
+			}
+		} 
+		
+
+		//Otherwise
+		else {
+			selected = t->getAllStmts(i1->second);
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = use->getUses(*it);
+				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+					usesAns.push_back(Pair (*it, *it2, tk1, tk2));
+				}
 			}
 		}
-		cout<<"Calling getUses(TYPE)"<<endl;
-		selected = use->getUses(i1->second);
-		return selected;
-	}
-
-	//Select v Uses(a,v)
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		selected = t->getAllStmts(TypeTable::ASSIGN);
-		vector<int> usedVar;
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			cout<<"Calling getUses(STMTNUM)"<<endl;
-			usedVar = use->getUses(*it);
-			answer.insert(usedVar.begin(), usedVar.end());
-		}
-		selected.clear();
-		copy(answer.begin(), answer.end(), back_inserter(selected));
-		return selected;
 	}
 
 	//Select a Uses(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
-		cout<<"Calling getUses(TYPE, VARNAME)"<<endl;
-		return use->getUses(i1->second, varName);
+
+		//If first token is of type procedure
+		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+
+			answer = use->getUsesProcVar(varName);
+			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				usesAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+			}
+		}
+
+		//otherwise
+		else {
+			answer = use->getUses(i1->second,varName);
+			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				usesAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+			}
+		}
+
 	}
+
 
 	//Select v such that Uses(1, v);
-	else {
-		cout<<"Calling getUses(STMTNUM)"<<endl;
-		return use->getUses(atoi(tk1.c_str()));
+	else if(isalpha(tk2[0])){
+		selected = use->getUses(atoi(tk1.c_str()));
+		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			usesAns.push_back(Pair (atoi(tk1.c_str()), *it, tk1, tk2));
+		}
 	}
+
+	//Modifies("Third", "x")
+	else if(tk1[0]=='\"'){
+		string procName = tk1.substr(1,tk1.length()-2);
+		string varName = tk2.substr(1,tk2.length()-2);
+		if(use->isUsesProc(procName, varName)){
+			usesAns.push_back(Pair (1,1,"true","true"));
+		}else {
+			usesAns.push_back(Pair (0,0,"false","false"));
+		}
+	}
+
+	//Modifies(1, "x")
+	else {
+		string varName = tk2.substr(1,tk2.length()-2);
+		if(use->isUses(atoi(tk1.c_str()), varName)){
+			 usesAns.push_back(Pair (1,1,"true","true"));
+		 }else{
+			 usesAns.push_back(Pair (0,0,"false","false"));
+		 }
+	}
+
+	//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+		removePairsFromRelAns(&usesAns, tk1, 1);
+		removePairsFromRelAns(&usesAns, tk2, 2);
+		removePairs(usesAns, tk1);
+		removePairs(usesAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&usesAns, tk1, 1);
+		removePairs(usesAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&usesAns, tk2, 2);
+		removePairs(usesAns, tk2);
+		insertLinks(tk2, relIndex);
+	}
+
+	else {
+
+	}
+
+	relAns.insert(make_pair(relIndex, usesAns));
 }
 
+/*
 bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -1370,7 +1444,7 @@ bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std:
 	}
 
 	return false;
-}
+}*/
 
 vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::string rightHandSide) {
 	vector<int> answers;
