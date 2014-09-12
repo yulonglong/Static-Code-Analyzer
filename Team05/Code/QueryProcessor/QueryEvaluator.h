@@ -23,7 +23,7 @@ private:
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-	std::vector<int> evaluateCalls(Relationship, std::string);
+	void evaluateCalls(Relationship, int);
 	std::vector<int> evaluateCallsStar(Relationship);
 	std::vector<int> evaluatePattern(Query, std::string, std::string);
 	std::vector<Relationship> orderRelationship(vector<Relationship>);

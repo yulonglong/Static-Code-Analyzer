@@ -304,6 +304,7 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return answers;
 }
 
+/*
 bool QueryEvaluator::evaluateCallsBoolean(Relationship r){
 	Calls *call = pkb->getCalls();
 	string tk1 = r.getToken1();
@@ -394,39 +395,101 @@ bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string
 		}
 		return temp;
 	}
-}
+}*/
 
-vector<int> QueryEvaluator::evaluateCalls(Relationship r, string selectedSyn){
+void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 	Calls *call = pkb->getCalls();
+	ProcTable *proc = pkb->getProcTable();
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	vector<int> ans; 
+	vector<int> ans;
+	vector<int> called;
+	vector<Pair> callAns;
 
-	//Select p Calls(p, q) OR Select p Calls(p, _)
-	if((isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1) || (selectedSyn==tk1 && tk2=="_")){
-		ans = call->getCalls();
+	//Calls(p, q) OR Calls(p, _) OR Calls(_,q)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (isalpha(tk1[0])&&tk2=="_") || (tk1=="_"&&isalpha(tk2[0]))){
+		ans = proc->getAllProcIndexes();
+		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+			string procName = proc->getProcName(*it);
+			called = call->getCalled(procName);
+
+			for(vector<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
+				callAns.push_back(Pair (*it, *it2, tk1, tk2));
+			}
+		}
+
 	}
 
-	//Select q Calls(p, q) OR Select q Calls(_, q)
-	else if((isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2) || (selectedSyn==tk2 && tk1=="_")){
-		ans = call->getCalled();
-	}
-
-	//Select p Calls(p, "Second")
+	//Select p Calls(p, "Second") 
 	else if(isalpha(tk1[0])){
 		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
+		int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
+
+		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+			callAns.push_back(Pair (*it, procIndex, tk1, tk2));
+		}
 	}
 
 	//Select q Calls("First", q)
-	else if(isalpha(tk2[0]) || tk2=="_"){
-		ans = call->getCalled(tk2.substr(1,tk2.length()-2));
+	else if(isalpha(tk2[0])){
+		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
+
+		int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
+
+		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+			callAns.push_back(Pair (procIndex, *it, tk1, tk2));
+		}
+	}
+
+	//Calls(_,_)
+	else if(tk1=="_" && tk2=="_"){
+		ans = call->getCalls();
+		if(!ans.empty()){
+			callAns.push_back(Pair (1, 1, "true", "true"));
+		}else{
+			callAns.push_back(Pair (0, 0, "false", "false"));
+		}
+	}
+
+	//Calls("Third", "Fourth")
+	else {
+		if(call->isCalls(tk1.substr(1, tk1.length()-2), tk2.substr(1,tk2.length()-2))){
+			callAns.push_back(Pair (1, 1, "true", "true"));
+		}else{
+			callAns.push_back(Pair (0, 0, "false", "false"));
+		}
+	}
+
+//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+		removePairsFromRelAns(&callAns, tk1, 1);
+		removePairsFromRelAns(&callAns, tk2, 2);
+		removePairs(callAns, tk1);
+		removePairs(callAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&callAns, tk1, 1);
+		removePairs(callAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&callAns, tk2, 2);
+		removePairs(callAns, tk2);
+		insertLinks(tk2, relIndex);
 	}
 
 	else {
-		
+
 	}
 
-	return ans;
+	relAns.insert(make_pair(relIndex, callAns));
 
 
 }
@@ -447,6 +510,7 @@ vector<int> * QueryEvaluator::findAnswerVectorFromToken(string token){
 	return point;
 }
 
+/*
 //Returns true if tk1 and tk2 are linked
 bool QueryEvaluator::isLinked(string tk1, string tk2){
 
@@ -465,7 +529,7 @@ vector<string> QueryEvaluator::findLinks(string token){
 			return *it;
 		}
 	}
-}
+}*/
 
 //return set of int answers for a particular syn
 set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
