@@ -27,6 +27,9 @@ public:
 	PROCINDEX getProcIndex (PROCNAME);
 	int getNumProcedures(); 
 
+	//REQUESTED PROCEDURES
+	vector<PROCINDEX> getAllProcIndexes();
+
 };
 
 #endif

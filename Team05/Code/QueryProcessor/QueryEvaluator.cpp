@@ -1110,19 +1110,41 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	Modifies *mod = pkb->getModifies();
 	TypeTable *t = pkb->getTypeTable();
 	VarTable *varTab = pkb->getVarTable();
+	ProcTable *proc = pkb->getProcTable();
 	vector<int> selected;
 	vector<Pair> modAns;
 	vector<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
+	//Select proc not done
+
 	//Modifies(a,v)
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		selected = t->getAllStmts(i1->second);
-		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-			answer = mod->getModifies(*it);
-			for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
-				modAns.push_back(Pair (*it, *it2, tk1, tk2));
+
+		//If first token is of procedure type
+		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+
+			selected = proc->getAllProcIndexes();
+
+			//iterate through all procedures
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = mod->getModifiesProc(*it);
+				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+					modAns.push_back(Pair (*it, *it2, tk1, tk2));
+				}
+			}
+		} 
+		
+
+		//Otherwise
+		else {
+			selected = t->getAllStmts(i1->second);
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = mod->getModifies(*it);
+				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+					modAns.push_back(Pair (*it, *it2, tk1, tk2));
+				}
 			}
 		}
 	}
@@ -1145,9 +1167,21 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
 
-		answer = mod->getModifies(i1->second,varName);
-		for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-			modAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+		//If first token is of type procedure
+		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+
+			answer = mod->getModifiesProcVar(varName);
+			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				modAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+			}
+		}
+
+		//otherwise
+		else {
+			answer = mod->getModifies(i1->second,varName);
+			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				modAns.push_back(Pair (*it, varTab->getVarIndex(varName), tk1, tk2));
+			}
 		}
 
 	}
@@ -1157,6 +1191,17 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		selected = mod->getModifies(atoi(tk1.c_str()));
 		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
 			modAns.push_back(Pair (atoi(tk1.c_str()), *it, tk1, tk2));
+		}
+	}
+
+	//Modifies("Third", "x")
+	else if(tk1[0]=='\"'){
+		string procName = tk1.substr(1,tk1.length()-2);
+		string varName = tk2.substr(1,tk2.length()-2);
+		if(mod->isModifiesProc(procName, varName)){
+			modAns.push_back(Pair (1,1,"true","true"));
+		}else {
+			modAns.push_back(Pair (0,0,"false","false"));
 		}
 	}
 
@@ -1170,7 +1215,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		 }
 	}
 
-			//If both a and b exist in linkages
+	//If both a and b exist in linkages
 	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 
 		removePairsFromRelAns(&modAns, tk1, 1);
@@ -1247,13 +1292,21 @@ vector<int> QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std:
 	string tk2=r.getToken2();
 	Uses *use = pkb->getUses();
 	TypeTable *t = pkb->getTypeTable();
+	VarTable *varTab = pkb->getVarTable();
 	vector<int> selected;
 	set<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	//Select a Uses(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
+	//Uses(a,v)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		selected = t->getAllStmts(i1->second);
+		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			answer = mod->getModifies(*it);
+			for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+				modAns.push_back(Pair (*it, *it2, tk1, tk2));
+			}
+		}
 		cout<<"Calling getUses(TYPE)"<<endl;
 		selected = use->getUses(i1->second);
 		return selected;

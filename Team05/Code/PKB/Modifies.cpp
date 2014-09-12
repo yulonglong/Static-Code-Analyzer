@@ -199,3 +199,13 @@ void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
 	} catch (...){
 	}
 }
+
+vector<PROCINDEX> Modifies::getModifiesProcVar(VARNAME vn){
+	vector<PROCINDEX> p;
+
+	return p;
+}
+
+bool Modifies::isModifiesProc(PROCNAME p, VARNAME v){
+	return true;
+}
