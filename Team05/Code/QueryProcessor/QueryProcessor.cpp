@@ -22,7 +22,9 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 
 	cout<<"End parse query"<<endl;
 	cout<<"Begin evaluate query"<<endl;
-	if(parsedQuery.getSelectedSyn() == "BOOLEAN") {
+
+	//Loophole here. I've changed getSelectedSyn to getSelectedSyn.at(0) for the time being since selected syn is a vector now
+	if(parsedQuery.getSelectedSyn().at(0) == "BOOLEAN") {
 		bool ans = qe.evaluateQueryBoolean(parsedQuery);
 		if(ans)
 			result.push_back("true");
@@ -32,7 +34,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	else {
 		vector<int> ans = qe.evaluateQuery(parsedQuery);
 		unordered_map<string, TypeTable::SynType> m = parsedQuery.getSynTable();
-		unordered_map<string, TypeTable::SynType>::iterator i = m.find(parsedQuery.getSelectedSyn());
+		unordered_map<string, TypeTable::SynType>::iterator i = m.find(parsedQuery.getSelectedSyn().at(0));//Same problem for selectedSyn
 		TypeTable tt = *pkb->getTypeTable();
 
 		if(i->second == 6) {

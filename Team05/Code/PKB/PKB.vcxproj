@@ -82,6 +82,7 @@
     <ClCompile Include="ConstTable.cpp" />
     <ClCompile Include="Follows.cpp" />
     <ClCompile Include="Modifies.cpp" />
+    <ClCompile Include="Pair.cpp" />
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="ProcTable.cpp" />
@@ -94,6 +95,7 @@
     <ClInclude Include="ConstTable.h" />
     <ClInclude Include="Follows.h" />
     <ClInclude Include="Modifies.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="Parent.h" />
     <ClInclude Include="PKB.h" />
     <ClInclude Include="ProcTable.h" />

@@ -8,12 +8,7 @@
 
 using namespace std;
 
-struct QueryEvaluator::cmp{
-	bool operator()(Pair p1, Pair p2){
 
-		return p1.ans1==p2.ans1 && p1.ans2==p2.ans2 && p1.token1==p2.token1 && p1.token2==p2.token2;
-	}
-};
 
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
@@ -28,18 +23,31 @@ QueryEvaluator::~QueryEvaluator(){
 //function that orders the relationship vector for efficiency and faster running time
 vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	vector<Relationship> reorderedRelations;
-	for(vector<Relationship>::iterator it = r.begin(); it!=r.end(); it++){
+	Relationship *rw;
 
+	for(vector<Relationship>::iterator it = r.begin(); it!=r.end(); it++){
 		//Swap pattern and relationships with non-alpha parameters to the front for first evaluation
-		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0]) || (it->getRelType()==Relationship::WITH && (!isalpha(it->getToken1()[0])|| !isalpha(it->getToken2()[0])))){
+		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0])){
 			r.insert(r.begin(), *it);
 			it = r.erase(it);
 		}
 
+		else if(it->getRelType()==Relationship::WITH){
+			Relationship relWith = *it;
+			rw = &relWith;
+			it = r.erase(it);
+		}
+
 	}
+
+	reorderedRelations.push_back(*rw);
+
+	return reorderedRelations;
 }
 
 vector<int> QueryEvaluator::evaluateQuery(Query q){
+
+	/*
 	//order the relationship vector
 	vector<Relationship> relations = orderRelationship(q.getRelVect());
 	vecOfRelations = relations;
@@ -242,9 +250,13 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 				 }
 		}
 	}
-	return intersectAnswers(answers);	
+	return intersectAnswers(answers);	*/
+
+	vector<int> a;
+	return a;
 }
 
+/*
 vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
 
 	cout<<"Intersecting Answers"<<endl;
@@ -304,7 +316,7 @@ bool QueryEvaluator::evaluateQueryBoolean(Query q){
 	return answers;
 }
 
-/*
+
 bool QueryEvaluator::evaluateCallsBoolean(Relationship r){
 	Calls *call = pkb->getCalls();
 	string tk1 = r.getToken1();
@@ -595,6 +607,22 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token){
 	}
 }
 
+void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+
+	//Retrieve the two with syns
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+
+	//with v1.varName = p.procName with v1.varName!=v2.varName
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
+	}
+	//with v.varName = "x" with p.procName = "Third"
+	else {
+
+	}
+}
+
 void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -785,13 +813,13 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 
 
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	string tk1=r.getToken1();
+	/*string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Follows *f = pkb->getFollows();
 	TypeTable *t = pkb->getTypeTable();
 	set<int> answer;
 	vector<int> selected;
-	set<Pair, cmp> followsStarAnsSet;
+	set<Pair> followsStarAnsSet;//REMEMBER TO INSERT SELF DEFINED COMPARATOR
 	vector<Pair> followsStarAns;
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
@@ -905,7 +933,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 	}
 
-	relAns.insert(make_pair(relIndex, followsStarAns));
+	relAns.insert(make_pair(relIndex, followsStarAns));*/
 }
 
 void QueryEvaluator::insertLinks(string tk, int relIndex){
