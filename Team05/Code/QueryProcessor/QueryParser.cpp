@@ -472,14 +472,17 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			withToken[0] = v.at(i+1);
 			withToken[1] = v.at(i+2);
 
-			//check whether first token is a synonym
+			//check whether first token is a single synonym, must be of type prog_line
 			bool withValid1 = true;
 			string firstParam = v.at(i+1);
 			bool match = regexMatch("("+synonym+")",firstParam);
-			//if it is a synonym
+
 			if(match){
 				it = synMap.find(firstParam);
 				if(it==synMap.end()){//if synonym not found
+					withValid1 = false;
+				}
+				else if(it->second != TypeTable::PROGLINE){
 					withValid1 = false;
 				}
 			}
@@ -491,21 +494,35 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 					if(it==synMap.end()){//if synonym not found
 						withValid1 = false;
 					}
-					else{//if it is found
-						withSyn[0]=result[1];
-						withToken[0]=result[2];
+					else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+						withValid1 = false;
+					}
+					else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+						withValid1 = false;
+					}
+					else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
+						withValid1 = false;
+					}
+					else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
+						withValid1 = false;
+					}
+					else{
+						withToken[0]= result[1];
 					}
 				}
 			}
 
-			//check whether second token is a synonym
+			//check whether first token is a single synonym, must be of type prog_line
 			bool withValid2 = true;
 			string secondParam = v.at(i+2);
 			match = regexMatch("("+synonym+")",secondParam);
-			//if it is a synonym
+
 			if(match){
 				it = synMap.find(secondParam);
 				if(it==synMap.end()){//if synonym not found
+					withValid2 = false;
+				}
+				else if(it->second != TypeTable::PROGLINE){
 					withValid2 = false;
 				}
 			}
@@ -514,20 +531,30 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 				match = regexMatchWithResult("("+synonym+").("+attrName+")",secondParam,result);
 				if(match){
 					it = synMap.find(result[1]);
+
 					if(it==synMap.end()){//if synonym not found
 						withValid2 = false;
 					}
-					else{//if it is found
-						withSyn[1]=result[1];
-						withToken[1]=result[2];
+					else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+						withValid2 = false;
+					}
+					else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+						withValid2 = false;
+					}
+					else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
+						withValid2 = false;
+					}
+					else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
+						withValid2 = false;
+					}
+					else{
+						withToken[1]= result[1];
 					}
 				}
 			}
 
 			if((withValid1)&&(withValid2)){
 				Relationship rel(v.at(i), withToken[0], withToken[1]);
-				rel.setWithSyn(withSyn[0],0);
-				rel.setWithSyn(withSyn[1],1);
 				query.addRelationship(rel);
 				i = i+2;
 			}
