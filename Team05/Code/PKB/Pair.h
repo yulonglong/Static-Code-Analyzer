@@ -21,7 +21,8 @@ public:
 	Pair(int, int, std::string, std::string);
 	Pair();
 
-	//friend bool operator==(Pair &p1, Pair &p2);
+	bool operator <(const Pair &p) const;
+	bool operator >(const Pair &p) const;
 };
 
 /*

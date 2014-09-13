@@ -813,7 +813,14 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 
 
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	/*string tk1=r.getToken1();
+	/*Pair p1;
+	Pair p2;
+
+	set<Pair> p;
+	p.insert(Pair (1,1,"d","d"));
+	p.insert(Pair (1,1,"d","d"));
+	*/
+	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Follows *f = pkb->getFollows();
 	TypeTable *t = pkb->getTypeTable();
@@ -821,10 +828,12 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	vector<int> selected;
 	set<Pair> followsStarAnsSet;//REMEMBER TO INSERT SELF DEFINED COMPARATOR
 	vector<Pair> followsStarAns;
+
+	
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-
+	
 	//Select w such that Follows*(w, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
 
@@ -847,7 +856,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			}while(true);
 		}
 	}
-
+	
 	//Select a such that Follows*(a, 13)
 	else if(isalpha(tk1[0])){
 		cout<<"Handling Follows*(type, stmtnum)"<<endl;
@@ -900,10 +909,14 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 				break;
 		}
 	}
-
+	
 	//copy set into vector
-	copy(followsStarAnsSet.begin(), followsStarAnsSet.end(),followsStarAns);
+	//copy(followsStarAnsSet.begin(), followsStarAnsSet.end(),followsStarAns);
+	for(set<Pair>::iterator it=followsStarAnsSet.begin(); it!=followsStarAnsSet.end(); it++){
+		followsStarAns.push_back(*it);
+	}
 
+	
 	//If both a and b exist in linkages
 	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 
@@ -933,7 +946,8 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 	}
 
-	relAns.insert(make_pair(relIndex, followsStarAns));*/
+	relAns.insert(make_pair(relIndex, followsStarAns));
+	
 }
 
 void QueryEvaluator::insertLinks(string tk, int relIndex){
