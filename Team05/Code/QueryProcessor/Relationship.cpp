@@ -39,6 +39,8 @@ Relationship::RelType Relationship::getRelType(string relStr){
 		return WITH;
 	} else if (relStr=="pattern"){
 		return PATTERN;
+	} else {
+		return INVALIDREL;
 	}
 }
 
@@ -53,7 +55,7 @@ Relationship::TokenType Relationship::getTokenType(string tokenStr){
 	} else if (tokenStr == "integer") {
 	    return INTEGER;
     } else {
-		return INVALID;
+		return INVALIDTOKEN;
 	}
 }
 
@@ -82,6 +84,18 @@ Relationship::Relationship(string newRel, string newToken1, TokenType newType1, 
 {
     relName = stringToLower(newRel);
 	relType = getRelType(relName);
+    token1 = newToken1;
+	token1Type = newType1;
+    token2 = newToken2;
+	token2Type = newType2;
+}
+
+//constructor for pattern clause with type
+Relationship::Relationship(string newRel, string newPatternSyn, string newToken1, TokenType newType1, string newToken2, TokenType newType2 )
+{
+    relName = stringToLower(newRel);
+	relType = getRelType(relName);
+	patternSyn = newPatternSyn;
     token1 = newToken1;
 	token1Type = newType1;
     token2 = newToken2;

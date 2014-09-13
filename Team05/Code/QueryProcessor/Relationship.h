@@ -11,9 +11,9 @@ using namespace std;
 class Relationship
 {	
 	public:
-		enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR, MODIFIES, USES, CALLS, CALLSSTAR, NEXT, NEXTSTAR, AFFECTS, AFFECTSSTAR, WITH, PATTERN};
+		enum RelType{FOLLOWS, FOLLOWSSTAR, PARENT, PARENTSTAR, MODIFIES, USES, CALLS, CALLSSTAR, NEXT, NEXTSTAR, AFFECTS, AFFECTSSTAR, WITH, PATTERN, INVALIDREL};
 		static RelType getRelType(string);
-		enum TokenType{ SYNONYM, IDENTIFIER, INTEGER, UNDERSCORE, INVALID};
+		enum TokenType{ SYNONYM, IDENTIFIER, INTEGER, UNDERSCORE, UNDERSCOREIDENT, INVALIDTOKEN};
 		static TokenType getTokenType(string);
 
     private:
@@ -32,6 +32,8 @@ class Relationship
 		Relationship(string, string, string, string);
 		//constructor for clause, token1, token1type, token2, token2type
 		Relationship(string, string, TokenType, string ,TokenType);
+		//constructor for clause, patternSyn, token1, token1type, token2, token2type
+		Relationship(string, string, string, TokenType, string ,TokenType);
         
 		//getter
 		string getRelName();

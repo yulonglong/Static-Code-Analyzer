@@ -370,6 +370,27 @@ void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
 	}
 }
 
+Relationship::TokenType QueryParser::detectTokenType(string token){
+	if( regexMatch("("+synonym+")",token) ){
+		return Relationship::SYNONYM;
+	}
+	else if( regexMatch("(_)",token) ){
+		return Relationship::UNDERSCORE;
+	}
+	else if( regexMatch("(\""+IDENT+"\")",token) ){
+		return Relationship::IDENTIFIER;
+	}
+	else if( regexMatch("("+INTEGER+")",token) ){
+		return Relationship::INTEGER;
+	}
+	else if( regexMatch("(_\""+expr+"\"_)",token) ){
+		return Relationship::UNDERSCOREIDENT;
+	}
+	else{
+		return Relationship::INVALIDTOKEN;
+	}
+}
+
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
 	vector<string> selectedSyn;
@@ -419,7 +440,7 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			}
 
 			if((formatValid)&&(synValid)){
-				Relationship rel(v.at(i), v.at(i+1), v.at(i+2));
+				Relationship rel(v.at(i), v.at(i+1), detectTokenType(v.at(i+1)), v.at(i+2),  detectTokenType(v.at(i+2)));
 				query.addRelationship(rel);
 				i = i+2;
 			}
@@ -453,7 +474,7 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			if((patternSynValid)&&(varRefValid)){
 				//query.setPatternSyn(v.at(i+1));
 				//Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
-				Relationship rel(v.at(i),v.at(i+1),v.at(i+2),v.at(i+3));
+				Relationship rel(v.at(i), v.at(i+1), v.at(i+2), detectTokenType(v.at(i+2)), v.at(i+3), detectTokenType(v.at(i+3)));
 				query.addRelationship(rel);
 				i = i+3;
 			}
@@ -554,7 +575,7 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			}
 
 			if((withValid1)&&(withValid2)){
-				Relationship rel(v.at(i), withToken[0], withToken[1]);
+				Relationship rel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]));
 				query.addRelationship(rel);
 				i = i+2;
 			}

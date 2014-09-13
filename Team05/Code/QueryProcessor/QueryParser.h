@@ -133,8 +133,9 @@ private:
 	bool parseDesignEntity(string);
 	bool parseSelectCl(string);
 
-	//QueryValidatior methods
+	//QueryValidation methods
 	void deepCopyTableParam(string[2], string);
+	Relationship::TokenType detectTokenType(string);
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:

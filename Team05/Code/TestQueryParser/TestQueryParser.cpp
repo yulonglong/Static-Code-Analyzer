@@ -119,13 +119,15 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a","\"oSCar\""));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"\"oSCar\"",Relationship::IDENTIFIER));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	
@@ -183,13 +185,15 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a","v"));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"v",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
@@ -245,13 +249,15 @@ void QueryParserTest::testQueryStmtSelectUses(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Uses","s","\"delta\""));
+	expectedRelVect.push_back(Relationship("Uses","s",Relationship::SYNONYM,"\"delta\"",Relationship::IDENTIFIER));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
@@ -307,13 +313,15 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Parent*","5","s"));
+	expectedRelVect.push_back(Relationship("Parent*","5",Relationship::INTEGER,"s",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -370,14 +378,16 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a","\"x\""));
-	expectedRelVect.push_back(Relationship("pattern","a1","_","_"));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
+	expectedRelVect.push_back(Relationship("pattern","a1","_",Relationship::UNDERSCORE,"_",Relationship::UNDERSCORE));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -436,14 +446,16 @@ void QueryParserTest::testQueryComplex1(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Uses","s","v"));
-	expectedRelVect.push_back(Relationship("pattern","a1","v2","_\"asd\"_"));
+	expectedRelVect.push_back(Relationship("Uses","s",Relationship::SYNONYM,"v",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("pattern","a1","v2",Relationship::SYNONYM,"_\"asd\"_",Relationship::UNDERSCOREIDENT));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -499,13 +511,15 @@ void QueryParserTest::testQueryFollows1(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Follows","w","a"));
+	expectedRelVect.push_back(Relationship("Follows","w",Relationship::SYNONYM,"a",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -561,13 +575,15 @@ void QueryParserTest::testQueryModifies1(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a","v"));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"v",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -623,13 +639,15 @@ void QueryParserTest::testQueryModifies2(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a","a1"));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"a1",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
@@ -685,13 +703,15 @@ void QueryParserTest::testQueryPattern1(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("pattern","a","a","_"));
+	expectedRelVect.push_back(Relationship("pattern","a","a",Relationship::SYNONYM,"_",Relationship::UNDERSCORE));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
@@ -748,13 +768,15 @@ void QueryParserTest::testQueryWith1(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("with","p","v"));
+	expectedRelVect.push_back(Relationship("with","p",Relationship::SYNONYM,"v",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 	return;
@@ -810,13 +832,15 @@ void QueryParserTest::testQueryWith2(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("with","s","c"));
+	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"c",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
@@ -872,14 +896,16 @@ void QueryParserTest::testQueryWith3(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Follows*","n","s"));
-	expectedRelVect.push_back(Relationship("with","n","10"));
+	expectedRelVect.push_back(Relationship("Follows*","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"10",Relationship::INTEGER));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
 	}
 	//RELATIONSHIP END
 
