@@ -6,6 +6,8 @@
 #include <sstream>
 using namespace std;
 
+//GRAMMAR RULES DECLARATION BEGIN
+
 //constant string
 const string QueryParser::BOOLEAN = "BOOLEAN";
 const string QueryParser::MODIFIES = "modifies";
@@ -102,6 +104,10 @@ const string QueryParser::nextParam[] = {lineRef , lineRef};
 const string QueryParser::nextStarParam[] = {lineRef , lineRef};
 const string QueryParser::affectsParam[] = {stmtRef , stmtRef};
 const string QueryParser::affectsStarParam[] = {stmtRef , stmtRef};
+
+//GRAMMAR RULES DECLARATION END
+
+
 
 QueryParser::QueryParser(){
 	selectStatement.clear();
@@ -445,8 +451,9 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 			}
 
 			if((patternSynValid)&&(varRefValid)){
-				query.setPatternSyn(v.at(i+1));
-				Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
+				//query.setPatternSyn(v.at(i+1));
+				//Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
+				Relationship rel(v.at(i),v.at(i+1),v.at(i+2),v.at(i+3));
 				query.addRelationship(rel);
 				i = i+3;
 			}
