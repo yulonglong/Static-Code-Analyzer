@@ -21,6 +21,12 @@
 
 using namespace std;
 
+/*! \brief A set of methods to extract more relationships after the CodeParser has parsed the SIMPLE source program.
+ * \ingroup 
+ * 
+ * 
+ */
+
 void extractorDriver(PKB* pkb);
 void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent);
 void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
