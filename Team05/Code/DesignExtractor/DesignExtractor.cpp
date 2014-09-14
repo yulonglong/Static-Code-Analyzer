@@ -6,6 +6,9 @@
 #include "DesignExtractor.h"
 using namespace std;
 
+bool debugModeIteration1 = 0; 
+bool debugModeIteration2 = 0; 
+
 int counter = -1;
 Node* rootCFGNode;
 Node* currASTNode;
@@ -13,9 +16,6 @@ Node* currCFGNode;
 // Node* CFGRoot;
 // Node* ASTRoot;
 
-//unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
-// VarTable* varTable; 
-// ProcTable* procTable; 
 queue<QueueItem> queueToProcess;
 
 void extractorDriver(PKB *pkb) {
@@ -30,9 +30,11 @@ void extractorDriver(PKB *pkb) {
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
-
-	// printCallsTable(callsTable);
-	// cout << "DE has obtained tables from PKB" << endl;
+	
+	if (debugModeIteration1) {
+		printCallsTable(callsTable);
+		cout << "DE has obtained tables from PKB" << endl;
+	}
 	
 	Node* ASTRoot = pkb->getASTRoot();
 	Node* CFGRoot = pkb->getCFGRoot();
@@ -60,6 +62,28 @@ void extractorDriver(PKB *pkb) {
 	// pkb->setCFGRoot(CFGRoot);
 }
 
+// actual building of CFG 
+Node* buildCFG(Node &ASTNode) {
+	currASTNode = &ASTNode; 
+	counter++; 
+
+	string ASTNodeType = ASTNode.getType();
+	if (ASTNodeType == "program") {
+		currCFGNode = new Node("program", counter);
+		rootCFGNode = currCFGNode;
+	} else if (ASTNodeType == "procedure") {
+		cout << "this is a procedure" << endl; 
+	} else {
+		cout << "yay!" << endl; 
+	}
+
+	// go through all children of current AST node 
+	for (unsigned i=0;i<ASTNode.getChild().size();i++) {
+		currCFGNode = buildCFG(*ASTNode.getChild(i));	
+	}
+	return currCFGNode;
+}
+
 
 
 // extracting of modifies and uses relationship for procedures and statements.
@@ -68,7 +92,9 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
-	// printQueue();
+	if (debugModeIteration1) {
+		printQueue();		
+	}	
 	// For each of the entries in the queue, dequeue and do the following 
 	// For the procedure, find the min and max prog line 
 	// Find all the variables modified, then set modifies relationship for proglines and procedures
@@ -83,7 +109,9 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 		int procIndex = item.getProcIndex();
 		unsigned int firstProgLine = getFirstProgLine(procIndex, ASTRoot, procTable);
 		unsigned int lastProgLine = getLastProgLine(procIndex, ASTRoot, procTable);
-		// cout << "Min: " << firstProgLine << ", Max: " << lastProgLine << endl;
+		if (debugModeIteration1) {
+			cout << "Min: " << firstProgLine << ", Max: " << lastProgLine << endl;
+		}
 
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
@@ -104,11 +132,15 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 					uses.setUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
-					// cout << "progLine: " << progLine << endl;
+					if (debugModeIteration1) {
+						cout << "progLine: " << progLine << endl;
+					} 
 					int parentProgLine = parent.getParent(progLine);
 					bool existsParent = (parentProgLine != -1);
 					while (existsParent) {
-						// cout << "parentProgLine: " << parentProgLine << endl;
+						if (debugModeIteration1) {
+							cout << "parentProgLine: " << parentProgLine << endl;
+						}
 						// SET:
 						modifies.setModifies(parentProgLine, variablesModifiedByProgLine); 
 						// SET:
@@ -140,28 +172,39 @@ void clear( std::queue<QueueItem> &q ) {
 }
 
 void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
-	// cout << "printing queue again: " << endl;
-	// printQueue();
+	if (debugModeIteration1) {
+		cout << "printing queue again: " << endl;
+		printQueue();
+	}
 	vector<int> emptyVector = vector<int>();
 	DFS(0, emptyVector, callsTable);
 }
 
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	try {
-		// cout << callsTable.at(source).empty() << endl;
+		if (debugModeIteration1) {
+			cout << callsTable.at(source).empty() << endl;
+		}
 		vector<CALLSPAIR> v;
 		v = vector<CALLSPAIR>();
-		// cout << "empty v created" << endl;
+		if (debugModeIteration1) {
+			cout << "empty v created" << endl;
+		}
 		v = callsTable.at(source);
-		// cout << "v updated" << endl;
+		if (debugModeIteration1) {
+ 			cout << "v updated" << endl;
+		}
+
 		if (!v.empty()) {
 			for (unsigned int i=0; i<callsTable.at(source).size(); i++) {
 				vector<int> tempProgLine = progLine; 
 				tempProgLine.push_back(callsTable.at(source).at(i).second);
 				DFS(callsTable.at(source).at(i).first, tempProgLine, callsTable); 
 			}
-			// cout << "push to queue: ";
-			// QueueItem(source, progLine).print();
+			if (debugModeIteration1) {
+				cout << "push to queue: ";
+				QueueItem(source, progLine).print();
+			}
 			queueToProcess.push(QueueItem(source, progLine));
 		
 		
@@ -207,27 +250,6 @@ void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLS
 
 }
 
-// actual building of CFG 
-Node* buildCFG(Node &ASTNode) {
-	currASTNode = &ASTNode; 
-	counter++; 
-
-	string ASTNodeType = ASTNode.getType();
-	if (ASTNodeType == "program") {
-		currCFGNode = new Node("program", counter);
-		rootCFGNode = currCFGNode;
-	} else if (ASTNodeType == "procedure") {
-		cout << "this is a procedure" << endl; 
-	} else {
-		cout << "yay!" << endl; 
-	}
-
-	// go through all children of current AST node 
-	for (unsigned i=0;i<ASTNode.getChild().size();i++) {
-		currCFGNode = buildCFG(*ASTNode.getChild(i));	
-	}
-	return currCFGNode;
-}
 
 void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	cout << "Calls Table is:" << endl; 
