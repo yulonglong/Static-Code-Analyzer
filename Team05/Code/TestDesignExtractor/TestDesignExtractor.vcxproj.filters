@@ -21,9 +21,15 @@
     <ClCompile Include="TestExtractRelationships.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestBuildCFG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestExtractRelationships.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestBuildCFG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

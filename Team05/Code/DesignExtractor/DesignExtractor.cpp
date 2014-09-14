@@ -11,10 +11,8 @@ bool debugModeIteration2 = 0;
 
 int counter = -1;
 Node* rootCFGNode;
-Node* currASTNode;
 Node* currCFGNode;
-// Node* CFGRoot;
-// Node* ASTRoot;
+Node* currASTNode;
 
 queue<QueueItem> queueToProcess;
 
@@ -42,48 +40,100 @@ void extractorDriver(PKB *pkb) {
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 	cout << "DE: Extracted Relationships" << endl;
 	
-	/*
+	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+}
+
+void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 	try {
-		// cout << "Building CFG..." << endl;
-		// CFGRoot = buildCFG(*ASTRoot);
-		extractRelationships(*ASTRoot, callsTable);
+		cout << "Building CFG" << endl;
+		buildCFG(ASTRoot);
 	} catch(const std::runtime_error& re) {
-		// speciffic handling for runtime_error
+		// specific handling for runtime_error
 		std::cerr << "Runtime error: " << re.what() << std::endl;
 	} catch(const std::exception& ex) {
-		// speciffic handling for all exceptions extending std::exception, except
+		// specific handling for all exceptions extending std::exception, except
 		// std::runtime_error which is handled explicitly
 		std::cerr << "Error occurred: " << ex.what() << std::endl; 
 	} catch(...) {
 		// catch any other errors (that we have no information about)
 		std::cerr << "Unknown failure occured. Possible memory corruption" << std::endl;
 	}
-	*/
-	// pkb->setCFGRoot(CFGRoot);
+	pkb.setCFGRoot(rootCFGNode);
 }
+
 
 // actual building of CFG 
-Node* buildCFG(Node &ASTNode) {
-	currASTNode = &ASTNode; 
-	counter++; 
+void buildCFG(Node &ASTRroot) {
+	// create CFG Root Node with progLine = 0
+	currASTNode = &ASTRroot; 
+	currCFGNode = new Node("program", 0);
+	rootCFGNode = currCFGNode;
 
-	string ASTNodeType = ASTNode.getType();
-	if (ASTNodeType == "program") {
-		currCFGNode = new Node("program", counter);
-		rootCFGNode = currCFGNode;
-	} else if (ASTNodeType == "procedure") {
-		cout << "this is a procedure" << endl; 
-	} else {
-		cout << "yay!" << endl; 
-	}
+	// iteratively traverse each of the type = procedure nodes in AST
+	// for each AST Node :
+	//		- update the currCFGNode to point to CFGRoot 
+	//		- create CFG for procedure and connect it to the CFGRoot 
+	//		- update parent pointer 
+	vector<Node*> children = currASTNode->getChild();
 
-	// go through all children of current AST node 
-	for (unsigned i=0;i<ASTNode.getChild().size();i++) {
-		currCFGNode = buildCFG(*ASTNode.getChild(i));	
+	for (int i=0; i<children.size(); i++) {
+		currASTNode = children[i];
+		currCFGNode = rootCFGNode; 	
+		createCFGForProcedure();
 	}
-	return currCFGNode;
 }
 
+void createCFGForProcedure() {
+	string currASTNodeType = currASTNode->getType();
+	if (currASTNodeType == "assign" || currASTNodeType == "call" || currASTNodeType == "while" || currASTNodeType == "if") {
+		createNewNodeAndAttachToCFG();
+	} else if (currASTNodeType == "else") {
+		// update currCFGNode 
+		// currCFGNode = getCFGNode(currASTNode.getParent.getProgline())
+		createNewNodeAndAttachToCFG();
+	}
+
+	// go through all children nodes of currASTNode (and update currASTNode)
+	// and then recursively call createCFTForProcedure()
+	vector<Node*> children = currASTNode->getChild();
+	for (int i=0; i<children.size(); i++) {
+		currASTNode = children[i];
+		createCFGForProcedure();
+	}
+
+	// NO NEED? currASTNodeType = currASTNode->getType();
+	// if (currASTNodeType == "while") {
+		// fromProgLine = currASTNode.getRightChild.getLastChild()
+		// getCFGNode(fromProgLine).addChild(currASTNode.progLine)
+	// }	
+	
+}
+
+void createNewNodeAndAttachToCFG() {
+	Node* newNode = new Node(currASTNode->getType(), currASTNode->getProgLine());
+	if (debugModeIteration2) {
+		cout << "adding new ";
+		newNode->printCFGNode();
+		cout << endl;
+	}	
+	currCFGNode->setChild(newNode);
+	if (debugModeIteration2) {
+		cout << "making ";
+		newNode->printCFGNode();
+		cout << "the child of ";
+		currCFGNode->printCFGNode();
+		cout << endl;
+	}	
+	newNode->setParent(currCFGNode);
+	if (debugModeIteration2) {
+		cout << "making ";
+		currCFGNode->printCFGNode();
+		cout << "the parent of ";
+		newNode->printCFGNode();
+		cout << endl;
+	}	
+	currCFGNode = newNode; 
+}
 
 
 // extracting of modifies and uses relationship for procedures and statements.
@@ -292,7 +342,6 @@ int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
 	}
 	return curr->getProgLine();
 }
-
 
 int getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
 	Node* curr = &ASTRoot; 
