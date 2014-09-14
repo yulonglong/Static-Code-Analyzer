@@ -277,33 +277,6 @@ bool QueryParser::parseSelectCl(string query){
 	return true;
 }
 
-Query QueryParser::queryParse(string queryStr, bool &valid){
-	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
-	//cout << "here" << endl;
-	istringstream istream(queryStr);
-
-	string querySubStr;
-	while(getline(istream,querySubStr,';')){
-		bool validDesignEntity = parseDesignEntity(querySubStr);
-		if(validDesignEntity){
-			continue;
-		}
-		bool validSelectCl = parseSelectCl(querySubStr);
-		if(validSelectCl){
-			continue;
-		}
-		if((validDesignEntity|validSelectCl)==false){
-			valid = false;
-			Query queryDummy;
-			return queryDummy;
-		}
-	}
-	
-	valid = true;
-	Query query = constructAndValidateQuery(selectStatement, synMap, valid);
-	return query;
-}
-
 
 //QueryValidation and Create Query
 
@@ -391,201 +364,266 @@ Relationship::TokenType QueryParser::detectTokenType(string token){
 	}
 }
 
+Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool& clauseValid){
+	v.at(i) = stringToLower(v.at(i));
+	string relationRef = v.at(i);
+
+	bool formatValid = true;
+	bool synValid = true;
+
+	string tableParam[2];
+	deepCopyTableParam(tableParam,relationRef);
+
+	string param[2];
+	param[0] = v.at(i+1);
+	param[1] = v.at(i+2);
+
+	for(int index=0;index<2;index++){
+		bool match = regexMatch("("+tableParam[index]+")",param[index]);
+		if(!match){
+			formatValid = false;
+		}				
+	}
+			
+	if(formatValid){
+		for(int index=0;index<2;index++){
+			bool match = regexMatch("("+synonym+")",param[index]);
+			//if it is a synonym
+			if(match){
+				unordered_map<string, TypeTable::SynType>::iterator it;
+				it = synMap.find(param[index]);
+				if(it==synMap.end()){
+					synValid=false;
+				}
+			}				
+		}
+	}
+
+	if((formatValid)&&(synValid)){
+		Relationship clauseRel(v.at(i), v.at(i+1), detectTokenType(v.at(i+1)), v.at(i+2),  detectTokenType(v.at(i+2)));
+		i = i+2;
+		clauseValid = true;
+		return clauseRel;
+	}
+	else{
+		clauseValid = false;
+		return Relationship();
+	}
+}
+
+Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patternValid){
+	v.at(i) = stringToLower(v.at(i));
+
+	bool patternSynValid = true;
+	string patternSyn = v.at(i+1);
+	unordered_map<string, TypeTable::SynType>::iterator it;
+	it = synMap.find(patternSyn);
+	if(it==synMap.end()){
+		patternSynValid = false;
+	}
+			
+	bool varRefValid = true;
+	string firstParam = v.at(i+2);
+	bool match = regexMatch("("+synonym+")",firstParam);
+	//if it is a synonym
+	if(match){
+		it = synMap.find(firstParam);
+		if(it==synMap.end()){
+			varRefValid = false;
+		}
+	}
+
+	if((patternSynValid)&&(varRefValid)){
+		Relationship patternRel(v.at(i), v.at(i+1), v.at(i+2), detectTokenType(v.at(i+2)), v.at(i+3), detectTokenType(v.at(i+3)));
+		i = i+3;
+		patternValid = true;
+		return patternRel;
+	}
+	else{
+		patternValid = false;
+		return Relationship();
+	}
+}
+
+Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withValid){
+	v.at(i) = stringToLower(v.at(i));
+	unordered_map<string, TypeTable::SynType>::iterator it;
+
+	string withToken[2];
+	withToken[0] = v.at(i+1);
+	withToken[1] = v.at(i+2);
+
+	//check whether first token is a single synonym, must be of type prog_line
+	bool withValid1 = true;
+	string firstParam = v.at(i+1);
+	bool match = regexMatch("("+synonym+")",firstParam);
+
+	if(match){
+		it = synMap.find(firstParam);
+		if(it==synMap.end()){//if synonym not found
+			withValid1 = false;
+		}
+		else if(it->second != TypeTable::PROGLINE){
+			withValid1 = false;
+		}
+	}
+	else{//if not synonym
+		vector<string> result;
+		match = regexMatchWithResult("("+synonym+").("+attrName+")",firstParam,result);
+		if(match){
+			it = synMap.find(result[1]);
+			if(it==synMap.end()){//if synonym not found
+				withValid1 = false;
+			}
+			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+				withValid1 = false;
+			}
+			else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+				withValid1 = false;
+			}
+			else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
+				withValid1 = false;
+			}
+			else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
+				withValid1 = false;
+			}
+			else{
+				withToken[0]= result[1];
+			}
+		}
+	}
+
+	//check whether first token is a single synonym, must be of type prog_line
+	bool withValid2 = true;
+	string secondParam = v.at(i+2);
+	match = regexMatch("("+synonym+")",secondParam);
+
+	if(match){
+		it = synMap.find(secondParam);
+		if(it==synMap.end()){//if synonym not found
+			withValid2 = false;
+		}
+		else if(it->second != TypeTable::PROGLINE){
+			withValid2 = false;
+		}
+	}
+	else{//if not synonym
+		vector<string> result;
+		match = regexMatchWithResult("("+synonym+").("+attrName+")",secondParam,result);
+		if(match){
+			it = synMap.find(result[1]);
+
+			if(it==synMap.end()){//if synonym not found
+				withValid2 = false;
+			}
+			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+				withValid2 = false;
+			}
+			else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+				withValid2 = false;
+			}
+			else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
+				withValid2 = false;
+			}
+			else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
+				withValid2 = false;
+			}
+			else{
+				withToken[1]= result[1];
+			}
+		}
+	}
+
+	if((withValid1)&&(withValid2)){
+		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]));
+		i = i+2;
+		withValid = true;
+		return withRel;
+	}
+	else{
+		withValid = false;
+		return Relationship();
+	}
+}
+
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
+
+	//currently supports only single select, no tuple
 	vector<string> selectedSyn;
 	selectedSyn.push_back(v.at(1));
 	query.setSelectedSyn(selectedSyn);
+
+	//set synTable
 	query.setSynTable(map);
 
-	for (size_t i = 2; i < v.size(); i++){
+	//validate all clauses
+	for (int i = 2; i < (int) v.size(); i++){
 		string relationRef = v.at(i);
-		bool formatValid = true;
-		bool synValid = true;
-
-		tr1::cmatch res;
-		tr1::regex rx("(" + allClause + ")");
-		tr1::regex_match(relationRef.c_str(), res, rx);
 		
-		//if match relRef
-		if(res.size()>0){
-			relationRef = stringToLower(relationRef);
+		bool clauseMatch = regexMatch("(" + allClause + ")",relationRef);
 
-			string tableParam[2];
-			deepCopyTableParam(tableParam,relationRef);
-
-			string param[2];
-			param[0] = v.at(i+1);
-			param[1] = v.at(i+2);
-
-			for(int index=0;index<2;index++){
-				bool match = regexMatch("("+tableParam[index]+")",param[index]);
-				if(!match){
-					formatValid = false;
-				}				
-			}
-			
-			if(formatValid){
-				for(int index=0;index<2;index++){
-					bool match = regexMatch("("+synonym+")",param[index]);
-					//if it is a synonym
-					if(match){
-						unordered_map<string, TypeTable::SynType>::iterator it;
-						it = synMap.find(param[index]);
-						if(it==synMap.end()){
-							synValid=false;
-						}
-					}				
-				}
-			}
-
-			if((formatValid)&&(synValid)){
-				Relationship rel(v.at(i), v.at(i+1), detectTokenType(v.at(i+1)), v.at(i+2),  detectTokenType(v.at(i+2)));
-				query.addRelationship(rel);
-				i = i+2;
+		if(clauseMatch){
+			bool clauseValid = false;
+			Relationship clauseRel = validateDefaultClauses(v,i,clauseValid);
+			if(clauseValid){
+				query.addRelationship(clauseRel);
 			}
 			else{
 				valid = false;
-				Query queryDummy;
-				return queryDummy;
+				return Query();
 			}
 		}
-		//if doesnt match relRef
 		else if (relationRef == PATTERN){
-			bool patternSynValid = true;
-			string patternSyn = v.at(i+1);
-			unordered_map<string, TypeTable::SynType>::iterator it;
-			it = synMap.find(patternSyn);
-			if(it==synMap.end()){
-				patternSynValid = false;
-			}
-			
-			bool varRefValid = true;
-			string firstParam = v.at(i+2);
-			bool match = regexMatch("("+synonym+")",firstParam);
-			//if it is a synonym
-			if(match){
-				it = synMap.find(firstParam);
-				if(it==synMap.end()){
-					varRefValid = false;
-				}
-			}
-
-			if((patternSynValid)&&(varRefValid)){
-				//query.setPatternSyn(v.at(i+1));
-				//Relationship rel(v.at(i), v.at(i+2), v.at(i+3));
-				Relationship rel(v.at(i), v.at(i+1), v.at(i+2), detectTokenType(v.at(i+2)), v.at(i+3), detectTokenType(v.at(i+3)));
-				query.addRelationship(rel);
-				i = i+3;
+			bool patternValid = false;
+			Relationship patternRel = validatePattern(v,i,patternValid);
+			if(patternValid){
+				query.addRelationship(patternRel);
 			}
 			else{
 				valid = false;
-				Query queryDummy;
-				return queryDummy;
+				return Query();
 			}
 		}
 		else if (relationRef == WITH){
-			unordered_map<string, TypeTable::SynType>::iterator it;
-
-			string withSyn[2];
-
-			string withToken[2];
-			withToken[0] = v.at(i+1);
-			withToken[1] = v.at(i+2);
-
-			//check whether first token is a single synonym, must be of type prog_line
-			bool withValid1 = true;
-			string firstParam = v.at(i+1);
-			bool match = regexMatch("("+synonym+")",firstParam);
-
-			if(match){
-				it = synMap.find(firstParam);
-				if(it==synMap.end()){//if synonym not found
-					withValid1 = false;
-				}
-				else if(it->second != TypeTable::PROGLINE){
-					withValid1 = false;
-				}
-			}
-			else{//if not synonym
-				vector<string> result;
-				match = regexMatchWithResult("("+synonym+").("+attrName+")",firstParam,result);
-				if(match){
-					it = synMap.find(result[1]);
-					if(it==synMap.end()){//if synonym not found
-						withValid1 = false;
-					}
-					else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
-						withValid1 = false;
-					}
-					else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
-						withValid1 = false;
-					}
-					else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
-						withValid1 = false;
-					}
-					else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
-						withValid1 = false;
-					}
-					else{
-						withToken[0]= result[1];
-					}
-				}
-			}
-
-			//check whether first token is a single synonym, must be of type prog_line
-			bool withValid2 = true;
-			string secondParam = v.at(i+2);
-			match = regexMatch("("+synonym+")",secondParam);
-
-			if(match){
-				it = synMap.find(secondParam);
-				if(it==synMap.end()){//if synonym not found
-					withValid2 = false;
-				}
-				else if(it->second != TypeTable::PROGLINE){
-					withValid2 = false;
-				}
-			}
-			else{//if not synonym
-				vector<string> result;
-				match = regexMatchWithResult("("+synonym+").("+attrName+")",secondParam,result);
-				if(match){
-					it = synMap.find(result[1]);
-
-					if(it==synMap.end()){//if synonym not found
-						withValid2 = false;
-					}
-					else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
-						withValid2 = false;
-					}
-					else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
-						withValid2 = false;
-					}
-					else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
-						withValid2 = false;
-					}
-					else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
-						withValid2 = false;
-					}
-					else{
-						withToken[1]= result[1];
-					}
-				}
-			}
-
-			if((withValid1)&&(withValid2)){
-				Relationship rel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]));
-				query.addRelationship(rel);
-				i = i+2;
+			bool withValid = false;
+			Relationship withRel;
+			withRel = validateWith(v,i,withValid);
+			if(withValid){
+				query.addRelationship(withRel);
 			}
 			else{
 				valid = false;
-				Query queryDummy;
-				return queryDummy;
+				return Query();
 			}
 		}
 
 	}
+	return query;
+}
+
+//public queryParse
+Query QueryParser::queryParse(string queryStr, bool &valid){
+	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	//cout << "here" << endl;
+	istringstream istream(queryStr);
+
+	string querySubStr;
+	while(getline(istream,querySubStr,';')){
+		bool validDesignEntity = parseDesignEntity(querySubStr);
+		if(validDesignEntity){
+			continue;
+		}
+		bool validSelectCl = parseSelectCl(querySubStr);
+		if(validSelectCl){
+			continue;
+		}
+		if((validDesignEntity|validSelectCl)==false){
+			valid = false;
+			return Query();
+		}
+	}
+	valid = true;
+	Query query = constructAndValidateQuery(selectStatement, synMap, valid);
 	return query;
 }

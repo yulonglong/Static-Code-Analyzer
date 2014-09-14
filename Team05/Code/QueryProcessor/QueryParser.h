@@ -136,6 +136,12 @@ private:
 	//QueryValidation methods
 	void deepCopyTableParam(string[2], string);
 	Relationship::TokenType detectTokenType(string);
+
+
+	Relationship validateDefaultClauses(vector<string>&,int&,bool&);
+	Relationship validatePattern(vector<string>&,int&,bool&);
+	Relationship validateWith(vector<string>&,int&,bool&);
+
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:

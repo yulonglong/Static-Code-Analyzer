@@ -59,6 +59,10 @@ Relationship::TokenType Relationship::getTokenType(string tokenStr){
 	}
 }
 
+//blank relationship
+Relationship::Relationship()
+{
+}
 
 //constructor for normal clause
 Relationship::Relationship(string newRel, string newToken1, string newToken2)

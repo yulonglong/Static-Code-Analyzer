@@ -26,6 +26,8 @@ class Relationship
 		TokenType token2Type;
 
     public:
+		//blank relationship
+		Relationship();
 		//constructor for clause, token1, token2
         Relationship(string, string, string);
 		//constructor for clause, patternSyn, token1, token2
