@@ -143,6 +143,55 @@ void ExtractRelationshipsTest::testUsesStatement() {
 	
 }
 
+void ExtractRelationshipsTest::testFullSourceDE2() {
+	pkb = PKB::getInstance();
+	pkb->~PKB();
+	parserDriver("SourceDE2.txt",pkb);
+
+	ASTRoot = pkb->getASTRoot();
+	modifies = pkb->getModifies();
+	uses = pkb->getUses();
+	parent = pkb->getParent();
+	procTable = pkb->getProcTable();
+	varTable = pkb->getVarTable();
+	callsTable = pkb->getCallsTable();
+	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+
+	vector<VARINDEX> v;
+	v =	uses->getUses(1);
+	string expected = "a beta tmp I k j1k chArlie x left right Romeo c delta l width w may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(2);
+	expected = "beta tmp I k j1k chArlie x left right Romeo c delta l width may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(4);
+	expected = "june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	uses->getUses(12);
+	expected = "may ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(1);
+	expected = "a oSCar x Romeo c w may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+	v =	modifies->getModifies(2);
+	expected = "a oSCar x Romeo c may june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+	v =	modifies->getModifies(4);
+	expected = "a june ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	
+	v =	modifies->getModifies(12);
+	expected = "a may ";
+	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+}
+
 // Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
 string ExtractRelationshipsTest::print(vector<VARINDEX> v, VarTable varTable) {
 	string s = "";
