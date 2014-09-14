@@ -84,9 +84,11 @@ void buildCFG(Node &ASTRroot) {
 }
 
 void createCFGForProcedure() {
+	Node* tempASTNode = currASTNode;
 	string currASTNodeType = currASTNode->getType();
 	if (currASTNodeType == "assign" || currASTNodeType == "call" || currASTNodeType == "while" || currASTNodeType == "if") {
 		createNewNodeAndAttachToCFG();
+	// TODO: IF ELSE 
 	} else if (currASTNodeType == "else") {
 		// update currCFGNode 
 		// currCFGNode = getCFGNode(currASTNode.getParent.getProgline())
@@ -101,12 +103,24 @@ void createCFGForProcedure() {
 		createCFGForProcedure();
 	}
 
-	// NO NEED? currASTNodeType = currASTNode->getType();
-	// if (currASTNodeType == "while") {
-		// fromProgLine = currASTNode.getRightChild.getLastChild()
-		// getCFGNode(fromProgLine).addChild(currASTNode.progLine)
-	// }	
 	
+	// TODO: WHILE 
+	/*
+	if (currASTNodeType == "while") {
+		// pseudo code: fromProgLine = currASTNode.getRightChild.getLastChild()
+		// pseudo code: getCFGNode(fromProgLine).addChild(currASTNode.progLine)
+
+		int fromProgLine;
+		int toProgLine;
+		Node* node = tempASTNode->getChild(1);
+		fromProgLine = node->getChild(node->getChild().size()-1)->getProgLine();
+		toProgLine = tempASTNode->getProgLine();
+		Node* fromNode = findCFGNode(fromProgLine);
+		Node* toNode = findCFGNode(toProgLine);
+		fromNode.setChild(toNode);  
+		toNode.setParent(fromNode); << NEED TO MAKE SURE THAT EACH NODE CAN HAVE MULTIPLE PARENTS!!!
+	}	
+	*/
 }
 
 void createNewNodeAndAttachToCFG() {
