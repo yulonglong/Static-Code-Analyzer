@@ -635,8 +635,7 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 		}
 		else if (relationRef == WITH){
 			bool withValid = false;
-			Relationship withRel;
-			withRel = validateWith(v,i,withValid);
+			Relationship withRel = validateWith(v,i,withValid);
 			if(withValid){
 				query.addRelationship(withRel);
 			}
