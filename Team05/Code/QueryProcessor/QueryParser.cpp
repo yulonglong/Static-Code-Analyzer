@@ -364,6 +364,7 @@ Relationship::TokenType QueryParser::detectTokenType(string token){
 	}
 }
 
+
 Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool& clauseValid){
 	v.at(i) = stringToLower(v.at(i));
 	string relationRef = v.at(i);
@@ -534,7 +535,12 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 		}
 	}
 
+	bool combinedValid = false;
 	if((withValid1)&&(withValid2)){
+		combinedValid = validateWithLhsAndRhs(withToken);
+	}
+
+	if(combinedValid){
 		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]));
 		i = i+2;
 		withValid = true;
@@ -543,6 +549,48 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	else{
 		withValid = false;
 		return Relationship();
+	}
+}
+
+bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
+	//synonym 5 type : STMT,CONSTANT,PROCEDURE,VARIABLE,PROGLINE
+	//ref : IDENTIFIER, INTEGER
+	//INTEGER category : INTEGER, STMT, CONSTANT, PROGLINE
+	//CHARSTRING category : IDENTIFIER, PROCEDURE, VARIABLE
+	const int lhs = 0;
+	const int rhs = 1;
+
+	const int categoryInt = 1;
+	const int categoryCharStr = 2;
+
+	int category[2];
+	category[lhs]= -1;
+	category[rhs]= -2;
+
+	for(int i=0;i<2;i++){
+		if(detectTokenType(withToken[i]) == Relationship::INTEGER){
+			category[i] = categoryInt;
+		}
+		else if(detectTokenType(withToken[i]) == Relationship::IDENTIFIER){
+			category[i] = categoryCharStr;
+		}
+		else{
+			unordered_map<string, TypeTable::SynType>::iterator it;
+			it = synMap.find(withToken[i]);
+			if((it->second == TypeTable::STMT)||(it->second == TypeTable::CONSTANT)||(it->second == TypeTable::PROGLINE)){
+				category[i] = categoryInt;
+			}
+			else if ((it->second == TypeTable::PROCEDURE)||(it->second == TypeTable::VARIABLE)){
+				category[i] = categoryCharStr;
+			}
+		}
+	}
+
+	if(category[lhs]==category[rhs]){
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 

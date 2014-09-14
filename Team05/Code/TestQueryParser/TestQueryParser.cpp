@@ -980,7 +980,29 @@ void QueryParserTest::testQueryValidationPattern3(){
 }
 
 void QueryParserTest::testQueryValidationWith1(){
-	string query = "variable v; procedure z; Select p with p.procName= v.VarName  ";
+	string query = "variable v; procedure z; Select p with p.procName= v.varName  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQueryValidationWith2(){
+	string query = "procedure p; constant c; Select p with p.procName= c.value  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQueryValidationWith3(){
+	string query = "procedure p; constant c; Select c with p.procName=10  ";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
