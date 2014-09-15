@@ -112,3 +112,26 @@ void Node::stringPreOrderExpressionTree(Node* root,string &word){
 	}
 	return;
 }
+
+void Node::stringPreOrderExpressionGraph(Node* root, string &word){
+	if(root->getParent()!=NULL){
+		char buffer[5000];
+		sprintf_s(buffer,"Parent %d.) %s : %s\n",root->getParent()->getProgLine(),root->getParent()->getType().c_str());
+		string temp = buffer;
+		word = word+ buffer;
+	}
+	char buffer[5000];
+
+	sprintf_s(buffer, "%d.) %s : %s\n",root->getProgLine(), root->getType().c_str());
+	string temp = buffer;
+	word = word+ buffer;
+	
+	for(unsigned i=0;i<root->getChild().size();i++){
+		stringPreOrderExpressionGraph(root->getChild(i),word);
+	}
+	return;
+}
+
+void Node::printCFGNode() {
+	cout << "CFGNode(" << progLine << ", " << type + ")";
+}

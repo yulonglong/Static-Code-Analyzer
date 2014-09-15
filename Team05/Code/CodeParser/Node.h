@@ -70,6 +70,9 @@ public:
 	void printPreOrderExpressionTree(Node* root);
 	//! Traverse the AST in pre-order manner, and saves the content in a string.
 	void stringPreOrderExpressionTree(Node* root,std::string &word);
+	//! Traverse the CFG in pre-order manner, and saves the content in a string.
+	void stringPreOrderExpressionGraph(Node* root,std::string &word);
+	void printCFGNode();
 };
 
 #endif

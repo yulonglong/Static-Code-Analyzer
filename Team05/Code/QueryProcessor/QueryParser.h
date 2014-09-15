@@ -19,6 +19,75 @@ using namespace std;
  * - Tokenize the appropriate sentences
  * - Build a Query class structure to be used by QueryEvaluator
  * 
+ * QueryParser has only one public method:
+ * \code
+ * Query QueryParser::queryParse(string queryStr, bool &valid);
+ * \endcode
+ *
+ * It has many private functions and sub-functions to modularize the process
+ * of parsing and validating user queries.
+ * 
+ * When queryParser() is called, it will call
+ * \code
+ * bool parseDesignEntity(string);
+ * bool parseSelectCl(string);
+ * \endcode
+ * 
+ * QueryParser will validate and parse the query against the pre-defined regular expressions
+ * which are stated in the grammar rules. (See sample of the pre-defined regex string further below)
+ * 
+ * Then QueryParser will call the function below to validate the tokens,
+ * while constructing the Query class simultaneously
+ * \code
+ * Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
+ *    for (int i = 2; i < (int) v.size(); i++){
+ *       Relationship clauseRel = validateDefaultClauses(v,i,clauseValid);
+ *       Relationship patternRel = validatePattern(v,i,patternValid);
+ *       Relationship withRel = validateWith(v,i,withValid);
+ *       //if the parsed tokens are not valid at all, terminate validation and return Query as invalid
+ *       if ((clauseValid||paternValid||withValid) == false ){
+ *          valid = false;
+ *          return Query();
+ *       }
+ *	  }
+ * }
+ * \endcode
+ *
+ * QueryParser will traverse all parsed tokens, and try to validate all the clauses (of 3 types).
+ * - Default clauses : Follows, Modifies, Parent, Calls, etc..
+ * - Pattern clause
+ * - With clause
+ * 
+ * For each type, the tokens will be evaluated and validated thoroughly, whether they conform to the grammar rule,
+ * and whether the synonym declaration has been defined properly.
+ * Otherwise, return failure, invalid query
+ *
+ *
+ *
+ * To facilitate the regular expression matching in QueryParser,
+ * the grammar rules has been defined in QueryParser attributes in regular expression form.
+ *
+ * Please take a look at the sample below:
+ * \code
+ * const string QueryParser::DIGIT = "[0-9]";
+ * const string QueryParser::LETTER = "[A-Za-z]";
+ * const string QueryParser::INTEGER = "[0-9]+";
+ * const string QueryParser::IDENT = "[A-Za-z][A-Za-z0-9#]*";
+
+ * const string QueryParser::synonym = IDENT;
+ * const string QueryParser::attrName = "(?:procName|varName|value|stmt#)";
+ * const string QueryParser::entRef = synonym + "|_|\"" + IDENT +"\"|" + INTEGER;
+ * const string QueryParser::varRef = synonym + "|_|\"" + IDENT +"\"";
+ * const string QueryParser::stmtRef = synonym + "|_|" + INTEGER;
+ * const string QueryParser::lineRef = synonym + "|_|" + INTEGER;
+ * const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
+ * const string QueryParser::attrRef = "(?:" + synonym + "." + attrName + ")";
+ * const string QueryParser::elem = synonym + "|" + attrRef;
+ * const string QueryParser::tuple = elem;
+ * const string QueryParser::resultCl = tuple + "|" + BOOLEAN;
+ * \endcode
+ *
+ *
  * 
  * \see CodeParser, QueryEvaluator
  */
@@ -133,8 +202,16 @@ private:
 	bool parseDesignEntity(string);
 	bool parseSelectCl(string);
 
-	//QueryValidatior methods
+	//QueryValidation methods
 	void deepCopyTableParam(string[2], string);
+	Relationship::TokenType detectTokenType(string);
+
+	Relationship validateDefaultClauses(vector<string>&,int&,bool&);
+	Relationship validatePattern(vector<string>&,int&,bool&);
+	Relationship validateWith(vector<string>&,int&,bool&);
+
+	bool validateWithLhsAndRhs(string withToken[2]);
+
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:
