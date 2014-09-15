@@ -32,6 +32,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 			it = r.erase(it);
 		}
 
+		//evaluate with last
 		else if(it->getRelType()==Relationship::WITH){
 			Relationship relWith = *it;
 			rw = &relWith;
@@ -613,10 +614,34 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	vector<Pair> withAns;
+	VarTable * v = pkb->getVarTable(); 
+	ProcTable * p = pkb->getProcTable();
+
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+	
 
 	//with v1.varName = p.procName with c.value = s.stmt#
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
 		//if both exist in links then remove all unnecessary tuples. push relans true
+		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+			
+			//if both tokens are of the same type e.g v1 v2
+			if(i1->second == i2->second){
+				//pop all relIndexes that have links to tk1 and tk2
+				int dummyRel1 = (linkages.find(tk1)->second).at(0);
+				int dummyRel2 = (linkages.find(tk2)->second).at(0);
+				vector<Pair> dummyPairs1 = relAns.find(dummyRel1)->second;
+				vector<Pair> dummyPairs2 = relAns.find(dummyRel2)->second;
+				dummyPairs1.at(0).token1 = tk2;
+				dummyPairs2.at(0).token1 = tk1;
+
+				//intersect
+				removePairs(dummyPairs2, tk1);
+				removePairs(dummyPairs1, tk2);
+
+			}
+		}
 
 		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push relans true
 
@@ -630,11 +655,25 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			tk2 = tk2.substr(1,tk2.length()-2);
 		}
 		if(isExistInLinkages(tk1)){
-			withAns.push_back(Pair (
-			
+			int index;
+		
+			if(i2->second==TypeTable::VARIABLE){
+				index = v->getVarIndex(tk2);
+			}else if(i2->second==TypeTable::PROCEDURE){
+				index = p->getProcIndex(tk2);
+			} else{
+				index = atoi(tk2.c_str());
+			}
+
+			//push in a dummy value for removal purposes
+			withAns.push_back(Pair (1, index, tk1, tk2));
+			removePairs(withAns, tk1);
 		}
 
 		//else evaluate true or false
+		else {
+			withAns.push_back(Pair (1, 1, "true", "true"));
+		}
 	}
 }
 
