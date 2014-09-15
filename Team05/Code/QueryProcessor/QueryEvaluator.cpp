@@ -612,14 +612,29 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 	//Retrieve the two with syns
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
+	vector<Pair> withAns;
 
-	//with v1.varName = p.procName with v1.varName!=v2.varName
+	//with v1.varName = p.procName with c.value = s.stmt#
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		//if both exist in links then remove all unnecessary tuples. push relans true
+
+		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push relans true
+
+		//else (both does not exist) evaluate true or false
 
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
+		//if exist in links then delete all unnecessary tuples then push into relAns true
+		if(!isdigit(tk2[0])){ //if the query is with c.value = 3 then we do not have to remove the quotation marks
+			tk2 = tk2.substr(1,tk2.length()-2);
+		}
+		if(isExistInLinkages(tk1)){
+			withAns.push_back(Pair (
+			
+		}
 
+		//else evaluate true or false
 	}
 }
 
