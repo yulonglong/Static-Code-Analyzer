@@ -11,6 +11,8 @@
 
 /*! \brief A Node Structure for AST.
  * \ingroup 
+ * 
+ * Overview: Node is the node structure of AST nodes.
  *
  * An AST Node is used to store relevant data which is read/parsed from the source file.
  *
@@ -32,45 +34,45 @@ private:
 	std::vector<Node*> child;
 	Node* parent;
 public:
-	//! Blank Node Constructor
+	//! A constructor to create a blank node.
 	Node();
-	//! Constructor 1
+	//! A constructor to create a node with  newData and newType as its attributes.
 	Node(std::string newData,std::string newType);
-	//! Constructor 2
+	//! A constructor to create a node with newData, newType, and progLine as its attributes.
 	Node(std::string newData,std::string newType,int newProgLine);
-	//! Constructor 3
-	Node(std::string newType,int newProgLine);
-	//! Constructor 4
+	//! A constructor to create a node with newType, and progLine as its attributes.
+	Node(std::string newType, int newProgLine);
+	//! A constructor to create a node with leftChild, rightChild, newData, newType, as its attributes.
 	Node(Node* newLeft, Node* newRight, std::string newData,std::string newType);
-	//! Constructor 5, most detailed constructor
+	//! A constructor to create a node with leftChild, rightChild, newData, newType, and progLine as its attributes.
 	Node(Node* newLeft, Node* newRight, std::string newData,std::string newType, int newProgLine);
-	//! get the a list of pointers of all the children of the Node
+	//! Returns a LIST of Node pointers of the current node’s children.
 	std::vector<Node*> getChild();
-	//! get the pointer of the children of the Node (at the specified index)
+	//! Get the pointer of the children of the Node (at the specified index)
 	Node* getChild(unsigned int index);
-	//! get the pointer of the parent of the Node
+	//! Returns a pointer to a node which is the parent of the current Node. 
 	Node* getParent();
-	//! get the type of the Node
+	//! Returns the statement type of the current Node.
 	std::string getType();
-	//! get the data of the Node
+	//! Returns the data of the current Node
 	std::string getData();
-	//! get the program line of the Node
+	//! Returns the program line of the current Node
 	int getProgLine();
-	//! add a children to the current Node
+	//! Add a new children to the current Node
 	void setChild(Node* newChild);
-	//! set the data of the Node
+	//! Set the data of the Node
 	void setData(std::string newData);
-	//! set the type of the Node
+	//! Set the type of the Node
 	void setType(std::string newType);
-	//! set the parent of the Node
+	//! Set the parent of the Node
 	void setParent(Node* newParent);
-	//! set the program line of the Node
+	//! Set the program line of the Node
 	void setProgLine(int newProgLine);
 	//! Traverse and print the content of the AST in pre-order manner.
 	void printPreOrderExpressionTree(Node* root);
-	//! Traverse the AST in pre-order manner, and saves the content in a string.
+	//! Traverse the AST in pre-order manner, and saves the content in a string passed by reference.
 	void stringPreOrderExpressionTree(Node* root,std::string &word);
-	//! Traverse the CFG in pre-order manner, and saves the content in a string.
+	//! Traverse the CFG in pre-order manner, and saves the content in a string passed by reference.
 	void stringPreOrderExpressionGraph(Node* root,std::string &word);
 	void printCFGNode();
 };
