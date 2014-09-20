@@ -3,10 +3,7 @@
 #define PAIR_H
 
 #include <iostream>
-#include "Relationship.h"
-#include "Query.h"
 #include "PKB.h"
-#include "QueryEvaluator.h"
 #include <vector>
 #include <set>
 

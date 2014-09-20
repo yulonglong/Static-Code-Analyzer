@@ -14,6 +14,7 @@
 using namespace std;
 
 
+
 void BuildCFGTest::setUp() {
 }
 
@@ -50,5 +51,6 @@ void BuildCFGTest::testBuildCFG() {
 	*/
 
 	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
+	pkb->~PKB();
 
 }
