@@ -641,6 +641,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				removePairs(dummyPairs1, tk2);
 
 			}
+
+			//else if they are different type
+			else {
+				//get list of rel that link to v1
+				//get list of rel that link to p
+			}
 		}
 
 		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push relans true
