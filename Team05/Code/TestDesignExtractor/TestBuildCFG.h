@@ -10,14 +10,16 @@
 class BuildCFGTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( BuildCFGTest ); // Note 3 
-	//CPPUNIT_TEST( testBuildCFG );
+	//CPPUNIT_TEST( testBuildCFGForAssignAndCallStmts );
+	CPPUNIT_TEST( testBuildCFGForWhileStmts );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void setUp();
 	void tearDown();
 
-	void testBuildCFG(); 
+	void testBuildCFGForAssignAndCallStmts(); 
+	void testBuildCFGForWhileStmts(); 
 
 };
 #endif

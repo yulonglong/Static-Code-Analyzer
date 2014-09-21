@@ -24,22 +24,60 @@ void BuildCFGTest::tearDown() {
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( BuildCFGTest ); // Note 4 
 
-void BuildCFGTest::testBuildCFG() {
+void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	PKB *pkb;
 	Node* ASTRoot;
 	Node* CFGRoot;
-
+	
 	pkb = PKB::getInstance();
 	parserDriver("SourceDE3.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	CFGRoot = pkb->getCFGRoot();
-	if (CFGRoot == NULL) {
-		cout << "CFGRoot is null" << endl;
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
 	} else {
-		cout << "CFGRoot is NOT NULL!!" << endl;
+		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
 	}
-	// assert that CFGRoot is null
+	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	
+	/*
+	CFGNode* node = getCFGNode(12);
+	if (node != NULL) {
+		cout << "FOUND LINE NUMBER: " << node->getProgLine() << endl;
+	} else {
+		cout << "NOT FOUND" << endl;
+	}
+	*/
+
+	/*
+	string resultFullCFG = "";
+	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
+	string expectedFullCFG = "";
+	cout << resultFullCFG << endl;
+	cout << "End of CFG" << endl;
+	*/
+
+	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
+	pkb->~PKB();
+
+}
+
+void BuildCFGTest::testBuildCFGForWhileStmts() {
+	PKB *pkb;
+	Node* ASTRoot;
+	Node* CFGRoot;
+	
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE2.txt",pkb);
+
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} else {
+		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
+	}
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	
 	/*

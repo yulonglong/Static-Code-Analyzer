@@ -132,6 +132,3 @@ void Node::stringPreOrderExpressionGraph(Node* root, string &word){
 	return;
 }
 
-void Node::printCFGNode() {
-	cout << "CFGNode(" << progLine << ", " << type + ")";
-}

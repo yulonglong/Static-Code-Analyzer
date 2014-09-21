@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CFGNode.cpp" />
     <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="QueueItem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CFGNode.h" />
     <ClInclude Include="DesignExtractor.h" />
     <ClInclude Include="QueueItem.h" />
   </ItemGroup>
