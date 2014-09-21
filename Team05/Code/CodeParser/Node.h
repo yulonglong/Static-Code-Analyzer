@@ -27,7 +27,7 @@
 
 //begin Node class
 class Node{
-private:
+protected:
 	std::string type;
 	std::string data;
 	int progLine;
@@ -74,7 +74,7 @@ public:
 	void stringPreOrderExpressionTree(Node* root,std::string &word);
 	//! Traverse the CFG in pre-order manner, and saves the content in a string passed by reference.
 	void stringPreOrderExpressionGraph(Node* root,std::string &word);
-	void printCFGNode();
+	
 };
 
 #endif

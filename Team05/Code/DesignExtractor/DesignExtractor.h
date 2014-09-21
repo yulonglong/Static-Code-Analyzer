@@ -1,3 +1,4 @@
+
 //@author Ipsita Mohapatra
 //DesignExtractor.h
 
@@ -16,6 +17,7 @@
 #include <queue>
 #include <vector>
 #include "Node.h"
+#include "CFGNode.h"
 #include "PKB.h"
 #include "QueueItem.h"
 
@@ -34,8 +36,14 @@ void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
 void buildCFG(Node &ASTroot);
-void createCFGForProcedure();
-void createNewNodeAndAttachToCFG();
+void createCFGForStmtLst(Node &ASTNode);
+void createCFGForAssign(int progLine);
+void createCFGForCall(int progLine);
+void createCFGForWhile(vector<Node*> children);
+void createCFGForIf(vector<Node*> children);
+void createNewNodeAndAttachToCFG(string type, int progLine);
+CFGNode* getCFGNode(int progLine);
+void traverseGraph(CFGNode &node, int progLine);
 
 int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
 int getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
