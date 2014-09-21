@@ -16,6 +16,7 @@ PKB::PKB(){
 	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 	uses = Uses::getInstance(typeTable,varTable);
 	calls = Calls::getInstance(procTable);
+	next = Next::getInstance(typeTable);
 }
 
 PKB::~PKB(){
@@ -28,6 +29,7 @@ PKB::~PKB(){
 	modifies->~Modifies();
 	uses->~Uses();
 	calls->~Calls();
+	next->~Next();
 	delete ASTRoot;
 	delete CFGRoot;
 	ASTRoot=NULL;
@@ -86,6 +88,10 @@ Calls* PKB::getCalls(){
 	return calls;
 }
 
+Next* PKB::getNext(){
+	return next;
+}
+
 unordered_map<PROCINDEX, vector<CALLSPAIR>> PKB::getCallsTable(){
 	return calls->getCallsTable();
 }
@@ -129,6 +135,11 @@ void PKB::setToUses(STMTNUM s, VARNAME v){
 void PKB::setToCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	calls = getCalls();
 	calls->setCalls(p1,p2,s);
+}
+
+void PKB::setToNext(STMTNUM s1, STMTNUM s2){
+	next = getNext();
+	next->setNext(s1,s2);
 }
 
 void PKB::setToTypeTable(STMTNUM s,TypeTable::SynType t){
