@@ -43,6 +43,7 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 	procTable = pkb->getProcTable();
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
+
 	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
@@ -61,6 +62,11 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 	v =	modifies->getModifiesProc(4);
 	expected = "e f w a ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+
+	// YOLIM LOOK HERE!
+	cout << "a" << endl;
+	pkb->~PKB();
+	cout << "b" << endl;
 }
 
 void ExtractRelationshipsTest::testUsesProcedure() {
