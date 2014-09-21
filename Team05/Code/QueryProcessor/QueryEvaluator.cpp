@@ -48,8 +48,63 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	return reorderedRelations;
 }
 
-vector<int> QueryEvaluator::evaluateQuery(Query q){
+unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
+	vector<Relationship> relations = q.getRelVect();
+	relations = orderRelationship(relations);
+	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+	int relIndex = 0;
+	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		switch(it->getRelType()){
+		case Relationship::FOLLOWS:
+			evaluateFollows(*it, m,relIndex); break;
+
+		case Relationship::FOLLOWSSTAR:
+			evaluateFollowsStar(*it, m, relIndex); break;
+
+		case Relationship::PARENT:
+			evaluateParent(*it, m, relIndex); break;
+
+		case Relationship::PARENTSTAR:
+			evaluateParentStar(*it, m, q.getSelectedSyn().at(0)); break;//review
+
+		case Relationship::CALLS:
+			evaluateCalls(*it, relIndex); break;
+
+		case Relationship::CALLSSTAR:
+			evaluateCallsStar(*it, m, relIndex); break;
+
+		case Relationship::MODIFIES:
+			evaluateModifies(*it, m, relIndex); break;
+
+		case Relationship::USES:
+			evaluateUses(*it, m, relIndex); break;
+
+		case Relationship::PATTERN:	
+			vector<int> proxy = evaluatePattern(q, it->getToken1(), it->getToken2()); //review
+		}
+
+		relIndex++;
+	}
+
+	vector<string> selectedSyn = q.getSelectedSyn();
+	unordered_map<string, vector<int>> answers;
+
+	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
+		int index = (linkages.find(*it)->second).at(0);
+		vector<Pair> p = relAns.at(index);
+		vector<int> synAns;
+		for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
+			if(*it==it2->token1){
+				synAns.push_back(it2->ans1);
+			}
+			else {
+				synAns.push_back(it2->ans2);
+			}
+		}
+	}
+
+	return answers;
 	/*
 	//order the relationship vector
 	vector<Relationship> relations = orderRelationship(q.getRelVect());
@@ -254,9 +309,6 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		}
 	}
 	return intersectAnswers(answers);	*/
-
-	vector<int> a;
-	return a;
 }
 
 /*

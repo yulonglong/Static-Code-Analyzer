@@ -66,7 +66,7 @@ public:
 	QueryEvaluator(PKB*);
 	~QueryEvaluator();
 	PKB *pkb;
-	std::vector<int> evaluateQuery(Query);
+	std::unordered_map<std::string, std::vector<int>> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);
 };
 
