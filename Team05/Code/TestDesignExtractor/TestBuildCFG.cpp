@@ -28,7 +28,7 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	PKB *pkb;
 	Node* ASTRoot;
 	Node* CFGRoot;
-	
+
 	pkb = PKB::getInstance();
 	parserDriver("SourceDE3.txt",pkb);
 
@@ -79,7 +79,35 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
 	}
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	pkb->~PKB();	
+}
+
+void BuildCFGTest::testBuildCFGForIfStmts() {
+	PKB *pkb;
+	Node* ASTRoot;
+	Node* CFGRoot;
 	
+	pkb = PKB::getInstance();
+	parserDriver("SourceDE4.txt",pkb);
+
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+	cout << "here1" << endl;
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
 	/*
 	string resultFullCFG = "";
 	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
@@ -90,5 +118,4 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 
 	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
 	pkb->~PKB();
-
 }
