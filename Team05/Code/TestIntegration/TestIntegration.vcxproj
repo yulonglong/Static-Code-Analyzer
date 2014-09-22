@@ -58,14 +58,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)CodeParser;$(SolutionDir)PKB;$(SolutionDir)QueryEvaluator;$(SolutionDir)QueryProcessor</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)source;$(SolutionDir)include;$(SolutionDir)CodeParser;$(SolutionDir)PKB;$(SolutionDir)QueryEvaluator;$(SolutionDir)QueryProcessor;$(SolutionDir)DesignExtractor</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\QueryProcessor.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)lib\cppunit.lib;$(SolutionDir)$(Configuration)\CodeParser.lib;$(SolutionDir)$(Configuration)\PKB.lib;$(SolutionDir)$(Configuration)\QueryProcessor.lib;$(SolutionDir)$(Configuration)\DesignExtractor.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
