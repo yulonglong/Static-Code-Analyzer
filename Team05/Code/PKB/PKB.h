@@ -2,7 +2,6 @@
 #define PKB_H
 
 #pragma once
-
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -19,6 +18,7 @@
 #include "Calls.h"
 #include "Next.h"
 
+
 using namespace std;
 
 /* TO USE PKB:
@@ -31,7 +31,7 @@ class PKB {
 private: 
 	static bool instanceFlag; 
 	static PKB *pkb;	
-	Node* ASTRoot;
+	
 	VarTable *varTable;
 	ProcTable *procTable;
 	TypeTable *typeTable;
@@ -42,6 +42,7 @@ private:
 	Uses *uses;
 	Calls *calls;
 	Next *next;
+	Node* ASTRoot;
 	Node* CFGRoot; 
 	
 public:

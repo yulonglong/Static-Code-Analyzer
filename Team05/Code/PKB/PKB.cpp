@@ -17,6 +17,8 @@ PKB::PKB(){
 	uses = Uses::getInstance(typeTable,varTable);
 	calls = Calls::getInstance(procTable);
 	next = Next::getInstance(typeTable);
+	ASTRoot = NULL;
+	CFGRoot = NULL;
 }
 
 PKB::~PKB(){
@@ -32,8 +34,6 @@ PKB::~PKB(){
 	next->~Next();
 	delete ASTRoot;
 	delete CFGRoot;
-	ASTRoot=NULL;
-	CFGRoot=NULL;
 	instanceFlag=false;
 }
 
