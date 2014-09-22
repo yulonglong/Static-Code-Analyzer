@@ -630,7 +630,7 @@ Node* parseCode(string filename,PKB *pkb){
 	return root;
 }
 
-void parserDriver(string filename,PKB *pkb){
+void CodeParser::parserDriver(string filename,PKB *pkb){
 	
 	Node* root = pkb->getASTRoot();
 

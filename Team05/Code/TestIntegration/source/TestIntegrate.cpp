@@ -30,7 +30,7 @@ void IntegrateTest::testParserSource2()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source2.txt",pkb);
+	CodeParser::parserDriver("Source2.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;

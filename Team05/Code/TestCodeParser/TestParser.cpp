@@ -31,7 +31,7 @@ void ParserTest::testModifyTable()
 	
 	PKB *pkb;
 	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
+	CodeParser::parserDriver("CodeParserTestIn.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -109,7 +109,7 @@ void ParserTest::testCompleteParser()
 	// create a node
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
+	CodeParser::parserDriver("CodeParserTestIn.txt",pkb);
 
 	
 	VarTable* varTable = pkb->getVarTable();
@@ -147,7 +147,7 @@ void ParserTest::testParserSource1()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source1.txt",pkb);
+	CodeParser::parserDriver("Source1.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -220,7 +220,7 @@ void ParserTest::testParserSource2()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source2.txt",pkb);
+	CodeParser::parserDriver("Source2.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -264,7 +264,7 @@ void ParserTest::testFullParserOwnSource()
 	// create a node
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("CodeParserTestIn.txt",pkb);
+	CodeParser::parserDriver("CodeParserTestIn.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -297,7 +297,7 @@ void ParserTest::testFullParserSource1()
 	// create a node
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source1.txt",pkb);
+	CodeParser::parserDriver("Source1.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -329,7 +329,7 @@ void ParserTest::testFullParserSource2()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source2.txt",pkb);
+	CodeParser::parserDriver("Source2.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -360,7 +360,7 @@ void ParserTest::testFullParserSource2messy()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source2messy.txt",pkb);
+	CodeParser::parserDriver("Source2messy.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -392,7 +392,7 @@ void ParserTest::testFullParserSource3()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source3.txt",pkb);
+	CodeParser::parserDriver("Source3.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -424,7 +424,7 @@ void ParserTest::testFullParserSource4()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source4.txt",pkb);
+	CodeParser::parserDriver("Source4.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -456,7 +456,7 @@ void ParserTest::testFullParserSource5()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source5.txt",pkb);
+	CodeParser::parserDriver("Source5.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
