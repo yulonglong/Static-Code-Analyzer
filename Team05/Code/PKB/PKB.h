@@ -17,7 +17,7 @@
 #include "Uses.h"
 #include "Calls.h"
 #include "Next.h"
-
+#include "CFGNode.h"
 
 using namespace std;
 
@@ -43,7 +43,7 @@ private:
 	Calls *calls;
 	Next *next;
 	Node* ASTRoot;
-	Node* CFGRoot; 
+	CFGNode* CFGRoot; 
 	
 public:
 	PKB();
@@ -61,7 +61,7 @@ public:
 	Calls* getCalls();
 	Next* getNext();
 	Node* getASTRoot();
-	Node* getCFGRoot();
+	CFGNode* getCFGRoot();
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
 
@@ -77,7 +77,7 @@ public:
 	void setToTypeTable(STMTNUM,TypeTable::SynType); //kester added this it was originally insertStmtNumAndType
 
 	void setASTRoot(Node* newASTRoot);
-	void setCFGRoot(Node* newCFGRoot);
+	void setCFGRoot(CFGNode* newCFGRoot);
 
 };
 

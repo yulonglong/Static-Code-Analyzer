@@ -151,7 +151,7 @@ void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
 
-void PKB::setCFGRoot(Node* newCFGRoot){
+void PKB::setCFGRoot(CFGNode* newCFGRoot){
 	CFGRoot = newCFGRoot;
 }
 
@@ -159,6 +159,6 @@ Node* PKB::getASTRoot(){
 	return ASTRoot;
 }
 
-Node* PKB::getCFGRoot(){
+CFGNode* PKB::getCFGRoot(){
 	return CFGRoot;
 }
