@@ -7,7 +7,7 @@
 using namespace std;
 
 
-bool isAllDigit(string input){
+bool CodeParser::isAllDigit(string input){
 	for(int i=0;i<(int)input.length();i++){
 		if(!isdigit(input[i])){
 			return false;
@@ -17,7 +17,7 @@ bool isAllDigit(string input){
 }
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, const vector<Node*> &containerNode){
+Node* CodeParser::constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, const vector<Node*> &containerNode){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -71,7 +71,7 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, c
 	return root;
 }
 
-vector<string> getPostfix(vector<string> tokens){
+vector<string> CodeParser::getPostfix(vector<string> tokens){
 	vector<string> ans;
 	stack<string> st;
 	int size = tokens.size();
@@ -192,7 +192,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-void tokenizeTokens(string word, vector<string> &storage){
+void CodeParser::tokenizeTokens(string word, vector<string> &storage){
 	string token ="";
 	for(int i=0;i<(int) word.length();i++){
 		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
@@ -214,7 +214,7 @@ void tokenizeTokens(string word, vector<string> &storage){
 }
 
 //real parsing
-Node* parseCode(string filename,PKB *pkb){
+Node* CodeParser::parseCode(string filename,PKB *pkb){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -635,7 +635,7 @@ void CodeParser::parserDriver(string filename,PKB *pkb){
 	Node* root = pkb->getASTRoot();
 
 	try{
-		root = parseCode(filename,pkb);
+		root = CodeParser::parseCode(filename,pkb);
 	}
 	catch(...){
 		cout << "ERROR IN PARSING SOURCE CODE! EXCEPTION CAUGHT!" << endl;
