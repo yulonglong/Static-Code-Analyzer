@@ -88,6 +88,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_node.html">Node</a>, including all inherited members.</p>
 <table class="directory">
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>child</b> (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>data</b> (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_node.html#a3c6d9b178e9e9b9f16838357f43e8b8b">getChild</a>()</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_node.html#affc006027da7acdbb99bf69b53daef12">getChild</a>(unsigned int index)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_node.html#aec31b742c39f351dd0f88c56d51333ab">getData</a>()</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
@@ -100,19 +102,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="entry"><a class="el" href="class_node.html#ac802f13d7c5b418357db32a6febdcfc9">Node</a>(std::string newType, int newProgLine)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_node.html#a1c9830a012d8d3cc696711fb9db9c0f7">Node</a>(Node *newLeft, Node *newRight, std::string newData, std::string newType)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_node.html#ab75d26e451d19b4a8775a81da70053e4">Node</a>(Node *newLeft, Node *newRight, std::string newData, std::string newType, int newProgLine)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>printCFGNode</b>() (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>parent</b> (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_node.html#a6bd9825c212b90fb4a64b251456e4ead">printPreOrderExpressionTree</a>(Node *root)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_node.html#a688312102a11ecd53bc9b37806c3cfaa">setChild</a>(Node *newChild)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_node.html#a11390082535d132bf9f6ee8985a6137e">setData</a>(std::string newData)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_node.html#a7e23fcd1d980e25960c4cc049ad80258">setParent</a>(Node *newParent)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_node.html#a164dfedff987c20d61d03add14839452">setProgLine</a>(int newProgLine)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_node.html#ab4529af4b75705483ec462e76673e068">setType</a>(std::string newType)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_node.html#a2ca524a6b93912ac839d89326cddceb9">stringPreOrderExpressionGraph</a>(Node *root, std::string &amp;word)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_node.html#ab78498a4c2f481c5e6238131d5424d17">stringPreOrderExpressionTree</a>(Node *root, std::string &amp;word)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>progLine</b> (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_node.html#a688312102a11ecd53bc9b37806c3cfaa">setChild</a>(Node *newChild)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_node.html#a11390082535d132bf9f6ee8985a6137e">setData</a>(std::string newData)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_node.html#a7e23fcd1d980e25960c4cc049ad80258">setParent</a>(Node *newParent)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_node.html#a164dfedff987c20d61d03add14839452">setProgLine</a>(int newProgLine)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_node.html#ab4529af4b75705483ec462e76673e068">setType</a>(std::string newType)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_node.html#a2ca524a6b93912ac839d89326cddceb9">stringPreOrderExpressionGraph</a>(Node *root, std::string &amp;word)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_node.html#ab78498a4c2f481c5e6238131d5424d17">stringPreOrderExpressionTree</a>(Node *root, std::string &amp;word)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>type</b> (defined in <a class="el" href="class_node.html">Node</a>)</td><td class="entry"><a class="el" href="class_node.html">Node</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 19 2014 01:47:26 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
