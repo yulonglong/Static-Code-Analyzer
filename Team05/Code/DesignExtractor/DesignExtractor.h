@@ -35,13 +35,13 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
-void buildCFG(Node &ASTroot);
-void createCFGForStmtLst(Node &ASTNode);
-void createCFGForAssign(int progLine);
-void createCFGForCall(int progLine);
-void createCFGForWhile(vector<Node*> children);
-void createCFGForIf(vector<Node*> children);
-void createNewNodeAndAttachToCFG(string type, int progLine);
+void buildCFG(Node &ASTroot, PKB &pkb);
+void createCFGForStmtLst(Node &ASTNode, PKB &pkb);
+void createCFGForAssign(int progLine, PKB &pkb);
+void createCFGForCall(int progLine, PKB &pkb);
+void createCFGForWhile(vector<Node*> children, PKB &pkb);
+void createCFGForIf(vector<Node*> children, PKB &pkb);
+void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb);
 CFGNode* getCFGNode(int progLine);
 void traverseGraph(CFGNode &node, int progLine);
 

@@ -49,23 +49,23 @@ void extractorDriver(PKB *pkb) {
 void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 	try {
 		cout << "Building CFG" << endl;
-		buildCFG(ASTRoot);
+		buildCFG(ASTRoot, pkb);
 	} catch(const std::runtime_error& re) {
 		// specific handling for runtime_error
-		std::cerr << "Runtime error: " << re.what() << std::endl;
+		std::cerr << "Runtime error in DE: " << re.what() << std::endl;
 	} catch(const std::exception& ex) {
 		// specific handling for all exceptions extending std::exception, except
 		// std::runtime_error which is handled explicitly
-		std::cerr << "Error occurred: " << ex.what() << std::endl; 
+		std::cerr << "Error occurred in DE: " << ex.what() << std::endl; 
 	} catch(...) {
 		// catch any other errors (that we have no information about)
-		std::cerr << "Unknown failure occured. Possible memory corruption" << std::endl;
+		std::cerr << "Unknown failure occured in DE. Possible memory corruption" << std::endl;
 	}
 	pkb.setCFGRoot(rootCFGNode);
 }
 
 // actual building of CFG 
-void buildCFG(Node &ASTRroot) {
+void buildCFG(Node &ASTRroot, PKB &pkb) {
 	// create CFG Root Node with progLine = 0
 	cout << "1" << endl;
 	Node* currASTNode;
@@ -85,7 +85,7 @@ void buildCFG(Node &ASTRroot) {
 		cout << "3" << endl;
 		currASTNode = children[i]->getChild(0);
 		currCFGNode = rootCFGNode; 	
-		createCFGForStmtLst(*currASTNode);
+		createCFGForStmtLst(*currASTNode, pkb);
 	}
 	cout << "4" << endl;
 
@@ -96,7 +96,7 @@ void buildCFG(Node &ASTRroot) {
 }
 
 // ASTNode is a pointer to the subtree rooted at the AST Node ":stmtLst"
-void createCFGForStmtLst(Node &ASTNode) {
+void createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 	Node* tempASTNode;
 	tempASTNode = &ASTNode; 
 
@@ -105,13 +105,13 @@ void createCFGForStmtLst(Node &ASTNode) {
 		string type = children[i]->getType();
 		int progLine = children[i]->getProgLine();
 		if (type == "assign") {
-			createCFGForAssign(progLine);
+			createCFGForAssign(progLine, pkb);
 		} else if (type == "call") {
-			createCFGForCall(progLine);
+			createCFGForCall(progLine, pkb);
 		} else if (type == "while") {
-			createCFGForWhile(children[i]->getChild());
+			createCFGForWhile(children[i]->getChild(), pkb);
 		} else if (type == "if") {
-			createCFGForIf(children[i]->getChild());
+			createCFGForIf(children[i]->getChild(), pkb);
 		}
 	}
 
@@ -120,53 +120,22 @@ void createCFGForStmtLst(Node &ASTNode) {
 		//createNewNodeAndAttachToCFG("end", -1);
 	}
 
-
-
-
-	/*
-	if (currASTNodeType == "assign" || currASTNodeType == "call" || currASTNodeType == "while" || currASTNodeType == "if") {
-		createNewNodeAndAttachToCFG();
-	// TODO: IF ELSE 
-	} else if (currASTNodeType == "else") {
-		// update currCFGNode 
-		// currCFGNode = getCFGNode(currASTNode.getParent.getProgline())
-		createNewNodeAndAttachToCFG();
-	}
-
-	// go through all children nodes of currASTNode (and update currASTNode)
-	// and then recursively call createCFTForProcedure()
-	vector<Node*> children = currASTNode->getChild();
-	for (int i=0; i<children.size(); i++) {
-		currASTNode = children[i];
-		createCFGForProcedure();
-	}
-	*/
-	
-	// TODO: WHILE 
-	/*
-	if (currASTNodeType == "while") {
-		// pseudo code: fromProgLine = currASTNode.getRightChild.getLastChild()
-		// pseudo code: getCFGNode(fromProgLine).addChild(currASTNode.progLine)
-
-		int fromProgLine;
-		int toProgLine;
-		Node* node = tempASTNode->getChild(1);
-		fromProgLine = node->getChild(node->getChild().size()-1)->getProgLine();
-		toProgLine = tempASTNode->getProgLine();
-		Node* fromNode = findCFGNode(fromProgLine);
-		Node* toNode = findCFGNode(toProgLine);
-		fromNode.setChild(toNode);  
-		toNode.setParent(fromNode); << NEED TO MAKE SURE THAT EACH NODE CAN HAVE MULTIPLE PARENTS!!!
-	}	
-	*/
 }
 
-void createCFGForAssign(int progLine) {
+void createCFGForAssign(int progLine, PKB &pkb) {
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("assign");
 		counter = progLine;
 
+		// Set next relationship in PKB
+		vector<CFGNode*> parents = currCFGNode->getMultiParent();
+		for (unsigned int i=0; i<parents.size(); i++) {
+			int fromProgLine = parents[i]->getProgLine();
+			int toProgLine = currCFGNode->getProgLine();
+			pkb.setToNext(fromProgLine, toProgLine);
+		}
+
 		if (debugModeIteration2) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
@@ -182,16 +151,24 @@ void createCFGForAssign(int progLine) {
 			cout << "Dummy node's parents are: " << s << endl;
 		}
 	} else {
-		createNewNodeAndAttachToCFG("assign", progLine);
+		createNewNodeAndAttachToCFG("assign", progLine, pkb);
 	}
 }
 
-void createCFGForCall(int progLine) {
+void createCFGForCall(int progLine, PKB &pkb) {
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("call");
 		counter = progLine;
 
+		// Set next relationship in PKB
+		vector<CFGNode*> parents = currCFGNode->getMultiParent();
+		for (unsigned int i=0; i<parents.size(); i++) {
+			int fromProgLine = parents[i]->getProgLine();
+			int toProgLine = currCFGNode->getProgLine();
+			pkb.setToNext(fromProgLine, toProgLine);
+		}
+
 		if (debugModeIteration2) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
@@ -207,17 +184,25 @@ void createCFGForCall(int progLine) {
 			cout << "Dummy node's parents are: " << s << endl;
 		}
 	} else {
-		createNewNodeAndAttachToCFG("call", progLine);
+		createNewNodeAndAttachToCFG("call", progLine, pkb);
 	}
 }
 
-void createCFGForWhile(vector<Node*> children) {
+void createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	int progLine = children[0]->getProgLine();
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("while");
 		counter = progLine;
 
+		// Set next relationship in PKB
+		vector<CFGNode*> parents = currCFGNode->getMultiParent();
+		for (unsigned int i=0; i<parents.size(); i++) {
+			int fromProgLine = parents[i]->getProgLine();
+			int toProgLine = currCFGNode->getProgLine();
+			pkb.setToNext(fromProgLine, toProgLine);
+		}
+
 		if (debugModeIteration2) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
@@ -233,12 +218,12 @@ void createCFGForWhile(vector<Node*> children) {
 			cout << "Dummy node's parents are: " << s << endl;
 		}
 	} else {
-		createNewNodeAndAttachToCFG("while", progLine);
+		createNewNodeAndAttachToCFG("while", progLine, pkb);
 	}
 
 	CFGNode* toNode = currCFGNode;
 	Node* stmtLst = children[1];
-	createCFGForStmtLst(*stmtLst);
+	createCFGForStmtLst(*stmtLst, pkb);
 
 	int fromProgLine = children[1]->getChild(children[1]->getChild().size()-1)->getProgLine();
 	CFGNode* fromNode = getCFGNode(fromProgLine);
@@ -248,6 +233,8 @@ void createCFGForWhile(vector<Node*> children) {
 		}
 		fromNode->setMultiChild(toNode);
 		toNode->setMultiParent(fromNode);
+		// Set next relationship in PKB
+		pkb.setToNext(fromNode->getProgLine(), toNode->getProgLine());
 		if (debugModeIteration2) {
 			cout << "Parent: ";
 			fromNode->printCFGNode();
@@ -259,12 +246,20 @@ void createCFGForWhile(vector<Node*> children) {
 	currCFGNode = toNode;
 }
 
-void createCFGForIf(vector<Node*> children) {
+void createCFGForIf(vector<Node*> children, PKB &pkb) {
 	int progLine = children[0]->getProgLine();
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("if");
 		counter = progLine;
+
+		// Set next relationship in PKB
+		vector<CFGNode*> parents = currCFGNode->getMultiParent();
+		for (unsigned int i=0; i<parents.size(); i++) {
+			int fromProgLine = parents[i]->getProgLine();
+			int toProgLine = currCFGNode->getProgLine();
+			pkb.setToNext(fromProgLine, toProgLine);
+		}
 
 		if (debugModeIteration2) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
@@ -281,18 +276,18 @@ void createCFGForIf(vector<Node*> children) {
 			cout << "Dummy node's parents are: " << s << endl;
 		}
 	} else {
-		createNewNodeAndAttachToCFG("if", progLine);
+		createNewNodeAndAttachToCFG("if", progLine, pkb);
 	}
 
 	CFGNode* ifCFGNode = currCFGNode;
 	Node* stmtLst = children[1];
-	createCFGForStmtLst(*stmtLst);
+	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
 	leafNodes.push_back(currCFGNode);
 
 	currCFGNode = ifCFGNode;
 	stmtLst = children[2];
-	createCFGForStmtLst(*stmtLst);
+	createCFGForStmtLst(*stmtLst, pkb);
 	leafNodes.push_back(currCFGNode);
 
 	CFGNode* dummyNode = new CFGNode("dummy", -1);
@@ -328,9 +323,8 @@ void createCFGForIf(vector<Node*> children) {
 	currCFGNode = dummyNode; 
 }
 
-void createNewNodeAndAttachToCFG(string type, int progLine) {
+void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
 	CFGNode* newNode = new CFGNode(type, progLine);
-	counter = progLine;
 	if (debugModeIteration2) {
 		cout << "adding new ";
 		newNode->printCFGNode();
@@ -346,8 +340,9 @@ void createNewNodeAndAttachToCFG(string type, int progLine) {
 		cout << endl;
 	}
 	currCFGNode = newNode; 
-	// TODO: Set next relationship in PKB
-	// next.setNext(currCFGNode.getProgLine(), progLine);
+	counter = currCFGNode->getProgLine();
+	// Set next relationship in PKB
+	pkb.setToNext(currCFGNode->getProgLine(), progLine);
 }
 
 CFGNode* getCFGNode(int progLine) {
