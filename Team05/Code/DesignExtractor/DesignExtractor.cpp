@@ -81,7 +81,7 @@ void buildCFG(Node &ASTRroot) {
 	//		- update parent pointer 
 	vector<Node*> children = currASTNode->getChild();
 
-	for (signed int i=0; i<children.size(); i++) {
+	for (unsigned int i=0; i<children.size(); i++) {
 		cout << "3" << endl;
 		currASTNode = children[i]->getChild(0);
 		currCFGNode = rootCFGNode; 	
@@ -101,7 +101,7 @@ void createCFGForStmtLst(Node &ASTNode) {
 	tempASTNode = &ASTNode; 
 
 	vector<Node*> children = tempASTNode->getChild();
-	for (int i=0; i<children.size(); i++) {
+	for (unsigned int i=0; i<children.size(); i++) {
 		string type = children[i]->getType();
 		int progLine = children[i]->getProgLine();
 		if (type == "assign") {
@@ -171,7 +171,7 @@ void createCFGForAssign(int progLine) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
 			string s = "";
-			for (int i=0; i<temp.size(); i++) {
+			for (unsigned int i=0; i<temp.size(); i++) {
 				int j = temp[i]->getProgLine();
 				std::string str;
 				std::stringstream out;
