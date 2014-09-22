@@ -6,6 +6,7 @@ using namespace std;
 
 
 void queryDriver(string query, list<string> &result, PKB *pkb){
+	/*
 	cout<<"Begin parse query"<<endl;
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);
@@ -58,5 +59,5 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 				result.push_back(to_string(static_cast<long long>(ans.at(i))));
 		}
 	}
-	cout<<"End evaluate query"<<endl;
+	cout<<"End evaluate query"<<endl;*/
 }

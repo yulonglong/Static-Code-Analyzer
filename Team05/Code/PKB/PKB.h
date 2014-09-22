@@ -17,6 +17,7 @@
 #include "Modifies.h"
 #include "Uses.h"
 #include "Calls.h"
+#include "Next.h"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ private:
 	Modifies *modifies;
 	Uses *uses;
 	Calls *calls;
+	Next *next;
 	Node* CFGRoot; 
 	
 public:
@@ -56,6 +58,7 @@ public:
 	Modifies* getModifies();
 	Uses* getUses();
 	Calls* getCalls();
+	Next* getNext();
 	Node* getASTRoot();
 	Node* getCFGRoot();
 
@@ -69,6 +72,7 @@ public:
 	void setToModifies(STMTNUM, VARNAME);
 	void setToUses(STMTNUM, VARNAME);
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM); //kester added the last parameter of STMTNUM, it is the progline in which the procedure is called
+	void setToNext(STMTNUM, STMTNUM);
 	void setToTypeTable(STMTNUM,TypeTable::SynType); //kester added this it was originally insertStmtNumAndType
 
 	void setASTRoot(Node* newASTRoot);

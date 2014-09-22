@@ -5,6 +5,8 @@
 #include <ctype.h>
 #include <set>
 #include <stack>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -46,8 +48,63 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	return reorderedRelations;
 }
 
-vector<int> QueryEvaluator::evaluateQuery(Query q){
+unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
+	vector<Relationship> relations = q.getRelVect();
+	relations = orderRelationship(relations);
+	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+	int relIndex = 0;
+	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		switch(it->getRelType()){
+		case Relationship::FOLLOWS:
+			evaluateFollows(*it, m,relIndex); break;
+
+		case Relationship::FOLLOWSSTAR:
+			evaluateFollowsStar(*it, m, relIndex); break;
+
+		case Relationship::PARENT:
+			evaluateParent(*it, m, relIndex); break;
+
+		case Relationship::PARENTSTAR:
+			evaluateParentStar(*it, m, q.getSelectedSyn().at(0)); break;//review
+
+		case Relationship::CALLS:
+			evaluateCalls(*it, relIndex); break;
+
+		case Relationship::CALLSSTAR:
+			evaluateCallsStar(*it, m, relIndex); break;
+
+		case Relationship::MODIFIES:
+			evaluateModifies(*it, m, relIndex); break;
+
+		case Relationship::USES:
+			evaluateUses(*it, m, relIndex); break;
+
+		case Relationship::PATTERN:	
+			vector<int> proxy = evaluatePattern(q, it->getToken1(), it->getToken2()); //review
+		}
+
+		relIndex++;
+	}
+
+	vector<string> selectedSyn = q.getSelectedSyn();
+	unordered_map<string, vector<int>> answers;
+
+	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
+		int index = (linkages.find(*it)->second).at(0);
+		vector<Pair> p = relAns.at(index);
+		vector<int> synAns;
+		for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
+			if(*it==it2->token1){
+				synAns.push_back(it2->ans1);
+			}
+			else {
+				synAns.push_back(it2->ans2);
+			}
+		}
+	}
+
+	return answers;
 	/*
 	//order the relationship vector
 	vector<Relationship> relations = orderRelationship(q.getRelVect());
@@ -252,9 +309,6 @@ vector<int> QueryEvaluator::evaluateQuery(Query q){
 		}
 	}
 	return intersectAnswers(answers);	*/
-
-	vector<int> a;
-	return a;
 }
 
 /*
@@ -616,6 +670,8 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 	vector<Pair> withAns;
 	VarTable * v = pkb->getVarTable(); 
 	ProcTable * p = pkb->getProcTable();
+	ConstTable * c = pkb->getConstTable();
+
 
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
@@ -645,13 +701,165 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			//else if they are different type
 			else {
 				//get list of rel that link to v1
+				set<int> ans1 = retrieveTokenEvaluatedAnswers(tk1);
+				set<string> ans1string;
+				if(i1->second==TypeTable::PROCEDURE || i1->second==TypeTable::VARIABLE){
+					
+					if(i1->second==TypeTable::PROCEDURE){
+						for(set<int>::iterator it = ans1.begin(); it!=ans1.end(); it++){
+							ans1string.insert(p->getProcName(*it));
+						}
+					}
+
+					else{
+						for(set<int>::iterator it = ans1.begin(); it!=ans1.end(); it++){
+							ans1string.insert(v->getVarName(*it));
+						}
+					}
+				}
 				//get list of rel that link to p
+				set<int> ans2 = retrieveTokenEvaluatedAnswers(tk2);
+				set<string> ans2string;
+				if(i2->second==TypeTable::PROCEDURE || i2->second==TypeTable::VARIABLE){
+					
+					if(i2->second==TypeTable::PROCEDURE){
+						for(set<int>::iterator it = ans2.begin(); it!=ans2.end(); it++){
+							ans2string.insert(p->getProcName(*it));
+						}
+					}
+
+					else{
+						for(set<int>::iterator it = ans2.begin(); it!=ans2.end(); it++){
+							ans2string.insert(v->getVarName(*it));
+						}
+					}
+				}
+
+				set<int> ans3;
+				
+
+				if(!ans1string.empty()){
+					vector<Pair> ans3stringVar;
+					vector<Pair> ans3stringProc;
+					set<string> ans3string;
+
+					//std::set_intersection(ans1string.begin(), ans1string.end(), ans2string.begin(), ans2string.end(),ans3string.begin());
+
+					for(set<string>::iterator it = ans3string.begin(); it!=ans3string.end(); it++){
+						ans3stringVar.push_back(Pair (v->getVarIndex(*it), v->getVarIndex(*it), tk1, tk2));
+						ans3stringProc.push_back(Pair (p->getProcIndex(*it), p->getProcIndex(*it), tk1, tk2));
+					}
+
+					if(i1->second==TypeTable::VARIABLE){
+						removePairs(ans3stringVar, tk1);
+						removePairs(ans3stringProc, tk2);
+					}
+					else{
+						removePairs(ans3stringProc, tk1);
+						removePairs(ans3stringVar, tk2);
+					}
+				}
+				else{
+					//std::set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), ans3.begin());
+					vector<Pair> finalAns;
+
+					for(set<int>::iterator it = ans3.begin(); it!=ans3.end(); it++){
+						finalAns.push_back(Pair(*it, *it, tk1, tk2));
+					}
+
+					removePairs(finalAns, tk1);
+					removePairs(finalAns, tk2);
+				}
 			}
 		}
 
 		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push relans true
+		else if(isExistInLinkages(tk1)){
+			set<int> ans = retrieveTokenEvaluatedAnswers(tk1);
+			vector<Pair> finalAns;
+			if(i1->second==TypeTable::PROCEDURE){
+				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
+					if(v->getVarName(*it)!="-1"){
+						finalAns.push_back(Pair (*it, 1, tk1, tk2));
+					}
+				}
+			}
+
+			else if(i1->second == TypeTable::VARIABLE){
+				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
+					if(p->getProcName(*it)!="-1"){
+						finalAns.push_back(Pair (*it, 1, tk1, tk2));
+					}
+				}
+			}
+
+			else {
+				if(i2->second==TypeTable::CONSTANT){
+					for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+						stringstream s;
+						s << *it;					
+						if(c->getConstIndex(s.str())!=-1){
+							finalAns.push_back(Pair (*it, 1, tk1, tk2));
+						}
+					}
+				}
+				else if(i2->second==TypeTable::STMT){
+					//request for stmt range
+				}
+				else{//PROGLINE
+					//request for progline range
+				}
+
+				removePairs(finalAns, tk1);
+			}
+		}
+
+		else if(isExistInLinkages(tk2)){
+			set<int> ans = retrieveTokenEvaluatedAnswers(tk2);
+			vector<Pair> finalAns;
+			if(i2->second==TypeTable::PROCEDURE){
+				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
+					if(v->getVarName(*it)!="-1"){
+						finalAns.push_back(Pair (1, *it, tk1, tk2));
+					}
+				}
+			}
+
+			else if(i2->second == TypeTable::VARIABLE){
+				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
+					if(p->getProcName(*it)!="-1"){
+						finalAns.push_back(Pair (1, *it, tk1, tk2));
+					}
+				}
+			}
+
+			else {
+				if(i1->second==TypeTable::CONSTANT){
+					for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+						stringstream s;
+						s << *it;					
+						if(c->getConstIndex(s.str())!=-1){
+							finalAns.push_back(Pair (1, *it, tk1, tk2));
+						}
+					}
+				}
+				else if(i1->second==TypeTable::STMT){
+					//request for stmt range
+				}
+				else{//PROGLINE
+					//request for progline range
+				}
+
+				removePairs(finalAns, tk2);
+			}
+		}
 
 		//else (both does not exist) evaluate true or false
+		else {
+			if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
+
+			}
+		}
 
 	}
 	//with v.varName = "x" with p.procName = "Third"
@@ -681,6 +889,151 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			withAns.push_back(Pair (1, 1, "true", "true"));
 		}
 	}
+}
+
+void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+
+}
+
+void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans, string tk1, string tk2){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+		ans->push_back(Pair (rootProcIndex, *i, tk1, tk2));
+		recursiveCall(rootProcIndex, *i, ans, tk1, tk2);
+	}
+}
+
+void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, vector<Pair> * ans, string tk1, string tk2){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+		if(currentIndex==targetIndex){
+			ans->push_back(Pair (1,1,"true","true"));
+			break;
+		}
+		recursiveCallBoolean(rootProcIndex, *i, targetIndex, ans, tk1, tk2);
+	}
+}
+
+void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vector<Pair> * ans, string tk1, string tk2){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> calls = c->getCalls(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=calls.begin(); i!=calls.end(); i++){
+		ans->push_back(Pair (*i, leafIndex, tk1, tk2));
+		recursiveInverseCall(leafIndex, *i, ans, tk1, tk2);
+	}
+}
+
+void QueryEvaluator::evaluateCallsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	vector<Pair> callsStarAns;
+
+	//Calls*(a,b) 
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		vector<int> allProc = p->getAllProcIndexes();
+
+		for(vector<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
+			recursiveCall(*it, *it, &callsStarAns, tk1, tk2);
+		}
+	}
+
+	//Calls*(a,_)
+	else if(isalpha(tk1[0]) && tk2=="_"){
+			vector<int> allProc = p->getAllProcIndexes();
+
+			for(vector<int>::iterator it=allProc.begin(); it!=allProc.end(); it++){
+				if(!c->getCalled(p->getProcName(*it)).empty()){
+					callsStarAns.push_back(Pair (*it, -1, tk1, tk2));
+				}
+			}
+	}
+
+	//Calls*(a, "second")
+	else if(isalpha(tk1[0])) {
+		int index = p->getProcIndex(tk2.substr(1,tk2.length()-2));
+
+		recursiveInverseCall(index, index, &callsStarAns, tk1, tk2);
+
+	}
+
+	//Calls*(_,b)
+	else if(isalpha(tk2[0]) && tk1=="_"){
+
+		vector<int> allProc = p->getAllProcIndexes();
+
+		for(vector<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
+			if(!c->getCalls(p->getProcName(*it)).empty()){
+				callsStarAns.push_back(Pair(-1, *it, tk1, tk2));
+			}
+		}
+
+	}
+
+	//Calls*("first", b)
+	else if(isalpha(tk2[0])){
+		int index = p->getProcIndex(tk1.substr(1, tk1.length()-2));
+
+		recursiveCall(index, index, &callsStarAns, tk1, tk2);
+	}
+
+	//Calls*("first", "second")
+	else {
+		int index1 = p->getProcIndex(tk1.substr(1, tk1.length()-2));
+		int index2 = p->getProcIndex(tk2.substr(1, tk1.length()-2));
+
+		recursiveCallBoolean(index1, index1, index2, &callsStarAns, tk1, tk2);
+
+		if(callsStarAns.empty()){
+			callsStarAns.push_back(Pair (0, 0, "false", "false"));
+		}
+	}
+
+	//If both a and b exist in linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+
+		removePairsFromRelAns(&callsStarAns, tk1, 1);
+		removePairsFromRelAns(&callsStarAns, tk2, 2);
+		removePairs(callsStarAns, tk1);
+		removePairs(callsStarAns, tk2);
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		removePairsFromRelAns(&callsStarAns, tk1, 1);
+		removePairs(callsStarAns, tk1);
+		insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		removePairsFromRelAns(&callsStarAns, tk2, 2);
+		removePairs(callsStarAns, tk2);
+		insertLinks(tk2, relIndex);
+	}
+
+	else {
+
+	}
+
+	relAns.insert(make_pair(relIndex, callsStarAns));
+
 }
 
 void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){

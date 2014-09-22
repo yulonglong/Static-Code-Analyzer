@@ -196,7 +196,7 @@ void createCFGForCall(int progLine) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
 			string s = "";
-			for (int i=0; i<temp.size(); i++) {
+			for (unsigned int i=0; i<temp.size(); i++) {
 				int j = temp[i]->getProgLine();
 				std::string str;
 				std::stringstream out;
@@ -222,7 +222,7 @@ void createCFGForWhile(vector<Node*> children) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
 			string s = "";
-			for (int i=0; i<temp.size(); i++) {
+			for (unsigned int i=0; i<temp.size(); i++) {
 				int j = temp[i]->getProgLine();
 				std::string str;
 				std::stringstream out;
@@ -270,7 +270,7 @@ void createCFGForIf(vector<Node*> children) {
 			cout << "Dummy node changed from -1 to " << progLine <<  endl;
 			vector<CFGNode*> temp = currCFGNode->getMultiParent();
 			string s = "";
-			for (int i=0; i<temp.size(); i++) {
+			for (unsigned int i=0; i<temp.size(); i++) {
 				int j = temp[i]->getProgLine();
 				std::string str;
 				std::stringstream out;
@@ -311,7 +311,7 @@ void createCFGForIf(vector<Node*> children) {
 		if (debugModeIteration2) {
 			vector<CFGNode*> temp = currCFGNode->getMultiChild();
 			string s = "";
-			for (int i=0; i<temp.size(); i++) {
+			for (unsigned int i=0; i<temp.size(); i++) {
 				int j = temp[i]->getProgLine();
 				std::string str;
 				std::stringstream out;
@@ -390,7 +390,7 @@ void traverseGraph(CFGNode &node, int progLine) {
 		cout << "Error caught" << endl;
 	}
 	vector<CFGNode*> children = node.getMultiChild();
-	for (int i=0; i<children.size(); i++) {
+	for (unsigned int i=0; i<children.size(); i++) {
 		CFGNode* child = children[i];
 		if (visited[child->getProgLine()] == 0) {
 			traverseGraph(*child, progLine);

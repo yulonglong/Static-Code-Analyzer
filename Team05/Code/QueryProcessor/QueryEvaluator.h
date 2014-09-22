@@ -24,9 +24,15 @@ private:
 	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateCalls(Relationship, int);
-	void evaluateWith(Relationship, unordered_map<string, TypeTable::SynType>, int);
+	void evaluateCallsStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 
-	std::vector<int> evaluateCallsStar(Relationship);
+	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	void recursiveCall(int, int, std::vector<Pair> *, std::string, std::string);
+	void recursiveInverseCall(int, int, std::vector<Pair> *, std::string, std::string);
+	void recursiveCallBoolean(int, int, int, std::vector<Pair> *, std::string, std::string);
+
+	//std::vector<int> evaluateCallsStar(Relationship);
 	std::vector<int> evaluatePattern(Query, std::string, std::string);
 	std::vector<Relationship> orderRelationship(vector<Relationship>);
 	std::vector<int> * findAnswerVectorFromToken(std::string);
@@ -60,7 +66,7 @@ public:
 	QueryEvaluator(PKB*);
 	~QueryEvaluator();
 	PKB *pkb;
-	std::vector<int> evaluateQuery(Query);
+	std::unordered_map<std::string, std::vector<int>> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);
 };
 
