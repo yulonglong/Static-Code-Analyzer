@@ -30,9 +30,6 @@
     <ClCompile Include="Parent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Follows.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Uses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="Next.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Follows.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
