@@ -2,7 +2,10 @@ procedure Second{
 	call Fourth;
 	if x then{		
 		if s then {
-			a = 5; } 
+			a = 5; }
+		else {
+			call Fourth;
+		} 
 		x = x + 1;}		
 	else{			
 		z = 1;

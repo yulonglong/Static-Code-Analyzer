@@ -89,11 +89,17 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	pkb = PKB::getInstance();
 	CodeParser::parserDriver("SourceDE4.txt",pkb);
 	
-	
 	ASTRoot = pkb->getASTRoot();
 	if (ASTRoot == NULL) {
 		cout << "Why is the ASTRoot null after ParserDriver?" << endl;
 	}
+
+
+
+
+
+
+
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL && ASTRoot != NULL) {
