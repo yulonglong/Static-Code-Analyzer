@@ -8,28 +8,14 @@ bool Follows::instanceFlag=false;
 Follows* Follows::follows=NULL;
 
 // constructor
-Follows::Follows() {
-}
-
 Follows::Follows(TypeTable *table) {
 	typeTable = table;
 }
 
-// TODO: delete
 Follows::~Follows() {
 	followsTable.clear();
 	followedByTable.clear();
 	instanceFlag=false;
-}
-
-Follows* Follows::getInstance() {
-	if (!instanceFlag) {
-        follows = new Follows();
-        instanceFlag = true;
-        return follows;
-    } else {
-        return follows;
-    }
 }
 
 Follows* Follows::getInstance(TypeTable *table) {
@@ -63,7 +49,7 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false; 
 }
 
-bool Follows::isFollows(TYPE t, STMTNUM s) {
+bool Follows::isFollows(SYNTYPE t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -72,7 +58,7 @@ bool Follows::isFollows(TYPE t, STMTNUM s) {
 	return true;
 }
 
-bool Follows::isFollowedBy(TYPE t, STMTNUM s) {
+bool Follows::isFollowedBy(SYNTYPE t, STMTNUM s) {
 	STMTNUM result = getFollowedBy(t, s);
 	bool noResult = (result == -1);
 	if (noResult) {
@@ -81,7 +67,7 @@ bool Follows::isFollowedBy(TYPE t, STMTNUM s) {
 	return true;
 }
 
-bool Follows::isFollows(TYPE t1, TYPE t2) {
+bool Follows::isFollows(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> temp = getFollows(t1, t2); 
 	// cout <<"hello"<< temp.size() << " "<<temp.at(0)<<endl; 
 	if (temp.size() == 1 && temp.at(0) == -1) {
@@ -90,7 +76,7 @@ bool Follows::isFollows(TYPE t1, TYPE t2) {
 	return true;
 }
 
-STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
+STMTNUM Follows::getFollows(SYNTYPE t, STMTNUM s) {
 	STMTNUM num = -1;
 	try {
 		num = followsTable.at(s);
@@ -105,7 +91,7 @@ STMTNUM Follows::getFollows(TYPE t, STMTNUM s) {
 	return -1; 
 }
 
-STMTNUM Follows::getFollowedBy(TYPE t, STMTNUM s) {
+STMTNUM Follows::getFollowedBy(SYNTYPE t, STMTNUM s) {
 	int num = -1; 
 	try {
 		num = followedByTable.at(s);
@@ -119,7 +105,7 @@ STMTNUM Follows::getFollowedBy(TYPE t, STMTNUM s) {
 	return -1; 
 }
 
-vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
+vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	try {
@@ -147,7 +133,7 @@ vector<STMTNUM> Follows::getFollows(TYPE t1, TYPE t2) {
 	// return list;
 }
 
-vector<STMTNUM> Follows::getFollowedBy(TYPE t1, TYPE t2) {
+vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
