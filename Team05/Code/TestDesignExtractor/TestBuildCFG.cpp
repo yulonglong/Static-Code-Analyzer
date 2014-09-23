@@ -14,7 +14,6 @@
 using namespace std;
 
 
-
 void BuildCFGTest::setUp() {
 }
 
@@ -27,10 +26,10 @@ CPPUNIT_TEST_SUITE_REGISTRATION( BuildCFGTest ); // Note 4
 void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	PKB *pkb;
 	Node* ASTRoot;
-	Node* CFGRoot;
+	CFGNode* CFGRoot;
 
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE3.txt",pkb);
+	CodeParser::parserDriver("SourceDE3.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	CFGRoot = pkb->getCFGRoot();
@@ -66,10 +65,10 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 void BuildCFGTest::testBuildCFGForWhileStmts() {
 	PKB *pkb;
 	Node* ASTRoot;
-	Node* CFGRoot;
+	CFGNode* CFGRoot;
 	
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE2.txt",pkb);
+	CodeParser::parserDriver("SourceDE5.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	CFGRoot = pkb->getCFGRoot();
@@ -85,14 +84,17 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 void BuildCFGTest::testBuildCFGForIfStmts() {
 	PKB *pkb;
 	Node* ASTRoot;
-	Node* CFGRoot;
+	CFGNode* CFGRoot;
 	
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE4.txt",pkb);
-
+	CodeParser::parserDriver("SourceDE4.txt",pkb);
+	
+	
 	ASTRoot = pkb->getASTRoot();
+	if (ASTRoot == NULL) {
+		cout << "Why is the ASTRoot null after ParserDriver?" << endl;
+	}
 	CFGRoot = pkb->getCFGRoot();
-	cout << "here1" << endl;
 
 	if (CFGRoot == NULL && ASTRoot != NULL) {
 		cout << "CFGRoot is null and ASTRoot is not null" << endl;
@@ -103,11 +105,13 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	if (ASTRoot == NULL) {
 		cout << "ASTRoot is null!!!" << endl;
 	}
+
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	
 	if (CFGRoot == NULL) {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
+
 	/*
 	string resultFullCFG = "";
 	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);

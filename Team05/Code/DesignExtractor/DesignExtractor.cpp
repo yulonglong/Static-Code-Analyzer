@@ -67,12 +67,10 @@ void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 // actual building of CFG 
 void buildCFG(Node &ASTRroot, PKB &pkb) {
 	// create CFG Root Node with progLine = 0
-	cout << "1" << endl;
 	Node* currASTNode;
 	currASTNode = &ASTRroot; 
 	currCFGNode = new CFGNode("program", 0);
 	rootCFGNode = currCFGNode;
-	cout << "2" << endl;
 
 	// iteratively traverse each of the type = procedure nodes in AST
 	// for each AST Node :
@@ -82,12 +80,10 @@ void buildCFG(Node &ASTRroot, PKB &pkb) {
 	vector<Node*> children = currASTNode->getChild();
 
 	for (unsigned int i=0; i<children.size(); i++) {
-		cout << "3" << endl;
 		currASTNode = children[i]->getChild(0);
 		currCFGNode = rootCFGNode; 	
 		createCFGForStmtLst(*currASTNode, pkb);
 	}
-	cout << "4" << endl;
 
 	
 	// if want end node, then after each iteration, push back the pointer to CFGNode into a vector.
