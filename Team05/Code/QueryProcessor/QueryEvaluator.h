@@ -13,8 +13,9 @@
 
 class QueryEvaluator{ 
 private:
-	static unordered_map<string, std::vector<int>> linkages;
-	static unordered_map<int, std::vector<Pair>> relAns;
+	static std::unordered_map<string, std::vector<int>> linkages;
+	static std::unordered_map<int, std::vector<Pair>> relAns;
+	static std::unordered_map<int, vector<std::string>> relParameters;
 	static std::vector<Relationship> vecOfRelations;
 
 	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
@@ -28,9 +29,11 @@ private:
 	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 
 	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
-	void recursiveCall(int, int, std::vector<Pair> *, std::string, std::string);
-	void recursiveInverseCall(int, int, std::vector<Pair> *, std::string, std::string);
-	void recursiveCallBoolean(int, int, int, std::vector<Pair> *, std::string, std::string);
+	void recursiveCall(int, int, std::vector<Pair> *);
+	void recursiveInverseCall(int, int, std::vector<Pair> *);
+	void recursiveCallBoolean(int, int, int, std::vector<Pair> *);
+
+	void intersectPairs(std::string, std::string, std::vector<Pair> *, int);
 
 	//std::vector<int> evaluateCallsStar(Relationship);
 	std::vector<int> evaluatePattern(Query, std::string, std::string);
@@ -39,7 +42,7 @@ private:
 	//std::vector<std::string> findLinks(std::string);
 
 	std::set<int> retrieveTokenEvaluatedAnswers(std::string );
-	void removePairs(std::vector<Pair>, std::string);
+	void removePairs(std::vector<Pair>, std::string, int);
 	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
 	void insertLinks(std::string, int);
 
