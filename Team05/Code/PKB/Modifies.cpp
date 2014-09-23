@@ -219,7 +219,6 @@ bool Modifies::isModifiesProc(PROCNAME p, VARNAME v){
 			}
 		}
 	} catch (...){
-		return false;
 	}
 	return false;
 }

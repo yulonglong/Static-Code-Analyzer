@@ -9,20 +9,23 @@ Uses* uses;
 PKB* pkb;
 TypeTable* typeTable;
 VarTable* varTable;
+ProcTable* procTable;
 
 void UsesTest::setUp() {
 	pkb = PKB::getInstance();
-	uses = pkb->getUses();
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
+	procTable = pkb->getProcTable();
+	uses = Uses::getInstance(typeTable,varTable,procTable);
 }
 
 void UsesTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	uses = Uses::getInstance();
-	typeTable = TypeTable::getInstance();
-	varTable = VarTable::getInstance();
+	typeTable = pkb->getTypeTable();
+	varTable = pkb->getVarTable();
+	procTable = pkb->getProcTable();
+	uses = Uses::getInstance(typeTable,varTable,procTable);
 }
 
 // Registers the fixture into the 'registry'
@@ -81,11 +84,13 @@ void UsesTest::testUsesUsingStmtType() {
 	ans.push_back(varTable->getVarIndex("y"));
 	CPPUNIT_ASSERT(uses->getUses(2) == ans);
 	ans.clear();
+	ans.push_back(-1);
 	CPPUNIT_ASSERT(uses->getUses(3) == ans);
 	CPPUNIT_ASSERT(uses->getUses(150) == ans);
 	CPPUNIT_ASSERT(uses->getUses(-150) == ans);
 
 	CPPUNIT_ASSERT(uses->getUses(TypeTable::WHILE)== ans);
+	ans.clear();
 	ans.push_back(2);
 	ans.push_back(4);
 	ans.push_back(10);
