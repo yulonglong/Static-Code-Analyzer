@@ -1,0 +1,295 @@
+-1.) root : program
+Parent -1.) root : program
+-1.) Second : procedure
+Parent -1.) Second : procedure
+-1.) Second : stmtLst
+Parent -1.) Second : stmtLst
+1.) = : assign
+Parent 1.) = : assign
+1.) a : variable
+Parent 1.) = : assign
+1.) 1 : constant
+Parent -1.) Second : stmtLst
+2.) = : assign
+Parent 2.) = : assign
+2.) b : variable
+Parent 2.) = : assign
+2.) 1 : constant
+Parent -1.) Second : stmtLst
+3.) = : assign
+Parent 3.) = : assign
+3.) c : variable
+Parent 3.) = : assign
+3.) 1 : constant
+Parent -1.) Second : stmtLst
+4.) 4 : if
+Parent 4.) 4 : if
+4.) a : variable
+Parent 4.) 4 : if
+4.) then : stmtLst
+Parent 4.) then : stmtLst
+5.) = : assign
+Parent 5.) = : assign
+5.) d : variable
+Parent 5.) = : assign
+5.) 2 : constant
+Parent 4.) then : stmtLst
+6.) = : assign
+Parent 6.) = : assign
+6.) e : variable
+Parent 6.) = : assign
+6.) 2 : constant
+Parent 4.) 4 : if
+4.) else : stmtLst
+Parent 4.) else : stmtLst
+7.) = : assign
+Parent 7.) = : assign
+7.) d : variable
+Parent 7.) = : assign
+7.) 3 : constant
+Parent 4.) else : stmtLst
+8.) = : assign
+Parent 8.) = : assign
+8.) e : variable
+Parent 8.) = : assign
+8.) 3 : constant
+Parent -1.) Second : stmtLst
+9.) 9 : if
+Parent 9.) 9 : if
+9.) b : variable
+Parent 9.) 9 : if
+9.) then : stmtLst
+Parent 9.) then : stmtLst
+10.) = : assign
+Parent 10.) = : assign
+10.) a : variable
+Parent 10.) = : assign
+10.) 3 : constant
+Parent 9.) then : stmtLst
+11.) 11 : if
+Parent 11.) 11 : if
+11.) c : variable
+Parent 11.) 11 : if
+11.) then : stmtLst
+Parent 11.) then : stmtLst
+12.) = : assign
+Parent 12.) = : assign
+12.) d : variable
+Parent 12.) = : assign
+12.) + : operator
+Parent 12.) + : operator
+12.) c : variable
+Parent 12.) + : operator
+12.) c : variable
+Parent 11.) 11 : if
+11.) else : stmtLst
+Parent 11.) else : stmtLst
+13.) 13 : if
+Parent 13.) 13 : if
+13.) d : variable
+Parent 13.) 13 : if
+13.) then : stmtLst
+Parent 13.) then : stmtLst
+14.) = : assign
+Parent 14.) = : assign
+14.) c : variable
+Parent 14.) = : assign
+14.) + : operator
+Parent 14.) + : operator
+14.) c : variable
+Parent 14.) + : operator
+14.) c : variable
+Parent 13.) 13 : if
+13.) else : stmtLst
+Parent 13.) else : stmtLst
+15.) = : assign
+Parent 15.) = : assign
+15.) c : variable
+Parent 15.) = : assign
+15.) - : operator
+Parent 15.) - : operator
+15.) c : variable
+Parent 15.) - : operator
+15.) 1 : constant
+Parent 9.) 9 : if
+9.) else : stmtLst
+Parent 9.) else : stmtLst
+16.) 16 : if
+Parent 16.) 16 : if
+16.) a : variable
+Parent 16.) 16 : if
+16.) then : stmtLst
+Parent 16.) then : stmtLst
+17.) = : assign
+Parent 17.) = : assign
+17.) f : variable
+Parent 17.) = : assign
+17.) + : operator
+Parent 17.) + : operator
+17.) e : variable
+Parent 17.) + : operator
+17.) 2 : constant
+Parent 16.) 16 : if
+16.) else : stmtLst
+Parent 16.) else : stmtLst
+18.) 18 : if
+Parent 18.) 18 : if
+18.) b : variable
+Parent 18.) 18 : if
+18.) then : stmtLst
+Parent 18.) then : stmtLst
+19.) 19 : if
+Parent 19.) 19 : if
+19.) c : variable
+Parent 19.) 19 : if
+19.) then : stmtLst
+Parent 19.) then : stmtLst
+20.) = : assign
+Parent 20.) = : assign
+20.) c : variable
+Parent 20.) = : assign
+20.) 1 : constant
+Parent 19.) 19 : if
+19.) else : stmtLst
+Parent 19.) else : stmtLst
+21.) 21 : if
+Parent 21.) 21 : if
+21.) b : variable
+Parent 21.) 21 : if
+21.) then : stmtLst
+Parent 21.) then : stmtLst
+22.) 22 : if
+Parent 22.) 22 : if
+22.) d : variable
+Parent 22.) 22 : if
+22.) then : stmtLst
+Parent 22.) then : stmtLst
+23.) = : assign
+Parent 23.) = : assign
+23.) c : variable
+Parent 23.) = : assign
+23.) + : operator
+Parent 23.) + : operator
+23.) c : variable
+Parent 23.) + : operator
+23.) c : variable
+Parent 22.) 22 : if
+22.) else : stmtLst
+Parent 22.) else : stmtLst
+24.) = : assign
+Parent 24.) = : assign
+24.) b : variable
+Parent 24.) = : assign
+24.) 2 : constant
+Parent 21.) 21 : if
+21.) else : stmtLst
+Parent 21.) else : stmtLst
+25.) = : assign
+Parent 25.) = : assign
+25.) b : variable
+Parent 25.) = : assign
+25.) 1 : constant
+Parent 18.) 18 : if
+18.) else : stmtLst
+Parent 18.) else : stmtLst
+26.) 26 : if
+Parent 26.) 26 : if
+26.) a : variable
+Parent 26.) 26 : if
+26.) then : stmtLst
+Parent 26.) then : stmtLst
+27.) = : assign
+Parent 27.) = : assign
+27.) c : variable
+Parent 27.) = : assign
+27.) 1 : constant
+Parent 26.) 26 : if
+26.) else : stmtLst
+Parent 26.) else : stmtLst
+28.) 28 : if
+Parent 28.) 28 : if
+28.) d : variable
+Parent 28.) 28 : if
+28.) then : stmtLst
+Parent 28.) then : stmtLst
+29.) = : assign
+Parent 29.) = : assign
+29.) e : variable
+Parent 29.) = : assign
+29.) 1 : constant
+Parent 28.) then : stmtLst
+31.) = : assign
+Parent 31.) = : assign
+31.) f : variable
+Parent 31.) = : assign
+31.) 1 : constant
+Parent 28.) 28 : if
+28.) else : stmtLst
+Parent 16.) else : stmtLst
+32.) = : assign
+Parent 32.) = : assign
+32.) merge : variable
+Parent 32.) = : assign
+32.) 1 : constant
+Parent 16.) else : stmtLst
+33.) 33 : if
+Parent 33.) 33 : if
+33.) merge : variable
+Parent 33.) 33 : if
+33.) then : stmtLst
+Parent 33.) then : stmtLst
+34.) = : assign
+Parent 34.) = : assign
+34.) merge : variable
+Parent 34.) = : assign
+34.) + : operator
+Parent 34.) + : operator
+34.) merge : variable
+Parent 34.) + : operator
+34.) 1 : constant
+Parent 33.) 33 : if
+33.) else : stmtLst
+Parent 33.) else : stmtLst
+35.) = : assign
+Parent 35.) = : assign
+35.) merge : variable
+Parent 35.) = : assign
+35.) - : operator
+Parent 35.) - : operator
+35.) merge : variable
+Parent 35.) - : operator
+35.) 1 : constant
+Parent 9.) else : stmtLst
+37.) = : assign
+Parent 37.) = : assign
+37.) final : variable
+Parent 37.) = : assign
+37.) 1 : constant
+Parent 9.) else : stmtLst
+38.) 38 : if
+Parent 38.) 38 : if
+38.) final : variable
+Parent 38.) 38 : if
+38.) then : stmtLst
+Parent 38.) then : stmtLst
+39.) = : assign
+Parent 39.) = : assign
+39.) final : variable
+Parent 39.) = : assign
+39.) + : operator
+Parent 39.) + : operator
+39.) final : variable
+Parent 39.) + : operator
+39.) 1 : constant
+Parent 38.) 38 : if
+38.) else : stmtLst
+Parent 38.) else : stmtLst
+40.) = : assign
+Parent 40.) = : assign
+40.) final : variable
+Parent 40.) = : assign
+40.) - : operator
+Parent 40.) - : operator
+40.) final : variable
+Parent 40.) - : operator
+40.) 1 : constant

@@ -501,5 +501,96 @@ void ParserTest::testSourceDE4(){
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
 	expected = "program";
 	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+}
 
+void ParserTest::testSource1A(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("Source1A.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	Node* curr = root;
+	
+	string expected = "root";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "program";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+}
+
+void ParserTest::testSource1B(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("Source1B.txt",pkb);
+
+	Node* root = pkb->getASTRoot();
+	if(root!=NULL){
+		CPPUNIT_ASSERT_EQUAL(0, 1);
+	}
+}
+
+void ParserTest::testSource1D(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("Source1D.txt",pkb);
+
+	Node* root = pkb->getASTRoot();
+	if(root!=NULL){
+		CPPUNIT_ASSERT_EQUAL(0, 1);
+	}
+}
+
+void ParserTest::testSourceIf(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("source-if.txt",pkb);
+
+	Node* root = pkb->getASTRoot();
+
+	ifstream infile;
+	infile.open("expectedSource-if.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource-if.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
+}
+
+void ParserTest::testSourceWhile(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("source-while.txt",pkb);
+
+	Node* root = pkb->getASTRoot();
+	
+	ifstream infile;
+	infile.open("expectedSource-while.txt",ios::in);
+	if(infile.fail()){
+		cout << "expectedSource-while.txt does not exist"<< endl;
+	}
+	else{
+		string word;
+		string expectedFullTree;
+		while(getline(infile,word)){
+			expectedFullTree = expectedFullTree + word +"\n";
+		}
+		string resultFullTree;
+		root->stringPreOrderExpressionTree(root, resultFullTree);
+	
+		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
+	}
 }
