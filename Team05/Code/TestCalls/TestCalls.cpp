@@ -18,8 +18,8 @@ void CallsTest::setUp() {
 void CallsTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	calls = Calls::getInstance();
 	procTable = ProcTable::getInstance();
+	calls = Calls::getInstance(procTable);
 }
 
 // Registers the fixture into the 'registry'
