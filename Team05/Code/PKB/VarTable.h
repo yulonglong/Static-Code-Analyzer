@@ -51,6 +51,9 @@ public:
 	VARNAME getVarName (VARINDEX);
 	//! Return the variable index given the variable name. If it is not found, return an -1.
 	VARINDEX getVarIndex (VARNAME);
+
+	int getNumVar(); 
+	vector<VARINDEX> getAllVarIndex();
 };
 
 #endif

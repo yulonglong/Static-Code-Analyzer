@@ -61,3 +61,15 @@ PROCINDEX ProcTable::getProcIndex (PROCNAME procName){
 	}
 	return -1;
 }
+
+int ProcTable::getNumProcedures() {
+	return procedureTable.size();
+}
+
+vector<PROCINDEX> ProcTable::getAllProcIndexes(){
+	vector<PROCINDEX> toReturn;
+	for (int i=0; i< (signed int) procedureTable.size(); i++) {
+		toReturn.emplace_back(i);
+	}
+	return toReturn; 
+}
