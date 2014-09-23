@@ -49,7 +49,7 @@ public:
 
 	//! Set the Follows relationship between the two statement numbers to be true.
 	void setFollows(STMTNUM, STMTNUM);
-	//! If the Follows relationship between the two procedure names is true, return true. Otherwise, return false.
+	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	
 
 	//! If the Follows relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
@@ -63,9 +63,9 @@ public:
 	STMTNUM getFollows(SYNTYPE, STMTNUM);	
 	//! Return the statement number that is followed by the given statement number and has the given SynType.
 	STMTNUM getFollowedBy(SYNTYPE, STMTNUM); 
-	//! Return a vector of statement numbers that has the given first SynType and follows the given second SynType
+	//! Return all statement numbers such that each statement number has the given first SynType and follows the given second SynType
 	vector<STMTNUM> getFollows(SYNTYPE, SYNTYPE);	 //Select s1 such that getFollows(s1, s2)
-	//! Return a vector of statement numbers that has the given first SynType and are followed by the given second SynType
+	//! Return all statement numbers such that each statement number has the given first SynType and are followed by the given second SynType
 	vector<STMTNUM> getFollowedBy(SYNTYPE, SYNTYPE);	 //Select s2 such that getFollows(s1, s2)
 }; 
 
