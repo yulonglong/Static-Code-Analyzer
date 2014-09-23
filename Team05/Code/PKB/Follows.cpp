@@ -109,7 +109,7 @@ vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	try {
-		for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
+		for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
 			j = -1; 
 			try {
 				j = followsTable.at(i);
@@ -136,7 +136,7 @@ vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
-	for (vector<STMTNUM>::size_type i = 0; i != followsTable.size(); i++) {
+	for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
 		j = -1; 
 		try {
 			// cout << "Try: i is " << i << endl; 
