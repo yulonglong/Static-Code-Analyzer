@@ -34,6 +34,8 @@ PKB::~PKB(){
 	next->~Next();
 	delete ASTRoot;
 	delete CFGRoot;
+	ASTRoot = NULL;
+	CFGRoot = NULL;
 	instanceFlag=false;
 }
 
