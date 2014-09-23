@@ -482,3 +482,24 @@ void ParserTest::testFullParserSource5()
 		CPPUNIT_ASSERT_EQUAL(expectedFullTree, resultFullTree);
 	}
 }
+
+void ParserTest::testSourceDE4(){
+	PKB* pkb;
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("SourceDE4.txt",pkb);
+
+	VarTable* varTable = pkb->getVarTable();
+	ProcTable* procTable = pkb->getProcTable();;
+	Follows* follows = pkb->getFollows();
+	Parent* parent = pkb->getParent();
+	TypeTable* typeTable = pkb->getTypeTable();
+	Node* root = pkb->getASTRoot();
+
+	Node* curr = root;
+	
+	string expected = "root";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getData());
+	expected = "program";
+	CPPUNIT_ASSERT_EQUAL(expected, curr->getType());
+
+}

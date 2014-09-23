@@ -237,6 +237,7 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 	vector<callNode> callStore;
 
 	string word;
+	int realProgLine = 1;
 	int progLine=0;
 	int progLineCounter=0;
 	string stringProgLine;
@@ -268,6 +269,7 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 			cout << tokens[i] << endl;
 		}*/
 
+		//cout << realProgLine << ". " << endl;
 		//checking syntax whether there are matching open and close curly bracket
 		//and the presence of semi colon
 		if(tokens.size()==1){
@@ -293,8 +295,10 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 				else{
 					valid=true;
 				}
+				//cout << tokens[0] << " " << endl;
 			}
 		}
+		
 
 
 		while(!valid){
@@ -531,7 +535,8 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 			 
 		}
 		else if (tokens[0]=="else"){
-			if(tokens.size()!=1){
+			if(tokens.size()>2){
+				cout << "ERROR IN ELSE BLOCK!" << endl;
 				return NULL;
 			}
 			
@@ -600,6 +605,8 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 		//int size = containerNode.size()-1;
 		//cout << containerNode[size]->getData() << " "<<  containerNode[size]->getType()<< endl;
 		
+		//cout <<  openBracket << "," << closeBracket << endl;
+
 		while(closeBracket>0){
 			if((bracket.size()==1)&&(closeBracket==1)){
 				currProcName = "";
@@ -616,7 +623,9 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 			}
 			closeBracket--;
 		}
-	
+
+		
+		realProgLine++;
 		//cout << stringProgLine << ". " << word << endl;
 	}
 
