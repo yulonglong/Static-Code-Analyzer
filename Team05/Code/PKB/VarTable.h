@@ -1,3 +1,6 @@
+//@author Yohanes Lim
+//VarTable.h
+
 #ifndef VARTABLE_H
 #define VARTABLE_H
 
