@@ -44,7 +44,7 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
 
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	modifies->getModifiesProc(0);
@@ -85,7 +85,7 @@ void ExtractRelationshipsTest::testUsesProcedure() {
 	procTable = pkb->getProcTable();
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	uses->getUsesProc(0);
@@ -127,7 +127,7 @@ void ExtractRelationshipsTest::testModifiesStatement() {
 	procTable = pkb->getProcTable();
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	modifies->getModifies(3);
@@ -180,7 +180,7 @@ void ExtractRelationshipsTest::testUsesStatement() {
 	procTable = pkb->getProcTable();
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	uses->getUses(3);
@@ -232,7 +232,7 @@ void ExtractRelationshipsTest::testFullSourceDE2() {
 	procTable = pkb->getProcTable();
 	varTable = pkb->getVarTable();
 	callsTable = pkb->getCallsTable();
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
 
 	vector<VARINDEX> v;
 	v =	uses->getUses(1);

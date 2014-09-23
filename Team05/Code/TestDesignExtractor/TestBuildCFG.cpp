@@ -38,7 +38,7 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	} else {
 		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
 	}
-	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	
 	/*
 	CFGNode* node = getCFGNode(12);
@@ -77,7 +77,7 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	} else {
 		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
 	}
-	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	pkb->~PKB();	
 }
 
@@ -102,7 +102,7 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 		cout << "ASTRoot is null!!!" << endl;
 	}
 
-	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL) {
@@ -142,7 +142,7 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 		cout << "ASTRoot is null!!!" << endl;
 	}
 
-	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL) {
@@ -160,7 +160,6 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
 	pkb->~PKB();
 }
-
 
 void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	PKB *pkb;
@@ -183,7 +182,7 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 		cout << "ASTRoot is null!!!" << endl;
 	}
 
-	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL) {
