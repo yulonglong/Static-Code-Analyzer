@@ -2,7 +2,6 @@
 #define PKB_H
 
 #pragma once
-
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -17,6 +16,8 @@
 #include "Modifies.h"
 #include "Uses.h"
 #include "Calls.h"
+#include "Next.h"
+#include "CFGNode.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ class PKB {
 private: 
 	static bool instanceFlag; 
 	static PKB *pkb;	
-	Node* ASTRoot;
+	
 	VarTable *varTable;
 	ProcTable *procTable;
 	TypeTable *typeTable;
@@ -40,7 +41,9 @@ private:
 	Modifies *modifies;
 	Uses *uses;
 	Calls *calls;
-	Node* CFGRoot; 
+	Next *next;
+	Node* ASTRoot;
+	CFGNode* CFGRoot; 
 	
 public:
 	PKB();
@@ -56,8 +59,9 @@ public:
 	Modifies* getModifies();
 	Uses* getUses();
 	Calls* getCalls();
+	Next* getNext();
 	Node* getASTRoot();
-	Node* getCFGRoot();
+	CFGNode* getCFGRoot();
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
 
@@ -69,10 +73,11 @@ public:
 	void setToModifies(STMTNUM, VARNAME);
 	void setToUses(STMTNUM, VARNAME);
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM); //kester added the last parameter of STMTNUM, it is the progline in which the procedure is called
+	void setToNext(STMTNUM, STMTNUM);
 	void setToTypeTable(STMTNUM,TypeTable::SynType); //kester added this it was originally insertStmtNumAndType
 
 	void setASTRoot(Node* newASTRoot);
-	void setCFGRoot(Node* newCFGRoot);
+	void setCFGRoot(CFGNode* newCFGRoot);
 
 };
 

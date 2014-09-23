@@ -51,6 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)DesignExtractor;$(SolutionDir)CodeParser;$(SolutionDir)QueryProcessor</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -67,7 +68,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)DesignExtractor;$(SolutionDir)CodeParser;$(SolutionDir)QueryProcessor;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DesignExtractor;$(SolutionDir)CodeParser;$(SolutionDir)QueryProcessor</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -82,6 +83,7 @@
     <ClCompile Include="ConstTable.cpp" />
     <ClCompile Include="Follows.cpp" />
     <ClCompile Include="Modifies.cpp" />
+    <ClCompile Include="Next.cpp" />
     <ClCompile Include="Pair.cpp" />
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PKB.cpp" />
@@ -95,6 +97,7 @@
     <ClInclude Include="ConstTable.h" />
     <ClInclude Include="Follows.h" />
     <ClInclude Include="Modifies.h" />
+    <ClInclude Include="Next.h" />
     <ClInclude Include="Pair.h" />
     <ClInclude Include="Parent.h" />
     <ClInclude Include="PKB.h" />

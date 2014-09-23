@@ -34,7 +34,7 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE1.txt",pkb);
+	CodeParser::parserDriver("SourceDE1.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	modifies = pkb->getModifies();
@@ -62,11 +62,7 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 	v =	modifies->getModifiesProc(4);
 	expected = "e f w a ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
-
-	// YOLIM LOOK HERE!
-	cout << "a" << endl;
 	pkb->~PKB();
-	cout << "b" << endl;
 }
 
 void ExtractRelationshipsTest::testUsesProcedure() {
@@ -80,7 +76,7 @@ void ExtractRelationshipsTest::testUsesProcedure() {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE1.txt",pkb);
+	CodeParser::parserDriver("SourceDE1.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	modifies = pkb->getModifies();
@@ -107,6 +103,8 @@ void ExtractRelationshipsTest::testUsesProcedure() {
 	v = uses->getUsesProc(4);
 	expected = "g w ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	pkb->~PKB();
+
 }
 
 void ExtractRelationshipsTest::testModifiesStatement() {
@@ -120,7 +118,7 @@ void ExtractRelationshipsTest::testModifiesStatement() {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE1.txt",pkb);
+	CodeParser::parserDriver("SourceDE1.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	modifies = pkb->getModifies();
@@ -158,6 +156,8 @@ void ExtractRelationshipsTest::testModifiesStatement() {
 	v =	modifies->getModifies(23);
 	expected = "a ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	pkb->~PKB();
+
 }
 
 void ExtractRelationshipsTest::testUsesStatement() {
@@ -171,7 +171,7 @@ void ExtractRelationshipsTest::testUsesStatement() {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
-	parserDriver("SourceDE1.txt",pkb);
+	CodeParser::parserDriver("SourceDE1.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	modifies = pkb->getModifies();
@@ -209,6 +209,7 @@ void ExtractRelationshipsTest::testUsesStatement() {
 	v =	uses->getUses(23);
 	expected = "w ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	pkb->~PKB();
 }
 
 void ExtractRelationshipsTest::testFullSourceDE2() {
@@ -222,11 +223,7 @@ void ExtractRelationshipsTest::testFullSourceDE2() {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
-	cout << "1" << endl;
-	pkb->~PKB();
-	cout << "2" << endl;
-	parserDriver("SourceDE2.txt",pkb);
-	cout << "3" << endl;
+	CodeParser::parserDriver("SourceDE2.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	modifies = pkb->getModifies();
@@ -269,6 +266,7 @@ void ExtractRelationshipsTest::testFullSourceDE2() {
 	v =	modifies->getModifies(12);
 	expected = "a may ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *varTable));
+	pkb->~PKB();
 }
 
 // Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs

@@ -16,6 +16,9 @@ PKB::PKB(){
 	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 	uses = Uses::getInstance(typeTable,varTable);
 	calls = Calls::getInstance(procTable);
+	next = Next::getInstance(typeTable);
+	ASTRoot = NULL;
+	CFGRoot = NULL;
 }
 
 PKB::~PKB(){
@@ -28,10 +31,9 @@ PKB::~PKB(){
 	modifies->~Modifies();
 	uses->~Uses();
 	calls->~Calls();
+	next->~Next();
 	delete ASTRoot;
 	delete CFGRoot;
-	ASTRoot=NULL;
-	CFGRoot=NULL;
 	instanceFlag=false;
 }
 
@@ -86,6 +88,10 @@ Calls* PKB::getCalls(){
 	return calls;
 }
 
+Next* PKB::getNext(){
+	return next;
+}
+
 unordered_map<PROCINDEX, vector<CALLSPAIR>> PKB::getCallsTable(){
 	return calls->getCallsTable();
 }
@@ -131,6 +137,11 @@ void PKB::setToCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	calls->setCalls(p1,p2,s);
 }
 
+void PKB::setToNext(STMTNUM s1, STMTNUM s2){
+	next = getNext();
+	next->setNext(s1,s2);
+}
+
 void PKB::setToTypeTable(STMTNUM s,TypeTable::SynType t){
 	typeTable = getTypeTable();
 	typeTable->insertStmtNumAndType(s,t);
@@ -140,7 +151,7 @@ void PKB::setASTRoot(Node* newASTRoot){
 	ASTRoot = newASTRoot;
 }
 
-void PKB::setCFGRoot(Node* newCFGRoot){
+void PKB::setCFGRoot(CFGNode* newCFGRoot){
 	CFGRoot = newCFGRoot;
 }
 
@@ -148,6 +159,6 @@ Node* PKB::getASTRoot(){
 	return ASTRoot;
 }
 
-Node* PKB::getCFGRoot(){
+CFGNode* PKB::getCFGRoot(){
 	return CFGRoot;
 }

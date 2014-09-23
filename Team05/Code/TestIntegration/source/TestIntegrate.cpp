@@ -30,7 +30,7 @@ void IntegrateTest::testParserSource2()
 {
 	PKB* pkb;
 	pkb = PKB::getInstance();
-	parserDriver("Source2.txt",pkb);
+	CodeParser::parserDriver("Source2.txt",pkb);
 
 	VarTable* varTable = pkb->getVarTable();
 	ProcTable* procTable = pkb->getProcTable();;
@@ -90,7 +90,7 @@ void IntegrateTest::testParserSource2()
 	unordered_map<string, TypeTable::SynType> m = q1.getSynTable();
 	
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r.getRelType());
-	CPPUNIT_ASSERT_EQUAL(expected, q1.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q1.getSelectedSyn().at(0));
 	expected = "1";
 	CPPUNIT_ASSERT_EQUAL(expected, r.getToken1());
 	expected = "2";
@@ -121,7 +121,7 @@ void IntegrateTest::testParserSource2()
 	
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r2.getRelType());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q2.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q2.getSelectedSyn().at(0));
 	expected = "1";
 	CPPUNIT_ASSERT_EQUAL(expected, r2.getToken1());
 	expected = "a";
@@ -153,7 +153,7 @@ void IntegrateTest::testParserSource2()
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r3.getRelType());
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q3.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q3.getSelectedSyn().at(0));
 	expected = "4";
 	CPPUNIT_ASSERT_EQUAL(expected, r3.getToken1());
 	expected = "s";
@@ -188,7 +188,7 @@ void IntegrateTest::testSource2q4(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r4.getRelType());
 	expected = "BOOLEAN";
-	CPPUNIT_ASSERT_EQUAL(expected, q4.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q4.getSelectedSyn().at(0));
 	expected = "6";
 	CPPUNIT_ASSERT_EQUAL(expected, r4.getToken1());
 	expected = "7";
@@ -218,7 +218,7 @@ void IntegrateTest::testSource2q5(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWS, r5.getRelType());
 	expected = "BOOLEAN";
-	CPPUNIT_ASSERT_EQUAL(expected, q5.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q5.getSelectedSyn().at(0));
 	expected = "5";
 	CPPUNIT_ASSERT_EQUAL(expected, r5.getToken1());
 	expected = "6";
@@ -248,7 +248,7 @@ void IntegrateTest::testSource2q6(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r6.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q6.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q6.getSelectedSyn().at(0));
 	expected = "3";
 	CPPUNIT_ASSERT_EQUAL(expected, r6.getToken1());
 	expected = "w";
@@ -282,7 +282,7 @@ void IntegrateTest::testSource2q7(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r7.getRelType());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q7.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q7.getSelectedSyn().at(0));
 	expected = "13";
 	CPPUNIT_ASSERT_EQUAL(expected, r7.getToken1());
 	expected = "a";
@@ -319,7 +319,7 @@ void IntegrateTest::testSource2q8(){
 	expected = "19";
 	CPPUNIT_ASSERT_EQUAL(expected, r8.getToken2()); 
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q8.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q8.getSelectedSyn().at(0));
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r8.getToken1());
 	
@@ -352,7 +352,7 @@ void IntegrateTest::testSource2q9(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::FOLLOWSSTAR, r9.getRelType());
 	expected = "BOOLEAN";
-	CPPUNIT_ASSERT_EQUAL(expected, q9.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q9.getSelectedSyn().at(0));
 	expected = "1";
 	CPPUNIT_ASSERT_EQUAL(expected, r9.getToken1());
 	expected = "3";
@@ -382,7 +382,7 @@ void IntegrateTest::testSource2q10(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r10.getRelType());
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q10.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q10.getSelectedSyn().at(0));
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r10.getToken1());
 	expected = "9";
@@ -414,7 +414,7 @@ void IntegrateTest::testSource2q11(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r11.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q11.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q11.getSelectedSyn().at(0));
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r11.getToken1());
 	expected = "11";
@@ -446,7 +446,7 @@ void IntegrateTest::testSource2q12(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r12.getRelType());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q12.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q12.getSelectedSyn().at(0));
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r12.getToken1());
 	expected = "3";
@@ -478,7 +478,7 @@ void IntegrateTest::testSource2q13(){
 	
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r13.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q13.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q13.getSelectedSyn().at(0));
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r13.getToken1());
 	expected = "a";
@@ -516,7 +516,7 @@ void IntegrateTest::testSource2q14(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r14.getRelType());
 	expected = "BOOLEAN";
-	CPPUNIT_ASSERT_EQUAL(expected, q14.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q14.getSelectedSyn().at(0));
 	expected = "4";
 	CPPUNIT_ASSERT_EQUAL(expected, r14.getToken1());
 	expected = "9";
@@ -546,7 +546,7 @@ void IntegrateTest::testSource2q15(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENT, r15.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q15.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q15.getSelectedSyn().at(0));
 	expected = "4";
 	CPPUNIT_ASSERT_EQUAL(expected, r15.getToken1());
 	expected = "w";
@@ -579,7 +579,7 @@ void IntegrateTest::testSource2q16(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENTSTAR, r16.getRelType());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q16.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q16.getSelectedSyn().at(0));
 	expected = "11";
 	CPPUNIT_ASSERT_EQUAL(expected, r16.getToken1());
 	expected = "a";
@@ -617,7 +617,7 @@ void IntegrateTest::testSource2q17(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::PARENTSTAR, r17.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q17.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q17.getSelectedSyn().at(0));
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, r17.getToken1());
 	expected = "17";
@@ -657,7 +657,7 @@ void IntegrateTest::testSource2q18(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r18.getRelType());
 	expected = "a";
-	CPPUNIT_ASSERT_EQUAL(expected, q18.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q18.getSelectedSyn().at(0));
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r18.getToken1());
 	expected = "\"x\"";
@@ -692,7 +692,7 @@ void IntegrateTest::testSource2q19(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r19.getRelType());
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q19.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q19.getSelectedSyn().at(0));
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r19.getToken1());
 	expected = "\"Romeo\"";
@@ -732,7 +732,7 @@ void IntegrateTest::testSource2q20(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r20.getRelType());
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q20.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q20.getSelectedSyn().at(0));
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r20.getToken1());
 	expected = "v";
@@ -779,13 +779,13 @@ void IntegrateTest::testSource2q21(){
 	v = q21.getRelVect();
 	Relationship r21 = v[0];
 	unordered_map<string, TypeTable::SynType> m21 = q21.getSynTable();
-	std::unordered_map<string, TypeTable::SynType>::iterator i = m21.find(q21.getSelectedSyn());
+	std::unordered_map<string, TypeTable::SynType>::iterator i = m21.find(q21.getSelectedSyn().at(0));
 	expected = "w";
 	CPPUNIT_ASSERT_EQUAL(expected, i->first);
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::MODIFIES, r21.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q21.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q21.getSelectedSyn().at(0));
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r21.getToken1());
 	expected = "v";
@@ -824,7 +824,7 @@ void IntegrateTest::testSource2q22(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r22.getRelType());
 	expected = "w";
-	CPPUNIT_ASSERT_EQUAL(expected, q22.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q22.getSelectedSyn().at(0));
 	expected = "a";
 	CPPUNIT_ASSERT_EQUAL(expected, r22.getToken1());
 	expected = "v";
@@ -867,7 +867,7 @@ void IntegrateTest::testSource2q23(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r23.getRelType());
 	expected = "s";
-	CPPUNIT_ASSERT_EQUAL(expected, q23.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q23.getSelectedSyn().at(0));
 	expected = "s";
 	CPPUNIT_ASSERT_EQUAL(expected, r23.getToken1());
 	expected = "\"x\"";
@@ -901,7 +901,7 @@ void IntegrateTest::testSource2q24(){
 	ConstTable *c = pkb->getConstTable();
 
 	expected = "c";
-	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q24.getSelectedSyn().at(0));
 
 	vector<int> vec;
 	vec = qe.evaluateQuery(q24);
@@ -941,7 +941,7 @@ void IntegrateTest::testSource2q25(){
 
 	CPPUNIT_ASSERT_EQUAL(Relationship::USES, r25.getRelType());
 	expected = "v";
-	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn());
+	CPPUNIT_ASSERT_EQUAL(expected, q25.getSelectedSyn().at(0));
 	expected = "5";
 	CPPUNIT_ASSERT_EQUAL(expected, r25.getToken1());
 	expected = "\"beta\"";

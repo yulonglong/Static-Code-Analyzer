@@ -86,58 +86,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DesignExtractor.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//@author Ipsita Mohapatra</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//DesignExtractor.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef DESIGNEXTRACTOR_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define DESIGNEXTRACTOR_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;Node.h&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;PKB.h&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;QueueItem.h&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//@author Ipsita Mohapatra</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//DesignExtractor.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef DESIGNEXTRACTOR_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define DESIGNEXTRACTOR_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;Node.h&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;CFGNode.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;PKB.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;QueueItem.h&quot;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> extractorDriver(<a class="code" href="class_p_k_b.html">PKB</a>* pkb);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> extractRelationships(<a class="code" href="class_node.html">Node</a> &amp;ASTRoot, unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable, <a class="code" href="class_modifies.html">Modifies</a> &amp;modifies, <a class="code" href="class_uses.html">Uses</a> &amp;uses, <a class="code" href="class_parent.html">Parent</a> &amp;parent);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> runDFSDriver(unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> DFS(<span class="keywordtype">int</span> source, vector&lt;int&gt; progLine, unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> buildCFGDriver(<a class="code" href="class_p_k_b.html">PKB</a> &amp;pkb, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_node.html">Node</a> &amp;CFGRoot);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> buildCFG(<a class="code" href="class_node.html">Node</a> &amp;ASTroot);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> createCFGForProcedure();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> createNewNodeAndAttachToCFG();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">int</span> getFirstProgLine(<span class="keywordtype">int</span> procIndex, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">int</span> getLastProgLine(<span class="keywordtype">int</span> procIndex, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> clear(std::queue&lt;QueueItem&gt; &amp;q);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> printCallsTable(unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> printQueue();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> extractorDriver(<a class="code" href="class_p_k_b.html">PKB</a>* pkb);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> extractRelationships(<a class="code" href="class_node.html">Node</a> &amp;ASTRoot, unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable, <a class="code" href="class_modifies.html">Modifies</a> &amp;modifies, <a class="code" href="class_uses.html">Uses</a> &amp;uses, <a class="code" href="class_parent.html">Parent</a> &amp;parent);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> runDFSDriver(unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> DFS(<span class="keywordtype">int</span> source, vector&lt;int&gt; progLine, unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> buildCFGDriver(<a class="code" href="class_p_k_b.html">PKB</a> &amp;pkb, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_node.html">Node</a> &amp;CFGRoot);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> buildCFG(<a class="code" href="class_node.html">Node</a> &amp;ASTroot);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> createCFGForStmtLst(<a class="code" href="class_node.html">Node</a> &amp;ASTNode);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">void</span> createCFGForAssign(<span class="keywordtype">int</span> progLine);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> createCFGForCall(<span class="keywordtype">int</span> progLine);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> createCFGForWhile(vector&lt;Node*&gt; children);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> createCFGForIf(vector&lt;Node*&gt; children);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> createNewNodeAndAttachToCFG(<span class="keywordtype">string</span> type, <span class="keywordtype">int</span> progLine);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<a class="code" href="class_c_f_g_node.html">CFGNode</a>* getCFGNode(<span class="keywordtype">int</span> progLine);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> traverseGraph(<a class="code" href="class_c_f_g_node.html">CFGNode</a> &amp;node, <span class="keywordtype">int</span> progLine);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">int</span> getFirstProgLine(<span class="keywordtype">int</span> procIndex, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">int</span> getLastProgLine(<span class="keywordtype">int</span> procIndex, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> clear(std::queue&lt;QueueItem&gt; &amp;q);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">void</span> printCallsTable(unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> printQueue();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">A Node Structure for AST.Overview: Node is the node structure of AST nodes. </div><div class="ttdef"><b>Definition:</b> Node.h:29</div></div>
 <div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdef"><b>Definition:</b> Modifies.h:19</div></div>
 <div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
-<div class="ttc" id="class_p_k_b_html"><div class="ttname"><a href="class_p_k_b.html">PKB</a></div><div class="ttdef"><b>Definition:</b> PKB.h:29</div></div>
+<div class="ttc" id="class_c_f_g_node_html"><div class="ttname"><a href="class_c_f_g_node.html">CFGNode</a></div><div class="ttdoc">A set of methods to extract more relationships after the CodeParser has parsed the SIMPLE source prog...</div><div class="ttdef"><b>Definition:</b> CFGNode.h:31</div></div>
+<div class="ttc" id="class_p_k_b_html"><div class="ttname"><a href="class_p_k_b.html">PKB</a></div><div class="ttdef"><b>Definition:</b> PKB.h:30</div></div>
 <div class="ttc" id="class_uses_html"><div class="ttname"><a href="class_uses.html">Uses</a></div><div class="ttdef"><b>Definition:</b> Uses.h:15</div></div>
 <div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdef"><b>Definition:</b> ProcTable.h:16</div></div>
 <div class="ttc" id="class_parent_html"><div class="ttname"><a href="class_parent.html">Parent</a></div><div class="ttdef"><b>Definition:</b> Parent.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 19 2014 01:47:26 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

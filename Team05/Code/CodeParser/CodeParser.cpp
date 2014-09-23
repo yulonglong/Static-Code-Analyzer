@@ -7,7 +7,7 @@
 using namespace std;
 
 
-bool isAllDigit(string input){
+bool CodeParser::isAllDigit(string input){
 	for(int i=0;i<(int)input.length();i++){
 		if(!isdigit(input[i])){
 			return false;
@@ -17,7 +17,7 @@ bool isAllDigit(string input){
 }
 
 
-Node* constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, const vector<Node*> &containerNode){
+Node* CodeParser::constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, const vector<Node*> &containerNode){
 	stack<Node*> st;
 	int length = tokens.size();
 	
@@ -71,7 +71,7 @@ Node* constructExpressionTree(vector<string> tokens,int newProgLine, PKB *pkb, c
 	return root;
 }
 
-vector<string> getPostfix(vector<string> tokens){
+vector<string> CodeParser::getPostfix(vector<string> tokens){
 	vector<string> ans;
 	stack<string> st;
 	int size = tokens.size();
@@ -192,7 +192,7 @@ vector<string> getPostfix(vector<string> tokens){
 	return ans;
 }
 
-void tokenizeTokens(string word, vector<string> &storage){
+void CodeParser::tokenizeTokens(string word, vector<string> &storage){
 	string token ="";
 	for(int i=0;i<(int) word.length();i++){
 		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
@@ -214,7 +214,7 @@ void tokenizeTokens(string word, vector<string> &storage){
 }
 
 //real parsing
-Node* parseCode(string filename,PKB *pkb){
+Node* CodeParser::parseCode(string filename,PKB *pkb){
 	//freopen("in.txt","r",stdin);
 	ifstream infile;
 	infile.open(filename.c_str(),ios::in);
@@ -237,6 +237,7 @@ Node* parseCode(string filename,PKB *pkb){
 	vector<callNode> callStore;
 
 	string word;
+	int realProgLine = 1;
 	int progLine=0;
 	int progLineCounter=0;
 	string stringProgLine;
@@ -268,6 +269,7 @@ Node* parseCode(string filename,PKB *pkb){
 			cout << tokens[i] << endl;
 		}*/
 
+		//cout << realProgLine << ". " << endl;
 		//checking syntax whether there are matching open and close curly bracket
 		//and the presence of semi colon
 		if(tokens.size()==1){
@@ -280,21 +282,21 @@ Node* parseCode(string filename,PKB *pkb){
 				openBracket++;
 			}
 		}
-		else if (tokens.size()==2){
+		else if ((tokens.size()==2)&&((tokens[0]=="procedure")||(tokens[0]=="while"))){
 			//cout << tokens[0] << endl;
-			if((tokens[0]=="procedure")||(tokens[0]=="while")||(tokens[0]=="if")||(tokens[0]=="else")){
-				int length=tokens[1].length()-1;
-				string lastChar = tokens[1].substr(length);
-				if(lastChar=="{"){
-					tokens[1] = tokens[1].substr(0,length);
-					openBracket++;
-					valid=true;
-				}
-				else{
-					valid=true;
-				}
+			int length=tokens[1].length()-1;
+			string lastChar = tokens[1].substr(length);
+			if(lastChar=="{"){
+				tokens[1] = tokens[1].substr(0,length);
+				openBracket++;
+				valid=true;
 			}
+			else{
+				valid=true;
+			}
+			//cout << tokens[0] << " " << endl;
 		}
+		
 
 
 		while(!valid){
@@ -327,6 +329,9 @@ Node* parseCode(string filename,PKB *pkb){
 				tokens.push_back(lastChar);
 			}
 		}
+
+		//cout << "tokensize " << tokens.size() << endl;
+
 		if(openBracket>0){
 			bracket.push(1);
 		} 
@@ -532,6 +537,7 @@ Node* parseCode(string filename,PKB *pkb){
 		}
 		else if (tokens[0]=="else"){
 			if(tokens.size()!=1){
+				cout << "ERROR IN ELSE BLOCK!" << endl;
 				return NULL;
 			}
 			
@@ -600,6 +606,8 @@ Node* parseCode(string filename,PKB *pkb){
 		//int size = containerNode.size()-1;
 		//cout << containerNode[size]->getData() << " "<<  containerNode[size]->getType()<< endl;
 		
+		//cout <<  openBracket << "," << closeBracket << endl;
+
 		while(closeBracket>0){
 			if((bracket.size()==1)&&(closeBracket==1)){
 				currProcName = "";
@@ -616,7 +624,9 @@ Node* parseCode(string filename,PKB *pkb){
 			}
 			closeBracket--;
 		}
-	
+
+		
+		realProgLine++;
 		//cout << stringProgLine << ". " << word << endl;
 	}
 
@@ -630,12 +640,12 @@ Node* parseCode(string filename,PKB *pkb){
 	return root;
 }
 
-void parserDriver(string filename,PKB *pkb){
+void CodeParser::parserDriver(string filename,PKB *pkb){
 	
 	Node* root = pkb->getASTRoot();
 
 	try{
-		root = parseCode(filename,pkb);
+		root = CodeParser::parseCode(filename,pkb);
 	}
 	catch(...){
 		cout << "ERROR IN PARSING SOURCE CODE! EXCEPTION CAUGHT!" << endl;
