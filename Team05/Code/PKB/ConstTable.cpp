@@ -4,6 +4,7 @@
 
 bool ConstTable::instanceFlag=false;
 ConstTable* ConstTable::constTable=NULL;
+CONSTINDEX ConstTable::currentIndex = 0;
 
 // constructor
 ConstTable::ConstTable() {
@@ -32,21 +33,23 @@ void ConstTable::insertConst(CONSTVALUE constant) {
 	bool containsConstant = (constantIndex != -1);
 		
 	if (!containsConstant) {
-		constantTable.emplace_back(constant);
+		constantTable[currentIndex] = constant;
+		currentIndex++;
 	}
 }
 
 CONSTVALUE ConstTable::getConst (CONSTINDEX ind){
-	if (ind >= (signed int) constantTable.size()) {
-		return "-1";
+	try{
+		return constantTable.at(ind);
+	}catch(...){
 	}
-	return constantTable[ind];
+	return "";
 }
 
 CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
-	for(std::vector<CONSTVALUE>::size_type i = 0; i != constantTable.size(); i++) {
-		if (constValue == constantTable[i]) {
-			return i; 
+	for(unordered_map<CONSTINDEX, CONSTVALUE>::iterator it = constantTable.begin(); it != constantTable.end(); it++) {
+		if (constValue == it->second) {
+			return it->first; 
 		}
 	}
 	return -1;
