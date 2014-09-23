@@ -13,6 +13,7 @@ VarTable::VarTable() {
 
 VarTable::~VarTable(){
 	variableTable.clear();
+	instanceFlag=false;
 }
 
 

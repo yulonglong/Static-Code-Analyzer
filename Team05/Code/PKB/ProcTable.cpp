@@ -13,6 +13,7 @@ ProcTable::ProcTable() {
 
 ProcTable::~ProcTable(){
 	procedureTable.clear();
+	instanceFlag=false;
 }
 
 

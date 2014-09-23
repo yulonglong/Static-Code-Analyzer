@@ -8,10 +8,12 @@ CONSTINDEX ConstTable::currentIndex = 0;
 
 // constructor
 ConstTable::ConstTable() {
+	currentIndex = 0;
 }
 
 ConstTable::~ConstTable(){
 	constantTable.clear();
+	instanceFlag=false;
 }
 
 
