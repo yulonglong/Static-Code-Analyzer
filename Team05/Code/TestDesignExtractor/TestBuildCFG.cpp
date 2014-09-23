@@ -90,16 +90,6 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	CodeParser::parserDriver("SourceDE4.txt",pkb);
 	
 	ASTRoot = pkb->getASTRoot();
-	if (ASTRoot == NULL) {
-		cout << "Why is the ASTRoot null after ParserDriver?" << endl;
-	}
-
-
-
-
-
-
-
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL && ASTRoot != NULL) {
@@ -113,7 +103,89 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	}
 
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
+
+	/*
+	string resultFullCFG = "";
+	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
+	string expectedFullCFG = "";
+	cout << resultFullCFG << endl;
+	cout << "End of CFG" << endl;
+	*/
+
+	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
+	pkb->~PKB();
+}
+
+void BuildCFGTest::testBuildCFGForNestedIfStmts() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
 	
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("source-if.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
+
+	/*
+	string resultFullCFG = "";
+	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
+	string expectedFullCFG = "";
+	cout << resultFullCFG << endl;
+	cout << "End of CFG" << endl;
+	*/
+
+	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
+	pkb->~PKB();
+}
+
+
+void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
+	
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("source-while.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	CFGRoot = pkb->getCFGRoot();
+
 	if (CFGRoot == NULL) {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}

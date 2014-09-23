@@ -7,7 +7,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 0; 
+bool debugModeIteration2 = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -62,6 +62,10 @@ void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 		std::cerr << "Unknown failure occured in DE. Possible memory corruption" << std::endl;
 	}
 	pkb.setCFGRoot(rootCFGNode);
+	CFGNode* temp = pkb.getCFGRoot();
+	if (temp == NULL) {
+	cout << "here" << endl;
+	}
 }
 
 // actual building of CFG 
@@ -71,19 +75,25 @@ void buildCFG(Node &ASTRroot, PKB &pkb) {
 	currASTNode = &ASTRroot; 
 	currCFGNode = new CFGNode("program", 0);
 	rootCFGNode = currCFGNode;
+	if (currASTNode == NULL) {
+		cout << "1a" << endl;
+	}
 
+	cout << "1" << endl;
 	// iteratively traverse each of the type = procedure nodes in AST
 	// for each AST Node :
 	//		- update the currCFGNode to point to CFGRoot 
 	//		- create CFG for procedure and connect it to the CFGRoot 
 	//		- update parent pointer 
 	vector<Node*> children = currASTNode->getChild();
+	cout << "2" << endl;
 
 	for (unsigned int i=0; i<children.size(); i++) {
 		currASTNode = children[i]->getChild(0);
 		currCFGNode = rootCFGNode; 	
 		createCFGForStmtLst(*currASTNode, pkb);
 	}
+	cout << "3" << endl;
 
 	
 	// if want end node, then after each iteration, push back the pointer to CFGNode into a vector.
