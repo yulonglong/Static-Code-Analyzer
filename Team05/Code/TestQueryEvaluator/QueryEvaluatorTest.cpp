@@ -20,38 +20,97 @@ void QueryEvaluatorTest::tearDown(){
 CPPUNIT_TEST_SUITE_REGISTRATION( QueryEvaluatorTest );
 
 void QueryEvaluatorTest::testEvaluateFollows(){
+	
 	QueryEvaluator qe(pkb);
-	//Query 1 assign a; Select a such that Follows(a, 2);
-	Query q;
-	Relationship r("Follows", "a", "2");
-	q.addRelationship(r);
+	//Query 1 assign a; Select a such that Follows(_ , _);
+	Relationship r("Follows", "_", "_");
 	unordered_map<string,TypeTable::SynType> m;
 	m.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
-	q.setSelectedSyn("a");
-	q.setSynTable(m);
+	m.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::STMT));
 
 	Follows *f = Follows::getInstance();
 	TypeTable *t = TypeTable::getInstance();
 
-	//follows(1,2)
+	//setting follows(1,2)
+	f->setFollows(1, 2);
+	f->setFollows(2, 3);
+	t->insertStmtNumAndType(1, TypeTable::WHILE);
+	t->insertStmtNumAndType(3, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
+	vector<Pair> ans;
+	vector<string> tokens;
+
+	qe.evaluateFollows(r, m, 0);
+	ans = qe.relAns.find(0)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Follows(a,3)
+	r = Relationship("Follows", "a", "3");
+	qe.evaluateFollows(r, m, 1);
+	ans = qe.relAns.find(1)->second;
+
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans1);
+	tokens.push_back("_");
+	tokens.push_back("_");
+	qe.relParameters.insert(make_pair<int, vector<string>>(0, tokens));
+	tokens.clear();
+	tokens.push_back("a");
+	tokens.push_back("3");
+	qe.relParameters.insert(make_pair<int, vector<string>>(1, tokens));
+
+	//Follows(_,a)
+	r = Relationship("Follows", "c", "_");
+	
+	qe.evaluateFollows(r, m, 2);
+	ans = qe.relAns.find(2)->second;
+
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
+	//evaluate
+	/*
+	qe.evaluateFollows(r,m,0);
+	vector<Pair> ans = qe.relAns.find(0)->second;
+	
+	//inserting into relParameters
+	
+	tokens.push_back("2");
+	tokens.push_back("a");
+	qe.relParameters.insert(make_pair(0, tokens));
+
+	CPPUNIT_ASSERT_EQUAL(3, ans.at(0).ans2);*/
+	/*
+	//Query 2 assign a; Select a such that Follows(b, 4);
+	r = Relationship("Follows", "b", "4");
+
+	//setting follows(3,4)
+	f->setFollows(3, 4);
+	m.insert(make_pair<string, TypeTable::SynType>("b", TypeTable::ASSIGN));
+	t->insertStmtNumAndType(4, TypeTable::ASSIGN);
+
+	qe.evaluateFollows(r,m,0);
+	ans = qe.relAns.find(0)->second;
+
+	//inserting into relParameters
+	tokens.clear();
+	tokens.push_back("b");
+	tokens.push_back("4");
+	qe.relParameters.insert(make_pair(0, tokens));
+
+	CPPUNIT_ASSERT_EQUAL(3, ans.at(0).ans1);
+	
+	//Query 3 assign a; Select a such that Follows(a, b);
+	r = Relationship("Follows", "a", "b");
+
+	//setting follows(3,4)
+	f->setFollows(3, 4);
 	f->setFollows(1, 2);
 	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
+	qe.evaluateFollows(r,m,1);
+	ans = qe.relAns.find(1)->second;
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans1);
+	CPPUNIT_ASSERT_EQUAL(3, ans.at(0).ans2);
 
-	vector<int> vec = qe.evaluateQuery(q);
-	cout<<vec.empty()<<endl;
-	cout<<vec[0]<<endl;
-	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
-
-	
-	Modifies *mod = Modifies::getInstance();
-	VarTable *v = pkb->getVarTable();
-
-	//modifies(1, "x")
-	v->insertVar("x");	
-	mod->setModifies(1, "x");
-	t->insertStmtNumAndType(1, TypeTable::ASSIGN);
-
-	
+	/*
 	//Query 1.5 variable v; assign a; Select v such that Follows(a, 2);
 	Query q1p5;
 	Relationship r1p5("Follows", "a", "2");
@@ -196,10 +255,12 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//cout<<"VECTOR IS "<<vec.empty()<<endl;
 	cout<<vec[0]<<endl;
 	CPPUNIT_ASSERT_EQUAL(3, vec[0]);
-	
+	*/
+
 	return;
 }
 
+/*
 void QueryEvaluatorTest::testEvaluateParent(){
 	QueryEvaluator qe(pkb);
 
@@ -452,9 +513,10 @@ void QueryEvaluatorTest::testEvaluateModifies(){
 	q6.setSynTable(map6);
 
 	vec = qe.evaluateQuery(q6);
-	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
-	}*/
+	
+	//for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+	//	cout<<*i<<endl;
+	//}
 	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
 	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
@@ -558,9 +620,9 @@ void QueryEvaluatorTest::testEvaluateUses(){
 	q6.setSynTable(map6);
 
 	vec = qe.evaluateQuery(q6);
-	/*for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
-		cout<<*i<<endl;
-	}*/
+	//for(vector<int>::iterator i = vec.begin(); i!=vec.end(); i++){
+	//	cout<<*i<<endl;
+	//}
 	CPPUNIT_ASSERT_EQUAL(1, vec[0]);
 	CPPUNIT_ASSERT_EQUAL(2, vec[1]);
 	CPPUNIT_ASSERT_EQUAL(3, vec[2]);
@@ -568,3 +630,4 @@ void QueryEvaluatorTest::testEvaluateUses(){
 	CPPUNIT_ASSERT_EQUAL(5, vec[4]);
 	
 }
+*/

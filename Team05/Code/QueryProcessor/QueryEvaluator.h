@@ -13,12 +13,9 @@
 
 class QueryEvaluator{ 
 private:
-	static std::unordered_map<string, std::vector<int>> linkages;
-	static std::unordered_map<int, std::vector<Pair>> relAns;
-	static std::unordered_map<int, vector<std::string>> relParameters;
-	static std::vector<Relationship> vecOfRelations;
 
-	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+
 	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
@@ -71,6 +68,12 @@ public:
 	PKB *pkb;
 	std::unordered_map<std::string, std::vector<int>> evaluateQuery(Query);
 	bool evaluateQueryBoolean(Query);
+
+
+	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+	static std::unordered_map<string, std::vector<int>> linkages;
+	static std::unordered_map<int, std::vector<Pair>> relAns;
+	static std::unordered_map<int, vector<std::string>> relParameters;
 };
 
 #endif
