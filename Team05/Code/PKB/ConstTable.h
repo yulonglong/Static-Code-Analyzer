@@ -45,9 +45,9 @@ public:
 	static ConstTable* getInstance();
 	//! Insert a constant value to the constant table
 	void insertConst(CONSTVALUE);
-	//! Return the constant value given the constant index
+	//! Return the constant value given the constant index. If it is not found, return an empty string.
 	CONSTVALUE getConst (CONSTINDEX);
-	//! Return the constant index given the constant value
+	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
 };
 

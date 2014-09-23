@@ -10,6 +10,7 @@ ProcTable::ProcTable() {
 }
 
 ProcTable::~ProcTable(){
+	procedureTable.clear();
 }
 
 
@@ -28,25 +29,26 @@ ProcTable* ProcTable::getInstance() {
 
 // If procName is not in the ProcTable, inserts procName into the
 // ProcTable and returns its index. if procName already exists, return its index and the table remains unchanged.
-PROCINDEX ProcTable::insertProc(PROCNAME procName) {
+void ProcTable::insertProc(PROCNAME procName) {
 	int procIndex = getProcIndex(procName);
 	bool containsVariable = (procIndex != -1);
 		
 	if (!containsVariable) {
 		procedureTable.emplace_back(procName);
-		return procedureTable.size()-1;  // return new index for this varName
-	} else {
-		return procIndex;
 	}
 }
 
 // Returns the name of a proc at ProTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
 PROCNAME ProcTable::getProcName (PROCINDEX ind){
-	if (ind >= (signed int) procedureTable.size()) {
-		return "-1";
+	try{
+		if (ind >= (signed int) procedureTable.size()) {
+			return "";
+		}
+		return procedureTable[ind];
+	}catch(...){
 	}
-	return procedureTable[ind];
+	return "";
 }
 
 // If procName is in procTable, returns its index; otherwise, returns -1 (special value)
@@ -57,12 +59,4 @@ PROCINDEX ProcTable::getProcIndex (PROCNAME procName){
 		}
 	}
 	return -1;
-}
-
-int ProcTable::getNumProcedures() {
-	return procedureTable.size();
-}
-
-vector<PROCINDEX> ProcTable::getAllProcIndexes(){
-
 }

@@ -10,6 +10,7 @@ ConstTable::ConstTable() {
 }
 
 ConstTable::~ConstTable(){
+	constantTable.clear();
 }
 
 
@@ -26,15 +27,12 @@ ConstTable* ConstTable::getInstance() {
     }
 }
 
-CONSTINDEX ConstTable::insertConst(CONSTVALUE constant) {
+void ConstTable::insertConst(CONSTVALUE constant) {
 	int constantIndex = getConstIndex(constant);
 	bool containsConstant = (constantIndex != -1);
 		
 	if (!containsConstant) {
 		constantTable.emplace_back(constant);
-		return constantTable.size()-1;  // return new index for this constant
-	} else {
-		return constantIndex;
 	}
 }
 
@@ -52,18 +50,6 @@ CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
 		}
 	}
 	return -1;
-}
-
-int ConstTable::getNumConst() {
-	return constantTable.size();
-}
-
-vector<CONSTINDEX> ConstTable::getAllConstIndex() {
-	vector<CONSTINDEX> toReturn;
-	for (int i=0; i< (signed int) constantTable.size(); i++) {
-		toReturn.emplace_back(i);
-	}
-	return toReturn; 
 }
 
 
