@@ -1,3 +1,7 @@
+//@author Yohanes Lim
+//PKB.h
+
+
 #ifndef PKB_H
 #define PKB_H
 
@@ -19,13 +23,39 @@
 #include "Next.h"
 #include "CFGNode.h"
 
-using namespace std;
-
 /* TO USE PKB:
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	pkb->method(); 
 */
+
+/*! \brief A PKB class to store all the datas needed for the program.
+ *  
+ *
+ * Overview: CodeParser is responsible to :
+ * - Store all the tables and relationships
+ * - Allow speedy access to the required datas
+ * 
+ * PKB is a singleton class, it can be invoked using:
+ * \code
+ * static PKB* getInstance();
+ * \endcode
+ *
+ * List of tables that PKB contains:
+ * - VarTable
+ * - ProcTable
+ * - TypeTable
+ * - ConstTable
+ * 
+ * List of relationships that PKB contains:
+ * - Parent
+ * - Follows
+ * - Modifies
+ * - Uses
+ * - Calls
+ * - Next
+ *
+ */
 
 class PKB {
 private: 
