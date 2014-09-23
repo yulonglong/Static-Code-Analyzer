@@ -38,6 +38,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCalls", "TestCalls\TestCalls.vcxproj", "{34EBDFFA-78AF-4434-88AD-D9632704D6A4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestNext", "TestNext\TestNext.vcxproj", "{AA09FD42-9682-4069-A44A-901B3DF05951}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A28F6BBC-5250-4FDB-9B56-E18978C61FF2} = {A28F6BBC-5250-4FDB-9B56-E18978C61FF2}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPKB", "TestPKB\TestPKB.vcxproj", "{6BEC0003-9A4A-4BCD-93B6-64F392E37089}"
 	ProjectSection(ProjectDependencies) = postProject

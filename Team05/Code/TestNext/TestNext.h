@@ -11,14 +11,14 @@
 class NextTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( NextTest ); // Note 3
+	CPPUNIT_TEST( testSetAndGetNext );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void setUp();
 	void tearDown();
 
-	void testSetNext();
-	void testGetNext();
+	void testSetAndGetNext();
 };
 #endif
     

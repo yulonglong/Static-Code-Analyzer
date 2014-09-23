@@ -30,6 +30,8 @@ public:
 	static Next* getInstance(TypeTable*);	// to be used to get instance of singleton class 
 	
 	void setNext(STMTNUM, STMTNUM);
+	vector<STMTNUM> getNext(STMTNUM);
+	STMTNUM getPrevious(STMTNUM);
 };
 
 #endif
