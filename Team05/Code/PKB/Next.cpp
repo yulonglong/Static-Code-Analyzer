@@ -6,26 +6,12 @@ bool Next::instanceFlag=false;
 Next* Next::next=NULL;
 
 //Constructor
-Next::Next(){
-}
 
 Next::~Next(){
 	nextTable.clear();
 	instanceFlag=false;
 }
 
-Next* Next::getInstance() {
-	if(!instanceFlag)
-    {
-        next = new Next();
-        instanceFlag = true;
-        return next;
-    }
-    else
-    {
-        return next;
-    }
-}
 
 Next* Next::getInstance(TypeTable* tt) {
 	if(!instanceFlag)
