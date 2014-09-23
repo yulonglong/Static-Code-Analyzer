@@ -4,12 +4,15 @@
 
 bool VarTable::instanceFlag=false;
 VarTable* VarTable::varTable=NULL;
+VARINDEX VarTable::currentIndex = 0;
 
 // constructor
 VarTable::VarTable() {
+	currentIndex = 0;
 }
 
 VarTable::~VarTable(){
+	variableTable.clear();
 }
 
 
@@ -27,46 +30,33 @@ VarTable* VarTable::getInstance() {
 }
 
 // If varName is not in the VarTable, inserts varName into the
-// VarTable and returns its index. Otherwise, return its index and the table remains unchanged.
-VARINDEX VarTable::insertVar(VARNAME varName) {
+// VarTable. Otherwise, the table remains unchanged.
+void VarTable::insertVar(VARNAME varName) {
 	int varIndex = getVarIndex(varName);
 	bool containsVar = (varIndex != -1);
 		
 	if (!containsVar) {
-		variableTable.emplace_back(varName);
-		return variableTable.size()-1;  // return new index for this varName
-	} else {
-		return varIndex;
+		variableTable[currentIndex] = varName;
+		currentIndex++;
 	}
 }
 
 // Returns the name of a variable at VarTable [ind]
-// If ‘ind’ is out of range, error (or throw exception)
+// If ‘ind’ is out of range, return an empty string
 VARNAME VarTable::getVarName (VARINDEX ind){
-	if (ind >= (signed int) variableTable.size()) {
-		return "-1";
+	try{
+		return variableTable.at(ind);
+	}catch(...){
 	}
-	return variableTable[ind];
+	return "";
 }
 
 // If varName is in VarTable, returns its index; otherwise, returns -1 (special value)
 VARINDEX VarTable::getVarIndex (VARNAME varName){
-	for(std::vector<VARNAME>::size_type i = 0; i != variableTable.size(); i++) {
-		if (varName == variableTable[i]) {
-			return i; 
+	for(unordered_map<VARINDEX, VARNAME>::iterator it = variableTable.begin(); it != variableTable.end(); it++) {
+		if (varName == it->second) {
+			return it->first; 
 		}
 	}
 	return -1;
-}
-
-int VarTable::getNumVar() {
-	return variableTable.size();
-}
-
-vector<VARINDEX> VarTable::getAllVarIndex() {
-	vector<VARINDEX> toReturn;
-	for (int i=0; i< (signed int) variableTable.size(); i++) {
-		toReturn.emplace_back(i);
-	}
-	return toReturn; 
 }
