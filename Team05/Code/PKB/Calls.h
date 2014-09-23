@@ -15,9 +15,9 @@
 #include <iterator>
 #include "ProcTable.h"
 
-/** Represents the statement number of the source code */
+/* Represents the statement number of the source code */
 typedef int STMTNUM;
-/** The pair of procedure index being called and the statement number where it is called */
+/* The pair of procedure index being called and the statement number where it is called */
 typedef pair<PROCINDEX,STMTNUM> CALLSPAIR;
 
 /*! \brief A Calls class to store the calls relationship.
@@ -29,7 +29,7 @@ typedef pair<PROCINDEX,STMTNUM> CALLSPAIR;
  * 
  * Calls is a singleton class, it can be invoked using:
  * \code
- * static PKB* getInstance(ProcTable*);
+ * static Calls* getInstance(ProcTable*);
  * \endcode
  *
  */

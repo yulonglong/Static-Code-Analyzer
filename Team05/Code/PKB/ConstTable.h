@@ -1,3 +1,6 @@
+//@author Yohanes Lim
+//ConstTable.h
+
 #ifndef CONSTTABLE_H
 #define CONSTTABLE_H
 
@@ -13,20 +16,39 @@ using namespace std;
 typedef int CONSTINDEX;
 typedef string CONSTVALUE; 
 
+/*! \brief A ConstTable class to store the constants from the source code.
+ *  
+ *
+ * Overview: ConstTable is responsible to :
+ * - Store all the constants from the source code
+ * - Assign each constant an unique index
+ * - Allow speedy access to the required datas
+ * 
+ * ConstTable is a singleton class, it can be invoked using:
+ * \code
+ * static ConstTable* getInstance();
+ * \endcode
+ *
+ */
+
 class ConstTable {
 private: 
 	vector<CONSTVALUE> constantTable; 
 	static bool instanceFlag;
 	static ConstTable *constTable;
 public:
+	//! A constructor to initialize the ConstTable class.
 	ConstTable();
+	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~ConstTable();
-	static ConstTable* getInstance();	// to be used to get instance of singleton class 
-	CONSTINDEX insertConst(CONSTVALUE);
+	//! Returns the instance of ConstTable singleton class.
+	static ConstTable* getInstance();
+	//! Insert a constant value to the constant table
+	void insertConst(CONSTVALUE);
+	//! Return the constant value given the constant index
 	CONSTVALUE getConst (CONSTINDEX);
+	//! Return the constant index given the constant value
 	CONSTINDEX getConstIndex (CONSTVALUE);
-	int getNumConst(); 
-	vector<CONSTINDEX> getAllConstIndex(); 
 };
 
 #endif
