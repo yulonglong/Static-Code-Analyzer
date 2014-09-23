@@ -282,21 +282,19 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 				openBracket++;
 			}
 		}
-		else if (tokens.size()==2){
+		else if ((tokens.size()==2)&&((tokens[0]=="procedure")||(tokens[0]=="while"))){
 			//cout << tokens[0] << endl;
-			if((tokens[0]=="procedure")||(tokens[0]=="while")||(tokens[0]=="if")||(tokens[0]=="else")){
-				int length=tokens[1].length()-1;
-				string lastChar = tokens[1].substr(length);
-				if(lastChar=="{"){
-					tokens[1] = tokens[1].substr(0,length);
-					openBracket++;
-					valid=true;
-				}
-				else{
-					valid=true;
-				}
-				//cout << tokens[0] << " " << endl;
+			int length=tokens[1].length()-1;
+			string lastChar = tokens[1].substr(length);
+			if(lastChar=="{"){
+				tokens[1] = tokens[1].substr(0,length);
+				openBracket++;
+				valid=true;
 			}
+			else{
+				valid=true;
+			}
+			//cout << tokens[0] << " " << endl;
 		}
 		
 
@@ -331,6 +329,9 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 				tokens.push_back(lastChar);
 			}
 		}
+
+		//cout << "tokensize " << tokens.size() << endl;
+
 		if(openBracket>0){
 			bracket.push(1);
 		} 
@@ -535,7 +536,7 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 			 
 		}
 		else if (tokens[0]=="else"){
-			if(tokens.size()>2){
+			if(tokens.size()!=1){
 				cout << "ERROR IN ELSE BLOCK!" << endl;
 				return NULL;
 			}
