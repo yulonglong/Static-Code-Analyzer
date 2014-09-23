@@ -12,10 +12,8 @@ class Pair {
 public:
 	int ans1;
 	int ans2;
-	string token1;
-	string token2;
 
-	Pair(int, int, std::string, std::string);
+	Pair(int, int);
 	Pair();
 
 	bool operator <(const Pair &p) const;
