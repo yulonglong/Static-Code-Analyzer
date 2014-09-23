@@ -11,7 +11,6 @@
 class ModifiesTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( ModifiesTest ); // Note 3 
-	CPPUNIT_TEST( testSetModifies );
 	CPPUNIT_TEST( testGetModifies );
 	CPPUNIT_TEST( testIsModifies );
 	CPPUNIT_TEST( testSetProcModifies );
@@ -21,7 +20,6 @@ public:
 	void setUp();
 	void tearDown();
 
-	void testSetModifies();
 	void testGetModifies();
 	void testIsModifies();
 	void testSetProcModifies();
