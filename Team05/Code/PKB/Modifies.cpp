@@ -4,11 +4,6 @@
 
 bool Modifies::instanceFlag=false;
 Modifies* Modifies::modifies=NULL;
-
-Modifies::Modifies() {
-
-}
-
 	
 Modifies::Modifies(TypeTable *tt, VarTable *vt, ProcTable *pt) {
 	typeTable = tt;
@@ -16,25 +11,13 @@ Modifies::Modifies(TypeTable *tt, VarTable *vt, ProcTable *pt) {
 	procTable = pt;
 }
 
-//TODO: delete
+
 Modifies::~Modifies() {
 	modifiesTable.clear();
+	modifiesProcTable.clear();
 	instanceFlag=false;
 }
 
-
-Modifies* Modifies::getInstance() {
-	if(!instanceFlag)
-    {
-        modifies = new Modifies();
-        instanceFlag = true;
-        return modifies;
-    }
-    else
-    {
-        return modifies;
-    }
-}
 
 Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt, ProcTable *pt) {
 	if(!instanceFlag) {
@@ -45,10 +28,6 @@ Modifies* Modifies::getInstance(TypeTable* tt, VarTable* vt, ProcTable *pt) {
     else {
         return modifies;
     }
-}
-
-unordered_map<STMTNUM, vector<VARINDEX>> Modifies::getModifiesTable() {
-	return modifiesTable;
 }
 
 void Modifies::setModifies(STMTNUM s, VARNAME v) {
@@ -91,34 +70,33 @@ bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	return false;
 }
 
-vector<STMTNUM> Modifies::getModifies(TYPE type) {	
+vector<STMTNUM> Modifies::getModifies(SYNTYPE type) {	
+	vector<STMTNUM> ans;
 	try {
-		vector<VARINDEX> toReturn;
 		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
 			if(!it->second.empty() && it->second!=vector<int> (1,-1)){
 				if(typeTable->isType(type,it->first))
-					toReturn.push_back(it->first);
+					ans.push_back(it->first);
 			}
 		}
-		if(toReturn==vector<int> (1,-1))
-			toReturn.clear();
-		sort(toReturn.begin(),toReturn.end());
-		return toReturn;
+		sort(ans.begin(),ans.end());
+		return ans;
 	} catch(...){
-		vector<STMTNUM> toReturn;
-		return toReturn;
 	}
+	ans = vector<STMTNUM> (1,-1);
+	return ans;
 }
 
-vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {	
+vector<STMTNUM> Modifies::getModifies(SYNTYPE t, VARNAME v) {	
 	// Select a such that Modifies(a, "x")	return -1 if doesn't exist
-	// iterate through all stmt numbers, if it is of type TYPE, then get the list, for each of the items check if equals to v, if yes, then add the stmt number to the vector
+	// iterate through all stmt numbers, if it is of type SYNTYPE, then get the list, for each of the items check if equals to v, if yes, then add the stmt number to the vector
+	vector<STMTNUM> ans;
 	try {
 		VARINDEX varIndex = varTable->getVarIndex(v);
 		if (varIndex == -1) {
-			return vector<VARINDEX> (1,-1);
+			ans = vector<STMTNUM> (1,-1);
+			return ans;
 		}
-		vector<STMTNUM> toReturn;
 
 		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
 			if (typeTable->isType(t, it->first))  {
@@ -126,86 +104,121 @@ vector<STMTNUM> Modifies::getModifies(TYPE t, VARNAME v) {
 				vector<VARINDEX>::iterator iter;
 				for (iter = temp.begin(); iter!=temp.end(); ++iter) {
 					if (*iter == varIndex) {
-						toReturn.push_back(it->first);
+						ans.push_back(it->first);
 						break;
 					}
 				}		
 			}
 		}
 
-		if(toReturn.empty())
-			return vector<VARINDEX> (1,-1);
+		if(ans.empty()){
+			ans = vector<STMTNUM> (1,-1);
+			return ans;
+		}
 		else
-			sort(toReturn.begin(),toReturn.end());
-			return toReturn;
+			sort(ans.begin(),ans.end());
+		return ans;
 	} catch(...){
-		return vector<VARINDEX> (1,-1);
+		ans = vector<STMTNUM> (1,-1);
+		return ans;
 	}
-
 }
 
 vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {	
 	//Select v such that Modifies(1, v)	return empty vector if doesnt exist };
+	vector<VARINDEX> ans;
 	try {
-		vector<VARINDEX> toReturn = modifiesTable.at(stmt);
-		return toReturn;
+		ans = modifiesTable.at(stmt);
+		return ans;
 	} catch(...) {
-		return vector<VARINDEX> (1,-1);
+		ans = vector<STMTNUM> (1,-1);
+		return ans;
 	}
 }
 
 void Modifies::setModifiesProc(PROCINDEX p, vector<VARINDEX> v) {
-	try {
-		try{
-			vector<VARINDEX> temp;
-			vector<VARINDEX> temp1 = modifiesProcTable.at(p);
-			temp.reserve(temp1.size()+v.size());
-			temp.insert(temp.end(), v.begin(), v.end());
-			temp.insert(temp.end(), temp1.begin(), temp1.end());
-			modifiesProcTable.erase(p);
-			sort( temp.begin(), temp.end() );
-			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
-			modifiesProcTable[p] = temp;
-		} catch(...){
-			modifiesProcTable[p] = v;
-		}
-	} catch (...){
+	try{
+		vector<VARINDEX> temp;
+		vector<VARINDEX> temp1 = modifiesProcTable.at(p);
+		temp.reserve(temp1.size()+v.size());
+		temp.insert(temp.end(), v.begin(), v.end());
+		temp.insert(temp.end(), temp1.begin(), temp1.end());
+		modifiesProcTable.erase(p);
+		sort( temp.begin(), temp.end() );
+		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+		modifiesProcTable[p] = temp;
+	} catch(...){
+		modifiesProcTable[p] = v;
 	}
 }
 
 vector<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {	
+	vector<VARINDEX> ans;
 	try {
-		return modifiesProcTable.at(p);
+		ans = modifiesProcTable.at(p);
+		return ans;
 	} catch(...){
-		vector<VARINDEX> ans;
+		ans = vector<VARINDEX> (1,-1);
 		return ans;
 	}
 }
 
 void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
-	try {
-		try{
-			vector<VARINDEX> temp;
-			vector<VARINDEX> temp1 = modifiesTable.at(s);
-			temp.reserve(temp1.size()+v.size());
-			temp.insert(temp.end(), v.begin(), v.end());
-			temp.insert(temp.end(), temp1.begin(), temp1.end());
-			sort( temp.begin(), temp.end() );
-			temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
-			modifiesTable[s] = temp;
-		} catch(...){
-			modifiesTable[s] = v;
-		}
-	} catch (...){
+	try{
+		vector<VARINDEX> temp;
+		vector<VARINDEX> temp1 = modifiesTable.at(s);
+		temp.reserve(temp1.size()+v.size());
+		temp.insert(temp.end(), v.begin(), v.end());
+		temp.insert(temp.end(), temp1.begin(), temp1.end());
+		sort( temp.begin(), temp.end() );
+		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
+		modifiesTable[s] = temp;
+	} catch(...){
+		modifiesTable[s] = v;
 	}
 }
 
-vector<PROCINDEX> Modifies::getModifiesProcVar(VARNAME vn){
-	vector<PROCINDEX> p;
+vector<PROCINDEX> Modifies::getModifiesProcVar(VARNAME v){
+	vector<PROCINDEX> ans;
+	try {
+		VARINDEX varIndex = varTable->getVarIndex(v);
+		if (varIndex == -1 ) {
+			ans = vector<PROCINDEX> (1,-1);
+			return ans;
+		}
 
-	return p;
+		for(unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = modifiesProcTable.begin(); it != modifiesProcTable.end(); it++) {
+			vector<VARINDEX> temp = it->second; 
+			vector<VARINDEX>::iterator iter;
+			for (iter = temp.begin(); iter!=temp.end(); iter++) {
+				if (*iter == varIndex) {
+					ans.push_back(it->first);
+					break;
+				}
+			}		
+		}
+	} catch (...){
+		ans = vector<PROCINDEX> (1,-1);
+		return ans;
+	}
+	return ans;
 }
 
 bool Modifies::isModifiesProc(PROCNAME p, VARNAME v){
-	return true;
+	try {
+		VARINDEX index = varTable->getVarIndex(v);
+		PROCINDEX procIndex = procTable->getProcIndex(p);
+		if (index == -1 || procIndex == -1) {
+			return false;
+		}
+		vector<VARINDEX> temp = modifiesProcTable.at(procIndex);
+		vector<VARINDEX>::iterator it = temp.begin();
+		for (; it!=temp.end(); it++){
+			if (index == *it) {
+				return true;
+			}
+		}
+	} catch (...){
+	}
+	return false;
 }

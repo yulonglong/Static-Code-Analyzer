@@ -12,15 +12,15 @@ PKB* pkb;
 
 void FollowsTest::setUp() {
 	pkb = PKB::getInstance();
-	follows = Follows::getInstance();
 	typeTable = TypeTable::getInstance();
+	follows = Follows::getInstance(typeTable);
 }
 
 void FollowsTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	follows = Follows::getInstance();
 	typeTable = TypeTable::getInstance();
+	follows = Follows::getInstance(typeTable);
 }
 	
 // Registers the fixture into the 'registry'

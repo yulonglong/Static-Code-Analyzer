@@ -1,3 +1,7 @@
+//@author Yohanes Lim
+//PKB.h
+
+
 #ifndef PKB_H
 #define PKB_H
 
@@ -19,13 +23,39 @@
 #include "Next.h"
 #include "CFGNode.h"
 
-using namespace std;
-
 /* TO USE PKB:
 	PKB *pkb;
 	pkb = PKB::getInstance();
 	pkb->method(); 
 */
+
+/*! \brief A PKB class to store all the datas needed for the program.
+ *  
+ *
+ * Overview: CodeParser is responsible to :
+ * - Store all the tables and relationships
+ * - Allow speedy access to the required datas
+ * 
+ * PKB is a singleton class, it can be invoked using:
+ * \code
+ * static PKB* getInstance();
+ * \endcode
+ *
+ * List of tables that PKB contains:
+ * - VarTable
+ * - ProcTable
+ * - TypeTable
+ * - ConstTable
+ * 
+ * List of relationships that PKB contains:
+ * - Parent
+ * - Follows
+ * - Modifies
+ * - Uses
+ * - Calls
+ * - Next
+ *
+ */
 
 class PKB {
 private: 
@@ -46,9 +76,38 @@ private:
 	CFGNode* CFGRoot; 
 	
 public:
+	//! A constructor to initialize the PKB.
 	PKB();
+	//! A constructor to clear all the tables, relationships and other parameters.
 	~PKB();
-	static PKB* getInstance();	// to be used to get instance of singleton class 
+	//! Returns the instance of PKB singleton class.
+	static PKB* getInstance();
+
+	//! Set a variable to the variable table.
+	void setToVarTable(VARNAME);
+	//! Set a procedure to the procedure table.
+	void setToProcTable(PROCNAME);
+	//! Set a constant to the constant table.
+	void setToConstTable(CONSTVALUE);
+	//! Set a SynType to the statement number at the type table.
+	void setToTypeTable(STMTNUM,TypeTable::SynType);
+	//! Set a Parent relationship between the two given statement numbers.
+	void setToParent(STMTNUM, STMTNUM);
+	//! Set a Follows relationship between the two given statement numbers.
+	void setToFollows(STMTNUM, STMTNUM);
+	//! Set a Modifies relationship between the given statement number and variable name.
+	void setToModifies(STMTNUM, VARNAME);
+	//! Set a Uses relationship between the given statement number and variable name.
+	void setToUses(STMTNUM, VARNAME);
+	//! Set a Calls relationship between the two given procedure name at the specified statement number.
+	void setToCalls(PROCNAME, PROCNAME, STMTNUM);
+	//! Set a Next relationship between the two given statement numbers.
+	void setToNext(STMTNUM, STMTNUM);
+	//! Set the new AST Root.
+	void setASTRoot(Node* newASTRoot);
+	//! Set the new CFG Root.
+	void setCFGRoot(CFGNode* newCFGRoot);
+
 
 	VarTable* getVarTable();
 	ProcTable* getProcTable();
@@ -64,21 +123,6 @@ public:
 	CFGNode* getCFGRoot();
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
-
-	void setToVarTable(VARNAME);
-	void setToProcTable(PROCNAME);
-	void setToConstTable(CONSTVALUE);
-	void setToParent(STMTNUM, STMTNUM);
-	void setToFollows(STMTNUM, STMTNUM);
-	void setToModifies(STMTNUM, VARNAME);
-	void setToUses(STMTNUM, VARNAME);
-	void setToCalls(PROCNAME, PROCNAME, STMTNUM); //kester added the last parameter of STMTNUM, it is the progline in which the procedure is called
-	void setToNext(STMTNUM, STMTNUM);
-	void setToTypeTable(STMTNUM,TypeTable::SynType); //kester added this it was originally insertStmtNumAndType
-
-	void setASTRoot(Node* newASTRoot);
-	void setCFGRoot(CFGNode* newCFGRoot);
-
 };
 
 #endif

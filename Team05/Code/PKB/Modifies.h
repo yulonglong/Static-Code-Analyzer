@@ -1,3 +1,6 @@
+//@author Yohanes Lim
+//Modifies.h
+
 #ifndef MODIFIES_H
 #define MODIFIES_H
 
@@ -14,7 +17,21 @@
 #include "VarTable.h"
 #include "ProcTable.h"
 
-typedef TypeTable::SynType TYPE; 
+typedef TypeTable::SynType SYNTYPE; 
+
+/*! \brief A Modifies class to store the Modifies relationship.
+ *  
+ * Overview: Modifies is responsible to :
+ * - Store all the Modifies relationship between statement number and variable index
+ * - Store all the Modifies relationship between procedure index and variable index
+ * - Allow speedy access to the required datas
+ * 
+ * Modifies is a singleton class, it can be invoked using:
+ * \code
+ * static Modifies* getInstance(TypeTable*, VarTable*, ProcTable*);
+ * \endcode
+ *
+ */
 
 class Modifies {
 private:
@@ -26,26 +43,37 @@ private:
 	VarTable *varTable;
 	ProcTable *procTable;
 public:	
+	//! A constructor to initialize the Modifies class.
 	Modifies(TypeTable*, VarTable*, ProcTable*);
-	Modifies();
+	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~Modifies();
-	static Modifies* getInstance();	// to be used to get instance of singleton class
+	//! Returns the instance of Modifies singleton class.
 	static Modifies* getInstance(TypeTable*, VarTable*,ProcTable*);	// to be used to get instance of singleton class 
-	unordered_map<STMTNUM, vector<VARINDEX>> getModifiesTable(); // only for unit testing.
+
+	//! Set the Modifies relationship between a statement number and a variable name to be true.
 	void setModifies(STMTNUM, VARNAME);
-	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")
-	vector<STMTNUM> getModifies(TYPE);			//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.
+	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
+	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")	
+	
+	
+	//! Return all statement numbers such that each statement number has the given SynType and modifies any variable. If no such statement number exists, then returns a vector of -1.
+	vector<STMTNUM> getModifies(SYNTYPE);	//Returns STMTNUM of statements of type t that modifies any variable;
+	//! Return all variable indexes such that each variable index is modified in the given statement number. If no such variable index exists, then returns a vector of -1.
 	vector<VARINDEX> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
-	vector<STMTNUM> getModifies(TYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
+	//! Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. If no such statement number exists, then returns a vector of -1.
+	vector<STMTNUM> getModifies(SYNTYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
 
+	//! Set the Modifies relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
+	void setModifies(STMTNUM, vector<VARINDEX>);
+	//! Set the Modifies relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
 	void setModifiesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
+	//! Return all the variable indexes such that each variable index is modified by the given procedure index. If no such variable index exists, then returns a vector of -1.
 	vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
-	void setModifies(STMTNUM, vector<VARINDEX>); // same as above
-
-	//Additional Methods to implement:
-	vector<PROCINDEX> getModifiesProcVar(VARNAME); //get all the procedures that modifies the variable with varname
-	bool isModifiesProc(PROCNAME, VARNAME); //returns true if procname modifies varname
-
+	
+	//! Return all the procedure indexes such that each procedure index modifies the given variable. If no such procedure index exists, then returns a vector of -1.
+	vector<PROCINDEX> getModifiesProcVar(VARNAME);
+	//! If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
+	bool isModifiesProc(PROCNAME, VARNAME); 
 };
 
 #endif

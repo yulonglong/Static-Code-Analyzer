@@ -4,12 +4,16 @@
 
 bool ConstTable::instanceFlag=false;
 ConstTable* ConstTable::constTable=NULL;
+CONSTINDEX ConstTable::currentIndex = 0;
 
 // constructor
 ConstTable::ConstTable() {
+	currentIndex = 0;
 }
 
 ConstTable::~ConstTable(){
+	constantTable.clear();
+	instanceFlag=false;
 }
 
 
@@ -26,44 +30,31 @@ ConstTable* ConstTable::getInstance() {
     }
 }
 
-CONSTINDEX ConstTable::insertConst(CONSTVALUE constant) {
+void ConstTable::insertConst(CONSTVALUE constant) {
 	int constantIndex = getConstIndex(constant);
 	bool containsConstant = (constantIndex != -1);
 		
 	if (!containsConstant) {
-		constantTable.emplace_back(constant);
-		return constantTable.size()-1;  // return new index for this constant
-	} else {
-		return constantIndex;
+		constantTable[currentIndex] = constant;
+		currentIndex++;
 	}
 }
 
 CONSTVALUE ConstTable::getConst (CONSTINDEX ind){
-	if (ind >= (signed int) constantTable.size()) {
-		return "-1";
+	try{
+		return constantTable.at(ind);
+	}catch(...){
 	}
-	return constantTable[ind];
+	return "";
 }
 
 CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
-	for(std::vector<CONSTVALUE>::size_type i = 0; i != constantTable.size(); i++) {
-		if (constValue == constantTable[i]) {
-			return i; 
+	for(unordered_map<CONSTINDEX, CONSTVALUE>::iterator it = constantTable.begin(); it != constantTable.end(); it++) {
+		if (constValue == it->second) {
+			return it->first; 
 		}
 	}
 	return -1;
-}
-
-int ConstTable::getNumConst() {
-	return constantTable.size();
-}
-
-vector<CONSTINDEX> ConstTable::getAllConstIndex() {
-	vector<CONSTINDEX> toReturn;
-	for (int i=0; i< (signed int) constantTable.size(); i++) {
-		toReturn.emplace_back(i);
-	}
-	return toReturn; 
 }
 
 

@@ -12,15 +12,15 @@ PKB *pkb;
 
 void ParentTest::setUp() {
 	pkb = PKB::getInstance();
-	parent = Parent::getInstance();
 	typeTable = TypeTable::getInstance();
+	parent = Parent::getInstance(typeTable);
 }
 
 void ParentTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	parent = Parent::getInstance();
 	typeTable = TypeTable::getInstance();
+	parent = Parent::getInstance(typeTable);
 }
 
 // Registers the fixture into the 'registry'

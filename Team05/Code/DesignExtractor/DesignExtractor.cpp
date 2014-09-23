@@ -7,7 +7,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 0; 
+bool debugModeIteration2 = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -19,7 +19,7 @@ CFGNode* currCFGNode;
 
 queue<QueueItem> queueToProcess;
 
-void extractorDriver(PKB *pkb) {
+void DesignExtractor::extractorDriver(PKB *pkb) {
 	TypeTable* typeTable = pkb->getTypeTable();
 	ConstTable* constTable = pkb->getConstTable();
 	Parent* parent = pkb->getParent();
@@ -46,7 +46,7 @@ void extractorDriver(PKB *pkb) {
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 }
 
-void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
+void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 	try {
 		cout << "Building CFG" << endl;
 		buildCFG(ASTRoot, pkb);
@@ -61,16 +61,24 @@ void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 		// catch any other errors (that we have no information about)
 		std::cerr << "Unknown failure occured in DE. Possible memory corruption" << std::endl;
 	}
+
 	pkb.setCFGRoot(rootCFGNode);
+	CFGNode* temp = pkb.getCFGRoot();
+	if (temp == NULL) {
+	cout << "here" << endl;
+	}
 }
 
 // actual building of CFG 
-void buildCFG(Node &ASTRroot, PKB &pkb) {
+void DesignExtractor::buildCFG(Node &ASTRroot, PKB &pkb) {
 	// create CFG Root Node with progLine = 0
 	Node* currASTNode;
 	currASTNode = &ASTRroot; 
 	currCFGNode = new CFGNode("program", 0);
 	rootCFGNode = currCFGNode;
+	if (currASTNode == NULL) {
+		cout << "Why is the AST root null?" << endl;
+	}
 
 	// iteratively traverse each of the type = procedure nodes in AST
 	// for each AST Node :
@@ -92,11 +100,12 @@ void buildCFG(Node &ASTRroot, PKB &pkb) {
 }
 
 // ASTNode is a pointer to the subtree rooted at the AST Node ":stmtLst"
-void createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
+void DesignExtractor::createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 	Node* tempASTNode;
 	tempASTNode = &ASTNode; 
 
 	vector<Node*> children = tempASTNode->getChild();
+	cout << "size is " << children.size() << endl;
 	for (unsigned int i=0; i<children.size(); i++) {
 		string type = children[i]->getType();
 		int progLine = children[i]->getProgLine();
@@ -118,7 +127,7 @@ void createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 
 }
 
-void createCFGForAssign(int progLine, PKB &pkb) {
+void DesignExtractor::createCFGForAssign(int progLine, PKB &pkb) {
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("assign");
@@ -130,6 +139,9 @@ void createCFGForAssign(int progLine, PKB &pkb) {
 			int fromProgLine = parents[i]->getProgLine();
 			int toProgLine = currCFGNode->getProgLine();
 			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
 		}
 
 		if (debugModeIteration2) {
@@ -151,7 +163,7 @@ void createCFGForAssign(int progLine, PKB &pkb) {
 	}
 }
 
-void createCFGForCall(int progLine, PKB &pkb) {
+void DesignExtractor::createCFGForCall(int progLine, PKB &pkb) {
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
 		currCFGNode->setType("call");
@@ -163,6 +175,9 @@ void createCFGForCall(int progLine, PKB &pkb) {
 			int fromProgLine = parents[i]->getProgLine();
 			int toProgLine = currCFGNode->getProgLine();
 			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
 		}
 
 		if (debugModeIteration2) {
@@ -184,7 +199,7 @@ void createCFGForCall(int progLine, PKB &pkb) {
 	}
 }
 
-void createCFGForWhile(vector<Node*> children, PKB &pkb) {
+void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	int progLine = children[0]->getProgLine();
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
@@ -197,6 +212,9 @@ void createCFGForWhile(vector<Node*> children, PKB &pkb) {
 			int fromProgLine = parents[i]->getProgLine();
 			int toProgLine = currCFGNode->getProgLine();
 			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
 		}
 
 		if (debugModeIteration2) {
@@ -232,6 +250,9 @@ void createCFGForWhile(vector<Node*> children, PKB &pkb) {
 		// Set next relationship in PKB
 		pkb.setToNext(fromNode->getProgLine(), toNode->getProgLine());
 		if (debugModeIteration2) {
+				cout << "setToNext(" << fromNode->getProgLine() << ", " << toNode->getProgLine() << ")" <<endl;
+		}
+		if (debugModeIteration2) {
 			cout << "Parent: ";
 			fromNode->printCFGNode();
 			cout << " Child: ";
@@ -242,7 +263,7 @@ void createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	currCFGNode = toNode;
 }
 
-void createCFGForIf(vector<Node*> children, PKB &pkb) {
+void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 	int progLine = children[0]->getProgLine();
 	if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
 		currCFGNode->setProgLine(progLine);
@@ -255,6 +276,9 @@ void createCFGForIf(vector<Node*> children, PKB &pkb) {
 			int fromProgLine = parents[i]->getProgLine();
 			int toProgLine = currCFGNode->getProgLine();
 			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
 		}
 
 		if (debugModeIteration2) {
@@ -276,11 +300,13 @@ void createCFGForIf(vector<Node*> children, PKB &pkb) {
 	}
 
 	CFGNode* ifCFGNode = currCFGNode;
+	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
 	leafNodes.push_back(currCFGNode);
 
+	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	currCFGNode = ifCFGNode;
 	stmtLst = children[2];
 	createCFGForStmtLst(*stmtLst, pkb);
@@ -319,7 +345,7 @@ void createCFGForIf(vector<Node*> children, PKB &pkb) {
 	currCFGNode = dummyNode; 
 }
 
-void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
+void DesignExtractor::createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
 	CFGNode* newNode = new CFGNode(type, progLine);
 	if (debugModeIteration2) {
 		cout << "adding new ";
@@ -328,6 +354,13 @@ void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
 	}	
 	currCFGNode->setMultiChild(newNode);
 	newNode->setMultiParent(currCFGNode);
+	
+	// Set next relationship in PKB
+	pkb.setToNext(currCFGNode->getProgLine(), newNode->getProgLine());
+	if (debugModeIteration2) {
+		cout << "setToNext(" << currCFGNode->getProgLine() << ", " << newNode->getProgLine() << ")" <<endl;
+	}
+
 	if (debugModeIteration2) {
 		cout << "Parent: ";
 		currCFGNode->printCFGNode();
@@ -337,11 +370,11 @@ void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
 	}
 	currCFGNode = newNode; 
 	counter = currCFGNode->getProgLine();
-	// Set next relationship in PKB
-	pkb.setToNext(currCFGNode->getProgLine(), progLine);
+	
+
 }
 
-CFGNode* getCFGNode(int progLine) {
+CFGNode* DesignExtractor::getCFGNode(int progLine) {
 	if (debugModeIteration2) {
 		cout << "getCFGNode(" << progLine << ")" << endl;
 		cout << "Max prog line now is: " << counter << "."<< endl;
@@ -371,7 +404,7 @@ CFGNode* getCFGNode(int progLine) {
 	}
 }
 
-void traverseGraph(CFGNode &node, int progLine) {
+void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
 	if (node.getProgLine() == progLine) {
 		foundNode = &node;
 	}
@@ -391,7 +424,7 @@ void traverseGraph(CFGNode &node, int progLine) {
 
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
-void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent) {
+void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent) {
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
@@ -469,12 +502,12 @@ void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPA
 
 }
 
-void clear( std::queue<QueueItem> &q ) {
+void DesignExtractor::clear( std::queue<QueueItem> &q ) {
    std::queue<QueueItem> empty;
    std::swap( q, empty );
 }
 
-void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	if (debugModeIteration1) {
 		cout << "printing queue again: " << endl;
 		printQueue();
@@ -483,7 +516,7 @@ void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	DFS(0, emptyVector, callsTable);
 }
 
-void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	try {
 		if (debugModeIteration1) {
 			cout << callsTable.at(source).empty() << endl;
@@ -554,7 +587,7 @@ void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLS
 }
 
 
-void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+void DesignExtractor::printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	cout << "Calls Table is:" << endl; 
 	for (auto it1 = callsTable.begin(); it1 != callsTable.end(); ++it1) {
 		cout << it1->first  << ": "; 
@@ -567,7 +600,7 @@ void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 
 }
 
-void printQueue() {
+void DesignExtractor::printQueue() {
 	queue<QueueItem> backup;
 	cout << "Toposort queue is: " << endl;
 	while (!queueToProcess.empty()) {
@@ -580,7 +613,7 @@ void printQueue() {
 	queueToProcess = backup; 
 }
 
-int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
+int DesignExtractor::getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
 	Node* curr = &ASTRoot; 
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();
@@ -596,7 +629,7 @@ int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
 	return curr->getProgLine();
 }
 
-int getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
+int DesignExtractor::getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
 	Node* curr = &ASTRoot; 
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();

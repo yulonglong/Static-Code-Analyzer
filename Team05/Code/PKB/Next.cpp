@@ -6,26 +6,12 @@ bool Next::instanceFlag=false;
 Next* Next::next=NULL;
 
 //Constructor
-Next::Next(){
-}
 
 Next::~Next(){
 	nextTable.clear();
 	instanceFlag=false;
 }
 
-Next* Next::getInstance() {
-	if(!instanceFlag)
-    {
-        next = new Next();
-        instanceFlag = true;
-        return next;
-    }
-    else
-    {
-        return next;
-    }
-}
 
 Next* Next::getInstance(TypeTable* tt) {
 	if(!instanceFlag)
@@ -61,3 +47,23 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 	}catch(...){
 	}
 }
+
+vector<STMTNUM> Next::getNext(STMTNUM s){
+	try{
+		vector<STMTNUM> ans = nextTable.at(s);
+		return ans;
+	} catch(...) {
+		return vector<STMTNUM> (1,-1);
+	}
+}
+
+STMTNUM Next::getPrevious(STMTNUM s){
+	try{
+		STMTNUM ans = previousTable.at(s);
+		return ans;
+	} catch(...) {
+		return -1;
+	}
+}
+
+

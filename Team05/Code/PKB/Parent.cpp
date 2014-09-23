@@ -6,9 +6,6 @@ bool Parent::instanceFlag=false;
 Parent* Parent::parent=NULL;
 
 // constructor
-Parent::Parent() {
-}
-
 Parent::Parent(TypeTable *table) {
 	typeTable = table;
 }
@@ -19,27 +16,10 @@ Parent::~Parent() {
 	instanceFlag=false;
 }
 
-Parent* Parent::getInstance() {
-	if(!instanceFlag)
-    {
-        parent = new Parent();
-        instanceFlag = true;
-        return parent;
-    }
-    else
-    {
-        return parent;
-    }
-}
-
 Parent* Parent::getInstance(TypeTable *table) {
 	parent = new Parent(table);
 	instanceFlag = true;
 	return parent;
-}
-
-TypeTable* Parent::getTypeTable(){
-	return typeTable;
 }
 
 void Parent::setParent(STMTNUM s1, STMTNUM s2) {
@@ -70,7 +50,7 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Parent::isParent(TYPE t1, TYPE t2) {
+bool Parent::isParent(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
 	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
@@ -100,7 +80,7 @@ bool Parent::isParent(TYPE t1, TYPE t2) {
 	return false;
 }
 
-bool Parent::isParent(TYPE t, STMTNUM s) {
+bool Parent::isParent(SYNTYPE t, STMTNUM s) {
 	try{
 		STMTNUM temp = childrenTable.at(s);
 		if (typeTable->isType(t,temp)) {
@@ -111,7 +91,7 @@ bool Parent::isParent(TYPE t, STMTNUM s) {
 	return false;
 }
 
-bool Parent::isChildren(TYPE t, STMTNUM s){
+bool Parent::isChildren(SYNTYPE t, STMTNUM s){
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
@@ -125,7 +105,7 @@ bool Parent::isChildren(TYPE t, STMTNUM s){
 }
 
 
-vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2, STMTNUM s) {
+vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	try{
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->isType(t2,temp)){
@@ -136,7 +116,7 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2, STMTNUM s) {
 	return vector<STMTNUM> (1,-1);
 }
 
-vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2, STMTNUM s) {
+vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
@@ -150,7 +130,7 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2, STMTNUM s) {
 	return vector<STMTNUM> (1,-1);
 }
 
-vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
+vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
 	vector<STMTNUM> list; 
 	STMTNUM j = -1; 
 	for (unordered_map<STMTNUM, STMTNUM>::iterator it = childrenTable.begin(); it != childrenTable.end(); it++) {
@@ -183,7 +163,7 @@ vector<STMTNUM> Parent::getChildren(TYPE t1, TYPE t2){
 	return list;
 }
 
-vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
+vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
 	vector<STMTNUM> ans; 
 	vector<STMTNUM> temp;
 	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
@@ -224,7 +204,7 @@ vector<STMTNUM> Parent::getParent(TYPE t1, TYPE t2){
 	return ans;
 }
 
-STMTNUM Parent::getParent(TYPE t1, STMTNUM s){
+STMTNUM Parent::getParent(SYNTYPE t1, STMTNUM s){
 	try{
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->isType(t1,temp))
@@ -235,7 +215,7 @@ STMTNUM Parent::getParent(TYPE t1, STMTNUM s){
 	return -1;
 }
 
-vector<STMTNUM> Parent::getChildren(TYPE t1, STMTNUM s){
+vector<STMTNUM> Parent::getChildren(SYNTYPE t1, STMTNUM s){
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM> ans;

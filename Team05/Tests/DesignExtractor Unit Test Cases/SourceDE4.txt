@@ -1,17 +1,17 @@
 procedure Second{ 
 	call Fourth;
 	if x then{		
-		if s then {
+		if s then{
 			a = 5; }
-		else {
+		else{
 			call Fourth;
 		} 
 		x = x + 1;}		
 	else{			
 		z = 1;
-		if q then {
+		if q then{
 			i = 2;}
-		else {
+		else{
 			a = g;
 		}
 	call Fourth; }	

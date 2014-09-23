@@ -7,13 +7,15 @@ Modifies* modifies;
 PKB* pkb;
 TypeTable* typeTable;
 VarTable* varTable;
+ProcTable* procTable;
 
 
 void ModifiesTest::setUp() {
 	pkb = PKB::getInstance();
-	modifies = pkb->getModifies();
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
+	procTable = pkb->getProcTable();
+	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 
 	varTable->insertVar("z");
 	varTable->insertVar("x");
@@ -50,24 +52,14 @@ void ModifiesTest::setUp() {
 void ModifiesTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	modifies = Modifies::getInstance();
-	typeTable = TypeTable::getInstance();
-	varTable = VarTable::getInstance();
+	typeTable = pkb->getTypeTable();
+	varTable = pkb->getVarTable();
+	procTable = pkb->getProcTable();
+	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 }
 	
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
-
-void ModifiesTest::testSetModifies() {  // Note 5
-	unordered_map<STMTNUM, vector<VARINDEX>> map = modifies->getModifiesTable();
-	CPPUNIT_ASSERT(map.at(1).size() == 1);
-	CPPUNIT_ASSERT(varTable->getVarName(map.at(1).at(0)) == "x");
-
-	CPPUNIT_ASSERT(map.at(6).size() == 2);
-	CPPUNIT_ASSERT(varTable->getVarName(map.at(6).at(0)) == "x");
-	CPPUNIT_ASSERT(varTable->getVarName(map.at(6).at(1)) == "i");
-	return;
-}
 
 void ModifiesTest::testGetModifies() {
 	vector<VARINDEX> v = modifies->getModifies(6); 
