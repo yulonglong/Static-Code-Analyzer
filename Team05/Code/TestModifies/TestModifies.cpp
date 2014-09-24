@@ -51,7 +51,7 @@ void ModifiesTest::setUp() {
 
 void ModifiesTest::tearDown() {
 	pkb->~PKB();
-	pkb = new PKB();
+	pkb = PKB::getInstance();
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
 	procTable = pkb->getProcTable();

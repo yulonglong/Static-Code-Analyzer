@@ -16,10 +16,17 @@ Parent::~Parent() {
 	instanceFlag=false;
 }
 
-Parent* Parent::getInstance(TypeTable *table) {
-	parent = new Parent(table);
-	instanceFlag = true;
-	return parent;
+Parent* Parent::getInstance(TypeTable *tt){
+	if(!instanceFlag)
+    {
+        parent = new Parent(tt);
+        instanceFlag = true;
+        return parent;
+    }
+    else
+    {
+        return parent;
+    }
 }
 
 void Parent::setParent(STMTNUM s1, STMTNUM s2) {
