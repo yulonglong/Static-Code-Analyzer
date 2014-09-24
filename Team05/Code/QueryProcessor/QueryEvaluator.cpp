@@ -16,12 +16,6 @@ unordered_map<int, vector<std::string>> QueryEvaluator::relParameters;
 
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
-	//QueryEvaluator::linkages;
-	//QueryEvaluator::relAns;
-	//QueryEvaluator::relParameters;
-	//QueryEvaluator::vecOfRelations;
-
-
 }
 
 QueryEvaluator::~QueryEvaluator(){
@@ -124,365 +118,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	}
 
 	return answers;
-	/*
-	//order the relationship vector
-	vector<Relationship> relations = orderRelationship(q.getRelVect());
-	QueryEvaluator::vecOfRelations = relations;
-
-	//declaring all table pointers
-	TypeTable *t = pkb->getTypeTable();
-	Follows *f = pkb->getFollows();
-	VarTable *var = pkb->getVarTable();
-
-	//retrieving synTable
-	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
-
-	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
-
-		string token1 = it->getToken1();
-		string token2 = it->getToken2();
-
-		if(token1==token2 && token1!="_"){
-			answers.clear();
-			break;
-		}
-
-		vector<string> selectedSyn = q.getSelectedSyn();
-		
-		unordered_map<string, TypeTable::SynType>::iterator i = m.find(selectedSyn);
-
-		if(selectedSyn.at(0)!=(i->first)){
-			answers.clear();
-			break;
-		}
-
-		if((it->getRelType())!=Relationship::CALLS){
-		if(token1=="_"){
-			it->setToken1("s1");
-			m.insert(make_pair<string, TypeTable::SynType>("s1", TypeTable::STMT));
-			q.setSynTable(m);
-		}
-
-		if(token2=="_" && ((it->getRelType())!=Relationship::MODIFIES) && ((it->getRelType())!=Relationship::USES)){
-			it->setToken2("s2");
-			m.insert(make_pair<string, TypeTable::SynType>("s2", TypeTable::STMT));
-			q.setSynTable(m);
-		}
-
-		if(token2=="_" && (((it->getRelType())==Relationship::MODIFIES) || ((it->getRelType())==Relationship::USES))){
-			it->setToken2("v");
-			m.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
-			q.setSynTable(m);
-		}
-		}
-
-		switch(it->getRelType()){
-		case Relationship::FOLLOWS: {	
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
-				if(evaluateFollowsBoolean(*it, m)){
-					answers.push_back(t->getAllStmts(i->second));
-				}
-			}
-			else {
-				answers.push_back(evaluateFollows(*it, m, q.getSelectedSyn()));
-			}
-			break;
-									}
-		case Relationship::FOLLOWSSTAR:
-
-			{	
-
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
-				if(evaluateFollowsStarBoolean(*it, m)){
-					answers.push_back(t->getAllStmts(i->second));
-				}
-			}
-			else {
-				answers.push_back(evaluateFollowsStar(*it, m, q.getSelectedSyn()));
-			}
-			break;
-									}
-
-		case Relationship::CALLS:
-			{
-				
-
-			}
-
-		case Relationship::CALLSSTAR:
-			{
-
-			}
-
-		case Relationship::PARENT:
-			{
-				if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
-					if(evaluateParentBoolean(*it, m)){
-						answers.push_back(t->getAllStmts(i->second));
-					}
-				}
-				else {
-					answers.push_back(evaluateParent(*it, m, q.getSelectedSyn()));
-				}
-
-				break;
-			}
-		case Relationship::PARENTSTAR:
-			{	
-
-			if((isdigit(token1[0]) && isdigit(token2[0])) || (selectedSyn!=token1 && selectedSyn!=token2)) { //if first char is a digit, then the token must be a number
-				if(evaluateParentStarBoolean(*it, m)){
-					answers.push_back(t->getAllStmts(i->second));
-				}
-			}
-			else {
-				answers.push_back(evaluateParentStar(*it, m, q.getSelectedSyn()));
-			}
-			break;
-									}
-
-		case Relationship::MODIFIES:
-			{
-
-			if(selectedSyn!=token1 && selectedSyn!=token2) { //if first char is a digit, then the token must be a number
-				cout<<"Calling evaluateModifiesBoolean"<<endl;
-				if(evaluateModifiesBoolean(*it, m)){
-					switch(i->second){
-					case TypeTable::VARIABLE:{
-						answers.push_back(var->getAllVarIndex());
-						break;
-											 }
-					default: {
-						answers.push_back(t->getAllStmts(i->second));
-						break;
-							 }
-					}
-				}
-			}
-			else {
-				cout<<"Calling evaluateModifies"<<endl;
-				answers.push_back(evaluateModifies(*it, m, q.getSelectedSyn()));
-			}
-			break;
-									}
-
-		case Relationship::USES:
-			{	
-
-			if(selectedSyn!=token1 && selectedSyn!=token2) { //if first char is a digit, then the token must be a number
-				cout<<"Calling evaluate uses boolean"<<endl;
-				if(evaluateUsesBoolean(*it, m)){
-					cout<<"called evaluate uses boolean"<<endl;
-					switch(i->second){
-					case TypeTable::VARIABLE:{
-						cout<<"pushing back"<<endl;
-						answers.push_back(var->getAllVarIndex());
-						break;
-											 }
-					default: {
-						answers.push_back(t->getAllStmts(i->second));
-						break;
-							 }
-					}
-				}
-			}
-			else {
-				answers.push_back(evaluateUses(*it, m, q.getSelectedSyn()));
-			}
-			break;
-									}
-		case Relationship::PATTERN:
-			{	
-				if (q.getSelectedSyn().compare(q.getPatternSyn()) == 0)
-					answers.push_back(evaluatePattern(q, token1, token2));
-				else {
-					vector<int> proxy = evaluatePattern(q, token1, token2);
-					if(proxy.size()==0)
-						answers.push_back(proxy);
-				}
-			}
-		}
-	}
-
-	//If there are no relationships in Query
-	if(relations.empty()){
-		string sel = q.getSelectedSyn();
-		unordered_map<string, TypeTable::SynType>::iterator iterate = q.getSynTable().find(sel);
-		switch(iterate->second){
-		case TypeTable::VARIABLE:{
-			answers.push_back(var->getAllVarIndex());		
-			break;
-								 }
-		case TypeTable::PROGLINE:{
-			answers.push_back(t->getAllStmts(TypeTable::STMT));
-			break;
-								 }
-		case TypeTable::CONSTANT:{
-			ConstTable *c = pkb->getConstTable();
-			answers.push_back(c->getAllConstIndex());
-			break;
-								 }
-		default: {
-			answers.push_back(t->getAllStmts(iterate->second));
-			break;
-				 }
-		}
-	}
-	return intersectAnswers(answers);	*/
 }
-
-/*
-vector<int> QueryEvaluator::intersectAnswers(vector<vector<int>> ans){
-
-	cout<<"Intersecting Answers"<<endl;
-	if(!ans.empty()){
-		vector<int> first = ans[0];
-		vector<int> queryAnswers;
-		for(vector<int>::iterator it3 = first.begin(); it3!=first.end(); it3++){
-			cout<<"In 1st for loop"<<endl;
-			bool insert = true;
-			for(vector<vector<int>>::iterator it1 = ans.begin()+1; it1!=ans.end(); it1++){
-				bool change = true;
-				cout<<"In 2nd for loop"<<endl;
-				for(vector<int>::iterator it2 = it1->begin(); it2!=it1->end(); it2++){
-					if(*it3==*it2)
-						change = false;
-				}
-				if(change) {
-					insert = false;
-					break;
-				}
-			}
-			if(insert){
-				queryAnswers.push_back(*it3);
-			}
-		}
-		return queryAnswers;
-	}
-	vector<int> emptyVec;
-	return emptyVec;
-}
-
-bool QueryEvaluator::evaluateQueryBoolean(Query q){
-	vector<Relationship> relations = q.getRelVect();
-	bool answers = true;
-	Follows *f = pkb->getFollows();
-	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
-		switch(it->getRelType()){
-		case Relationship::FOLLOWS: 
-			answers = answers && evaluateFollowsBoolean(*it, q.getSynTable());
-			break;
-		case Relationship::FOLLOWSSTAR:
-			answers = answers && evaluateFollowsStarBoolean(*it, q.getSynTable());
-			break;
-		case Relationship::PARENT:
-			answers = answers && evaluateParentBoolean(*it, q.getSynTable());
-			break;
-		case Relationship::PARENTSTAR:
-			answers = answers && evaluateParentStarBoolean(*it, q.getSynTable());
-			break;
-		case Relationship::MODIFIES:
-			answers = answers && evaluateModifiesBoolean(*it, q.getSynTable());
-			break;
-		case Relationship::USES:
-			answers = answers && evaluateUsesBoolean(*it, q.getSynTable());
-		}
-	}
-	return answers;
-}
-
-
-bool QueryEvaluator::evaluateCallsBoolean(Relationship r){
-	Calls *call = pkb->getCalls();
-	string tk1 = r.getToken1();
-	string tk2 = r.getToken2();
-	vector<int> ans; 
-
-	//Calls(p, q)
-	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && tk2=="_")){
-		ans = call->getCalls();
-		if(!ans.empty())
-			return true;
-	}
-
-	//Calls(p, "Second")
-	else if(isalpha(tk1[0]) || tk1=="_"){
-		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
-		if(!ans.empty())
-			return true;
-	}
-
-	//Calls("First", q)
-	else if(isalpha(tk2[0]) || tk2=="_"){
-		ans = call->getCalled(tk2.substr(1,tk2.length()-2));
-		if(!ans.empty())
-			return true;
-	}
-
-	//Calls("First", "Second")
-	else {
-		return call->isCalls(tk1, tk2);
-	}
-
-	return false;
-}
-
-bool QueryEvaluator::evaluateParentBoolean(Relationship r, unordered_map<string, TypeTable::SynType> m){
-	string tk1 = r.getToken1();
-	string tk2 = r.getToken2();
-	Parent *p = pkb->getParent();
-	if(isdigit(tk1[0]) && isdigit(tk2[0])){
-		return p->isParent(atoi(tk1.c_str()), atoi(tk2.c_str()));
-	}
-	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-		cout<<"Calling isParent(TYPE, TYPE)"<<endl;
-		return p->isParent(i1->second, i2->second);
-	}
-	else if(isalpha(tk1[0])){
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-		cout<<"Calling isParent(TYPE, STMTNUM)"<<endl;
-		return p->isParent(i1->second, atoi(tk2.c_str()));
-	}
-	else {
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
-		cout<<"Calling isChildren(TYPE, STMTNUM)"<<endl;
-		return p->isChildren(i1->second, atoi(tk1.c_str()));
-	}
-}
-
-bool QueryEvaluator::evaluateFollowsBoolean(Relationship r, unordered_map<string, TypeTable::SynType> m){
-	string tk1 = r.getToken1();
-	string tk2 = r.getToken2();
-	Follows *f = pkb->getFollows();
-
-	if(isdigit(tk1[0]) && isdigit(tk2[0])){
-		cout<<"Calling isFollows(STMTNUM, STMTNUM)"<<endl;
-		return f->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()));
-	}
-	else if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-		unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-		cout<<"Calling isFollows(TYPE, TYPE)"<<endl;
-		return f->isFollows(i1->second, i2->second);
-	}
-	else if(isalpha(tk1[0])){
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-		cout<<"Calling getFollows(TYPE, STMTNUM)"<<endl;
-		return (f->getFollows(i1->second, atoi(tk2.c_str()))==-1)?false:true;
-	}
-	else {
-		unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk2);
-		cout<<"Calling getFollowedBy(TYPE, STMTNUM)"<<endl;
-		bool temp;
-		try{
-			temp = f->getFollowedBy(i1->second, atoi(tk1.c_str()))==-1?false:true;
-		}catch(...){
-		}
-		return temp;
-	}
-}*/
 
 void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 	Calls *call = pkb->getCalls();
@@ -540,6 +176,9 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	//Calls("Third", "Fourth")
 	else {
+		cout<<"supposed"<<endl;
+		call->setCalls("\"first\"", "\"second\"", 4);
+		cout<<tk1.substr(1, tk1.length()-2)<<tk2.substr(1,tk2.length()-2)<<endl;
 		if(call->isCalls(tk1.substr(1, tk1.length()-2), tk2.substr(1,tk2.length()-2))){
 			callAns.push_back(Pair (-1, -1));
 		}else{
@@ -569,27 +208,6 @@ vector<int> * QueryEvaluator::findAnswerVectorFromToken(string token){
 
 	return point;
 }
-
-/*
-//Returns true if tk1 and tk2 are linked
-bool QueryEvaluator::isLinked(string tk1, string tk2){
-
-	for(vector<vector<string>>::iterator it = QueryEvaluator::linkages.begin(); it!=QueryEvaluator::linkages.end(); it++){
-		if(find(it->begin(), it->end(), tk1)!=it->end() && find(it->begin(), it->end(), tk2)!=it->end()){
-			return true;
-		}
-	}
-
-	return false;
-}
-
-vector<string> QueryEvaluator::findLinks(string token){
-	for(vector<vector<string>>::iterator it = QueryEvaluator::linkages.begin(); it!=QueryEvaluator::linkages.end(); it++){
-		if(find(it->begin(), it->end(), token)!=it->end()){
-			return *it;
-		}
-	}
-}*/
 
 //return set of int answers for a particular syn
 set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
@@ -664,7 +282,7 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-/*
+
 	//Retrieve the two with syns
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -672,6 +290,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 	VarTable * v = pkb->getVarTable(); 
 	ProcTable * p = pkb->getProcTable();
 	ConstTable * c = pkb->getConstTable();
+	TypeTable * t = pkb->getTypeTable();
 
 
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
@@ -685,24 +304,19 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			
 			//if both tokens are of the same type e.g v1 v2
 			if(i1->second == i2->second){
-				//pop all relIndexes that have links to tk1 and tk2
-				int dummyRel1 = (QueryEvaluator::linkages.find(tk1)->second).at(0);
-				int dummyRel2 = (QueryEvaluator::linkages.find(tk2)->second).at(0);
-				vector<Pair> dummyPairs1 = QueryEvaluator::relAns.find(dummyRel1)->second;
-				vector<Pair> dummyPairs2 = QueryEvaluator::relAns.find(dummyRel2)->second;
-				//dummyPairs1.at(0).token1 = tk2;
-				string store1 = QueryEvaluator::relParameters.find(dummyRel1)->second.at(0);
-				QueryEvaluator::relParameters.find(dummyRel1)->second.at(0) = tk2;
-				//dummyPairs2.at(0).token1 = tk1;
-				string store2 = QueryEvaluator::relParameters.find(dummyRel2)->second.at(0);
-				QueryEvaluator::relParameters.find(dummyRel2)->second.at(0) = tk1;
+				set<int> tk1Set = retrieveTokenEvaluatedAnswers(tk1);
+				set<int> tk2Set = retrieveTokenEvaluatedAnswers(tk2);
 
-				//intersect
-				removePairs(dummyPairs2, tk1, dummyRel2);
-				removePairs(dummyPairs1, tk2, dummyRel1);
+				set<int> intersect;
+				set_intersection(tk1Set.begin(), tk1Set.end(), tk2Set.begin(), tk2Set.end(), std::inserter(intersect, intersect.begin()));
 
-				QueryEvaluator::relParameters.find(dummyRel1)->second.at(0) = store1;
-				QueryEvaluator::relParameters.find(dummyRel2)->second.at(0) = store2;
+				vector<Pair> withAns;
+				for(set<int>::iterator it = intersect.begin(); it!=intersect.end(); it++){
+					withAns.push_back(Pair (*it, 0));
+				}
+
+				removePairs(withAns, tk1, 1);
+				removePairs(withAns, tk2, 1);
 			}
 
 			//else if they are different type
@@ -750,7 +364,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 					vector<Pair> ans3stringProc;
 					set<string> ans3string;
 
-					//std::set_intersection(ans1string.begin(), ans1string.end(), ans2string.begin(), ans2string.end(),ans3string.begin());
+					set_intersection(ans1string.begin(), ans1string.end(), ans2string.begin(), ans2string.end(), inserter(ans3string,ans3string.begin()));
 
 					for(set<string>::iterator it = ans3string.begin(); it!=ans3string.end(); it++){
 						ans3stringVar.push_back(Pair (v->getVarIndex(*it), v->getVarIndex(*it)));
@@ -758,44 +372,98 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 					}
 
 					if(i1->second==TypeTable::VARIABLE){
-						removePairs(ans3stringVar, tk1);
-						removePairs(ans3stringProc, tk2);
+						removePairs(ans3stringVar, tk1,1);
+						removePairs(ans3stringProc, tk2,1);
 					}
 					else{
-						removePairs(ans3stringProc, tk1);
-						removePairs(ans3stringVar, tk2);
+						removePairs(ans3stringProc, tk1,1);
+						removePairs(ans3stringVar, tk2,1);
 					}
 				}
 				else{
-					//std::set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), ans3.begin());
+					std::set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), inserter(ans3, ans3.begin()));
 					vector<Pair> finalAns;
 
 					for(set<int>::iterator it = ans3.begin(); it!=ans3.end(); it++){
-						finalAns.push_back(Pair(*it, *it, tk1, tk2));
+						finalAns.push_back(Pair(*it, *it));
 					}
 
-					removePairs(finalAns, tk1);
-					removePairs(finalAns, tk2);
+					removePairs(finalAns, tk1, 1);
+					removePairs(finalAns, tk2, 1);
 				}
 			}
 		}
 
+		else {
+			vector<Pair> withAns;
+			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT)){
+				vector<int> allConst = c->getAllConst();
+				vector<int> stmtRange = t->getStmtRange();
+
+				for(vector<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
+					if(*it>=stmtRange.at(0) && *it<=stmtRange.at(1)){
+						withAns.push_back(Pair(*it, *it));
+					}
+				}		
+			}
+
+			else if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
+				vector<int> allConst = c->getAllConst();
+				vector<int> progRange = t->getProgLineRange();
+				
+				for(vector<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
+					if(*it>=progRange.at(0) && *it<=progRange.at(1)){
+						withAns.push_back(Pair(*it, *it));
+					}
+				}		
+			}
+			else if((i1->second==TypeTable::STMT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::STMT)){
+				vector<int> stmtRange = t->getStmtRange();
+				vector<int> progRange = t->getProgLineRange();
+				int higher;
+				if(stmtRange.at(1)< progRange.at(1)){
+					higher = stmtRange.at(1);
+				}
+				else{
+					higher = progRange.at(1);
+				}
+
+				for(int i=1; i<=higher; i++){
+					withAns.push_back(Pair (i, i));
+				}
+			}
+
+			if(isExistInLinkages(tk1)){
+				removePairs(withAns, tk1, 1);
+			} else if(isExistInLinkages(tk2)){
+				removePairs(withAns, tk2, 2);
+			}else {
+
+			}
+
+			if(withAns.empty()){
+				withAns.push_back(Pair (-2, -2));
+				relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
+			}
+		}
+
+		/*
 		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push QueryEvaluator::relAns true
 		else if(isExistInLinkages(tk1)){
 			set<int> ans = retrieveTokenEvaluatedAnswers(tk1);
 			vector<Pair> finalAns;
 			if(i1->second==TypeTable::PROCEDURE){
 				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(v->getVarName(*it)!="-1"){
-						finalAns.push_back(Pair (*it, 1, tk1, tk2));
+					if(v->getVarIndex(p->getProcName(*it))!=-1){
+						finalAns.push_back(Pair (*it, v->getVarIndex(p->getProcName(*it))));
 					}
 				}
 			}
 
 			else if(i1->second == TypeTable::VARIABLE){
 				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(p->getProcName(*it)!="-1"){
-						finalAns.push_back(Pair (*it, 1, tk1, tk2));
+					if(p->getProcIndex(v->getVarName(*it))!=-1){
+						finalAns.push_back(Pair (*it, p->getProcIndex(v->getVarName(*it))));
 					}
 				}
 			}
@@ -819,6 +487,8 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 				removePairs(finalAns, tk1);
 			}
+
+			removePairs(finalAns, tk1, 1);
 		}
 
 		else if(isExistInLinkages(tk2)){
@@ -855,19 +525,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				}
 				else{//PROGLINE
 					//request for progline range
-				}
+				} 
 
 				removePairs(finalAns, tk2);
 			}
-		}
-
-		//else (both does not exist) evaluate true or false
-		else {
-			if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
-
-			}
-		}
-
+		}*/
+		
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
@@ -887,16 +550,42 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			}
 
 			//push in a dummy value for removal purposes
-			withAns.push_back(Pair (1, index, tk1, tk2));
-			removePairs(withAns, tk1);
+			withAns.push_back(Pair (index, index));
+			removePairs(withAns, tk1, 2);
 		}
 
 		//else evaluate true or false
 		else {
-			withAns.push_back(Pair (1, 1, "true", "true"));
+			if((i1->second == TypeTable::VARIABLE && v->getVarIndex(tk2)!=-1) || (i1->second == TypeTable::PROCEDURE && p->getProcIndex(tk2)!=-1)
+				|| (i1->second == TypeTable::CONSTANT && c->getConstIndex(tk2)!=-1)){
+				withAns.push_back(Pair (-1, -1));
+			}
+
+			else if(i1->second == TypeTable::STMT){
+				vector<int> indexes = t->getStmtRange();
+				if(atoi(tk2.c_str())>=indexes.at(0) || atoi(tk2.c_str())<=indexes.at(1)){
+					withAns.push_back(Pair (-1, -1));
+				}else {
+					withAns.push_back(Pair (-2, -2));
+				}
+			}
+
+			else if(i1->second == TypeTable::PROGLINE){
+				vector<int> indexes = t->getProgLineRange();
+				if(atoi(tk2.c_str())>=indexes.at(0) || atoi(tk2.c_str())<=indexes.at(1)){
+					withAns.push_back(Pair (-1, -1));
+				}else {
+					withAns.push_back(Pair (-2, -2));
+				}
+			}
+
+			else{
+				withAns.push_back(Pair (-2, -2));
+			}
+			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 		}
 	}
-	*/
+	
 }
 
 void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -1424,40 +1113,6 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 	}
 }
 
-/*
-bool QueryEvaluator::evaluateFollowsStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Follows *f = pkb->getFollows();
-	int stmtnum=0;
-	vector<int> temp;
-
-	bool flag = false;
-
-	if(isdigit(tk1[0]) && isdigit(tk2[0])){
-		stmtnum = atoi(tk1.c_str());
-		while(stmtnum!=-1){
-			cout<<"STMTNUM is "<<stmtnum<<endl;
-			stmtnum = f->getFollows(TypeTable::STMT, stmtnum);
-			if(stmtnum==atoi(tk2.c_str()))
-				flag = true;
-			if(stmtnum>atoi(tk2.c_str()))
-				break;
-		}
-	}
-	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || isdigit(tk2[0])){
-		temp = evaluateFollowsStar(r, m, tk1);
-	}
-	else{
-		temp = evaluateFollowsStar(r, m, tk2);
-	}
-
-	if(!temp.empty())
-		flag = true;
-
-	return flag;
-}*/
-
 void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -1482,8 +1137,6 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			}
 		}
 	}
-
-
 	//Parent(a,3)
 	else if(isalpha(tk1[0])){
 		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
@@ -1502,8 +1155,10 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	//Parent(1,5)
 	else{
 		 if(p->isParent(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			 cout<<"istrue"<<endl;
 			 parentAns.push_back(Pair (-1,-1));
 		 }else{
+			 cout<<"isfalse"<<atoi(tk1.c_str())<<atoi(tk2.c_str())<<endl;
 			 parentAns.push_back(Pair (-2,-2));
 		 }
 	}
@@ -1588,45 +1243,6 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 
 	return vectorAnswer;
 }
-
-/*
-bool QueryEvaluator::evaluateParentStarBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Parent *p = pkb->getParent();
-	int stmtnum=0;
-	vector<int> temp;
-
-	bool flag = false;
-
-	//Parent*(1,8)
-	if(isdigit(tk1[0]) && isdigit(tk2[0])){
-		stmtnum = atoi(tk2.c_str());
-		while(stmtnum!=-1){
-			cout<<"STMTNUM IS "<<stmtnum<<endl;
-			stmtnum = p->getParent(stmtnum);
-			if(stmtnum==atoi(tk1.c_str()))
-				flag = true;
-			if(stmtnum<atoi(tk1.c_str()))
-				break;
-		}
-	}
-
-	//Parent*(w, a) Parent*(w, 3)
-	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || isdigit(tk2[0])){
-		temp = evaluateParentStar(r, m, tk1);
-	}
-
-	//Parent*(3, a)
-	else{
-		temp = evaluateFollowsStar(r, m, tk2);
-	}
-
-	if(!temp.empty())
-		flag = true;
-
-	return flag;
-}*/
 
 void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
@@ -1729,8 +1345,12 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 	//Modifies(1, "x")
 	else {
+		cout<<"supposed"<<endl;
 		string varName = tk2.substr(1,tk2.length()-2);
+		cout<<atoi(tk1.c_str())<<varName<<endl;
+		mod->setModifies(1, "y");
 		if(mod->isModifies(atoi(tk1.c_str()), varName)){
+			cout<<"supposed2"<<endl;
 			 modAns.push_back(Pair (-1,-1));
 		 }else{
 			 modAns.push_back(Pair (-2,-2));
@@ -1772,46 +1392,6 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	}
 }
-
-/*
-bool QueryEvaluator::evaluateModifiesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Modifies *mod = pkb->getModifies();
-	TypeTable *t = pkb->getTypeTable();
-
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-
-	//Modifies(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		vector<int>ans = mod->getModifies(i1->second);
-		if(!ans.empty()){
-			return true;
-		}
-	}
-
-	//Modifies(a, "x")
-	else if(isalpha(tk1[0])){
-		vector<int> ans = mod->getModifies(i1->second, tk2.substr(1,tk2.length()-2));
-		if(!ans.empty())
-			return true;
-	}
-
-	//Modifies(1, v)
-	else if(isdigit(tk1[0]) && isalpha(tk2[0])){
-		vector<int> ans = mod->getModifies(atoi(tk1.c_str()));
-		if(!ans.empty())
-			return true;
-	}
-
-	//Modifies(1, "x")
-	else{
-		return mod->isModifies(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
-	}
-
-	return false;
-}*/
 
 void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
@@ -1913,39 +1493,6 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, usesAns));
 }
-
-/*
-bool QueryEvaluator::evaluateUsesBoolean(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m){
-	string tk1=r.getToken1();
-	string tk2=r.getToken2();
-	Uses *use = pkb->getUses();
-	TypeTable *t = pkb->getTypeTable();
-
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-
-	//Uses(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		vector<int>ans = use->getUses(i1->second);
-		if(!ans.empty()){
-			return true;
-		}
-	}
-
-	//Uses(a, "x")
-	else if(isalpha(tk1[0])){
-		vector<int> ans = use->getUses(i1->second, tk2.substr(1,tk2.length()-2));
-		if(!ans.empty())
-			return true;
-	}
-
-	//Uses(1, "x")
-	else{
-		return use->isUses(atoi(tk1.c_str()), tk2.substr(1, tk2.length()-2));
-	}
-
-	return false;
-}*/
 
 vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::string rightHandSide) {
 	vector<int> answers;

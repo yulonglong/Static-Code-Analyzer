@@ -28,8 +28,9 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	m.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
 	m.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::STMT));
 
-	Follows *f = Follows::getInstance();
+	
 	TypeTable *t = TypeTable::getInstance();
+	Follows *f = Follows::getInstance(t);
 
 	//setting follows(1,2)
 	f->setFollows(1, 2);
@@ -60,12 +61,37 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	qe.relParameters.insert(make_pair<int, vector<string>>(1, tokens));
 
 	//Follows(_,a)
-	r = Relationship("Follows", "c", "_");
+	r = Relationship("Follows", "_", "c");
 	
 	qe.evaluateFollows(r, m, 2);
 	ans = qe.relAns.find(2)->second;
 
 	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
+
+
+	//Modifies(1 , "y")
+	Calls* call = pkb->getCalls();
+	call->setCalls("first", "second", 4);
+	r = Relationship("Calls", "\"first\"", "\"second\"");
+
+	qe.evaluateCalls(r,3);
+	ans = qe.relAns.find(3)->second;
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans2);
+
+	/*
+	//Parent(1,2) r3
+	Parent *p = Parent::getInstance(t);
+	p->setParent(1, 2);
+	r = Relationship("Parent", "1", "2");
+	tokens.clear();
+	tokens.push_back("1");
+	tokens.push_back("2");
+	qe.relParameters.insert(make_pair<int, vector<string>>(3, tokens));
+
+	qe.evaluateParent(r, m, 3);
+	ans = qe.relAns.find(3)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
 	//evaluate
 	/*
 	qe.evaluateFollows(r,m,0);
