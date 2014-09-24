@@ -12,8 +12,7 @@ Calls::~Calls(){
 }
 
 Calls* Calls::getInstance(ProcTable* pt) {
-	if(!instanceFlag)
-    {
+	if(!instanceFlag){
         calls = new Calls(pt);
         instanceFlag = true;
         return calls;

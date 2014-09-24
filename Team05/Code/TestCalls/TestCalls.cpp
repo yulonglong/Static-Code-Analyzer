@@ -11,13 +11,12 @@ ProcTable* procTable;
 
 void CallsTest::setUp() {
 	pkb = PKB::getInstance();
-	calls = pkb->getCalls();
-	procTable = pkb->getProcTable();
+	procTable = ProcTable::getInstance();
+	calls = Calls::getInstance(procTable);
 }
 
 void CallsTest::tearDown() {
 	pkb->~PKB();
-	pkb = new PKB();
 	procTable = ProcTable::getInstance();
 	calls = Calls::getInstance(procTable);
 }
