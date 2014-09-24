@@ -591,6 +591,125 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
+	Next* n = pkb->getNext();
+	TypeTable *t = pkb->getTypeTable();
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	vector<Pair> nextAns;
+
+	//if token 1 and token 2 is alpha
+	//Next(s, a)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
+		//If s and a exists, retrieve s and a answers, then isNext
+		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+			set<int> firstSet = retrieveTokenEvaluatedAnswers(tk1);
+			set<int> secondSet = retrieveTokenEvaluatedAnswers(tk2);
+
+			for(set<int>::iterator it = firstSet.begin(); it!=firstSet.end(); it++){
+				for(set<int>::iterator it2 = secondSet.begin(); it2!=secondSet.end(); it2++){
+					if(n->isNext(*it, *it2)){ 
+						nextAns.push_back(Pair (*it, *it2));
+					}
+				}
+			}
+
+			removePairs(nextAns, tk1, 1);
+			removePairs(nextAns, tk2, 2);
+		}
+
+		//If s exists, retrieve s then getNext check type
+		if(isExistInLinkages(tk1)){
+			set<int> firstSet = retrieveTokenEvaluatedAnswers(tk1);
+			vector<int> tk2Ans;
+
+			for(set<int>::iterator it = firstSet.begin(); it!=firstSet.end(); it++){
+				tk2Ans = n->getNext(*it);
+				for(vector<int>::iterator it1 = tk2Ans.begin(); it1!=tk2Ans.end(); it1++){
+					if(t->getType(*it1)==i2->second){
+						nextAns.push_back(Pair (*it, *it1));
+					}
+				}
+			}
+
+			removePairs(nextAns, tk1, 1);
+		}
+
+		//If a exists, retrieve a, get previous check type
+		if(isExistInLinkages(tk2)){
+			set<int> secondSet = retrieveTokenEvaluatedAnswers(tk2);
+			int tk1Ans;
+
+			for(set<int>::iterator it = secondSet.begin(); it!=secondSet.end(); it++){
+				tk1Ans = n->getPrevious(*it);
+				if(t->getType(tk1Ans) == i1->second){
+					nextAns.push_back(Pair (tk1Ans, *it));
+				}
+			}
+
+			removePairs(nextAns, tk2, 2);
+		}
+
+		//If both doesn't exist, then getNext(type, type)
+		else {
+			vector<int> allTk1 = t->getAllStmts(i2->second);
+			int tk1Ans;
+			for(vector<int>::iterator it= allTk1.begin(); it!=allTk1.end(); it++){
+				tk1Ans = n->getPrevious(*it);
+				if(t->getType(tk1Ans)==i1->second){
+					nextAns.push_back(Pair (tk1Ans, *it));
+				}
+			}
+		}
+
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//Next(n, 4)
+	else if(isalpha(tk1[0])){
+		int tk2Int = atoi(tk2.c_str());
+
+		if(t->getType(n->getPrevious(tk2Int))==i1->second){
+			nextAns.push_back(Pair (n->getPrevious(tk2Int), tk2Int));
+		}
+		
+		if(isExistInLinkages(tk1)){
+			removePairsFromRelAns(&nextAns, tk1, 1);
+			removePairs(nextAns, tk1, 1);
+		}
+
+		insertLinks(tk1, relIndex);
+	}
+
+	//Next(3, n)
+	else if(isalpha(tk2[0])){
+		int tk1Int = atoi(tk1.c_str());
+		vector<int> tk1Vec = n->getNext(tk1Int);
+
+		for(vector<int>::iterator it = tk1Vec.begin(); it!=tk1Vec.end(); it++){
+			if(t->getType(*it)==i2->second){
+				nextAns.push_back(Pair (tk1Int, *it));
+			}
+		}
+
+		if(isExistInLinkages(tk2)){
+			removePairsFromRelAns(&nextAns, tk2, 2);
+			removePairs(nextAns, tk2, 2);
+		}
+
+		insertLinks(tk2, relIndex);
+	}
+
+	//Next(3,4)
+	else {
+		if(n->isNext(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			nextAns.push_back(Pair (-1,-1));
+		}else{
+			nextAns.push_back(Pair (-2, -2));
+		}
+	}
 
 }
 
@@ -1085,7 +1204,7 @@ void QueryEvaluator::insertLinks(string tk, int relIndex){
 	else {
 		vector<int> relIndexes;
 		relIndexes.push_back(relIndex);
-
+		//minghongisgod
 		QueryEvaluator::linkages.insert(make_pair(tk, relIndexes));
 	}
 }
