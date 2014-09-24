@@ -89,60 +89,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Uses Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> class to store the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship.  
+ <a href="class_uses.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_uses_8h_source.html">Uses.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2d99c029adbd8cfc2703d1bd09ffb783"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d99c029adbd8cfc2703d1bd09ffb783"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Uses</b> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *)</td></tr>
-<tr class="separator:a2d99c029adbd8cfc2703d1bd09ffb783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a682b85c47c7c880ad300b514efd0eada"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a682b85c47c7c880ad300b514efd0eada"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a682b85c47c7c880ad300b514efd0eada">Uses</a> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:a682b85c47c7c880ad300b514efd0eada"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> class. <br /></td></tr>
+<tr class="separator:a682b85c47c7c880ad300b514efd0eada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f2b9e28f10201b5a487f2cb6a5ccb3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15f2b9e28f10201b5a487f2cb6a5ccb3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a15f2b9e28f10201b5a487f2cb6a5ccb3">~Uses</a> ()</td></tr>
+<tr class="memdesc:a15f2b9e28f10201b5a487f2cb6a5ccb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:a15f2b9e28f10201b5a487f2cb6a5ccb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac026d05ff261ec37a0404438d4e98266"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac026d05ff261ec37a0404438d4e98266"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setUses</b> (STMTNUM, VARNAME)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ac026d05ff261ec37a0404438d4e98266">setUses</a> (STMTNUM, VARNAME)</td></tr>
+<tr class="memdesc:ac026d05ff261ec37a0404438d4e98266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a statement number and a variable name to be true. <br /></td></tr>
 <tr class="separator:ac026d05ff261ec37a0404438d4e98266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af83b643e81bd747ed937084d7a884fc2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af83b643e81bd747ed937084d7a884fc2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUses</b> (STMTNUM, VARNAME)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#af83b643e81bd747ed937084d7a884fc2">isUses</a> (STMTNUM, VARNAME)</td></tr>
+<tr class="memdesc:af83b643e81bd747ed937084d7a884fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a statement number and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:af83b643e81bd747ed937084d7a884fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95bc0c9b4c215799153040af0396773c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95bc0c9b4c215799153040af0396773c"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUses</b> (TYPE, VARNAME)</td></tr>
-<tr class="separator:a95bc0c9b4c215799153040af0396773c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18b42c3d16f67264c62e9debe50a883"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac18b42c3d16f67264c62e9debe50a883"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ac18b42c3d16f67264c62e9debe50a883">getUses</a> (SYNTYPE)</td></tr>
+<tr class="memdesc:ac18b42c3d16f67264c62e9debe50a883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses any variable. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="separator:ac18b42c3d16f67264c62e9debe50a883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec200590ef5775bbfaa61573c61d5ac1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec200590ef5775bbfaa61573c61d5ac1"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUses</b> (STMTNUM)</td></tr>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aec200590ef5775bbfaa61573c61d5ac1">getUses</a> (STMTNUM)</td></tr>
+<tr class="memdesc:aec200590ef5775bbfaa61573c61d5ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is used in the given statement number. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:aec200590ef5775bbfaa61573c61d5ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c9b61cf4f89ec43e664a66562be4ba5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c9b61cf4f89ec43e664a66562be4ba5"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUses</b> (TYPE)</td></tr>
-<tr class="separator:a3c9b61cf4f89ec43e664a66562be4ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab805ef6c3017367ede89cf906ca34d74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab805ef6c3017367ede89cf906ca34d74"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setUsesProc</b> (PROCINDEX, vector&lt; VARINDEX &gt;)</td></tr>
-<tr class="separator:ab805ef6c3017367ede89cf906ca34d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3027e9b89a93cf137c07bb8d0eb4053"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053">getUses</a> (SYNTYPE, VARNAME)</td></tr>
+<tr class="memdesc:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses the given variable name. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="separator:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e59a0076a7e554e60b3f2281f081e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12e59a0076a7e554e60b3f2281f081e3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setUses</b> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a12e59a0076a7e554e60b3f2281f081e3">setUses</a> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
+<tr class="memdesc:a12e59a0076a7e554e60b3f2281f081e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates. <br /></td></tr>
 <tr class="separator:a12e59a0076a7e554e60b3f2281f081e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab805ef6c3017367ede89cf906ca34d74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab805ef6c3017367ede89cf906ca34d74"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab805ef6c3017367ede89cf906ca34d74">setUsesProc</a> (PROCINDEX, vector&lt; VARINDEX &gt;)</td></tr>
+<tr class="memdesc:ab805ef6c3017367ede89cf906ca34d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates. <br /></td></tr>
+<tr class="separator:ab805ef6c3017367ede89cf906ca34d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3bf683de7cf369545a3389270121919"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3bf683de7cf369545a3389270121919"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsesProc</b> (PROCINDEX)</td></tr>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ad3bf683de7cf369545a3389270121919">getUsesProc</a> (PROCINDEX)</td></tr>
+<tr class="memdesc:ad3bf683de7cf369545a3389270121919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is used by the given procedure index. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:ad3bf683de7cf369545a3389270121919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca0177c15e5312af5bca552aeea785d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca0177c15e5312af5bca552aeea785d6"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsesProcVar</b> (VARNAME)</td></tr>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aca0177c15e5312af5bca552aeea785d6">getUsesProcVar</a> (VARNAME)</td></tr>
+<tr class="memdesc:aca0177c15e5312af5bca552aeea785d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index uses the given variable. If no such procedure index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:aca0177c15e5312af5bca552aeea785d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8807e004e8a0bf36e25376b609c8ab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8807e004e8a0bf36e25376b609c8ab9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUsesProc</b> (PROCNAME, VARNAME)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#af8807e004e8a0bf36e25376b609c8ab9">isUsesProc</a> (PROCNAME, VARNAME)</td></tr>
+<tr class="memdesc:af8807e004e8a0bf36e25376b609c8ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a procedure name and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:af8807e004e8a0bf36e25376b609c8ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a66f6987bcc36e1fcce856c0eb29a0e90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66f6987bcc36e1fcce856c0eb29a0e90"></a>
-static <a class="el" href="class_uses.html">Uses</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
-<tr class="separator:a66f6987bcc36e1fcce856c0eb29a0e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a061daf5fc5211d22fb97e54ce22e1aca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a061daf5fc5211d22fb97e54ce22e1aca"></a>
-static <a class="el" href="class_uses.html">Uses</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *)</td></tr>
-<tr class="separator:a061daf5fc5211d22fb97e54ce22e1aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914848b7b4e91469fc0667e057fc51cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a914848b7b4e91469fc0667e057fc51cd"></a>
+static <a class="el" href="class_uses.html">Uses</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a914848b7b4e91469fc0667e057fc51cd">getInstance</a> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:a914848b7b4e91469fc0667e057fc51cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> singleton class. <br /></td></tr>
+<tr class="separator:a914848b7b4e91469fc0667e057fc51cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> class to store the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship. </p>
+<p>Overview: <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> is responsible to :</p><ul>
+<li>Store all the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between statement number and variable index</li>
+<li>Store all the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between procedure index and variable index</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_uses.html">Uses</a>* <a class="code" href="class_uses.html#a914848b7b4e91469fc0667e057fc51cd">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*, <a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_uses_8h_source.html">Uses.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Uses.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:58 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

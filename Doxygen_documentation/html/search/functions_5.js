@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['setchild',['setChild',['../class_node.html#a688312102a11ecd53bc9b37806c3cfaa',1,'Node']]],
-  ['setdata',['setData',['../class_node.html#a11390082535d132bf9f6ee8985a6137e',1,'Node']]],
-  ['setmultichild',['setMultiChild',['../class_c_f_g_node.html#a2e9b29dfff90f1a08e5e2b127b7102f9',1,'CFGNode']]],
-  ['setmultiparent',['setMultiParent',['../class_c_f_g_node.html#ad30a0dd6f14549aec1663dc92dad1468',1,'CFGNode']]],
-  ['setparent',['setParent',['../class_node.html#a7e23fcd1d980e25960c4cc049ad80258',1,'Node']]],
-  ['setprogline',['setProgLine',['../class_node.html#a164dfedff987c20d61d03add14839452',1,'Node']]],
-  ['settype',['setType',['../class_node.html#ab4529af4b75705483ec462e76673e068',1,'Node']]],
-  ['stringpreorderexpressiongraph',['stringPreOrderExpressionGraph',['../class_node.html#a2ca524a6b93912ac839d89326cddceb9',1,'Node']]],
-  ['stringpreorderexpressiontree',['stringPreOrderExpressionTree',['../class_node.html#ab78498a4c2f481c5e6238131d5424d17',1,'Node']]]
+  ['next',['Next',['../class_next.html#ac958afedf15ce12d597c034ba0e0f0e2',1,'Next']]],
+  ['node',['Node',['../class_node.html#ad7a34779cad45d997bfd6d3d8043c75f',1,'Node::Node()'],['../class_node.html#a2bc6324fd7133beb0b70951fee5c3eb0',1,'Node::Node(std::string newData, std::string newType)'],['../class_node.html#ad4eddb6c4d8ede7a8b72dd10bd59483e',1,'Node::Node(std::string newData, std::string newType, int newProgLine)'],['../class_node.html#ac802f13d7c5b418357db32a6febdcfc9',1,'Node::Node(std::string newType, int newProgLine)'],['../class_node.html#a1c9830a012d8d3cc696711fb9db9c0f7',1,'Node::Node(Node *newLeft, Node *newRight, std::string newData, std::string newType)'],['../class_node.html#ab75d26e451d19b4a8775a81da70053e4',1,'Node::Node(Node *newLeft, Node *newRight, std::string newData, std::string newType, int newProgLine)']]]
 ];

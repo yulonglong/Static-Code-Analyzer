@@ -89,33 +89,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Next Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> class to store the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship.  
+ <a href="class_next.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_next_8h_source.html">Next.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac958afedf15ce12d597c034ba0e0f0e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac958afedf15ce12d597c034ba0e0f0e2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Next</b> (<a class="el" href="class_type_table.html">TypeTable</a> *)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_next.html#ac958afedf15ce12d597c034ba0e0f0e2">Next</a> (<a class="el" href="class_type_table.html">TypeTable</a> *)</td></tr>
+<tr class="memdesc:ac958afedf15ce12d597c034ba0e0f0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> class. <br /></td></tr>
 <tr class="separator:ac958afedf15ce12d597c034ba0e0f0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8e421418f7231e6812ba10c0c81373"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a8e421418f7231e6812ba10c0c81373"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_next.html#a8a8e421418f7231e6812ba10c0c81373">~Next</a> ()</td></tr>
+<tr class="memdesc:a8a8e421418f7231e6812ba10c0c81373"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:a8a8e421418f7231e6812ba10c0c81373"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7876883d81bced6fd0b87a4a439c2c56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7876883d81bced6fd0b87a4a439c2c56"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setNext</b> (STMTNUM, STMTNUM)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_next.html#a7876883d81bced6fd0b87a4a439c2c56">setNext</a> (STMTNUM, STMTNUM)</td></tr>
+<tr class="memdesc:a7876883d81bced6fd0b87a4a439c2c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_follows.html" title="A Follows class to store the Follows relationship. ">Follows</a> relationship between the two statement numbers to be true. <br /></td></tr>
 <tr class="separator:a7876883d81bced6fd0b87a4a439c2c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac57094834a97edaca13cc6de8688a855"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac57094834a97edaca13cc6de8688a855"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getNext</b> (STMTNUM)</td></tr>
+<tr class="separator:ac57094834a97edaca13cc6de8688a855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd393f14705ec9a1eff0bdae395d361"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbd393f14705ec9a1eff0bdae395d361"></a>
+STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getPrevious</b> (STMTNUM)</td></tr>
+<tr class="separator:acbd393f14705ec9a1eff0bdae395d361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a447461ec7092d7c5a468a1774a960561"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a447461ec7092d7c5a468a1774a960561"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNext</b> (STMTNUM, STMTNUM)</td></tr>
+<tr class="separator:a447461ec7092d7c5a468a1774a960561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a65880bb050bbeebe06d4143e0c236c8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65880bb050bbeebe06d4143e0c236c8f"></a>
-static <a class="el" href="class_next.html">Next</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
-<tr class="separator:a65880bb050bbeebe06d4143e0c236c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87d8d2cd9f1879f18fbb04a7a31edbb9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87d8d2cd9f1879f18fbb04a7a31edbb9"></a>
-static <a class="el" href="class_next.html">Next</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> (<a class="el" href="class_type_table.html">TypeTable</a> *)</td></tr>
+static <a class="el" href="class_next.html">Next</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_next.html#a87d8d2cd9f1879f18fbb04a7a31edbb9">getInstance</a> (<a class="el" href="class_type_table.html">TypeTable</a> *)</td></tr>
+<tr class="memdesc:a87d8d2cd9f1879f18fbb04a7a31edbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> singleton class. <br /></td></tr>
 <tr class="separator:a87d8d2cd9f1879f18fbb04a7a31edbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> class to store the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship. </p>
+<p>Overview: <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> is responsible to :</p><ul>
+<li>Store all the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship between statement numbers</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_next.html">Next</a>* <a class="code" href="class_next.html#a87d8d2cd9f1879f18fbb04a7a31edbb9">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*);</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_next_8h_source.html">Next.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Next.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

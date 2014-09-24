@@ -89,17 +89,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ProcTable Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> class to store the procedure names from the source code.  
+ <a href="class_proc_table.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_proc_table_8h_source.html">ProcTable.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae07b7db8f9e3840deac754c2046ff7d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae07b7db8f9e3840deac754c2046ff7d9"></a>
-PROCINDEX&#160;</td><td class="memItemRight" valign="bottom"><b>insertProc</b> (PROCNAME)</td></tr>
-<tr class="separator:ae07b7db8f9e3840deac754c2046ff7d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd8028f870c3de3abc12bd64c7d358ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd8028f870c3de3abc12bd64c7d358ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#afd8028f870c3de3abc12bd64c7d358ce">ProcTable</a> ()</td></tr>
+<tr class="memdesc:afd8028f870c3de3abc12bd64c7d358ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> class. <br /></td></tr>
+<tr class="separator:afd8028f870c3de3abc12bd64c7d358ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3cc42df8caf3bd1393f99962b0879f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f3cc42df8caf3bd1393f99962b0879f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#a3f3cc42df8caf3bd1393f99962b0879f">~ProcTable</a> ()</td></tr>
+<tr class="memdesc:a3f3cc42df8caf3bd1393f99962b0879f"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:a3f3cc42df8caf3bd1393f99962b0879f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff64f691f2e41b8a4f46178d5401cf1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ff64f691f2e41b8a4f46178d5401cf1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#a9ff64f691f2e41b8a4f46178d5401cf1">insertProc</a> (PROCNAME)</td></tr>
+<tr class="memdesc:a9ff64f691f2e41b8a4f46178d5401cf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a procedure name to the constant table. <br /></td></tr>
+<tr class="separator:a9ff64f691f2e41b8a4f46178d5401cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d8b083a577c6515b4e96dc4c0f4bb5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37d8b083a577c6515b4e96dc4c0f4bb5"></a>
-PROCNAME&#160;</td><td class="memItemRight" valign="bottom"><b>getProcName</b> (PROCINDEX)</td></tr>
+PROCNAME&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#a37d8b083a577c6515b4e96dc4c0f4bb5">getProcName</a> (PROCINDEX)</td></tr>
+<tr class="memdesc:a37d8b083a577c6515b4e96dc4c0f4bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the procedure name given the procedure index. If it is not found, return an empty string. <br /></td></tr>
 <tr class="separator:a37d8b083a577c6515b4e96dc4c0f4bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add215c6c93f618751c06cae41818142f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add215c6c93f618751c06cae41818142f"></a>
-PROCINDEX&#160;</td><td class="memItemRight" valign="bottom"><b>getProcIndex</b> (PROCNAME)</td></tr>
+PROCINDEX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#add215c6c93f618751c06cae41818142f">getProcIndex</a> (PROCNAME)</td></tr>
+<tr class="memdesc:add215c6c93f618751c06cae41818142f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the procedure index given the procedure name. If it is not found, return an -1. <br /></td></tr>
 <tr class="separator:add215c6c93f618751c06cae41818142f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa61d70daa0017d78b476bd6a255df39b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa61d70daa0017d78b476bd6a255df39b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumProcedures</b> ()</td></tr>
@@ -111,17 +127,26 @@ vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4aaccd365f8a415d847e54c47adfe878"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aaccd365f8a415d847e54c47adfe878"></a>
-static <a class="el" href="class_proc_table.html">ProcTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+static <a class="el" href="class_proc_table.html">ProcTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_proc_table.html#a4aaccd365f8a415d847e54c47adfe878">getInstance</a> ()</td></tr>
+<tr class="memdesc:a4aaccd365f8a415d847e54c47adfe878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> singleton class. <br /></td></tr>
 <tr class="separator:a4aaccd365f8a415d847e54c47adfe878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> class to store the procedure names from the source code. </p>
+<p>Overview: <a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> is responsible to :</p><ul>
+<li>Store all the procedure names from the source code</li>
+<li>Assign each procedure name an unique procedure index</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_proc_table.html" title="A ProcTable class to store the procedure names from the source code. ">ProcTable</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_proc_table.html">ProcTable</a>* <a class="code" href="class_proc_table.html#a4aaccd365f8a415d847e54c47adfe878">getInstance</a>();</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_proc_table_8h_source.html">ProcTable.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/ProcTable.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

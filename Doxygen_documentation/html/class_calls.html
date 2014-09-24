@@ -89,52 +89,73 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Calls Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> class to store the calls relationship.  
+ <a href="class_calls.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_calls_8h_source.html">Calls.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d9250ac093b82c6483ea50d98094bd9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d9250ac093b82c6483ea50d98094bd9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Calls</b> (<a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a4d9250ac093b82c6483ea50d98094bd9">Calls</a> (<a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:a4d9250ac093b82c6483ea50d98094bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> class. <br /></td></tr>
 <tr class="separator:a4d9250ac093b82c6483ea50d98094bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75bb5118d2cc374288afb07a3e3b7ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad75bb5118d2cc374288afb07a3e3b7ab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#ad75bb5118d2cc374288afb07a3e3b7ab">~Calls</a> ()</td></tr>
+<tr class="memdesc:ad75bb5118d2cc374288afb07a3e3b7ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:ad75bb5118d2cc374288afb07a3e3b7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7b6f64cc0b9dc117f324262419bc3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d7b6f64cc0b9dc117f324262419bc3a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a4d7b6f64cc0b9dc117f324262419bc3a">setCalls</a> (PROCNAME, PROCNAME, STMTNUM)</td></tr>
+<tr class="memdesc:a4d7b6f64cc0b9dc117f324262419bc3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> relationship between the two procedure names to be true at the specified statement number. <br /></td></tr>
+<tr class="separator:a4d7b6f64cc0b9dc117f324262419bc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904359ceb46c397a48df73067b8a39a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a904359ceb46c397a48df73067b8a39a7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a904359ceb46c397a48df73067b8a39a7">isCalls</a> (PROCNAME, PROCNAME)</td></tr>
+<tr class="memdesc:a904359ceb46c397a48df73067b8a39a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> relationship between the two procedure names is true, return true. Otherwise, return false. <br /></td></tr>
+<tr class="separator:a904359ceb46c397a48df73067b8a39a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1215073f53147210d290136e36e580f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1215073f53147210d290136e36e580f4"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a1215073f53147210d290136e36e580f4">getCalls</a> ()</td></tr>
+<tr class="memdesc:a1215073f53147210d290136e36e580f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had called another procedure. Return a vector of -1 if not found. <br /></td></tr>
+<tr class="separator:a1215073f53147210d290136e36e580f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614ceaa2036b5c040fa3263a807a0344"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a614ceaa2036b5c040fa3263a807a0344"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a614ceaa2036b5c040fa3263a807a0344">getCalls</a> (PROCNAME)</td></tr>
+<tr class="memdesc:a614ceaa2036b5c040fa3263a807a0344"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had called the given procedure name. Return a vector of -1 if not found. <br /></td></tr>
+<tr class="separator:a614ceaa2036b5c040fa3263a807a0344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac681d5abd94842d78146069edc100407"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac681d5abd94842d78146069edc100407"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#ac681d5abd94842d78146069edc100407">getCalled</a> ()</td></tr>
+<tr class="memdesc:ac681d5abd94842d78146069edc100407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had been called by another procedure. Return a vector of -1 if not found. <br /></td></tr>
+<tr class="separator:ac681d5abd94842d78146069edc100407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a8504c717a870494dfe3cd738705ce8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a8504c717a870494dfe3cd738705ce8"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a3a8504c717a870494dfe3cd738705ce8">getCalled</a> (PROCNAME)</td></tr>
+<tr class="memdesc:a3a8504c717a870494dfe3cd738705ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had been called by the given procedure name. Return a vector of -1 if not found. <br /></td></tr>
+<tr class="separator:a3a8504c717a870494dfe3cd738705ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28435a24ca99e6fcb64fbaeca8c2a0ed"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28435a24ca99e6fcb64fbaeca8c2a0ed"></a>
 unordered_map&lt; PROCINDEX, <br class="typebreak" />
 vector&lt; CALLSPAIR &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCallsTable</b> ()</td></tr>
 <tr class="separator:a28435a24ca99e6fcb64fbaeca8c2a0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d7b6f64cc0b9dc117f324262419bc3a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d7b6f64cc0b9dc117f324262419bc3a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCalls</b> (PROCNAME, PROCNAME, STMTNUM)</td></tr>
-<tr class="separator:a4d7b6f64cc0b9dc117f324262419bc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a904359ceb46c397a48df73067b8a39a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a904359ceb46c397a48df73067b8a39a7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isCalls</b> (PROCNAME, PROCNAME)</td></tr>
-<tr class="separator:a904359ceb46c397a48df73067b8a39a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1215073f53147210d290136e36e580f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1215073f53147210d290136e36e580f4"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalls</b> ()</td></tr>
-<tr class="separator:a1215073f53147210d290136e36e580f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a614ceaa2036b5c040fa3263a807a0344"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a614ceaa2036b5c040fa3263a807a0344"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalls</b> (PROCNAME)</td></tr>
-<tr class="separator:a614ceaa2036b5c040fa3263a807a0344"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac681d5abd94842d78146069edc100407"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac681d5abd94842d78146069edc100407"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalled</b> ()</td></tr>
-<tr class="separator:ac681d5abd94842d78146069edc100407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a8504c717a870494dfe3cd738705ce8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a8504c717a870494dfe3cd738705ce8"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalled</b> (PROCNAME)</td></tr>
-<tr class="separator:a3a8504c717a870494dfe3cd738705ce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a81e3540a2f0c88d4283e7021a92ed580"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81e3540a2f0c88d4283e7021a92ed580"></a>
-static <a class="el" href="class_calls.html">Calls</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
-<tr class="separator:a81e3540a2f0c88d4283e7021a92ed580"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53be78b250718f757f7c9f43f4dd880a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53be78b250718f757f7c9f43f4dd880a"></a>
-static <a class="el" href="class_calls.html">Calls</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> (<a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+static <a class="el" href="class_calls.html">Calls</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_calls.html#a53be78b250718f757f7c9f43f4dd880a">getInstance</a> (<a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:a53be78b250718f757f7c9f43f4dd880a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> singleton class. <br /></td></tr>
 <tr class="separator:a53be78b250718f757f7c9f43f4dd880a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> class to store the calls relationship. </p>
+<p>Overview: <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> is responsible to :</p><ul>
+<li>Store all the <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> relationship between procedures</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_calls.html">Calls</a>* <a class="code" href="class_calls.html#a53be78b250718f757f7c9f43f4dd880a">getInstance</a>(<a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_calls_8h_source.html">Calls.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Calls.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

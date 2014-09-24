@@ -89,64 +89,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Modifies Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> class to store the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship.  
+ <a href="class_modifies.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_modifies_8h_source.html">Modifies.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acba64ccef56ebbe97a7d7df007369722"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acba64ccef56ebbe97a7d7df007369722"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Modifies</b> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#acba64ccef56ebbe97a7d7df007369722">Modifies</a> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:acba64ccef56ebbe97a7d7df007369722"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> class. <br /></td></tr>
 <tr class="separator:acba64ccef56ebbe97a7d7df007369722"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4228e43ae37d455f41435cf57fb37ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4228e43ae37d455f41435cf57fb37ef"></a>
-unordered_map&lt; STMTNUM, vector<br class="typebreak" />
-&lt; VARINDEX &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiesTable</b> ()</td></tr>
-<tr class="separator:ab4228e43ae37d455f41435cf57fb37ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a160db37d91c9221cac9a42343e7736"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a160db37d91c9221cac9a42343e7736"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a5a160db37d91c9221cac9a42343e7736">~Modifies</a> ()</td></tr>
+<tr class="memdesc:a5a160db37d91c9221cac9a42343e7736"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:a5a160db37d91c9221cac9a42343e7736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef6ad36813520d0ac747ce99d6fb8a40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef6ad36813520d0ac747ce99d6fb8a40"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setModifies</b> (STMTNUM, VARNAME)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#aef6ad36813520d0ac747ce99d6fb8a40">setModifies</a> (STMTNUM, VARNAME)</td></tr>
+<tr class="memdesc:aef6ad36813520d0ac747ce99d6fb8a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a statement number and a variable name to be true. <br /></td></tr>
 <tr class="separator:aef6ad36813520d0ac747ce99d6fb8a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a649ff665afb117d04c4d8626134d9ceb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a649ff665afb117d04c4d8626134d9ceb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isModifies</b> (STMTNUM, VARNAME)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a649ff665afb117d04c4d8626134d9ceb">isModifies</a> (STMTNUM, VARNAME)</td></tr>
+<tr class="memdesc:a649ff665afb117d04c4d8626134d9ceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a statement number and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:a649ff665afb117d04c4d8626134d9ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3cfd72d1497b3f4644dda1c1b3cb82e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3cfd72d1497b3f4644dda1c1b3cb82e"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifies</b> (TYPE)</td></tr>
-<tr class="separator:ae3cfd72d1497b3f4644dda1c1b3cb82e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa95809116ee621002cf6ba53ff4f713"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa95809116ee621002cf6ba53ff4f713"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">getModifies</a> (SYNTYPE)</td></tr>
+<tr class="memdesc:afa95809116ee621002cf6ba53ff4f713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies any variable. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="separator:afa95809116ee621002cf6ba53ff4f713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa864c0e2e09de310f5901109c70c903e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa864c0e2e09de310f5901109c70c903e"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifies</b> (STMTNUM)</td></tr>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#aa864c0e2e09de310f5901109c70c903e">getModifies</a> (STMTNUM)</td></tr>
+<tr class="memdesc:aa864c0e2e09de310f5901109c70c903e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is modified in the given statement number. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:aa864c0e2e09de310f5901109c70c903e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56051f4842290391556142d16dd02bfa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56051f4842290391556142d16dd02bfa"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifies</b> (TYPE, VARNAME)</td></tr>
-<tr class="separator:a56051f4842290391556142d16dd02bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b91555fe625182300336dda57a0b0be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b91555fe625182300336dda57a0b0be"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a3b91555fe625182300336dda57a0b0be">getModifies</a> (SYNTYPE, VARNAME)</td></tr>
+<tr class="memdesc:a3b91555fe625182300336dda57a0b0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="separator:a3b91555fe625182300336dda57a0b0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0fef04207b57afaaac3fce301d11ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f0fef04207b57afaaac3fce301d11ef"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a1f0fef04207b57afaaac3fce301d11ef">setModifies</a> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
+<tr class="memdesc:a1f0fef04207b57afaaac3fce301d11ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates. <br /></td></tr>
+<tr class="separator:a1f0fef04207b57afaaac3fce301d11ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9faf6a922f571426d99bf058e9cfce7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9faf6a922f571426d99bf058e9cfce7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setModifiesProc</b> (PROCINDEX, vector&lt; VARINDEX &gt;)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#aa9faf6a922f571426d99bf058e9cfce7">setModifiesProc</a> (PROCINDEX, vector&lt; VARINDEX &gt;)</td></tr>
+<tr class="memdesc:aa9faf6a922f571426d99bf058e9cfce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates. <br /></td></tr>
 <tr class="separator:aa9faf6a922f571426d99bf058e9cfce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e0ed8b13eeb670c13fb947f8295099"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12e0ed8b13eeb670c13fb947f8295099"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiesProc</b> (PROCINDEX)</td></tr>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a12e0ed8b13eeb670c13fb947f8295099">getModifiesProc</a> (PROCINDEX)</td></tr>
+<tr class="memdesc:a12e0ed8b13eeb670c13fb947f8295099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is modified by the given procedure index. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:a12e0ed8b13eeb670c13fb947f8295099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f0fef04207b57afaaac3fce301d11ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f0fef04207b57afaaac3fce301d11ef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setModifies</b> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
-<tr class="separator:a1f0fef04207b57afaaac3fce301d11ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b427f9a76410db18c8050737e0204eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b427f9a76410db18c8050737e0204eb"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiesProcVar</b> (VARNAME)</td></tr>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a2b427f9a76410db18c8050737e0204eb">getModifiesProcVar</a> (VARNAME)</td></tr>
+<tr class="memdesc:a2b427f9a76410db18c8050737e0204eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index modifies the given variable. If no such procedure index exists, then returns a vector of -1. <br /></td></tr>
 <tr class="separator:a2b427f9a76410db18c8050737e0204eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c10f14dadc9486015a545a37f81dc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4c10f14dadc9486015a545a37f81dc3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isModifiesProc</b> (PROCNAME, VARNAME)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#ac4c10f14dadc9486015a545a37f81dc3">isModifiesProc</a> (PROCNAME, VARNAME)</td></tr>
+<tr class="memdesc:ac4c10f14dadc9486015a545a37f81dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a procedure name and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:ac4c10f14dadc9486015a545a37f81dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a0e55816e7f9fc6a0ac0b102ba0fe5a5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e55816e7f9fc6a0ac0b102ba0fe5a5c"></a>
-static <a class="el" href="class_modifies.html">Modifies</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
-<tr class="separator:a0e55816e7f9fc6a0ac0b102ba0fe5a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac206db58d31b3e9c12207949802a3cff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac206db58d31b3e9c12207949802a3cff"></a>
-static <a class="el" href="class_modifies.html">Modifies</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+static <a class="el" href="class_modifies.html">Modifies</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#ac206db58d31b3e9c12207949802a3cff">getInstance</a> (<a class="el" href="class_type_table.html">TypeTable</a> *, <a class="el" href="class_var_table.html">VarTable</a> *, <a class="el" href="class_proc_table.html">ProcTable</a> *)</td></tr>
+<tr class="memdesc:ac206db58d31b3e9c12207949802a3cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> singleton class. <br /></td></tr>
 <tr class="separator:ac206db58d31b3e9c12207949802a3cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> class to store the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship. </p>
+<p>Overview: <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> is responsible to :</p><ul>
+<li>Store all the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between statement number and variable index</li>
+<li>Store all the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between procedure index and variable index</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a>* <a class="code" href="class_modifies.html#ac206db58d31b3e9c12207949802a3cff">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*, <a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_modifies_8h_source.html">Modifies.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Modifies.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

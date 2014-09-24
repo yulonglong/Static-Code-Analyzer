@@ -89,39 +89,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ConstTable Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> class to store the constants from the source code.  
+ <a href="class_const_table.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_const_table_8h_source.html">ConstTable.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9504d78b2d380ca19deb1fe04789f77c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9504d78b2d380ca19deb1fe04789f77c"></a>
-CONSTINDEX&#160;</td><td class="memItemRight" valign="bottom"><b>insertConst</b> (CONSTVALUE)</td></tr>
-<tr class="separator:a9504d78b2d380ca19deb1fe04789f77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd9455d32df435dceca447728601a538"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd9455d32df435dceca447728601a538"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#abd9455d32df435dceca447728601a538">ConstTable</a> ()</td></tr>
+<tr class="memdesc:abd9455d32df435dceca447728601a538"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> class. <br /></td></tr>
+<tr class="separator:abd9455d32df435dceca447728601a538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae79949473cee7d3ff665de62642c5691"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae79949473cee7d3ff665de62642c5691"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#ae79949473cee7d3ff665de62642c5691">~ConstTable</a> ()</td></tr>
+<tr class="memdesc:ae79949473cee7d3ff665de62642c5691"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:ae79949473cee7d3ff665de62642c5691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7431aa18735e7859180679381def7ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7431aa18735e7859180679381def7ac"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#aa7431aa18735e7859180679381def7ac">insertConst</a> (CONSTVALUE)</td></tr>
+<tr class="memdesc:aa7431aa18735e7859180679381def7ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a constant value to the constant table. <br /></td></tr>
+<tr class="separator:aa7431aa18735e7859180679381def7ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a77eb2f948576159a7ccd2bde2cc298"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a77eb2f948576159a7ccd2bde2cc298"></a>
-CONSTVALUE&#160;</td><td class="memItemRight" valign="bottom"><b>getConst</b> (CONSTINDEX)</td></tr>
+CONSTVALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#a1a77eb2f948576159a7ccd2bde2cc298">getConst</a> (CONSTINDEX)</td></tr>
+<tr class="memdesc:a1a77eb2f948576159a7ccd2bde2cc298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the constant value given the constant index. If it is not found, return an empty string. <br /></td></tr>
 <tr class="separator:a1a77eb2f948576159a7ccd2bde2cc298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02d35608e7ad28cc9dcce2fab3bf84a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02d35608e7ad28cc9dcce2fab3bf84a3"></a>
-CONSTINDEX&#160;</td><td class="memItemRight" valign="bottom"><b>getConstIndex</b> (CONSTVALUE)</td></tr>
+CONSTINDEX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#a02d35608e7ad28cc9dcce2fab3bf84a3">getConstIndex</a> (CONSTVALUE)</td></tr>
+<tr class="memdesc:a02d35608e7ad28cc9dcce2fab3bf84a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the constant index given the constant value. If it is not found, return an -1. <br /></td></tr>
 <tr class="separator:a02d35608e7ad28cc9dcce2fab3bf84a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abdb1f645dddd1d158abe25ac22f8544f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abdb1f645dddd1d158abe25ac22f8544f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumConst</b> ()</td></tr>
-<tr class="separator:abdb1f645dddd1d158abe25ac22f8544f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d159a652c48107ac4c21ed0e73b6fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9d159a652c48107ac4c21ed0e73b6fd"></a>
-vector&lt; CONSTINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllConstIndex</b> ()</td></tr>
-<tr class="separator:ab9d159a652c48107ac4c21ed0e73b6fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca6c193c8df74aea04de33f8ab6174f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acca6c193c8df74aea04de33f8ab6174f"></a>
+vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllConst</b> ()</td></tr>
+<tr class="separator:acca6c193c8df74aea04de33f8ab6174f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a13c72e778d922f18a527025e60dae61a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13c72e778d922f18a527025e60dae61a"></a>
-static <a class="el" href="class_const_table.html">ConstTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+static <a class="el" href="class_const_table.html">ConstTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_const_table.html#a13c72e778d922f18a527025e60dae61a">getInstance</a> ()</td></tr>
+<tr class="memdesc:a13c72e778d922f18a527025e60dae61a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> singleton class. <br /></td></tr>
 <tr class="separator:a13c72e778d922f18a527025e60dae61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> class to store the constants from the source code. </p>
+<p>Overview: <a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> is responsible to :</p><ul>
+<li>Store all the constants from the source code</li>
+<li>Assign each constant an unique index</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_const_table.html" title="A ConstTable class to store the constants from the source code. ">ConstTable</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_const_table.html">ConstTable</a>* <a class="code" href="class_const_table.html#a13c72e778d922f18a527025e60dae61a">getInstance</a>();</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_const_table_8h_source.html">ConstTable.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/ConstTable.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

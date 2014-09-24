@@ -86,65 +86,76 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Modifies.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MODIFIES_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MODIFIES_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//@author Yohanes Lim</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//Modifies.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;VarTable.h&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">typedef</span> TypeTable::SynType TYPE; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_modifies.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_modifies.html">Modifies</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    unordered_map&lt;STMTNUM, vector&lt;VARINDEX&gt;&gt; modifiesTable;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;VARINDEX&gt;&gt; modifiesProcTable;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a> *modifies;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">public</span>: </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*, <a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    ~<a class="code" href="class_modifies.html">Modifies</a>();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a>* getInstance(); <span class="comment">// to be used to get instance of singleton class</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a>* getInstance(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*,<a class="code" href="class_proc_table.html">ProcTable</a>*); <span class="comment">// to be used to get instance of singleton class </span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    unordered_map&lt;STMTNUM, vector&lt;VARINDEX&gt;&gt; getModifiesTable(); <span class="comment">// only for unit testing.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> setModifies(STMTNUM, VARNAME);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> isModifies(STMTNUM, VARNAME);  <span class="comment">//Select w such that Modifies(1, &quot;y&quot;)</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    vector&lt;STMTNUM&gt; getModifies(TYPE);          <span class="comment">//Returns STMTNUM of statements of type t that modifies any variable; If no such statments, then returns empty vector.</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    vector&lt;VARINDEX&gt; getModifies(STMTNUM);      <span class="comment">//Select v such that Modifies(1, v) return empty vector if doesnt exist</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    vector&lt;STMTNUM&gt; getModifies(TYPE, VARNAME); <span class="comment">//Select a such that Modifies(a, &quot;x&quot;)   return empty vector if doesnt exist</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> setModifiesProc(PROCINDEX, vector&lt;VARINDEX&gt;); <span class="comment">// if there already were variables modified by this procedure, then just add the 2 vectors.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    vector&lt;VARINDEX&gt; getModifiesProc(PROCINDEX); <span class="comment">//for getting using procedure index</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> setModifies(STMTNUM, vector&lt;VARINDEX&gt;); <span class="comment">// same as above</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">//Additional Methods to implement:</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    vector&lt;PROCINDEX&gt; getModifiesProcVar(VARNAME); <span class="comment">//get all the procedures that modifies the variable with varname</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">bool</span> isModifiesProc(PROCNAME, VARNAME); <span class="comment">//returns true if procname modifies varname</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdef"><b>Definition:</b> Modifies.h:19</div></div>
-<div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdef"><b>Definition:</b> ProcTable.h:16</div></div>
-<div class="ttc" id="class_var_table_html"><div class="ttname"><a href="class_var_table.html">VarTable</a></div><div class="ttdef"><b>Definition:</b> VarTable.h:16</div></div>
-<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdef"><b>Definition:</b> TypeTable.h:16</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef MODIFIES_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define MODIFIES_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;VarTable.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">typedef</span> TypeTable::SynType SYNTYPE; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_modifies.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_modifies.html">Modifies</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    unordered_map&lt;STMTNUM, vector&lt;VARINDEX&gt;&gt; modifiesTable;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;VARINDEX&gt;&gt; modifiesProcTable;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a> *modifies;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_modifies.html#acba64ccef56ebbe97a7d7df007369722">Modifies</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*, <a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_modifies.html#a5a160db37d91c9221cac9a42343e7736">~Modifies</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_modifies.html">Modifies</a>* <a class="code" href="class_modifies.html#ac206db58d31b3e9c12207949802a3cff">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*,<a class="code" href="class_proc_table.html">ProcTable</a>*); <span class="comment">// to be used to get instance of singleton class </span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_modifies.html#aef6ad36813520d0ac747ce99d6fb8a40">setModifies</a>(STMTNUM, VARNAME);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_modifies.html#a649ff665afb117d04c4d8626134d9ceb">isModifies</a>(STMTNUM, VARNAME);  <span class="comment">//Select w such that Modifies(1, &quot;y&quot;)   </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    vector&lt;STMTNUM&gt; <a class="code" href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">getModifies</a>(SYNTYPE);   <span class="comment">//Returns STMTNUM of statements of type t that modifies any variable;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span>    vector&lt;VARINDEX&gt; <a class="code" href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">getModifies</a>(STMTNUM);      <span class="comment">//Select v such that Modifies(1, v) return empty vector if doesnt exist</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span>    vector&lt;STMTNUM&gt; <a class="code" href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">getModifies</a>(SYNTYPE, VARNAME);  <span class="comment">//Select a such that Modifies(a, &quot;x&quot;)   return empty vector if doesnt exist</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_modifies.html#aef6ad36813520d0ac747ce99d6fb8a40">setModifies</a>(STMTNUM, vector&lt;VARINDEX&gt;);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_modifies.html#aa9faf6a922f571426d99bf058e9cfce7">setModifiesProc</a>(PROCINDEX, vector&lt;VARINDEX&gt;); <span class="comment">// if there already were variables modified by this procedure, then just add the 2 vectors.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>    vector&lt;VARINDEX&gt; <a class="code" href="class_modifies.html#a12e0ed8b13eeb670c13fb947f8295099">getModifiesProc</a>(PROCINDEX); <span class="comment">//for getting using procedure index</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    vector&lt;PROCINDEX&gt; <a class="code" href="class_modifies.html#a2b427f9a76410db18c8050737e0204eb">getModifiesProcVar</a>(VARNAME);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_modifies.html#ac4c10f14dadc9486015a545a37f81dc3">isModifiesProc</a>(PROCNAME, VARNAME); </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_modifies_html_ac206db58d31b3e9c12207949802a3cff"><div class="ttname"><a href="class_modifies.html#ac206db58d31b3e9c12207949802a3cff">Modifies::getInstance</a></div><div class="ttdeci">static Modifies * getInstance(TypeTable *, VarTable *, ProcTable *)</div><div class="ttdoc">Returns the instance of Modifies singleton class. </div><div class="ttdef"><b>Definition:</b> Modifies.cpp:22</div></div>
+<div class="ttc" id="class_modifies_html_aef6ad36813520d0ac747ce99d6fb8a40"><div class="ttname"><a href="class_modifies.html#aef6ad36813520d0ac747ce99d6fb8a40">Modifies::setModifies</a></div><div class="ttdeci">void setModifies(STMTNUM, VARNAME)</div><div class="ttdoc">Set the Modifies relationship between a statement number and a variable name to be true...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:33</div></div>
+<div class="ttc" id="class_modifies_html_a12e0ed8b13eeb670c13fb947f8295099"><div class="ttname"><a href="class_modifies.html#a12e0ed8b13eeb670c13fb947f8295099">Modifies::getModifiesProc</a></div><div class="ttdeci">vector&lt; VARINDEX &gt; getModifiesProc(PROCINDEX)</div><div class="ttdoc">Return all the variable indexes such that each variable index is modified by the given procedure inde...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:155</div></div>
+<div class="ttc" id="class_modifies_html_a2b427f9a76410db18c8050737e0204eb"><div class="ttname"><a href="class_modifies.html#a2b427f9a76410db18c8050737e0204eb">Modifies::getModifiesProcVar</a></div><div class="ttdeci">vector&lt; PROCINDEX &gt; getModifiesProcVar(VARNAME)</div><div class="ttdoc">Return all the procedure indexes such that each procedure index modifies the given variable...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:181</div></div>
+<div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdoc">A Modifies class to store the Modifies relationship. </div><div class="ttdef"><b>Definition:</b> Modifies.h:36</div></div>
+<div class="ttc" id="class_modifies_html_ac4c10f14dadc9486015a545a37f81dc3"><div class="ttname"><a href="class_modifies.html#ac4c10f14dadc9486015a545a37f81dc3">Modifies::isModifiesProc</a></div><div class="ttdeci">bool isModifiesProc(PROCNAME, VARNAME)</div><div class="ttdoc">If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false. </div><div class="ttdef"><b>Definition:</b> Modifies.cpp:207</div></div>
+<div class="ttc" id="class_modifies_html_acba64ccef56ebbe97a7d7df007369722"><div class="ttname"><a href="class_modifies.html#acba64ccef56ebbe97a7d7df007369722">Modifies::Modifies</a></div><div class="ttdeci">Modifies(TypeTable *, VarTable *, ProcTable *)</div><div class="ttdoc">A constructor to initialize the Modifies class. </div><div class="ttdef"><b>Definition:</b> Modifies.cpp:8</div></div>
+<div class="ttc" id="class_modifies_html_afa95809116ee621002cf6ba53ff4f713"><div class="ttname"><a href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">Modifies::getModifies</a></div><div class="ttdeci">vector&lt; STMTNUM &gt; getModifies(SYNTYPE)</div><div class="ttdoc">Return all statement numbers such that each statement number has the given SynType and modifies any v...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:73</div></div>
+<div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdoc">A ProcTable class to store the procedure names from the source code. </div><div class="ttdef"><b>Definition:</b> ProcTable.h:35</div></div>
+<div class="ttc" id="class_modifies_html_aa9faf6a922f571426d99bf058e9cfce7"><div class="ttname"><a href="class_modifies.html#aa9faf6a922f571426d99bf058e9cfce7">Modifies::setModifiesProc</a></div><div class="ttdeci">void setModifiesProc(PROCINDEX, vector&lt; VARINDEX &gt;)</div><div class="ttdoc">Set the Modifies relationship between a procedure index and a list of variable indexes to be true...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:139</div></div>
+<div class="ttc" id="class_var_table_html"><div class="ttname"><a href="class_var_table.html">VarTable</a></div><div class="ttdoc">A VarTable class to store the variable names from the source code. </div><div class="ttdef"><b>Definition:</b> VarTable.h:35</div></div>
+<div class="ttc" id="class_modifies_html_a5a160db37d91c9221cac9a42343e7736"><div class="ttname"><a href="class_modifies.html#a5a160db37d91c9221cac9a42343e7736">Modifies::~Modifies</a></div><div class="ttdeci">~Modifies()</div><div class="ttdoc">A destructor to clear all the tables and set the instance flag of the singleton class to false...</div><div class="ttdef"><b>Definition:</b> Modifies.cpp:15</div></div>
+<div class="ttc" id="class_modifies_html_a649ff665afb117d04c4d8626134d9ceb"><div class="ttname"><a href="class_modifies.html#a649ff665afb117d04c4d8626134d9ceb">Modifies::isModifies</a></div><div class="ttdeci">bool isModifies(STMTNUM, VARNAME)</div><div class="ttdoc">If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false. </div><div class="ttdef"><b>Definition:</b> Modifies.cpp:53</div></div>
+<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdoc">A TypeTable class to store the type of expression of a statement number from the source code...</div><div class="ttdef"><b>Definition:</b> TypeTable.h:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

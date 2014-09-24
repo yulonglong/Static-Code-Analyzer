@@ -97,7 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12db252feb56df9af4bd5fb415cafb99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_query.html">Query</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_query_parser.html#a12db252feb56df9af4bd5fb415cafb99">queryParse</a> (string queryStr, bool &amp;valid)</td></tr>
-<tr class="memdesc:a12db252feb56df9af4bd5fb415cafb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">queryParser reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure.  <a href="#a12db252feb56df9af4bd5fb415cafb99">More...</a><br /></td></tr>
+<tr class="memdesc:a12db252feb56df9af4bd5fb415cafb99"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure.  <a href="#a12db252feb56df9af4bd5fb415cafb99">More...</a><br /></td></tr>
 <tr class="separator:a12db252feb56df9af4bd5fb415cafb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 <div class="line">   }</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> will traverse all parsed tokens, and try to validate all the clauses (of 3 types).</p><ul>
-<li>Default clauses : <a class="el" href="class_follows.html">Follows</a>, <a class="el" href="class_modifies.html">Modifies</a>, <a class="el" href="class_parent.html">Parent</a>, <a class="el" href="class_calls.html">Calls</a>, etc..</li>
+<li>Default clauses : <a class="el" href="class_follows.html" title="A Follows class to store the Follows relationship. ">Follows</a>, <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a>, <a class="el" href="class_parent.html" title="A Parent class to store the Parent relationship. ">Parent</a>, <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a>, etc..</li>
 <li>Pattern clause</li>
 <li>With clause</li>
 </ul>
@@ -147,7 +147,7 @@ Public Member Functions</h2></td></tr>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span> QueryParser::elem = synonym + <span class="stringliteral">&quot;|&quot;</span> + attrRef;</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span> QueryParser::tuple = elem;</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span> QueryParser::resultCl = tuple + <span class="stringliteral">&quot;|&quot;</span> + BOOLEAN;</div>
-</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd>CodeParser, <a class="el" href="class_query_evaluator.html">QueryEvaluator</a> </dd></dl>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_code_parser.html" title="A CodeParser class to validate and parse Source code. ">CodeParser</a>, <a class="el" href="class_query_evaluator.html">QueryEvaluator</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a12db252feb56df9af4bd5fb415cafb99"></a>
 <div class="memitem">
@@ -173,7 +173,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>queryParser reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure. </p>
+<p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">queryStr</td><td>is the string which contains the query. (e.g. "assign a; while w; Select a such that Follows(w, a) pattern a ("x", _"x+y"_)") </td></tr>
@@ -192,7 +192,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

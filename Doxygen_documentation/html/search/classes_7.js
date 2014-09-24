@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['next',['Next',['../class_next.html',1,'']]],
-  ['node',['Node',['../class_node.html',1,'']]],
-  ['nodetest',['NodeTest',['../class_node_test.html',1,'']]]
+  ['modifies',['Modifies',['../class_modifies.html',1,'']]],
+  ['modifiestest',['ModifiesTest',['../class_modifies_test.html',1,'']]]
 ];

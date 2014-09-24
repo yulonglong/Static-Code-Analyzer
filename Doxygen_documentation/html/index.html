@@ -79,13 +79,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><p><b> Static Program Analyzer (SPA) </b> is a program to answer queries about an input SIMPLE program. In this report, we will be describing the design and implementation decisions made during the development of the SPA prototype in CS3201 as well as the changes we have made to the prototype.</p>
 <p><b>ARCHITECTURE</b> </p>
-<p>The architecture for the prototype consists of 3 main components: the Code Parser, the <a class="el" href="class_p_k_b.html">PKB</a> and the <a class="el" href="class_query.html">Query</a> Processor. Both the Code Parser and the <a class="el" href="class_query.html">Query</a> Processor are dependent on <a class="el" href="class_p_k_b.html">PKB</a> but not dependent on each other. CodeParser parses the code and stores design abstractions in each of the 8 tables in the <a class="el" href="class_p_k_b.html">PKB</a>. After <a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> has parsed the query, the <a class="el" href="class_query.html">Query</a> Evaluator consults the <a class="el" href="class_p_k_b.html">PKB</a> API to answer queries. </p><div class="image">
+<p>The architecture for the prototype consists of 3 main components: the Code Parser, the <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a> and the <a class="el" href="class_query.html">Query</a> Processor. Both the Code Parser and the <a class="el" href="class_query.html">Query</a> Processor are dependent on <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a> but not dependent on each other. <a class="el" href="class_code_parser.html" title="A CodeParser class to validate and parse Source code. ">CodeParser</a> parses the code and stores design abstractions in each of the 8 tables in the <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a>. After <a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> has parsed the query, the <a class="el" href="class_query.html">Query</a> Evaluator consults the <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a> API to answer queries. </p><div class="image">
 <img src="architecture.png" alt="architecture.png"/>
 </div>
  </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:58 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

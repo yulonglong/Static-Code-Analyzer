@@ -84,6 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_query_evaluator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QueryEvaluator Class Reference</div>  </div>
@@ -103,12 +104,42 @@ std::unordered_map<br class="typebreak" />
 <tr class="memitem:a92fb13cc490d72456b5c61a08e1a6d24"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92fb13cc490d72456b5c61a08e1a6d24"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateQueryBoolean</b> (<a class="el" href="class_query.html">Query</a>)</td></tr>
 <tr class="separator:a92fb13cc490d72456b5c61a08e1a6d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6bca8eb7cd63867b7c777afb616704d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6bca8eb7cd63867b7c777afb616704d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateCalls</b> (<a class="el" href="class_relationship.html">Relationship</a>, int)</td></tr>
+<tr class="separator:ac6bca8eb7cd63867b7c777afb616704d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe1850197d631141dcb3522f5666d7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefe1850197d631141dcb3522f5666d7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateUses</b> (<a class="el" href="class_relationship.html">Relationship</a>, std::unordered_map&lt; std::string, TypeTable::SynType &gt;, int)</td></tr>
+<tr class="separator:aefe1850197d631141dcb3522f5666d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b3a486e383870296bb3995bfb228f6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b3a486e383870296bb3995bfb228f6d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateFollows</b> (<a class="el" href="class_relationship.html">Relationship</a>, std::unordered_map&lt; std::string, TypeTable::SynType &gt;, int)</td></tr>
+<tr class="separator:a0b3a486e383870296bb3995bfb228f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b38de60eaa609a16b69cb74351ea21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5b38de60eaa609a16b69cb74351ea21"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateParent</b> (<a class="el" href="class_relationship.html">Relationship</a>, std::unordered_map&lt; std::string, TypeTable::SynType &gt;, int)</td></tr>
+<tr class="separator:ac5b38de60eaa609a16b69cb74351ea21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ed57b9eb35a64da94314d6ea8dbc93"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09ed57b9eb35a64da94314d6ea8dbc93"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evaluateModifies</b> (<a class="el" href="class_relationship.html">Relationship</a>, std::unordered_map&lt; std::string, TypeTable::SynType &gt;, int)</td></tr>
+<tr class="separator:a09ed57b9eb35a64da94314d6ea8dbc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa8d076c0cac9013225d62242d1676acc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8d076c0cac9013225d62242d1676acc"></a>
 <a class="el" href="class_p_k_b.html">PKB</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>pkb</b></td></tr>
 <tr class="separator:aa8d076c0cac9013225d62242d1676acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aea3a1f0d4ce6c14ac4eade292a2c8397"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea3a1f0d4ce6c14ac4eade292a2c8397"></a>
+static std::unordered_map<br class="typebreak" />
+&lt; string, std::vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>linkages</b></td></tr>
+<tr class="separator:aea3a1f0d4ce6c14ac4eade292a2c8397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca7887e1f9c4abbbc201e0db769658cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca7887e1f9c4abbbc201e0db769658cd"></a>
+static std::unordered_map&lt; int, <br class="typebreak" />
+std::vector&lt; <a class="el" href="class_pair.html">Pair</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>relAns</b></td></tr>
+<tr class="separator:aca7887e1f9c4abbbc201e0db769658cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6e5aa203e443f9e39a8717af67b881"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a6e5aa203e443f9e39a8717af67b881"></a>
+static std::unordered_map&lt; int, <br class="typebreak" />
+vector&lt; std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>relParameters</b></td></tr>
+<tr class="separator:a1a6e5aa203e443f9e39a8717af67b881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/QueryProcessor/<a class="el" href="_query_evaluator_8h_source.html">QueryEvaluator.h</a></li>
@@ -117,7 +148,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

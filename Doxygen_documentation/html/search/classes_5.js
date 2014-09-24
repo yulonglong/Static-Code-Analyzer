@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['integratetest',['IntegrateTest',['../class_integrate_test.html',1,'']]]
+  ['follows',['Follows',['../class_follows.html',1,'']]],
+  ['followstest',['FollowsTest',['../class_follows_test.html',1,'']]]
 ];

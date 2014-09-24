@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extractrelationshipstest',['ExtractRelationshipsTest',['../class_extract_relationships_test.html',1,'']]]
+  ['designextractor',['DesignExtractor',['../class_design_extractor.html',1,'']]]
 ];

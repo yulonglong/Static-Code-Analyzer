@@ -86,47 +86,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Next.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef NEXT_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define NEXT_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//@author Yohanes Lim</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//Next.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> STMTNUM;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_next.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_next.html">Next</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    unordered_map&lt;STMTNUM, vector&lt;STMTNUM&gt;&gt; nextTable;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    unordered_map&lt;STMTNUM, STMTNUM&gt; previousTable;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_next.html">Next</a> *next;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>: </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_next.html">Next</a>(<a class="code" href="class_type_table.html">TypeTable</a>*);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_next.html">Next</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ~<a class="code" href="class_next.html">Next</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_next.html">Next</a>* getInstance(); <span class="comment">// to be used to get instance of singleton class</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_next.html">Next</a>* getInstance(<a class="code" href="class_type_table.html">TypeTable</a>*);   <span class="comment">// to be used to get instance of singleton class </span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> setNext(STMTNUM, STMTNUM);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdef"><b>Definition:</b> Next.h:17</div></div>
-<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdef"><b>Definition:</b> TypeTable.h:16</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef NEXT_H</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define NEXT_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> STMTNUM;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_next.html">   33</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_next.html">Next</a> {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    unordered_map&lt;STMTNUM, vector&lt;STMTNUM&gt;&gt; nextTable;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    unordered_map&lt;STMTNUM, STMTNUM&gt; previousTable;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_next.html">Next</a> *next;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_next.html#ac958afedf15ce12d597c034ba0e0f0e2">Next</a>(<a class="code" href="class_type_table.html">TypeTable</a>*);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_next.html#a8a8e421418f7231e6812ba10c0c81373">~Next</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_next.html">Next</a>* <a class="code" href="class_next.html#a87d8d2cd9f1879f18fbb04a7a31edbb9">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*);   <span class="comment">// to be used to get instance of singleton class </span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="class_next.html#a7876883d81bced6fd0b87a4a439c2c56">setNext</a>(STMTNUM, STMTNUM);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//Temp method. lacie give me the correct one please</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    vector&lt;STMTNUM&gt; getNext(STMTNUM);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">//Temp method. lacie give me the correct one please</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    STMTNUM getPrevious(STMTNUM);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//ADDITIONAL METHODS</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">bool</span> isNext(STMTNUM, STMTNUM);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdoc">A Next class to store the Next relationship. </div><div class="ttdef"><b>Definition:</b> Next.h:33</div></div>
+<div class="ttc" id="class_next_html_a7876883d81bced6fd0b87a4a439c2c56"><div class="ttname"><a href="class_next.html#a7876883d81bced6fd0b87a4a439c2c56">Next::setNext</a></div><div class="ttdeci">void setNext(STMTNUM, STMTNUM)</div><div class="ttdoc">Set the Follows relationship between the two statement numbers to be true. </div><div class="ttdef"><b>Definition:</b> Next.cpp:35</div></div>
+<div class="ttc" id="class_next_html_ac958afedf15ce12d597c034ba0e0f0e2"><div class="ttname"><a href="class_next.html#ac958afedf15ce12d597c034ba0e0f0e2">Next::Next</a></div><div class="ttdeci">Next(TypeTable *)</div><div class="ttdoc">A constructor to initialize the Next class. </div><div class="ttdef"><b>Definition:</b> Next.cpp:30</div></div>
+<div class="ttc" id="class_next_html_a87d8d2cd9f1879f18fbb04a7a31edbb9"><div class="ttname"><a href="class_next.html#a87d8d2cd9f1879f18fbb04a7a31edbb9">Next::getInstance</a></div><div class="ttdeci">static Next * getInstance(TypeTable *)</div><div class="ttdoc">Returns the instance of Next singleton class. </div><div class="ttdef"><b>Definition:</b> Next.cpp:16</div></div>
+<div class="ttc" id="class_next_html_a8a8e421418f7231e6812ba10c0c81373"><div class="ttname"><a href="class_next.html#a8a8e421418f7231e6812ba10c0c81373">Next::~Next</a></div><div class="ttdeci">~Next()</div><div class="ttdoc">A destructor to clear all the tables and set the instance flag of the singleton class to false...</div><div class="ttdef"><b>Definition:</b> Next.cpp:10</div></div>
+<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdoc">A TypeTable class to store the type of expression of a statement number from the source code...</div><div class="ttdef"><b>Definition:</b> TypeTable.h:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

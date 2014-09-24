@@ -86,106 +86,123 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">PKB.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PKB_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PKB_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//@author Yohanes Lim</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//PKB.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;VarTable.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;ConstTable.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;Parent.h&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;Follows.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;Node.h&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;Modifies.h&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;Uses.h&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;Calls.h&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;Next.h&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/* TO USE PKB:</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    PKB *pkb;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">    pkb = PKB::getInstance();</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    pkb-&gt;method(); </span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">*/</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_p_k_b.html">   30</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_p_k_b.html">PKB</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>: </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_p_k_b.html">PKB</a> *pkb;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_node.html">Node</a>* ASTRoot;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a> *constTable;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_parent.html">Parent</a> *parent;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_follows.html">Follows</a> *follows;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a> *modifies;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_uses.html">Uses</a> *uses;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_calls.html">Calls</a> *calls;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_next.html">Next</a> *next;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_node.html">Node</a>* CFGRoot; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_p_k_b.html">PKB</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    ~<a class="code" href="class_p_k_b.html">PKB</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_p_k_b.html">PKB</a>* getInstance();  <span class="comment">// to be used to get instance of singleton class </span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a>* getVarTable();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a>* getProcTable();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a>* getTypeTable();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a>* getConstTable();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_parent.html">Parent</a>* getParent();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_follows.html">Follows</a>* getFollows();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>* getModifies();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_uses.html">Uses</a>* getUses();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="class_calls.html">Calls</a>* getCalls();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_next.html">Next</a>* getNext();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_node.html">Node</a>* getASTRoot();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_node.html">Node</a>* getCFGRoot();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> setToVarTable(VARNAME);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> setToProcTable(PROCNAME);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> setToConstTable(CONSTVALUE);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> setToParent(STMTNUM, STMTNUM);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> setToFollows(STMTNUM, STMTNUM);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> setToModifies(STMTNUM, VARNAME);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> setToUses(STMTNUM, VARNAME);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> setToCalls(PROCNAME, PROCNAME, STMTNUM); <span class="comment">//kester added the last parameter of STMTNUM, it is the progline in which the procedure is called</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> setToNext(STMTNUM, STMTNUM);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> setToTypeTable(STMTNUM,TypeTable::SynType); <span class="comment">//kester added this it was originally insertStmtNumAndType</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> setASTRoot(<a class="code" href="class_node.html">Node</a>* newASTRoot);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> setCFGRoot(<a class="code" href="class_node.html">Node</a>* newCFGRoot);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdef"><b>Definition:</b> Calls.h:18</div></div>
-<div class="ttc" id="class_const_table_html"><div class="ttname"><a href="class_const_table.html">ConstTable</a></div><div class="ttdef"><b>Definition:</b> ConstTable.h:16</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PKB_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PKB_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;VarTable.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;TypeTable.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;ConstTable.h&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;Parent.h&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;Follows.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;Node.h&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;Modifies.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;Uses.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;Calls.h&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;Next.h&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;CFGNode.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* TO USE PKB:</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">    PKB *pkb;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">    pkb = PKB::getInstance();</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">    pkb-&gt;method(); </span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_p_k_b.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_p_k_b.html">PKB</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>: </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_p_k_b.html">PKB</a> *pkb;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a> *constTable;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="class_parent.html">Parent</a> *parent;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="class_follows.html">Follows</a> *follows;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a> *modifies;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="class_uses.html">Uses</a> *uses;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_calls.html">Calls</a> *calls;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="class_next.html">Next</a> *next;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_node.html">Node</a>* ASTRoot;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* CFGRoot; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_p_k_b.html#a1089dcd6c17b7ff5f3d2b41b2b0c54e5">PKB</a>();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="class_p_k_b.html#a4de1945c7c7414313f50c5b0c1936d8d">~PKB</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_p_k_b.html">PKB</a>* <a class="code" href="class_p_k_b.html#a64cd160d92e3593615705d271d8468bc">getInstance</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#adad3e4d85de461e539af2b15b7a24540">setToVarTable</a>(VARNAME);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#ad1ac6083607df06b44d61ffa9f51ef5f">setToProcTable</a>(PROCNAME);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#aea62dabf2850e12809236c9442e65c47">setToConstTable</a>(CONSTVALUE);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a7fe6421fe1da7ac3f1ecbd2496167f32">setToTypeTable</a>(STMTNUM,TypeTable::SynType);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a018bb1e51977cd8cf2e8e77b012f6aaa">setToParent</a>(STMTNUM, STMTNUM);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a0021ac3699edf2d60a1b8ee2dc07fe80">setToFollows</a>(STMTNUM, STMTNUM);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#ae8c6b2bcd9dcac9d632770817c4a4d75">setToModifies</a>(STMTNUM, VARNAME);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a6af39a4b5b6f5ce6e7c85ba94516e006">setToUses</a>(STMTNUM, VARNAME);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a35126033a0ce562e7657ced9034dd632">setToCalls</a>(PROCNAME, PROCNAME, STMTNUM);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#a506b5ab3d13843a49e3301d5119fc038">setToNext</a>(STMTNUM, STMTNUM);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#ab66b49e40d4d185680e2dbade5eabc4c">setASTRoot</a>(<a class="code" href="class_node.html">Node</a>* newASTRoot);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_p_k_b.html#ac4bfd291c946856849d979f5c3dec6a8">setCFGRoot</a>(<a class="code" href="class_c_f_g_node.html">CFGNode</a>* newCFGRoot);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a>* getVarTable();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a>* getProcTable();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a>* getTypeTable();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a>* getConstTable();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_parent.html">Parent</a>* getParent();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="class_follows.html">Follows</a>* getFollows();</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>* getModifies();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="class_uses.html">Uses</a>* getUses();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <a class="code" href="class_calls.html">Calls</a>* getCalls();</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="class_next.html">Next</a>* getNext();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="class_node.html">Node</a>* getASTRoot();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* getCFGRoot();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdoc">A Calls class to store the calls relationship. </div><div class="ttdef"><b>Definition:</b> Calls.h:37</div></div>
+<div class="ttc" id="class_p_k_b_html_ac4bfd291c946856849d979f5c3dec6a8"><div class="ttname"><a href="class_p_k_b.html#ac4bfd291c946856849d979f5c3dec6a8">PKB::setCFGRoot</a></div><div class="ttdeci">void setCFGRoot(CFGNode *newCFGRoot)</div><div class="ttdoc">Set the new CFG Root. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:156</div></div>
+<div class="ttc" id="class_const_table_html"><div class="ttname"><a href="class_const_table.html">ConstTable</a></div><div class="ttdoc">A ConstTable class to store the constants from the source code. </div><div class="ttdef"><b>Definition:</b> ConstTable.h:35</div></div>
 <div class="ttc" id="class_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">A Node Structure for AST.Overview: Node is the node structure of AST nodes. </div><div class="ttdef"><b>Definition:</b> Node.h:29</div></div>
-<div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdef"><b>Definition:</b> Modifies.h:19</div></div>
-<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdef"><b>Definition:</b> Next.h:17</div></div>
-<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
-<div class="ttc" id="class_p_k_b_html"><div class="ttname"><a href="class_p_k_b.html">PKB</a></div><div class="ttdef"><b>Definition:</b> PKB.h:30</div></div>
-<div class="ttc" id="class_follows_html"><div class="ttname"><a href="class_follows.html">Follows</a></div><div class="ttdef"><b>Definition:</b> Follows.h:18</div></div>
-<div class="ttc" id="class_uses_html"><div class="ttname"><a href="class_uses.html">Uses</a></div><div class="ttdef"><b>Definition:</b> Uses.h:15</div></div>
-<div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdef"><b>Definition:</b> ProcTable.h:16</div></div>
-<div class="ttc" id="class_parent_html"><div class="ttname"><a href="class_parent.html">Parent</a></div><div class="ttdef"><b>Definition:</b> Parent.h:20</div></div>
-<div class="ttc" id="class_var_table_html"><div class="ttname"><a href="class_var_table.html">VarTable</a></div><div class="ttdef"><b>Definition:</b> VarTable.h:16</div></div>
-<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdef"><b>Definition:</b> TypeTable.h:16</div></div>
+<div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdoc">A Modifies class to store the Modifies relationship. </div><div class="ttdef"><b>Definition:</b> Modifies.h:36</div></div>
+<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdoc">A Next class to store the Next relationship. </div><div class="ttdef"><b>Definition:</b> Next.h:33</div></div>
+<div class="ttc" id="class_p_k_b_html_ab66b49e40d4d185680e2dbade5eabc4c"><div class="ttname"><a href="class_p_k_b.html#ab66b49e40d4d185680e2dbade5eabc4c">PKB::setASTRoot</a></div><div class="ttdeci">void setASTRoot(Node *newASTRoot)</div><div class="ttdoc">Set the new AST Root. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:152</div></div>
+<div class="ttc" id="class_p_k_b_html_a64cd160d92e3593615705d271d8468bc"><div class="ttname"><a href="class_p_k_b.html#a64cd160d92e3593615705d271d8468bc">PKB::getInstance</a></div><div class="ttdeci">static PKB * getInstance()</div><div class="ttdoc">Returns the instance of PKB singleton class. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:43</div></div>
+<div class="ttc" id="class_p_k_b_html_adad3e4d85de461e539af2b15b7a24540"><div class="ttname"><a href="class_p_k_b.html#adad3e4d85de461e539af2b15b7a24540">PKB::setToVarTable</a></div><div class="ttdeci">void setToVarTable(VARNAME)</div><div class="ttdoc">Set a variable to the variable table. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:101</div></div>
+<div class="ttc" id="class_p_k_b_html_a4de1945c7c7414313f50c5b0c1936d8d"><div class="ttname"><a href="class_p_k_b.html#a4de1945c7c7414313f50c5b0c1936d8d">PKB::~PKB</a></div><div class="ttdeci">~PKB()</div><div class="ttdoc">A constructor to clear all the tables, relationships and other parameters. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:24</div></div>
+<div class="ttc" id="class_c_f_g_node_html"><div class="ttname"><a href="class_c_f_g_node.html">CFGNode</a></div><div class="ttdoc">A set of methods to extract more relationships after the CodeParser has parsed the SIMPLE source prog...</div><div class="ttdef"><b>Definition:</b> CFGNode.h:31</div></div>
+<div class="ttc" id="class_p_k_b_html"><div class="ttname"><a href="class_p_k_b.html">PKB</a></div><div class="ttdoc">A PKB class to store all the datas needed for the program. </div><div class="ttdef"><b>Definition:</b> PKB.h:60</div></div>
+<div class="ttc" id="class_p_k_b_html_ad1ac6083607df06b44d61ffa9f51ef5f"><div class="ttname"><a href="class_p_k_b.html#ad1ac6083607df06b44d61ffa9f51ef5f">PKB::setToProcTable</a></div><div class="ttdeci">void setToProcTable(PROCNAME)</div><div class="ttdoc">Set a procedure to the procedure table. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:106</div></div>
+<div class="ttc" id="class_p_k_b_html_a506b5ab3d13843a49e3301d5119fc038"><div class="ttname"><a href="class_p_k_b.html#a506b5ab3d13843a49e3301d5119fc038">PKB::setToNext</a></div><div class="ttdeci">void setToNext(STMTNUM, STMTNUM)</div><div class="ttdoc">Set a Next relationship between the two given statement numbers. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:142</div></div>
+<div class="ttc" id="class_follows_html"><div class="ttname"><a href="class_follows.html">Follows</a></div><div class="ttdoc">A Follows class to store the Follows relationship. </div><div class="ttdef"><b>Definition:</b> Follows.h:34</div></div>
+<div class="ttc" id="class_p_k_b_html_aea62dabf2850e12809236c9442e65c47"><div class="ttname"><a href="class_p_k_b.html#aea62dabf2850e12809236c9442e65c47">PKB::setToConstTable</a></div><div class="ttdeci">void setToConstTable(CONSTVALUE)</div><div class="ttdoc">Set a constant to the constant table. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:111</div></div>
+<div class="ttc" id="class_p_k_b_html_a0021ac3699edf2d60a1b8ee2dc07fe80"><div class="ttname"><a href="class_p_k_b.html#a0021ac3699edf2d60a1b8ee2dc07fe80">PKB::setToFollows</a></div><div class="ttdeci">void setToFollows(STMTNUM, STMTNUM)</div><div class="ttdoc">Set a Follows relationship between the two given statement numbers. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:122</div></div>
+<div class="ttc" id="class_uses_html"><div class="ttname"><a href="class_uses.html">Uses</a></div><div class="ttdoc">A Uses class to store the Modifies relationship. </div><div class="ttdef"><b>Definition:</b> Uses.h:32</div></div>
+<div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdoc">A ProcTable class to store the procedure names from the source code. </div><div class="ttdef"><b>Definition:</b> ProcTable.h:35</div></div>
+<div class="ttc" id="class_parent_html"><div class="ttname"><a href="class_parent.html">Parent</a></div><div class="ttdoc">A Parent class to store the Parent relationship. </div><div class="ttdef"><b>Definition:</b> Parent.h:35</div></div>
+<div class="ttc" id="class_p_k_b_html_ae8c6b2bcd9dcac9d632770817c4a4d75"><div class="ttname"><a href="class_p_k_b.html#ae8c6b2bcd9dcac9d632770817c4a4d75">PKB::setToModifies</a></div><div class="ttdeci">void setToModifies(STMTNUM, VARNAME)</div><div class="ttdoc">Set a Modifies relationship between the given statement number and variable name. ...</div><div class="ttdef"><b>Definition:</b> PKB.cpp:127</div></div>
+<div class="ttc" id="class_p_k_b_html_a018bb1e51977cd8cf2e8e77b012f6aaa"><div class="ttname"><a href="class_p_k_b.html#a018bb1e51977cd8cf2e8e77b012f6aaa">PKB::setToParent</a></div><div class="ttdeci">void setToParent(STMTNUM, STMTNUM)</div><div class="ttdoc">Set a Parent relationship between the two given statement numbers. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:117</div></div>
+<div class="ttc" id="class_var_table_html"><div class="ttname"><a href="class_var_table.html">VarTable</a></div><div class="ttdoc">A VarTable class to store the variable names from the source code. </div><div class="ttdef"><b>Definition:</b> VarTable.h:35</div></div>
+<div class="ttc" id="class_p_k_b_html_a6af39a4b5b6f5ce6e7c85ba94516e006"><div class="ttname"><a href="class_p_k_b.html#a6af39a4b5b6f5ce6e7c85ba94516e006">PKB::setToUses</a></div><div class="ttdeci">void setToUses(STMTNUM, VARNAME)</div><div class="ttdoc">Set a Uses relationship between the given statement number and variable name. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:132</div></div>
+<div class="ttc" id="class_p_k_b_html_a35126033a0ce562e7657ced9034dd632"><div class="ttname"><a href="class_p_k_b.html#a35126033a0ce562e7657ced9034dd632">PKB::setToCalls</a></div><div class="ttdeci">void setToCalls(PROCNAME, PROCNAME, STMTNUM)</div><div class="ttdoc">Set a Calls relationship between the two given procedure name at the specified statement number...</div><div class="ttdef"><b>Definition:</b> PKB.cpp:137</div></div>
+<div class="ttc" id="class_p_k_b_html_a7fe6421fe1da7ac3f1ecbd2496167f32"><div class="ttname"><a href="class_p_k_b.html#a7fe6421fe1da7ac3f1ecbd2496167f32">PKB::setToTypeTable</a></div><div class="ttdeci">void setToTypeTable(STMTNUM, TypeTable::SynType)</div><div class="ttdoc">Set a SynType to the statement number at the type table. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:147</div></div>
+<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdoc">A TypeTable class to store the type of expression of a statement number from the source code...</div><div class="ttdef"><b>Definition:</b> TypeTable.h:33</div></div>
+<div class="ttc" id="class_p_k_b_html_a1089dcd6c17b7ff5f3d2b41b2b0c54e5"><div class="ttname"><a href="class_p_k_b.html#a1089dcd6c17b7ff5f3d2b41b2b0c54e5">PKB::PKB</a></div><div class="ttdeci">PKB()</div><div class="ttdoc">A constructor to initialize the PKB. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:9</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

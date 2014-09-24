@@ -90,6 +90,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">TypeTable Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A <a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> class to store the type of expression of a statement number from the source code.  
+ <a href="class_type_table.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_type_table_8h_source.html">TypeTable.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -113,18 +118,36 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2e259cf4fe4783d23af7305ed425c70c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e259cf4fe4783d23af7305ed425c70c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#a2e259cf4fe4783d23af7305ed425c70c">TypeTable</a> ()</td></tr>
+<tr class="memdesc:a2e259cf4fe4783d23af7305ed425c70c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor to initialize the <a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> class. <br /></td></tr>
+<tr class="separator:a2e259cf4fe4783d23af7305ed425c70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37cceed491a3cef275d5d098f7f14ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac37cceed491a3cef275d5d098f7f14ef"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#ac37cceed491a3cef275d5d098f7f14ef">~TypeTable</a> ()</td></tr>
+<tr class="memdesc:ac37cceed491a3cef275d5d098f7f14ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor to clear all the tables and set the instance flag of the singleton class to false. <br /></td></tr>
+<tr class="separator:ac37cceed491a3cef275d5d098f7f14ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac224a10618d69446a45b89ae73f4c82d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac224a10618d69446a45b89ae73f4c82d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>insertStmtNumAndType</b> (STMTNUM, SynType)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#ac224a10618d69446a45b89ae73f4c82d">insertStmtNumAndType</a> (STMTNUM, SynType)</td></tr>
+<tr class="memdesc:ac224a10618d69446a45b89ae73f4c82d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert a SynType to the given statement number. <br /></td></tr>
 <tr class="separator:ac224a10618d69446a45b89ae73f4c82d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22fa470a3d25eaba205bd5387de9fd1a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22fa470a3d25eaba205bd5387de9fd1a"></a>
-SynType&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> (STMTNUM)</td></tr>
+SynType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#a22fa470a3d25eaba205bd5387de9fd1a">getType</a> (STMTNUM)</td></tr>
+<tr class="memdesc:a22fa470a3d25eaba205bd5387de9fd1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the SynType given the statement number. If the statement number, return INVALID. <br /></td></tr>
 <tr class="separator:a22fa470a3d25eaba205bd5387de9fd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b085a5e6bdf501488e9df338b9b06f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b085a5e6bdf501488e9df338b9b06f9"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllStmts</b> (SynType)</td></tr>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#a9b085a5e6bdf501488e9df338b9b06f9">getAllStmts</a> (SynType)</td></tr>
+<tr class="memdesc:a9b085a5e6bdf501488e9df338b9b06f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the statement numbers given the SynType. <br /></td></tr>
 <tr class="separator:a9b085a5e6bdf501488e9df338b9b06f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaebd41616226ac203a2f013871ee8590"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaebd41616226ac203a2f013871ee8590"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isType</b> (SynType, STMTNUM)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#aaebd41616226ac203a2f013871ee8590">isType</a> (SynType, STMTNUM)</td></tr>
+<tr class="memdesc:aaebd41616226ac203a2f013871ee8590"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the given statement number has the given SynType. <br /></td></tr>
 <tr class="separator:aaebd41616226ac203a2f013871ee8590"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e1b06c3ff79a8a9fded9421c6519042"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e1b06c3ff79a8a9fded9421c6519042"></a>
+vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getStmtRange</b> ()</td></tr>
+<tr class="separator:a9e1b06c3ff79a8a9fded9421c6519042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ccb2a37118db433e1b58706e712d25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8ccb2a37118db433e1b58706e712d25"></a>
+vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getProgLineRange</b> ()</td></tr>
+<tr class="separator:af8ccb2a37118db433e1b58706e712d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -132,17 +155,25 @@ Static Public Member Functions</h2></td></tr>
 static SynType&#160;</td><td class="memItemRight" valign="bottom"><b>getSynType</b> (std::string)</td></tr>
 <tr class="separator:a9fc95ce68851af2d63a98221dafa0420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c6f0deee99e002f285fe6a72879fdf6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c6f0deee99e002f285fe6a72879fdf6"></a>
-static <a class="el" href="class_type_table.html">TypeTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+static <a class="el" href="class_type_table.html">TypeTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_type_table.html#a3c6f0deee99e002f285fe6a72879fdf6">getInstance</a> ()</td></tr>
+<tr class="memdesc:a3c6f0deee99e002f285fe6a72879fdf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the instance of <a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> singleton class. <br /></td></tr>
 <tr class="separator:a3c6f0deee99e002f285fe6a72879fdf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A <a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> class to store the type of expression of a statement number from the source code. </p>
+<p>Overview: <a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> is responsible to :</p><ul>
+<li>Store all the type of expression of a statement number from the source code</li>
+<li>Allow speedy access to the required datas</li>
+</ul>
+<p><a class="el" href="class_type_table.html" title="A TypeTable class to store the type of expression of a statement number from the source code...">TypeTable</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_type_table.html">TypeTable</a>* <a class="code" href="class_type_table.html#a3c6f0deee99e002f285fe6a72879fdf6">getInstance</a>();</div>
+</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_type_table_8h_source.html">TypeTable.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/TypeTable.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2014 15:08:57 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
