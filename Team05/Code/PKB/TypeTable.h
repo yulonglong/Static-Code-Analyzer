@@ -52,8 +52,11 @@ public:
 	//! Return all the statement numbers given the SynType.
 	vector<STMTNUM> getAllStmts(SynType);
 	//! Return true if the given statement number has the given SynType.
-	bool isType(SynType, STMTNUM); 
+	bool isType(SynType, STMTNUM);
 
+	//NEW METHODS
+	vector<int> getStmtRange(); //return first and last stmtNum push_back into the vector
+	vector<int> getProgLineRange();
 };
 
 #endif

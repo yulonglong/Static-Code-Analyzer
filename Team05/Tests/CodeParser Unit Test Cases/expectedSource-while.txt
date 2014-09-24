@@ -1,0 +1,209 @@
+-1.) root : program
+Parent -1.) root : program
+-1.) First : procedure
+Parent -1.) First : procedure
+-1.) First : stmtLst
+Parent -1.) First : stmtLst
+1.) = : assign
+Parent 1.) = : assign
+1.) a : variable
+Parent 1.) = : assign
+1.) 5 : constant
+Parent -1.) First : stmtLst
+2.) = : assign
+Parent 2.) = : assign
+2.) b : variable
+Parent 2.) = : assign
+2.) 5 : constant
+Parent -1.) First : stmtLst
+3.) = : assign
+Parent 3.) = : assign
+3.) c : variable
+Parent 3.) = : assign
+3.) 5 : constant
+Parent -1.) First : stmtLst
+4.) = : assign
+Parent 4.) = : assign
+4.) d : variable
+Parent 4.) = : assign
+4.) 5 : constant
+Parent -1.) First : stmtLst
+5.) = : assign
+Parent 5.) = : assign
+5.) e : variable
+Parent 5.) = : assign
+5.) 5 : constant
+Parent -1.) First : stmtLst
+6.) 6 : while
+Parent 6.) 6 : while
+6.) a : variable
+Parent 6.) 6 : while
+6.) 6 : stmtLst
+Parent 6.) 6 : stmtLst
+7.) = : assign
+Parent 7.) = : assign
+7.) a : variable
+Parent 7.) = : assign
+7.) + : operator
+Parent 7.) + : operator
+7.) a : variable
+Parent 7.) + : operator
+7.) 1 : constant
+Parent 6.) 6 : stmtLst
+8.) = : assign
+Parent 8.) = : assign
+8.) b : variable
+Parent 8.) = : assign
+8.) + : operator
+Parent 8.) + : operator
+8.) b : variable
+Parent 8.) + : operator
+8.) 1 : constant
+Parent 6.) 6 : stmtLst
+9.) = : assign
+Parent 9.) = : assign
+9.) c : variable
+Parent 9.) = : assign
+9.) + : operator
+Parent 9.) + : operator
+9.) c : variable
+Parent 9.) + : operator
+9.) 1 : constant
+Parent 6.) 6 : stmtLst
+10.) 10 : while
+Parent 10.) 10 : while
+10.) b : variable
+Parent 10.) 10 : while
+10.) 10 : stmtLst
+Parent 10.) 10 : stmtLst
+11.) = : assign
+Parent 11.) = : assign
+11.) d : variable
+Parent 11.) = : assign
+11.) + : operator
+Parent 11.) + : operator
+11.) d : variable
+Parent 11.) + : operator
+11.) 1 : constant
+Parent 10.) 10 : stmtLst
+12.) = : assign
+Parent 12.) = : assign
+12.) e : variable
+Parent 12.) = : assign
+12.) + : operator
+Parent 12.) + : operator
+12.) e : variable
+Parent 12.) + : operator
+12.) 1 : constant
+Parent 10.) 10 : stmtLst
+13.) 13 : while
+Parent 13.) 13 : while
+13.) c : variable
+Parent 13.) 13 : while
+13.) 13 : stmtLst
+Parent 13.) 13 : stmtLst
+14.) = : assign
+Parent 14.) = : assign
+14.) f : variable
+Parent 14.) = : assign
+14.) 1 : constant
+Parent 13.) 13 : stmtLst
+15.) = : assign
+Parent 15.) = : assign
+15.) g : variable
+Parent 15.) = : assign
+15.) 1 : constant
+Parent 10.) 10 : stmtLst
+16.) = : assign
+Parent 16.) = : assign
+16.) e : variable
+Parent 16.) = : assign
+16.) + : operator
+Parent 16.) + : operator
+16.) e : variable
+Parent 16.) + : operator
+16.) 2 : constant
+Parent 6.) 6 : stmtLst
+17.) 17 : while
+Parent 17.) 17 : while
+17.) d : variable
+Parent 17.) 17 : while
+17.) 17 : stmtLst
+Parent 17.) 17 : stmtLst
+18.) = : assign
+Parent 18.) = : assign
+18.) h : variable
+Parent 18.) = : assign
+18.) 2 : constant
+Parent 17.) 17 : stmtLst
+19.) = : assign
+Parent 19.) = : assign
+19.) i : variable
+Parent 19.) = : assign
+19.) 2 : constant
+Parent 17.) 17 : stmtLst
+20.) = : assign
+Parent 20.) = : assign
+20.) j : variable
+Parent 20.) = : assign
+20.) 2 : constant
+Parent -1.) First : stmtLst
+21.) 21 : while
+Parent 21.) 21 : while
+21.) e : variable
+Parent 21.) 21 : while
+21.) 21 : stmtLst
+Parent 21.) 21 : stmtLst
+22.) = : assign
+Parent 22.) = : assign
+22.) k : variable
+Parent 22.) = : assign
+22.) 3 : constant
+Parent 21.) 21 : stmtLst
+23.) 23 : while
+Parent 23.) 23 : while
+23.) f : variable
+Parent 23.) 23 : while
+23.) 23 : stmtLst
+Parent 23.) 23 : stmtLst
+24.) = : assign
+Parent 24.) = : assign
+24.) l : variable
+Parent 24.) = : assign
+24.) 6 : constant
+Parent 23.) 23 : stmtLst
+25.) 25 : while
+Parent 25.) 25 : while
+25.) g : variable
+Parent 25.) 25 : while
+25.) 25 : stmtLst
+Parent 25.) 25 : stmtLst
+26.) 26 : while
+Parent 26.) 26 : while
+26.) j : variable
+Parent 26.) 26 : while
+26.) 26 : stmtLst
+Parent 26.) 26 : stmtLst
+27.) = : assign
+Parent 27.) = : assign
+27.) m : variable
+Parent 27.) = : assign
+27.) 7 : constant
+Parent 26.) 26 : stmtLst
+28.) 28 : while
+Parent 28.) 28 : while
+28.) k : variable
+Parent 28.) 28 : while
+28.) 28 : stmtLst
+Parent 28.) 28 : stmtLst
+29.) = : assign
+Parent 29.) = : assign
+29.) f : variable
+Parent 29.) = : assign
+29.) 1 : constant
+Parent 28.) 28 : stmtLst
+30.) = : assign
+Parent 30.) = : assign
+30.) k : variable
+Parent 30.) = : assign
+30.) 1 : constant

@@ -264,6 +264,10 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 		while(istream>>singleToken){
 			tokenizeTokens(singleToken,tokens);
 		}
+		if(tokens.size()==0){
+			continue;
+		}
+
 		/*
 		for(int i=0;i<tokens.size();i++){
 			cout << tokens[i] << endl;

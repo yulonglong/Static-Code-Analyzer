@@ -1,0 +1,23 @@
+procedure First { x = 2;
+	x = 3;
+	call Second; }
+procedure Second { x = 0;
+	i = 5;
+	while i {
+		x = x+ 2 * y;
+		call Third;
+		i = i -1 }
+	if x then {
+		call Fourth; } else {
+		call Fifth;
+		call Fourth; }
+	z = z+x+1;
+	y = z + 2;
+	x = x* y + z; }
+procedure Third { z = 5;
+	v = z;}
+procedure Fourth { call Sixth;
+	call First; }
+procedure Fifth { call Seventh; } 
+procedure Sixth { call Second; }
+procedure Seventh { call Sixth; }

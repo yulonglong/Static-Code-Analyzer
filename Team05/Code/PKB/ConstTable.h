@@ -51,6 +51,10 @@ public:
 	CONSTVALUE getConst (CONSTINDEX);
 	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
+
+
+	//NEW METHOD
+	vector<int> getAllConst();
 };
 
 #endif

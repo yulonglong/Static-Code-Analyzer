@@ -1,0 +1,53 @@
+procedure Main {
+	x = 8;
+	left = x;
+	right = left + 2;
+	temp = 1;
+	radius = x + left;
+	temp = temp + 2;
+	radius1 = x + left;
+	while x {
+		quota = left + right;
+		temp = temp + 3;
+		right = right + x;
+		iter = right + 1;
+		left = right + x;
+		temp = temp + 4;
+		temp = temp + 5;
+		iter = iter + 1;
+		temp = temp + 6;
+	}
+	x = left + x + right + radius +5;
+	while iter {
+		x = right+3 + 2+left;
+		temp = temp + 7;
+		while iter {
+			iter = iter + 1;              
+		}
+		while x {
+			right = x + 1;
+			while left {
+				while right {
+					left = right + x;
+					while iter {
+						x = x + left + right + quota + radius;
+						left = right + 5;
+					}
+					right = x + 3;
+				}
+			}
+			x = x + left + right;
+		}
+		x = x + left + right + quota + radius;
+		while iter {
+			iter = iter  + 1;
+		}
+	}
+	x = x + center ;
+	if x then {
+		iter = iter + 1;
+	}
+	else {
+		left = left + 1;
+	}
+}		
