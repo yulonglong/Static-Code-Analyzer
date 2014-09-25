@@ -1535,6 +1535,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		else {
 			cout<<"hihihihi"<<endl;
 			answer = mod->getModifies(i1->second,varName);
+			cout<<"answer is empty: "<<answer.empty()<<endl;
 			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 				cout<<"modifiesAnswer"<<*it<<" "<<varTab->getVarIndex(varName)<<endl;
 				modAns.push_back(Pair (*it, varTab->getVarIndex(varName)));

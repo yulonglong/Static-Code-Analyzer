@@ -197,6 +197,8 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	//Modifies(a, "x") r11
 	Modifies* mod = pkb->getModifies();
+	VarTable *varT = pkb->getVarTable();
+	varT->insertVar("x");
 	mod->setModifies(2, "x");
 	r = Relationship("Modifies", "a", "\"x\"");
 
