@@ -37,6 +37,7 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryValidationWith1);
 	CPPUNIT_TEST(testQueryValidationWith2);
 	CPPUNIT_TEST(testQueryValidationWith3);
+	CPPUNIT_TEST(testQBasic1F_invalid_queries);
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -71,6 +72,7 @@ public:
 	void testQueryValidationWith1();
 	void testQueryValidationWith2();
 	void testQueryValidationWith3();
+	void testQBasic1F_invalid_queries();
 };
 #endif
     

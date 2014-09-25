@@ -50,7 +50,7 @@ const string QueryParser::ref = "(?:" + attrRef + "|" + synonym + "|" + "\""+IDE
 const string QueryParser::attrCompare = "(?:" + ref + "\\s*=\\s*" + ref + ")";
 const string QueryParser::attrCond = attrCompare + "(?:" + "\\s+" + "and" + "\\s+" + attrCompare + ")*";
 //+ "\\s+(?:" +"and\\s+" + attrCompare + "\\s*)*";
-const string QueryParser::withCl = "(?:[Ww]ith\\s+(?:" + attrCond + ")"+"\\s*)";
+const string QueryParser::withCl = "(?:[Ww]ith\\s+(?:" + attrCond + ")"+")";
 
 const string QueryParser::select = "[Ss]elect";
 const string QueryParser::such = "such";
@@ -80,7 +80,7 @@ const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + U
 const string QueryParser::allClause = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
 
 const string QueryParser::relCond = relRef + "(?:" + "\\s+" + "and" + "\\s+" + relRef + ")*";
-const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond +"\\s*";
+const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
 
 const string QueryParser::expressionSpec = "\"" + expr + "\"" + "|" + "_\"" + expr + "\"_" + "|" + "_";
@@ -88,11 +88,11 @@ const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+v
 const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::pattern = "(?:" + assignCl + "|" + whileCl + "|" + ifCl + ")";
-const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";;
-const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + "\\s*)";
+const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";
+const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + ")";
 
 //select clause
-const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"\\s+"+"(?:"+suchThatCl+"|"+patternCl+"|"+withCl+")*";
+const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"(?:\\s+(?:"+suchThatCl+"|"+patternCl+"|"+withCl+"))*";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};

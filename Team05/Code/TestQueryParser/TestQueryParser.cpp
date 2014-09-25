@@ -1354,3 +1354,447 @@ void QueryParserTest::testQueryValidationWith3(){
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
 	return;
 }
+
+void QueryParserTest::testQBasic1F_invalid_queries(){
+	QueryParser* qp;
+	Query parsedQuery;
+	string query;
+	bool isValid = true;
+	bool expectedIsValid = false;
+
+	//1
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; variable v; Select pl with pl.prog_line# = v.varName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//2
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; variable v;Select v with pl.prog_line# = v.varName ";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//3
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; procedure p;Select pl with pl.prog_line# = p.procName ";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//4
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; procedure p;Select p with pl.prog_line# = p.procName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//5
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; variable v;Select c with c.value = v.varName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//6
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; procedure p;Select c with c.value = p.procName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//7
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; variable v;Select v with c.value = v.varName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//8
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; procedure p; Select p with c.value = p.procName";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//17
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; procedure p; Select pl with pl.procName = \"wrong\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//18
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; procedure p;Select p with p.prog_line# = 34";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//19
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; procedure p;Select pl with pl.varName = \"stillwrong\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//20
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; Select pl with pl.value = 56";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//21
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl;Select pl with pl.stmt# = 999";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//22
+	isValid = true;
+	qp = new QueryParser();
+	query = "procedure p; Select p with p.varName = \"wrong\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//23
+	isValid = true;
+	qp = new QueryParser();
+	query = "procedure p; Select p with p.value = 23";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//24
+	isValid = true;
+	qp = new QueryParser();
+	query = "variable v; Select v with v.procName = \"fantastic\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//25
+	isValid = true;
+	qp = new QueryParser();
+	query = "variable v; Select v with v.value = 888";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//26
+	isValid = true;
+	qp = new QueryParser();
+	query = "variable v; Select v with v.prog_line# = 89797";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//27
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s; Select s with s.procName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//28
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s; Select s with s.varName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//29
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s;Select s with s.value = 90000";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//30
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s;Select s with s.prog_line# = 999";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//31
+	isValid = true;
+	qp = new QueryParser();
+	query = "while s; Select s with s.procName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//32
+	isValid = true;
+	qp = new QueryParser();
+	query = "while s; Select s with s.varName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//33
+	isValid = true;
+	qp = new QueryParser();
+	query = "while s;Select s with s.value = 90000";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//34
+	isValid = true;
+	qp = new QueryParser();
+	query = "while s; Select s with s.prog_line# = 999";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//35
+	isValid = true;
+	qp = new QueryParser();
+	query = "if s; Select s with s.procName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//36
+	isValid = true;
+	qp = new QueryParser();
+	query = "if s;Select s with s.varName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//37
+	isValid = true;
+	qp = new QueryParser();
+	query = "if s; Select s with s.value = 90000";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//38
+	isValid = true;
+	qp = new QueryParser();
+	query = "if s; Select s with s.prog_line# = 999";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//39
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign s; Select s with s.procName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//40
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign s; Select s with s.varName = \"somthing\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//41
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign s; Select s with s.value = 90000";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//42
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign s; Select s with s.prog_line# = 999";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//43
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c;Select c with c.procName = \"wrong\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//44
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; Select c with c.stmt# = 78";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//45
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c;Select c with c.varName = \"wrong\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//46
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; Select c with c.prog_line# = 89";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//47
+	isValid = true;
+	qp = new QueryParser();
+	query = "procedure p; Select p with p.procName = 89";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//48
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s; Select s with s.stmt# = \"number\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//49
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign a; Select a with a.stmt# = \"number\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//50
+	isValid = true;
+	qp = new QueryParser();
+	query = "while w; Select w with w.stmt# = \"number\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//51
+	isValid = true;
+	qp = new QueryParser();
+	query = "if i; Select i with i.stmt# = \"number\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//52
+	isValid = true;
+	qp = new QueryParser();
+	query = "variable v; Select v with v.varName = 000";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//53
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; Select c with c.value = somenum";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//54
+	isValid = true;
+	qp = new QueryParser();
+	query = "constant c; Select c with c.value = \"somenum\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//55
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; Select pl with pl.prog_line# = somenum";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//56
+	isValid = true;
+	qp = new QueryParser();
+	query = "prog_line pl; Select pl with pl.prog_line# = \"somenum\"";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//57
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "constant c; Select c with c.value = 0098";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//58
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s; Select s with s.stmt# = 009";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//59
+	isValid = true;
+	qp = new QueryParser();
+	query = "stmt s; Select s with s.stmt# = number";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//60
+	isValid = true;
+	qp = new QueryParser();
+	query = "assign a; Select a with a.stmt# = number";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//61
+	isValid = true;
+	qp = new QueryParser();
+	query = "while w; Select w with w.stmt# = number";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//62
+	isValid = true;
+	qp = new QueryParser();
+	query = "if i; Select i with i.stmt# = number";
+	parsedQuery = qp->queryParse(query,isValid);
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//63
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; Select BOOLEAN such that Calls (s1, s2);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//64
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; procedure p; Select p such that Calls (s1, s2);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//65
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; procedure p; Select p such that Calls (p, s1);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//66
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1; procedure p; Select BOOLEAN such that Calls (p, s1);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//67
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; procedure p; Select p such that Calls (s1, p);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//68
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; procedure p; Select BOOLEAN such that Calls (s1, p)";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//69
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; constant c; procedure p; Select BOOLEAN such that Calls* (p, c);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//70
+	//isValid = true;
+	//qp = new QueryParser();
+	//query = "stmt s1, s2; procedure p; constant c; Select p such that Calls* (c, p);";
+	//parsedQuery = qp->queryParse(query,isValid);
+	//CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	return;
+}
