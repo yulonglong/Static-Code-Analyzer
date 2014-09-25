@@ -446,91 +446,6 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 			}
 		}
-
-		/*
-		//else if only one exist and the other does not. get all from the one that does not exist and remove unnecessary tuples. push QueryEvaluator::relAns true
-		else if(isExistInLinkages(tk1)){
-			set<int> ans = retrieveTokenEvaluatedAnswers(tk1);
-			vector<Pair> finalAns;
-			if(i1->second==TypeTable::PROCEDURE){
-				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(v->getVarIndex(p->getProcName(*it))!=-1){
-						finalAns.push_back(Pair (*it, v->getVarIndex(p->getProcName(*it))));
-					}
-				}
-			}
-
-			else if(i1->second == TypeTable::VARIABLE){
-				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(p->getProcIndex(v->getVarName(*it))!=-1){
-						finalAns.push_back(Pair (*it, p->getProcIndex(v->getVarName(*it))));
-					}
-				}
-			}
-
-			else {
-				if(i2->second==TypeTable::CONSTANT){
-					for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-						stringstream s;
-						s << *it;					
-						if(c->getConstIndex(s.str())!=-1){
-							finalAns.push_back(Pair (*it, 1, tk1, tk2));
-						}
-					}
-				}
-				else if(i2->second==TypeTable::STMT){
-					//request for stmt range
-				}
-				else{//PROGLINE
-					//request for progline range
-				}
-
-				removePairs(finalAns, tk1);
-			}
-
-			removePairs(finalAns, tk1, 1);
-		}
-
-		else if(isExistInLinkages(tk2)){
-			set<int> ans = retrieveTokenEvaluatedAnswers(tk2);
-			vector<Pair> finalAns;
-			if(i2->second==TypeTable::PROCEDURE){
-				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(v->getVarName(*it)!="-1"){
-						finalAns.push_back(Pair (1, *it, tk1, tk2));
-					}
-				}
-			}
-
-			else if(i2->second == TypeTable::VARIABLE){
-				for(set<int>::iterator it = ans.begin(); it!=ans.end(); it++){
-					if(p->getProcName(*it)!="-1"){
-						finalAns.push_back(Pair (1, *it, tk1, tk2));
-					}
-				}
-			}
-
-			else {
-				if(i1->second==TypeTable::CONSTANT){
-					for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-						stringstream s;
-						s << *it;					
-						if(c->getConstIndex(s.str())!=-1){
-							finalAns.push_back(Pair (1, *it, tk1, tk2));
-						}
-					}
-				}
-				else if(i1->second==TypeTable::STMT){
-					//request for stmt range
-				}
-				else{//PROGLINE
-					//request for progline range
-				} 
-
-				removePairs(finalAns, tk2);
-			}
-		}*/
-		
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
@@ -1344,20 +1259,21 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 	
 	//Retrieve the set of int of the token that was evaluated
 	set<int> s = retrieveTokenEvaluatedAnswers(tk);
-
+	cout<<"relationsAns: "<<relationsAns->at(1).ans1<<endl;//<<relationsAns->at(0).ans2<<relationsAns->at(1).ans1<<relationsAns->at(1).ans2<<endl;
 	//Delete it from the ans pairs made
 	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
+		cout<<"in for loop"<<endl;
 		if(pairIndex==1){
 
 			//if ans from relationsAns is not found in the set, remove it
 			if(s.find(it->ans1)==s.end()){
-				relationsAns->erase(it);
+				it = relationsAns->erase(it);
 			}
 		}
 		else {
-
+			cout<<"in else"<<endl;
 			if(s.find(it->ans2)==s.end()){
-				relationsAns->erase(it);
+				it = relationsAns->erase(it);
 			}
 		}
 	}
@@ -1376,29 +1292,78 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Parent(a,b)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
 		answer = t->getAllStmts(i1->second);
+
+		//Parent(_, b)
+		if(tk1=="_"){
+			answer = t->getAllStmts(TypeTable::STMT);
+		}
 		
 		for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-			vector<int> children = p->getChildren(i1->second, *it);
+			
+			vector<int> children;
+			if(tk2=="_"){
+				children = p->getChildren(TypeTable::STMT, *it);
+			}else{
+				children = p->getChildren(i2->second, *it);
+			}
 			for(vector<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
 				parentAns.push_back(Pair(*it, *it2));
+				cout<<"it" << *it << "it2"<<*it2<<endl;
 			}
 		}
 	}
 	//Parent(a,3)
-	else if(isalpha(tk1[0])){
+	else if(isalpha(tk1[0]) || tk1=="_"){
+
 		cout<<"Calling getParent(TYPE, STMTNUM)"<<endl;
-		int parent = p->getParent(i1->second, atoi(tk2.c_str()));
-		parentAns.push_back(Pair(parent, atoi(tk2.c_str())));
+		int parent;
+		//Parent(_,3)
+		if(tk1=="_"){
+			parent = p->getParent(TypeTable::STMT, atoi(tk2.c_str()));
+			if(parent!=-1){
+				parentAns.push_back(Pair(-1,-1));
+			}
+			else {
+				parentAns.push_back(Pair(-2,-2));
+			}
+		}
+		else {
+			parent = p->getParent(i1->second, atoi(tk2.c_str()));
+			if(parent!=-1){
+				parentAns.push_back(Pair(parent, atoi(tk2.c_str())));
+			}
+		}
 	}
 
 	//Parent(3,a)
-	else if(isalpha(tk2[0])){
-		vector<int> children = p->getChildren(i2->second, atoi(tk1.c_str()));
-		for(vector<int>::iterator it=children.begin(); it!=children.end(); it++){
-			parentAns.push_back(Pair(atoi(tk1.c_str()), *it));
+	else if(isalpha(tk2[0]) || tk2=="_"){
+		cout<<"Parent(STMTNUM, TYPE)"<<endl;
+		if(tk2!="_"){
+			vector<int> children = p->getChildren(i2->second, atoi(tk1.c_str()));
+			for(vector<int>::iterator it=children.begin(); it!=children.end(); it++){
+				parentAns.push_back(Pair(atoi(tk1.c_str()), *it));
+				cout<<"in for loop"<<endl;
+			}
+		} else {
+			vector<int> children = p->getChildren(TypeTable::STMT, atoi(tk1.c_str()));
+			if(!children.empty()){
+				parentAns.push_back(Pair(-1,-1));
+			}else {
+				parentAns.push_back(Pair(-2,-2));
+			}
+		}
+	}
+
+	//Parent(_,_)
+	else if(tk1=="_" && tk2 == "_"){
+		vector<int> ans = p->getParent(TypeTable::STMT, TypeTable::STMT);
+		if(!ans.empty()){
+			parentAns.push_back(Pair(-1,-1));
+		}else {
+			parentAns.push_back(Pair(-2,-2));
 		}
 	}
 
@@ -1412,9 +1377,11 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			 parentAns.push_back(Pair (-2,-2));
 		 }
 	}
+	
 
+	cout<<"before intersect pairs"<<endl;
 	intersectPairs(tk1,tk2,&parentAns,relIndex);
-
+	cout<<"after intersect pairs"<<endl;
 	QueryEvaluator::relAns.insert(make_pair(relIndex, parentAns));
 }
 
@@ -1633,9 +1600,13 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	//If only b exist
 	else if(isExistInLinkages(tk2)){
+		cout<<"supposedarea"<<endl;
 		removePairsFromRelAns(ans, tk2, 2);
+		cout<<"1"<<endl;
 		removePairs(*ans, tk2, 2);
+		cout<<"2"<<endl;
 		insertLinks(tk2, relIndex);
+		cout<<"end supposedArea"<<endl;
 	}
 
 	else {
