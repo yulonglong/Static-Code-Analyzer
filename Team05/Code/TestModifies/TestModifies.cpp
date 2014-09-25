@@ -62,6 +62,7 @@ void ModifiesTest::tearDown() {
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
 
 void ModifiesTest::testGetModifies() {
+	modifies->printModifiesTable();
 	vector<VARINDEX> v = modifies->getModifies(6); 
 	CPPUNIT_ASSERT(varTable->getVarName(v.at(0)) == "x");
 	CPPUNIT_ASSERT(varTable->getVarName(v.at(1)) == "i");

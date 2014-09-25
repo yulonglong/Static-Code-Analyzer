@@ -74,6 +74,8 @@ public:
 	vector<PROCINDEX> getModifiesProcVar(VARNAME);
 	//! If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
 	bool isModifiesProc(PROCNAME, VARNAME); 
+
+	void printModifiesTable();
 };
 
 #endif

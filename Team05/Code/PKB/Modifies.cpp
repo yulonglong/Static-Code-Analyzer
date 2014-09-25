@@ -214,3 +214,17 @@ bool Modifies::isModifiesProc(PROCNAME p, VARNAME v){
 	}
 	return false;
 }
+
+void Modifies::printModifiesTable() {
+	cout<< "Modifies Table" << endl;
+	for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
+		cout<< it->first << " modifies ";
+		vector<VARINDEX> temp = it->second; 
+		vector<VARINDEX>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			string name = varTable->getVarName(*iter);
+			cout<< name<< ",";
+		}		
+		cout<<endl;
+	}
+}

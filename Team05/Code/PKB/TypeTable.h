@@ -55,8 +55,7 @@ public:
 	bool isType(SynType, STMTNUM);
 
 	//NEW METHODS
-	vector<int> getStmtRange(); //return first and last stmtNum push_back into the vector
-	vector<int> getProgLineRange();
+	STMTNUM getStmtRange(); //return first and last stmtNum push_back into the vector
 };
 
 #endif
