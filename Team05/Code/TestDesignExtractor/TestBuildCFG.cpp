@@ -52,6 +52,8 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	v = nextTable->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
+	nextTable->printNextTable();
+
 	pkb->~PKB();
 
 	/*
@@ -126,6 +128,9 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	expected = "6 "; 
 	v = nextTable->getNext(22);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+
+	nextTable->printNextTable();
+
 	pkb->~PKB();
 
 }
@@ -160,11 +165,9 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	vector<int> v;
-	string expected = "7 21 "; 
-	v = nextTable->getNext(6);
-	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	nextTable->printNextTable();
 
+	
 	pkb->~PKB();
 }
 
@@ -198,10 +201,8 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	vector<int> v;
-	//string expected = "7 21 "; 
-	//v = nextTable->getNext(6);
-	//CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	nextTable->printNextTable();
 
 	pkb->~PKB();
 }
@@ -269,6 +270,8 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = nextTable->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
+	nextTable->printNextTable();
+
 	pkb->~PKB();
 }
 

@@ -12,7 +12,7 @@ class BuildCFGTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST_SUITE( BuildCFGTest ); // Note 3 
 	//CPPUNIT_TEST( testBuildCFGForAssignAndCallStmts );
 	//CPPUNIT_TEST( testBuildCFGForWhileStmts );
-	//CPPUNIT_TEST( testBuildCFGForIfStmts ); // need to debug after AST is fine! 
+	//CPPUNIT_TEST( testBuildCFGForIfStmts );
 	CPPUNIT_TEST( testBuildCFGForNestedIfStmts ); // need to debug after AST is fine! 
 	//CPPUNIT_TEST( testBuildCFGForNestedWhileStmts );
 	

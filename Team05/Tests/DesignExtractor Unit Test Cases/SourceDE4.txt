@@ -14,7 +14,9 @@ procedure Second{
 		else{
 			a = g;
 		}
-	call Fourth; }	
+		call Fourth; 
+	}	
+	s = 2;
 }
 
 procedure Fourth{ 
