@@ -14,8 +14,6 @@
 class QueryEvaluator{ 
 private:
 
-
-
 	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
@@ -73,7 +71,7 @@ public:
 	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateNextStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
-	void recursiveNext(int, int, std::vector<Pair> *);
+	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType);
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;
 	static std::unordered_map<int, vector<std::string>> relParameters;

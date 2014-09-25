@@ -774,7 +774,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 				stmt = n->getPrevious(*it);
 				while(stmt!=-1){
 					if(t->getType(stmt) == i1->second){
-						nextStarAns.insert(Pair (stmt, *it);
+						nextStarAns.insert(Pair (stmt, *it));
 					}
 					stmt = n->getPrevious(stmt);
 				}
