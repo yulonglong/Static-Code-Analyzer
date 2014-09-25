@@ -11,14 +11,15 @@ TypeTable* typeTable;
 void NextTest::setUp() {
 	pkb = PKB::getInstance();
 	next1 = pkb->getNext();
-	typeTable = pkb->getTypeTable();
+	typeTable = TypeTable::getInstance();
+	next1 = Next::getInstance(typeTable);
 }
 
 void NextTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	next1 = Next::getInstance();
 	typeTable = TypeTable::getInstance();
+	next1 = Next::getInstance(typeTable);
 }
 
 // Registers the fixture into the 'registry'
@@ -30,7 +31,7 @@ void NextTest::testSetAndGetNext() {
 	next1->setNext(1,4);
 	next1->setNext(4,5);
 
-
+	next1->printNextTable();
 
 	vector<STMTNUM> ans (1,2);
 	ans.push_back(3);
@@ -41,7 +42,6 @@ void NextTest::testSetAndGetNext() {
 	ans.push_back(5);
 	CPPUNIT_ASSERT(next1->getNext(4) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(next1->getNext(999) == ans);
 	CPPUNIT_ASSERT(next1->getNext(5) == ans);
 

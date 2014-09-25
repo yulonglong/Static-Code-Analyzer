@@ -56,6 +56,7 @@ public:
 	//ADDITIONAL METHODS
 	bool isNext(STMTNUM, STMTNUM);
 
+	void printNextTable();
 };
 
 #endif
