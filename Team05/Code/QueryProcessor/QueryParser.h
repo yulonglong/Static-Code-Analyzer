@@ -95,6 +95,7 @@ using namespace std;
 class QueryParser{
 private:
 	//constant string
+	static const string AND;
 	static const string BOOLEAN;
 	static const string MODIFIES;
 	static const string USES;
