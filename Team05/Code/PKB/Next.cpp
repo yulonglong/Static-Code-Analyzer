@@ -71,4 +71,15 @@ bool Next::isNext(STMTNUM s, STMTNUM s1){
 	return true;
 }
 
-
+void Next::printNextTable() {
+	cout<< "Next Table" << endl;
+	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
+		cout<< it->first << " has next consisting of ";
+		vector<STMTNUM> temp = it->second; 
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			cout<< *iter<< ",";
+		}		
+		cout<<endl;
+	}
+}

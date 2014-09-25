@@ -5,7 +5,8 @@ procedure Second {
 	if a then {
 		d = 2;
 		e = 2; 
-	} else {
+	}
+	else {
 		d = 3;
 		e = 3; 
 	}
@@ -13,35 +14,44 @@ procedure Second {
 		a = 3;
 		if c then {
 			d = c + c;	
-		} else {
+		}
+		else {
 			if d then {
 				c = c + c;
-			} else {
+			}
+			else {
 				c = c - 1;
 			}
 		}
-	} else {
+	}
+	else {
 		if a then {
 			f = e + 2;	
-		} else {
+		}
+		else {
 			if b then {
 				if c then {
 					c = 1;	
-				} else {
+				}
+				else {
 					if b then {
 						if d then {
 							c = c + c;	
-						} else {
+						}
+						else {
 							b = 2; 	
 						}
-					} else {
+					}
+					else {
 						b = 1; 	
 					}
 				}
-			} else {
+			}
+			else {
 				if a then {
 					c = 1; 
-				} else {
+				}
+				else {
 					if d then {
 						e = 1; 
 					} else { 
@@ -53,7 +63,8 @@ procedure Second {
 		merge = 1;
 		if merge then {
 			merge = merge + 1;
-		} else {
+		}
+		else {
 			merge = merge - 1;
 		}
 		merge 2 = 1;
@@ -61,7 +72,8 @@ procedure Second {
 	final = 1;
 	if final then {
 		final = final + 1;
-	} else {
+	}
+	else {
 		final = final - 1;
 	}
 }
