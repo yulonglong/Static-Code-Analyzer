@@ -66,12 +66,11 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 	}
 }
 
-vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	return -1 if doesn't exist
+vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	Return an empty vector if not found.
 	vector<VARINDEX> ans;
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
 		if(index==-1){
-			ans = vector<STMTNUM> (1,-1);
 			return ans;
 		}
 		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
@@ -90,15 +89,10 @@ vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a
 				}
 			}
 		}
-		if(ans.empty()){
-			ans = vector<STMTNUM> (1,-1);
-			return ans;
-		}
-		else
-			sort(ans.begin(),ans.end());
+		sort(ans.begin(),ans.end());
 		return ans;
 	}catch(...){
-		ans = vector<STMTNUM> (1,-1);
+		ans.clear();
 		return ans;
 	}
 }
@@ -109,7 +103,6 @@ vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	retur
 		ans = usesTable.at(s);
 		return ans;
 	}catch(...){
-		ans = vector<VARINDEX> (1,-1);
 		return ans;
 	}
 }
@@ -124,12 +117,10 @@ vector<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); r
 			}
 		}
 		sort(ans.begin(),ans.end());
-		if(ans.empty())
-			ans = vector<VARINDEX> (1,-1);
 		return ans;
 	}catch(...){
+		ans.clear();
 	}
-	ans = vector<VARINDEX> (1,-1);
 	return ans;
 }
 
@@ -154,7 +145,6 @@ vector<VARINDEX> Uses::getUsesProc(PROCINDEX p) {
 		ans = usesProcTable.at(p);
 		return ans;
 	} catch(...){
-		ans = vector<VARINDEX> (1,-1);
 		return ans;
 	}
 }
@@ -194,8 +184,7 @@ vector<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
 			}		
 		}
 	} catch (...){
-		ans = vector<PROCINDEX> (1,-1);
-		return ans;
+		ans.clear();
 	}
 	return ans;
 }

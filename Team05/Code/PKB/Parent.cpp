@@ -113,28 +113,33 @@ bool Parent::isChildren(SYNTYPE t, STMTNUM s){
 
 
 vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
+	vector<STMTNUM> ans;
 	try{
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->isType(t2,temp)){
-			return typeTable->getAllStmts(t1);
+			ans = typeTable->getAllStmts(t1);
 		}
+		return ans;
 	}catch(...){
+		return ans;
 	}
-	return vector<STMTNUM> (1,-1);
+	
 }
 
 vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
+	vector<STMTNUM> ans;
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
 			if(typeTable->isType(t2,*it)){
-				return typeTable->getAllStmts(t1);
+				ans = typeTable->getAllStmts(t1);
 			}
 		}
+		return ans;
 	}catch(...){
+		return ans;
 	}
-	return vector<STMTNUM> (1,-1);
 }
 
 vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
@@ -164,8 +169,6 @@ vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
 			continue; 
 		}
 	}
-	if(list.empty())
-		return vector<STMTNUM> (1,-1);
 	sort(list.begin(),list.end());
 	return list;
 }
@@ -205,8 +208,6 @@ vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
 				}
 		}
 	}
-	if(ans.empty())
-		return vector<STMTNUM> (1,-1);
 	sort(ans.begin(),ans.end());
 	return ans;
 }
@@ -223,22 +224,20 @@ STMTNUM Parent::getParent(SYNTYPE t1, STMTNUM s){
 }
 
 vector<STMTNUM> Parent::getChildren(SYNTYPE t1, STMTNUM s){
+	vector<STMTNUM> ans;
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
-		vector<STMTNUM> ans;
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();it++){
 			if(typeTable->isType(t1,*it))
 				ans.push_back(*it);
 		}
-		if(ans.empty())
-			return vector<STMTNUM> (1,-1);
 		sort(ans.begin(),ans.end());
 		return ans;
 	}catch(...){
-		return vector<STMTNUM> (1,-1);
+		ans.clear();
+		return ans;
 	}
-	return vector<STMTNUM> (1,-1);
 }
 
 
@@ -253,10 +252,12 @@ STMTNUM Parent::getParent(STMTNUM s){
 }
 
 vector<STMTNUM> Parent::getChildren(STMTNUM s){
+	vector<STMTNUM> ans;
 	try{
-		return parentTable.at(s);
+		ans = parentTable.at(s);
+		return ans;
 	} catch (...){
-		return vector<STMTNUM> (1,-1);
+		return ans;
 	}
 }
 

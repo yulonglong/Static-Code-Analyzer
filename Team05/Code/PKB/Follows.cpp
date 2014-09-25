@@ -69,8 +69,7 @@ bool Follows::isFollowedBy(SYNTYPE t, STMTNUM s) {
 
 bool Follows::isFollows(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> temp = getFollows(t1, t2); 
-	// cout <<"hello"<< temp.size() << " "<<temp.at(0)<<endl; 
-	if (temp.size() == 1 && temp.at(0) == -1) {
+	if (temp.empty()) {
 		return false;
 	}
 	return true;
@@ -121,16 +120,11 @@ vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 				list.push_back(j);
 			}
 		}
-		if (list.empty()) {
-			return vector<STMTNUM> (1,-1);
-		}
 		return list; 
 	} catch (...) {
-		return vector<STMTNUM> (1,-1);
+		list.clear();
 	}
-
-	//return vector<STMTNUM> (1,-1);
-	// return list;
+	return list;
 }
 
 vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {

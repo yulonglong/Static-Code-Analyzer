@@ -61,15 +61,15 @@ public:
 
 	//! Return a statement number which has the given first SynType and has a parent relationship with the given statement number.
 	STMTNUM getParent(SYNTYPE, STMTNUM); 
-	//! Return all statement number such that each statement number has the given first SynType and has a child relationship with the given statement number
+	//! Return all statement number such that each statement number has the given first SynType and has a child relationship with the given statement number. Return an empty vector if not found.
 	vector<STMTNUM> getChildren(SYNTYPE, STMTNUM); 
-	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with the given statement number which has the given second SynType.
+	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with the given statement number which has the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getParent(SYNTYPE, SYNTYPE,STMTNUM); 
-	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with the given statement number which has the given second SynType.
+	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with the given statement number which has the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getChildren(SYNTYPE, SYNTYPE,STMTNUM);
-	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with a statement number which has the given second SynType.
+	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with a statement number which has the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getParent(SYNTYPE, SYNTYPE); // Select w such that Parent(w,a)
-	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType.
+	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getChildren(SYNTYPE, SYNTYPE); //Select a such that Parent(w,a)
 	
 

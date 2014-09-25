@@ -82,8 +82,8 @@ vector<STMTNUM> Modifies::getModifies(SYNTYPE type) {
 		sort(ans.begin(),ans.end());
 		return ans;
 	} catch(...){
+		ans.clear();
 	}
-	ans = vector<STMTNUM> (1,-1);
 	return ans;
 }
 
@@ -110,18 +110,12 @@ vector<STMTNUM> Modifies::getModifies(SYNTYPE t, VARNAME v) {
 				}		
 			}
 		}
-
-		if(ans.empty()){
-			ans = vector<STMTNUM> (1,-1);
-			return ans;
-		}
-		else
-			sort(ans.begin(),ans.end());
+		sort(ans.begin(),ans.end());
 		return ans;
 	} catch(...){
-		ans = vector<STMTNUM> (1,-1);
-		return ans;
+		ans.clear();
 	}
+	return ans;
 }
 
 vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {	
@@ -131,9 +125,9 @@ vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {
 		ans = modifiesTable.at(stmt);
 		return ans;
 	} catch(...) {
-		ans = vector<STMTNUM> (1,-1);
-		return ans;
+		ans.clear();
 	}
+	return ans;
 }
 
 void Modifies::setModifiesProc(PROCINDEX p, vector<VARINDEX> v) {
@@ -158,9 +152,9 @@ vector<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {
 		ans = modifiesProcTable.at(p);
 		return ans;
 	} catch(...){
-		ans = vector<VARINDEX> (1,-1);
-		return ans;
+		ans.clear();
 	}
+	return ans;
 }
 
 void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
@@ -183,7 +177,6 @@ vector<PROCINDEX> Modifies::getModifiesProcVar(VARNAME v){
 	try {
 		VARINDEX varIndex = varTable->getVarIndex(v);
 		if (varIndex == -1 ) {
-			ans = vector<PROCINDEX> (1,-1);
 			return ans;
 		}
 
@@ -197,9 +190,9 @@ vector<PROCINDEX> Modifies::getModifiesProcVar(VARNAME v){
 				}
 			}		
 		}
-	} catch (...){
-		ans = vector<PROCINDEX> (1,-1);
 		return ans;
+	} catch (...){
+		ans.clear();
 	}
 	return ans;
 }

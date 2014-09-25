@@ -70,7 +70,7 @@ void ModifiesTest::testGetModifies() {
 	CPPUNIT_ASSERT(varTable->getVarName(v.at(0)) == "x");
 	
 	v = modifies->getModifies(3); 
-	CPPUNIT_ASSERT(v.at(0) == -1);
+	CPPUNIT_ASSERT(v.empty() == true);
 
 	vector<int> list = modifies->getModifies(TypeTable::ASSIGN, "x");
 	CPPUNIT_ASSERT(list.size() == 4);
@@ -84,8 +84,7 @@ void ModifiesTest::testGetModifies() {
 	CPPUNIT_ASSERT(list.at(0) == 6);
 		
 	list = modifies->getModifies(TypeTable::WHILE, "z");
-	CPPUNIT_ASSERT(list.size() == 1);
-	CPPUNIT_ASSERT(list.at(0) == -1);
+	CPPUNIT_ASSERT(list.empty() == true);
 
 }
 

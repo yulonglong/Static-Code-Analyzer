@@ -75,8 +75,9 @@ void UsesTest::testUsesUsingStmtType() {
 	vector<int> ans (1,2);
 	ans.push_back(4);
 	CPPUNIT_ASSERT(uses->getUses(TypeTable::ASSIGN, "x") == ans);
-	CPPUNIT_ASSERT(uses->getUses(TypeTable::WHILE, "y") == vector<int> (1,-1));
-	CPPUNIT_ASSERT(uses->getUses(TypeTable::WHILE, "asdfasdqwre") == vector<int> (1,-1));
+	ans.clear();
+	CPPUNIT_ASSERT(uses->getUses(TypeTable::WHILE, "y") == ans);
+	CPPUNIT_ASSERT(uses->getUses(TypeTable::WHILE, "asdfasdqwre") == ans);
 
 	ans.clear();
 	ans.push_back(varTable->getVarIndex("x"));
@@ -84,7 +85,6 @@ void UsesTest::testUsesUsingStmtType() {
 	ans.push_back(varTable->getVarIndex("y"));
 	CPPUNIT_ASSERT(uses->getUses(2) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(uses->getUses(3) == ans);
 	CPPUNIT_ASSERT(uses->getUses(150) == ans);
 	CPPUNIT_ASSERT(uses->getUses(-150) == ans);
