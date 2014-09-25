@@ -396,41 +396,26 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 		else {
 			vector<Pair> withAns;
-			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT)){
+			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT) || (i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
 				vector<int> allConst = c->getAllConst();
-				vector<int> stmtRange = t->getStmtRange();
+				int stmtRange = t->getStmtRange();
 
 				for(vector<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
-					if(*it>=stmtRange.at(0) && *it<=stmtRange.at(1)){
+					if(*it<=stmtRange){
 						withAns.push_back(Pair(*it, *it));
 					}
 				}		
 			}
 
-			else if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
-				vector<int> allConst = c->getAllConst();
-				vector<int> progRange = t->getProgLineRange();
-				
-				for(vector<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
-					if(*it>=progRange.at(0) && *it<=progRange.at(1)){
-						withAns.push_back(Pair(*it, *it));
-					}
-				}		
-			}
 			else if((i1->second==TypeTable::STMT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::STMT)){
-				vector<int> stmtRange = t->getStmtRange();
-				vector<int> progRange = t->getProgLineRange();
-				int higher;
-				if(stmtRange.at(1)< progRange.at(1)){
-					higher = stmtRange.at(1);
-				}
-				else{
-					higher = progRange.at(1);
-				}
-
+				int higher = t->getStmtRange();
 				for(int i=1; i<=higher; i++){
 					withAns.push_back(Pair (i, i));
 				}
+			}
+
+			else{
+
 			}
 
 			if(isExistInLinkages(tk1)){
@@ -476,18 +461,9 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				withAns.push_back(Pair (-1, -1));
 			}
 
-			else if(i1->second == TypeTable::STMT){
-				vector<int> indexes = t->getStmtRange();
-				if(atoi(tk2.c_str())>=indexes.at(0) || atoi(tk2.c_str())<=indexes.at(1)){
-					withAns.push_back(Pair (-1, -1));
-				}else {
-					withAns.push_back(Pair (-2, -2));
-				}
-			}
-
-			else if(i1->second == TypeTable::PROGLINE){
-				vector<int> indexes = t->getProgLineRange();
-				if(atoi(tk2.c_str())>=indexes.at(0) || atoi(tk2.c_str())<=indexes.at(1)){
+			else if(i1->second == TypeTable::STMT || i1->second == TypeTable::PROGLINE){
+				int stmtRange = t->getStmtRange();
+				if(atoi(tk2.c_str())<=stmtRange){
 					withAns.push_back(Pair (-1, -1));
 				}else {
 					withAns.push_back(Pair (-2, -2));
