@@ -107,12 +107,12 @@ bool TypeTable::isType(TypeTable::SynType type, STMTNUM stmt) {
 	}
 }
 
-vector<int> getProgLineRange(){
+vector<int> TypeTable::getProgLineRange(){
 	vector<int> v;
 	return v;
 }
 
-vector<int> getStmtRange(){
+vector<int> TypeTable::getStmtRange(){
 	vector<int> v;
 	return v; 
 }

@@ -66,4 +66,8 @@ STMTNUM Next::getPrevious(STMTNUM s){
 	}
 }
 
+bool Next::isNext(STMTNUM s, STMTNUM s1){
+	return true;
+}
+
 

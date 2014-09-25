@@ -57,4 +57,9 @@ CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
 	return -1;
 }
 
+vector<int> ConstTable::getAllConst(){
+	vector<int> v;
+	return v;
+}
+
 
