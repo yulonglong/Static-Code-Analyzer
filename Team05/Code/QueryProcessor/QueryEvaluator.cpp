@@ -711,8 +711,139 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		}
 	}
 
+	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextAns));
 }
 
+void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	Next *n = pkb->getNext();
+	TypeTable *t = pkb->getTypeTable();
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	set<Pair> nextStarAns;
+	vector<Pair> nextStarAnsVec;
+	//Next*(n,b)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+
+		//if b exists
+		if(isExistInLinkages(tk2)){
+			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
+			
+			int stmt = -1;
+
+			for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
+				stmt = n->getPrevious(*it);
+				while(stmt!=-1){
+					if(i1->second==t->getType(stmt)){
+						nextStarAns.insert(Pair (stmt, *it));
+					}
+					stmt = n->getPrevious(stmt);
+				}
+			}
+			for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
+					nextStarAnsVec.push_back(*it);
+				}
+			if(isExistInLinkages(tk1)){
+				removePairsFromRelAns(&nextStarAnsVec,tk1,1);
+				removePairs(nextStarAnsVec, tk1, 1);
+			}
+
+			removePairs(nextStarAnsVec, tk2, 2);
+		}
+
+		else if(isExistInLinkages(tk1)){
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
+			vector<int> nextOfStmt;
+			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
+				recursiveNext(*it, *it, &nextStarAns, i2->second);
+			}
+
+			for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
+				nextStarAnsVec.push_back(*it);
+			}
+
+			removePairs(nextStarAnsVec, tk1, 1);
+		}
+
+		else {
+			vector<int> allB = t->getAllStmts(i2->second);
+			int stmt = -1;
+			for(vector<int>::iterator it = allB.begin(); it!=allB.end(); it++){
+				stmt = n->getPrevious(*it);
+				while(stmt!=-1){
+					if(t->getType(stmt) == i1->second){
+						nextStarAns.insert(Pair (stmt, *it);
+					}
+					stmt = n->getPrevious(stmt);
+				}
+			}
+		}
+
+		insertLinks(tk1, relIndex);
+		insertLinks(tk2, relIndex);
+	}
+
+	//Next*(n, 3)
+	else if(isalpha(tk1[0])){
+		int tk2Int = atoi(tk2.c_str());
+		int stmt = n->getPrevious(tk2Int);
+
+		while(stmt!=-1){
+			if(t->getType(stmt)==i1->second){
+				nextStarAnsVec.push_back(Pair (stmt, tk2Int));
+			}
+			stmt = n->getPrevious(tk2Int);
+		}
+		
+		insertLinks(tk1, relIndex);
+	}
+
+	//Next*(3, n)
+	else if(isalpha(tk2[0])){
+		recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &nextStarAns, i2->second);
+
+		for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
+			nextStarAnsVec.push_back(*it);
+		}
+
+		insertLinks(tk2, relIndex);
+	}
+
+	//Next*(1,7)
+	else {
+		int tk2Int = atoi(tk2.c_str());
+		int tk1Int = atoi(tk1.c_str());
+		int stmt = n->getPrevious(tk2Int);
+
+		while(stmt!=-1){
+			if(stmt == tk1Int){
+				nextStarAnsVec.push_back(Pair (-1, -1));
+			}
+			stmt = n->getPrevious(tk2Int);
+		}
+		
+		if(nextStarAnsVec.empty()){
+			nextStarAnsVec.push_back(Pair (-2, -2));
+		}
+
+	}
+
+	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextStarAnsVec));
+}
+void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * ans, TypeTable::SynType type){
+	Next * n = pkb->getNext();
+	TypeTable *t = pkb->getTypeTable();
+	vector<int> next = n->getNext(currentIndex);
+
+	for(vector<int>::iterator it = next.begin(); it!=next.end(); it++){
+		if(t->getType(*it) == type){
+			ans->insert(Pair (rootIndex, *it));
+		}
+		recursiveNext(rootIndex, *it, ans, type);
+	}
+}
 void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans){
 	Calls *c = pkb->getCalls();
 	ProcTable *p = pkb->getProcTable();
