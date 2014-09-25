@@ -182,15 +182,28 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(1, ans.at(0).ans1);
 	CPPUNIT_ASSERT_EQUAL(5, ans.at(2).ans1);
 
+	/*
 	//Parent(_ ,a) r10
 	r = Relationship("Parent", "_", "a");
+	tokens.clear();
+	tokens.push_back("_");
+	tokens.push_back("a");
+	qe.relParameters.insert(make_pair<int, vector<string>>(10, tokens));
 
 	qe.evaluateParent(r, m, 10);
 	ans = qe.relAns.find(10)->second;
 
-	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);*/
 
-	
+	//Modifies(a, "x") r11
+	Modifies* mod = pkb->getModifies();
+	mod->setModifies(2, "x");
+	r = Relationship("Modifies", "a", "\"x\"");
+
+	qe.evaluateModifies(r, m, 11);
+	ans = qe.relAns.find(11)->second;
+
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans1);
 	//evaluate
 	/*
 	qe.evaluateFollows(r,m,0);

@@ -1533,9 +1533,12 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 		//otherwise
 		else {
+			cout<<"hihihihi"<<endl;
 			answer = mod->getModifies(i1->second,varName);
 			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				cout<<"modifiesAnswer"<<*it<<" "<<varTab->getVarIndex(varName)<<endl;
 				modAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
+				
 			}
 		}
 
