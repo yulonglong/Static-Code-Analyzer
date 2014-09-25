@@ -9,6 +9,7 @@ using namespace std;
 //GRAMMAR RULES DECLARATION BEGIN
 
 //constant string
+const string QueryParser::AND = "and";
 const string QueryParser::BOOLEAN = "BOOLEAN";
 const string QueryParser::MODIFIES = "modifies";
 const string QueryParser::USES = "uses";
@@ -45,7 +46,7 @@ const string QueryParser::resultCl = tuple + "|" + BOOLEAN;
 
 const string QueryParser::ref = "(?:" + attrRef + "|" + synonym + "|" + "\""+IDENT+"\"" + "|" + INTEGER + ")";
 const string QueryParser::attrCompare = "(?:" + ref + "\\s*=\\s*" + ref + ")";
-const string QueryParser::attrCond = attrCompare;
+const string QueryParser::attrCond = attrCompare + "(?:" + "\\s+" + "and" + "\\s+" + attrCompare + ")*";
 //+ "\\s+(?:" +"and\\s+" + attrCompare + "\\s*)*";
 const string QueryParser::withCl = "(?:[Ww]ith\\s+(?:" + attrCond + ")"+"\\s*)";
 
@@ -197,6 +198,7 @@ bool QueryParser::parseSelectCl(string query){
 	
 	istringstream istream(query);
 	string token;
+	string prevToken;
 
 	token = getNextToken(istream);
 	selectStatement.push_back(token);//Select
@@ -207,7 +209,11 @@ bool QueryParser::parseSelectCl(string query){
 		if (token.length()==0){
 			continue;
 		}
+		if (token == AND){
+			token = prevToken;
+		}
 		if (token == such){
+			prevToken = such;
 			selectStatement.push_back(token);//push such
 			token = getNextToken(istream);//read that
 			selectStatement.push_back(that);
@@ -234,6 +240,7 @@ bool QueryParser::parseSelectCl(string query){
 
 		}
 		else if(token == PATTERN){//read pattern
+			prevToken = PATTERN;
 			selectStatement.push_back(token);//push pattern
 
 			string patternToken[3];
@@ -250,6 +257,7 @@ bool QueryParser::parseSelectCl(string query){
 			}
 		}
 		else if(token == WITH){//read with
+			prevToken = WITH;
 			selectStatement.push_back(token);//push with
 
 			string withToken[2];
