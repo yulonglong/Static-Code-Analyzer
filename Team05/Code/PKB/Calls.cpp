@@ -76,8 +76,6 @@ vector<PROCINDEX> Calls::getCalls(){
 	vector<PROCINDEX> ans;
 	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it = callsTable.begin();it!=callsTable.end();it++)
 		ans.push_back(it->first);
-	if(ans.empty()==true)
-		ans.push_back(-1);
 	return ans;
 }
 
@@ -89,8 +87,6 @@ vector<PROCINDEX> Calls::getCalled(){
 	}
 	sort( ans.begin(), ans.end() );
 	ans.erase( unique( ans.begin(), ans.end() ), ans.end() );
-	if(ans.empty()==true)
-		ans.push_back(-1);
 	return ans;
 }
 
@@ -108,8 +104,6 @@ vector<PROCINDEX> Calls::getCalls(PROCNAME p){
 		}
 	}catch(...){
 	}
-	if(ans.empty()==true)
-		ans.push_back(-1);
 	return ans;
 }
 
@@ -125,7 +119,5 @@ vector<PROCINDEX> Calls::getCalled(PROCNAME p){
 	}
 	catch(...){
 	}
-	if(ans.empty()==true)
-		ans.push_back(-1);
 	return ans;
 }

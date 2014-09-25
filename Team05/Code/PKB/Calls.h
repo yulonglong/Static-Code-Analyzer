@@ -54,13 +54,13 @@ public:
 	//! If the Calls relationship between the two procedure names is true, return true. Otherwise, return false.
 	bool isCalls(PROCNAME,PROCNAME);
 	
-	//! Return a vector of procedure indexes where the procedure index had called another procedure. Return a vector of -1 if not found.
+	//! Return a vector of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found.
 	vector<PROCINDEX> getCalls(); //Calls(p,q) Select p, return empty if not found
-	//! Return a vector of procedure indexes where the procedure index had called the given procedure name. Return a vector of -1 if not found.
+	//! Return a vector of procedure indexes where the procedure index had called the given procedure name. Return an empty vector if not found.
 	vector<PROCINDEX> getCalls(PROCNAME); //Calls (p, "Second") Select p, return empty if not found
-	//! Return a vector of procedure indexes where the procedure index had been called by another procedure. Return a vector of -1 if not found.
+	//! Return a vector of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found.
 	vector<PROCINDEX> getCalled(); //Calls(p,q) Select q, return empty if not found
-	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure name. Return a vector of -1 if not found.
+	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure name. Return an empty vector if not found.
 	vector<PROCINDEX> getCalled(PROCNAME); //Calls("First", q) Select q, return empty if not found
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();

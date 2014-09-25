@@ -116,7 +116,6 @@ void ParentTest::testGetParent() {
 	ans.push_back(10);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::IF,TypeTable::ASSIGN) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE) == ans);
 
 	ans.clear();
@@ -132,7 +131,6 @@ void ParentTest::testGetParent() {
 	ans.push_back(8);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::CALL,TypeTable::IF,11) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
 	CPPUNIT_ASSERT(parent->getParent(TypeTable::WHILE,TypeTable::WHILE,100) == ans);
 	return;
@@ -157,7 +155,6 @@ void ParentTest::testGetChildren() {
 	ans.push_back(9);
 	CPPUNIT_ASSERT(parent->getChildren(6) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(11) == ans);
 	CPPUNIT_ASSERT(parent->getChildren(13) == ans);
 
@@ -166,10 +163,7 @@ void ParentTest::testGetChildren() {
 	ans.push_back(9);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::ASSIGN,6) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::IF,10) == ans);
-	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,12) == ans);
 
 	ans.clear();
@@ -180,7 +174,6 @@ void ParentTest::testGetChildren() {
 	ans.push_back(12);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::IF,TypeTable::ASSIGN) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE) == ans);
 
 	ans.clear();
@@ -190,7 +183,6 @@ void ParentTest::testGetChildren() {
 	ans.push_back(8);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::CALL,TypeTable::ASSIGN,10) == ans);
 	ans.clear();
-	ans.push_back(-1);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,12) == ans);
 	CPPUNIT_ASSERT(parent->getChildren(TypeTable::WHILE,TypeTable::WHILE,13) == ans);
 	return;

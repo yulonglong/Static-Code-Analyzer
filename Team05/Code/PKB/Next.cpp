@@ -49,11 +49,12 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 }
 
 vector<STMTNUM> Next::getNext(STMTNUM s){
+	vector<STMTNUM> ans;
 	try{
-		vector<STMTNUM> ans = nextTable.at(s);
+		ans = nextTable.at(s);
 		return ans;
 	} catch(...) {
-		return vector<STMTNUM> (1,-1);
+		return ans;
 	}
 }
 
