@@ -52,28 +52,9 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	v = nextTable->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	nextTable->printNextTable();
+	//nextTable->printNextTable();
 
 	pkb->~PKB();
-
-	/*
-	CFGNode* node = getCFGNode(12);
-	if (node != NULL) {
-		cout << "FOUND LINE NUMBER: " << node->getProgLine() << endl;
-	} else {
-		cout << "NOT FOUND" << endl;
-	}
-	*/
-
-	/*
-	string resultFullCFG = "";
-	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
-	string expectedFullCFG = "";
-	cout << resultFullCFG << endl;
-	cout << "End of CFG" << endl;
-	*/
-
-	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
 
 }
 
@@ -129,7 +110,7 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	v = nextTable->getNext(22);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
-	nextTable->printNextTable();
+	//nextTable->printNextTable();
 
 	pkb->~PKB();
 
@@ -165,7 +146,8 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	nextTable->printNextTable();
+
+	//nextTable->printNextTable();
 
 	
 	pkb->~PKB();
@@ -270,7 +252,7 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = nextTable->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	nextTable->printNextTable();
+	//nextTable->printNextTable();
 
 	pkb->~PKB();
 }

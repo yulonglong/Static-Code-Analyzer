@@ -7,7 +7,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 1; 
+bool debugModeIteration2 = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -105,7 +105,9 @@ void DesignExtractor::createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 	tempASTNode = &ASTNode; 
 
 	vector<Node*> children = tempASTNode->getChild();
-	cout << "size is " << children.size() << endl;
+	if (debugModeIteration2) {
+		cout << "size is " << children.size() << endl;
+	}
 	for (unsigned int i=0; i<children.size(); i++) {
 		string type = children[i]->getType();
 		int progLine = children[i]->getProgLine();
@@ -304,13 +306,21 @@ void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
-	leafNodes.push_back(currCFGNode);
+	if (currCFGNode->getProgLine() == -1) {
+		leafNodes.push_back(currCFGNode->getMultiParent(0));
+	} else {
+		leafNodes.push_back(currCFGNode);	
+	}
 
 	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	currCFGNode = ifCFGNode;
 	stmtLst = children[2];
 	createCFGForStmtLst(*stmtLst, pkb);
-	leafNodes.push_back(currCFGNode);
+	if (currCFGNode->getProgLine() == -1) {
+		leafNodes.push_back(currCFGNode->getMultiParent(0));
+	} else {
+		leafNodes.push_back(currCFGNode);	
+	}
 
 	CFGNode* dummyNode = new CFGNode("dummy", -1);
 	while (!leafNodes.empty()) {
