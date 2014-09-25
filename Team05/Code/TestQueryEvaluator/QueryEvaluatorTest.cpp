@@ -26,6 +26,10 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	Relationship r("Follows", "_", "_");
 	unordered_map<string,TypeTable::SynType> m;
 	m.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	m.insert(make_pair<string, TypeTable::SynType>("a1", TypeTable::ASSIGN));
+	m.insert(make_pair<string, TypeTable::SynType>("a2", TypeTable::ASSIGN));
+	m.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
+	m.insert(make_pair<string, TypeTable::SynType>("if", TypeTable::IF));
 	m.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::STMT));
 
 	
@@ -60,7 +64,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	tokens.push_back("3");
 	qe.relParameters.insert(make_pair<int, vector<string>>(1, tokens));
 
-	//Follows(_,a)
+	//Follows(_,c)
 	r = Relationship("Follows", "_", "c");
 	
 	qe.evaluateFollows(r, m, 2);
@@ -78,7 +82,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	ans = qe.relAns.find(3)->second;
 	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans2);*/
 
-	/*
+	
 	//Parent(1,2) r3
 	Parent *p = Parent::getInstance(t);
 	p->setParent(1, 2);
@@ -92,6 +96,101 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	ans = qe.relAns.find(3)->second;
 
 	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Parent (w, 2) r4
+	r = Relationship("Parent", "w", "2");
+	tokens.clear();
+	tokens.push_back("w");
+	tokens.push_back("2");
+	qe.relParameters.insert(make_pair<int, vector<string>>(4, tokens));
+
+	qe.evaluateParent(r, m, 4);
+	ans = qe.relAns.find(4)->second;
+
+	CPPUNIT_ASSERT_EQUAL(1, ans.at(0).ans1);
+
+	//Parent (w,4) r5
+	r = Relationship("Parent", "w", "4");
+	p->setParent(1, 4);
+	tokens.clear();
+	tokens.push_back("w");
+	tokens.push_back("4");
+	qe.relParameters.insert(make_pair<int, vector<string>>(5, tokens));
+
+	qe.evaluateParent(r, m, 5);
+	ans = qe.relAns.find(5)->second;
+
+	//cout<<ans.empty()<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, ans.at(0).ans1);
+
+	//Parent (5, a1) r6
+	r = Relationship("Parent", "5", "a1");
+	p->setParent(5, 7);
+	p->setParent(5, 6);
+	t->insertStmtNumAndType(5, TypeTable::WHILE);
+	t->insertStmtNumAndType(6, TypeTable::STMT);
+	t->insertStmtNumAndType(7, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(4, TypeTable::ASSIGN);
+	tokens.clear();
+	tokens.push_back("5");
+	tokens.push_back("a");
+	qe.relParameters.insert(make_pair<int, vector<string>>(6, tokens));
+
+	qe.evaluateParent(r, m, 6);
+	ans = qe.relAns.find(6) ->second;
+
+	CPPUNIT_ASSERT_EQUAL(7, ans.at(0).ans2);
+
+	//Follows(6, a1) r7
+	f->setFollows(6, 7);
+	r = Relationship("Follows", "6", "a1");
+	tokens.clear();
+	tokens.push_back("6");
+	tokens.push_back("a1");
+	qe.relParameters.insert(make_pair<int, vector<string>>(7, tokens));
+
+	qe.evaluateFollows(r, m, 7);
+	ans = qe.relAns.find(7) -> second;
+
+	CPPUNIT_ASSERT_EQUAL(7, ans.at(0).ans2);
+
+	//Parent(w, a2) r8
+	r = Relationship("Parent", "w", "a2");
+
+	qe.evaluateParent(r, m, 8);
+	ans = qe.relAns.find(8)->second;
+	tokens.clear();
+	tokens.push_back("w");
+	tokens.push_back("a2");
+	qe.relParameters.insert(make_pair<int, vector<string>>(8, tokens));
+
+	CPPUNIT_ASSERT_EQUAL(1, ans.at(0).ans1);
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
+	CPPUNIT_ASSERT_EQUAL(1, ans.at(1).ans1);
+	CPPUNIT_ASSERT_EQUAL(4, ans.at(1).ans2);
+
+	//Parent(w, _) r9
+	r = Relationship("Parent", "w", "_");
+	tokens.clear();
+	tokens.push_back("w");
+	tokens.push_back("_");
+	qe.relParameters.insert(make_pair<int, vector<string>>(8, tokens));
+
+	qe.evaluateParent(r, m, 9);
+	ans = qe.relAns.find(9)->second;
+
+	CPPUNIT_ASSERT_EQUAL(1, ans.at(0).ans1);
+	CPPUNIT_ASSERT_EQUAL(5, ans.at(2).ans1);
+
+	//Parent(_ ,a) r10
+	r = Relationship("Parent", "_", "a");
+
+	qe.evaluateParent(r, m, 10);
+	ans = qe.relAns.find(10)->second;
+
+	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
+
+	
 	//evaluate
 	/*
 	qe.evaluateFollows(r,m,0);
