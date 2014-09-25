@@ -22,7 +22,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( QueryEvaluatorTest );
 void QueryEvaluatorTest::testEvaluateFollows(){
 	
 	QueryEvaluator qe(pkb);
-	//Query 1 assign a; Select a such that Follows(_ , _);
+	//Query 1 assign a; Select a such that Follows(_ , _); r0
 	Relationship r("Follows", "_", "_");
 	unordered_map<string,TypeTable::SynType> m;
 	m.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
@@ -50,7 +50,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
 
-	//Follows(a,3)
+	//Follows(a,3)  r1
 	r = Relationship("Follows", "a", "3");
 	qe.evaluateFollows(r, m, 1);
 	ans = qe.relAns.find(1)->second;
@@ -174,7 +174,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	tokens.clear();
 	tokens.push_back("w");
 	tokens.push_back("_");
-	qe.relParameters.insert(make_pair<int, vector<string>>(8, tokens));
+	qe.relParameters.insert(make_pair<int, vector<string>>(9, tokens));
 
 	qe.evaluateParent(r, m, 9);
 	ans = qe.relAns.find(9)->second;
@@ -201,11 +201,162 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	varT->insertVar("x");
 	mod->setModifies(2, "x");
 	r = Relationship("Modifies", "a", "\"x\"");
+	tokens.clear();
+	tokens.push_back("a");
+	tokens.push_back("\"x\"");
+	qe.relParameters.insert(make_pair<int, vector<string>>(11, tokens));
 
 	qe.evaluateModifies(r, m, 11);
 	ans = qe.relAns.find(11)->second;
 
 	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans1);
+
+	//Modifies(a, v) r12
+	r = Relationship("Modifies", "a", "v");
+	tokens.clear();
+	tokens.push_back("a");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(12, tokens));
+
+	qe.evaluateModifies(r, m, 12);
+	ans = qe.relAns.find(12)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans2);
+
+	//Modifies(2, "x") r13
+	r = Relationship("Modifies", "2", "\"x\"");
+	ProcTable* proc = pkb->getProcTable();
+
+	tokens.clear();
+	tokens.push_back("a");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(13, tokens));
+
+	qe.evaluateModifies(r, m, 13);
+	ans = qe.relAns.find(13)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Modifies(2, v) r14
+	r = Relationship("Modifies", "2", "v");
+	tokens.push_back("2");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(14, tokens));
+
+	qe.evaluateModifies(r, m, 14);
+	ans = qe.relAns.find(14)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans2);
+
+	//Modifies(p, "x") r15
+	cout<<"Evaluating Relationship 15"<<endl;
+	r = Relationship("Modifies", "p", "\"x\"");
+	tokens.push_back("p");
+	tokens.push_back("\"x\"");
+	qe.relParameters.insert(make_pair<int, vector<string>>(15, tokens));
+	m.insert(make_pair<string, TypeTable::SynType>("p", TypeTable::PROCEDURE));
+	proc->insertProc("First");
+	vector<int> varIndexes;
+	varIndexes.push_back(0);
+	mod->setModifiesProc(proc->getProcIndex("First"),varIndexes);
+
+	qe.evaluateModifies(r, m, 15);
+	ans = qe.relAns.find(15)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
+
+	//Modifies("First", "x") r16
+	r = Relationship("Modifies", "\"First\"", "\"x\"");
+	tokens.push_back("\"First\"");
+	tokens.push_back("\"x\"");
+	qe.relParameters.insert(make_pair<int, vector<string>>(15, tokens));
+	
+	qe.evaluateModifies(r, m, 16);
+	ans = qe.relAns.find(16)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Modifies(p, v) r17
+	r = Relationship("Modifies", "p", "v");
+	m.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
+	tokens.push_back("p");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(17, tokens));
+	
+	qe.evaluateModifies(r, m, 17);
+	ans = qe.relAns.find(17)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans2);
+	
+	//Modifies("First", v) r18
+	r = Relationship("Modifies", "\"First\"", "v");
+	tokens.push_back("\"First\"");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(18, tokens));
+
+	qe.evaluateModifies(r, m, 18);
+	ans = qe.relAns.find(18)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans2);
+
+	//Modifies(_,_) r19
+	r = Relationship("Modifies", "_", "_");
+
+	qe.evaluateModifies(r, m, 19);
+	ans = qe.relAns.find(19)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Modifies(_,"x") r20
+	r = Relationship("Modifies", "_", "\"y\"");
+
+	qe.evaluateModifies(r, m, 20);
+	ans = qe.relAns.find(20)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-2, ans.at(0).ans1);
+
+	//Modifies("First",_) r21
+	r = Relationship("Modifies", "\"First\"", "_");
+
+	qe.evaluateModifies(r, m, 21);
+	ans = qe.relAns.find(21)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	//Modifies(_,v) r22
+	r = Relationship("Modifies", "_", "v");
+	tokens.push_back("_");
+	tokens.push_back("v");
+	qe.relParameters.insert(make_pair<int, vector<string>>(22, tokens));
+
+	qe.evaluateModifies(r, m, 22);
+	ans = qe.relAns.find(22)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans2);
+
+	//Modifies(p,_) r23
+	r = Relationship("Modifies", "p", "_");
+	tokens.push_back("p");
+	tokens.push_back("_");
+	qe.relParameters.insert(make_pair<int, vector<string>>(23, tokens));
+
+	qe.evaluateModifies(r, m, 23);
+	ans = qe.relAns.find(23)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
+
+	//Uses(a, v) r24
+	Uses* use = pkb->getUses();
+	use->setUses(2, "x");
+	use->setUsesProc(0, varIndexes);
+
+	r = Relationship("Uses", "p", "v");
+	qe.evaluateUses(r, m, 24); 
+	ans = qe.relAns.find(24)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
+
 	//evaluate
 	/*
 	qe.evaluateFollows(r,m,0);

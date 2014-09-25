@@ -6,24 +6,21 @@ using namespace std;
 
 
 void queryDriver(string query, list<string> &result, PKB *pkb){
-	/*
 	cout<<"Begin parse query"<<endl;
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);
 
-	//bool isValid = qp.validate(query);
 	bool isValid = true;
-
 	Query parsedQuery = qp.queryParse(query,isValid);
 
 	if(!isValid){
 		cout << "Query Invalid" << endl;
 		return;
 	}
-
 	cout<<"End parse query"<<endl;
-	cout<<"Begin evaluate query"<<endl;
 
+
+	cout<<"Begin evaluate query"<<endl;
 	//Loophole here. I've changed getSelectedSyn to getSelectedSyn.at(0) for the time being since selected syn is a vector now
 	if(parsedQuery.getSelectedSyn().at(0) == "BOOLEAN") {
 		bool ans = qe.evaluateQueryBoolean(parsedQuery);
@@ -33,10 +30,13 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 			result.push_back("false");
 	}
 	else {
-		vector<int> ans = qe.evaluateQuery(parsedQuery);
-		unordered_map<string, TypeTable::SynType> m = parsedQuery.getSynTable();
-		unordered_map<string, TypeTable::SynType>::iterator i = m.find(parsedQuery.getSelectedSyn().at(0));//Same problem for selectedSyn
-		TypeTable tt = *pkb->getTypeTable();
+		unordered_map<string, vector<int>> ansTable = qe.evaluateQuery(parsedQuery);
+		unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+		vector<string> selectedSyns =  parsedQuery.getSelectedSyn(); 
+
+		unordered_map<string, TypeTable::SynType>::iterator i = synTable.find(selectedSyns.at(0));
+
+		vector<int> ans = ansTable.at(selectedSyns.at(0));
 
 		if(i->second == 6) {
 			VarTable* varTable = pkb->getVarTable();
@@ -59,5 +59,5 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 				result.push_back(to_string(static_cast<long long>(ans.at(i))));
 		}
 	}
-	cout<<"End evaluate query"<<endl;*/
+	cout<<"End evaluate query"<<endl;
 }
