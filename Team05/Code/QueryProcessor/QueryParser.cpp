@@ -86,7 +86,7 @@ const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+v
 const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::pattern = "(?:" + assignCl + "|" + whileCl + "|" + ifCl + ")";
-const string QueryParser::patternCond = pattern;
+const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";;
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + "\\s*)";
 
 //select clause
