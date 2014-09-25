@@ -134,8 +134,6 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 	return;
 }
 
-
-
 void QueryParserTest::testQueryAssignVariableSelectModifies(){
 	//INIT BEGIN
 	string query = " assign a; variable v; Select a such that Modifies (a,v) ";
@@ -200,7 +198,6 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 	return;
 }
 
-
 void QueryParserTest::testQueryStmtSelectUses(){
 	//INIT BEGIN
 	string query = "  stmt s  ; Select s such that Uses (s,\"delta\")  ";
@@ -264,7 +261,6 @@ void QueryParserTest::testQueryStmtSelectUses(){
 	return;
 }
 
-
 void QueryParserTest::testQueryStmtSelectParentStar(){
 	//INIT BEGIN
 	string query = "stmt   s ;   Select   s  such  that Parent*(5,s)  ";
@@ -326,8 +322,6 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 	//RELATIONSHIP END
 	return;
 }
-
-
 
 void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 	//INIT BEGIN
@@ -392,7 +386,6 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 	//RELATIONSHIP END
 	return;
 }
-
 
 void QueryParserTest::testQueryComplex1(){
 	//INIT BEGIN
@@ -461,7 +454,6 @@ void QueryParserTest::testQueryComplex1(){
 	return;
 }
 
-
 void QueryParserTest::testQueryFollows1(){
 	//INIT BEGIN
 	string query = " assign a; while w; Select a such that Follows(w, a)";
@@ -525,7 +517,6 @@ void QueryParserTest::testQueryFollows1(){
 	return;
 }
 
-
 void QueryParserTest::testQueryModifies1(){
 	//INIT BEGIN
 	string query = "variable v; assign a; Select v such that Modifies(a, v)";
@@ -588,7 +579,6 @@ void QueryParserTest::testQueryModifies1(){
 	//RELATIONSHIP END
 	return;
 }
-
 
 void QueryParserTest::testQueryModifies2(){
 	//INIT BEGIN
@@ -654,7 +644,6 @@ void QueryParserTest::testQueryModifies2(){
 	return;
 }
 
-
 void QueryParserTest::testQueryPattern1(){
 	//INIT BEGIN
 	string query = "assign a; Select a pattern a(a,_)";
@@ -718,7 +707,6 @@ void QueryParserTest::testQueryPattern1(){
 	return;
 }
 
-
 void QueryParserTest::testQueryWith1(){
 	//INIT BEGIN
 	string query = "variable v; procedure p; Select p with p.procName = v.varName ";
@@ -781,7 +769,6 @@ void QueryParserTest::testQueryWith1(){
 	//RELATIONSHIP END
 	return;
 }
-
 
 void QueryParserTest::testQueryWith2(){
 	//INIT BEGIN
@@ -912,7 +899,74 @@ void QueryParserTest::testQueryWith3(){
 	return;
 }
 
-void QueryParserTest::testQueryWithAndWith(){
+void QueryParserTest::testQueryMultipleSuchThat(){
+	//INIT BEGIN
+	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\")";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("n", TypeTable::PROGLINE));
+	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Follows*","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Follows","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Uses","n",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
+	//assert relationship
+
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
+
+void QueryParserTest::testQueryMultipleWith(){
 	//INIT BEGIN
 	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) with n=10 and s.stmt#=9 and s.stmt#=11 with n=12";
 	QueryParser qp;
@@ -981,7 +1035,7 @@ void QueryParserTest::testQueryWithAndWith(){
 	return;
 }
 
-void QueryParserTest::testQueryPatternAndPattern(){
+void QueryParserTest::testQueryMultiplePattern(){
 	//INIT BEGIN
 	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_)";
 	QueryParser qp;
@@ -1108,6 +1162,85 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"12",Relationship::INTEGER));
 	expectedRelVect.push_back(Relationship("pattern","s", "s",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"z+y\"_",Relationship::UNDERSCOREIDENT));
+	//assert relationship
+
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
+
+void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
+	//INIT BEGIN
+	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\") pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_) with n=10 and s.stmt#=9 and s.stmt#=11 with n=12 pattern s(s,\"x\") and s(_,_\"z+y\"_) such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\")";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("n", TypeTable::PROGLINE));
+	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Follows*","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Follows","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Uses","n",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
+	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_",Relationship::UNDERSCORE));
+	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+y\"_",Relationship::UNDERSCOREIDENT));
+	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+z\"_",Relationship::UNDERSCOREIDENT));
+	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"10",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"9",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"11",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"12",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("pattern","s", "s",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
+	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"z+y\"_",Relationship::UNDERSCOREIDENT));
+	expectedRelVect.push_back(Relationship("Follows*","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Follows","n",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Uses","n",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
 	//assert relationship
 
 	for(int i=0;i<(int)expectedRelVect.size();i++){

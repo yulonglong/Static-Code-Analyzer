@@ -10,6 +10,8 @@ using namespace std;
 
 //constant string
 const string QueryParser::AND = "and";
+const string QueryParser::SUCHTHAT = "such that";
+
 const string QueryParser::BOOLEAN = "BOOLEAN";
 const string QueryParser::MODIFIES = "modifies";
 const string QueryParser::USES = "uses";
@@ -77,7 +79,7 @@ const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + U
 //const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" +  Follows +")";
 const string QueryParser::allClause = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
 
-const string QueryParser::relCond = relRef;
+const string QueryParser::relCond = relRef + "(?:" + "\\s+" + "and" + "\\s+" + relRef + ")*";
 const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond +"\\s*";
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
 
@@ -209,14 +211,16 @@ bool QueryParser::parseSelectCl(string query){
 		if (token.length()==0){
 			continue;
 		}
+		if (token == such){
+			string next = getNextToken(istream);//read that
+			token = token + " " + next;
+		}
 		if (token == AND){
 			token = prevToken;
 		}
-		if (token == such){
-			prevToken = such;
-			selectStatement.push_back(token);//push such
-			token = getNextToken(istream);//read that
-			selectStatement.push_back(that);
+		if (token == SUCHTHAT){
+			prevToken = SUCHTHAT;
+			selectStatement.push_back(token);//push such that
 
 			string generalToken[3];
 			getline(istream,generalToken[0],'(');
