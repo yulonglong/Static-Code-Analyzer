@@ -54,7 +54,8 @@ procedure Second {
 				else {
 					if d then {
 						e = 1; 
-					} else { 
+					}
+					else { 
 						f = 1;	
 					}
 				}
@@ -67,7 +68,7 @@ procedure Second {
 		else {
 			merge = merge - 1;
 		}
-		merge 2 = 1;
+		merge2 = 1;
 	}
 	final = 1;
 	if final then {
