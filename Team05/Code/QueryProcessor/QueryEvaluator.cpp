@@ -1460,7 +1460,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Modifies(a,v) Modifies(_,v) Modifies(a,_)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")){
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")){
 
 		//If first token is of procedure type
 		//Modifies(p, v)
@@ -1574,6 +1574,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 			if(!mod->getModifiesProc(*it).empty()){
 				cout<<"flag is true"<<endl;
 				flag = true;
+				break;
 			}
 		}
 
@@ -1662,10 +1663,10 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Uses(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")){
 
 		//If first token is of procedure type
-		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+		if(i1->second==TypeTable::PROCEDURE || tk1=="_"){
 
 			selected = proc->getAllProcIndexes();
 
@@ -1696,7 +1697,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 		string varName = tk2.substr(1,tk2.length()-2);
 
 		//If first token is of type procedure
-		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+		if(i1->second==TypeTable::PROCEDURE){
 
 			answer = use->getUsesProcVar(varName);
 			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
@@ -1717,31 +1718,92 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 	//Select v such that Uses(1, v);
 	else if(isalpha(tk2[0])){
-		selected = use->getUses(atoi(tk1.c_str()));
-		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-			usesAns.push_back(Pair (atoi(tk1.c_str()), *it));
+
+		if(isdigit(tk1[0])){
+			selected = use->getUses(atoi(tk1.c_str()));
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				usesAns.push_back(Pair (atoi(tk1.c_str()), *it));
+			}
+		}
+
+		//Uses("First", v)
+		else {
+			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
+			vector<int> vars = use->getUsesProc(procIndex);
+
+			for(vector<int>::iterator it = vars.begin(); it!=vars.end(); it++){
+				usesAns.push_back(Pair(procIndex, *it));
+			}
 		}
 	}
 
-	//Modifies("Third", "x")
+	//Uses("Third", "x")
 	else if(tk1[0]=='\"'){
-		string procName = tk1.substr(1,tk1.length()-2);
-		string varName = tk2.substr(1,tk2.length()-2);
-		if(use->isUsesProc(procName, varName)){
+		if(tk2!="_"){
+			string procName = tk1.substr(1,tk1.length()-2);
+			string varName = tk2.substr(1,tk2.length()-2);
+			if(use->isUsesProc(procName, varName)){
+				usesAns.push_back(Pair (-1,-1));
+			}else {
+				usesAns.push_back(Pair (-2,-2));
+			}
+		}
+
+		//Uses("Third", _)
+		else {
+			int index = proc->getProcIndex(tk1.substr(1, tk1.length()-2));
+			vector<int> allVariablesUsedByProc = use->getUsesProc(index);
+			if(allVariablesUsedByProc.empty()){
+				usesAns.push_back(Pair(-2,-2));
+			}
+
+			else {
+				usesAns.push_back(Pair(-1,-1));
+			}
+		}
+	}
+
+	//Uses(_,_)
+	else if(tk1=="_" && tk2=="_"){
+		cout<<"Uses(_,_)"<<endl;
+		vector<int> allProcIndexes = proc->getAllProcIndexes();
+		bool flag = false;
+		for(vector<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
+			if(!use->getUsesProc(*it).empty()){
+				cout<<"flag is true"<<endl;
+				flag = true;
+				break;
+			}
+		}
+
+		if(flag){
 			usesAns.push_back(Pair (-1,-1));
-		}else {
+		}else{
 			usesAns.push_back(Pair (-2,-2));
 		}
 	}
 
-	//Modifies(1, "x")
+	//Uses(1, "x")
 	else {
-		string varName = tk2.substr(1,tk2.length()-2);
-		if(use->isUses(atoi(tk1.c_str()), varName)){
-			 usesAns.push_back(Pair (-1,-1));
-		 }else{
-			 usesAns.push_back(Pair (-2,-2));
-		 }
+
+		//Uses(_, "x")
+		if(tk1=="_"){
+			if(!use->getUsesProcVar(tk2.substr(1, tk2.length()-2)).empty()){
+				usesAns.push_back(Pair (-1,-1));
+			}
+			else {
+				usesAns.push_back(Pair (-2, -2));
+			}
+		}
+
+		else{
+			string varName = tk2.substr(1,tk2.length()-2);
+			if(use->isUses(atoi(tk1.c_str()), varName)){
+				 usesAns.push_back(Pair (-1,-1));
+			 }else{
+				 usesAns.push_back(Pair (-2,-2));
+			 }
+		}
 	}
 
 	intersectPairs(tk1,tk2,&usesAns,relIndex);

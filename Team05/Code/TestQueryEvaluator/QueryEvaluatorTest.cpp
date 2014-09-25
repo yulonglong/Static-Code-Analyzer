@@ -346,6 +346,17 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
 
+	//Uses(a, v) r24
+	Uses* use = pkb->getUses();
+	use->setUses(2, "x");
+	use->setUsesProc(0, varIndexes);
+
+	r = Relationship("Uses", "p", "v");
+	qe.evaluateUses(r, m, 24); 
+	ans = qe.relAns.find(24)->second;
+
+	CPPUNIT_ASSERT_EQUAL(0, ans.at(0).ans1);
+
 	//evaluate
 	/*
 	qe.evaluateFollows(r,m,0);
