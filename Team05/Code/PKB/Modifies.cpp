@@ -94,7 +94,6 @@ vector<STMTNUM> Modifies::getModifies(SYNTYPE t, VARNAME v) {
 	try {
 		VARINDEX varIndex = varTable->getVarIndex(v);
 		if (varIndex == -1) {
-			ans = vector<STMTNUM> (1,-1);
 			return ans;
 		}
 
