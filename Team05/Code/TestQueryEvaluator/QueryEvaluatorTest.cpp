@@ -68,7 +68,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	CPPUNIT_ASSERT_EQUAL(2, ans.at(0).ans2);
 
-
+	/*
 	//Modifies(1 , "y")
 	Calls* call = pkb->getCalls();
 	call->setCalls("first", "second", 4);
@@ -76,7 +76,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	qe.evaluateCalls(r,3);
 	ans = qe.relAns.find(3)->second;
-	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans2);
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans2);*/
 
 	/*
 	//Parent(1,2) r3
