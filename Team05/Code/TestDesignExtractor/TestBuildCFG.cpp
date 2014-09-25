@@ -196,15 +196,13 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
-	/*
-	string resultFullCFG = "";
-	CFGRoot->stringPreOrderExpressionGraph(CFGRoot, resultFullCFG);
-	string expectedFullCFG = "";
-	cout << resultFullCFG << endl;
-	cout << "End of CFG" << endl;
-	*/
+	Next* nextTable; 
+	nextTable = pkb->getNext();
+	vector<int> v;
+	//string expected = "7 21 "; 
+	//v = nextTable->getNext(6);
+	//CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
-	// CPPUNIT_ASSERT_EQUAL(expectedFullCFG, resultFullCFG);
 	pkb->~PKB();
 }
 
