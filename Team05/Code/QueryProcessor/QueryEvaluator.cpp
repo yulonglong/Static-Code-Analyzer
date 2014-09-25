@@ -222,23 +222,25 @@ set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
 	vector<int> listOfRel = QueryEvaluator::linkages.find(tk)->second;
 
 	vector<Pair> ans = QueryEvaluator::relAns.find(listOfRel.at(0))->second;
-	cout<<"listofrel0="<<listOfRel.at(0)<<endl;
+	cout<<"Retrieving Token Evaluated Answers with first relationship index = "<<listOfRel.at(0)<<endl;
 	string relTk1 = QueryEvaluator::relParameters.find(listOfRel.at(0))->second.at(0);
-	cout<<"here"<<endl;
+	cout<<"RelTk1 = "<<relTk1<<" "<<"tk = "<<tk<<endl;
 	set<int> setAns;
-	cout<<"here"<<endl;
 	if(relTk1==tk){
 		for(vector<Pair>::iterator it = ans.begin(); it!=ans.end(); it++){
 			setAns.insert(it->ans1);
-			cout<<"here"<<endl;
 		}
 	}else{
 		for(vector<Pair>::iterator it = ans.begin(); it!=ans.end(); it++){
 			setAns.insert(it->ans2);
-			cout<<"here"<<endl;
 		}
 	}
-	cout<<"end"<<endl;
+
+	cout<<"PRINTING ELEMENTS OF RETRIEVED TOKEN: "<<endl;
+	for(set<int>::iterator it = setAns.begin(); it!=setAns.end(); it++){
+		cout<<*it<<endl;
+	}
+	cout<<"End retrieving token"<<endl;
 	return setAns;
 }
 
@@ -1240,10 +1242,9 @@ void QueryEvaluator::insertLinks(string tk, int relIndex){
 }
 
 void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string tk, int pairIndex){
-	
+	cout<<"removePairsfrom RELANS"<<endl;
 	//Retrieve the set of int of the token that was evaluated
 	set<int> s = retrieveTokenEvaluatedAnswers(tk);
-	cout<<"relationsAns: "<<relationsAns->at(1).ans1<<endl;//<<relationsAns->at(0).ans2<<relationsAns->at(1).ans1<<relationsAns->at(1).ans2<<endl;
 	//Delete it from the ans pairs made
 	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
 		cout<<"in for loop"<<endl;
@@ -1458,11 +1459,12 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	//Modifies(a,v)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+	//Modifies(a,v) Modifies(_,v) Modifies(a,_)
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")){
 
 		//If first token is of procedure type
-		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
+		//Modifies(p, v)
+		if(i1->second==TypeTable::PROCEDURE || tk1=="_"){
 
 			selected = proc->getAllProcIndexes();
 
@@ -1487,28 +1489,15 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 			}
 		}
 	}
-	/*
-	//Select v Modifies(a,v)
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		selected = t->getAllStmts(TypeTable::ASSIGN);
-		vector<int> modifiedVar;
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){	
-			cout<<"Calling getModifies(STMTNUM)"<<endl;
-			modifiedVar = mod->getModifies(*it);
-			answer.insert(modifiedVar.begin(), modifiedVar.end());
-		}
-		selected.clear();
-		copy(answer.begin(), answer.end(), back_inserter(selected));
-		return selected;
-	}*/
 
 	//Modifies(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
 
 		//If first token is of type procedure
-		if(t->getSynType(tk1)==TypeTable::PROCEDURE){
-
+		//Modifies(p, "x")
+		if(i1->second==TypeTable::PROCEDURE){
+			cout<<"In Modifies(p, \"var\")"<<endl;
 			answer = mod->getModifiesProcVar(varName);
 			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 				modAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
@@ -1531,25 +1520,84 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 	//Select v such that Modifies(1, v);
 	else if(isalpha(tk2[0])){
-		selected = mod->getModifies(atoi(tk1.c_str()));
-		for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-			modAns.push_back(Pair (atoi(tk1.c_str()), *it));
+		if(isdigit(tk1[0])){
+			selected = mod->getModifies(atoi(tk1.c_str()));
+			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				modAns.push_back(Pair (atoi(tk1.c_str()), *it));
+			}
+		}
+
+		//Modifies("First", v)
+		else {
+			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
+			vector<int> vars = mod->getModifiesProc(procIndex);
+
+			for(vector<int>::iterator it = vars.begin(); it!=vars.end(); it++){
+				modAns.push_back(Pair(procIndex, *it));
+			}
 		}
 	}
 
 	//Modifies("Third", "x")
 	else if(tk1[0]=='\"'){
-		string procName = tk1.substr(1,tk1.length()-2);
-		string varName = tk2.substr(1,tk2.length()-2);
-		if(mod->isModifiesProc(procName, varName)){
+		if(tk2!="_"){
+			cout<<"Modifies(\"Procname\", \"VarName\")"<<endl;
+			string procName = tk1.substr(1,tk1.length()-2);
+			string varName = tk2.substr(1,tk2.length()-2);
+			if(mod->isModifiesProc(procName, varName)){
+				modAns.push_back(Pair (-1,-1));
+			}else {
+				modAns.push_back(Pair (-2,-2));
+			}
+		} 
+		
+		//Modifies("Third", _)
+		else {
+			int index = proc->getProcIndex(tk1.substr(1, tk1.length()-2));
+			vector<int> allVariablesModifiedByProc = mod->getModifiesProc(index);
+			if(allVariablesModifiedByProc.empty()){
+				modAns.push_back(Pair(-2,-2));
+			}
+
+			else {
+				modAns.push_back(Pair(-1,-1));
+			}
+		}
+	}
+
+	//Modifies(_,_)
+	else if(tk1=="_" && tk2=="_"){
+		cout<<"Modifies(_,_)"<<endl;
+		vector<int> allProcIndexes = proc->getAllProcIndexes();
+		bool flag = false;
+		for(vector<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
+			if(!mod->getModifiesProc(*it).empty()){
+				cout<<"flag is true"<<endl;
+				flag = true;
+			}
+		}
+
+		if(flag){
 			modAns.push_back(Pair (-1,-1));
-		}else {
+		}else{
 			modAns.push_back(Pair (-2,-2));
 		}
 	}
 
 	//Modifies(1, "x")
 	else {
+
+		//Modifies(_, "x")
+		if(tk1=="_"){
+			if(!mod->getModifiesProcVar(tk2.substr(1, tk2.length()-2)).empty()){
+				modAns.push_back(Pair (-1,-1));
+			}
+			else {
+				modAns.push_back(Pair (-2, -2));
+			}
+		}
+
+		else {
 		cout<<"supposed"<<endl;
 		string varName = tk2.substr(1,tk2.length()-2);
 		cout<<atoi(tk1.c_str())<<varName<<endl;
@@ -1560,6 +1608,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		 }else{
 			 modAns.push_back(Pair (-2,-2));
 		 }
+		}
 	}
 
 	intersectPairs(tk1, tk2, &modAns, relIndex);
@@ -1581,6 +1630,7 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	//If only a exist
 	else if(isExistInLinkages(tk1)){
+		cout<<"intersectPairs tk1Exists"<<endl;
 		removePairsFromRelAns(ans, tk1, 1);
 		removePairs(*ans, tk1, 1);
 		insertLinks(tk1, relIndex);
@@ -1588,13 +1638,9 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	//If only b exist
 	else if(isExistInLinkages(tk2)){
-		cout<<"supposedarea"<<endl;
 		removePairsFromRelAns(ans, tk2, 2);
-		cout<<"1"<<endl;
 		removePairs(*ans, tk2, 2);
-		cout<<"2"<<endl;
 		insertLinks(tk2, relIndex);
-		cout<<"end supposedArea"<<endl;
 	}
 
 	else {
