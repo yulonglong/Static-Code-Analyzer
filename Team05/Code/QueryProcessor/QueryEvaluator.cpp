@@ -49,11 +49,20 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 
 unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
-
-
 	vector<Relationship> relations = q.getRelVect();
 	relations = orderRelationship(relations);
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
+	vector<string> selectedSyn = q.getSelectedSyn();
+	unordered_map<string, vector<int>> answers;
+
+	//If relations is empty
+	if(relations.empty()){
+		for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
+
+		}
+	}
+
+	//If relations are not empty
 	int relIndex = 0;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		switch(it->getRelType()){
@@ -93,8 +102,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		relIndex++;
 	}
 
-	vector<string> selectedSyn = q.getSelectedSyn();
-	unordered_map<string, vector<int>> answers;
+
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
 		int index = (QueryEvaluator::linkages.find(*it)->second).at(0);
@@ -397,7 +405,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 		else {
 			vector<Pair> withAns;
 			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT) || (i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
-				vector<int> allConst = c->getAllConst();
+				vector<int> allConst = c->getAllConstValue();
 				int stmtRange = t->getStmtRange();
 
 				for(vector<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
