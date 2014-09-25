@@ -54,7 +54,7 @@ public:
 
 
 	//NEW METHOD
-	vector<CONSTINDEX> getAllConstIndex();
+	vector<CONSTVALUE> getAllConstValue();
 };
 
 #endif

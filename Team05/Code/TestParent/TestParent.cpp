@@ -33,6 +33,8 @@ void ParentTest::testParentUsingStmtNum() {  // Note 5
 	parent->setParent(10, 11);
 	parent->setParent(10, 12);
 
+	parent->printParentTable();
+
 	CPPUNIT_ASSERT(parent->isParent(6, 7) == true);
 	CPPUNIT_ASSERT(parent->isParent(10, 11) == true);
 	CPPUNIT_ASSERT(parent->isParent(5, 6) == false);

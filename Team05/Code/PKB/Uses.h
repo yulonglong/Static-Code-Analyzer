@@ -68,6 +68,8 @@ public:
 	vector<PROCINDEX> getUsesProcVar(VARNAME);
 	//! If the Uses relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
 	bool isUsesProc(PROCNAME, VARNAME);
+
+	void printUsesTable();
 };
 
 #endif

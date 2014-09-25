@@ -57,10 +57,10 @@ CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
 	return -1;
 }
 
-vector<CONSTINDEX> ConstTable::getAllConstIndex(){
-	vector<CONSTINDEX> ans;
+vector<CONSTVALUE> ConstTable::getAllConstValue(){
+	vector<CONSTVALUE> ans;
 	for(unordered_map<CONSTINDEX, CONSTVALUE>::iterator it = constantTable.begin(); it != constantTable.end(); it++) {
-		ans.push_back(it->first);
+		ans.push_back(it->second);
 	}
 	return ans;
 }

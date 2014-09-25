@@ -157,3 +157,10 @@ vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
 	}
 	return list;
 }
+
+void Follows::printFollowsTable() {
+	cout<< "Follows Table" << endl;
+	for(unordered_map<STMTNUM, STMTNUM>::iterator it = followsTable.begin(); it != followsTable.end(); it++) {
+		cout<< it->first << " follows "<< it->second<< endl;
+	}
+}

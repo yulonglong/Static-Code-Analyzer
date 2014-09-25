@@ -261,3 +261,15 @@ vector<STMTNUM> Parent::getChildren(STMTNUM s){
 	}
 }
 
+void Parent::printParentTable() {
+	cout<< "Parent Table" << endl;
+	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
+		cout<< it->first << " is parent of ";
+		vector<STMTNUM> temp = it->second; 
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			cout<< *iter<< ",";
+		}		
+		cout<<endl;
+	}
+}

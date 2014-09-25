@@ -207,3 +207,17 @@ bool Uses::isUsesProc(PROCNAME p, VARNAME v){
 	}
 	return false;
 }
+
+void Uses::printUsesTable() {
+	cout<< "Uses Table" << endl;
+	for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
+		cout<< it->first << " uses ";
+		vector<VARINDEX> temp = it->second; 
+		vector<VARINDEX>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			string name = varTable->getVarName(*iter);
+			cout<< name<< ",";
+		}		
+		cout<<endl;
+	}
+}

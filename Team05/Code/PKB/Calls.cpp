@@ -121,3 +121,18 @@ vector<PROCINDEX> Calls::getCalled(PROCNAME p){
 	}
 	return ans;
 }
+
+void Calls::printCallsTable() {
+	cout<< "Calls Table" << endl;
+	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it = callsTable.begin(); it != callsTable.end(); it++) {
+		string name1 = procTable->getProcName(it->first);
+		cout<< name1 << " modifies ";
+		vector<CALLSPAIR> temp = it->second; 
+		vector<CALLSPAIR>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			string name = procTable->getProcName(iter->first);
+			cout<< name<< ",";
+		}		
+		cout<<endl;
+	}
+}

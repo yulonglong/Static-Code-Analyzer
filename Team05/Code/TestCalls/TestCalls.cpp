@@ -33,6 +33,8 @@ void CallsTest::testSetCalls() {  // Note 5
 	calls->setCalls("x", "z",3);
 	calls->setCalls("y", "z",4);
 
+	calls->printCallsTable();
+
 	CPPUNIT_ASSERT(calls->isCalls("x", "y") == true);
 	CPPUNIT_ASSERT(calls->isCalls("y", "z") == true);
 	CPPUNIT_ASSERT(calls->isCalls("z", "y") == false);

@@ -76,6 +76,8 @@ public:
 	//For parentStar
 	STMTNUM getParent(STMTNUM); 
 	vector<STMTNUM> getChildren(STMTNUM); 
+
+	void printParentTable();
 };
 
 #endif

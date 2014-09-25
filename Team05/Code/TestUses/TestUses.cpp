@@ -43,6 +43,8 @@ void UsesTest::testUsesUsingStmtNum() {  // Note 5
 	uses->setUses(5, "z");
 	uses->setUses(10, "xy");
 
+	uses->printUsesTable();
+
 	CPPUNIT_ASSERT(uses->isUses(2, "x") == true);
 	CPPUNIT_ASSERT(uses->isUses(2, "y") == true);
 	CPPUNIT_ASSERT(uses->isUses(2, "z") == false);

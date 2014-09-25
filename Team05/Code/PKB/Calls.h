@@ -64,6 +64,8 @@ public:
 	vector<PROCINDEX> getCalled(PROCNAME); //Calls("First", q) Select q, return empty if not found
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
+
+	void printCallsTable();
 };
 
 #endif

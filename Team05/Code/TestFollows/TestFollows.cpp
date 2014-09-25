@@ -33,6 +33,8 @@ void FollowsTest::testIsFollowsUsingStmtNum() {  // Note 5
 	follows->setFollows(5, 6);
 	follows->setFollows(6, 10);
 	follows->setFollows(10, 12);
+
+	follows->printFollowsTable();
 	
 	CPPUNIT_ASSERT(follows->isFollows(5, 6) == true);
 	CPPUNIT_ASSERT(follows->isFollows(6, 7) == false);
