@@ -146,29 +146,48 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 			for(vector<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
 				callAns.push_back(Pair (*it, *it2));
+				cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
 			}
 		}
 
 	}
 
-	//Select p Calls(p, "Second") 
-	else if(isalpha(tk1[0])){
+	//Select p Calls(p, "Second") Calls(_, "Second")
+	else if(isalpha(tk1[0]) || (tk1=="_" && tk2!="_")){
 		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
-		int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
+		if(tk1=="_"){
+			if(!ans.empty()){
+				callAns.push_back(Pair(-1,-1));
+			}else{
+				callAns.push_back(Pair(-2,-2));
+			}
+		}
+		else{
+			int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
 
-		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-			callAns.push_back(Pair (*it, procIndex));
+			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+				callAns.push_back(Pair (*it, procIndex));
+			}
 		}
 	}
 
 	//Select q Calls("First", q)
-	else if(isalpha(tk2[0])){
+	else if(isalpha(tk2[0]) || (tk1!="_" && tk2=="_")){
 		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
 
-		int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
+		if(tk2=="_"){
+			if(!ans.empty()){
+				callAns.push_back(Pair(-1,-1));
+			}else{
+				callAns.push_back(Pair(-2,-2));
+			}
+		}
+		else{
+			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
 
-		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-			callAns.push_back(Pair (procIndex, *it));
+			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+				callAns.push_back(Pair (procIndex, *it));
+			}
 		}
 	}
 
@@ -196,7 +215,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	intersectPairs(tk1,tk2,&callAns, relIndex);
 
-	QueryEvaluator::relAns.insert(make_pair(relIndex, callAns));
+	relAns.insert(make_pair(relIndex, callAns));
 
 
 }
@@ -1236,8 +1255,7 @@ void QueryEvaluator::insertLinks(string tk, int relIndex){
 	else {
 		vector<int> relIndexes;
 		relIndexes.push_back(relIndex);
-		//minghongisgod
-		QueryEvaluator::linkages.insert(make_pair(tk, relIndexes));
+		linkages.insert(make_pair(tk, relIndexes));
 	}
 }
 
@@ -1246,13 +1264,21 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 	//Retrieve the set of int of the token that was evaluated
 	set<int> s = retrieveTokenEvaluatedAnswers(tk);
 	//Delete it from the ans pairs made
+	/*
 	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
+		cout<<it->ans2<<endl;
+	}*/
+
+	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end();){
 		cout<<"in for loop"<<endl;
 		if(pairIndex==1){
-
+			cout<<"pair index is 1"<< it->ans1<<endl;
 			//if ans from relationsAns is not found in the set, remove it
 			if(s.find(it->ans1)==s.end()){
 				it = relationsAns->erase(it);
+			}
+			else{
+				++it;
 			}
 		}
 		else {
@@ -1260,8 +1286,13 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 			if(s.find(it->ans2)==s.end()){
 				it = relationsAns->erase(it);
 			}
+			else{
+				++it;
+			}
 		}
 	}
+
+	cout<<"end of RemovePairsFromRelAns"<<endl;
 }
 
 void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -1620,13 +1651,10 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, int relIndex){
 		//If both a and b exist in QueryEvaluator::linkages
 	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
-
 		removePairsFromRelAns(ans, tk1, 1);
 		removePairsFromRelAns(ans, tk2, 2);
 		removePairs(*ans, tk1, 1);
 		removePairs(*ans, tk2, 2);
-		insertLinks(tk1, relIndex);
-		insertLinks(tk2, relIndex);
 	}
 
 	//If only a exist
@@ -1634,18 +1662,28 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 		cout<<"intersectPairs tk1Exists"<<endl;
 		removePairsFromRelAns(ans, tk1, 1);
 		removePairs(*ans, tk1, 1);
-		insertLinks(tk1, relIndex);
+		//insertLinks(tk1, relIndex);
 	}
 
 	//If only b exist
 	else if(isExistInLinkages(tk2)){
 		removePairsFromRelAns(ans, tk2, 2);
 		removePairs(*ans, tk2, 2);
-		insertLinks(tk2, relIndex);
 	}
 
 	else {
+		cout<<"In intersect Pairs: both does not exist"<<endl;
+	}
 
+	
+	if(isalpha(tk1[0])){
+		cout<<"insert links for tk1 =" <<tk1<<endl;
+		insertLinks(tk1, relIndex);
+	}
+	
+	if(isalpha(tk2[0])){
+	
+		insertLinks(tk2, relIndex);
 	}
 }
 
