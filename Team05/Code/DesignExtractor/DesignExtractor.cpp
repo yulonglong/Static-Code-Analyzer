@@ -315,21 +315,25 @@ void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
-	if (currCFGNode->getProgLine() == -1) {
+	leafNodes.push_back(currCFGNode);	
+
+	/*if (currCFGNode->getProgLine() == -1) {
 		leafNodes.push_back(currCFGNode->getMultiParent(0));
 	} else {
 		leafNodes.push_back(currCFGNode);	
-	}
+	}*/
 
 	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	currCFGNode = ifCFGNode;
 	stmtLst = children[2];
 	createCFGForStmtLst(*stmtLst, pkb);
-	if (currCFGNode->getProgLine() == -1) {
+	leafNodes.push_back(currCFGNode);	
+
+	/*if (currCFGNode->getProgLine() == -1) {
 		leafNodes.push_back(currCFGNode->getMultiParent(0));
 	} else {
 		leafNodes.push_back(currCFGNode);	
-	}
+	}*/
 
 	CFGNode* dummyNode = new CFGNode("dummy", -1);
 	while (!leafNodes.empty()) {
