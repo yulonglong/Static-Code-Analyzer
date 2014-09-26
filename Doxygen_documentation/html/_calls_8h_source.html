@@ -129,13 +129,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span>    vector&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#ac681d5abd94842d78146069edc100407">getCalled</a>(PROCNAME); <span class="comment">//Calls(&quot;First&quot;, q) Select q, return empty if not found</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;};</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> printCallsTable();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdoc">A Calls class to store the calls relationship. </div><div class="ttdef"><b>Definition:</b> Calls.h:37</div></div>
 <div class="ttc" id="class_calls_html_a4d7b6f64cc0b9dc117f324262419bc3a"><div class="ttname"><a href="class_calls.html#a4d7b6f64cc0b9dc117f324262419bc3a">Calls::setCalls</a></div><div class="ttdeci">void setCalls(PROCNAME, PROCNAME, STMTNUM)</div><div class="ttdoc">Set the Calls relationship between the two procedure names to be true at the specified statement numb...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:35</div></div>
 <div class="ttc" id="class_calls_html_a4d9250ac093b82c6483ea50d98094bd9"><div class="ttname"><a href="class_calls.html#a4d9250ac093b82c6483ea50d98094bd9">Calls::Calls</a></div><div class="ttdeci">Calls(ProcTable *)</div><div class="ttdoc">A constructor to initialize the Calls class. </div><div class="ttdef"><b>Definition:</b> Calls.cpp:27</div></div>
-<div class="ttc" id="class_calls_html_ac681d5abd94842d78146069edc100407"><div class="ttname"><a href="class_calls.html#ac681d5abd94842d78146069edc100407">Calls::getCalled</a></div><div class="ttdeci">vector&lt; PROCINDEX &gt; getCalled()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had been called by another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:84</div></div>
+<div class="ttc" id="class_calls_html_ac681d5abd94842d78146069edc100407"><div class="ttname"><a href="class_calls.html#ac681d5abd94842d78146069edc100407">Calls::getCalled</a></div><div class="ttdeci">vector&lt; PROCINDEX &gt; getCalled()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had been called by another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:82</div></div>
 <div class="ttc" id="class_calls_html_a904359ceb46c397a48df73067b8a39a7"><div class="ttname"><a href="class_calls.html#a904359ceb46c397a48df73067b8a39a7">Calls::isCalls</a></div><div class="ttdeci">bool isCalls(PROCNAME, PROCNAME)</div><div class="ttdoc">If the Calls relationship between the two procedure names is true, return true. Otherwise, return false. </div><div class="ttdef"><b>Definition:</b> Calls.cpp:55</div></div>
 <div class="ttc" id="class_calls_html_a1215073f53147210d290136e36e580f4"><div class="ttname"><a href="class_calls.html#a1215073f53147210d290136e36e580f4">Calls::getCalls</a></div><div class="ttdeci">vector&lt; PROCINDEX &gt; getCalls()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had called another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:75</div></div>
 <div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdoc">A ProcTable class to store the procedure names from the source code. </div><div class="ttdef"><b>Definition:</b> ProcTable.h:35</div></div>
@@ -144,7 +146,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 27 2014 00:46:06 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

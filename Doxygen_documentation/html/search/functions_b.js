@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vartable',['VarTable',['../class_var_table.html#a16ef0b6548c794f0d7a0fbfdc468759f',1,'VarTable']]]
+  ['uses',['Uses',['../class_uses.html#a682b85c47c7c880ad300b514efd0eada',1,'Uses']]]
 ];

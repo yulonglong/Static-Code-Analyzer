@@ -115,15 +115,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a649ff665afb117d04c4d8626134d9ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa95809116ee621002cf6ba53ff4f713"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa95809116ee621002cf6ba53ff4f713"></a>
 vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#afa95809116ee621002cf6ba53ff4f713">getModifies</a> (SYNTYPE)</td></tr>
-<tr class="memdesc:afa95809116ee621002cf6ba53ff4f713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies any variable. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:afa95809116ee621002cf6ba53ff4f713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies any variable. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:afa95809116ee621002cf6ba53ff4f713"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa864c0e2e09de310f5901109c70c903e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa864c0e2e09de310f5901109c70c903e"></a>
 vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#aa864c0e2e09de310f5901109c70c903e">getModifies</a> (STMTNUM)</td></tr>
-<tr class="memdesc:aa864c0e2e09de310f5901109c70c903e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is modified in the given statement number. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:aa864c0e2e09de310f5901109c70c903e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is modified in the given statement number. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:aa864c0e2e09de310f5901109c70c903e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b91555fe625182300336dda57a0b0be"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b91555fe625182300336dda57a0b0be"></a>
 vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a3b91555fe625182300336dda57a0b0be">getModifies</a> (SYNTYPE, VARNAME)</td></tr>
-<tr class="memdesc:a3b91555fe625182300336dda57a0b0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:a3b91555fe625182300336dda57a0b0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a3b91555fe625182300336dda57a0b0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f0fef04207b57afaaac3fce301d11ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f0fef04207b57afaaac3fce301d11ef"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a1f0fef04207b57afaaac3fce301d11ef">setModifies</a> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
@@ -135,16 +135,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:aa9faf6a922f571426d99bf058e9cfce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e0ed8b13eeb670c13fb947f8295099"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12e0ed8b13eeb670c13fb947f8295099"></a>
 vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a12e0ed8b13eeb670c13fb947f8295099">getModifiesProc</a> (PROCINDEX)</td></tr>
-<tr class="memdesc:a12e0ed8b13eeb670c13fb947f8295099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is modified by the given procedure index. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:a12e0ed8b13eeb670c13fb947f8295099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is modified by the given procedure index. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a12e0ed8b13eeb670c13fb947f8295099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b427f9a76410db18c8050737e0204eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b427f9a76410db18c8050737e0204eb"></a>
 vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#a2b427f9a76410db18c8050737e0204eb">getModifiesProcVar</a> (VARNAME)</td></tr>
-<tr class="memdesc:a2b427f9a76410db18c8050737e0204eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index modifies the given variable. If no such procedure index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:a2b427f9a76410db18c8050737e0204eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index modifies the given variable. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a2b427f9a76410db18c8050737e0204eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c10f14dadc9486015a545a37f81dc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4c10f14dadc9486015a545a37f81dc3"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_modifies.html#ac4c10f14dadc9486015a545a37f81dc3">isModifiesProc</a> (PROCNAME, VARNAME)</td></tr>
 <tr class="memdesc:ac4c10f14dadc9486015a545a37f81dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a procedure name and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:ac4c10f14dadc9486015a545a37f81dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bfc94f09569b70228e10159b7e204fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1bfc94f09569b70228e10159b7e204fb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printModifiesTable</b> ()</td></tr>
+<tr class="separator:a1bfc94f09569b70228e10159b7e204fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -168,7 +171,7 @@ static <a class="el" href="class_modifies.html">Modifies</a> *&#160;</td><td cla
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 27 2014 00:46:06 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

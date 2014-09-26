@@ -115,15 +115,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:af83b643e81bd747ed937084d7a884fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac18b42c3d16f67264c62e9debe50a883"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac18b42c3d16f67264c62e9debe50a883"></a>
 vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ac18b42c3d16f67264c62e9debe50a883">getUses</a> (SYNTYPE)</td></tr>
-<tr class="memdesc:ac18b42c3d16f67264c62e9debe50a883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses any variable. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:ac18b42c3d16f67264c62e9debe50a883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses any variable. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:ac18b42c3d16f67264c62e9debe50a883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec200590ef5775bbfaa61573c61d5ac1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec200590ef5775bbfaa61573c61d5ac1"></a>
 vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aec200590ef5775bbfaa61573c61d5ac1">getUses</a> (STMTNUM)</td></tr>
-<tr class="memdesc:aec200590ef5775bbfaa61573c61d5ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is used in the given statement number. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:aec200590ef5775bbfaa61573c61d5ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:aec200590ef5775bbfaa61573c61d5ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3027e9b89a93cf137c07bb8d0eb4053"></a>
 vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053">getUses</a> (SYNTYPE, VARNAME)</td></tr>
-<tr class="memdesc:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses the given variable name. If no such statement number exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e59a0076a7e554e60b3f2281f081e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12e59a0076a7e554e60b3f2281f081e3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a12e59a0076a7e554e60b3f2281f081e3">setUses</a> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
@@ -135,16 +135,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:ab805ef6c3017367ede89cf906ca34d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3bf683de7cf369545a3389270121919"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3bf683de7cf369545a3389270121919"></a>
 vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ad3bf683de7cf369545a3389270121919">getUsesProc</a> (PROCINDEX)</td></tr>
-<tr class="memdesc:ad3bf683de7cf369545a3389270121919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is used by the given procedure index. If no such variable index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:ad3bf683de7cf369545a3389270121919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:ad3bf683de7cf369545a3389270121919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca0177c15e5312af5bca552aeea785d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca0177c15e5312af5bca552aeea785d6"></a>
 vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aca0177c15e5312af5bca552aeea785d6">getUsesProcVar</a> (VARNAME)</td></tr>
-<tr class="memdesc:aca0177c15e5312af5bca552aeea785d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index uses the given variable. If no such procedure index exists, then returns a vector of -1. <br /></td></tr>
+<tr class="memdesc:aca0177c15e5312af5bca552aeea785d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:aca0177c15e5312af5bca552aeea785d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8807e004e8a0bf36e25376b609c8ab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8807e004e8a0bf36e25376b609c8ab9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#af8807e004e8a0bf36e25376b609c8ab9">isUsesProc</a> (PROCNAME, VARNAME)</td></tr>
 <tr class="memdesc:af8807e004e8a0bf36e25376b609c8ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a procedure name and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:af8807e004e8a0bf36e25376b609c8ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace721951cfacbce4f09e5962cec1860b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace721951cfacbce4f09e5962cec1860b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>printUsesTable</b> ()</td></tr>
+<tr class="separator:ace721951cfacbce4f09e5962cec1860b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -168,7 +171,7 @@ static <a class="el" href="class_uses.html">Uses</a> *&#160;</td><td class="memI
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 25 2014 02:48:53 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 27 2014 00:46:06 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

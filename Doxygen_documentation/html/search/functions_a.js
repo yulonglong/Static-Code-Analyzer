@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uses',['Uses',['../class_uses.html#a682b85c47c7c880ad300b514efd0eada',1,'Uses']]]
+  ['typetable',['TypeTable',['../class_type_table.html#a2e259cf4fe4783d23af7305ed425c70c',1,'TypeTable']]]
 ];

@@ -21,6 +21,7 @@ var searchData=
   ['getprocindex',['getProcIndex',['../class_queue_item.html#a0233333d8e990d47b4556f0864f90428',1,'QueueItem::getProcIndex()'],['../class_proc_table.html#add215c6c93f618751c06cae41818142f',1,'ProcTable::getProcIndex()']]],
   ['getprocname',['getProcName',['../class_proc_table.html#a37d8b083a577c6515b4e96dc4c0f4bb5',1,'ProcTable']]],
   ['getprogline',['getProgLine',['../class_node.html#a95ee383ab208183418181b920d56efb7',1,'Node']]],
+  ['getstmtrange',['getStmtRange',['../class_type_table.html#a410e2826535d923b0b98137d52555bfa',1,'TypeTable']]],
   ['gettype',['getType',['../class_node.html#a3b8b4d37c6fc1618ed1fb8304bc0d2bc',1,'Node::getType()'],['../class_type_table.html#a22fa470a3d25eaba205bd5387de9fd1a',1,'TypeTable::getType()']]],
   ['getuses',['getUses',['../class_uses.html#ac18b42c3d16f67264c62e9debe50a883',1,'Uses::getUses(SYNTYPE)'],['../class_uses.html#aec200590ef5775bbfaa61573c61d5ac1',1,'Uses::getUses(STMTNUM)'],['../class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053',1,'Uses::getUses(SYNTYPE, VARNAME)']]],
   ['getusesproc',['getUsesProc',['../class_uses.html#ad3bf683de7cf369545a3389270121919',1,'Uses']]],
