@@ -271,7 +271,7 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	Next* nextTable; 
 	nextTable = pkb->getNext();
 
-	//nextTable->printNextTable();
+	nextTable->printNextTable();
 
 	
 	pkb->~PKB();
