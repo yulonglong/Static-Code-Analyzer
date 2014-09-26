@@ -18,7 +18,7 @@ private:
 	
 	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
 	
-	void evaluateCallsStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+
 	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 
 	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
@@ -66,6 +66,7 @@ public:
 	bool evaluateQueryBoolean(Query);
 
 	void evaluateCalls(Relationship, int);
+		void evaluateCallsStar(Relationship,int);
 	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);

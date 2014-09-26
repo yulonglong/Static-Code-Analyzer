@@ -377,6 +377,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	proc->insertProc("Second");
 	proc->insertProc("Third");
 	proc->insertProc("Fourth");
+	proc->insertProc("Fifth");
 
 	call->setCalls("First", "Second",8);
 	call->setCalls("Second", "Third", 9);
@@ -425,6 +426,14 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Calls", "\"Second\"", "\"Third\"");
 	qe.evaluateCalls(r, 28);
 	ans = qe.relAns.find(28)->second;
+
+	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
+
+	call->setCalls("Third", "Fourth", 11);
+	//Calls*("First", "Fourth") r29
+	r = Relationship("Calls*", "\"First\"", "\"Fourth\"");
+	qe.evaluateCallsStar(r,29);
+	ans = qe.relAns.find(29)->second;
 
 	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans1);
 	//evaluate

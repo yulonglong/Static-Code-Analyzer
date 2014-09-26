@@ -83,3 +83,24 @@ void Next::printNextTable() {
 		cout<<endl;
 	}
 }
+
+bool Next::isNext(STMTNUM s1, STMTNUM s2){
+	try{
+		vector<STMTNUM> temp = nextTable.at(s1);
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			cout<< *iter<< ",";
+		}		
+		cout<<endl;
+	} catch(...){
+		return false;
+	}
+	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
+		vector<STMTNUM> temp = it->second; 
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			cout<< *iter<< ",";
+		}		
+		cout<<endl;
+	}	
+}

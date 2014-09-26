@@ -82,7 +82,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			evaluateCalls(*it, relIndex); break;
 
 		case Relationship::CALLSSTAR:
-			evaluateCallsStar(*it, m, relIndex); break;
+			evaluateCallsStar(*it, relIndex); break;
 
 		case Relationship::MODIFIES:
 			evaluateModifies(*it, m, relIndex); break;
@@ -800,13 +800,11 @@ void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vecto
 	}
 }
 
-void QueryEvaluator::evaluateCallsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Calls *c = pkb->getCalls();
 	ProcTable *p = pkb->getProcTable();
-	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
-	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	vector<Pair> callsStarAns;
 
