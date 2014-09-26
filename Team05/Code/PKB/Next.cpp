@@ -89,18 +89,11 @@ bool Next::isNext(STMTNUM s1, STMTNUM s2){
 		vector<STMTNUM> temp = nextTable.at(s1);
 		vector<STMTNUM>::iterator iter;
 		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			cout<< *iter<< ",";
+			if(*iter==s2)
+				return true;
 		}		
-		cout<<endl;
 	} catch(...){
 		return false;
 	}
-	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
-		vector<STMTNUM> temp = it->second; 
-		vector<STMTNUM>::iterator iter;
-		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			cout<< *iter<< ",";
-		}		
-		cout<<endl;
-	}	
+	return false;
 }
