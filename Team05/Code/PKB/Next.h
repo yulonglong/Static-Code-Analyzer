@@ -57,6 +57,7 @@ public:
 	bool isNext(STMTNUM, STMTNUM);
 
 	void printNextTable();
+	void printNextTableForTesting();
 };
 
 #endif

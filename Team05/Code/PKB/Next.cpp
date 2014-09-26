@@ -67,8 +67,18 @@ STMTNUM Next::getPrevious(STMTNUM s){
 	}
 }
 
-bool Next::isNext(STMTNUM s, STMTNUM s1){
-	return true;
+bool Next::isNext(STMTNUM s1, STMTNUM s2){
+	try{
+		vector<STMTNUM> temp = nextTable.at(s1);
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			if(*iter==s2)
+				return true;
+		}		
+	} catch(...){
+		return false;
+	}
+	return false;
 }
 
 void Next::printNextTable() {
@@ -84,16 +94,16 @@ void Next::printNextTable() {
 	}
 }
 
-bool Next::isNext(STMTNUM s1, STMTNUM s2){
-	try{
-		vector<STMTNUM> temp = nextTable.at(s1);
+void Next::printNextTableForTesting() {
+	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
+		cout<< it->first << "-";
+		vector<STMTNUM> temp = it->second; 
 		vector<STMTNUM>::iterator iter;
 		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			if(*iter==s2)
-				return true;
+			cout<< *iter<< " ";
 		}		
-	} catch(...){
-		return false;
+		cout<<"+";
 	}
-	return false;
 }
+
+

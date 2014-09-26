@@ -32,6 +32,7 @@ void NextTest::testSetAndGetNext() {
 	next1->setNext(4,5);
 
 	next1->printNextTable();
+	next1->printNextTableForTesting();
 
 	vector<STMTNUM> ans (1,2);
 	ans.push_back(3);
