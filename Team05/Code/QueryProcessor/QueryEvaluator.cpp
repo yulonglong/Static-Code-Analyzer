@@ -49,17 +49,23 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 
 unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
+	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
 	relations = orderRelationship(relations);
+
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 	vector<string> selectedSyn = q.getSelectedSyn();
 	unordered_map<string, vector<int>> answers;
+	TypeTable *t = pkb->getTypeTable();
 
 	//If relations is empty
 	if(relations.empty()){
 		for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
-
+			vector<int> synAns = t->getAllStmts(m.find(*it)->second);
+			answers.insert(make_pair<string, vector<int>>(*it, synAns));
 		}
+
+		return answers;
 	}
 
 	//If relations are not empty
@@ -102,27 +108,39 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		relIndex++;
 	}
 
+	//If one of the relations are evaluated to false or empty
+	for(int i=0; i<relations.size(); i++){
+		vector<Pair> v = relAns.find(i)->second;
+		if(v.empty() || v.at(0).ans1==-2){
+			return answers;
+		}
+	}
 
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
-		int index = (QueryEvaluator::linkages.find(*it)->second).at(0);
-		vector<string> param = QueryEvaluator::relParameters.find(index)->second;
+		int index = (linkages.find(*it)->second).at(0);
+		vector<string> param = relParameters.find(index)->second;
 
-		vector<Pair> p = QueryEvaluator::relAns.at(index);
-		vector<int> synAns;
+		vector<Pair> p = relAns.at(index);
+		set<int> synAns;
+		vector<int> synAnsVec;
 
 		if(*it==param.at(0)){
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
-				synAns.push_back(it2->ans1);
+				synAns.insert(it2->ans1);
 			}
 
 		}else {
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
-				synAns.push_back(it2->ans2);
+				synAns.insert(it2->ans2);
 			}
 		}
 
-		answers.insert(make_pair(*it, synAns));
+		for(set<int>::iterator it3 = synAns.begin(); it3!=synAns.end(); it3++){
+			synAnsVec.push_back(*it3);
+		}
+
+		answers.insert(make_pair<string, vector<int>>(*it, synAnsVec));
 	}
 
 	return answers;
@@ -1399,8 +1417,13 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	QueryEvaluator::relAns.insert(make_pair(relIndex, parentAns));
 }
 
+void QueryEvaluator::recursiveParent(int rootIndex, int currentIndex){
+	vector<int> 
+
+}
 
 
+//PARENTSTAR
 vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -1413,6 +1436,20 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
+	//Parent*(w, a)
+	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
+			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
+			set<int> setSample;
+
+			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
+
+			}
+		}
+	}
+
+	/*
 	//Select w such that Parent*(w, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
 		selected = t->getAllStmts(i2->second);	//get all assign statements
@@ -1470,7 +1507,7 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 		}
 	}
 
-	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));
+	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));*/
 
 	return vectorAnswer;
 }

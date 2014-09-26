@@ -10,6 +10,18 @@
 #include <vector>
 #include <set>
 
+/*! \brief Query Evaluator class 
+ *  
+ * Overview: Query Evaluator is responsible for :
+ * - Accepting Query object made by the Query Parser 
+ * - And evaluate the set of answers resquested by the user
+ * 
+ * To evaluate query, call
+ * \code
+ * void unordered_map<string, vector<Pair>> evaluateQuery(Query);
+ * \endcode
+ *
+ */
 
 class QueryEvaluator{ 
 private:
@@ -66,7 +78,7 @@ public:
 	bool evaluateQueryBoolean(Query);
 
 	void evaluateCalls(Relationship, int);
-		void evaluateCallsStar(Relationship,int);
+	void evaluateCallsStar(Relationship,int);
 	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
