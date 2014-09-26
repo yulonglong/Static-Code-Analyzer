@@ -1,0 +1,131 @@
+\hypertarget{class_query_parser}{\section{Query\+Parser Class Reference}
+\label{class_query_parser}\index{Query\+Parser@{Query\+Parser}}
+}
+
+
+A \hyperlink{class_query_parser}{Query\+Parser} class to validate and parse User Queries.  
+
+
+
+
+{\ttfamily \#include $<$Query\+Parser.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_query}{Query} \hyperlink{class_query_parser_a12db252feb56df9af4bd5fb415cafb99}{query\+Parse} (string query\+Str, bool \&valid)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_query_parser}{Query\+Parser} reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a \hyperlink{class_query}{Query} class structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A \hyperlink{class_query_parser}{Query\+Parser} class to validate and parse User Queries. 
+
+Overview\+: Parser is responsible to \+:
+\begin{DoxyItemize}
+\item Read the query code
+\item Tokenize the appropriate sentences
+\item Build a \hyperlink{class_query}{Query} class structure to be used by \hyperlink{class_query_evaluator}{Query\+Evaluator}
+\end{DoxyItemize}
+
+\hyperlink{class_query_parser}{Query\+Parser} has only one public method\+: 
+\begin{DoxyCode}
+\hyperlink{class_query}{Query} \hyperlink{class_query_parser_a12db252feb56df9af4bd5fb415cafb99}{QueryParser::queryParse}(\textcolor{keywordtype}{string} queryStr, \textcolor{keywordtype}{bool} &valid);
+\end{DoxyCode}
+
+
+It has many private functions and sub-\/functions to modularize the process of parsing and validating user queries.
+
+When query\+Parser() is called, it will call 
+\begin{DoxyCode}
+\textcolor{keywordtype}{bool} parseDesignEntity(\textcolor{keywordtype}{string});
+\textcolor{keywordtype}{bool} parseSelectCl(\textcolor{keywordtype}{string});
+\end{DoxyCode}
+
+
+\hyperlink{class_query_parser}{Query\+Parser} will validate and parse the query against the pre-\/defined regular expressions which are stated in the grammar rules. (See sample of the pre-\/defined regex string further below)
+
+Then \hyperlink{class_query_parser}{Query\+Parser} will call the function below to validate the tokens, while constructing the \hyperlink{class_query}{Query} class simultaneously 
+\begin{DoxyCode}
+\hyperlink{class_query}{Query} QueryParser::constructAndValidateQuery(vector<string> v, unordered\_map<string,
+       TypeTable::SynType> map, \textcolor{keywordtype}{bool} &valid)\{
+   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 2; i < (int) v.size(); i++)\{
+      \hyperlink{class_relationship}{Relationship} clauseRel = validateDefaultClauses(v,i,clauseValid);
+      \hyperlink{class_relationship}{Relationship} patternRel = validatePattern(v,i,patternValid);
+      \hyperlink{class_relationship}{Relationship} withRel = validateWith(v,i,withValid);
+      \textcolor{comment}{//if the parsed tokens are not valid at all, terminate validation and return Query as invalid}
+      \textcolor{keywordflow}{if} ((clauseValid||paternValid||withValid) == \textcolor{keyword}{false} )\{
+         valid = \textcolor{keyword}{false};
+         \textcolor{keywordflow}{return} \hyperlink{class_query}{Query}();
+      \}
+   \}
+\}
+\end{DoxyCode}
+
+
+\hyperlink{class_query_parser}{Query\+Parser} will traverse all parsed tokens, and try to validate all the clauses (of 3 types).
+\begin{DoxyItemize}
+\item Default clauses \+: Follows, Modifies, Parent, Calls, etc..
+\item Pattern clause
+\item With clause
+\end{DoxyItemize}
+
+For each type, the tokens will be evaluated and validated thoroughly, whether they conform to the grammar rule, and whether the synonym declaration has been defined properly. Otherwise, return failure, invalid query
+
+To facilitate the regular expression matching in \hyperlink{class_query_parser}{Query\+Parser}, the grammar rules has been defined in \hyperlink{class_query_parser}{Query\+Parser} attributes in regular expression form.
+
+Please take a look at the sample below\+: 
+\begin{DoxyCode}
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::DIGIT = \textcolor{stringliteral}{"[0-9]"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::LETTER = \textcolor{stringliteral}{"[A-Za-z]"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::INTEGER = \textcolor{stringliteral}{"[0-9]+"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::IDENT = \textcolor{stringliteral}{"[A-Za-z][A-Za-z0-9#]*"};
+
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::synonym = IDENT;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::attrName = \textcolor{stringliteral}{"(?:procName|varName|value|stmt#)"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::entRef = synonym + \textcolor{stringliteral}{"|\_|\(\backslash\)""} + IDENT +\textcolor{stringliteral}{"\(\backslash\)"|"} + INTEGER;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::varRef = synonym + \textcolor{stringliteral}{"|\_|\(\backslash\)""} + IDENT +\textcolor{stringliteral}{"\(\backslash\)""};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::stmtRef = synonym + \textcolor{stringliteral}{"|\_|"} + INTEGER;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::lineRef = synonym + \textcolor{stringliteral}{"|\_|"} + INTEGER;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::designEntity = \textcolor{stringliteral}{"
+      procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog\_line"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::attrRef = \textcolor{stringliteral}{"(?:"} + synonym + \textcolor{stringliteral}{"."} + attrName + \textcolor{stringliteral}{")"};
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::elem = synonym + \textcolor{stringliteral}{"|"} + attrRef;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::tuple = elem;
+\textcolor{keyword}{const} \textcolor{keywordtype}{string} QueryParser::resultCl = tuple + \textcolor{stringliteral}{"|"} + BOOLEAN;
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+Code\+Parser, \hyperlink{class_query_evaluator}{Query\+Evaluator} 
+\end{DoxySeeAlso}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_query_parser_a12db252feb56df9af4bd5fb415cafb99}{\index{Query\+Parser@{Query\+Parser}!query\+Parse@{query\+Parse}}
+\index{query\+Parse@{query\+Parse}!Query\+Parser@{Query\+Parser}}
+\subsubsection[{query\+Parse}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Query} Query\+Parser\+::query\+Parse (
+\begin{DoxyParamCaption}
+\item[{string}]{query\+Str, }
+\item[{bool \&}]{valid}
+\end{DoxyParamCaption}
+)}}\label{class_query_parser_a12db252feb56df9af4bd5fb415cafb99}
+
+
+\hyperlink{class_query_parser}{Query\+Parser} reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a \hyperlink{class_query}{Query} class structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query\+Str} & is the string which contains the query. (e.\+g. \char`\"{}assign a; while w; Select a such that Follows(w, a) pattern a (\char`\"{}x\char`\"{}, \+\_\+\char`\"{}x+y\char`\"{}\+\_\+)\char`\"{}) \\
+\hline
+{\em valid} & is a Boolean pointer to indicate whether the query string is valid or invalid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \hyperlink{class_query}{Query} object. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Query\+Parser.\+h\item 
+Query\+Parser.\+cpp\end{DoxyCompactItemize}
