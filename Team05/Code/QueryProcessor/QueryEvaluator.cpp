@@ -1417,10 +1417,11 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	QueryEvaluator::relAns.insert(make_pair(relIndex, parentAns));
 }
 
+/*
 void QueryEvaluator::recursiveParent(int rootIndex, int currentIndex){
 	vector<int> 
 
-}
+}*/
 
 
 //PARENTSTAR
