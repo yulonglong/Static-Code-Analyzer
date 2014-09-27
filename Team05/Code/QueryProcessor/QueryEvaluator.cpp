@@ -1425,31 +1425,169 @@ void QueryEvaluator::recursiveParent(int rootIndex, int currentIndex){
 
 
 //PARENTSTAR
-vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, string selectedSyn){
+void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Parent *p = pkb->getParent();
 	TypeTable *t = pkb->getTypeTable();
-	set<int> answer;
-	vector<int> selected;
-	vector<int> vectorAnswer;
+	vector<Pair> answer;
+	set<Pair> parentStarAnsSet;
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Parent*(w, a)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
-			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
-			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
-			set<int> setSample;
+	if((isalpha(tk1[0]) && isalpha(tk2[0]))|| (isalpha(tk1[0])&& tk2=="_") || (tk1=="_" && isalpha(tk2[0]))){
+		set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
+		set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
 
-			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
+		int stmt;
 
+		if(!isExistInLinkages(tk2)){
+			vector<int> vb;
+			if(tk2=="_"){
+				vb = t->getAllStmts(TypeTable::STMT);
+			}else{
+				vb = t->getAllStmts(i2->second);
+			}
+			sb.clear();
+			copy(vb.begin(), vb.end(), back_inserter(sb));
+		}
+
+		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
+			stmt = p->getParent(*it);
+			while(stmt!=-1){
+				if(isExistInLinkages(tk1)){
+					if(t->getType(stmt) == i1->second && sa.find(stmt)!=sa.end()){
+						parentStarAnsSet.insert(Pair (stmt, *it));
+					}
+				}
+				else{
+					if(tk1=="_"){
+						parentStarAnsSet.insert(Pair (stmt, *it));
+					}else{
+						if(t->getType(stmt) == i1->second){
+							parentStarAnsSet.insert(Pair (stmt, *it));
+						}
+					}
+				}
+				stmt = p->getParent(stmt);
+			}
+		}
+
+		if(isExistInLinkages(tk1)){
+			insertLinks(tk1, relIndex);
+		}
+
+		if(isExistInLinkages(tk2)){
+			insertLinks(tk2, relIndex);
+		}
+	}
+
+
+	//Parent*(w, 4)
+	else if(isalpha(tk1[0])){
+		int tk2Int = atoi(tk2.c_str());
+		set<int> sa;
+		int stmt;
+
+		if(isExistInLinkages(tk1)){
+			sa = retrieveTokenEvaluatedAnswers(tk1);
+			insertLinks(tk1, relIndex);
+		}else {
+			vector<int> va = t->getAllStmts(i1->second);
+			copy(va.begin(), va.end(), back_inserter(sa));
+		}
+		
+		stmt = p->getParent(tk2Int);
+		while(stmt!=-1){
+			if(sa.find(stmt)!=sa.end()){
+				parentStarAnsSet.insert(Pair (stmt, tk2Int));
+			}
+		stmt = p->getParent(stmt);
+		}
+	}
+
+	//Parent*(3, a)
+	else if(isalpha(tk2[0])){
+		int tk1Int = atoi(tk1.c_str());
+		set<int> sb;
+		int stmt;
+
+		if(isExistInLinkages(tk2)){
+			sb = retrieveTokenEvaluatedAnswers(tk2);
+			insertLinks(tk2, relIndex);
+		}else {
+			vector<int> va = t->getAllStmts(i2->second);
+			copy(va.begin(), va.end(), back_inserter(sb));
+		}
+		
+		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
+		stmt = p->getParent(*it);
+			while(stmt!=-1){
+				if(stmt == tk1Int){
+					parentStarAnsSet.insert(Pair (tk1Int, *it));
+					break;
+				}
+			stmt = p->getParent(stmt);
 			}
 		}
 	}
 
+	else if(tk1=="_" && tk2=="_"){
+		vector<int> dummy = p->getParent(TypeTable::STMT, TypeTable::STMT);
+		if(dummy.empty()){
+			parentStarAnsSet.insert(Pair(-2,-2));
+		}else {
+			parentStarAnsSet.insert(Pair(-1,-1));
+		}
+	}
+
+	//Parent*(3,4)
+	else {
+
+		//Parent*(3, _)
+		if(tk2=="_"){
+			if(p->getChildren(atoi(tk1.c_str())).empty()){
+				answer.push_back(Pair(-2,-2));
+			}else{
+				answer.push_back(Pair(-1,-1));
+			}
+			relAns.insert(make_pair<int, vector<Pair>>(relIndex, answer));
+			return;
+		}
+
+		//Parent*(_,3)
+		if(tk1=="_"){
+			if(p->getParent(atoi(tk2.c_str()))==-1){
+				answer.push_back(Pair(-2,-2));
+			}else{
+				answer.push_back(Pair(-1,-1));
+			}
+			relAns.insert(make_pair<int, vector<Pair>>(relIndex, answer));
+			return;
+		}
+
+		int tk1Int = atoi(tk1.c_str());
+		int tk2Int = atoi(tk2.c_str());
+
+		int stmt = p->getParent(tk2Int);
+		while(stmt!=-1){
+			if(stmt == tk1Int){
+				answer.push_back(Pair(-1,-1));
+				relAns.insert(make_pair<int, vector<Pair>>(relIndex, answer));
+				return;
+			}
+
+			stmt = p->getParent(stmt);
+		}
+
+		parentStarAnsSet.insert(Pair(-2,-2));
+
+	}
+
+	copy(parentStarAnsSet.begin(), parentStarAnsSet.end(), back_inserter(answer));
+	relAns.insert(make_pair<int, vector<Pair>>(relIndex, answer));
 	/*
 	//Select w such that Parent*(w, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
@@ -1509,8 +1647,6 @@ vector<int> QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<str
 	}
 
 	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));*/
-
-	return vectorAnswer;
 }
 
 void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {

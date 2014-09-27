@@ -52,7 +52,7 @@ private:
 	//! Evaluate Follows* Relationships
 	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	
-	std::vector<int> evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, std::string);
+	void evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	
 
 	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
