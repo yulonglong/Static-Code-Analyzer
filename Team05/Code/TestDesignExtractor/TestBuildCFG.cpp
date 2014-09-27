@@ -44,6 +44,8 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	Next* nextTable; 
 	nextTable = pkb->getNext();
 	vector<int> v;
+	//nextTable->printNextTable();
+
 	string expected = "1 6 14 16 18 "; 
 	v = nextTable->getNext(0);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
@@ -112,8 +114,6 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	v = nextTable->getNext(19);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	//nextTable->printNextTable();
-
 	pkb->~PKB();
 
 }
@@ -138,6 +138,8 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	Next* nextTable; 
 	nextTable = pkb->getNext();
 	vector<int> v;
+	//nextTable->printNextTable();
+
 	string expected = "1 5 "; 
 	v = nextTable->getNext(0);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
@@ -234,8 +236,6 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	v = nextTable->getNext(24);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
-	//nextTable->printNextTable();
-
 	pkb->~PKB();
 
 }
@@ -270,10 +270,69 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-
-	nextTable->printNextTable();
-
+	vector<int> v;
+	//nextTable->printNextTable();
 	
+	string expected = "1 13 "; 
+	v = nextTable->getNext(0);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+
+	expected = "2 "; 
+	v = nextTable->getNext(1);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "3 7 "; 
+	v = nextTable->getNext(2);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "4 5 "; 
+	v = nextTable->getNext(3);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "6 "; 
+	v = nextTable->getNext(4);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "6 "; 
+	v = nextTable->getNext(5);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "12 "; 
+	v = nextTable->getNext(6);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "8 "; 
+	v = nextTable->getNext(7);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "9 10 "; 
+	v = nextTable->getNext(8);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "11 "; 
+	v = nextTable->getNext(9);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "11 "; 
+	v = nextTable->getNext(10);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "12 "; 
+	v = nextTable->getNext(11);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = ""; 
+	v = nextTable->getNext(12);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "14 "; 
+	v = nextTable->getNext(13);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = ""; 
+	v = nextTable->getNext(14);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+
 	pkb->~PKB();
 }
 
@@ -307,9 +366,173 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 
 	Next* nextTable; 
 	nextTable = pkb->getNext();
+	vector<int> v;
+	//nextTable->printNextTable();
 	
-	nextTable->printNextTable();
+	string expected = "1 "; 
+	v = nextTable->getNext(0);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
+	expected = "2 "; 
+	v = nextTable->getNext(1);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "3 "; 
+	v = nextTable->getNext(2);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "4 "; 
+	v = nextTable->getNext(3);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "5 7 "; 
+	v = nextTable->getNext(4);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "6 "; 
+	v = nextTable->getNext(5);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "9 "; 
+	v = nextTable->getNext(6);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "8 "; 
+	v = nextTable->getNext(7);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "9 "; 
+	v = nextTable->getNext(8);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "10 16 "; 
+	v = nextTable->getNext(9);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "11 "; 
+	v = nextTable->getNext(10);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "12 13 "; 
+	v = nextTable->getNext(11);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "36 "; 
+	v = nextTable->getNext(12);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "14 15 "; 
+	v = nextTable->getNext(13);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "36 "; 
+	v = nextTable->getNext(14);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+
+	expected = "36 "; 
+	v = nextTable->getNext(15);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "17 18 "; 
+	v = nextTable->getNext(16);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(17);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "19 26 "; 
+	v = nextTable->getNext(18);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "19 26 "; 
+	v = nextTable->getNext(18);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "20 21 "; 
+	v = nextTable->getNext(19);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(20);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "22 25 "; 
+	v = nextTable->getNext(21);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "23 24 "; 
+	v = nextTable->getNext(22);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(23);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+
+	expected = "31 "; 
+	v = nextTable->getNext(24);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(25);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "27 28 "; 
+	v = nextTable->getNext(26);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(27);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "29 30 "; 
+	v = nextTable->getNext(28);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(29);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "31 "; 
+	v = nextTable->getNext(30);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "32 "; 
+	v = nextTable->getNext(31);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "33 34 "; 
+	v = nextTable->getNext(32);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "35 "; 
+	v = nextTable->getNext(33);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "35 "; 
+	v = nextTable->getNext(34);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "36 "; 
+	v = nextTable->getNext(35);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "37 "; 
+	v = nextTable->getNext(36);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "38 39 "; 
+	v = nextTable->getNext(37);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = ""; 
+	v = nextTable->getNext(38);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = ""; 
+	v = nextTable->getNext(39);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
 	pkb->~PKB();
 }
 
@@ -344,6 +567,8 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	Next* nextTable; 
 	nextTable = pkb->getNext();
 	vector<int> v;
+	//nextTable->printNextTable();
+
 	string expected = "7 21 "; 
 	v = nextTable->getNext(6);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
@@ -376,8 +601,6 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = nextTable->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	//nextTable->printNextTable();
-
 	pkb->~PKB();
 }
 

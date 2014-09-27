@@ -55,6 +55,8 @@ private:
 	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 	static void buildCFG(Node &ASTroot, PKB &pkb);
+	static void setNextRelationshipDriver(PKB &pkb);
+	static void setNextRelationship(CFGNode &node, PKB &pkb);
 	static void createCFGForStmtLst(Node &ASTNode, PKB &pkb);
 	static void createCFGForAssign(int progLine, PKB &pkb);
 	static void createCFGForCall(int progLine, PKB &pkb);
@@ -62,6 +64,7 @@ private:
 	static void createCFGForIf(vector<Node*> children, PKB &pkb);
 	static void createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb);
 	static CFGNode* getCFGNode(int progLine);
+	// traverse graph to look for CFGNode with given progLine 
 	static void traverseGraph(CFGNode &node, int progLine);
 
 	static int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);

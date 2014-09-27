@@ -52,8 +52,10 @@ public:
 	//! Return the variable index given the variable name. If it is not found, return an -1.
 	VARINDEX getVarIndex (VARNAME);
 
+	/// @cond
 	int getNumVar(); 
 	vector<VARINDEX> getAllVarIndex();
+	/// @endcond
 };
 
 #endif

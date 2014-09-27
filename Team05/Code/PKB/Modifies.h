@@ -75,7 +75,9 @@ public:
 	//! If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
 	bool isModifiesProc(PROCNAME, VARNAME); 
 
+	/// @cond
 	void printModifiesTable();
+	/// @endcond
 };
 
 #endif

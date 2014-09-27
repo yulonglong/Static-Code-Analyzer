@@ -53,11 +53,13 @@ public:
 	//Temp method. lacie give me the correct one please
 	STMTNUM getPrevious(STMTNUM);
 
+	/// @cond
 	//ADDITIONAL METHODS
 	bool isNext(STMTNUM, STMTNUM);
 
 	void printNextTable();
 	void printNextTableForTesting();
+	/// @endcond
 };
 
 #endif

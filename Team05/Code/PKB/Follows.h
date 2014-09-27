@@ -68,7 +68,9 @@ public:
 	//! Return all statement numbers such that each statement number has the given first SynType and are followed by the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getFollowedBy(SYNTYPE, SYNTYPE);	 //Select s2 such that getFollows(s1, s2)
 
+	/// @cond
 	void printFollowsTable();
+	/// @endcond
 }; 
 
 #endif

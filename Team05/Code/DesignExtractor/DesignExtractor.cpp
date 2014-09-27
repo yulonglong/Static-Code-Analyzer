@@ -7,7 +7,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 1; 
+bool debugModeIteration2 = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -50,6 +50,7 @@ void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 	try {
 		cout << "Building CFG" << endl;
 		buildCFG(ASTRoot, pkb);
+		setNextRelationshipDriver(pkb);
 	} catch(const std::runtime_error& re) {
 		// specific handling for runtime_error
 		std::cerr << "Runtime error in DE: " << re.what() << std::endl;
@@ -99,6 +100,53 @@ void DesignExtractor::buildCFG(Node &ASTRroot, PKB &pkb) {
 	// THERE WILL BE A SINGLE -1 NODE TO DENOTE END OF CFG
 }
 
+// traverse the CFG and then set the next relationship in PKB
+void DesignExtractor::setNextRelationshipDriver(PKB &pkb) {
+	CFGNode* source = rootCFGNode;
+
+	if (debugModeIteration2) {
+		cout << "Max prog line now is: " << counter << "."<< endl;
+	}
+	vector<int> temp(counter+1);
+	std::fill (temp.begin(), temp.end(), 0);
+	visited = temp; 
+
+	setNextRelationship(*source, pkb);
+
+	visited.clear();
+}
+
+void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
+	int fromProgLine = node.getProgLine();
+	visited[fromProgLine] = 1; 
+	vector<CFGNode*> children = node.getMultiChild();
+	for (unsigned int i=0; i<children.size(); i++) {
+		CFGNode* child = children[i];
+		int toProgLine = child->getProgLine();
+		if (fromProgLine != -1 && toProgLine != -1) {
+			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
+		}
+		if (toProgLine == -1) {
+			while (toProgLine == -1) {
+				if (child->getMultiChild().size() == 0) {
+					return;
+				}
+				child = child->getMultiChild(0);
+				toProgLine = child->getProgLine();
+			}
+			pkb.setToNext(fromProgLine, toProgLine);
+			if (debugModeIteration2) {
+				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
+			}
+		}
+		if (visited[toProgLine] == 0) {
+			setNextRelationship(*child, pkb);
+		}
+	}
+}
 // ASTNode is a pointer to the subtree rooted at the AST Node ":stmtLst"
 void DesignExtractor::createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 	Node* tempASTNode;
@@ -130,118 +178,17 @@ void DesignExtractor::createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 }
 
 void DesignExtractor::createCFGForAssign(int progLine, PKB &pkb) {
-	//if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
-	//	currCFGNode->setProgLine(progLine);
-	//	currCFGNode->setType("assign");
-	//	counter = progLine;
-
-	//	// Set next relationship in PKB
-	//	vector<CFGNode*> parents = currCFGNode->getMultiParent();
-	//	for (unsigned int i=0; i<parents.size(); i++) {
-	//		int fromProgLine = parents[i]->getProgLine();
-	//		int toProgLine = currCFGNode->getProgLine();
-	//		pkb.setToNext(fromProgLine, toProgLine);
-	//		if (debugModeIteration2) {
-	//			cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
-	//		}
-	//	}
-
-	//	if (debugModeIteration2) {
-	//		cout << "Dummy node changed from -1 to " << progLine <<  endl;
-	//		vector<CFGNode*> temp = currCFGNode->getMultiParent();
-	//		string s = "";
-	//		for (unsigned int i=0; i<temp.size(); i++) {
-	//			int j = temp[i]->getProgLine();
-	//			std::string str;
-	//			std::stringstream out;
-	//			out << j;
-	//			str = out.str();
-	//			s += ( str + " ");
-	//		}
-	//		cout << "Dummy node's parents are: " << s << endl;
-	//	}
-	//} else {
-	//	createNewNodeAndAttachToCFG("assign", progLine, pkb);
-	//}
 	createNewNodeAndAttachToCFG("assign", progLine, pkb);
 }
 
 void DesignExtractor::createCFGForCall(int progLine, PKB &pkb) {
-	//if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
-	//	currCFGNode->setProgLine(progLine);
-	//	currCFGNode->setType("call");
-	//	counter = progLine;
-
-	//	// Set next relationship in PKB
-	//	vector<CFGNode*> parents = currCFGNode->getMultiParent();
-	//	for (unsigned int i=0; i<parents.size(); i++) {
-	//		int fromProgLine = parents[i]->getProgLine();
-	//		int toProgLine = currCFGNode->getProgLine();
-	//		//pkb.setToNext(fromProgLine, toProgLine);
-	//		if (debugModeIteration2) {
-	//			//cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
-	//		}
-	//	}
-
-	//	if (debugModeIteration2) {
-	//		cout << "Dummy node changed from -1 to " << progLine <<  endl;
-	//		vector<CFGNode*> temp = currCFGNode->getMultiParent();
-	//		string s = "";
-	//		for (unsigned int i=0; i<temp.size(); i++) {
-	//			int j = temp[i]->getProgLine();
-	//			std::string str;
-	//			std::stringstream out;
-	//			out << j;
-	//			str = out.str();
-	//			s += ( str + " ");
-	//		}
-	//		cout << "Dummy node's parents are: " << s << endl;
-	//	}
-	//} else {
-	//	createNewNodeAndAttachToCFG("call", progLine, pkb);
-	//}
 	createNewNodeAndAttachToCFG("call", progLine, pkb);
 
 }
 
 void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	int progLine = children[0]->getProgLine();
-	//if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
-	//	currCFGNode->setProgLine(progLine);
-	//	currCFGNode->setType("while");
-	//	counter = progLine;
-
-	//	// Set next relationship in PKB
-	//	vector<CFGNode*> parents = currCFGNode->getMultiParent();
-	//	for (unsigned int i=0; i<parents.size(); i++) {
-	//		int fromProgLine = parents[i]->getProgLine();
-	//		int toProgLine = currCFGNode->getProgLine();
-	//		/*pkb.setToNext(fromProgLine, toProgLine);
-	//		if (debugModeIteration2) {
-	//			cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
-	//		}*/
-	//	}
-
-	//	if (debugModeIteration2) {
-	//		cout << "Dummy node changed from -1 to " << progLine <<  endl;
-	//		vector<CFGNode*> temp = currCFGNode->getMultiParent();
-	//		string s = "";
-	//		for (unsigned int i=0; i<temp.size(); i++) {
-	//			int j = temp[i]->getProgLine();
-	//			std::string str;
-	//			std::stringstream out;
-	//			out << j;
-	//			str = out.str();
-	//			s += ( str + " ");
-	//		}
-	//		cout << "Dummy node's parents are: " << s << endl;
-	//	}
-	//} else {
-	//	createNewNodeAndAttachToCFG("while", progLine, pkb);
-	//}
-
 	createNewNodeAndAttachToCFG("while", progLine, pkb);
-
 
 	CFGNode* toNode = currCFGNode;
 	Node* stmtLst = children[1];
@@ -255,11 +202,7 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 		}
 		fromNode->setMultiChild(toNode);
 		toNode->setMultiParent(fromNode);
-		// Set next relationship in PKB
-		/*pkb.setToNext(fromNode->getProgLine(), toNode->getProgLine());
-		if (debugModeIteration2) {
-				cout << "setToNext(" << fromNode->getProgLine() << ", " << toNode->getProgLine() << ")" <<endl;
-		}*/
+		
 		if (debugModeIteration2) {
 			cout << "Parent: ";
 			fromNode->printCFGNode();
@@ -272,68 +215,25 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 }
 
 void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
-	int progLine = children[0]->getProgLine();
-	//if (currCFGNode->getProgLine() == -1 && currCFGNode->getType() == "dummy") {
-	//	currCFGNode->setProgLine(progLine);
-	//	currCFGNode->setType("if");
-	//	counter = progLine;
-
-	//	// Set next relationship in PKB
-	//	vector<CFGNode*> parents = currCFGNode->getMultiParent();
-	//	for (unsigned int i=0; i<parents.size(); i++) {
-	//		int fromProgLine = parents[i]->getProgLine();
-	//		int toProgLine = currCFGNode->getProgLine();
-	//		/*pkb.setToNext(fromProgLine, toProgLine);
-	//		if (debugModeIteration2) {
-	//			cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
-	//		}*/
-	//	}
-
-	//	if (debugModeIteration2) {
-	//		cout << "Dummy node changed from -1 to " << progLine <<  endl;
-	//		vector<CFGNode*> temp = currCFGNode->getMultiParent();
-	//		string s = "";
-	//		for (unsigned int i=0; i<temp.size(); i++) {
-	//			int j = temp[i]->getProgLine();
-	//			std::string str;
-	//			std::stringstream out;
-	//			out << j;
-	//			str = out.str();
-	//			s += ( str + " ");
-	//		}
-	//		cout << "Dummy node's parents are: " << s << endl;
-	//	}
-	//} else {
-	//	createNewNodeAndAttachToCFG("if", progLine, pkb);
-	//}
-	
+	int progLine = children[0]->getProgLine();	
 	createNewNodeAndAttachToCFG("if", progLine, pkb);
 
-
 	CFGNode* ifCFGNode = currCFGNode;
-	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
+	if (debugModeIteration2) {
+		cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
+	}
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
 	leafNodes.push_back(currCFGNode);	
 
-	/*if (currCFGNode->getProgLine() == -1) {
-		leafNodes.push_back(currCFGNode->getMultiParent(0));
-	} else {
-		leafNodes.push_back(currCFGNode);	
-	}*/
-
-	cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
+	if (debugModeIteration2) {
+		cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
+	}
 	currCFGNode = ifCFGNode;
 	stmtLst = children[2];
 	createCFGForStmtLst(*stmtLst, pkb);
 	leafNodes.push_back(currCFGNode);	
-
-	/*if (currCFGNode->getProgLine() == -1) {
-		leafNodes.push_back(currCFGNode->getMultiParent(0));
-	} else {
-		leafNodes.push_back(currCFGNode);	
-	}*/
 
 	CFGNode* dummyNode = new CFGNode("dummy", -1);
 	while (!leafNodes.empty()) {
@@ -378,12 +278,6 @@ void DesignExtractor::createNewNodeAndAttachToCFG(string type, int progLine, PKB
 	currCFGNode->setMultiChild(newNode);
 	newNode->setMultiParent(currCFGNode);
 	
-	// Set next relationship in PKB
-	/*pkb.setToNext(currCFGNode->getProgLine(), newNode->getProgLine());
-	if (debugModeIteration2) {
-		cout << "setToNext(" << currCFGNode->getProgLine() << ", " << newNode->getProgLine() << ")" <<endl;
-	}*/
-
 	if (debugModeIteration2) {
 		cout << "Parent: ";
 		currCFGNode->printCFGNode();
