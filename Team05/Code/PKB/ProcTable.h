@@ -52,10 +52,12 @@ public:
 	//! Return the procedure index given the procedure name. If it is not found, return an -1.
 	PROCINDEX getProcIndex (PROCNAME);
 
+	/// @cond
 	int getNumProcedures(); 
 
 	//REQUESTED PROCEDURES
 	vector<PROCINDEX> getAllProcIndexes();
+	/// @endcond
 };
 
 #endif

@@ -108,7 +108,7 @@ public:
 	//! Set the new CFG Root.
 	void setCFGRoot(CFGNode* newCFGRoot);
 
-
+	/// @cond
 	VarTable* getVarTable();
 	ProcTable* getProcTable();
 	TypeTable* getTypeTable();
@@ -123,6 +123,7 @@ public:
 	CFGNode* getCFGRoot();
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
+	/// @endcond
 };
 
 #endif

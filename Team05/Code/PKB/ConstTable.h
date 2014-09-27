@@ -52,9 +52,10 @@ public:
 	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
 
-
+	/// @cond
 	//NEW METHOD
 	vector<int> getAllConstValue();
+	/// @endcond
 };
 
 #endif

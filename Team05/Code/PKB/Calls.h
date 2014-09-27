@@ -63,9 +63,11 @@ public:
 	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure name. Return an empty vector if not found.
 	vector<PROCINDEX> getCalled(PROCNAME); //Calls("First", q) Select q, return empty if not found
 
+	/// @cond
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
 
 	void printCallsTable();
+	/// @endcond
 };
 
 #endif

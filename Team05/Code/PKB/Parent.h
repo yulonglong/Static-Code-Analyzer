@@ -72,12 +72,14 @@ public:
 	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType. Return an empty vector if not found.
 	vector<STMTNUM> getChildren(SYNTYPE, SYNTYPE); //Select a such that Parent(w,a)
 	
-
+	/// @cond
 	//For parentStar
 	STMTNUM getParent(STMTNUM); 
 	vector<STMTNUM> getChildren(STMTNUM); 
 
+	
 	void printParentTable();
+	/// @endcond
 };
 
 #endif
