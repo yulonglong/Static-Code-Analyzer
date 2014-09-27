@@ -21,7 +21,55 @@ CPPUNIT_TEST_SUITE_REGISTRATION( QueryEvaluatorTest );
 
 void QueryEvaluatorTest::testEvaluateFollows(){
 	
+	//INITIALIZATION
 	QueryEvaluator qe(pkb);
+	
+	TypeTable *t = pkb->getTypeTable();
+	Follows* f = pkb->getFollows();
+	Parent* p = pkb->getParent();
+	Calls* c = pkb->getCalls();
+	Modifies* m = pkb->getModifies();
+	Uses * u = pkb->getUses();
+	ProcTable * pt = pkb->getProcTable();
+	VarTable* vt = pkb->getVarTable();
+
+	Query q;
+	Relationship r;
+	unordered_map<string,TypeTable::SynType> map;
+	unordered_map<string, vector<int>> answer;
+	vector<string> selectedSyn;
+
+	//SETTINGS
+	t->insertStmtNumAndType(1, TypeTable::WHILE);
+	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(3, TypeTable::CALL);
+
+	f->setFollows(2, 3);
+
+	pt->insertProc("First");
+	pt->insertProc("Second");
+	pt->insertProc("Third");
+	pt->insertProc("Fourth");
+
+	c->setCalls("First", "Second", 3);
+
+	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
+
+	q.setSynTable(map);
+	
+	//Follows(a,s)	r1
+	r = Relationship("Follows", "a", "s");
+	q.addRelationship(r);
+	selectedSyn.push_back("a");
+	selectedSyn.push_back("s");
+	q.setSelectedSyn(selectedSyn);
+	
+	answer = qe.evaluateQuery(q);
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("a")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("s")->second.at(0));
+
+	/*
 	//Query 1 assign a; Select a such that Follows(_ , _); r0
 	Relationship r("Follows", "_", "_");
 	unordered_map<string,TypeTable::SynType> m;
@@ -82,7 +130,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	ans = qe.relAns.find(3)->second;
 	CPPUNIT_ASSERT_EQUAL(-1, ans.at(0).ans2);*/
 
-	
+	/*
 	//Parent(1,2) r3
 	cout<<"r3"<<endl;
 	Parent *p = Parent::getInstance(t);

@@ -82,7 +82,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			evaluateParent(*it, m, relIndex); break;
 
 		case Relationship::PARENTSTAR:
-			evaluateParentStar(*it, m, q.getSelectedSyn().at(0)); break;//review
+			evaluateParentStar(*it, m, relIndex); break;//review
 
 		case Relationship::CALLS:
 			evaluateCalls(*it, relIndex); break;
@@ -1451,7 +1451,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 				vb = t->getAllStmts(i2->second);
 			}
 			sb.clear();
-			copy(vb.begin(), vb.end(), back_inserter(sb));
+			copy(vb.begin(), vb.end(), inserter(sb, sb.begin()));
 		}
 
 		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
@@ -1496,7 +1496,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			insertLinks(tk1, relIndex);
 		}else {
 			vector<int> va = t->getAllStmts(i1->second);
-			copy(va.begin(), va.end(), back_inserter(sa));
+			copy(va.begin(), va.end(), inserter(sa, sa.begin()));
 		}
 		
 		stmt = p->getParent(tk2Int);
@@ -1519,7 +1519,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			insertLinks(tk2, relIndex);
 		}else {
 			vector<int> va = t->getAllStmts(i2->second);
-			copy(va.begin(), va.end(), back_inserter(sb));
+			copy(va.begin(), va.end(), inserter(sb, sb.begin()));
 		}
 		
 		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
