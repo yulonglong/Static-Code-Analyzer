@@ -49,6 +49,9 @@ private:
 	//! A Recursive Method used in Next* to aid in finding the respective answers
 	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType);
 
+	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType);
+	void recursiveNextTarget(int, int, int, std::set<Pair> *);
+
 	//! Evaluate Follows* Relationships
 	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 	

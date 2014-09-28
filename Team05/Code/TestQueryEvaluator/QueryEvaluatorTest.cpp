@@ -346,6 +346,8 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("s6")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(11, answer.find("s6")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(8, answer.find("s7")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("s7")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(0, answer.find("v")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
