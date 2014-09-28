@@ -43,7 +43,16 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 		} catch(...){
 			nextTable[s1] = temp;
 		}
-		previousTable[s2] = s1; 
+
+		vector<STMTNUM> temp2 (1,s1);
+
+		try{
+			vector<STMTNUM> temp3 = previousTable.at(s2);
+			temp3.push_back(s1);
+			previousTable[s2] = temp3;
+		} catch(...){
+			previousTable[s2] = temp2;
+		}
 	}catch(...){
 	}
 }
@@ -58,12 +67,13 @@ vector<STMTNUM> Next::getNext(STMTNUM s){
 	}
 }
 
-STMTNUM Next::getPrevious(STMTNUM s){
+vector<STMTNUM> Next::getPrevious(STMTNUM s){
+	vector<STMTNUM> ans;
 	try{
-		STMTNUM ans = previousTable.at(s);
+		ans = previousTable.at(s);
 		return ans;
 	} catch(...) {
-		return -1;
+		return ans;
 	}
 }
 

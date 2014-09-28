@@ -45,11 +45,14 @@ void NextTest::testSetAndGetNext() {
 	ans.clear();
 	CPPUNIT_ASSERT(next1->getNext(999) == ans);
 	CPPUNIT_ASSERT(next1->getNext(5) == ans);
-
-	CPPUNIT_ASSERT(next1->getPrevious(3) == 1);
-	CPPUNIT_ASSERT(next1->getPrevious(5) == 4);
-
-	CPPUNIT_ASSERT(next1->getPrevious(1) == -1);
-	CPPUNIT_ASSERT(next1->getPrevious(999) == -1);
+	ans.clear();
+	ans.push_back(1);
+	CPPUNIT_ASSERT(next1->getPrevious(3) == ans);
+	ans.clear();
+	ans.push_back(4);
+	CPPUNIT_ASSERT(next1->getPrevious(5) == ans);
+	ans.clear();
+	CPPUNIT_ASSERT(next1->getPrevious(1) == ans);
+	CPPUNIT_ASSERT(next1->getPrevious(999) == ans);
 	return;
 }

@@ -33,7 +33,7 @@ typedef int STMTNUM;
 class Next {
 private:
 	unordered_map<STMTNUM, vector<STMTNUM>> nextTable;
-	unordered_map<STMTNUM, STMTNUM> previousTable;
+	unordered_map<STMTNUM, vector<STMTNUM>> previousTable;
 	static bool instanceFlag;
 	static Next *next;
 	TypeTable *typeTable;
@@ -51,7 +51,7 @@ public:
 	//Temp method. lacie give me the correct one please
 	vector<STMTNUM> getNext(STMTNUM);
 	//Temp method. lacie give me the correct one please
-	STMTNUM getPrevious(STMTNUM);
+	vector<STMTNUM> getPrevious(STMTNUM);
 
 	/// @cond
 	//ADDITIONAL METHODS
