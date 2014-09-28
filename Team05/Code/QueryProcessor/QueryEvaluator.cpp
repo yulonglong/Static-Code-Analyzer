@@ -114,7 +114,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			evaluateWith(*it, m, relIndex); break;
 
 		case Relationship::PATTERN:	
-			vector<int> proxy = evaluatePattern(q, it->getToken1(), it->getToken2()); //review
+			evaluatePattern(*it, m, relIndex); break; //review
 		}
 
 		vector<string> parametersVec;
@@ -2218,135 +2218,296 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	QueryEvaluator::relAns.insert(make_pair(relIndex, usesAns));
 }
 
-vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::string rightHandSide) {
-	vector<int> answers;
-	VarTable* varTable = pkb->getVarTable();
+void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+	string lhs = r.getToken1();
+	string rhs = r.getToken2();
+	string syn = r.getPatternSyn();
+	TypeTable::SynType synType = m.at(syn);
+	vector<Pair> patternAns;
+	Node* root = pkb->getASTRoot();
 
-	leftHandSide.erase(std::remove(leftHandSide.begin(), leftHandSide.end(), '\"'), leftHandSide.end());
-	rightHandSide.erase(std::remove(rightHandSide.begin(), rightHandSide.end(), '\"'), rightHandSide.end());
+	switch(synType){
+		case TypeTable::ASSIGN:
+			patternAns = findAssign(*root, lhs, rhs);
+			break;
 
-	unordered_map<string, TypeTable::SynType>::iterator iterate = q.getSynTable().find(leftHandSide);
+		case TypeTable::IF:
+			break;
+
+		case TypeTable::WHILE:
+			break;
+
+	}
+
+	QueryEvaluator::relAns.insert(make_pair(relIndex, patternAns));
+}
+
+vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs) {
+	vector<Pair> ans;
+	stack<Node> st;
+	st.push(startNode);
 	
-	if(iterate->second == 6) {
-		vector<int> varIndexs = varTable->getAllVarIndex();
-		for(unsigned int i=0; i<varIndexs.size(); i++) {
-			leftHandSide = varTable->getVarName(varIndexs.at(i));
-			Node* root = pkb->getASTRoot();
+	while(!st.empty()) {
+		Node n = st.top();
+		st.pop();
+		if(n.getType().compare("assign") == 0)
+			if(matchPattern(n, lhs, rhs))
+				ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+		else {
+			vector<Node*> children = n.getChild();
+			for(int i=0; i<children.size(); i++)
+				st.push(*children.at(i));
+		}
+	}
+
+	return ans;
+}
+
+bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs) {
+	lhs.erase(std::remove(lhs.begin(), lhs.end(), '\"'), lhs.end());
+	rhs.erase(std::remove(rhs.begin(), rhs.end(), '\"'), rhs.end());
+
+	bool leftMatch=false, rightMatch=false;
+	vector<Node*> children = n.getChild();
+	Node left = *children.at(0);
+	Node right = *children.at(1);
+
+	//Check if lhs matches pattern
+	if(lhs.compare("_") == 0 || lhs.compare(left.getData()) == 0)
+		leftMatch = true;
+
+	//Check if rhs matches pattern
+	bool underscore = false;
+	if(rhs.front() == '_') {
+		if(rhs.size() == 1)
+			rightMatch = true;
+		else
+			underscore = true;
+	}
+
+	if(!rightMatch) {
+		vector<string> tokens;
+		tokenizeTokens(rhs, tokens);
+		vector<string> postfix = getPostfix(tokens);
+		Node* treeRoot = constructExpressionTree(postfix);
+
+		if(underscore) {
 			stack<Node> st;
-			st.push(*root);
-			while(!st.empty()) {
-				Node nd = st.top();
+			st.push(right);
+			while(!rightMatch && !st.empty()) {
+				Node n = st.top();
 				st.pop();
-				if(nd.getType().compare("assign")==0) {
-					vector<Node*> children = nd.getChild();
-					Node childOne = *children.at(0);
-					Node childTwo = *children.at(1);
-					if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
-						answers.push_back(nd.getProgLine());
-				}
-				else {
-					vector<Node*> children = nd.getChild();
-					for(unsigned int i=0; i<children.size(); i++) {
-						Node child = *children.at(i);
-						st.push(child);
-					}
-				}
+				rightMatch = matchTree(n, *treeRoot);
+				children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 		}
-	}
-	else {
-		Node* root = pkb->getASTRoot();
-		stack<Node> st;
-		st.push(*root);
-		while(!st.empty()) {
-			Node nd = st.top();
-			st.pop();
-			if(nd.getType().compare("assign")==0) {
-				vector<Node*> children = nd.getChild();
-				Node childOne = *children.at(0);
-				Node childTwo = *children.at(1);
-				if(evaluateLeftHandSide(leftHandSide, childOne) && evaluateRightHandSide(rightHandSide, childTwo))
-					answers.push_back(nd.getProgLine());
-			}
-			else {
-				vector<Node*> children = nd.getChild();
-				for(unsigned int i=0; i<children.size(); i++) {
-					Node child = *children.at(i);
-					st.push(child);
-				}
-			}
-		}
+		else
+			rightMatch = matchTree(right, *treeRoot);
 	}
 
-	return answers;
+
+	return leftMatch && rightMatch;
 }
 
-bool QueryEvaluator::evaluateLeftHandSide(string IDENT, Node rightHand) {
-	if(IDENT.compare("_") == 0)
-		return true;
-	else if(IDENT.compare(rightHand.getData()) == 0)
-		return true;
-	else 
+bool QueryEvaluator::matchTree(Node a, Node b) {
+	vector<Node*> children1 = a.getChild();
+	vector<Node*> children2 = b.getChild();
+
+	if(children1.size() != children2.size())
 		return false;
+
+	if(a.getData().compare(b.getData()) != 0)
+		return false;
+
+	Node childA1 = *children1.at(0);
+	Node childA2 = *children1.at(1);
+	Node childB1 = *children2.at(0);
+	Node childB2 = *children2.at(1);
+
+	return matchTree(childA1, childB1) && matchTree(childA2, childB2);
 }
 
-bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
-	if(pattern.compare("_") == 0)
-		return true;
-	else if(pattern.find("+") == string::npos){
-		pattern = pattern.substr(1, pattern.length()-2);
-		stack<Node> st;
-		st.push(leftHand);
-		while(!st.empty()) {
-			Node nd = st.top();
+Node* QueryEvaluator::constructExpressionTree(vector<string> tokens){
+	stack<Node*> st;
+	int length = tokens.size();
+	
+	for(int i=0;i<length;i++){
+		if((tokens[i]=="+")||(tokens[i]=="-")||(tokens[i]=="*")||(tokens[i]=="/")){
+			Node* right = st.top();
 			st.pop();
-			if(nd.getData().compare(pattern) == 0)
-				return true;
-			else {
-				vector<Node*> children = nd.getChild();
-				for(unsigned int i=0; i< children.size(); i++) {
-					Node child = *children.at(i);
-					st.push(child);
+			Node* left = st.top();
+			st.pop();
+			Node* curr = new Node(left,right,tokens[i],"operator",-1);
+			left->setParent(curr);
+			right->setParent(curr);
+			st.push(curr);
+		}
+		else{
+			string type;
+			if(isAllDigit(tokens[i]))
+				type="constant";
+			else
+				type="variable";
+
+			Node* curr = new Node(tokens[i],type,-1);
+			st.push(curr);
+		}
+	}
+	Node* root = st.top();
+	st.pop();
+	return root;
+}
+
+vector<string> QueryEvaluator::getPostfix(vector<string> tokens){
+	vector<string> ans;
+	stack<string> st;
+	int size = tokens.size();
+	for(int i=0;i<size;i++){
+		if(tokens[i]=="("){
+			st.push(tokens[i]);
+		}
+		else if(tokens[i]==")"){
+			if(!st.empty()){
+				ans.clear();
+				ans.push_back("invalid");
+				return ans;
+			}
+			string tempToken = st.top();
+			st.pop();
+			while(tempToken!="("){
+				if(!st.empty()){
+					ans.push_back(tempToken);
+					tempToken=st.top();
+					st.pop();
+				}
+				else{
+					ans.clear();
+					ans.push_back("invalid");
+					return ans;
 				}
 			}
 		}
-	}
-	else {
-		pattern = pattern.substr(1, pattern.length()-2);
-		unsigned pos = pattern.find("+");
-		string right = pattern.substr(0, pos);
-		string left = pattern.substr(pos+1);
-
-		stack<Node> st;
-		st.push(leftHand);
-		while(!st.empty()) {
-			Node nd = st.top();
-			st.pop();
-			if(nd.getType().compare("operator")==0 && nd.getData().compare("+")==0) {
-				vector<Node*> children = nd.getChild();
-				Node childOne = *children.at(0);
-				Node childTwo = *children.at(1);
-				cout<<"currNode: "<< nd.getData()<< " " << nd.getProgLine() <<endl;
-				cout<<"left, right: "<< childOne.getData() << " " << childTwo.getData()<< endl;
-				if(childOne.getData().compare(right)==0 && childTwo.getData().compare(left)==0)
-					return true;
-				else {
-					vector<Node*> children = nd.getChild();
-					for(unsigned int i=0; i<  children.size(); i++) {
-						Node child = *children.at(i);
-						st.push(child);
+		else if(tokens[i]=="+") {
+			if(st.empty()){
+				st.push("+");
+				continue;
+			}
+			else{
+				string tempToken = st.top();
+				while((tempToken=="+")||(tempToken=="-")||(tempToken=="*")||(tempToken=="/")){
+					ans.push_back(tempToken);
+					st.pop();
+					if(!st.empty()){
+						tempToken=st.top();
+					}
+					else{
+						break;
 					}
 				}
+				st.push("+");
 			}
-			else {
-				vector<Node*> children = nd.getChild();
-				for(unsigned int i=0; i<  children.size(); i++) {
-					Node child = *children.at(i);
-					st.push(child);
+		}
+		else if(tokens[i]=="-") {
+			if(st.empty()){
+				st.push("-");
+				continue;
+			}
+			else{
+				string tempToken = st.top();
+				while((tempToken=="+")||(tempToken=="-")||(tempToken=="*")||(tempToken=="/")){
+					ans.push_back(tempToken);
+					st.pop();
+					if(!st.empty()){
+						tempToken=st.top();
+					}
+					else{
+						break;
+					}
 				}
+				st.push("-");
 			}
-
+		}
+		else if(tokens[i]=="*") {
+			if(st.empty()){
+				st.push("*");
+				continue;
+			}
+			else{
+				string tempToken = st.top();
+				while((tempToken=="*")||(tempToken=="/")){
+					ans.push_back(tempToken);
+					st.pop();
+					if(!st.empty()){
+						tempToken=st.top();
+					}
+					else{
+						break;
+					}
+				}
+				st.push("*");
+			}
+		}
+		else if(tokens[i]=="/") {
+			if(st.empty()){
+				st.push("/");
+				continue;
+			}
+			else{
+				string tempToken = st.top();
+				while((tempToken=="*")||(tempToken=="/")){
+					ans.push_back(tempToken);
+					st.pop();
+					if(!st.empty()){
+						tempToken=st.top();
+					}
+					else{
+						break;
+					}
+				}
+				st.push("/");
+			}
+		}
+		else {
+			ans.push_back(tokens[i]);
 		}
 	}
-	return false;
+	
+	while(!st.empty()){
+		ans.push_back(st.top());
+		st.pop();
+	}
+	return ans;
 }
+
+void QueryEvaluator::tokenizeTokens(string word, vector<string> &storage){
+	string token ="";
+	for(int i=0;i<(int) word.length();i++){
+		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
+			if(token.length()>0){
+				storage.push_back(token);
+			}
+			token = word[i];
+			storage.push_back(token);
+			token ="";
+		}
+		else{
+			token = token + word[i];
+		}
+	}
+	if(token.length()>0){
+		storage.push_back(token);
+	}
+	return;
+}
+
+bool QueryEvaluator::isAllDigit(string input){
+	for(int i=0;i<(int)input.length();i++){
+		if(!isdigit(input[i])){
+			return false;
+		}
+	}
+	return true;
+}
+	

@@ -25,7 +25,7 @@
 
 class QueryEvaluator{ 
 private:
-		//! Evaluate all Calls Relationships
+	//! Evaluate all Calls Relationships
 	void evaluateCalls(Relationship, int);
 
 	//! Evaluate all Calls* Relationships
@@ -67,8 +67,17 @@ private:
 
 	void intersectPairs(std::string, std::string, std::vector<Pair> *, int);
 
+	//! Evaluate Pattern Relationships
+	void evaluatePattern(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	std::vector<Pair> findAssign(Node, string, string);
+	bool matchPattern(Node, string, string);
+	bool matchTree(Node, Node);
+	static Node* constructExpressionTree(vector<string> tokens);
+	static vector<string> getPostfix(vector<string> tokens);
+	static void tokenizeTokens(string word, vector<string> &storage);
+	static bool isAllDigit(string input);
+
 	//std::vector<int> evaluateCallsStar(Relationship);
-	std::vector<int> evaluatePattern(Query, std::string, std::string);
 	std::vector<Relationship> orderRelationship(vector<Relationship>);
 	std::vector<int> * findAnswerVectorFromToken(std::string);
 	//std::vector<std::string> findLinks(std::string);
@@ -78,8 +87,6 @@ private:
 	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
 	void insertLinks(std::string, int);
 
-	bool evaluateRightHandSide(std::string, Node);
-	bool evaluateLeftHandSide(std::string, Node);
 	bool isExistInLinkages(std::string);
 
 	std::string convertEnumToString(TypeTable::SynType);
