@@ -48,25 +48,60 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	t->insertStmtNumAndType(6, TypeTable::ASSIGN);
 	t->insertStmtNumAndType(7, TypeTable::ASSIGN);
 
+	t->insertStmtNumAndType(8, TypeTable::IF);
+	t->insertStmtNumAndType(9, TypeTable::WHILE);
+	t->insertStmtNumAndType(10, TypeTable::CALL);
+
 	f->setFollows(2, 3);
 	f->setFollows(3, 4);
 	f->setFollows(4, 5);
 	f->setFollows(1, 6);
 	f->setFollows(6, 7);
 
+	p->setParent(1, 2);
+	p->setParent(1, 3);
+	p->setParent(1, 4);
+	p->setParent(1, 5);
+	p->setParent(8, 9);
+	p->setParent(9, 10);
+
 	pt->insertProc("First");
 	pt->insertProc("Second");
 	pt->insertProc("Third");
 	pt->insertProc("Fourth");
 
+	vt->insertVar("x");
+	vt->insertVar("y");
+	vt->insertVar("z");
+	
+	m->setModifies(2, "x");
+	m->setModifies(4, "y");
+	m->setModifies(5, "z");
+	m->setModifies(1, "x");
+	m->setModifies(1, "y");
+	m->setModifies(1, "z");
+
+	vector<int> procedureFirstModifies;
+	procedureFirstModifies.push_back(0);
+	procedureFirstModifies.push_back(1);
+	procedureFirstModifies.push_back(2);
+	m->setModifiesProc(0, procedureFirstModifies);
+
 	c->setCalls("First", "Second", 3);
 
 	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
 	map.insert(make_pair<string, TypeTable::SynType>("a2", TypeTable::ASSIGN));	
+	map.insert(make_pair<string, TypeTable::SynType>("a3", TypeTable::ASSIGN));	
+	map.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::CALL));
+	map.insert(make_pair<string, TypeTable::SynType>("p", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("s2", TypeTable::STMT));	
-	map.insert(make_pair<string, TypeTable::SynType>("s3", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("s3", TypeTable::STMT));
+	map.insert(make_pair<string, TypeTable::SynType>("s4", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("s5", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
 	map.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
+	map.insert(make_pair<string, TypeTable::SynType>("w2", TypeTable::WHILE));
 
 	q.setSynTable(map);
 	
@@ -124,6 +159,64 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Follows", "_", "_");
 	q.addRelationship(r);
 
+	//Parent(w, a3) r13
+	r = Relationship("Parent", "w", "a3");
+	q.addRelationship(r);
+	selectedSyn.push_back("a3");
+
+	//Parent(s4, s5) r14
+	r = Relationship("Parent", "s4", "s5");
+	q.addRelationship(r);
+	selectedSyn.push_back("s4");
+	selectedSyn.push_back("s5");
+
+	//Parent(s4, 10) r15
+	r = Relationship("Parent", "s4", "10");
+	q.addRelationship(r);
+
+	//Parent*(8, 10) r16
+	r = Relationship("Parent*", "8", "10");
+	q.addRelationship(r);
+
+	//Parent*(w2, 10) r17
+	r = Relationship("Parent*", "w2", "10");
+	q.addRelationship(r);
+	selectedSyn.push_back("w2");
+
+	//Parent*(8, s5) r18
+	r = Relationship("Parent*", "8", "s5");
+	q.addRelationship(r);
+
+	//Parent*(_, s5) r19
+	r = Relationship("Parent*", "_", "s5");
+	q.addRelationship(r);
+
+	//Parent*(_,_) r20
+	r = Relationship("Parent*", "_", "_");
+	q.addRelationship(r);
+
+	//Parent*(1, _) r21
+	r = Relationship("Parent*", "1", "_");
+	q.addRelationship(r);
+
+	//Parent*(_, 9) r22
+	r = Relationship("Parent*", "_", "9");
+	q.addRelationship(r);
+
+	//Modifies(p, v) r23
+	r = Relationship("Modifies", "p", "v");
+	q.addRelationship(r);
+	selectedSyn.push_back("p");
+	selectedSyn.push_back("v");
+
+	//Modifies(a, v) r24
+	r = Relationship("Modifies", "a", "v");
+	q.addRelationship(r);
+
+	//Modifies(_, v) r25
+	r = Relationship("Modifies", "_", "v");
+	q.addRelationship(r);
+	
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 
@@ -139,12 +232,24 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(4, answer.find("s3")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("s3")->second.at(2));
 	CPPUNIT_ASSERT_EQUAL(6, answer.find("s3")->second.at(3));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("a3")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(4, answer.find("a3")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(5, answer.find("a3")->second.at(2));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("s4")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(10, answer.find("s5")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 
-	vector<int> k = answer.find("s2")->second;
-	vector<int> j = answer.find("s3")->second;
+	CPPUNIT_ASSERT_EQUAL(0, answer.find("p")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(0, answer.find("v")->second.at(0));
+	
+	vector<int> k = answer.find("a")->second;
+	vector<int> j = answer.find("v")->second;
 
 	for(int i = 0; i<k.size(); i++){
-		cout<<"follows* ans1 = "<< k.at(i)<<" "<<"follows* ans2 = "<<j.at(i)<<endl;
+		cout<<"parent ans1 = "<< k.at(i)<<endl;
+	}
+	for(int i=0; i<j.size(); i++){
+		cout<<"parent ans2 = "<<j.at(i)<<endl;
 	}
 
 	/*

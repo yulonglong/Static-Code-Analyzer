@@ -84,9 +84,11 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			evaluateFollowsStar(*it, m, relIndex); break;
 
 		case Relationship::PARENT:
+			cout<<"Evaluating Parent RelIndex = "<<relIndex<<endl;
 			evaluateParent(*it, m, relIndex); break;
 
 		case Relationship::PARENTSTAR:
+			cout<<"Evaluating Parent* RelIndex = "<<relIndex<<endl;
 			evaluateParentStar(*it, m, relIndex); break;//review
 
 		case Relationship::CALLS:
@@ -126,13 +128,14 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
+		cout<<"Iterating Selected Syn"<<endl;
 		int index = (linkages.find(*it)->second).at(0);
 		vector<string> param = relParameters.find(index)->second;
 
 		vector<Pair> p = relAns.at(index);
 		set<int> synAns;
 		vector<int> synAnsVec;
-		cout<<"p.size = "<<p.size()<<endl;
+		cout<<"token in selectedSyn = "<<*it<<" p.size = "<<p.size()<<endl;
 
 		if(*it==param.at(0)){
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
@@ -154,6 +157,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		answers.insert(make_pair<string, vector<int>>(*it, synAnsVec));
 	}
 
+	cout<<"RETURNING FINAL ANSWERS"<<endl;
 	return answers;
 }
 
@@ -267,12 +271,11 @@ vector<int> * QueryEvaluator::findAnswerVectorFromToken(string token){
 
 //return set of int answers for a particular syn
 set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
-	vector<int> listOfRel = QueryEvaluator::linkages.find(tk)->second;
-
+	cout<<"In retrieveTokenEvaluatedAnswers Finding tk = "<<tk<<endl;
+	vector<int> listOfRel = linkages.find(tk)->second;
 	vector<Pair> ans = QueryEvaluator::relAns.find(listOfRel.at(0))->second;
 	cout<<"Retrieving Token Evaluated Answers with first relationship index = "<<listOfRel.at(0)<<endl;
 	string relTk1 = QueryEvaluator::relParameters.find(listOfRel.at(0))->second.at(0);
-	cout<<"RelTk1 = "<<relTk1<<" "<<"tk = "<<tk<<endl;
 	set<int> setAns;
 	if(relTk1==tk){
 		for(vector<Pair>::iterator it = ans.begin(); it!=ans.end(); it++){
@@ -1485,6 +1488,7 @@ void QueryEvaluator::recursiveParent(int rootIndex, int currentIndex){
 
 //PARENTSTAR
 void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	cout<<"Initialzing all Parent* variables"<<endl;
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Parent *p = pkb->getParent();
@@ -1495,14 +1499,23 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	//Parent*(w, a)
+	//Parent*(w, a) Parent(_,a) Parent(w,_)
 	if((isalpha(tk1[0]) && isalpha(tk2[0]))|| (isalpha(tk1[0])&& tk2=="_") || (tk1=="_" && isalpha(tk2[0]))){
-		set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
-		set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
+		cout<<"If both tokens are alpha or one of them is a wildcard"<<endl;
+		set<int> sa;
+		set<int> sb;
+		if(isExistInLinkages(tk1)){
+			sa = retrieveTokenEvaluatedAnswers(tk1);
+		}
+		if(isExistInLinkages(tk2)){
+			sb = retrieveTokenEvaluatedAnswers(tk2);
+		}
+
 
 		int stmt;
 
 		if(!isExistInLinkages(tk2)){
+			cout<<"Token2 does not Exist in Linkages"<<endl;
 			vector<int> vb;
 			if(tk2=="_"){
 				vb = t->getAllStmts(TypeTable::STMT);
@@ -1513,7 +1526,9 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			copy(vb.begin(), vb.end(), inserter(sb, sb.begin()));
 		}
 
+		cout<<"sb is Empty: "<<sb.empty()<<endl;
 		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
+			cout<<"Iterating token 2 set Sb"<<endl;
 			stmt = p->getParent(*it);
 			while(stmt!=-1){
 				if(isExistInLinkages(tk1)){
@@ -1523,6 +1538,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 				}
 				else{
 					if(tk1=="_"){
+						cout<<"Token = _ and Parent = "<<stmt<<endl;
 						parentStarAnsSet.insert(Pair (stmt, *it));
 					}else{
 						if(t->getType(stmt) == i1->second){
@@ -1534,11 +1550,11 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			}
 		}
 
-		if(isExistInLinkages(tk1)){
+		if(isalpha(tk1[0])){
 			insertLinks(tk1, relIndex);
 		}
 
-		if(isExistInLinkages(tk2)){
+		if(isalpha(tk2[0])){
 			insertLinks(tk2, relIndex);
 		}
 	}
@@ -1547,24 +1563,31 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	//Parent*(w, 4)
 	else if(isalpha(tk1[0])){
 		int tk2Int = atoi(tk2.c_str());
+		cout<<"tk2 is Integer "<<tk2Int<<endl;
 		set<int> sa;
 		int stmt;
 
 		if(isExistInLinkages(tk1)){
+			cout<<"TOKEN1 FOUND TO EXIST IN LINKAGES"<<endl;
 			sa = retrieveTokenEvaluatedAnswers(tk1);
-			insertLinks(tk1, relIndex);
 		}else {
+			cout<<"TOKEN1 FOUND NOT TO EXIST IN LINKAGES"<<endl;
 			vector<int> va = t->getAllStmts(i1->second);
 			copy(va.begin(), va.end(), inserter(sa, sa.begin()));
 		}
 		
+		cout<<"Set is Empty: "<<sa.empty()<<endl;
 		stmt = p->getParent(tk2Int);
 		while(stmt!=-1){
+			cout<<"Parent StmtNumber = "<<stmt<<endl;
 			if(sa.find(stmt)!=sa.end()){
+				cout<<"Insert stmtNum = "<<stmt<<" into set"<<endl;
 				parentStarAnsSet.insert(Pair (stmt, tk2Int));
 			}
 		stmt = p->getParent(stmt);
 		}
+
+		insertLinks(tk1, relIndex);
 	}
 
 	//Parent*(3, a)
@@ -1575,7 +1598,6 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 
 		if(isExistInLinkages(tk2)){
 			sb = retrieveTokenEvaluatedAnswers(tk2);
-			insertLinks(tk2, relIndex);
 		}else {
 			vector<int> va = t->getAllStmts(i2->second);
 			copy(va.begin(), va.end(), inserter(sb, sb.begin()));
@@ -1591,6 +1613,8 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			stmt = p->getParent(stmt);
 			}
 		}
+
+		insertLinks(tk2, relIndex);
 	}
 
 	else if(tk1=="_" && tk2=="_"){
@@ -1768,7 +1792,6 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 		//otherwise
 		else {
-			cout<<"hihihihi"<<endl;
 			answer = mod->getModifies(i1->second,varName);
 			cout<<"answer is empty: "<<answer.empty()<<endl;
 			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
@@ -1912,7 +1935,7 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	
 	if(isalpha(tk1[0])){
-		cout<<"insert links for tk1 =" <<tk1<<endl;
+		cout<<"Insert links for tk1 =" <<tk1<<endl;
 		insertLinks(tk1, relIndex);
 	}
 	
