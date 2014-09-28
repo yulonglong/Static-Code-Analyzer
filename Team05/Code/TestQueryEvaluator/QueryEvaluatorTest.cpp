@@ -32,6 +32,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	Uses * u = pkb->getUses();
 	ProcTable * pt = pkb->getProcTable();
 	VarTable* vt = pkb->getVarTable();
+	Next* n = pkb->getNext();
 
 	Query q;
 	Relationship r;
@@ -51,6 +52,21 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	t->insertStmtNumAndType(8, TypeTable::IF);
 	t->insertStmtNumAndType(9, TypeTable::WHILE);
 	t->insertStmtNumAndType(10, TypeTable::CALL);
+	t->insertStmtNumAndType(11, TypeTable::ASSIGN);
+
+	n->setNext(1,2);
+	n->setNext(2,3);
+	n->setNext(3,4);
+	n->setNext(4,5);
+	n->setNext(5,1);
+	n->setNext(1,6);
+	n->setNext(6,7);
+	n->setNext(7,8);
+	n->setNext(8,9);
+	n->setNext(8,11);
+	n->setNext(9,10);
+	n->setNext(9,11);
+	n->setNext(10,9);
 
 	f->setFollows(2, 3);
 	f->setFollows(3, 4);
@@ -108,6 +124,8 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("s3", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("s4", TypeTable::STMT));	
 	map.insert(make_pair<string, TypeTable::SynType>("s5", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("s6", TypeTable::STMT));
+	map.insert(make_pair<string, TypeTable::SynType>("s7", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
 	map.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
 	map.insert(make_pair<string, TypeTable::SynType>("w2", TypeTable::WHILE));
@@ -285,6 +303,21 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Calls*", "\"Second\"", "_");
 	q.addRelationship(r);
 
+	//Next(a, c)
+	r = Relationship("Next", "a", "c");
+	q.addRelationship(r);
+	selectedSyn.push_back("c");
+
+	//Next(8, s6)
+	r = Relationship("Next", "8", "s6");
+	q.addRelationship(r);
+	selectedSyn.push_back("s6");
+
+	//Next(s7, 11)
+	r = Relationship("Next", "s7", "11");
+	q.addRelationship(r);
+	selectedSyn.push_back("s7");
+
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 
@@ -310,12 +343,15 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(6, answer.find("s3")->second.at(3));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("s4")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(10, answer.find("s5")->second.at(0));
+
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("s6")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(11, answer.find("s6")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(0, answer.find("v")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	
 	vector<int> k = answer.find("p2")->second;
-	vector<int> j = answer.find("q2")->second;
+	vector<int> j = answer.find("s7")->second;
 
 	for(int i = 0; i<k.size(); i++){
 		cout<<"parent ans1 = "<< k.at(i)<<endl;
@@ -323,6 +359,8 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	for(int i=0; i<j.size(); i++){
 		cout<<"parent ans2 = "<<j.at(i)<<endl;
 	}
+
+	n->printNextTable();
 
 	/*
 	//Query 1 assign a; Select a such that Follows(_ , _); r0

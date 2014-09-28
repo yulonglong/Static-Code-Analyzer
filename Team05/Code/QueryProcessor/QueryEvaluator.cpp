@@ -103,6 +103,16 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		case Relationship::USES:
 			evaluateUses(*it, m, relIndex); break;
 
+		case Relationship::NEXT:
+			cout<<"Evaluating Next RelIndex = "<<relIndex<<endl;
+			evaluateNext(*it, m, relIndex); break;
+
+		case Relationship::NEXTSTAR:
+			evaluateNextStar(*it, m, relIndex); break;
+
+		case Relationship::WITH:
+			evaluateWith(*it, m, relIndex); break;
+
 		case Relationship::PATTERN:	
 			vector<int> proxy = evaluatePattern(q, it->getToken1(), it->getToken2()); //review
 		}
@@ -557,9 +567,10 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	//if token 1 and token 2 is alpha
 	//Next(s, a)
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-
+		cout<<"Both Tokens are Alpha"<<endl;
 		//If s and a exists, retrieve s and a answers, then isNext
 		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+			cout<<"Both Tokens Exist in Linkages"<<endl;
 			set<int> firstSet = retrieveTokenEvaluatedAnswers(tk1);
 			set<int> secondSet = retrieveTokenEvaluatedAnswers(tk2);
 
@@ -583,7 +594,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			for(set<int>::iterator it = firstSet.begin(); it!=firstSet.end(); it++){
 				tk2Ans = n->getNext(*it);
 				for(vector<int>::iterator it1 = tk2Ans.begin(); it1!=tk2Ans.end(); it1++){
-					if(t->getType(*it1)==i2->second){
+					if(t->isType(i2->second, *it1)){
 						nextAns.push_back(Pair (*it, *it1));
 					}
 				}
@@ -599,7 +610,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 			for(set<int>::iterator it = secondSet.begin(); it!=secondSet.end(); it++){
 				tk1Ans = n->getPrevious(*it);
-				if(t->getType(tk1Ans) == i1->second){
+				if(t->isType(i1->second, tk1Ans)){
 					nextAns.push_back(Pair (tk1Ans, *it));
 				}
 			}
@@ -613,7 +624,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			int tk1Ans;
 			for(vector<int>::iterator it= allTk1.begin(); it!=allTk1.end(); it++){
 				tk1Ans = n->getPrevious(*it);
-				if(t->getType(tk1Ans)==i1->second){
+				if(t->isType(i1->second,tk1Ans)){
 					nextAns.push_back(Pair (tk1Ans, *it));
 				}
 			}
@@ -627,7 +638,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	else if(isalpha(tk1[0])){
 		int tk2Int = atoi(tk2.c_str());
 
-		if(t->getType(n->getPrevious(tk2Int))==i1->second){
+		if(t->isType(i1->second, n->getPrevious(tk2Int))){
 			nextAns.push_back(Pair (n->getPrevious(tk2Int), tk2Int));
 		}
 		
@@ -641,11 +652,14 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 	//Next(3, n)
 	else if(isalpha(tk2[0])){
+		cout<<"Second Token is Alpha"<<endl;
 		int tk1Int = atoi(tk1.c_str());
 		vector<int> tk1Vec = n->getNext(tk1Int);
 
 		for(vector<int>::iterator it = tk1Vec.begin(); it!=tk1Vec.end(); it++){
-			if(t->getType(*it)==i2->second){
+			cout<<"Iterating through the vector of GETNEXT(TOKEN1)"<<endl;
+			if(t->isType(i2->second, *it)){
+				cout<<"Pushing into Answer "<<*it<<endl;
 				nextAns.push_back(Pair (tk1Int, *it));
 			}
 		}
@@ -692,7 +706,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 			for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
 				stmt = n->getPrevious(*it);
 				while(stmt!=-1){
-					if(i1->second==t->getType(stmt)){
+					if(t->isType(i1->second,stmt)){
 						nextStarAns.insert(Pair (stmt, *it));
 					}
 					stmt = n->getPrevious(stmt);
@@ -729,7 +743,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 			for(vector<int>::iterator it = allB.begin(); it!=allB.end(); it++){
 				stmt = n->getPrevious(*it);
 				while(stmt!=-1){
-					if(t->getType(stmt) == i1->second){
+					if(t->isType(i1->second, stmt)){
 						nextStarAns.insert(Pair (stmt, *it));
 					}
 					stmt = n->getPrevious(stmt);
@@ -747,7 +761,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 		int stmt = n->getPrevious(tk2Int);
 
 		while(stmt!=-1){
-			if(t->getType(stmt)==i1->second){
+			if(t->isType(i1->second, stmt)){
 				nextStarAnsVec.push_back(Pair (stmt, tk2Int));
 			}
 			stmt = n->getPrevious(tk2Int);
@@ -794,7 +808,7 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 	vector<int> next = n->getNext(currentIndex);
 
 	for(vector<int>::iterator it = next.begin(); it!=next.end(); it++){
-		if(t->getType(*it) == type){
+		if(t->isType(type,*it)){
 			ans->insert(Pair (rootIndex, *it));
 		}
 		recursiveNext(rootIndex, *it, ans, type);
@@ -1554,7 +1568,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			stmt = p->getParent(*it);
 			while(stmt!=-1){
 				if(isExistInLinkages(tk1)){
-					if(t->getType(stmt) == i1->second && sa.find(stmt)!=sa.end()){
+					if(t->isType(i1->second,stmt) && sa.find(stmt)!=sa.end()){
 						parentStarAnsSet.insert(Pair (stmt, *it));
 					}
 				}
@@ -1563,7 +1577,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 						cout<<"Token = _ and Parent = "<<stmt<<endl;
 						parentStarAnsSet.insert(Pair (stmt, *it));
 					}else{
-						if(t->getType(stmt) == i1->second){
+						if(t->isType(i1->second,stmt)){
 							parentStarAnsSet.insert(Pair (stmt, *it));
 						}
 					}
