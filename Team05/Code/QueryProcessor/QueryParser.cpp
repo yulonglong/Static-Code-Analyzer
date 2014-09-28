@@ -33,6 +33,8 @@ const string QueryParser::DIGIT = "[0-9]";
 const string QueryParser::LETTER = "[A-Za-z]";
 const string QueryParser::INTEGER = "[0-9]+";
 const string QueryParser::IDENT = "[A-Za-z][A-Za-z0-9#]*";
+const string QueryParser::OPERATOR = "(?:\\+|\\-|\\*)";
+const string QueryParser::LETTERORINTEGER = "(?:[A-Za-z]+|[0-9]+)";
 
 const string QueryParser::synonym = IDENT;
 const string QueryParser::attrName = "(?:procName|varName|value|stmt#)";
@@ -56,7 +58,10 @@ const string QueryParser::select = "[Ss]elect";
 const string QueryParser::such = "such";
 const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
-const string QueryParser::expr = "[^_]+";
+const string QueryParser::freeStringWithSpace = "[.]+";
+
+const string QueryParser::expr = "\\s*" + LETTERORINTEGER +"(?:"+"\\s*" + OPERATOR + "\\s*" + LETTERORINTEGER + ")*" + "\\s*";
+
 
 const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
 const string QueryParser::ModifiesS = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
@@ -83,7 +88,7 @@ const string QueryParser::relCond = relRef + "(?:" + "\\s+" + "and" + "\\s+" + r
 const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
 
-const string QueryParser::expressionSpec = "\"" + expr + "\"" + "|" + "_\"" + expr + "\"_" + "|" + "_";
+const string QueryParser::expressionSpec = "(?:\"" + expr + "\")" + "|" + "(?:_\"" + expr + "\"_)" + "|" + "(?:_)";
 const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
 const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\))";
@@ -244,6 +249,7 @@ bool QueryParser::parseSelectCl(string query){
 
 		}
 		else if(token == PATTERN){//read pattern
+			
 			prevToken = PATTERN;
 			selectStatement.push_back(token);//push pattern
 
@@ -255,6 +261,9 @@ bool QueryParser::parseSelectCl(string query){
 			for(int i=0;i<3;i++){
 				vector<string> subRes;
 				regexPattern = "\\s*(" + freeString + ")\\s*";
+				if(i==2){
+					regexPattern = "\\s*(" + expressionSpec + ")\\s*";
+				}
 				match = regexMatchWithResult(regexPattern,patternToken[i],subRes);
 				string variableName = subRes[1];
 				selectStatement.push_back(variableName);
@@ -369,7 +378,10 @@ Relationship::TokenType QueryParser::detectTokenType(string token){
 		return Relationship::INTEGER;
 	}
 	else if( regexMatch("(_\""+expr+"\"_)",token) ){
-		return Relationship::UNDERSCOREIDENT;
+		return Relationship::UNDERSCOREEXPR;
+	}
+	else if( regexMatch("(\""+expr+"\")",token) ){
+		return Relationship::EXPR;
 	}
 	else{
 		return Relationship::INVALIDTOKEN;
@@ -666,7 +678,7 @@ Query QueryParser::queryParse(string queryStr, bool &valid){
 	synMap.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	//cout << "here" << endl;
 	istringstream istream(queryStr);
-
+	//cout << queryStr << endl;
 	string querySubStr;
 	while(getline(istream,querySubStr,';')){
 		bool validDesignEntity = parseDesignEntity(querySubStr);
@@ -678,6 +690,7 @@ Query QueryParser::queryParse(string queryStr, bool &valid){
 			continue;
 		}
 		if((validDesignEntity|validSelectCl)==false){
+			//cout << queryStr << endl;
 			valid = false;
 			return Query();
 		}

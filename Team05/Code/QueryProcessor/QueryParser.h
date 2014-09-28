@@ -120,11 +120,14 @@ private:
 	static const string LETTER;
 	static const string INTEGER;
 	static const string IDENT;
+	static const string OPERATOR;
+	static const string LETTERORINTEGER;
 
 	static const string select;
 	static const string such;
 	static const string that;
 	static const string freeString;
+	static const string freeStringWithSpace;
 	static const string expr;
 
 	//auxiliary grammar rules
