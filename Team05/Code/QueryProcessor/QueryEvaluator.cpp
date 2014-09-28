@@ -27,7 +27,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	Relationship temp;
 	cout<<"In orderRelationships"<<endl;
 
-	for(int i=0; i<r.size(); i++){
+	for(unsigned int i=0; i<r.size(); i++){
 		if(r.at(i).getRelType()==Relationship::PATTERN || !isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])){
 			temp = r.at(sorted);
 			r.at(sorted) = r.at(i);
@@ -118,7 +118,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	}
 
 	//If one of the relations are evaluated to false or empty
-	for(int i=0; i<relations.size(); i++){
+	for(unsigned int i=0; i<relations.size(); i++){
 		vector<Pair> v = relAns.find(i)->second;
 		if(v.empty() || v.at(0).ans1==-2){
 			cout<<"Found Relations to be False or Empty"<<endl;
@@ -204,7 +204,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 		}
 	}
 
-	//Select q Calls("First", q)
+	//Select q Calls("First", q) Calls("First", _)
 	else if(isalpha(tk2[0]) || (tk1!="_" && tk2=="_")){
 		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
 
@@ -817,7 +817,9 @@ void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, i
 	vector<int> called = c->getCalled(p->getProcName(currentIndex));
 
 	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
-		if(currentIndex==targetIndex){
+		cout<<"Iterating throught called vector. *i = "<<*i <<endl;
+		if(*i==targetIndex){
+			cout<<"recursiveCallBoolean returns TRUE"<<endl;
 			ans->push_back(Pair (-1,-1));
 			break;
 		}
@@ -890,6 +892,26 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 		int index = p->getProcIndex(tk1.substr(1, tk1.length()-2));
 
 		recursiveCall(index, index, &callsStarAns);
+	}
+
+	//Calls*(_,"Second")
+	else if(tk1=="_" && tk2[0]=='\"'){
+		vector<int> p = c->getCalls(tk2.substr(1, tk2.length()-2));
+		if(p.empty()){
+			callsStarAns.push_back(Pair (-2,-2));
+		}else{
+			callsStarAns.push_back(Pair (-1,-1));
+		}
+	}
+
+	//Calls*("First", _)
+	else if(tk1[0]=='\"' && tk2=="_"){
+		vector<int> p = c->getCalled(tk1.substr(1, tk1.length()-2));
+		if(p.empty()){
+			callsStarAns.push_back(Pair (-2,-2));
+		}else{
+			callsStarAns.push_back(Pair (-1,-1));
+		}
 	}
 
 	//Calls*("first", "second")
@@ -994,8 +1016,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			vector<int> first = t->getAllStmts(i1->second);
 			vector<int> second = t->getAllStmts(i2->second);
 			cout<<"trying is follows"<<f->isFollows(2,3)<<endl;
-			for(int i=0; i<first.size(); i++){
-				for(int j=0; j<second.size(); j++){
+			for(unsigned int i=0; i<first.size(); i++){
+				for(unsigned int j=0; j<second.size(); j++){
 					if(f->isFollows(first.at(i), second.at(j))){
 						followsAns.push_back(Pair (first.at(i), second.at(j)));
 						cout<<"first.at(i) = "<<first.at(i)<<"second.at(i) = "<<second.at(i)<<endl;
@@ -2118,7 +2140,7 @@ vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::s
 	
 	if(iterate->second == 6) {
 		vector<int> varIndexs = varTable->getAllVarIndex();
-		for(int i=0; i<varIndexs.size(); i++) {
+		for(unsigned int i=0; i<varIndexs.size(); i++) {
 			leftHandSide = varTable->getVarName(varIndexs.at(i));
 			Node* root = pkb->getASTRoot();
 			stack<Node> st;
@@ -2135,7 +2157,7 @@ vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::s
 				}
 				else {
 					vector<Node*> children = nd.getChild();
-					for(int i=0; i<children.size(); i++) {
+					for(unsigned int i=0; i<children.size(); i++) {
 						Node child = *children.at(i);
 						st.push(child);
 					}
@@ -2159,7 +2181,7 @@ vector<int> QueryEvaluator::evaluatePattern(Query q, string leftHandSide, std::s
 			}
 			else {
 				vector<Node*> children = nd.getChild();
-				for(int i=0; i<children.size(); i++) {
+				for(unsigned int i=0; i<children.size(); i++) {
 					Node child = *children.at(i);
 					st.push(child);
 				}
@@ -2193,7 +2215,7 @@ bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
 				return true;
 			else {
 				vector<Node*> children = nd.getChild();
-				for(int i=0; i< children.size(); i++) {
+				for(unsigned int i=0; i< children.size(); i++) {
 					Node child = *children.at(i);
 					st.push(child);
 				}
@@ -2221,7 +2243,7 @@ bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
 					return true;
 				else {
 					vector<Node*> children = nd.getChild();
-					for(int i=0; i<  children.size(); i++) {
+					for(unsigned int i=0; i<  children.size(); i++) {
 						Node child = *children.at(i);
 						st.push(child);
 					}
@@ -2229,7 +2251,7 @@ bool QueryEvaluator::evaluateRightHandSide(string pattern, Node leftHand) {
 			}
 			else {
 				vector<Node*> children = nd.getChild();
-				for(int i=0; i<  children.size(); i++) {
+				for(unsigned int i=0; i<  children.size(); i++) {
 					Node child = *children.at(i);
 					st.push(child);
 				}
