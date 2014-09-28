@@ -43,8 +43,16 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	t->insertStmtNumAndType(1, TypeTable::WHILE);
 	t->insertStmtNumAndType(2, TypeTable::ASSIGN);
 	t->insertStmtNumAndType(3, TypeTable::CALL);
+	t->insertStmtNumAndType(4, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(5, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(6, TypeTable::ASSIGN);
+	t->insertStmtNumAndType(7, TypeTable::ASSIGN);
 
 	f->setFollows(2, 3);
+	f->setFollows(3, 4);
+	f->setFollows(4, 5);
+	f->setFollows(1, 6);
+	f->setFollows(6, 7);
 
 	pt->insertProc("First");
 	pt->insertProc("Second");
@@ -54,7 +62,11 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	c->setCalls("First", "Second", 3);
 
 	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
+	map.insert(make_pair<string, TypeTable::SynType>("a2", TypeTable::ASSIGN));	
 	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
+	map.insert(make_pair<string, TypeTable::SynType>("s2", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("s3", TypeTable::STMT));	
+	map.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
 
 	q.setSynTable(map);
 	
@@ -63,11 +75,77 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	q.addRelationship(r);
 	selectedSyn.push_back("a");
 	selectedSyn.push_back("s");
-	q.setSelectedSyn(selectedSyn);
+
+	//Follows(4, a2) r2
+	r = Relationship("Follows", "4", "a2");
+	q.addRelationship(r);
+	selectedSyn.push_back("a2");
+
+	//Follows(w, 6) r3
+	r = Relationship("Follows", "w", "6");
+	q.addRelationship(r);
+	selectedSyn.push_back("w");
+
+	//Follows*(s2, s3) r4
+	r = Relationship("Follows*", "s2", "s3");
+	q.addRelationship(r);
+	selectedSyn.push_back("s2");
+	selectedSyn.push_back("s3");
 	
+	//Follows*(a, 5) r5
+	r = Relationship("Follows*", "a", "5");
+	q.addRelationship(r);
+
+	//Follows*(a, 3) r6
+	r = Relationship("Follows*", "a", "3");
+	q.addRelationship(r);
+
+	//Follows*(1, 7) r7
+	r = Relationship("Follows*", "1", "7");
+	q.addRelationship(r);
+
+	//Follows*(w, 7) r8
+	r = Relationship("Follows*", "w", "7");
+	q.addRelationship(r);
+
+	//Follows*(_,_) r9
+	r = Relationship("Follows", "_", "_");
+	q.addRelationship(r);
+
+	//Follows*(w, _) r10
+	r = Relationship("Follows", "w", "_");
+	q.addRelationship(r);
+
+	//Follows*(_, s) r11
+	r = Relationship("Follows", "_", "s");
+	q.addRelationship(r);
+
+	//Follows*(_, 5) r12
+	r = Relationship("Follows", "_", "_");
+	q.addRelationship(r);
+
+	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
+
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(3, answer.find("s")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(5, answer.find("a2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("s2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("s2")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("s2")->second.at(2));
+	CPPUNIT_ASSERT_EQUAL(4, answer.find("s2")->second.at(3));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("s3")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(4, answer.find("s3")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(5, answer.find("s3")->second.at(2));
+	CPPUNIT_ASSERT_EQUAL(6, answer.find("s3")->second.at(3));
+
+	vector<int> k = answer.find("s2")->second;
+	vector<int> j = answer.find("s3")->second;
+
+	for(int i = 0; i<k.size(); i++){
+		cout<<"follows* ans1 = "<< k.at(i)<<" "<<"follows* ans2 = "<<j.at(i)<<endl;
+	}
 
 	/*
 	//Query 1 assign a; Select a such that Follows(_ , _); r0

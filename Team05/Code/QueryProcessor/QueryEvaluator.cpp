@@ -23,36 +23,36 @@ QueryEvaluator::~QueryEvaluator(){
 
 //function that orders the relationship vector for efficiency and faster running time
 vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
-	vector<Relationship> reorderedRelations;
-	Relationship *rw;
+	int sorted = 0;
+	Relationship temp;
+	cout<<"In orderRelationships"<<endl;
 
-	for(vector<Relationship>::iterator it = r.begin(); it!=r.end(); it++){
-		//Swap pattern and relationships with non-alpha parameters to the front for first evaluation
-		if(it->getRelType()==Relationship::PATTERN || !isalpha(it->getToken1()[0]) || !isalpha(it->getToken2()[0])){
-			r.insert(r.begin(), *it);
-			it = r.erase(it);
+	for(int i=0; i<r.size(); i++){
+		if(r.at(i).getRelType()==Relationship::PATTERN || !isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])){
+			temp = r.at(sorted);
+			r.at(sorted) = r.at(i);
+			r.at(i) = temp;
+			sorted++;
+		} else if(r.at(i).getRelType() == Relationship::WITH){
+			temp = r.at(r.size()-1);
+			r.at(r.size()-1) = r.at(i);
+			r.at(i) = temp;
 		}
-
-		//evaluate with last
-		else if(it->getRelType()==Relationship::WITH){
-			Relationship relWith = *it;
-			rw = &relWith;
-			it = r.erase(it);
-		}
-
 	}
 
-	reorderedRelations.push_back(*rw);
-
-	return reorderedRelations;
+	cout<<"After Ordering Relations, r.size = "<<r.size()<<endl;
+	return r;
 }
 
 unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
+
+	cout<<"Ordering Relationships"<<endl;
 	relations = orderRelationship(relations);
 
+	cout<<"Initializing Variables"<<endl;
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
 	vector<string> selectedSyn = q.getSelectedSyn();
 	unordered_map<string, vector<int>> answers;
@@ -60,6 +60,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 	//If relations is empty
 	if(relations.empty()){
+		cout<<"Relations found empty"<<endl;
 		for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
 			vector<int> synAns = t->getAllStmts(m.find(*it)->second);
 			answers.insert(make_pair<string, vector<int>>(*it, synAns));
@@ -71,11 +72,15 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	//If relations are not empty
 	int relIndex = 0;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		cout<<" "<<endl;
+		cout<<it->getRelName()<<"("<<it->getToken1()<<", "<< it->getToken2()<<")"<<endl;
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS:
+			cout<<"Evaluating Follows RelIndex = "<<relIndex<<endl;
 			evaluateFollows(*it, m,relIndex); break;
 
 		case Relationship::FOLLOWSSTAR:
+			cout<<"Evaluating Follows* RelIndex = "<<relIndex<<endl;
 			evaluateFollowsStar(*it, m, relIndex); break;
 
 		case Relationship::PARENT:
@@ -101,9 +106,11 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		}
 
 		vector<string> parametersVec;
+		parametersVec.clear();
 		parametersVec.push_back(it->getToken1());
 		parametersVec.push_back(it->getToken2());
 
+		cout<<"Inserting tokens into relParameters"<<endl;
 		QueryEvaluator::relParameters.insert(make_pair<int, vector<string>>(relIndex, parametersVec));
 		relIndex++;
 	}
@@ -112,6 +119,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	for(int i=0; i<relations.size(); i++){
 		vector<Pair> v = relAns.find(i)->second;
 		if(v.empty() || v.at(0).ans1==-2){
+			cout<<"Found Relations to be False or Empty"<<endl;
 			return answers;
 		}
 	}
@@ -124,15 +132,18 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		vector<Pair> p = relAns.at(index);
 		set<int> synAns;
 		vector<int> synAnsVec;
+		cout<<"p.size = "<<p.size()<<endl;
 
 		if(*it==param.at(0)){
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 				synAns.insert(it2->ans1);
+				cout<<"it2->ans1 = "<<it2->ans1<<endl;
 			}
 
 		}else {
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 				synAns.insert(it2->ans2);
+				cout<<"it2->ans2 = "<<it2->ans2<<endl;
 			}
 		}
 
@@ -312,16 +323,20 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 		}
 
 		//iterate through the relationship pairs
-		for(vector<Pair>::iterator it2=pr->begin(); it2!=pr->end(); it2++){
+		for(vector<Pair>::iterator it2=pr->begin(); it2!=pr->end();){
 
 			//remove all pairs that are eliminated
 			if(pairIndex==1){
 				if(find(list.begin(),list.end(),it2->ans1)==list.end()){
 					it2 = pr->erase(it2);
+				} else{
+					++it2;
 				}
 			}else{
 				if(find(list.begin(),list.end(),it2->ans2)==list.end()){
 					it2 = pr->erase(it2);
+				} else{
+					++it2;
 				}
 			}
 		}
@@ -897,6 +912,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Follows *f = pkb->getFollows();
+	TypeTable *t = pkb->getTypeTable();
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
@@ -970,13 +986,18 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 		//If both do not exist
 		else {
-
+			cout<<"Both tokens are alpha and do not exist in linkages"<<endl;
 			//Retrieve both a and b from PKB
-			vector<int> first = f->getFollowedBy(i1->second, i2->second);
-			vector<int> second = f->getFollows(i1->second, i2->second);
-
+			vector<int> first = t->getAllStmts(i1->second);
+			vector<int> second = t->getAllStmts(i2->second);
+			cout<<"trying is follows"<<f->isFollows(2,3)<<endl;
 			for(int i=0; i<first.size(); i++){
-				followsAns.push_back(Pair (first.at(i), second.at(i)));
+				for(int j=0; j<second.size(); j++){
+					if(f->isFollows(first.at(i), second.at(j))){
+						followsAns.push_back(Pair (first.at(i), second.at(j)));
+						cout<<"first.at(i) = "<<first.at(i)<<"second.at(i) = "<<second.at(i)<<endl;
+					}
+				}
 			}
 
 		}
@@ -1077,11 +1098,15 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		//If it does not exist
 		else {
 			//Retrieve a from PKB and push it into the answer vector
-
+			cout<<"Second token is alpha and it does not exist in linkages"<<endl;
 			if(isdigit(tk1[0])){
+				cout<<"First token is digit"<<endl;
 				int second = f->getFollows(i2->second, atoi(tk1.c_str()));
-
-				followsAns.push_back(Pair (atoi(tk1.c_str()), second));
+				cout<<"Answer is = "<<second<<endl;
+				if(second!=-1){
+					followsAns.push_back(Pair (atoi(tk1.c_str()), second));
+				}
+				cout<<"followsAns.size = "<<followsAns.size()<<endl;
 			}
 
 			//Follows(_,b)
@@ -1150,13 +1175,6 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 
 
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	/*Pair p1;
-	Pair p2;
-
-	set<Pair> p;
-	p.insert(Pair (1,1,"d","d"));
-	p.insert(Pair (1,1,"d","d"));
-	*/
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
 	Follows *f = pkb->getFollows();
@@ -1171,38 +1189,48 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	
-	//Select w such that Follows*(w, a)
-	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+	//Select w such that Follows*(w, a) OR Follows*(_, a) OR Follows*(w, _)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (tk2=="_" && isalpha(tk1[0]))){
 
-		selected = t->getAllStmts(i1->second);	//get all while statements
+		if(tk1=="_"){
+			selected = t->getAllStmts(TypeTable::STMT);
+		}
+		else{
+			selected = t->getAllStmts(i1->second);	//get all while statements
+		}
 
 		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-
-			stmtNumber = f->getFollows(TypeTable::STMT, *it);
+			if(tk2=="_"){
+				stmtNumber = f->getFollows(TypeTable::STMT, *it);
+			}else {
+				stmtNumber = f->getFollows(i2->second, *it);
+			}
 			do{			
 				if(stmtNumber!=-1){
-					if(t->isType(i2->second,stmtNumber)){
-						followsStarAnsSet.insert(Pair (*it, stmtNumber));
-					}
+					followsStarAnsSet.insert(Pair (*it, stmtNumber));
 				}
 				else{
 					break;
 				}
-
-				stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
+				if(tk2=="_"){
+					stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
+				}
+				else {
+					stmtNumber = f->getFollows(i2->second, stmtNumber);
+				}
 			}while(true);
 		}
 	}
 	
 	//Select a such that Follows*(a, 13)
 	else if(isalpha(tk1[0])){
-		cout<<"Handling Follows*(type, stmtnum)"<<endl;
+		cout<<"Handling Follows*(type, stmtnum) with tk2 = " << atoi(tk2.c_str())<<endl;
 		stmtNumber = atoi(tk2.c_str());
 		do{			
 			cout<<"Calling getFollowedBy(type, stmtnum)"<<endl;
 			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=-1){
-				cout<<"Calling TypeTable::isType"<<endl;
+				cout<<"Evaluated StmtNumber = "<<stmtNumber<<endl;
 				if(t->isType(i1->second, stmtNumber)){
 					followsStarAnsSet.insert(Pair (stmtNumber, atoi(tk2.c_str())));
 				}
@@ -1233,17 +1261,48 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		}while(true);
 	}
 
-	//Follows*(1,2)
-	else {
+	else if(tk1=="_" && tk2=="_"){
+		bool flag = false;
+		vector<int> dummy = t->getAllStmts(TypeTable::STMT);
+		for(vector<int>::iterator it=dummy.begin(); it!=dummy.end(); it++){
+			if(f->getFollows(TypeTable::STMT, *it)!=-1){
+				flag = true;
+				break;
+			}
+		}
+
+		if(flag){
+			followsStarAnsSet.insert(Pair (-1,-1));
+		}else{
+			followsStarAnsSet.insert(Pair (-2,-2));
+		}
+	}
+
+	//Follows*(1,2) OR Follows*(1, _)
+	else if((isdigit(tk1[0]) && isdigit(tk2[0]))|| tk2=="_"){
 		stmtNumber = atoi(tk1.c_str());
-		while(stmtNumber!=-1){
-			cout<<"STMTNUM is "<<stmtNumber<<endl;
+		while(stmtNumber!=-1){	
 			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
-			if(stmtNumber==atoi(tk2.c_str()))
+			cout<<"STMTNUM is "<<stmtNumber<<endl;
+			if(stmtNumber==atoi(tk2.c_str()) || (tk2=="_" && stmtNumber!=-1)){
 				followsStarAnsSet.insert(Pair (-1,-1));
-			if(stmtNumber>atoi(tk2.c_str()))
+				break;
+			}
+			if(stmtNumber>atoi(tk2.c_str())){
 				followsStarAnsSet.insert(Pair (-2,-2));
 				break;
+			}
+		}
+	}
+
+	//Follows(_,2)
+	else{
+		stmtNumber = f->getFollowedBy(TypeTable::STMT, atoi(tk2.c_str()));
+		if(stmtNumber==-1){
+			followsStarAnsSet.insert(Pair(-2,-2));
+		}
+		else {
+			followsStarAnsSet.insert(Pair(-1,-1));
 		}
 	}
 	
@@ -1262,7 +1321,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 void QueryEvaluator::insertLinks(string tk, int relIndex){
 	//Add the relationship into QueryEvaluator::linkages
-
+	cout<<"IN INSERT LINKS INSERTING TOKEN = "<<tk<<endl;
 	//if tk exists
 	if(linkages.find(tk) != linkages.end()){
 		vector<int> *pt = &QueryEvaluator::linkages.find(tk)->second;
@@ -1823,6 +1882,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, int relIndex){
 		//If both a and b exist in QueryEvaluator::linkages
 	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+		cout<<"Both tk1 and tk2 Exists tk1 = "<<tk1<<" tk2 = " <<tk2<<endl;
 		removePairsFromRelAns(ans, tk1, 1);
 		removePairsFromRelAns(ans, tk2, 2);
 		removePairs(*ans, tk1, 1);
@@ -1831,20 +1891,23 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 	//If only a exist
 	else if(isExistInLinkages(tk1)){
-		cout<<"intersectPairs tk1Exists"<<endl;
+		cout<<"IntersectPairs tk1 Exists tk1 = "<<tk1<<endl;
 		removePairsFromRelAns(ans, tk1, 1);
+		cout<<"hihihihihi"<<endl;
 		removePairs(*ans, tk1, 1);
+		cout<<"nonononono"<<endl;
 		//insertLinks(tk1, relIndex);
 	}
 
 	//If only b exist
 	else if(isExistInLinkages(tk2)){
+		cout<<"IntersectPairs tk2 Exists tk2 = "<<tk2<<endl;
 		removePairsFromRelAns(ans, tk2, 2);
 		removePairs(*ans, tk2, 2);
 	}
 
 	else {
-		cout<<"In intersect Pairs: both does not exist"<<endl;
+		cout<<"In intersect Pairs: both do not exist"<<endl;
 	}
 
 	
@@ -1854,7 +1917,7 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 	}
 	
 	if(isalpha(tk2[0])){
-	
+		cout<<"Insert links for tk2 = "<<tk2<<endl;
 		insertLinks(tk2, relIndex);
 	}
 }
