@@ -87,6 +87,11 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	procedureFirstModifies.push_back(2);
 	m->setModifiesProc(0, procedureFirstModifies);
 
+	vector<int> procedureSecondModifies;
+	procedureSecondModifies.push_back(1);
+	procedureSecondModifies.push_back(2);
+	m->setModifiesProc(1, procedureSecondModifies);
+
 	c->setCalls("First", "Second", 3);
 
 	map.insert(make_pair<string, TypeTable::SynType>("a", TypeTable::ASSIGN));
@@ -94,6 +99,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("a3", TypeTable::ASSIGN));	
 	map.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::CALL));
 	map.insert(make_pair<string, TypeTable::SynType>("p", TypeTable::PROCEDURE));
+	map.insert(make_pair<string, TypeTable::SynType>("p2", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("s2", TypeTable::STMT));	
 	map.insert(make_pair<string, TypeTable::SynType>("s3", TypeTable::STMT));
@@ -216,14 +222,45 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Modifies(_, v) r25
 	r = Relationship("Modifies", "_", "v");
 	q.addRelationship(r);
+
+	//Modifies(w, _) r26
+	r = Relationship("Modifies", "w", "_");
+	q.addRelationship(r);
+
+	//Modifies(p2, "y") r27
+	r = Relationship("Modifies", "p2", "\"y\"");
+	q.addRelationship(r);
+	selectedSyn.push_back("p2");
+
+	//Modifies(_, "z") r28
+	r = Relationship("Modifies", "_", "\"z\"");
+	q.addRelationship(r);
 	
+	//Modifies("First", "z") r29
+	r = Relationship("Modifies", "\"First\"", "\"z\"");
+	q.addRelationship(r);
+
+	//Modifies("First", v) r30
+	r = Relationship("Modifies", "\"First\"", "v");
+	q.addRelationship(r);
+
+	//Modifies(a, "x") r31
+	r = Relationship("Modifies", "a", "\"x\"");
+	q.addRelationship(r);
+
+	//Uses (a, v) r32
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a")->second.at(0));
-	CPPUNIT_ASSERT_EQUAL(3, answer.find("s")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("a2")->second.at(0));
-	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("a3")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(4, answer.find("a3")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(5, answer.find("a3")->second.at(2));
+	CPPUNIT_ASSERT_EQUAL(0, answer.find("p")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(0, answer.find("p2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("p2")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("s")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("s2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("s2")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(3, answer.find("s2")->second.at(2));
@@ -232,18 +269,14 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(4, answer.find("s3")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("s3")->second.at(2));
 	CPPUNIT_ASSERT_EQUAL(6, answer.find("s3")->second.at(3));
-	CPPUNIT_ASSERT_EQUAL(2, answer.find("a3")->second.at(0));
-	CPPUNIT_ASSERT_EQUAL(4, answer.find("a3")->second.at(1));
-	CPPUNIT_ASSERT_EQUAL(5, answer.find("a3")->second.at(2));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("s4")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(10, answer.find("s5")->second.at(0));
-	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
-
-	CPPUNIT_ASSERT_EQUAL(0, answer.find("p")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(0, answer.find("v")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	
 	vector<int> k = answer.find("a")->second;
-	vector<int> j = answer.find("v")->second;
+	vector<int> j = answer.find("p2")->second;
 
 	for(int i = 0; i<k.size(); i++){
 		cout<<"parent ans1 = "<< k.at(i)<<endl;
