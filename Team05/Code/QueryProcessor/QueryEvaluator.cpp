@@ -2226,6 +2226,8 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	vector<Pair> patternAns;
 	Node* root = pkb->getASTRoot();
 
+	insertLinks(syn, relIndex);
+
 	switch(synType){
 		case TypeTable::ASSIGN:
 			patternAns = findAssign(*root, lhs, rhs);
