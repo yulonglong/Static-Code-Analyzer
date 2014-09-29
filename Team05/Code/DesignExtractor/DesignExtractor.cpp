@@ -20,6 +20,8 @@ CFGNode* currCFGNode;
 queue<QueueItem> queueToProcess;
 
 void DesignExtractor::extractorDriver(PKB *pkb) {
+	cout << "Begin DesignExtractor" << endl;
+
 	TypeTable* typeTable = pkb->getTypeTable();
 	ConstTable* constTable = pkb->getConstTable();
 	Parent* parent = pkb->getParent();
@@ -44,6 +46,8 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	cout << "DE: Extracted Relationships" << endl;
 	
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+
+	cout << "End DesignExtractor" << endl;
 }
 
 void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
