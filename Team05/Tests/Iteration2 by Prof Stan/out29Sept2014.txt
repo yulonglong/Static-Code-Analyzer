@@ -1,0 +1,365 @@
+Parameters : testiter2simplesource.txt testiter2queries.txt out29Sept2014.xml
+Beginning to parse Simple Program.
+DE: Extracted Relationships
+Building CFG
+End of parsing Simple Program.
+Iteration2 by Prof Stan
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - ParenStar ::
+while w;
+Select w such that Parent*(w, 13)
+9
+5000
+Evaluating query 1 - ParenStar ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent*(w, 13)
+Evaluating Parent* RelIndex = 0
+Initialzing all Parent* variables
+tk2 is Integer 13
+TOKEN1 FOUND NOT TO EXIST IN LINKAGES
+Set is Empty: 0
+Parent StmtNumber = 11
+Parent StmtNumber = 9
+Insert stmtNum = 9 into set
+IN INSERT LINKS INSERTING TOKEN = w
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 1
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+2 - FollowsStar ::
+stmt s; while w;
+Select w such that Follows* (s, w)
+9
+5000
+Evaluating query 2 - FollowsStar ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(s, w)
+Evaluating Follows* RelIndex = 0
+IntersectPairs tk2 Exists tk2 = w
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+End retrieving token
+in for loop
+in else
+end of RemovePairsFromRelAns
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+Insert links for tk2 = w
+IN INSERT LINKS INSERTING TOKEN = w
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 1
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+3 - FollowsStar ::
+if ifstat;
+Select ifstat such that Follows* (ifstat, 17)
+11
+5000
+Evaluating query 3 - FollowsStar ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(ifstat, 17)
+Evaluating Follows* RelIndex = 0
+Handling Follows*(type, stmtnum) with tk2 = 17
+Calling getFollowedBy(type, stmtnum)
+Evaluated StmtNumber = 11
+Calling getFollowedBy(type, stmtnum)
+Evaluated StmtNumber = 10
+Calling getFollowedBy(type, stmtnum)
+In intersect Pairs: both do not exist
+Insert links for tk1 =ifstat
+IN INSERT LINKS INSERTING TOKEN = ifstat
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = ifstat p.size = 1
+it2->ans2 = 13
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer: 13 
+Correct answer: 11 
+Missing: 11 
+Additional: 13 
+4 - Modifies ::
+variable v;
+Select v such that Modifies (9, v)
+idx,t,x,y,z
+5000
+Evaluating query 4 - Modifies ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(9, v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 1
+it2->ans2 = 13
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer:  
+Correct answer: idx t x y z 
+Missing: idx t x y z 
+Additional:  
+5 - Modifies, Uses ::
+assign a;
+Select a such that Modifies (a, "idx") and Uses (a, "idx")
+16,22
+5000
+Evaluating query 5 - Modifies, Uses ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+modifies(a, "idx")
+answer is empty: 0
+modifiesAnswer13 5
+modifiesAnswer16 5
+modifiesAnswer22 5
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+ 
+uses(a, "idx")
+IntersectPairs tk1 Exists tk1 = a
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+13
+End retrieving token
+in for loop
+pair index is 116
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+end of RemovePairsFromRelAns
+hihihihihi
+nonononono
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+<exception/>
+6 - CallsStar ::
+procedure p;
+Select p such that Calls* (p, "Tulip")
+Fern,Orchid
+5000
+Evaluating query 6 - CallsStar ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls*(p, "Tulip")
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+IN INSERT LINKS INSERTING TOKEN = p
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+<exception/>
+7 -Pattern ::
+assign a;
+Select a pattern a ("y", "2 * x")
+none
+5000
+Evaluating query 7 -Pattern ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("y", "2 * x")
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+<exception/>
+8 - NextStar ::
+prog_line n;
+Select n such that Next* (10, n) and Next* (n, 9)
+9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 8 - NextStar ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+next*(10, n)
+In intersect Pairs: both do not exist
+Insert links for tk2 = n
+IN INSERT LINKS INSERTING TOKEN = n
+Inserting tokens into relParameters
+ 
+next*(n, 9)
+IntersectPairs tk1 Exists tk1 = n
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = n
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+end of RemovePairsFromRelAns
+hihihihihi
+nonononono
+Insert links for tk1 =n
+IN INSERT LINKS INSERTING TOKEN = n
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+<exception/>
+9 - Modifies, Uses, Follows, ParentStar :: Tests multiple clauses (it is not in Assignment 1).
+assign a; while w;
+Select a such that Modifies (a, "idx") and Uses (a, "idx") and Follows (15, a) and Parent* (w, a)
+16
+5000
+Evaluating query 9 - Modifies, Uses, Follows, ParentStar :: Tests multiple clauses (it is not in Assignment 1).
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+modifies(a, "idx")
+answer is empty: 0
+modifiesAnswer13 5
+modifiesAnswer16 5
+modifiesAnswer22 5
+IntersectPairs tk1 Exists tk1 = a
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+in for loop
+pair index is 113
+in for loop
+pair index is 116
+in for loop
+pair index is 122
+end of RemovePairsFromRelAns
+hihihihihi
+nonononono
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+ 
+uses(a, "idx")
+IntersectPairs tk1 Exists tk1 = a
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+in for loop
+pair index is 116
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+end of RemovePairsFromRelAns
+hihihihihi
+nonononono
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+ 
+follows(15, a)
+Evaluating Follows RelIndex = 2
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+ 
+parent*(w, a)
+Evaluating Parent* RelIndex = 3
+Initialzing all Parent* variables
+If both tokens are alpha or one of them is a wildcard
+In retrieveTokenEvaluatedAnswers Finding tk = w
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+End retrieving token
+sb is Empty: 1
+IN INSERT LINKS INSERTING TOKEN = w
+IN INSERT LINKS INSERTING TOKEN = a
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+<exception/>
+End of evaluating Query File.
+AutoTester Completed !
