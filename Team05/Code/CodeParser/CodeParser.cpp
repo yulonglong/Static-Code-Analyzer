@@ -645,7 +645,7 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 }
 
 void CodeParser::parserDriver(string filename,PKB *pkb){
-	
+	cout << "Begin CodeParser" << endl;
 	Node* root = pkb->getASTRoot();
 
 	try{
@@ -656,6 +656,7 @@ void CodeParser::parserDriver(string filename,PKB *pkb){
 	}
 	pkb->setASTRoot(root);
 
+	cout << "End CodeParser" << endl;
 	//pkb.setVarTable(varTable);
 	//pkb.setProcTable(procTable);
 	//pkb.setTypeTable(typeTable);

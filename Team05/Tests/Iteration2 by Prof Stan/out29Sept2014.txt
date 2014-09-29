@@ -1,7 +1,11 @@
-Parameters : testiter2simplesource.txt testiter2queries.txt out29Sept2014.xml
+Parameters : testiter2simplesource.txt testiter2queries.txt out29sept2014.xml
 Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
 DE: Extracted Relationships
 Building CFG
+End DesignExtractor
 End of parsing Simple Program.
 Iteration2 by Prof Stan
 Beginning to evaluate Query File.
