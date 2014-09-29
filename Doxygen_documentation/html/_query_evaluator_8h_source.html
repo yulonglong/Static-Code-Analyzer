@@ -133,38 +133,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> intersectPairs(std::string, std::string, std::vector&lt;Pair&gt; *, <span class="keywordtype">int</span>);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">//std::vector&lt;int&gt; evaluateCallsStar(Relationship);</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    std::vector&lt;int&gt; evaluatePattern(<a class="code" href="class_query.html">Query</a>, std::string, std::string);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::vector&lt;Relationship&gt; orderRelationship(vector&lt;Relationship&gt;);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::vector&lt;int&gt; * findAnswerVectorFromToken(std::string);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">//std::vector&lt;std::string&gt; findLinks(std::string);</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::set&lt;int&gt; retrieveTokenEvaluatedAnswers(std::string );</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> removePairs(std::vector&lt;Pair&gt;, std::string, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> removePairsFromRelAns(std::vector&lt;Pair&gt; *,std::string, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> insertLinks(std::string, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">bool</span> evaluateRightHandSide(std::string, <a class="code" href="class_node.html">Node</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> evaluateLeftHandSide(std::string, <a class="code" href="class_node.html">Node</a>);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">bool</span> isExistInLinkages(std::string);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> evaluatePattern(<a class="code" href="class_relationship.html">Relationship</a>, std::unordered_map&lt;string, TypeTable::SynType&gt;, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::vector&lt;Pair&gt; findAssign(<a class="code" href="class_node.html">Node</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> matchPattern(<a class="code" href="class_node.html">Node</a>, <span class="keywordtype">string</span>, <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> matchTree(<a class="code" href="class_node.html">Node</a>, <a class="code" href="class_node.html">Node</a>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_node.html">Node</a>* constructExpressionTree(vector&lt;string&gt; tokens);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">static</span> vector&lt;string&gt; getPostfix(vector&lt;string&gt; tokens);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> tokenizeTokens(<span class="keywordtype">string</span> word, vector&lt;string&gt; &amp;storage);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> isAllDigit(<span class="keywordtype">string</span> input);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">//std::vector&lt;int&gt; evaluateCallsStar(Relationship);</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::vector&lt;Relationship&gt; orderRelationship(vector&lt;Relationship&gt;);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::vector&lt;int&gt; * findAnswerVectorFromToken(std::string);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//std::vector&lt;std::string&gt; findLinks(std::string);</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    std::string convertEnumToString(TypeTable::SynType);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;string, std::vector&lt;int&gt;&gt; linkages;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;int, std::vector&lt;Pair&gt;&gt; relAns;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;int, vector&lt;std::string&gt;&gt; relParameters;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="class_p_k_b.html">PKB</a> *pkb;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="class_query_evaluator.html#a861e04948c25774d74a7dcb4137864aa">QueryEvaluator</a>(<a class="code" href="class_p_k_b.html">PKB</a>*);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    ~<a class="code" href="class_query_evaluator.html">QueryEvaluator</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    std::unordered_map&lt;std::string, std::vector&lt;int&gt;&gt; <a class="code" href="class_query_evaluator.html#a3b4e7218194d6338941eee6ba5a1cd42">evaluateQuery</a>(<a class="code" href="class_query.html">Query</a>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    std::set&lt;int&gt; retrieveTokenEvaluatedAnswers(std::string );</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> removePairs(std::vector&lt;Pair&gt;, std::string, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> removePairsFromRelAns(std::vector&lt;Pair&gt; *,std::string, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> insertLinks(std::string, <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">bool</span> isExistInLinkages(std::string);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    std::string convertEnumToString(TypeTable::SynType);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;string, std::vector&lt;int&gt;&gt; linkages;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;int, std::vector&lt;Pair&gt;&gt; relAns;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;int, vector&lt;std::string&gt;&gt; relParameters;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_p_k_b.html">PKB</a> *pkb;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="class_query_evaluator.html#a861e04948c25774d74a7dcb4137864aa">QueryEvaluator</a>(<a class="code" href="class_p_k_b.html">PKB</a>*);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    ~<a class="code" href="class_query_evaluator.html">QueryEvaluator</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    std::unordered_map&lt;std::string, std::vector&lt;int&gt;&gt; <a class="code" href="class_query_evaluator.html#a3b4e7218194d6338941eee6ba5a1cd42">evaluateQuery</a>(<a class="code" href="class_query.html">Query</a>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_query_evaluator_html_a861e04948c25774d74a7dcb4137864aa"><div class="ttname"><a href="class_query_evaluator.html#a861e04948c25774d74a7dcb4137864aa">QueryEvaluator::QueryEvaluator</a></div><div class="ttdeci">QueryEvaluator(PKB *)</div><div class="ttdoc">Constructor for QueryEvaluator. Takes in the singleton PKB as input parameter. </div><div class="ttdef"><b>Definition:</b> QueryEvaluator.cpp:17</div></div>
 <div class="ttc" id="class_query_html"><div class="ttname"><a href="class_query.html">Query</a></div><div class="ttdef"><b>Definition:</b> Query.h:13</div></div>
 <div class="ttc" id="class_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">A Node Structure for AST.Overview: Node is the node structure of AST nodes. </div><div class="ttdef"><b>Definition:</b> Node.h:29</div></div>
@@ -175,7 +181,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 29 2014 02:55:59 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 30 2014 01:34:21 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
