@@ -3,11 +3,11 @@
 
 #pragma once
 
-#include "DesignExtractor.h"
+#include "DesignExtractor.h"	
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 0; 
+bool debugModeIteration2 = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -198,9 +198,24 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 
-	int fromProgLine = children[1]->getChild(children[1]->getChild().size()-1)->getProgLine();
+	Node* fromASTNode = children[1]->getChild(children[1]->getChild().size()-1);
+	int fromProgLine = fromASTNode->getProgLine();
 	CFGNode* fromNode = getCFGNode(fromProgLine);
+
+	cout << "here" << endl;
 	if (fromNode != NULL) {
+		if (fromNode->getType() == "if") {
+			// get the child which is -1 and set that as the fromNode 
+			while (fromNode->getProgLine() != -1) {
+				if (fromNode->getMultiChild().size() != 0) {
+					fromNode = fromNode->getMultiChild(0);
+				} else {
+					cout << "Error in DE 1!" << endl;
+					break;
+				}
+			}
+		}
+
 		if (debugModeIteration2) {
 			cout << "fromNode is found" << endl;
 		}
@@ -214,6 +229,8 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 			toNode->printCFGNode();
 			cout << endl;
 		}
+	} else {
+		cout << "Error in DE 2!" << endl;
 	}
 	currCFGNode = toNode;
 }
