@@ -20,6 +20,7 @@ public:
 	void testIter2SimpleSource(); 
 private:
 	string print(vector<int>); 
+	string printVariables(vector<VARINDEX>, VarTable);
 
 };
 #endif

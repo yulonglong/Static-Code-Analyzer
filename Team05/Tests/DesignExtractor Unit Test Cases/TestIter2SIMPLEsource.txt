@@ -36,4 +36,7 @@ procedure Tulip {
 		if idx then {
 			x = y + 80; }
 		else {
-			y = y * x + z + t * v; } } }
+			if t then {
+				y = y * x + z + t * v; }
+			else {
+				y = x; } } } }

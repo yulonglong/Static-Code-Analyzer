@@ -7,7 +7,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 1; 
+bool debugModeIteration2 = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -69,9 +69,6 @@ void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 
 	pkb.setCFGRoot(rootCFGNode);
 	CFGNode* temp = pkb.getCFGRoot();
-	if (temp == NULL) {
-	cout << "here" << endl;
-	}
 }
 
 // actual building of CFG 
@@ -201,8 +198,8 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 	Node* fromASTNode = children[1]->getChild(children[1]->getChild().size()-1);
 	int fromProgLine = fromASTNode->getProgLine();
 	CFGNode* fromNode = getCFGNode(fromProgLine);
+	foundNode = NULL; 
 
-	cout << "here" << endl;
 	if (fromNode != NULL) {
 		if (fromNode->getType() == "if") {
 			// get the child which is -1 and set that as the fromNode 
@@ -329,17 +326,13 @@ CFGNode* DesignExtractor::getCFGNode(int progLine) {
 	source = rootCFGNode;
 	traverseGraph(*source, progLine);
 
-	//for (std::vector<int>::iterator it=visited.begin(); it!=visited.end(); ++it)
-	//std::cout << ' ' << *it;
-	//std::cout << '\n';
-
+	/*for (std::vector<int>::iterator it=visited.begin(); it!=visited.end(); ++it)
+	std::cout << ' ' << *it;
+	std::cout << '\n';*/
+	
 	visited.clear();
 
-	if (foundNode != NULL) {
-		return foundNode;
-	} else {
-		return NULL;
-	}
+	return foundNode;
 }
 
 void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
@@ -347,14 +340,16 @@ void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
 		foundNode = &node;
 	}
 	try {
-		visited[node.getProgLine()] = 1; 
+		if (node.getProgLine() != -1) {
+			visited[node.getProgLine()] = 1;
+		}
 	} catch (...) {
-		cout << "Error caught" << endl;
+		cout << "Error caught in DE" << endl;
 	}
 	vector<CFGNode*> children = node.getMultiChild();
 	for (unsigned int i=0; i<children.size(); i++) {
 		CFGNode* child = children[i];
-		if (visited[child->getProgLine()] == 0) {
+		if (visited[child->getProgLine()] == 0 || child->getProgLine() == -1) {
 			traverseGraph(*child, progLine);
 		}
 	}

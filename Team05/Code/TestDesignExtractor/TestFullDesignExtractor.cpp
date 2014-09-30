@@ -28,7 +28,11 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	PKB *pkb;
 	Node* ASTRoot;
 	CFGNode* CFGRoot;
-	
+	Modifies* modifies;
+	Uses* uses;
+	VarTable* varTable;
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+
 	pkb = PKB::getInstance();
 	CodeParser::parserDriver("TestIter2SIMPLEsource.txt",pkb);
 	
@@ -45,32 +49,97 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 		cout << "ASTRoot is null!!!" << endl;
 	}
 
+	// CALLS DE
 	DesignExtractor::extractorDriver(pkb);
+	// after this, PKB Next, Modifies, Uses and CFGRoot should be filled in
 	CFGRoot = pkb->getCFGRoot();
 
 	if (CFGRoot == NULL) {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
+	modifies = pkb->getModifies();
+	uses = pkb->getUses();
+	vector<int> v;
+	varTable = pkb->getVarTable();
 
-
-
-
-
-
-
-
-
-
-
+	v =	uses->getUses(5);
+	string expected = "y x z v t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(5);
+	expected = "y x ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(7);
+	expected = "y x v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(7);
+	expected = "y x ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(9);
+	expected = "y x z v idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(9);
+	expected = "y x z t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(11);
+	expected = "y x z v idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(11);
+	expected = "y x z idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(15);
+	expected = "y x v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(15);
+	expected = "y x ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(18);
+	expected = "y x z v t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(18);
+	expected = "y x z idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(19);
+	expected = "y x z v t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(19);
+	expected = "y x idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(21);
+	expected = "y x z v t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(21);
+	expected = "y x ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	uses->getUses(27);
+	expected = "y x z v t idx ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	
+	v =	modifies->getModifies(27);
+	expected = "y x ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
 
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	vector<int> v;
-	nextTable->printNextTable();
+	//nextTable->printNextTable();
 
-	/*
-	string expected = "10 18 "; 
+	expected = "10 18 "; 
 	v = nextTable->getNext(9);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
@@ -126,11 +195,18 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	v = nextTable->getNext(29);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "27 "; 
+	expected = "31 32 "; 
 	v = nextTable->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	*/
+	expected = "27 "; 
+	v = nextTable->getNext(31);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
+	expected = "27 "; 
+	v = nextTable->getNext(32);
+	CPPUNIT_ASSERT_EQUAL(expected, print(v));
+	
 	pkb->~PKB();
 }
 
@@ -144,6 +220,16 @@ string FullDesignExtractorTest::print(vector<int> v) {
 		out << j;
 		str = out.str();
 		s += ( str + " ");
+	}
+	return s; 
+}
+
+// Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
+string FullDesignExtractorTest::printVariables(vector<VARINDEX> v, VarTable varTable) {
+	string s = "";
+	for (int i=0; i<v.size(); i++) {
+		s += varTable.getVarName(v[i]);
+		s += " ";
 	}
 	return s; 
 }
