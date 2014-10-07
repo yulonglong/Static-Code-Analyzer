@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>Iteration2 by Prof Stan</name><parsing_time_taken>5.000000</parsing_time_taken>
+<name>Iteration2 by Prof Stan</name><parsing_time_taken>1.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" All Category">
@@ -9,21 +9,21 @@
 <id ParenStar="1" comment="" >1</id><querystr><![CDATA[while w; Select w such that Parent*(w, 13)]]></querystr>
 <stuans>9</stuans>
 <correct>9</correct>
-<time_taken>24.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id FollowsStar="1" comment="" >2</id><querystr><![CDATA[stmt s; while w; Select w such that Follows* (s, w)]]></querystr>
 <stuans>9</stuans>
 <correct>9</correct>
-<time_taken>34.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id FollowsStar="1" comment="" >3</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 17)]]></querystr>
 <stuans>13</stuans>
 <correct>11</correct>
-<time_taken>31.000000</time_taken>
+<time_taken>2.000000</time_taken>
 <failed>
 <missing>11</missing>
 <additional>13</additional>
@@ -39,7 +39,7 @@
 <id Modifies="1" comment="" >4</id><querystr><![CDATA[variable v; Select v such that Modifies (9, v)]]></querystr>
 <stuans></stuans>
 <correct>idx,t,x,y,z</correct>
-<time_taken>20.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <failed>
 <missing>idx,t,x,y,z</missing>
 <additional></additional>

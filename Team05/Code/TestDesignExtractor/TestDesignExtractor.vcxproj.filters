@@ -24,12 +24,18 @@
     <ClCompile Include="TestBuildCFG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestFullDesignExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestExtractRelationships.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestBuildCFG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFullDesignExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

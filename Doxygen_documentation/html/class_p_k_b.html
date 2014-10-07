@@ -153,6 +153,184 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ac4bfd291c946856849d979f5c3dec6a8">setCFGRoot</a> (<a class="el" href="class_c_f_g_node.html">CFGNode</a> *newCFGRoot)</td></tr>
 <tr class="memdesc:ac4bfd291c946856849d979f5c3dec6a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the new CFG Root. <br /></td></tr>
 <tr class="separator:ac4bfd291c946856849d979f5c3dec6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c064d6039bc9ee9b8282c4e0319cf4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c064d6039bc9ee9b8282c4e0319cf4f"></a>
+VARNAME&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a0c064d6039bc9ee9b8282c4e0319cf4f">getVarName</a> (VARINDEX)</td></tr>
+<tr class="memdesc:a0c064d6039bc9ee9b8282c4e0319cf4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the variable name given the variable index. If it is not found, return an empty string. <br /></td></tr>
+<tr class="separator:a0c064d6039bc9ee9b8282c4e0319cf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0a4cc3efa5a4677e05bec1440a3b0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f0a4cc3efa5a4677e05bec1440a3b0e"></a>
+VARINDEX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a4f0a4cc3efa5a4677e05bec1440a3b0e">getVarIndex</a> (VARNAME)</td></tr>
+<tr class="memdesc:a4f0a4cc3efa5a4677e05bec1440a3b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the variable index given the variable name. If it is not found, return an -1. <br /></td></tr>
+<tr class="separator:a4f0a4cc3efa5a4677e05bec1440a3b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f35314672c3d7cdd36edea23fe43111"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f35314672c3d7cdd36edea23fe43111"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumVar</b> ()</td></tr>
+<tr class="separator:a2f35314672c3d7cdd36edea23fe43111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a2b45b4f0e0ef880b9f390997dd96a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a2b45b4f0e0ef880b9f390997dd96a6"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllVarIndex</b> ()</td></tr>
+<tr class="separator:a2a2b45b4f0e0ef880b9f390997dd96a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77607e653475f3c0552dcee5f6a8068"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad77607e653475f3c0552dcee5f6a8068"></a>
+PROCNAME&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ad77607e653475f3c0552dcee5f6a8068">getProcName</a> (PROCINDEX)</td></tr>
+<tr class="memdesc:ad77607e653475f3c0552dcee5f6a8068"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the procedure name given the procedure index. If it is not found, return an empty string. <br /></td></tr>
+<tr class="separator:ad77607e653475f3c0552dcee5f6a8068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a0331e0e10271f5bec86fac1811d029"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a0331e0e10271f5bec86fac1811d029"></a>
+PROCINDEX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a0a0331e0e10271f5bec86fac1811d029">getProcIndex</a> (PROCNAME)</td></tr>
+<tr class="memdesc:a0a0331e0e10271f5bec86fac1811d029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the procedure index given the procedure name. If it is not found, return an -1. <br /></td></tr>
+<tr class="separator:a0a0331e0e10271f5bec86fac1811d029"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad25161f6b056631c36d10d49cdc4ecbd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad25161f6b056631c36d10d49cdc4ecbd"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumProcedures</b> ()</td></tr>
+<tr class="separator:ad25161f6b056631c36d10d49cdc4ecbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a699915427febac9ea73d24f5ff5990fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a699915427febac9ea73d24f5ff5990fc"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllProcIndexes</b> ()</td></tr>
+<tr class="separator:a699915427febac9ea73d24f5ff5990fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d67e6db6fd3144027ee28ec9ea5bbb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d67e6db6fd3144027ee28ec9ea5bbb2"></a>
+CONSTVALUE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a6d67e6db6fd3144027ee28ec9ea5bbb2">getConstValue</a> (CONSTINDEX)</td></tr>
+<tr class="memdesc:a6d67e6db6fd3144027ee28ec9ea5bbb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the constant value given the constant index. If it is not found, return an empty string. <br /></td></tr>
+<tr class="separator:a6d67e6db6fd3144027ee28ec9ea5bbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b02b017cb4db76b4d5610e3da35fa77"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b02b017cb4db76b4d5610e3da35fa77"></a>
+CONSTINDEX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a5b02b017cb4db76b4d5610e3da35fa77">getConstIndex</a> (CONSTVALUE)</td></tr>
+<tr class="memdesc:a5b02b017cb4db76b4d5610e3da35fa77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the constant index given the constant value. If it is not found, return an -1. <br /></td></tr>
+<tr class="separator:a5b02b017cb4db76b4d5610e3da35fa77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa9914f96d4d758e47da9593f0ef1bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abfa9914f96d4d758e47da9593f0ef1bb"></a>
+vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllConstValue</b> ()</td></tr>
+<tr class="separator:abfa9914f96d4d758e47da9593f0ef1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb3f63bac0f80953febaa155b5b77cce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb3f63bac0f80953febaa155b5b77cce"></a>
+TypeTable::SynType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#afb3f63bac0f80953febaa155b5b77cce">getSynType</a> (STMTNUM)</td></tr>
+<tr class="memdesc:afb3f63bac0f80953febaa155b5b77cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the SynType given the statement number. If the statement number, return INVALID. <br /></td></tr>
+<tr class="separator:afb3f63bac0f80953febaa155b5b77cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa98d1cef99af07f392ad162790efafb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa98d1cef99af07f392ad162790efafb"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#afa98d1cef99af07f392ad162790efafb">getAllStmts</a> (TypeTable::SynType)</td></tr>
+<tr class="memdesc:afa98d1cef99af07f392ad162790efafb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the statement numbers given the SynType. <br /></td></tr>
+<tr class="separator:afa98d1cef99af07f392ad162790efafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca3fe9f6fc37b43da2019c189845e58"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ca3fe9f6fc37b43da2019c189845e58"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a4ca3fe9f6fc37b43da2019c189845e58">isSynType</a> (TypeTable::SynType, STMTNUM)</td></tr>
+<tr class="memdesc:a4ca3fe9f6fc37b43da2019c189845e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the given statement number has the given SynType. <br /></td></tr>
+<tr class="separator:a4ca3fe9f6fc37b43da2019c189845e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051317fa49eeadd166d4fe2046e13981"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a051317fa49eeadd166d4fe2046e13981"></a>
+STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a051317fa49eeadd166d4fe2046e13981">getStmtRange</a> ()</td></tr>
+<tr class="memdesc:a051317fa49eeadd166d4fe2046e13981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the last statement number of the program. Return -1 if there is no source code. <br /></td></tr>
+<tr class="separator:a051317fa49eeadd166d4fe2046e13981"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b6f0b32fe93dcbc77c6b52ae1f21997"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b6f0b32fe93dcbc77c6b52ae1f21997"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a0b6f0b32fe93dcbc77c6b52ae1f21997">isCalls</a> (PROCINDEX, PROCINDEX)</td></tr>
+<tr class="memdesc:a0b6f0b32fe93dcbc77c6b52ae1f21997"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_calls.html" title="A Calls class to store the calls relationship. ">Calls</a> relationship between the two procedure names is true, return true. Otherwise, return false. <br /></td></tr>
+<tr class="separator:a0b6f0b32fe93dcbc77c6b52ae1f21997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e6700d157ab30e42192944d88dfe1ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e6700d157ab30e42192944d88dfe1ea"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllCalls</b> ()</td></tr>
+<tr class="separator:a7e6700d157ab30e42192944d88dfe1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28500ab8a8ce62cc814a62ce34e01515"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28500ab8a8ce62cc814a62ce34e01515"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalls</b> (PROCINDEX)</td></tr>
+<tr class="separator:a28500ab8a8ce62cc814a62ce34e01515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbcb953b9dfb4d5460ed3b4c2019172a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbcb953b9dfb4d5460ed3b4c2019172a"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllCalled</b> ()</td></tr>
+<tr class="separator:acbcb953b9dfb4d5460ed3b4c2019172a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9a303b6af23965487337c91ab4693b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e9a303b6af23965487337c91ab4693b"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCalled</b> (PROCINDEX)</td></tr>
+<tr class="separator:a3e9a303b6af23965487337c91ab4693b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a85f4db70f30fb6856c57f6de1f308"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8a85f4db70f30fb6856c57f6de1f308"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ac8a85f4db70f30fb6856c57f6de1f308">isFollows</a> (STMTNUM, STMTNUM)</td></tr>
+<tr class="memdesc:ac8a85f4db70f30fb6856c57f6de1f308"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_follows.html" title="A Follows class to store the Follows relationship. ">Follows</a> relationship between the two statement names is true, return true. Otherwise, return false. <br /></td></tr>
+<tr class="separator:ac8a85f4db70f30fb6856c57f6de1f308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1981e390e1a41fe56f15db9067388883"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1981e390e1a41fe56f15db9067388883"></a>
+STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getFollows</b> (STMTNUM)</td></tr>
+<tr class="separator:a1981e390e1a41fe56f15db9067388883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614e0ea9be57eee880717841b8c20ed1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a614e0ea9be57eee880717841b8c20ed1"></a>
+STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getFollowedBy</b> (STMTNUM)</td></tr>
+<tr class="separator:a614e0ea9be57eee880717841b8c20ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c7651a550552a8da16d7c1321a70458"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c7651a550552a8da16d7c1321a70458"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollows</b> ()</td></tr>
+<tr class="separator:a9c7651a550552a8da16d7c1321a70458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad729be24ea04ddf3e6826da4da311a3d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad729be24ea04ddf3e6826da4da311a3d"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollowedBy</b> ()</td></tr>
+<tr class="separator:ad729be24ea04ddf3e6826da4da311a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae93551c4c6bd04434d373fee73706ce6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae93551c4c6bd04434d373fee73706ce6"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isParent</b> (STMTNUM, STMTNUM)</td></tr>
+<tr class="separator:ae93551c4c6bd04434d373fee73706ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb4040786db56eacf67709cadf07c53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafb4040786db56eacf67709cadf07c53"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllChildren</b> ()</td></tr>
+<tr class="separator:aafb4040786db56eacf67709cadf07c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c8ef82e877fca38c7675bb455ba551"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19c8ef82e877fca38c7675bb455ba551"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getChildren</b> (STMTNUM)</td></tr>
+<tr class="separator:a19c8ef82e877fca38c7675bb455ba551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ddbc23d1cdc60a6b2a895e93cc0888"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01ddbc23d1cdc60a6b2a895e93cc0888"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllParent</b> ()</td></tr>
+<tr class="separator:a01ddbc23d1cdc60a6b2a895e93cc0888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d1507f55b75d214a812a06a17737f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1d1507f55b75d214a812a06a17737f9"></a>
+STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getParent</b> (STMTNUM)</td></tr>
+<tr class="separator:af1d1507f55b75d214a812a06a17737f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea0c003d490523745e07849acce0b447"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea0c003d490523745e07849acce0b447"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#aea0c003d490523745e07849acce0b447">isModifies</a> (STMTNUM, VARINDEX)</td></tr>
+<tr class="memdesc:aea0c003d490523745e07849acce0b447"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> relationship between a statement number and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
+<tr class="separator:aea0c003d490523745e07849acce0b447"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a279e6915e3078e8c26e3ec01022cec4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a279e6915e3078e8c26e3ec01022cec4c"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModified</b> (STMTNUM)</td></tr>
+<tr class="separator:a279e6915e3078e8c26e3ec01022cec4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcafddc111f159b55ddb1fd708b71ceb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcafddc111f159b55ddb1fd708b71ceb"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifies</b> (VARINDEX)</td></tr>
+<tr class="separator:adcafddc111f159b55ddb1fd708b71ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52db465addbdb6340904d9a15dc3ced"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa52db465addbdb6340904d9a15dc3ced"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllModified</b> ()</td></tr>
+<tr class="separator:aa52db465addbdb6340904d9a15dc3ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4a4fa92a19e01754103ba3d70d9792c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac4a4fa92a19e01754103ba3d70d9792c"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllModifies</b> ()</td></tr>
+<tr class="separator:ac4a4fa92a19e01754103ba3d70d9792c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df42385a356bbb81b3c54efa34b4830"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7df42385a356bbb81b3c54efa34b4830"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isModifiesProc</b> (STMTNUM, PROCINDEX)</td></tr>
+<tr class="separator:a7df42385a356bbb81b3c54efa34b4830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a199d668481c469886492b5d939c2f305"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a199d668481c469886492b5d939c2f305"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiedProc</b> (STMTNUM)</td></tr>
+<tr class="separator:a199d668481c469886492b5d939c2f305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7e6849dfe674b1b4996ca4f9bd6d98"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f7e6849dfe674b1b4996ca4f9bd6d98"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getModifiesProc</b> (PROCINDEX)</td></tr>
+<tr class="separator:a4f7e6849dfe674b1b4996ca4f9bd6d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5d282acc3a113a2b17d40471db9351"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f5d282acc3a113a2b17d40471db9351"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllModifiedProc</b> ()</td></tr>
+<tr class="separator:a7f5d282acc3a113a2b17d40471db9351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a4b8954b01885ee9e030ef4fcd627c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a4b8954b01885ee9e030ef4fcd627c8"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllModifiesProc</b> ()</td></tr>
+<tr class="separator:a0a4b8954b01885ee9e030ef4fcd627c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ebd85a3fb539a51039bc0ce6b3a91b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02ebd85a3fb539a51039bc0ce6b3a91b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUses</b> (STMTNUM, VARINDEX)</td></tr>
+<tr class="separator:a02ebd85a3fb539a51039bc0ce6b3a91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8da856aa882b0ae8fd9b75e7348cd5e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8da856aa882b0ae8fd9b75e7348cd5e5"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsed</b> (STMTNUM)</td></tr>
+<tr class="separator:a8da856aa882b0ae8fd9b75e7348cd5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da8a89c49b79d17c2024fe66580b3c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7da8a89c49b79d17c2024fe66580b3c6"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUses</b> (VARINDEX)</td></tr>
+<tr class="separator:a7da8a89c49b79d17c2024fe66580b3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8681f862657bb0d2c589b2f9fa6a5938"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8681f862657bb0d2c589b2f9fa6a5938"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsed</b> ()</td></tr>
+<tr class="separator:a8681f862657bb0d2c589b2f9fa6a5938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aa29d734a051cabce2c945d876989ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1aa29d734a051cabce2c945d876989ba"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUses</b> ()</td></tr>
+<tr class="separator:a1aa29d734a051cabce2c945d876989ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2731c2faed65ca2c064237febe10e976"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2731c2faed65ca2c064237febe10e976"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUsesProc</b> (STMTNUM, PROCINDEX)</td></tr>
+<tr class="separator:a2731c2faed65ca2c064237febe10e976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2940460a3bce8e42a9c8f16e00355aea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2940460a3bce8e42a9c8f16e00355aea"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsedProc</b> (STMTNUM)</td></tr>
+<tr class="separator:a2940460a3bce8e42a9c8f16e00355aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddae9dadaeb073d1f6d230b4d0e153a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ddae9dadaeb073d1f6d230b4d0e153a"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsesProc</b> (PROCINDEX)</td></tr>
+<tr class="separator:a6ddae9dadaeb073d1f6d230b4d0e153a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cdaa9f257ef4c11c3ab27b98203816c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cdaa9f257ef4c11c3ab27b98203816c"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsedProc</b> ()</td></tr>
+<tr class="separator:a6cdaa9f257ef4c11c3ab27b98203816c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a02b3af00190da45d6c139bfea02e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59a02b3af00190da45d6c139bfea02e4"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsesProc</b> ()</td></tr>
+<tr class="separator:a59a02b3af00190da45d6c139bfea02e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddc872cef06b4e442133c05276b9722"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ddc872cef06b4e442133c05276b9722"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNext</b> (STMTNUM, STMTNUM)</td></tr>
+<tr class="separator:a2ddc872cef06b4e442133c05276b9722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ff8e17709c6a3ff601bdc49574c863"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54ff8e17709c6a3ff601bdc49574c863"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getNext</b> (STMTNUM)</td></tr>
+<tr class="separator:a54ff8e17709c6a3ff601bdc49574c863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ad0baa9f2a87f53d218cbf1b62b978"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7ad0baa9f2a87f53d218cbf1b62b978"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getPrevious</b> (STMTNUM)</td></tr>
+<tr class="separator:aa7ad0baa9f2a87f53d218cbf1b62b978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83301f9de2ede108be2696424f22c58f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a83301f9de2ede108be2696424f22c58f"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllNext</b> ()</td></tr>
+<tr class="separator:a83301f9de2ede108be2696424f22c58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2da2fb96957d5968accca27819578f5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2da2fb96957d5968accca27819578f5c"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllPrevious</b> ()</td></tr>
+<tr class="separator:a2da2fb96957d5968accca27819578f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -189,7 +367,7 @@ static <a class="el" href="class_p_k_b.html">PKB</a> *&#160;</td><td class="memI
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 29 2014 02:56:00 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 7 2014 03:43:43 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
