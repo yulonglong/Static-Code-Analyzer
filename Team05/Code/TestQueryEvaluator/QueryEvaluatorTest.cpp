@@ -126,6 +126,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("s5", TypeTable::STMT));	
 	map.insert(make_pair<string, TypeTable::SynType>("s6", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("s7", TypeTable::STMT));
+	map.insert(make_pair<string, TypeTable::SynType>("s8", TypeTable::STMT));
 	map.insert(make_pair<string, TypeTable::SynType>("v", TypeTable::VARIABLE));
 	map.insert(make_pair<string, TypeTable::SynType>("w", TypeTable::WHILE));
 	map.insert(make_pair<string, TypeTable::SynType>("w2", TypeTable::WHILE));
@@ -318,6 +319,20 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	q.addRelationship(r);
 	selectedSyn.push_back("s7");
 
+	//Next(7,8)
+	r = Relationship("Next", "7", "8");
+	q.addRelationship(r);
+
+	//Next(s8, _)
+	r = Relationship("Next", "s8", "_");
+	q.addRelationship(r);
+	selectedSyn.push_back("s8");
+
+	//Next*(1, 5)
+	r = Relationship("Next*", "1", "5");
+	q.addRelationship(r);
+
+
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 
@@ -353,7 +368,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	
 	vector<int> k = answer.find("p2")->second;
-	vector<int> j = answer.find("s7")->second;
+	vector<int> j = answer.find("s8")->second;
 
 	for(int i = 0; i<k.size(); i++){
 		cout<<"parent ans1 = "<< k.at(i)<<endl;

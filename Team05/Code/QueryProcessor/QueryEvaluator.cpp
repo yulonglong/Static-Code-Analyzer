@@ -108,6 +108,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			evaluateNext(*it, m, relIndex); break;
 
 		case Relationship::NEXTSTAR:
+			cout<<"Evaluating Next* RelIndex = "<<relIndex<<endl;
 			evaluateNextStar(*it, m, relIndex); break;
 
 		case Relationship::WITH:
@@ -651,11 +652,14 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 			removePairs(nextAns, tk1, 1);
 		} else {
+			cout<<"First Token does not Exist"<<endl;
 			vector<int> va = t->getAllStmts(i1->second);
 
 			for(vector<int>::iterator it = va.begin(); it!=va.end(); it++){
+				cout<<"Before retrieving getNext it = "<<*it<<endl;
 				if(!n->getNext(*it).empty()){
 					nextAns.push_back(Pair (*it, n->getNext(*it).at(0)));
+					cout<<"Pushing in it = "<<*it<<endl;
 				}
 			}
 		}
@@ -837,6 +841,13 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	else {
 		int tk2Int = atoi(tk2.c_str());
 		int tk1Int = atoi(tk1.c_str());
+		vector<int> dummy = n->getNext(tk1Int);
+		
+		while(!dummy.empty()){
+
+		}
+
+		cout<<"tk1Int = "<<tk1Int<<" tk2Int = "<<tk2Int<<endl;
 		recursiveNextTarget(tk1Int, tk1Int, tk2Int, &nextStarAns);
 		
 		if(nextStarAns.empty()){
@@ -864,16 +875,22 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 }
 
 void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans){
+	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<endl;
 	Next * n = pkb->getNext();
 	TypeTable *t = pkb->getTypeTable();
 	vector<int> next = n->getNext(currentIndex);
 
-	for(vector<int>::iterator it = next.begin(); it!=next.end(); it++){
-		if(*it == targetIndex){
+	for(int i=0; i<next.size(); i++){
+		cout<<"Iterating through the next vector"<<endl;
+		if(next.at(i) == targetIndex){
+			cout<<"TargetIndex found"<<endl;
 			ans->insert(Pair (-1, -1));
 			break;
 		}
-		recursiveNextTarget(rootIndex, *it, targetIndex, ans);
+		if(next.at(i)<targetIndex){
+			i++;
+		}
+		recursiveNextTarget(rootIndex, next.at(i), targetIndex, ans);
 	}
 }
 
