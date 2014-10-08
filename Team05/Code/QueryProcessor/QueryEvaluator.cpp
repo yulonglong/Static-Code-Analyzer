@@ -2284,9 +2284,11 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs) 
 	while(!st.empty()) {
 		Node n = st.top();
 		st.pop();
-		if(n.getType().compare("assign") == 0)
-			if(matchPattern(n, lhs, rhs))
+		if(n.getType().compare("assign") == 0) {
+			if(matchPattern(n, lhs, rhs)) {
 				ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+			}
+		}
 		else {
 			vector<Node*> children = n.getChild();
 			for(int i=0; i<children.size(); i++)
@@ -2307,8 +2309,9 @@ bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs) {
 	Node right = *children.at(1);
 
 	//Check if lhs matches pattern
-	if(lhs.compare("_") == 0 || lhs.compare(left.getData()) == 0)
+	if(lhs.compare("_") == 0 || lhs.compare(left.getData()) == 0) {
 		leftMatch = true;
+	}
 
 	//Check if rhs matches pattern
 	bool underscore = false;
@@ -2318,6 +2321,8 @@ bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs) {
 		else
 			underscore = true;
 	}
+
+	rhs.erase(std::remove(rhs.begin(), rhs.end(), '_'), rhs.end());
 
 	if(!rightMatch) {
 		vector<string> tokens;
@@ -2354,6 +2359,9 @@ bool QueryEvaluator::matchTree(Node a, Node b) {
 
 	if(a.getData().compare(b.getData()) != 0)
 		return false;
+
+	if(a.getData().compare(b.getData()) == 0 && children1.size() == 0)
+		return true;
 
 	Node childA1 = *children1.at(0);
 	Node childA2 = *children1.at(1);
