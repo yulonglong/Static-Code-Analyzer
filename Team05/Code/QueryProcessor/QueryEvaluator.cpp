@@ -48,6 +48,10 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
+	linkages.clear();
+	relAns.clear();
+	relParameters.clear();
+
 
 	cout<<"Ordering Relationships"<<endl;
 	relations = orderRelationship(relations);
@@ -76,45 +80,51 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		cout<<it->getRelName()<<"("<<it->getToken1()<<", "<< it->getToken2()<<")"<<endl;
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS:
-			cout<<"Evaluating Follows RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING FOLLOWS ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateFollows(*it, m,relIndex); break;
 
 		case Relationship::FOLLOWSSTAR:
-			cout<<"Evaluating Follows* RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING FOLLOWS* ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateFollowsStar(*it, m, relIndex); break;
 
 		case Relationship::PARENT:
-			cout<<"Evaluating Parent RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING PARENT ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateParent(*it, m, relIndex); break;
 
 		case Relationship::PARENTSTAR:
-			cout<<"Evaluating Parent* RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING PARENT* ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateParentStar(*it, m, relIndex); break;//review
 
 		case Relationship::CALLS:
+			cout<<"\n EVALUATING CALLS ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateCalls(*it, relIndex); break;
 
 		case Relationship::CALLSSTAR:
+			cout<<"\n EVALUATING CALLS* ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateCallsStar(*it, relIndex); break;
 
 		case Relationship::MODIFIES:
+			cout<<"\n EVALUATING MODIFIES ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateModifies(*it, m, relIndex); break;
 
 		case Relationship::USES:
+			cout<<"\n EVALUATING USES ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateUses(*it, m, relIndex); break;
 
 		case Relationship::NEXT:
-			cout<<"Evaluating Next RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING NEXT ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateNext(*it, m, relIndex); break;
 
 		case Relationship::NEXTSTAR:
-			cout<<"Evaluating Next* RelIndex = "<<relIndex<<endl;
+			cout<<"\n EVALUATING NEXT* ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateNextStar(*it, m, relIndex); break;
 
 		case Relationship::WITH:
+			cout<<"\n EVALUATING WITH ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
 			evaluateWith(*it, m, relIndex); break;
 
 		case Relationship::PATTERN:	
+			cout<<"\n EVALUATING PATTERN"<<endl;
 			evaluatePattern(*it, m, relIndex); break; //review
 		}
 
@@ -124,7 +134,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		parametersVec.push_back(it->getToken2());
 
 		cout<<"Inserting tokens into relParameters"<<endl;
-		QueryEvaluator::relParameters.insert(make_pair<int, vector<string>>(relIndex, parametersVec));
+		relParameters.insert(make_pair<int, vector<string>>(relIndex, parametersVec));
 		relIndex++;
 	}
 
@@ -147,7 +157,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		set<int> synAns;
 		vector<int> synAnsVec;
 		cout<<"token in selectedSyn = "<<*it<<" p.size = "<<p.size()<<endl;
-
+		cout<<"FIRST PARAM = "<<param.at(0)<<endl;
 		if(*it==param.at(0)){
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 				synAns.insert(it2->ans1);
@@ -155,6 +165,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			}
 
 		}else {
+			cout<<"SECOND PARAM = "<<param.at(1)<<endl;
 			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 				synAns.insert(it2->ans2);
 				cout<<"it2->ans2 = "<<it2->ans2<<endl;
@@ -1363,6 +1374,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			if(stmtNumber!=-1){
 				cout<<"Evaluated StmtNumber = "<<stmtNumber<<endl;
 				if(t->isType(i1->second, stmtNumber)){
+					cout<<"Inserting StmtNumber "<<stmtNumber<<" into the answer set"<<endl;
 					followsStarAnsSet.insert(Pair (stmtNumber, atoi(tk2.c_str())));
 				}
 			}
@@ -1446,7 +1458,8 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	
 	intersectPairs(tk1,tk2,&followsStarAns,relIndex);
 
-	QueryEvaluator::relAns.insert(make_pair(relIndex, followsStarAns));
+	cout<<"Inserting into RelAns RelIndex = "<<relIndex<<endl;
+	relAns.insert(make_pair(relIndex, followsStarAns));
 	
 }
 
@@ -1455,10 +1468,12 @@ void QueryEvaluator::insertLinks(string tk, int relIndex){
 	cout<<"IN INSERT LINKS INSERTING TOKEN = "<<tk<<endl;
 	//if tk exists
 	if(linkages.find(tk) != linkages.end()){
+		cout<<tk<<" Found in Linkages"<<endl;
 		vector<int> *pt = &QueryEvaluator::linkages.find(tk)->second;
 		pt->push_back(relIndex);
 	}
 	else {
+		cout<<tk<<" Not Found in Linkages and relIndex = "<<relIndex<<endl;
 		vector<int> relIndexes;
 		relIndexes.push_back(relIndex);
 		linkages.insert(make_pair(tk, relIndexes));
