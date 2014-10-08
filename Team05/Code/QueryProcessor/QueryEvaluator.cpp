@@ -1212,11 +1212,11 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	//Follows(1,b)
 	else if(isalpha(tk2[0])){
 		if(isExistInLinkages(tk2)){
-			
+			cout<<tk2<<" Found to Exist in Linkages"<<endl;
 			//get the set of answers that are previously evaluated by other relations
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk2);
 
-			if(isdigit(tk2[0])){
+			if(isdigit(tk1[0])){
 				for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
 					if(f->isFollows(atoi(tk1.c_str()), *it)){
 						followsAns.push_back(Pair (atoi(tk1.c_str()), *it));
