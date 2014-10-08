@@ -45,21 +45,27 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 
 		vector<int> ans = ansTable.at(selectedSyns.at(0));
 
-		if(i->second == 6) {
+		if(i->second == TypeTable::VARIABLE) {
 			VarTable* varTable = pkb->getVarTable();
 
 			for(size_t i = 0; i < ans.size(); i++)
 				if(ans.at(i) != -1)
 					result.push_back(varTable->getVarName(ans.at(i)));
 		}
-		else if(i->second == 7) {
+		else if(i->second == TypeTable::CONSTANT) {
 			ConstTable* constTable = pkb->getConstTable();
 
 			for(size_t i = 0; i < ans.size(); i++)
 				if(ans.at(i) != -1)
 					result.push_back(constTable->getConst(ans.at(i)));
 		}
+		else if(i->second == TypeTable::PROCEDURE) {
+			ProcTable* procTable = pkb->getProcTable();
 
+			for(size_t i = 0; i < ans.size(); i++)
+				if(ans.at(i) != -1)
+					result.push_back(procTable->getProcName(ans.at(i)));
+		}
 		else {
 		for(size_t i = 0; i < ans.size(); i++)
 			if(ans.at(i) != -1)
