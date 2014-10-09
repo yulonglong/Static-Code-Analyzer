@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['getallstmts',['getAllStmts',['../class_p_k_b.html#afa98d1cef99af07f392ad162790efafb',1,'PKB::getAllStmts()'],['../class_type_table.html#a9b085a5e6bdf501488e9df338b9b06f9',1,'TypeTable::getAllStmts()']]],
+  ['getallstmts',['getAllStmts',['../class_p_k_b.html#a5b38b28ee2f8900ac5d8bcd3443871dd',1,'PKB::getAllStmts()'],['../class_type_table.html#a9b085a5e6bdf501488e9df338b9b06f9',1,'TypeTable::getAllStmts()']]],
   ['getcalled',['getCalled',['../class_calls.html#ac681d5abd94842d78146069edc100407',1,'Calls::getCalled()'],['../class_calls.html#a3a8504c717a870494dfe3cd738705ce8',1,'Calls::getCalled(PROCNAME)']]],
   ['getcalls',['getCalls',['../class_calls.html#a1215073f53147210d290136e36e580f4',1,'Calls::getCalls()'],['../class_calls.html#a614ceaa2036b5c040fa3263a807a0344',1,'Calls::getCalls(PROCNAME)']]],
   ['getcallsprogline',['getCallsProgLine',['../class_queue_item.html#a114719ba58f134a31f9ffc39718d8f4a',1,'QueueItem']]],
@@ -13,8 +13,7 @@ var searchData=
   ['getfollowedby',['getFollowedBy',['../class_follows.html#aae502a2f96d7a11197db90113f2fda6e',1,'Follows::getFollowedBy(SYNTYPE, STMTNUM)'],['../class_follows.html#ac3cd102e49278002b4f53c43d23b8e2d',1,'Follows::getFollowedBy(SYNTYPE, SYNTYPE)']]],
   ['getfollows',['getFollows',['../class_follows.html#a55b9074209e1bdabb99af2110df7c670',1,'Follows::getFollows(SYNTYPE, STMTNUM)'],['../class_follows.html#afc6250b347bdc8faaf501010b5dc8e13',1,'Follows::getFollows(SYNTYPE, SYNTYPE)']]],
   ['getinstance',['getInstance',['../class_calls.html#a53be78b250718f757f7c9f43f4dd880a',1,'Calls::getInstance()'],['../class_const_table.html#a13c72e778d922f18a527025e60dae61a',1,'ConstTable::getInstance()'],['../class_follows.html#ae86320eb0b7c4c8dee8b208b3c2aa730',1,'Follows::getInstance()'],['../class_modifies.html#ac206db58d31b3e9c12207949802a3cff',1,'Modifies::getInstance()'],['../class_next.html#a87d8d2cd9f1879f18fbb04a7a31edbb9',1,'Next::getInstance()'],['../class_parent.html#a959a1a402b7c33019720bdda5e13cab2',1,'Parent::getInstance()'],['../class_p_k_b.html#a64cd160d92e3593615705d271d8468bc',1,'PKB::getInstance()'],['../class_proc_table.html#a4aaccd365f8a415d847e54c47adfe878',1,'ProcTable::getInstance()'],['../class_type_table.html#a3c6f0deee99e002f285fe6a72879fdf6',1,'TypeTable::getInstance()'],['../class_uses.html#a914848b7b4e91469fc0667e057fc51cd',1,'Uses::getInstance()'],['../class_var_table.html#aa1a4cdffc98a15c6dd3e5b66b020bb95',1,'VarTable::getInstance()']]],
-  ['getmodifies',['getModifies',['../class_modifies.html#afa95809116ee621002cf6ba53ff4f713',1,'Modifies::getModifies(SYNTYPE)'],['../class_modifies.html#aa864c0e2e09de310f5901109c70c903e',1,'Modifies::getModifies(STMTNUM)'],['../class_modifies.html#a3b91555fe625182300336dda57a0b0be',1,'Modifies::getModifies(SYNTYPE, VARNAME)']]],
-  ['getmodifiesproc',['getModifiesProc',['../class_modifies.html#a12e0ed8b13eeb670c13fb947f8295099',1,'Modifies']]],
+  ['getmodifies',['getModifies',['../class_modifies.html#afa95809116ee621002cf6ba53ff4f713',1,'Modifies::getModifies(SYNTYPE)'],['../class_modifies.html#a3b91555fe625182300336dda57a0b0be',1,'Modifies::getModifies(SYNTYPE, VARNAME)']]],
   ['getmodifiesprocvar',['getModifiesProcVar',['../class_modifies.html#a2b427f9a76410db18c8050737e0204eb',1,'Modifies']]],
   ['getmultichild',['getMultiChild',['../class_c_f_g_node.html#a6f7b556917c64331f2518c390c0f6631',1,'CFGNode::getMultiChild()'],['../class_c_f_g_node.html#ae9ade9b6b5916b3dbaf7c708b7ae81df',1,'CFGNode::getMultiChild(unsigned int index)']]],
   ['getmultiparent',['getMultiParent',['../class_c_f_g_node.html#a93c7fe727599b5fd46918de1dca499b5',1,'CFGNode::getMultiParent()'],['../class_c_f_g_node.html#afb00441b7e2589b4205ec37847a7f21d',1,'CFGNode::getMultiParent(unsigned int index)']]],
@@ -25,8 +24,7 @@ var searchData=
   ['getstmtrange',['getStmtRange',['../class_p_k_b.html#a051317fa49eeadd166d4fe2046e13981',1,'PKB::getStmtRange()'],['../class_type_table.html#a410e2826535d923b0b98137d52555bfa',1,'TypeTable::getStmtRange()']]],
   ['getsyntype',['getSynType',['../class_p_k_b.html#afb3f63bac0f80953febaa155b5b77cce',1,'PKB']]],
   ['gettype',['getType',['../class_node.html#a3b8b4d37c6fc1618ed1fb8304bc0d2bc',1,'Node::getType()'],['../class_type_table.html#a22fa470a3d25eaba205bd5387de9fd1a',1,'TypeTable::getType()']]],
-  ['getuses',['getUses',['../class_uses.html#ac18b42c3d16f67264c62e9debe50a883',1,'Uses::getUses(SYNTYPE)'],['../class_uses.html#aec200590ef5775bbfaa61573c61d5ac1',1,'Uses::getUses(STMTNUM)'],['../class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053',1,'Uses::getUses(SYNTYPE, VARNAME)']]],
-  ['getusesproc',['getUsesProc',['../class_uses.html#ad3bf683de7cf369545a3389270121919',1,'Uses']]],
+  ['getuses',['getUses',['../class_uses.html#ac18b42c3d16f67264c62e9debe50a883',1,'Uses::getUses(SYNTYPE)'],['../class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053',1,'Uses::getUses(SYNTYPE, VARNAME)']]],
   ['getusesprocvar',['getUsesProcVar',['../class_uses.html#aca0177c15e5312af5bca552aeea785d6',1,'Uses']]],
   ['getvarindex',['getVarIndex',['../class_p_k_b.html#a4f0a4cc3efa5a4677e05bec1440a3b0e',1,'PKB::getVarIndex()'],['../class_var_table.html#af8691d4cf157454059143f10429b4ef5',1,'VarTable::getVarIndex()']]],
   ['getvarname',['getVarName',['../class_p_k_b.html#a0c064d6039bc9ee9b8282c4e0319cf4f',1,'PKB::getVarName()'],['../class_var_table.html#a6de85bc00b386e13657eb00a45aea63c',1,'VarTable::getVarName()']]]

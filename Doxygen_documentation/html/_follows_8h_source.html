@@ -122,26 +122,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> setFollows(STMTNUM, STMTNUM);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">bool</span> isFollows(STMTNUM, STMTNUM);   </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> isFollows(SYNTYPE, STMTNUM);   </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> isFollowedBy(SYNTYPE, STMTNUM);    </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span> isFollows(SYNTYPE, SYNTYPE);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    STMTNUM getFollows(STMTNUM s);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    STMTNUM getFollowedBy(STMTNUM s);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    vector&lt;STMTNUM&gt; getAllFollows();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    vector&lt;STMTNUM&gt; getAllFollowedBy();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    STMTNUM getFollows(SYNTYPE, STMTNUM);   </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    STMTNUM getFollowedBy(SYNTYPE, STMTNUM); </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    vector&lt;STMTNUM&gt; getFollows(SYNTYPE, SYNTYPE);    <span class="comment">//Select s1 such that getFollows(s1, s2)</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>    vector&lt;STMTNUM&gt; getFollowedBy(SYNTYPE, SYNTYPE);     <span class="comment">//Select s2 such that getFollows(s1, s2)</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> printFollowsTable();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span> isFollows(SYNTYPE, STMTNUM);   </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> isFollowedBy(SYNTYPE, STMTNUM);    </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">bool</span> isFollows(SYNTYPE, SYNTYPE);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    STMTNUM getFollows(SYNTYPE, STMTNUM);   </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    STMTNUM getFollowedBy(SYNTYPE, STMTNUM); </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    vector&lt;STMTNUM&gt; getFollows(SYNTYPE, SYNTYPE);    <span class="comment">//Select s1 such that getFollows(s1, s2)</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span>    vector&lt;STMTNUM&gt; getFollowedBy(SYNTYPE, SYNTYPE);     <span class="comment">//Select s2 such that getFollows(s1, s2)</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> printFollowsTable();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
 <div class="ttc" id="class_follows_html"><div class="ttname"><a href="class_follows.html">Follows</a></div><div class="ttdoc">A Follows class to store the Follows relationship. </div><div class="ttdef"><b>Definition:</b> Follows.h:34</div></div>
 <div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdoc">A TypeTable class to store the type of expression of a statement number from the source code...</div><div class="ttdef"><b>Definition:</b> TypeTable.h:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 8 2014 00:33:11 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 10 2014 04:05:49 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

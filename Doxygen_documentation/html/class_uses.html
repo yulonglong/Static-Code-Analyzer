@@ -113,17 +113,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#af83b643e81bd747ed937084d7a884fc2">isUses</a> (STMTNUM, VARNAME)</td></tr>
 <tr class="memdesc:af83b643e81bd747ed937084d7a884fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a statement number and a variable name is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:af83b643e81bd747ed937084d7a884fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a1ebd69ed96e285f0df227d24638dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70a1ebd69ed96e285f0df227d24638dd"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUses</b> (STMTNUM, VARINDEX)</td></tr>
+<tr class="separator:a70a1ebd69ed96e285f0df227d24638dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4778287c7f6d1a1e03a393ce9f1aebb6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4778287c7f6d1a1e03a393ce9f1aebb6"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsed</b> (STMTNUM)</td></tr>
+<tr class="separator:a4778287c7f6d1a1e03a393ce9f1aebb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43e6e440da9ef3ae7b8f03043dd05f29"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43e6e440da9ef3ae7b8f03043dd05f29"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUses</b> (VARINDEX)</td></tr>
+<tr class="separator:a43e6e440da9ef3ae7b8f03043dd05f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a8725ee64ff86ddee8f78eb877acd5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9a8725ee64ff86ddee8f78eb877acd5"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsed</b> ()</td></tr>
+<tr class="separator:ab9a8725ee64ff86ddee8f78eb877acd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dee877454ff107cf9894ccbbc33028e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5dee877454ff107cf9894ccbbc33028e"></a>
+vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUses</b> ()</td></tr>
+<tr class="separator:a5dee877454ff107cf9894ccbbc33028e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a777e2d042723c68e8d5878ec7e03c07e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a777e2d042723c68e8d5878ec7e03c07e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUsesProc</b> (PROCINDEX, VARINDEX)</td></tr>
+<tr class="separator:a777e2d042723c68e8d5878ec7e03c07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f256ce49acf36396be8c95ddc550e7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f256ce49acf36396be8c95ddc550e7b"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsedProc</b> (PROCINDEX)</td></tr>
+<tr class="separator:a6f256ce49acf36396be8c95ddc550e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af314080ff331b400f58123cdb37cac31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af314080ff331b400f58123cdb37cac31"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getUsesProc</b> (VARINDEX)</td></tr>
+<tr class="separator:af314080ff331b400f58123cdb37cac31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05289a1c22b3d06b3faab4d07c8320f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad05289a1c22b3d06b3faab4d07c8320f"></a>
+vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsedProc</b> ()</td></tr>
+<tr class="separator:ad05289a1c22b3d06b3faab4d07c8320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ce8a51d9506f1380846561ba191f3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58ce8a51d9506f1380846561ba191f3b"></a>
+vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllUsesProc</b> ()</td></tr>
+<tr class="separator:a58ce8a51d9506f1380846561ba191f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac18b42c3d16f67264c62e9debe50a883"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac18b42c3d16f67264c62e9debe50a883"></a>
 vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ac18b42c3d16f67264c62e9debe50a883">getUses</a> (SYNTYPE)</td></tr>
 <tr class="memdesc:ac18b42c3d16f67264c62e9debe50a883"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses any variable. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:ac18b42c3d16f67264c62e9debe50a883"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec200590ef5775bbfaa61573c61d5ac1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec200590ef5775bbfaa61573c61d5ac1"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aec200590ef5775bbfaa61573c61d5ac1">getUses</a> (STMTNUM)</td></tr>
-<tr class="memdesc:aec200590ef5775bbfaa61573c61d5ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:aec200590ef5775bbfaa61573c61d5ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3027e9b89a93cf137c07bb8d0eb4053"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053">getUses</a> (SYNTYPE, VARNAME)</td></tr>
-<tr class="memdesc:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found. <br /></td></tr>
+<tr class="memitem:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memItemLeft" align="right" valign="top">vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab3027e9b89a93cf137c07bb8d0eb4053">getUses</a> (SYNTYPE, VARNAME)</td></tr>
+<tr class="memdesc:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found.  <a href="#ab3027e9b89a93cf137c07bb8d0eb4053">More...</a><br /></td></tr>
 <tr class="separator:ab3027e9b89a93cf137c07bb8d0eb4053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12e59a0076a7e554e60b3f2281f081e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12e59a0076a7e554e60b3f2281f081e3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#a12e59a0076a7e554e60b3f2281f081e3">setUses</a> (STMTNUM, vector&lt; VARINDEX &gt;)</td></tr>
@@ -133,13 +158,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ab805ef6c3017367ede89cf906ca34d74">setUsesProc</a> (PROCINDEX, vector&lt; VARINDEX &gt;)</td></tr>
 <tr class="memdesc:ab805ef6c3017367ede89cf906ca34d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates. <br /></td></tr>
 <tr class="separator:ab805ef6c3017367ede89cf906ca34d74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3bf683de7cf369545a3389270121919"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3bf683de7cf369545a3389270121919"></a>
-vector&lt; VARINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#ad3bf683de7cf369545a3389270121919">getUsesProc</a> (PROCINDEX)</td></tr>
-<tr class="memdesc:ad3bf683de7cf369545a3389270121919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:ad3bf683de7cf369545a3389270121919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca0177c15e5312af5bca552aeea785d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca0177c15e5312af5bca552aeea785d6"></a>
-vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aca0177c15e5312af5bca552aeea785d6">getUsesProcVar</a> (VARNAME)</td></tr>
-<tr class="memdesc:aca0177c15e5312af5bca552aeea785d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found. <br /></td></tr>
+<tr class="memitem:aca0177c15e5312af5bca552aeea785d6"><td class="memItemLeft" align="right" valign="top">vector&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#aca0177c15e5312af5bca552aeea785d6">getUsesProcVar</a> (VARNAME)</td></tr>
+<tr class="memdesc:aca0177c15e5312af5bca552aeea785d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found.  <a href="#aca0177c15e5312af5bca552aeea785d6">More...</a><br /></td></tr>
 <tr class="separator:aca0177c15e5312af5bca552aeea785d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8807e004e8a0bf36e25376b609c8ab9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8807e004e8a0bf36e25376b609c8ab9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_uses.html#af8807e004e8a0bf36e25376b609c8ab9">isUsesProc</a> (PROCNAME, VARNAME)</td></tr>
@@ -161,14 +181,63 @@ static <a class="el" href="class_uses.html">Uses</a> *&#160;</td><td class="memI
 <li>Allow speedy access to the required datas</li>
 </ul>
 <p><a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> is a singleton class, it can be invoked using: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code" href="class_uses.html">Uses</a>* <a class="code" href="class_uses.html#a914848b7b4e91469fc0667e057fc51cd">getInstance</a>(<a class="code" href="class_type_table.html">TypeTable</a>*, <a class="code" href="class_var_table.html">VarTable</a>*, <a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
-</div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ab3027e9b89a93cf137c07bb8d0eb4053"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; STMTNUM &gt; Uses::getUses </td>
+          <td>(</td>
+          <td class="paramtype">SYNTYPE&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VARNAME&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found. </p>
+<p>Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found. </p>
+
+</div>
+</div>
+<a class="anchor" id="aca0177c15e5312af5bca552aeea785d6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; PROCINDEX &gt; Uses::getUsesProcVar </td>
+          <td>(</td>
+          <td class="paramtype">VARNAME&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found. </p>
+<p>Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/<a class="el" href="_uses_8h_source.html">Uses.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Uses.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 8 2014 00:33:11 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 10 2014 04:05:50 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
