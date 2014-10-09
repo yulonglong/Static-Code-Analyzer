@@ -160,25 +160,25 @@ public:
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isModifies(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
 	vector<VARINDEX> getModified(STMTNUM);
-	vector<STMTNUM> getModifies(VARINDEX);
+	vector<STMTNUM> getModifies(VARINDEX); //NOT IMPLEMENTED YET
 	vector<VARINDEX> getAllModified();
 	vector<STMTNUM> getAllModifies();
 
 	bool isModifiesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
 	vector<VARINDEX> getModifiedProc(STMTNUM);
-	vector<STMTNUM> getModifiesProc(PROCINDEX);
+	vector<STMTNUM> getModifiesProc(PROCINDEX); //NOT IMPLEMENTED YET
 	vector<PROCINDEX> getAllModifiedProc();
 	vector<STMTNUM> getAllModifiesProc();
 
 	bool isUses(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
 	vector<VARINDEX> getUsed(STMTNUM);
-	vector<STMTNUM> getUses(VARINDEX);
+	vector<STMTNUM> getUses(VARINDEX); //NOT IMPLEMENTED YET
 	vector<VARINDEX> getAllUsed();
 	vector<STMTNUM> getAllUses();
 
 	bool isUsesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
 	vector<VARINDEX> getUsedProc(STMTNUM);
-	vector<STMTNUM> getUsesProc(PROCINDEX);
+	vector<STMTNUM> getUsesProc(PROCINDEX); //NOT IMPLEMENTED YET
 	vector<PROCINDEX> getAllUsedProc();
 	vector<STMTNUM> getAllUsesProc();
 

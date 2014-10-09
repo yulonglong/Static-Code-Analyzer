@@ -52,6 +52,13 @@ public:
 	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	
 
+	STMTNUM getFollows(STMTNUM s);
+	STMTNUM getFollowedBy(STMTNUM s);
+
+	vector<STMTNUM> getAllFollows();
+	vector<STMTNUM> getAllFollowedBy();
+	
+
 	//! If the Follows relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
 	bool isFollows(SYNTYPE, STMTNUM);	
 	//! If the FollowedBy relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.

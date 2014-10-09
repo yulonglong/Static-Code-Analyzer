@@ -70,6 +70,143 @@ bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	return false;
 }
 
+
+bool Modifies::isModifies(STMTNUM s, VARINDEX index){
+	//Select w such that Modifies(1, "y")
+	try {
+		if (index == -1) {
+			return false;
+		}
+		vector<VARINDEX> temp = modifiesTable.at(s);
+		vector<VARINDEX>::iterator it = temp.begin();
+		for (; it!=temp.end(); it++){
+			if (index == *it) {
+				return true;
+			}
+		}
+	} catch (...){
+		return false;
+	}
+	return false;
+}
+
+vector<VARINDEX> Modifies::getModified(STMTNUM s){
+	vector<STMTNUM> ans;
+	try{
+		ans = modifiesTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
+vector<VARINDEX> Modifies::getAllModified(){
+	vector<VARINDEX> ans; 
+	vector<VARINDEX> temp;
+	vector<VARINDEX> temp2;
+	try{
+		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
+			try {
+				temp = it->second;
+
+				temp2.reserve(ans.size()+temp.size());
+				temp2.insert(temp2.end(), temp.begin(), temp.end());
+				temp2.insert(temp2.end(), ans.begin(), ans.end());
+				sort( temp2.begin(), temp2.end() );
+				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
+				ans = temp2;
+			} catch (...) {
+				continue;
+			}
+		}
+	}catch(...){
+		ans.clear();
+		return ans;
+	}
+	return ans;
+}
+
+vector<STMTNUM> Modifies::getAllModifies(){
+	vector<STMTNUM> ans;
+	for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+bool Modifies::isModifiesProc(PROCINDEX procIndex, VARINDEX index){
+	try {
+		if (index == -1 || procIndex == -1) {
+			return false;
+		}
+		vector<VARINDEX> temp = modifiesProcTable.at(procIndex);
+		vector<VARINDEX>::iterator it = temp.begin();
+		for (; it!=temp.end(); it++){
+			if (index == *it) {
+				return true;
+			}
+		}
+	} catch (...){
+	}
+	return false;
+}
+
+vector<VARINDEX> Modifies::getModifiedProc(PROCINDEX s){
+	vector<STMTNUM> ans;
+	try{
+		ans = modifiesProcTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
+vector<VARINDEX> Modifies::getAllModifiedProc(){
+	vector<VARINDEX> ans; 
+	vector<VARINDEX> temp;
+	vector<VARINDEX> temp2;
+	try{
+		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesProcTable.begin(); it != modifiesProcTable.end(); it++) {
+			try {
+				temp = it->second;
+
+				temp2.reserve(ans.size()+temp.size());
+				temp2.insert(temp2.end(), temp.begin(), temp.end());
+				temp2.insert(temp2.end(), ans.begin(), ans.end());
+				sort( temp2.begin(), temp2.end() );
+				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
+				ans = temp2;
+			} catch (...) {
+				continue;
+			}
+		}
+	}catch(...){
+		ans.clear();
+		return ans;
+	}
+	return ans;
+}
+
+vector<PROCINDEX> Modifies::getAllModifiesProc(){
+	vector<PROCINDEX> ans; 
+	for (unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = modifiesProcTable.begin(); it != modifiesProcTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+
+
+
+
 vector<STMTNUM> Modifies::getModifies(SYNTYPE type) {	
 	vector<STMTNUM> ans;
 	try {

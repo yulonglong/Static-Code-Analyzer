@@ -49,6 +49,65 @@ bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
 	return false; 
 }
 
+STMTNUM Follows::getFollows(STMTNUM s){
+	try{
+		return followsTable.at(s);
+	} catch (...){
+		return -1;
+	}
+}
+
+STMTNUM Follows::getFollowedBy(STMTNUM s){
+	try{
+		return followedByTable.at(s);
+	} catch (...){
+		return -1;
+	}
+}
+
+vector<STMTNUM> Follows::getAllFollows(){
+	vector<STMTNUM> ans; 
+	try {
+		for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
+			int j = -1; 
+			try {
+				j = followsTable.at(i);
+			} catch (...) {
+				continue;
+			}
+			if (j!=-1)  {
+				ans.push_back(j);
+			}
+		}
+		return ans; 
+	} catch (...) {
+		ans.clear();
+	}
+	return ans;
+}
+
+vector<STMTNUM> Follows::getAllFollowedBy(){
+	vector<STMTNUM> ans; 
+	try {
+		for (vector<STMTNUM>::size_type i = 1; i != followedByTable.size(); i++) {
+			int j = -1; 
+			try {
+				j = followedByTable.at(i);
+			} catch (...) {
+				continue;
+			}
+			if (j!=-1)  {
+				ans.push_back(j);
+			}
+		}
+		return ans; 
+	} catch (...) {
+		ans.clear();
+	}
+	return ans;
+}
+
+
 bool Follows::isFollows(SYNTYPE t, STMTNUM s) {
 	STMTNUM result = getFollows(t, s);
 	bool noResult = (result == -1);

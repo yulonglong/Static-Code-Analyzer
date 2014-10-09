@@ -48,6 +48,14 @@ public:
 	//! Set the Follows relationship between the two statement numbers to be true.
 	void setNext(STMTNUM, STMTNUM);
 
+
+	vector<STMTNUM> getAllNext();
+	vector<STMTNUM> getAllPrevious();
+
+
+
+
+
 	//Temp method. lacie give me the correct one please
 	vector<STMTNUM> getNext(STMTNUM);
 	//Temp method. lacie give me the correct one please

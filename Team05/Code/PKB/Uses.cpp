@@ -66,6 +66,146 @@ bool Uses::isUses(STMTNUM s, VARNAME v){
 	}
 }
 
+
+bool Uses::isUses(STMTNUM s, VARINDEX index){
+	//Select w such that Modifies(1, "y")
+	try {
+		if (index == -1) {
+			return false;
+		}
+		vector<VARINDEX> temp = usesTable.at(s);
+		vector<VARINDEX>::iterator it = temp.begin();
+		for (; it!=temp.end(); it++){
+			if (index == *it) {
+				return true;
+			}
+		}
+	} catch (...){
+		return false;
+	}
+	return false;
+}
+
+vector<VARINDEX> Uses::getUsed(STMTNUM s){
+	vector<STMTNUM> ans;
+	try{
+		ans = usesTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
+vector<VARINDEX> Uses::getAllUsed(){
+	vector<VARINDEX> ans; 
+	vector<VARINDEX> temp;
+	vector<VARINDEX> temp2;
+	try{
+		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
+			try {
+				temp = it->second;
+
+				temp2.reserve(ans.size()+temp.size());
+				temp2.insert(temp2.end(), temp.begin(), temp.end());
+				temp2.insert(temp2.end(), ans.begin(), ans.end());
+				sort( temp2.begin(), temp2.end() );
+				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
+				ans = temp2;
+			} catch (...) {
+				continue;
+			}
+		}
+	}catch(...){
+		ans.clear();
+		return ans;
+	}
+	return ans;
+}
+
+vector<STMTNUM> Uses::getAllUses(){
+	vector<STMTNUM> ans; 
+	for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+bool Uses::isUsesProc(PROCINDEX procIndex, VARINDEX index){
+	try {
+		if (index == -1 || procIndex == -1) {
+			return false;
+		}
+		vector<VARINDEX> temp = usesProcTable.at(procIndex);
+		vector<VARINDEX>::iterator it = temp.begin();
+		for (; it!=temp.end(); it++){
+			if (index == *it) {
+				return true;
+			}
+		}
+	} catch (...){
+	}
+	return false;
+}
+
+vector<VARINDEX> Uses::getUsedProc(PROCINDEX s){
+	vector<STMTNUM> ans;
+	try{
+		ans = usesProcTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
+vector<VARINDEX> Uses::getAllUsedProc(){
+	vector<VARINDEX> ans; 
+	vector<VARINDEX> temp;
+	vector<VARINDEX> temp2;
+	try{
+		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesProcTable.begin(); it != usesProcTable.end(); it++) {
+			try {
+				temp = it->second;
+
+				temp2.reserve(ans.size()+temp.size());
+				temp2.insert(temp2.end(), temp.begin(), temp.end());
+				temp2.insert(temp2.end(), ans.begin(), ans.end());
+				sort( temp2.begin(), temp2.end() );
+				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
+				ans = temp2;
+			} catch (...) {
+				continue;
+			}
+		}
+	}catch(...){
+		ans.clear();
+		return ans;
+	}
+	return ans;
+}
+
+vector<PROCINDEX> Uses::getAllUsesProc(){
+	vector<PROCINDEX> ans; 
+	for (unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = usesProcTable.begin(); it != usesProcTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+
+
+
+
+
+
+
 vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	Return an empty vector if not found.
 	vector<VARINDEX> ans;
 	try{

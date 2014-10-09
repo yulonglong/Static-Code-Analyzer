@@ -72,6 +72,23 @@ bool Calls::isCalls(PROCNAME p1, PROCNAME p2){
 	}
 }
 
+bool Calls::isCalls2(PROCINDEX index1, PROCINDEX index2){
+	try{
+		if(index1==-1 || index2==-1)
+			return false;
+
+		vector<CALLSPAIR> temp = callsTable.at(index1);
+		vector<CALLSPAIR>::iterator it = temp.begin();
+		for(;it!=temp.end();it++){
+			if(index2==get<0>(*it))
+				return true;
+		}
+		return false;
+	}catch(...){
+		return false;
+	}
+}
+
 vector<PROCINDEX> Calls::getCalls(){
 	vector<PROCINDEX> ans;
 	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it = callsTable.begin();it!=callsTable.end();it++)
@@ -107,9 +124,39 @@ vector<PROCINDEX> Calls::getCalls(PROCNAME p){
 	return ans;
 }
 
+vector<PROCINDEX> Calls::getCalls2(PROCINDEX index){
+	vector<PROCINDEX> ans;
+	try{
+		for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1 = callsTable.begin();it1!=callsTable.end();it1++){
+			for(vector<CALLSPAIR>::iterator it2 = it1->second.begin();it2!=it1->second.end();it2++){
+				if(it2->first == index){
+					ans.push_back(it1->first);
+					break;
+				}
+			}
+		}
+	}catch(...){
+	}
+	return ans;
+}
+
 vector<PROCINDEX> Calls::getCalled(PROCNAME p){
 	vector<PROCINDEX> ans;
 	PROCINDEX index = procTable->getProcIndex(p);
+	try{
+		vector<CALLSPAIR> temp;
+		temp = callsTable.at(index);
+		vector<CALLSPAIR>::iterator it = temp.begin();
+		for(;it!=temp.end();it++)
+			ans.push_back(it->first);
+	}
+	catch(...){
+	}
+	return ans;
+}
+
+vector<PROCINDEX> Calls::getCalled2(PROCINDEX index){
+	vector<PROCINDEX> ans;
 	try{
 		vector<CALLSPAIR> temp;
 		temp = callsTable.at(index);

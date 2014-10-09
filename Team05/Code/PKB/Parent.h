@@ -52,6 +52,11 @@ public:
 	//! If the Parent relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isParent(STMTNUM, STMTNUM);	
 	
+	vector<STMTNUM> getAllChildren();
+	vector<STMTNUM> getAllParent();
+	vector<STMTNUM> getChildren(STMTNUM);
+	STMTNUM getParent(STMTNUM);
+
 	//! If the Parent relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
 	bool isParent(SYNTYPE, STMTNUM); // Select BOOLEAN such that Parent(3,a)
 	//! If the Child relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
@@ -74,8 +79,8 @@ public:
 	
 	/// @cond
 	//For parentStar
-	STMTNUM getParent(STMTNUM); 
-	vector<STMTNUM> getChildren(STMTNUM); 
+//	STMTNUM getParent(STMTNUM); 
+	//vector<STMTNUM> getChildren(STMTNUM); 
 
 	
 	void printParentTable();

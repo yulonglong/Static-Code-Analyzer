@@ -57,6 +57,52 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
+vector<STMTNUM> Parent::getAllChildren(){
+	vector<STMTNUM> ans; 
+	STMTNUM temp;
+	for (unordered_map<STMTNUM, STMTNUM>::iterator it = childrenTable.begin(); it != childrenTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+vector<STMTNUM> Parent::getAllParent(){
+	vector<STMTNUM> ans; 
+	STMTNUM temp;
+	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
+		try {
+			ans.push_back(it->first);
+		} catch (...) {
+			continue;
+		}
+	}
+	return ans;
+}
+
+vector<STMTNUM> Parent::getChildren(STMTNUM s){
+	vector<STMTNUM> ans;
+	try{
+		ans = parentTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
+STMTNUM Parent::getParent(STMTNUM s){
+	STMTNUM ans;
+	try{
+		ans = childrenTable.at(s);
+		return ans;
+	} catch (...){
+		return ans;
+	}
+}
+
 bool Parent::isParent(SYNTYPE t1, SYNTYPE t2) {
 	vector<STMTNUM> list; 
 	vector<STMTNUM> temp;
@@ -242,24 +288,24 @@ vector<STMTNUM> Parent::getChildren(SYNTYPE t1, STMTNUM s){
 
 
 //For parentStar
-STMTNUM Parent::getParent(STMTNUM s){
-	try{
-		return childrenTable.at(s);
-	} catch (...){
-		return -1;
-	}
-
-}
-
-vector<STMTNUM> Parent::getChildren(STMTNUM s){
-	vector<STMTNUM> ans;
-	try{
-		ans = parentTable.at(s);
-		return ans;
-	} catch (...){
-		return ans;
-	}
-}
+//STMTNUM Parent::getParent(STMTNUM s){
+//	try{
+//		return childrenTable.at(s);
+//	} catch (...){
+//		return -1;
+//	}
+//
+//}
+//
+//vector<STMTNUM> Parent::getChildren(STMTNUM s){
+//	vector<STMTNUM> ans;
+//	try{
+//		ans = parentTable.at(s);
+//		return ans;
+//	} catch (...){
+//		return ans;
+//	}
+//}
 
 void Parent::printParentTable() {
 	cout<< "Parent Table" << endl;

@@ -116,4 +116,27 @@ void Next::printNextTableForTesting() {
 	}
 }
 
+vector<STMTNUM> Next::getAllNext(){
+	vector<STMTNUM> ans;
+	try{
+		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
+			ans.push_back(it->first);
+		}
+	} catch(...) {
+		ans.clear();
+	}
+	return ans;
+}
+vector<STMTNUM> Next::getAllPrevious(){
+	vector<STMTNUM> ans;
+	try{
+		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = previousTable.begin(); it != previousTable.end(); it++) {
+			ans.push_back(it->first);
+		}
+	} catch(...) {
+		ans.clear();
+	}
+	return ans;
+}
+
 

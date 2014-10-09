@@ -50,10 +50,25 @@ public:
 	//! If the Uses relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
 
+	bool isUses(STMTNUM, VARINDEX);
+	vector<VARINDEX> getUsed(STMTNUM);
+	vector<STMTNUM> getUses(VARINDEX);
+	vector<VARINDEX> getAllUsed();
+	vector<STMTNUM> getAllUses();
+
+	bool isUsesProc(PROCINDEX, VARINDEX);
+	vector<VARINDEX> getUsedProc(PROCINDEX);
+	vector<PROCINDEX> getUsesProc(VARINDEX);
+	vector<VARINDEX> getAllUsedProc();
+	vector<PROCINDEX> getAllUsesProc();
+
+
+
+
 	//! Return all statement numbers such that each statement number has the given SynType and uses any variable. Return an empty vector if not found.
 	vector<STMTNUM> getUses(SYNTYPE);//Select a such that Uses(a, v); 
 	//! Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found.
-	vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes.
+	//vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes.
 	//! Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found.
 	vector<STMTNUM> getUses(SYNTYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
 	
@@ -62,7 +77,7 @@ public:
 	//! Set the Uses relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
 	void setUsesProc(PROCINDEX, vector<VARINDEX>); 
 	//! Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found.
-	vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
+	//vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
 	
 	//! Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found.
 	vector<PROCINDEX> getUsesProcVar(VARNAME);
