@@ -366,15 +366,23 @@ bool PKB::isNext(STMTNUM s1, STMTNUM s2){
 	return next->isNext(s1,s2);
 }
 
-	vector<STMTNUM> PKB::getNext(STMTNUM s){
+vector<STMTNUM> PKB::getNext(STMTNUM s){
 	return next->getNext(s);
 }
-	vector<STMTNUM> PKB::getPrevious(STMTNUM s){
+vector<STMTNUM> PKB::getPrevious(STMTNUM s){
 	return next->getPrevious(s);
 }
-	vector<STMTNUM> PKB::getAllNext(){
+vector<STMTNUM> PKB::getAllNext(){
 	return next->getAllNext();
 }
-	vector<STMTNUM> PKB::getAllPrevious(){
+vector<STMTNUM> PKB::getAllPrevious(){
 	return next->getAllPrevious();
+}
+
+void PKB::setToNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
+	next->setNextPair(s,p);
+}
+
+vector<pair<STMTNUM,STMTNUM>> PKB::getNextPair(STMTNUM s){
+	return next->getNextPair(s);
 }

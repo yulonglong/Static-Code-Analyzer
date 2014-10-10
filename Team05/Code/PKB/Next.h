@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <pair>
 #include <iterator>
 #include "TypeTable.h"
 
@@ -34,6 +35,7 @@ class Next {
 private:
 	unordered_map<STMTNUM, vector<STMTNUM>> nextTable;
 	unordered_map<STMTNUM, vector<STMTNUM>> previousTable;
+	unordered_map<STMTNUM, vector<pair<STMTNUM,STMTNUM>>> nextPairTable;
 	static bool instanceFlag;
 	static Next *next;
 	TypeTable *typeTable;
@@ -52,7 +54,8 @@ public:
 	vector<STMTNUM> getAllNext();
 	vector<STMTNUM> getAllPrevious();
 
-
+	void setNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
+	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
 
 

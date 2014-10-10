@@ -188,6 +188,10 @@ public:
 	vector<STMTNUM> getAllNext();
 	vector<STMTNUM> getAllPrevious();
 
+	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table
+	void setToNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
+	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
+
 	/// @cond
 	VarTable* getVarTable();
 	ProcTable* getProcTable();

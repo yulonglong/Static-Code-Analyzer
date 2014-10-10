@@ -77,6 +77,31 @@ vector<STMTNUM> Next::getPrevious(STMTNUM s){
 	}
 }
 
+void Next::setNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
+	try{
+		vector<pair<STMTNUM,STMTNUM>> temp (1,p);
+
+		try{
+			vector<pair<STMTNUM,STMTNUM>> temp1 = nextPairTable.at(s);
+			temp1.push_back(p);
+			nextPairTable[s] = temp1;
+		} catch(...){
+			nextPairTable[s] = temp;
+		}
+	}catch(...){
+	}
+}
+
+vector<pair<STMTNUM,STMTNUM>> Next::getNextPair(STMTNUM s){
+	vector<pair<STMTNUM,STMTNUM>> ans;
+	try{
+		ans = nextPairTable.at(s);
+		return ans;
+	} catch(...){
+		return ans;
+	}
+}
+
 bool Next::isNext(STMTNUM s1, STMTNUM s2){
 	try{
 		vector<STMTNUM> temp = nextTable.at(s1);
