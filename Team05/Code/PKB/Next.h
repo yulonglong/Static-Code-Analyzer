@@ -12,7 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
-#include <pair>
+#include <utility>
 #include <iterator>
 #include "TypeTable.h"
 
