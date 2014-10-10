@@ -220,23 +220,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    vector&lt;STMTNUM&gt; getAllNext();</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    vector&lt;STMTNUM&gt; getAllPrevious();</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a>* getVarTable();</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a>* getProcTable();</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a>* getTypeTable();</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a>* getConstTable();</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="class_parent.html">Parent</a>* getParent();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="class_follows.html">Follows</a>* getFollows();</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>* getModifies();</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <a class="code" href="class_uses.html">Uses</a>* getUses();</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <a class="code" href="class_calls.html">Calls</a>* getCalls();</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <a class="code" href="class_next.html">Next</a>* getNext();</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <a class="code" href="class_node.html">Node</a>* getASTRoot();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* getCFGRoot();</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;};</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordtype">void</span> setToNextPair(STMTNUM, pair&lt;STMTNUM,STMTNUM&gt;);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    vector&lt;pair&lt;STMTNUM,STMTNUM&gt;&gt; getNextPair(STMTNUM);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a>* getVarTable();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a>* getProcTable();</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a>* getTypeTable();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <a class="code" href="class_const_table.html">ConstTable</a>* getConstTable();</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <a class="code" href="class_parent.html">Parent</a>* getParent();</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <a class="code" href="class_follows.html">Follows</a>* getFollows();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <a class="code" href="class_modifies.html">Modifies</a>* getModifies();</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <a class="code" href="class_uses.html">Uses</a>* getUses();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <a class="code" href="class_calls.html">Calls</a>* getCalls();</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <a class="code" href="class_next.html">Next</a>* getNext();</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <a class="code" href="class_node.html">Node</a>* getASTRoot();</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* getCFGRoot();</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;};</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_p_k_b_html_a4f0a4cc3efa5a4677e05bec1440a3b0e"><div class="ttname"><a href="class_p_k_b.html#a4f0a4cc3efa5a4677e05bec1440a3b0e">PKB::getVarIndex</a></div><div class="ttdeci">VARINDEX getVarIndex(VARNAME)</div><div class="ttdoc">Return the variable index given the variable name. If it is not found, return an -1. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:172</div></div>
 <div class="ttc" id="class_p_k_b_html_afb3f63bac0f80953febaa155b5b77cce"><div class="ttname"><a href="class_p_k_b.html#afb3f63bac0f80953febaa155b5b77cce">PKB::getSynType</a></div><div class="ttdeci">TypeTable::SynType getSynType(STMTNUM)</div><div class="ttdoc">Return the SynType given the statement number. If the statement number, return INVALID. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:212</div></div>
 <div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdoc">A Calls class to store the calls relationship. </div><div class="ttdef"><b>Definition:</b> Calls.h:37</div></div>
@@ -246,7 +250,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="class_p_k_b_html_a0c064d6039bc9ee9b8282c4e0319cf4f"><div class="ttname"><a href="class_p_k_b.html#a0c064d6039bc9ee9b8282c4e0319cf4f">PKB::getVarName</a></div><div class="ttdeci">VARNAME getVarName(VARINDEX)</div><div class="ttdoc">Return the variable name given the variable index. If it is not found, return an empty string...</div><div class="ttdef"><b>Definition:</b> PKB.cpp:168</div></div>
 <div class="ttc" id="class_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">A Node Structure for AST.Overview: Node is the node structure of AST nodes. </div><div class="ttdef"><b>Definition:</b> Node.h:29</div></div>
 <div class="ttc" id="class_modifies_html"><div class="ttname"><a href="class_modifies.html">Modifies</a></div><div class="ttdoc">A Modifies class to store the Modifies relationship. </div><div class="ttdef"><b>Definition:</b> Modifies.h:36</div></div>
-<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdoc">A Next class to store the Next relationship. </div><div class="ttdef"><b>Definition:</b> Next.h:33</div></div>
+<div class="ttc" id="class_next_html"><div class="ttname"><a href="class_next.html">Next</a></div><div class="ttdoc">A Next class to store the Next relationship. </div><div class="ttdef"><b>Definition:</b> Next.h:34</div></div>
 <div class="ttc" id="class_p_k_b_html_a051317fa49eeadd166d4fe2046e13981"><div class="ttname"><a href="class_p_k_b.html#a051317fa49eeadd166d4fe2046e13981">PKB::getStmtRange</a></div><div class="ttdeci">STMTNUM getStmtRange()</div><div class="ttdoc">Return the last statement number of the program. Return -1 if there is no source code. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:224</div></div>
 <div class="ttc" id="class_p_k_b_html_aea0c003d490523745e07849acce0b447"><div class="ttname"><a href="class_p_k_b.html#aea0c003d490523745e07849acce0b447">PKB::isModifies</a></div><div class="ttdeci">bool isModifies(STMTNUM, VARINDEX)</div><div class="ttdoc">If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:290</div></div>
 <div class="ttc" id="class_p_k_b_html_ab66b49e40d4d185680e2dbade5eabc4c"><div class="ttname"><a href="class_p_k_b.html#ab66b49e40d4d185680e2dbade5eabc4c">PKB::setASTRoot</a></div><div class="ttdeci">void setASTRoot(Node *newASTRoot)</div><div class="ttdoc">Set the new AST Root. </div><div class="ttdef"><b>Definition:</b> PKB.cpp:152</div></div>
@@ -281,7 +285,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 10 2014 04:05:49 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Oct 11 2014 02:00:19 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
