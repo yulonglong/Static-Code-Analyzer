@@ -191,98 +191,6 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	return answers;
 }
 
-void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
-	Calls *call = pkb->getCalls();
-	ProcTable *proc = pkb->getProcTable();
-	string tk1 = r.getToken1();
-	string tk2 = r.getToken2();
-	vector<int> ans;
-	vector<int> called;
-	vector<Pair> callAns;
-
-	//Calls(p, q) OR Calls(p, _) OR Calls(_,q)
-	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (isalpha(tk1[0])&&tk2=="_") || (tk1=="_"&&isalpha(tk2[0]))){
-		ans = proc->getAllProcIndexes();
-		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-			string procName = proc->getProcName(*it);
-			called = call->getCalled(procName);
-
-			for(vector<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
-				callAns.push_back(Pair (*it, *it2));
-				cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
-			}
-		}
-
-	}
-
-	//Select p Calls(p, "Second") Calls(_, "Second")
-	else if(isalpha(tk1[0]) || (tk1=="_" && tk2!="_")){
-		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
-		if(tk1=="_"){
-			if(!ans.empty()){
-				callAns.push_back(Pair(-1,-1));
-			}else{
-				callAns.push_back(Pair(-2,-2));
-			}
-		}
-		else{
-			int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
-
-			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-				callAns.push_back(Pair (*it, procIndex));
-			}
-		}
-	}
-
-	//Select q Calls("First", q) Calls("First", _)
-	else if(isalpha(tk2[0]) || (tk1!="_" && tk2=="_")){
-		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
-
-		if(tk2=="_"){
-			if(!ans.empty()){
-				callAns.push_back(Pair(-1,-1));
-			}else{
-				callAns.push_back(Pair(-2,-2));
-			}
-		}
-		else{
-			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
-
-			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-				callAns.push_back(Pair (procIndex, *it));
-			}
-		}
-	}
-
-	//Calls(_,_)
-	else if(tk1=="_" && tk2=="_"){
-		ans = call->getCalls();
-		if(!ans.empty()){
-			callAns.push_back(Pair (-1, -1));
-		}else{
-			callAns.push_back(Pair (-2, -2));
-		}
-	}
-
-	//Calls("Third", "Fourth")
-	else {
-		cout<<"supposed"<<endl;
-		call->setCalls("\"first\"", "\"second\"", 4);
-		cout<<tk1.substr(1, tk1.length()-2)<<tk2.substr(1,tk2.length()-2)<<endl;
-		if(call->isCalls(tk1.substr(1, tk1.length()-2), tk2.substr(1,tk2.length()-2))){
-			callAns.push_back(Pair (-1, -1));
-		}else{
-			callAns.push_back(Pair (-2, -2));
-		}
-	}
-
-	intersectPairs(tk1,tk2,&callAns, relIndex);
-
-	relAns.insert(make_pair(relIndex, callAns));
-
-
-}
-
 //Returns true if token already exists in QueryEvaluator::linkages
 bool QueryEvaluator::isExistInLinkages(string token){
 	if(QueryEvaluator::linkages.find(token)!=QueryEvaluator::linkages.end()){
@@ -325,6 +233,115 @@ set<int> QueryEvaluator::retrieveTokenEvaluatedAnswers(string tk){
 	return setAns;
 }
 
+void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, int relIndex){
+		//If both a and b exist in QueryEvaluator::linkages
+	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+		cout<<"Both tk1 and tk2 Exists tk1 = "<<tk1<<" tk2 = " <<tk2<<endl;
+		removePairsFromRelAns(ans, tk1, 1);
+		removePairsFromRelAns(ans, tk2, 2);
+		removePairs(*ans, tk1, 1);
+		removePairs(*ans, tk2, 2);
+	}
+
+	//If only a exist
+	else if(isExistInLinkages(tk1)){
+		cout<<"IntersectPairs tk1 Exists tk1 = "<<tk1<<endl;
+		removePairsFromRelAns(ans, tk1, 1);
+		cout<<"hihihihihi"<<endl;
+		removePairs(*ans, tk1, 1);
+		cout<<"nonononono"<<endl;
+		//insertLinks(tk1, relIndex);
+	}
+
+	//If only b exist
+	else if(isExistInLinkages(tk2)){
+		cout<<"IntersectPairs tk2 Exists tk2 = "<<tk2<<endl;
+		removePairsFromRelAns(ans, tk2, 2);
+		removePairs(*ans, tk2, 2);
+	}
+
+	else {
+		cout<<"In intersect Pairs: both do not exist"<<endl;
+	}
+
+	
+	if(isalpha(tk1[0])){
+		cout<<"Insert links for tk1 =" <<tk1<<endl;
+		insertLinks(tk1, relIndex);
+	}
+	
+	if(isalpha(tk2[0])){
+		cout<<"Insert links for tk2 = "<<tk2<<endl;
+		insertLinks(tk2, relIndex);
+	}
+}
+
+void QueryEvaluator::insertLinks(string tk, int relIndex){
+	//Add the relationship into QueryEvaluator::linkages
+	cout<<"IN INSERT LINKS INSERTING TOKEN = "<<tk<<endl;
+	//if tk exists
+	if(linkages.find(tk) != linkages.end()){
+		cout<<tk<<" Found in Linkages"<<endl;
+		vector<int> *pt = &QueryEvaluator::linkages.find(tk)->second;
+		pt->push_back(relIndex);
+	}
+	else {
+		cout<<tk<<" Not Found in Linkages and relIndex = "<<relIndex<<endl;
+		vector<int> relIndexes;
+		relIndexes.push_back(relIndex);
+		linkages.insert(make_pair(tk, relIndexes));
+	}
+}
+
+void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string tk, int pairIndex){
+	cout<<"removePairsfrom RELANS"<<endl;
+	//Retrieve the set of int of the token that was evaluated
+	set<int> s = retrieveTokenEvaluatedAnswers(tk);
+	//Delete it from the ans pairs made
+	/*
+	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
+		cout<<it->ans2<<endl;
+	}*/
+
+	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end();){
+		cout<<"in for loop"<<endl;
+		if(pairIndex==1){
+			cout<<"pair index is 1"<< it->ans1<<endl;
+			//if ans from relationsAns is not found in the set, remove it
+			if(s.find(it->ans1)==s.end()){
+				it = relationsAns->erase(it);
+			}
+			else{
+				++it;
+			}
+		}
+		else {
+			cout<<"in else"<<endl;
+			if(s.find(it->ans2)==s.end()){
+				it = relationsAns->erase(it);
+			}
+			else{
+				++it;
+			}
+		}
+	}
+
+	cout<<"end of RemovePairsFromRelAns"<<endl;
+}
+
+string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
+	switch(t){
+	case TypeTable::ASSIGN:
+		return "assign";
+	case TypeTable::WHILE:
+		return "while";
+	case TypeTable::PROGLINE:
+		return "progline";
+	case TypeTable::CONSTANT:
+		return "constant";
+	}
+	return "null";
+}
 
 void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 	int pairIndex;
@@ -880,6 +897,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	intersectPairs(tk1,tk2,&nextStarAnsVec, relIndex);
 	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextStarAnsVec));
 }
+
 void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * ans, TypeTable::SynType type){
 	Next * n = pkb->getNext();
 	TypeTable *t = pkb->getTypeTable();
@@ -925,42 +943,97 @@ void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<P
 		recursiveNextReverse(rootIndex, *it, ans, type);
 	}
 }
-void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> called = c->getCalled(p->getProcName(currentIndex));
 
-	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
-		ans->push_back(Pair (rootProcIndex, *i));
-		recursiveCall(rootProcIndex, *i, ans);
-	}
-}
+void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
+	Calls *call = pkb->getCalls();
+	ProcTable *proc = pkb->getProcTable();
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	vector<int> ans;
+	vector<int> called;
+	vector<Pair> callAns;
 
-void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+	//Calls(p, q) OR Calls(p, _) OR Calls(_,q)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (isalpha(tk1[0])&&tk2=="_") || (tk1=="_"&&isalpha(tk2[0]))){
+		ans = proc->getAllProcIndexes();
+		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+			string procName = proc->getProcName(*it);
+			called = call->getCalled(procName);
 
-	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
-		cout<<"Iterating throught called vector. *i = "<<*i <<endl;
-		if(*i==targetIndex){
-			cout<<"recursiveCallBoolean returns TRUE"<<endl;
-			ans->push_back(Pair (-1,-1));
-			break;
+			for(vector<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
+				callAns.push_back(Pair (*it, *it2));
+				cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
+			}
 		}
-		recursiveCallBoolean(rootProcIndex, *i, targetIndex, ans);
-	}
-}
 
-void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> calls = c->getCalls(p->getProcName(currentIndex));
-
-	for(vector<int>::iterator i=calls.begin(); i!=calls.end(); i++){
-		ans->push_back(Pair (*i, leafIndex));
-		recursiveInverseCall(leafIndex, *i, ans);
 	}
+
+	//Select p Calls(p, "Second") Calls(_, "Second")
+	else if(isalpha(tk1[0]) || (tk1=="_" && tk2!="_")){
+		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
+		if(tk1=="_"){
+			if(!ans.empty()){
+				callAns.push_back(Pair(-1,-1));
+			}else{
+				callAns.push_back(Pair(-2,-2));
+			}
+		}
+		else{
+			int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
+
+			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+				callAns.push_back(Pair (*it, procIndex));
+			}
+		}
+	}
+
+	//Select q Calls("First", q) Calls("First", _)
+	else if(isalpha(tk2[0]) || (tk1!="_" && tk2=="_")){
+		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
+
+		if(tk2=="_"){
+			if(!ans.empty()){
+				callAns.push_back(Pair(-1,-1));
+			}else{
+				callAns.push_back(Pair(-2,-2));
+			}
+		}
+		else{
+			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
+
+			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+				callAns.push_back(Pair (procIndex, *it));
+			}
+		}
+	}
+
+	//Calls(_,_)
+	else if(tk1=="_" && tk2=="_"){
+		ans = call->getCalls();
+		if(!ans.empty()){
+			callAns.push_back(Pair (-1, -1));
+		}else{
+			callAns.push_back(Pair (-2, -2));
+		}
+	}
+
+	//Calls("Third", "Fourth")
+	else {
+		cout<<"supposed"<<endl;
+		call->setCalls("\"first\"", "\"second\"", 4);
+		cout<<tk1.substr(1, tk1.length()-2)<<tk2.substr(1,tk2.length()-2)<<endl;
+		if(call->isCalls(tk1.substr(1, tk1.length()-2), tk2.substr(1,tk2.length()-2))){
+			callAns.push_back(Pair (-1, -1));
+		}else{
+			callAns.push_back(Pair (-2, -2));
+		}
+	}
+
+	intersectPairs(tk1,tk2,&callAns, relIndex);
+
+	relAns.insert(make_pair(relIndex, callAns));
+
+
 }
 
 void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
@@ -1056,6 +1129,44 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, callsStarAns));
 
+}
+
+void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+		ans->push_back(Pair (rootProcIndex, *i));
+		recursiveCall(rootProcIndex, *i, ans);
+	}
+}
+
+void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, vector<Pair> * ans){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+		cout<<"Iterating throught called vector. *i = "<<*i <<endl;
+		if(*i==targetIndex){
+			cout<<"recursiveCallBoolean returns TRUE"<<endl;
+			ans->push_back(Pair (-1,-1));
+			break;
+		}
+		recursiveCallBoolean(rootProcIndex, *i, targetIndex, ans);
+	}
+}
+
+void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vector<Pair> * ans){
+	Calls *c = pkb->getCalls();
+	ProcTable *p = pkb->getProcTable();
+	vector<int> calls = c->getCalls(p->getProcName(currentIndex));
+
+	for(vector<int>::iterator i=calls.begin(); i!=calls.end(); i++){
+		ans->push_back(Pair (*i, leafIndex));
+		recursiveInverseCall(leafIndex, *i, ans);
+	}
 }
 
 void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -1308,22 +1419,6 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	QueryEvaluator::relAns.insert(make_pair(relIndex, followsAns));
 }
 
-string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
-	switch(t){
-	case TypeTable::ASSIGN:
-		return "assign";
-	case TypeTable::WHILE:
-		return "while";
-	case TypeTable::PROGLINE:
-		return "progline";
-	case TypeTable::CONSTANT:
-		return "constant";
-	}
-	return "null";
-}
-
-
-
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -1471,59 +1566,6 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	
 }
 
-void QueryEvaluator::insertLinks(string tk, int relIndex){
-	//Add the relationship into QueryEvaluator::linkages
-	cout<<"IN INSERT LINKS INSERTING TOKEN = "<<tk<<endl;
-	//if tk exists
-	if(linkages.find(tk) != linkages.end()){
-		cout<<tk<<" Found in Linkages"<<endl;
-		vector<int> *pt = &QueryEvaluator::linkages.find(tk)->second;
-		pt->push_back(relIndex);
-	}
-	else {
-		cout<<tk<<" Not Found in Linkages and relIndex = "<<relIndex<<endl;
-		vector<int> relIndexes;
-		relIndexes.push_back(relIndex);
-		linkages.insert(make_pair(tk, relIndexes));
-	}
-}
-
-void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string tk, int pairIndex){
-	cout<<"removePairsfrom RELANS"<<endl;
-	//Retrieve the set of int of the token that was evaluated
-	set<int> s = retrieveTokenEvaluatedAnswers(tk);
-	//Delete it from the ans pairs made
-	/*
-	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end(); it++){
-		cout<<it->ans2<<endl;
-	}*/
-
-	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end();){
-		cout<<"in for loop"<<endl;
-		if(pairIndex==1){
-			cout<<"pair index is 1"<< it->ans1<<endl;
-			//if ans from relationsAns is not found in the set, remove it
-			if(s.find(it->ans1)==s.end()){
-				it = relationsAns->erase(it);
-			}
-			else{
-				++it;
-			}
-		}
-		else {
-			cout<<"in else"<<endl;
-			if(s.find(it->ans2)==s.end()){
-				it = relationsAns->erase(it);
-			}
-			else{
-				++it;
-			}
-		}
-	}
-
-	cout<<"end of RemovePairsFromRelAns"<<endl;
-}
-
 void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -1630,14 +1672,6 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	QueryEvaluator::relAns.insert(make_pair(relIndex, parentAns));
 }
 
-/*
-void QueryEvaluator::recursiveParent(int rootIndex, int currentIndex){
-	vector<int> 
-
-}*/
-
-
-//PARENTSTAR
 void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	cout<<"Initialzing all Parent* variables"<<endl;
 	string tk1=r.getToken1();
@@ -2053,49 +2087,6 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	QueryEvaluator::relAns.insert(make_pair(relIndex, modAns));
 }
 
-void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, int relIndex){
-		//If both a and b exist in QueryEvaluator::linkages
-	if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
-		cout<<"Both tk1 and tk2 Exists tk1 = "<<tk1<<" tk2 = " <<tk2<<endl;
-		removePairsFromRelAns(ans, tk1, 1);
-		removePairsFromRelAns(ans, tk2, 2);
-		removePairs(*ans, tk1, 1);
-		removePairs(*ans, tk2, 2);
-	}
-
-	//If only a exist
-	else if(isExistInLinkages(tk1)){
-		cout<<"IntersectPairs tk1 Exists tk1 = "<<tk1<<endl;
-		removePairsFromRelAns(ans, tk1, 1);
-		cout<<"hihihihihi"<<endl;
-		removePairs(*ans, tk1, 1);
-		cout<<"nonononono"<<endl;
-		//insertLinks(tk1, relIndex);
-	}
-
-	//If only b exist
-	else if(isExistInLinkages(tk2)){
-		cout<<"IntersectPairs tk2 Exists tk2 = "<<tk2<<endl;
-		removePairsFromRelAns(ans, tk2, 2);
-		removePairs(*ans, tk2, 2);
-	}
-
-	else {
-		cout<<"In intersect Pairs: both do not exist"<<endl;
-	}
-
-	
-	if(isalpha(tk1[0])){
-		cout<<"Insert links for tk1 =" <<tk1<<endl;
-		insertLinks(tk1, relIndex);
-	}
-	
-	if(isalpha(tk2[0])){
-		cout<<"Insert links for tk2 = "<<tk2<<endl;
-		insertLinks(tk2, relIndex);
-	}
-}
-
 void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -2282,6 +2273,12 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	}
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, patternAns));
+}
+
+void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+}
+
+void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 }
 
 vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs) {
@@ -2560,4 +2557,6 @@ bool QueryEvaluator::isAllDigit(string input){
 	}
 	return true;
 }
+
+
 	
