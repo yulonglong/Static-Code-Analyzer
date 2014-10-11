@@ -25,50 +25,56 @@
 
 class QueryEvaluator{ 
 private:
+	//! Evaluate all Follows Relationships
+	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Follows* Relationships
+	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Parent Relationships
+	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Parent* Relationships
+	void evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Uses Relationships
+	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Modifies Relationships
+	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
 	//! Evaluate all Calls Relationships
 	void evaluateCalls(Relationship, int);
 
 	//! Evaluate all Calls* Relationships
 	void evaluateCallsStar(Relationship,int);
-
-	//! Evaluate all Uses Relationships
-	void evaluateUses(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-
-	//! Evaluate all Follows Relationships
-	void evaluateFollows(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-
-	//! Evaluate all Parent Relationships
-	void evaluateParent(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-
-	//! Evaluate all Modifies Relationships
-	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-
-	//! Evaluate all Next* Relationships
-	void evaluateNextStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
-
-	//! A Recursive Method used in Next* to aid in finding the respective answers
-	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType);
-
-	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType);
-	void recursiveNextTarget(int, int, int, std::set<Pair> *);
-
-	//! Evaluate Follows* Relationships
-	void evaluateFollowsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-	
-	void evaluateParentStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
-	
-
-	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
-
-	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	//! A Recursive Method used in Call* to aid in finding the respective answers
 	void recursiveCall(int, int, std::vector<Pair> *);
 	void recursiveInverseCall(int, int, std::vector<Pair> *);
 	void recursiveCallBoolean(int, int, int, std::vector<Pair> *);
 
-	void intersectPairs(std::string, std::string, std::vector<Pair> *, int);
+	//! Evaluate all Next Relationships
+	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+
+	//! Evaluate all Next* Relationships
+	void evaluateNextStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	//! A Recursive Method used in Next* to aid in finding the respective answers
+	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType);
+	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType);
+	void recursiveNextTarget(int, int, int, std::set<Pair> *);
+
+	//! Evaluate all Affects Relationships
+	void evaluateAffects(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
+	//! Evaluate all Affects* Relationships
+	void evaluateAffectsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);	
+	
+	//! Evaluate all With Relationships
+	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 
 	//! Evaluate Pattern Relationships
 	void evaluatePattern(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
+	//! Helper functions used to evaluate Pattern Relationships
 	std::vector<Pair> findAssign(Node, string, string);
 	bool matchPattern(Node, string, string);
 	bool matchTree(Node, Node);
@@ -77,19 +83,20 @@ private:
 	static void tokenizeTokens(string word, vector<string> &storage);
 	static bool isAllDigit(string input);
 
-	//std::vector<int> evaluateCallsStar(Relationship);
+	//! Final answer intersection function
+	void intersectPairs(std::string, std::string, std::vector<Pair> *, int);
+
+	//! General helper functions
 	std::vector<Relationship> orderRelationship(vector<Relationship>);
 	std::vector<int> * findAnswerVectorFromToken(std::string);
 	//std::vector<std::string> findLinks(std::string);
-
 	std::set<int> retrieveTokenEvaluatedAnswers(std::string );
 	void removePairs(std::vector<Pair>, std::string, int);
 	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
 	void insertLinks(std::string, int);
-
 	bool isExistInLinkages(std::string);
-
 	std::string convertEnumToString(TypeTable::SynType);
+
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;
 	static std::unordered_map<int, vector<std::string>> relParameters;
@@ -98,13 +105,10 @@ private:
 public:
 	//! Constructor for QueryEvaluator. Takes in the singleton PKB as input parameter
 	QueryEvaluator(PKB*);
-	~QueryEvaluator();
-	
+	~QueryEvaluator();	
 
 	//! To evaluate Queries, the Query Processor will call evaluateQuery and pass in the Query object returned by the Query Parser. This method will then return an unordered_map that has every selected syn and their corresponding vector of answers
 	std::unordered_map<std::string, std::vector<int>> evaluateQuery(Query);
-
-
 };
 
 #endif

@@ -125,7 +125,15 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 		case Relationship::PATTERN:	
 			cout<<"\n EVALUATING PATTERN"<<endl;
-			evaluatePattern(*it, m, relIndex); break; //review
+			evaluatePattern(*it, m, relIndex); break;
+
+		case Relationship::AFFECTS:
+			cout<<"\n EVALUATING AFFECTS"<<endl;
+			evaluateAffects(*it, m, relIndex); break;
+
+		case Relationship::AFFECTSSTAR:
+			cout<<"\n EVALUATING AFFECTSSTAR"<<endl;
+			evaluateAffectsStar(*it, m , relIndex); break;
 		}
 
 		vector<string> parametersVec;
