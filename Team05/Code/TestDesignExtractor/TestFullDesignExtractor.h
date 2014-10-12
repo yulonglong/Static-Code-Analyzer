@@ -1,5 +1,5 @@
 //@author Ipsita Mohapatra
-//TestFullDesignExtractor_h.h
+//TestFullDesignExtractor_h
 
 #ifndef TestFullDesignExtractor_h
 #define TestFullDesignExtractor_h

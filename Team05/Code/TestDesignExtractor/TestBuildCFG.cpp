@@ -358,8 +358,10 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
+	Next* nextTable; 
+	nextTable = pkb->getNext();
 	vector<int> v;
-	//pkb->printNextTable();
+	nextTable->printNextTable();
 	
 	string expected = "1 "; 
 	v = pkb->getNext(0);

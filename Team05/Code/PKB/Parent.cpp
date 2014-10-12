@@ -166,7 +166,7 @@ vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 			ans = typeTable->getAllStmts(t1);
 		}
 		return ans;
-	}catch(...){
+	} catch(...){
 		return ans;
 	}
 	

@@ -5,7 +5,9 @@
 #ifndef DESIGNEXTRACTOR_H
 #define DESIGNEXTRACTOR_H
 
+
 #pragma once
+#include <utility>
 #include <string>
 #include <cstdlib>
 #include <cstdio>
@@ -57,6 +59,8 @@ private:
 	static void buildCFG(Node &ASTroot, PKB &pkb);
 	static void setNextRelationshipDriver(PKB &pkb);
 	static void setNextRelationship(CFGNode &node, PKB &pkb);
+	static void setNextPairRelationship(PKB &pkb);
+	static pair<int, int> findPair(int fromIndex, PKB &pkb);
 	static void createCFGForStmtLst(Node &ASTNode, PKB &pkb);
 	static void createCFGForAssign(int progLine, PKB &pkb);
 	static void createCFGForCall(int progLine, PKB &pkb);

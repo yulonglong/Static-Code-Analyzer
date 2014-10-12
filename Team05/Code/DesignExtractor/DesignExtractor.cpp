@@ -4,10 +4,13 @@
 #pragma once
 
 #include "DesignExtractor.h"	
+#include "TypeTable.h"	
+
 using namespace std;
 
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0; 
+bool debugModeIteration3 = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -21,16 +24,6 @@ queue<QueueItem> queueToProcess;
 
 void DesignExtractor::extractorDriver(PKB *pkb) {
 	cout << "Begin DesignExtractor" << endl;
-
-	/*TypeTable* typeTable = pkb->getTypeTable();
-	ConstTable* constTable = pkb->getConstTable();
-	Parent* parent = pkb->getParent();
-	Follows* follows = pkb->getFollows();
-	Modifies* modifies = pkb->getModifies();
-	Uses* uses = pkb->getUses();
-	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();*/
-
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
 	
@@ -110,8 +103,49 @@ void DesignExtractor::setNextRelationshipDriver(PKB &pkb) {
 	visited = temp; 
 
 	setNextRelationship(*source, pkb);
+	setNextPairRelationship(pkb);
 
 	visited.clear();
+}
+
+void DesignExtractor::setNextPairRelationship(PKB &pkb) {
+	vector<int> allStmts = pkb.getAllStmts(TypeTable::STMT); // check with Yolim
+	for (unsigned int i=0; i<allStmts.size(); i++) {
+		int stmtNum = allStmts.at(i);
+		if (debugModeIteration3) {
+			cout << "StmtNum is " << stmtNum << endl;
+		}
+		vector<int> v = pkb.getNext(stmtNum);
+		for (unsigned int j=0; j<v.size(); j++) {
+			if (debugModeIteration3) {
+				cout << "Child is " << v[j] << endl;
+			}
+			pair<int, int> pairToAdd = findPair(v[j], pkb);
+			if (debugModeIteration3) {
+				cout << "setToNextPair(" << stmtNum  << "): ["<< pairToAdd.first << ", " << pairToAdd.second << "]" << endl;
+			}
+			pkb.setToNextPair(stmtNum, pairToAdd);
+
+		}
+	}
+
+}
+
+pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
+	vector<int> v = pkb.getNext(fromIndex);
+	int toIndex = fromIndex; 
+	
+	while (true) {
+		if (std::find(v.begin(), v.end(), toIndex+1) != v.end()) {
+			/* v contains toIndex+1 */
+			toIndex += 1; 
+			v = pkb.getNext(toIndex);
+		} else {
+			/* v does not contain toIndex+1 */
+			break;
+		}
+	}
+	return pair<int, int>(fromIndex, toIndex);
 }
 
 void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
@@ -383,19 +417,19 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
 			vector<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
 			// SET: procedure procIndex modifies these variables too
-			pkb.setModifiesProc(procIndex, variablesModifiedByProgLine);
+			//pkb.setModifiesProc(procIndex, variablesModifiedByProgLine);
 
 			vector<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
 			// SET: procedure procIndex uses these variables too
-			pkb.setUsesProc(procIndex, variablesUsedByProgLine); 
+			//pkb.setUsesProc(procIndex, variablesUsedByProgLine); 
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
 					// SET:
-					pkb.setModifies(progLine, variablesModifiedByProgLine); 
+					//pkb.setModifies(progLine, variablesModifiedByProgLine); 
 					// SET:
-					pkb.setUses(progLine, variablesUsedByProgLine); 
+					//pkb.setUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
 					if (debugModeIteration1) {
@@ -408,9 +442,9 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 							cout << "parentProgLine: " << parentProgLine << endl;
 						}
 						// SET:
-						pkb.setModifies(parentProgLine, variablesModifiedByProgLine); 
+						//pkb.setModifies(parentProgLine, variablesModifiedByProgLine); 
 						// SET:
-						pkb.setUses(parentProgLine, variablesUsedByProgLine); 
+						//pkb.setUses(parentProgLine, variablesUsedByProgLine); 
 						parentProgLine = pkb.getParent(parentProgLine);
 						existsParent = (parentProgLine != -1);
 					}
