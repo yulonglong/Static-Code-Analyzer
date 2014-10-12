@@ -45,6 +45,8 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQuerySemanticCallsStar);
 	CPPUNIT_TEST(testQuerySemanticParent);
 	CPPUNIT_TEST(testQuerySemanticParentStar);
+	CPPUNIT_TEST(testQuerySemanticNext);
+	CPPUNIT_TEST(testQuerySemanticNextStar);
 	CPPUNIT_TEST(testQBasic1F_invalid_queries);
 	CPPUNIT_TEST_SUITE_END();
 
@@ -88,6 +90,8 @@ public:
 	void testQuerySemanticCallsStar();
 	void testQuerySemanticParent();
 	void testQuerySemanticParentStar();
+	void testQuerySemanticNext();
+	void testQuerySemanticNextStar();
 	void testQBasic1F_invalid_queries();
 };
 #endif
