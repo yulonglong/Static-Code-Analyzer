@@ -582,7 +582,7 @@ void QueryParserTest::testQueryModifies1(){
 
 void QueryParserTest::testQueryModifies2(){
 	//INIT BEGIN
-	string query = "assign a, a1; Select a such that Modifies(a,a1)";
+	string query = "assign a, a1; variable v; Select a such that Modifies(a,v)";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -613,6 +613,7 @@ void QueryParserTest::testQueryModifies2(){
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
 	expectedSynTable.insert(make_pair("a1", TypeTable::ASSIGN));
+	expectedSynTable.insert(make_pair("v", TypeTable::VARIABLE));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table
@@ -629,7 +630,7 @@ void QueryParserTest::testQueryModifies2(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"a1",Relationship::SYNONYM));
+	expectedRelVect.push_back(Relationship("Modifies","a",Relationship::SYNONYM,"v",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
@@ -1473,6 +1474,50 @@ void QueryParserTest::testQueryValidationWith2(){
 
 void QueryParserTest::testQueryValidationWith3(){
 	string query = "procedure p; constant c; Select c with p.procName=10  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticModifies(){
+	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticUses(){
+	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticCalls(){
+	string query = "variable p; constant c; Select c such that Calls (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticCallsStar(){
+	string query = "procedure p; constant c; Select c such that Calls* (c,p)  ";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
