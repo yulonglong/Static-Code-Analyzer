@@ -49,7 +49,7 @@ using namespace std;
 class DesignExtractor {
 public:
 	static void extractorDriver(PKB* pkb);
-	static void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent);
+	static void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
 	static void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
 private:
 	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
@@ -67,8 +67,8 @@ private:
 	// traverse graph to look for CFGNode with given progLine 
 	static void traverseGraph(CFGNode &node, int progLine);
 
-	static int getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
-	static int getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable);
+	static int getFirstProgLine(int procIndex, Node &ASTRoot, PKB &pkb);
+	static int getLastProgLine(int procIndex, Node &ASTRoot, PKB &pkb);
 
 	static void clear(std::queue<QueueItem> &q);
 	static void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);

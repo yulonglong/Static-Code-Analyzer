@@ -28,9 +28,6 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	PKB *pkb;
 	Node* ASTRoot;
 	CFGNode* CFGRoot;
-	Modifies* modifies;
-	Uses* uses;
-	VarTable* varTable;
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 
 	pkb = PKB::getInstance();
@@ -58,153 +55,148 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
-	modifies = pkb->getModifies();
-	uses = pkb->getUses();
 	vector<int> v;
-	varTable = pkb->getVarTable();
 
-	v =	uses->getUses(5);
+	v =	pkb->getUses(5);
 	string expected = "y x z v t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(5);
+	v =	pkb->getModifies(5);
 	expected = "y x ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(7);
+	v =	pkb->getUses(7);
 	expected = "y x v ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(7);
+	v =	pkb->getModifies(7);
 	expected = "y x ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(9);
+	v =	pkb->getUses(9);
 	expected = "y x z v idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(9);
+	v =	pkb->getModifies(9);
 	expected = "y x z t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(11);
+	v =	pkb->getUses(11);
 	expected = "y x z v idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(11);
+	v =	pkb->getModifies(11);
 	expected = "y x z idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(15);
+	v =	pkb->getUses(15);
 	expected = "y x v ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(15);
+	v =	pkb->getModifies(15);
 	expected = "y x ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(18);
+	v =	pkb->getUses(18);
 	expected = "y x z v t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(18);
+	v =	pkb->getModifies(18);
 	expected = "y x z idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(19);
+	v =	pkb->getUses(19);
 	expected = "y x z v t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(19);
+	v =	pkb->getModifies(19);
 	expected = "y x idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(21);
+	v =	pkb->getUses(21);
 	expected = "y x z v t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(21);
+	v =	pkb->getModifies(21);
 	expected = "y x ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	uses->getUses(27);
+	v =	pkb->getUses(27);
 	expected = "y x z v t idx ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	modifies->getModifies(27);
+	v =	pkb->getModifies(27);
 	expected = "y x ";
-	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *varTable));
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 
-	Next* nextTable; 
-	nextTable = pkb->getNext();
-	//nextTable->printNextTable();
+	//pkb->printNextTable();
 
 	expected = "10 18 "; 
-	v = nextTable->getNext(9);
+	v = pkb->getNext(9);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
 	expected = "12 14 "; 
-	v = nextTable->getNext(11);
+	v = pkb->getNext(11);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "17 "; 
-	v = nextTable->getNext(13);
+	v = pkb->getNext(13);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "17 "; 
-	v = nextTable->getNext(16);
+	v = pkb->getNext(16);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "9 "; 
-	v = nextTable->getNext(17);
+	v = pkb->getNext(17);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = ""; 
-	v = nextTable->getNext(18);
+	v = pkb->getNext(18);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "20 23 "; 
-	v = nextTable->getNext(19);
+	v = pkb->getNext(19);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "19 "; 
-	v = nextTable->getNext(22);
+	v = pkb->getNext(22);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = ""; 
-	v = nextTable->getNext(23);
+	v = pkb->getNext(23);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "25 26 "; 
-	v = nextTable->getNext(24);
+	v = pkb->getNext(24);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "24 "; 
-	v = nextTable->getNext(25);
+	v = pkb->getNext(25);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = ""; 
-	v = nextTable->getNext(26);
+	v = pkb->getNext(26);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "28 "; 
-	v = nextTable->getNext(27);
+	v = pkb->getNext(27);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "27 "; 
-	v = nextTable->getNext(29);
+	v = pkb->getNext(29);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "31 32 "; 
-	v = nextTable->getNext(30);
+	v = pkb->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "27 "; 
-	v = nextTable->getNext(31);
+	v = pkb->getNext(31);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	expected = "27 "; 
-	v = nextTable->getNext(32);
+	v = pkb->getNext(32);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
 	pkb->~PKB();
@@ -225,10 +217,10 @@ string FullDesignExtractorTest::print(vector<int> v) {
 }
 
 // Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
-string FullDesignExtractorTest::printVariables(vector<VARINDEX> v, VarTable varTable) {
+string FullDesignExtractorTest::printVariables(vector<VARINDEX> v, PKB &pkb) {
 	string s = "";
 	for (int i=0; i<v.size(); i++) {
-		s += varTable.getVarName(v[i]);
+		s += pkb.getVarName(v[i]);
 		s += " ";
 	}
 	return s; 

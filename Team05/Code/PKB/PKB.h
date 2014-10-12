@@ -187,14 +187,15 @@ public:
 	vector<STMTNUM> getPrevious(STMTNUM);
 	vector<STMTNUM> getAllNext();
 	vector<STMTNUM> getAllPrevious();
+	//printNextTable(); ??
 
 	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table
 	void setToNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
 	/// @cond
-	VarTable* getVarTable();
-	ProcTable* getProcTable();
+	VarTable* getVarTable(); 
+	ProcTable* getProcTable(); 
 	TypeTable* getTypeTable();
 	ConstTable* getConstTable();
 	Parent* getParent();
@@ -203,10 +204,10 @@ public:
 	Uses* getUses();
 	Calls* getCalls();
 	Next* getNext();
-	Node* getASTRoot();
-	CFGNode* getCFGRoot();
+	Node* getASTRoot(); // do not delete this method from PKB.h (DE needs)
+	CFGNode* getCFGRoot(); // do not delete this method from PKB.h (DE needs)
 
-	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable(); // do not delete this method from PKB.h
 	/// @endcond
 };
 

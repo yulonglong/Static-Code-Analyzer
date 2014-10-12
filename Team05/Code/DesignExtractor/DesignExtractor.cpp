@@ -22,14 +22,14 @@ queue<QueueItem> queueToProcess;
 void DesignExtractor::extractorDriver(PKB *pkb) {
 	cout << "Begin DesignExtractor" << endl;
 
-	TypeTable* typeTable = pkb->getTypeTable();
+	/*TypeTable* typeTable = pkb->getTypeTable();
 	ConstTable* constTable = pkb->getConstTable();
 	Parent* parent = pkb->getParent();
 	Follows* follows = pkb->getFollows();
 	Modifies* modifies = pkb->getModifies();
 	Uses* uses = pkb->getUses();
 	VarTable* varTable = pkb->getVarTable();
-	ProcTable* procTable = pkb->getProcTable();
+	ProcTable* procTable = pkb->getProcTable();*/
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	callsTable = pkb->getCallsTable();
@@ -42,7 +42,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	Node* ASTRoot = pkb->getASTRoot();
 	Node* CFGRoot = pkb->getCFGRoot();
 	
-	extractRelationships(*ASTRoot, callsTable, *procTable, *modifies, *uses, *parent);
+	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
 	
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
@@ -96,9 +96,6 @@ void DesignExtractor::buildCFG(Node &ASTRroot, PKB &pkb) {
 	}
 
 	
-	// if want end node, then after each iteration, push back the pointer to CFGNode into a vector.
-	// after for loop ends, pop one by one and make it the parent of the terminating -1 node
-	// THERE WILL BE A SINGLE -1 NODE TO DENOTE END OF CFG
 }
 
 // traverse the CFG and then set the next relationship in PKB
@@ -357,7 +354,7 @@ void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
 
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
-void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent) {
+void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb) {
 	// Run DFS on callsTree to generate toposort queue
 	runDFSDriver(callsTable); 
 
@@ -376,45 +373,45 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 		
 		vector<int> progLines = item.getCallsProgLine();
 		int procIndex = item.getProcIndex();
-		unsigned int firstProgLine = getFirstProgLine(procIndex, ASTRoot, procTable);
-		unsigned int lastProgLine = getLastProgLine(procIndex, ASTRoot, procTable);
+		unsigned int firstProgLine = getFirstProgLine(procIndex, ASTRoot, pkb);
+		unsigned int lastProgLine = getLastProgLine(procIndex, ASTRoot, pkb);
 		if (debugModeIteration1) {
 			cout << "Min: " << firstProgLine << ", Max: " << lastProgLine << endl;
 		}
 
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
-			vector<VARINDEX> variablesModifiedByProgLine = modifies.getModifies(i);
+			vector<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
 			// SET: procedure procIndex modifies these variables too
-			modifies.setModifiesProc(procIndex, variablesModifiedByProgLine);
+			pkb.setModifiesProc(procIndex, variablesModifiedByProgLine);
 
-			vector<VARINDEX> variablesUsedByProgLine = uses.getUses(i);
+			vector<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
 			// SET: procedure procIndex uses these variables too
-			uses.setUsesProc(procIndex, variablesUsedByProgLine); 
+			pkb.setUsesProc(procIndex, variablesUsedByProgLine); 
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
 					// SET:
-					modifies.setModifies(progLine, variablesModifiedByProgLine); 
+					pkb.setModifies(progLine, variablesModifiedByProgLine); 
 					// SET:
-					uses.setUses(progLine, variablesUsedByProgLine); 
+					pkb.setUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
 					if (debugModeIteration1) {
 						cout << "progLine: " << progLine << endl;
 					} 
-					int parentProgLine = parent.getParent(progLine);
+					int parentProgLine = pkb.getParent(progLine);
 					bool existsParent = (parentProgLine != -1);
 					while (existsParent) {
 						if (debugModeIteration1) {
 							cout << "parentProgLine: " << parentProgLine << endl;
 						}
 						// SET:
-						modifies.setModifies(parentProgLine, variablesModifiedByProgLine); 
+						pkb.setModifies(parentProgLine, variablesModifiedByProgLine); 
 						// SET:
-						uses.setUses(parentProgLine, variablesUsedByProgLine); 
-						parentProgLine = parent.getParent(parentProgLine);
+						pkb.setUses(parentProgLine, variablesUsedByProgLine); 
+						parentProgLine = pkb.getParent(parentProgLine);
 						existsParent = (parentProgLine != -1);
 					}
 				}
@@ -546,12 +543,12 @@ void DesignExtractor::printQueue() {
 	queueToProcess = backup; 
 }
 
-int DesignExtractor::getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
+int DesignExtractor::getFirstProgLine(int procIndex, Node &ASTRoot, PKB &pkb) {
 	Node* curr = &ASTRoot; 
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();
 	for (unsigned int i=0;i<curr->getChild().size();i++) {
-		if (procIndex == procTable.getProcIndex(curr->getChild(i)->getData())) {
+		if (procIndex == pkb.getProcIndex(curr->getChild(i)->getData())) {
 			curr = (curr->getChild(i))->getChild(0);
 			break;
 		}
@@ -562,12 +559,12 @@ int DesignExtractor::getFirstProgLine(int procIndex, Node &ASTRoot, ProcTable &p
 	return curr->getProgLine();
 }
 
-int DesignExtractor::getLastProgLine(int procIndex, Node &ASTRoot, ProcTable &procTable) {
+int DesignExtractor::getLastProgLine(int procIndex, Node &ASTRoot, PKB &pkb) {
 	Node* curr = &ASTRoot; 
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();
 	for (unsigned int i=0;i<curr->getChild().size();i++) {
-		if (procIndex == procTable.getProcIndex(curr->getChild(i)->getData())) {
+		if (procIndex == pkb.getProcIndex(curr->getChild(i)->getData())) {
 			curr = (curr->getChild(i))->getChild(0);
 			break;
 		}
