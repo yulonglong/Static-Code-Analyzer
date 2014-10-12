@@ -411,17 +411,37 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 	}
 			
 	if(formatValid){
-		for(int index=0;index<2;index++){
-			bool match = regexMatch("("+synonym+")",param[index]);
-			//if it is a synonym
-			if(match){
-				unordered_map<string, TypeTable::SynType>::iterator it;
-				it = synMap.find(param[index]);
-				if(it==synMap.end()){
-					synValid=false;
-				}
-			}				
+		//checking synonyms arguments whether they have been declared earlier
+
+		//first argument
+		int index = 0;
+		bool match = regexMatch("("+synonym+")",param[index]);
+		//if it is a synonym
+		if(match){
+			unordered_map<string, TypeTable::SynType>::iterator it;
+			it = synMap.find(param[index]);
+			if(it==synMap.end()){
+				synValid=false;
+			}
 		}
+
+		//second argument
+		index = 1;
+		match = regexMatch("("+synonym+")",param[index]);
+		//if it is a synonym
+		if(match){
+			unordered_map<string, TypeTable::SynType>::iterator it;
+			it = synMap.find(param[index]);
+			if(it==synMap.end()){
+				synValid=false;
+			}
+			else if((relationRef == MODIFIES) || (relationRef == USES)){
+				if(!(it->second == TypeTable::VARIABLE)){
+					synValid = false;
+				}
+			}
+		}
+		
 	}
 
 	if((formatValid)&&(synValid)){
