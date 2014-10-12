@@ -97,8 +97,16 @@ public:
 	void setToFollows(STMTNUM, STMTNUM);
 	//! Set a Modifies relationship between the given statement number and variable name.
 	void setToModifies(STMTNUM, VARNAME);
+	//! Set a Modifies relationship between the given statement number and vector of variable indexes.
+	void setToModifies(STMTNUM, vector<VARINDEX>);
+	//! Set a Modifies relationship between the given procedure index and vector of variable indexes.
+	void setToModifiesProc(PROCINDEX, vector<VARINDEX>);
 	//! Set a Uses relationship between the given statement number and variable name.
 	void setToUses(STMTNUM, VARNAME);
+	//! Set a Uses relationship between the given statement number and vector of variable indexes.
+	void setToUses(STMTNUM, vector<VARINDEX>);
+	//! Set a Uses relationship between the given procedure index and vector of variable indexes.
+	void setToUsesProc(PROCINDEX, vector<VARINDEX>);
 	//! Set a Calls relationship between the two given procedure name at the specified statement number.
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM);
 	//! Set a Next relationship between the two given statement numbers.

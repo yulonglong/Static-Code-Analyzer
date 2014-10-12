@@ -129,9 +129,29 @@ void PKB::setToModifies(STMTNUM s, VARNAME v){
 	modifies->setModifies(s,v);
 }
 
+void PKB::setToModifies(STMTNUM s, vector<VARINDEX> v){
+	modifies = getModifies();
+	modifies->setModifies(s,v);
+}
+
+void PKB::setToModifiesProc(PROCINDEX i, vector<VARINDEX> v){
+	modifies = getModifies();
+	modifies->setModifiesProc(i,v);
+}
+
 void PKB::setToUses(STMTNUM s, VARNAME v){
 	uses = getUses();
 	uses->setUses(s,v);
+}
+
+void PKB::setToUses(STMTNUM s, vector<VARINDEX> v){
+	uses = getUses();
+	uses->setUses(s,v);
+}
+
+void PKB::setToUsesProc(PROCINDEX i, vector<VARINDEX> v){
+	uses = getUses();
+	uses->setUsesProc(i,v);
 }
 
 void PKB::setToCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
