@@ -433,6 +433,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
+			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
+				if(!(it->second == TypeTable::ASSIGN)){
+					synValid = false;
+				}
+			}
 			else if((relationRef == PARENT) || (relationRef == PARENTSTAR)){
 				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF))){
 					synValid = false;
@@ -458,6 +463,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 			}
 			else if((relationRef == NEXT) || (relationRef == NEXTSTAR)){
 				if(!(it->second == TypeTable::PROGLINE)){
+					synValid = false;
+				}
+			}
+			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
+				if(!(it->second == TypeTable::ASSIGN)){
 					synValid = false;
 				}
 			}

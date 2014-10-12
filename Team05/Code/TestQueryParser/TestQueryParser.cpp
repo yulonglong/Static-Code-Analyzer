@@ -1550,7 +1550,7 @@ void QueryParserTest::testQuerySemanticParentStar(){
 }
 
 void QueryParserTest::testQuerySemanticNext(){
-	string query = "variable p; constant c; Select c such that Parent (c,p)  ";
+	string query = "variable p; constant c; Select c such that Next(c,p)  ";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -1561,7 +1561,29 @@ void QueryParserTest::testQuerySemanticNext(){
 }
 
 void QueryParserTest::testQuerySemanticNextStar(){
-	string query = "procedure p; constant c; Select c such that Parent* (c,p)  ";
+	string query = "procedure p; constant c; Select c such that Next*(c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticAffects(){
+	string query = "variable p; constant c; Select c such that Affects (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticAffectsStar(){
+	string query = "procedure p; constant c; Select c such that Affects* (c,p)  ";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
