@@ -213,6 +213,7 @@ private:
 	void deepCopyTableParam(string[2], string);
 	Relationship::TokenType detectTokenType(string);
 
+	bool isValidSelectedSyn(string);
 	Relationship validateDefaultClauses(vector<string>&,int&,bool&);
 	Relationship validatePattern(vector<string>&,int&,bool&);
 	Relationship validateWith(vector<string>&,int&,bool&);

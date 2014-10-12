@@ -707,13 +707,29 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
 	}
 }
 
+bool QueryParser::isValidSelectedSyn(string selectedName){
+	unordered_map<string, TypeTable::SynType>::iterator it;
+	it = synMap.find(selectedName);
+	if(it==synMap.end()){
+		return false;
+	}
+	return true;
+}
+
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
 
 	//set selected synonyms (supports tuple)
 	vector<string> selectedSynForQuery;
 	for (int i=0;i<(int)selectedSyn.size();i++){
-		selectedSynForQuery.push_back(selectedSyn[i]);
+		//semantic check on whether the selected syn is present
+		if(isValidSelectedSyn(selectedSyn[i])){
+			selectedSynForQuery.push_back(selectedSyn[i]);
+		}
+		else{
+			valid = false;
+			return Query();
+		}
 	}
 	query.setSelectedSyn(selectedSynForQuery);
 

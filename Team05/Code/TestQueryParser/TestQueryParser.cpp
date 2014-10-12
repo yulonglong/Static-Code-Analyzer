@@ -1526,6 +1526,17 @@ void QueryParserTest::testQueryTupleUses(){
 	return;
 }
 
+void QueryParserTest::testQueryValidationTuple(){
+	string query = "assign a1; Select <a1,a2, a3> such that Modifies(a1, \"v\")";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
 void QueryParserTest::testQueryValidationModifies1(){
 	string query = "assign a; Select a such that Modifies(a, 2)";
 	QueryParser qp;
@@ -1538,7 +1549,7 @@ void QueryParserTest::testQueryValidationModifies1(){
 }
 
 void QueryParserTest::testQueryValidationModifies2(){
-	string query = "assign a; Select b such that Modifies(b, 2)";
+	string query = "assign a; Select b such that Modifies(b, \"v\")";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
