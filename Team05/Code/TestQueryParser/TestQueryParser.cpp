@@ -1494,6 +1494,39 @@ void QueryParserTest::testQuerySemanticModifies(){
 	return;
 }
 
+void QueryParserTest::testQuerySemanticUses(){
+	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticCalls(){
+	string query = "variable p; constant c; Select c such that Calls (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticCallsStar(){
+	string query = "procedure p; constant c; Select c such that Calls* (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
 void QueryParserTest::testQBasic1F_invalid_queries(){
 	QueryParser* qp;
 	Query parsedQuery;

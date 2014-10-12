@@ -423,6 +423,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 			if(it==synMap.end()){
 				synValid=false;
 			}
+			else if((relationRef == CALLS) || (relationRef == CALLSSTAR)){
+				if(!(it->second == TypeTable::PROCEDURE)){
+					synValid = false;
+				}
+			}
 		}
 
 		//second argument
@@ -434,6 +439,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 			it = synMap.find(param[index]);
 			if(it==synMap.end()){
 				synValid=false;
+			}
+			else if((relationRef == CALLS) || (relationRef == CALLSSTAR)){
+				if(!(it->second == TypeTable::PROCEDURE)){
+					synValid = false;
+				}
 			}
 			else if((relationRef == MODIFIES) || (relationRef == USES)){
 				if(!(it->second == TypeTable::VARIABLE)){
