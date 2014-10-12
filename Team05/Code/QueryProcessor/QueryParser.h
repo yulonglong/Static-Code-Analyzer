@@ -196,6 +196,7 @@ private:
 
 	//query class table
 	vector<string> selectStatement;
+	vector<string> selectedSyn;
 	unordered_map<string, TypeTable::SynType> synMap;
 
 	//common methods
@@ -213,7 +214,6 @@ private:
 	Relationship::TokenType detectTokenType(string);
 
 	Relationship validateDefaultClauses(vector<string>&,int&,bool&);
-	Relationship validateUsesAndModifies(vector<string>&,int&,bool&);
 	Relationship validatePattern(vector<string>&,int&,bool&);
 	Relationship validateWith(vector<string>&,int&,bool&);
 
