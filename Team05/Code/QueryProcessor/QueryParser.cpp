@@ -44,9 +44,9 @@ const string QueryParser::stmtRef = synonym + "|_|" + INTEGER;
 const string QueryParser::lineRef = synonym + "|_|" + INTEGER;
 const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
 const string QueryParser::attrRef = "(?:" + synonym + "." + attrName + ")";
-const string QueryParser::elem = synonym + "|" + attrRef;
-const string QueryParser::tuple = elem;
-const string QueryParser::resultCl = tuple + "|" + BOOLEAN;
+const string QueryParser::elem = "(?:"+ synonym + "|" + attrRef + ")";
+const string QueryParser::tuple = "(?:" + elem + "|" + "(?:" + "<" + "\\s*" + elem + "(?:" + "\\s*,\\s*" + elem + ")*" + "\\s*" + ">" + "))";
+const string QueryParser::resultCl = "(?:" + tuple + "|" + BOOLEAN + ")";
 
 const string QueryParser::ref = "(?:" + attrRef + "|" + synonym + "|" + "\""+IDENT+"\"" + "|" + INTEGER + ")";
 const string QueryParser::attrCompare = "(?:" + ref + "\\s*=\\s*" + ref + ")";
@@ -97,7 +97,7 @@ const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + ")";
 
 //select clause
-const string QueryParser::selectCl = "([Ss]elect)\\s+("+resultCl+")"+"(?:\\s+(?:"+suchThatCl+"|"+patternCl+"|"+withCl+"))*";
+const string QueryParser::selectCl = "([Ss]elect)\\s+(?:"+resultCl+")"+"(?:\\s+(?:"+suchThatCl+"|"+patternCl+"|"+withCl+"))*";
 
 //clauses parameter
 const string QueryParser::modifiesParam[] = {entRef + "|" + stmtRef , varRef};
@@ -208,9 +208,42 @@ bool QueryParser::parseSelectCl(string query){
 	string prevToken;
 
 	token = getNextToken(istream);
-	selectStatement.push_back(token);//Select
+	//selectStatement.push_back(token); //Select
+
+	//BEGIN SELECT STATEMENT PARSING
 	token = getNextToken(istream);
-	selectStatement.push_back(token);//result-Cl
+	//case 1: no tuple
+	if(token[0] != '<'){
+		selectedSyn.push_back(token);//result-Cl
+	}
+	//case 2: tuple
+	else {
+		//case 2.1: token includes complete tuple, e.g. <p,q,r>
+		if (token[token.length()-1] == '>'){
+			token = token.substr(0,token.length()-1);
+		}
+		//case 2.2: token does not include complete tuple
+		else{
+			string secondToken;
+			getline(istream,secondToken,'>');
+			token = token + secondToken;
+		}
+		token = token.substr(1); // remove the '<' as the first character
+		
+		//separate the selected synonyms
+		//and push to the vector
+		istringstream selectedstream(token);
+		string selectedToken;
+		while(getline(selectedstream,selectedToken,',')){
+			vector<string> subRes;
+			regexPattern = "\\s*(" + synonym + ")\\s*";
+			match = regexMatchWithResult(regexPattern,selectedToken,subRes);
+			string selectedName = subRes[1];
+			selectedSyn.push_back(selectedName);
+			subRes.clear();
+		}
+	}
+	//END SELECT STATEMENT PARSING
 
 	while(getline(istream,token,' ')){
 		if (token.length()==0){
@@ -677,16 +710,18 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
 Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<string, TypeTable::SynType> map, bool &valid){
 	Query query;
 
-	//currently supports only single select, no tuple
-	vector<string> selectedSyn;
-	selectedSyn.push_back(v.at(1));
-	query.setSelectedSyn(selectedSyn);
+	//set selected synonyms (supports tuple)
+	vector<string> selectedSynForQuery;
+	for (int i=0;i<(int)selectedSyn.size();i++){
+		selectedSynForQuery.push_back(selectedSyn[i]);
+	}
+	query.setSelectedSyn(selectedSynForQuery);
 
 	//set synTable
 	query.setSynTable(map);
 
 	//validate all clauses
-	for (int i = 2; i < (int) v.size(); i++){
+	for (int i = 0; i < (int) v.size(); i++){
 		string relationRef = v.at(i);
 		
 		bool clauseMatch = regexMatch("(" + allClause + ")",relationRef);
