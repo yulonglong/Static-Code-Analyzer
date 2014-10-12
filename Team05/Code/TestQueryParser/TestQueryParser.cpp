@@ -1484,112 +1484,741 @@ void QueryParserTest::testQueryValidationWith3(){
 }
 
 void QueryParserTest::testQuerySemanticModifies(){
+	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "variable   s ;   Select   s  such  that Modifies (1,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::VARIABLE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Modifies","1",Relationship::INTEGER,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
+
 }
 
 void QueryParserTest::testQuerySemanticUses(){
-	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";
-	QueryParser qp;
+	//TEST INVALID
+	string query = "procedure p; constant c; Select c such that Uses (c,p)  ";
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "variable   s ;   Select   s  such  that Uses (1,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::VARIABLE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Uses","1",Relationship::INTEGER,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticCalls(){
-	string query = "variable p; constant c; Select c such that Calls (c,p)  ";
-	QueryParser qp;
+	//TEST INVALID
+	string query = "procedure p; constant c; Select c such that Calls (c,p)  ";
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "procedure   s,a;   Select   s  such  that Calls (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::PROCEDURE));
+	expectedSynTable.insert(make_pair("a", TypeTable::PROCEDURE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Calls","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticCallsStar(){
+	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Calls* (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "procedure   s,a;   Select   s  such  that Calls* (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::PROCEDURE));
+	expectedSynTable.insert(make_pair("a", TypeTable::PROCEDURE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Calls*","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticParent(){
+	//TEST INVALID
 	string query = "variable p; constant c; Select c such that Parent (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "while   s,a;   Select   s  such  that Parent (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::WHILE));
+	expectedSynTable.insert(make_pair("a", TypeTable::WHILE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Parent","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticParentStar(){
+	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Parent* (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "while   s,a;   Select   s  such  that Parent* (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::WHILE));
+	expectedSynTable.insert(make_pair("a", TypeTable::WHILE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Parent*","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticNext(){
+	//TEST INVALID
 	string query = "variable p; constant c; Select c such that Next(c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "prog_line   s,a;   Select   s  such  that Next (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::PROGLINE));
+	expectedSynTable.insert(make_pair("a", TypeTable::PROGLINE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Next","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticNextStar(){
+	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Next*(c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "prog_line   s,a;   Select   s  such  that Next* (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::PROGLINE));
+	expectedSynTable.insert(make_pair("a", TypeTable::PROGLINE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Next*","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticAffects(){
+	//TEST INVALID
 	string query = "variable p; constant c; Select c such that Affects (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "assign   s,a;   Select   s  such  that Affects (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::ASSIGN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Affects","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
 void QueryParserTest::testQuerySemanticAffectsStar(){
+	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Affects* (c,p)  ";
-	QueryParser qp;
+	QueryParser qp2;
 	bool isValid = true;
-	Query parsedQuery = qp.queryParse(query,isValid);
+	Query parsedQuery2 = qp2.queryParse(query,isValid);
 
 	bool expectedIsValid = false;
 	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	
+	//TEST VALID
+
+	//INIT BEGIN
+	query = "assign   s,a;   Select   s  such  that Affects* (a,s)  ";
+	QueryParser qp;
+	isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("s");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("s", TypeTable::ASSIGN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("Affects*","a",Relationship::SYNONYM,"s",Relationship::SYNONYM));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+	}
+	//RELATIONSHIP END
 	return;
 }
 
