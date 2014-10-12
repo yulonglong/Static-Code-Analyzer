@@ -428,6 +428,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
+			else if((relationRef == PARENT) || (relationRef == PARENTSTAR)){
+				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF))){
+					synValid = false;
+				}
+			}
 		}
 
 		//second argument

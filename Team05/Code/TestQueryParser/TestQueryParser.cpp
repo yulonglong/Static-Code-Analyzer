@@ -1527,6 +1527,28 @@ void QueryParserTest::testQuerySemanticCallsStar(){
 	return;
 }
 
+void QueryParserTest::testQuerySemanticParent(){
+	string query = "variable p; constant c; Select c such that Parent (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
+void QueryParserTest::testQuerySemanticParentStar(){
+	string query = "procedure p; constant c; Select c such that Parent* (c,p)  ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
 void QueryParserTest::testQBasic1F_invalid_queries(){
 	QueryParser* qp;
 	Query parsedQuery;
