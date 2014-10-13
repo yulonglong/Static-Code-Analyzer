@@ -36,16 +36,16 @@ const string QueryParser::IDENT = "[A-Za-z][A-Za-z0-9#]*";
 const string QueryParser::OPERATOR = "(?:\\+|\\-|\\*)";
 const string QueryParser::LETTERORINTEGER = "(?:[A-Za-z]+|[0-9]+)";
 
-const string QueryParser::synonym = IDENT;
+const string QueryParser::synonym = "(?:" + IDENT + ")";
 const string QueryParser::attrName = "(?:procName|varName|value|stmt#)";
 const string QueryParser::entRef = synonym + "|_|\"" + IDENT +"\"|" + INTEGER;
 const string QueryParser::varRef = synonym + "|_|\"" + IDENT +"\"";
 const string QueryParser::stmtRef = synonym + "|_|" + INTEGER;
 const string QueryParser::lineRef = synonym + "|_|" + INTEGER;
 const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
-const string QueryParser::attrRef = "(?:" + synonym + "." + attrName + ")";
-const string QueryParser::elem = "(?:"+ synonym + "|" + attrRef + ")";
-const string QueryParser::tuple = "(?:" + elem + "|" + "(?:" + "<" + "\\s*" + elem + "(?:" + "\\s*,\\s*" + elem + ")*" + "\\s*" + ">" + "))";
+const string QueryParser::attrRef = "(?:" + synonym + "\\." + attrName + ")";
+const string QueryParser::elem = "(?:" + attrRef + "|" + synonym + ")";
+const string QueryParser::tuple = "(?:" + elem + ")" + "|" + "(?:" + "\\<" + "\\s*" + elem + "(?:" + "\\s*\\,\\s*" +  elem  + ")*" + "\\s*" + "\\>" + ")";
 const string QueryParser::resultCl = "(?:" + tuple + "|" + BOOLEAN + ")";
 
 const string QueryParser::ref = "(?:" + attrRef + "|" + synonym + "|" + "\""+IDENT+"\"" + "|" + INTEGER + ")";
@@ -63,21 +63,21 @@ const string QueryParser::freeStringWithSpace = "[.]+";
 const string QueryParser::expr = "\\s*" + LETTERORINTEGER +"(?:"+"\\s*" + OPERATOR + "\\s*" + LETTERORINTEGER + ")*" + "\\s*";
 
 
-const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
-const string QueryParser::ModifiesS = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
-const string QueryParser::UsesP = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
-const string QueryParser::UsesS = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
-const string QueryParser::Calls = "(?:(?:[Cc]alls)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
-const string QueryParser::CallsT = "(?:(?:[Cc]alls\\*)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
-const string QueryParser::Parent = "(?:(?:[Pp]arent)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::ParentT = "(?:(?:[Pp]arent\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::Follows = "(?:(?:[Ff]ollows)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::FollowsT = "(?:(?:[Ff]ollows\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::Next = "(?:(?:[Nn]ext)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
-const string QueryParser::NextT = "(?:(?:[Nn]ext\\*)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
-const string QueryParser::Affects = "(?:(?:[Aa]ffects)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::AffectsT = "(?:(?:[Aa]ffects\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
-const string QueryParser::TESTSTR = "\\s*\\(\\s*("+freeString+")"+ "\\s*,\\s*" +"("+freeString+")" + "\\s*\\)";
+const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::ModifiesS = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::UsesP = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::UsesS = "(?:(?:[Uu]ses)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
+const string QueryParser::Calls = "(?:(?:[Cc]alls)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
+const string QueryParser::CallsT = "(?:(?:[Cc]alls\\*)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+entRef+")" + "\\s*\\))";
+const string QueryParser::Parent = "(?:(?:[Pp]arent)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::ParentT = "(?:(?:[Pp]arent\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::Follows = "(?:(?:[Ff]ollows)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::FollowsT = "(?:(?:[Ff]ollows\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::Next = "(?:(?:[Nn]ext)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*\\,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
+const string QueryParser::NextT = "(?:(?:[Nn]ext\\*)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*\\,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
+const string QueryParser::Affects = "(?:(?:[Aa]ffects)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::AffectsT = "(?:(?:[Aa]ffects\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::TESTSTR = "\\s*\\(\\s*("+freeString+")"+ "\\s*\\,\\s*" +"("+freeString+")" + "\\s*\\)";
 
 const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT
 + "|" + Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + ")";
@@ -89,9 +89,9 @@ const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
 
 const string QueryParser::expressionSpec = "(?:\"" + expr + "\")" + "|" + "(?:_\"" + expr + "\"_)" + "|" + "(?:_)";
-const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
-const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*,\\s*" + "("+"_"+")" + "\\s*\\))";
-const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + ",\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*\\,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
+const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::pattern = "(?:" + assignCl + "|" + whileCl + "|" + ifCl + ")";
 const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + ")";
@@ -229,7 +229,6 @@ bool QueryParser::parseSelectCl(string query){
 			token = token + secondToken;
 		}
 		token = token.substr(1); // remove the '<' as the first character
-		
 		//separate the selected synonyms
 		//and push to the vector
 		istringstream selectedstream(token);
@@ -238,9 +237,22 @@ bool QueryParser::parseSelectCl(string query){
 			vector<string> subRes;
 			regexPattern = "\\s*(" + synonym + ")\\s*";
 			match = regexMatchWithResult(regexPattern,selectedToken,subRes);
-			string selectedName = subRes[1];
-			selectedSyn.push_back(selectedName);
-			subRes.clear();
+			//if it is a synonym
+			if (match){
+				string selectedName = subRes[1];
+				selectedSyn.push_back(selectedName);
+				subRes.clear();
+			}
+			else{
+				regexPattern = "\\s*(" + attrRef + ")\\s*";
+				match = regexMatchWithResult(regexPattern,selectedToken,subRes);
+				//if it is a attrRef
+				if(match){
+					string selectedName = subRes[1];
+					selectedSyn.push_back(selectedName);
+					subRes.clear();
+				}
+			}
 		}
 	}
 	//END SELECT STATEMENT PARSING
@@ -635,7 +647,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	}
 	else{//if not synonym
 		vector<string> result;
-		match = regexMatchWithResult("("+synonym+").("+attrName+")",firstParam,result);
+		match = regexMatchWithResult("("+synonym+")\\.("+attrName+")",firstParam,result);
 		if(match){
 			it = synMap.find(result[1]);
 			if(it==synMap.end()){//if synonym not found
@@ -675,7 +687,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	}
 	else{//if not synonym
 		vector<string> result;
-		match = regexMatchWithResult("("+synonym+").("+attrName+")",secondParam,result);
+		match = regexMatchWithResult("("+synonym+")\\.("+attrName+")",secondParam,result);
 		if(match){
 			it = synMap.find(result[1]);
 
@@ -759,11 +771,40 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
 	}
 }
 
-bool QueryParser::isValidSelectedSyn(string selectedName){
+bool QueryParser::isValidSelectedSyn(string &refSelectedName){
+	string selectedName = refSelectedName;
 	unordered_map<string, TypeTable::SynType>::iterator it;
-	it = synMap.find(selectedName);
-	if(it==synMap.end()){
-		return false;
+
+	vector<string> result;
+	bool match = regexMatchWithResult("("+synonym+")\\.("+attrName+")",selectedName,result);
+	//if it is an attrRef
+	if(match){
+		it = synMap.find(result[1]);
+		if(it==synMap.end()){//if synonym not found
+			return false;
+		}
+		else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+			return false;
+		}
+		else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+			return false;
+		}
+		else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
+			return false;
+		}
+		else if((it->second != TypeTable::VARIABLE)&&(result[2] == "varName")){
+			return false;
+		}
+		else{
+			refSelectedName = result[1];
+		}
+	}
+	//if it is a regular synonym
+	else{
+		it = synMap.find(selectedName);
+		if(it==synMap.end()){
+			return false;
+		}
 	}
 	return true;
 }
