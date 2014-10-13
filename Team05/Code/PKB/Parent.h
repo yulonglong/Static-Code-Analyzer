@@ -10,7 +10,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <math.h>
 #include <unordered_map>
+#include <cstdint>
 #include <algorithm>
 #include <iterator>
 #include "TypeTable.h"
@@ -36,6 +38,9 @@ class Parent {
 private:
 	unordered_map<STMTNUM,vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
 	unordered_map<STMTNUM,STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
+	vector<vector<int64_t>> parTable;
+	vector<STMTNUM> parentList;
+	vector<STMTNUM> childrenList;
 	static bool instanceFlag;
 	static Parent *parent;
 	TypeTable *typeTable; 

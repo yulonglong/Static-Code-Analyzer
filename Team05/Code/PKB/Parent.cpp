@@ -43,8 +43,63 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 		}
 
 		childrenTable[s2] = s1; 
+
+		parentList.push_back(s1);
+		sort( parentList.begin(), parentList.end() );
+		parentList.erase( unique( parentList.begin(), parentList.end() ), parentList.end() );
+		childrenList.push_back(s2);
+		sort( childrenList.begin(), childrenList.end() );
+		childrenList.erase( unique( childrenList.begin(), childrenList.end() ), childrenList.end() );
 	}catch(...){
 	}
+}
+
+//void Parent::setParent(STMTNUM s1, STMTNUM s2) {
+//	try{
+//		vector<int64_t> placeHolder (0,1);
+//		vector<int64_t> temp (0,1);
+//		try{
+//			temp = parTable.at(s1);
+//		}catch(...){
+//			parTable.resize(s1+1,placeHolder);
+//		}
+//		int location =ceil((double)s2/63);
+//		int bitPos = s2%63;
+//
+//		if(temp.size()<location)
+//			temp.resize(location);
+//
+//		int64_t bitArray = temp.at(location-1);
+//		bitArray = bitArray | (((int64_t)1)<<bitPos);
+//
+//		temp[location-1]=bitArray;
+//		parTable[s1]=temp;
+//		childrenTable[s2] = s1;
+//
+//		parentList.push_back(s1);
+//		sort( parentList.begin(), parentList.end() );
+//		parentList.erase( unique( parentList.begin(), parentList.end() ), parentList.end() );
+//		childrenList.push_back(s2);
+//		sort( childrenList.begin(), childrenList.end() );
+//		childrenList.erase( unique( childrenList.begin(), childrenList.end() ), childrenList.end() );
+//	}catch(...){
+//	}
+//}
+
+bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
+	try{
+		vector<int64_t> temp=parTable.at(s1);
+		int location =ceil((double)s2/63);
+		int bitPos = s2%63;
+		if(temp.size()<location)
+			return false;
+
+		int64_t bitArray = temp.at(location-1);
+		if((bitArray & ((int64_t)1<<bitPos))>0)
+			return true;
+	} catch(...){
+	}
+	return false;
 }
 
 bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
@@ -58,29 +113,11 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 }
 
 vector<STMTNUM> Parent::getAllChildren(){
-	vector<STMTNUM> ans; 
-	STMTNUM temp;
-	for (unordered_map<STMTNUM, STMTNUM>::iterator it = childrenTable.begin(); it != childrenTable.end(); it++) {
-		try {
-			ans.push_back(it->first);
-		} catch (...) {
-			continue;
-		}
-	}
-	return ans;
+	return childrenList;
 }
 
 vector<STMTNUM> Parent::getAllParent(){
-	vector<STMTNUM> ans; 
-	STMTNUM temp;
-	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
-		try {
-			ans.push_back(it->first);
-		} catch (...) {
-			continue;
-		}
-	}
-	return ans;
+	return parentList;
 }
 
 vector<STMTNUM> Parent::getChildren(STMTNUM s){
@@ -92,6 +129,28 @@ vector<STMTNUM> Parent::getChildren(STMTNUM s){
 		return ans;
 	}
 }
+
+//vector<STMTNUM> Parent::getChildren(STMTNUM s){
+//	vector<STMTNUM> ans;
+//	try{
+//		vector<int64_t> temp=parTable.at(s);
+//
+//		for(size_t s = 0;s<temp.size();s++){
+//			int64_t bitArray = temp.at(s);
+//			while(bitArray>0){
+//				int64_t bit = bitArray & -bitArray;
+//				bitArray -= bit;
+//				int number = log((double)bit)/log(2.0) + s*63;
+//				ans.push_back(number);
+//			}
+//		}
+//		return ans;
+//	}
+//	catch(...){
+//		ans.clear();
+//		return ans;
+//	}
+//}
 
 STMTNUM Parent::getParent(STMTNUM s){
 	STMTNUM ans;

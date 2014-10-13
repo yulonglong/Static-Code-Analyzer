@@ -10,20 +10,21 @@
 class ParentTest : public CPPUNIT_NS::TestFixture // Note 2 
 { 
 	CPPUNIT_TEST_SUITE( ParentTest ); // Note 3 
-	CPPUNIT_TEST( testParentUsingStmtNum );
-	CPPUNIT_TEST( testParentUsingStmtType );
+	CPPUNIT_TEST( testParentIsParent );
+	CPPUNIT_TEST( testParentGetAllChildrenParent );
+	/*CPPUNIT_TEST( testParentUsingStmtType );
 	CPPUNIT_TEST( testAllBoolean );
 	CPPUNIT_TEST( testGetParent );
 	CPPUNIT_TEST( testGetChildren );
-	CPPUNIT_TEST( testNew );
+	CPPUNIT_TEST( testNew );*/
 	CPPUNIT_TEST_SUITE_END();
 
 public:
 	void setUp();
 	void tearDown();
 
-	void testParentUsingStmtNum();
-	void testParentUsingStmtType();
+	void testParentIsParent();
+	void testParentGetAllChildrenParent();
 	void testAllBoolean();
 	void testGetParent();
 	void testGetChildren();
