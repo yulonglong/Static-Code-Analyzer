@@ -34,6 +34,13 @@ void NextTest::testSetAndGetNext() {
 	next1->printNextTable();
 	next1->printNextTableForTesting();
 
+	
+	next1->setNextPair(1,make_pair(2,3));
+	next1->setNextPair(1,make_pair(4,5));
+	next1->setNextPair(5,make_pair(6,0));
+	next1->setNextPair(7,make_pair(8,11));
+	next1->printNextPairTableForTesting();
+
 	vector<STMTNUM> ans (1,2);
 	ans.push_back(3);
 	ans.push_back(4);

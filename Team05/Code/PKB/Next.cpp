@@ -129,6 +129,19 @@ void Next::printNextTable() {
 	}
 }
 
+void Next::printNextPairTableForTesting() {
+	cout<< "Next pair Table" << endl;
+	for(unordered_map<STMTNUM, vector<pair<STMTNUM,STMTNUM>>>::iterator it = nextPairTable.begin(); it != nextPairTable.end(); it++) {
+		cout<<"("<< it->first<<"): [";
+		vector<pair<STMTNUM,STMTNUM>> temp = it->second; 
+		vector<pair<STMTNUM,STMTNUM>>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			cout<<"("<< iter->first<<","<<iter->second<<")";
+		}		
+		cout<<"]"<<endl;
+	}
+}
+
 void Next::printNextTableForTesting() {
 	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
 		cout<< it->first << "-";

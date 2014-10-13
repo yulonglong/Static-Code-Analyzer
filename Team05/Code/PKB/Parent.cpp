@@ -86,21 +86,21 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 //	}
 //}
 
-bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
-	try{
-		vector<int64_t> temp=parTable.at(s1);
-		int location =ceil((double)s2/63);
-		int bitPos = s2%63;
-		if(temp.size()<location)
-			return false;
-
-		int64_t bitArray = temp.at(location-1);
-		if((bitArray & ((int64_t)1<<bitPos))>0)
-			return true;
-	} catch(...){
-	}
-	return false;
-}
+//bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
+//	try{
+//		vector<int64_t> temp=parTable.at(s1);
+//		int location =ceil((double)s2/63);
+//		int bitPos = s2%63;
+//		if(temp.size()<location)
+//			return false;
+//
+//		int64_t bitArray = temp.at(location-1);
+//		if((bitArray & ((int64_t)1<<bitPos))>0)
+//			return true;
+//	} catch(...){
+//	}
+//	return false;
+//}
 
 bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	try{

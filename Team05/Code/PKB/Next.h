@@ -70,6 +70,7 @@ public:
 
 	void printNextTable();
 	void printNextTableForTesting();
+	void printNextPairTableForTesting();
 	/// @endcond
 };
 
