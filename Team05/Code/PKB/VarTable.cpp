@@ -7,6 +7,8 @@ VarTable* VarTable::varTable=NULL;
 
 // constructor
 VarTable::VarTable() {
+	vector<VARNAME> temp (1,"");
+	variableTable = temp;
 }
 
 VarTable::~VarTable(){

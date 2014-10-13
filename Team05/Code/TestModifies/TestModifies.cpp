@@ -17,7 +17,7 @@ void ModifiesTest::setUp() {
 	procTable = pkb->getProcTable();
 	modifies = Modifies::getInstance(typeTable,varTable,procTable);
 
-	varTable->insertVar("z");
+	/*varTable->insertVar("z");
 	varTable->insertVar("x");
 	varTable->insertVar("i");
 	
@@ -45,7 +45,7 @@ void ModifiesTest::setUp() {
 	modifies->setModifies(10, "x");
 	modifies->setModifies(10, "z");
 	modifies->setModifies(11, "x");
-	modifies->setModifies(12, "z");
+	modifies->setModifies(12, "z");*/
 	
 }
 
@@ -60,6 +60,53 @@ void ModifiesTest::tearDown() {
 	
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
+
+void ModifiesTest::test1() {
+	varTable->insertVar("a");
+	varTable->insertVar("b");
+	varTable->insertVar("c");
+	
+	modifies->setModifies(1, "a");
+	modifies->setModifies(1, "b");
+	modifies->setModifies(1, "c");
+	modifies->setModifies(2, "b");
+	modifies->setModifies(4, "c");
+	modifies->setModifies(1500, "a");
+
+	CPPUNIT_ASSERT(modifies->isModifies(1,"a")==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1,"b")==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1,"c")==true);
+	CPPUNIT_ASSERT(modifies->isModifies(2,"b")==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1500,"a")==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1500,"b")==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1501,"a")==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1549,"a")==false);
+	CPPUNIT_ASSERT(modifies->isModifies(-1,"a")==false);
+
+	vector<int> ans;
+	ans.push_back(1);
+	ans.push_back(2);
+	ans.push_back(3);
+	CPPUNIT_ASSERT(modifies->getModified(1)==ans);
+
+	ans.clear();
+	ans.push_back(1);
+	CPPUNIT_ASSERT(modifies->getModified(1500)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(modifies->getModified(1499)==ans);
+
+	ans.clear();
+	ans.push_back(1);
+	ans.push_back(1500);
+	cout<<"size of ans ="<<modifies->getModifies(1).size();
+	CPPUNIT_ASSERT(modifies->getModifies(1)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(modifies->getModifies(0)==ans);
+	CPPUNIT_ASSERT(modifies->getModifies(4)==ans);
+
+}
+
+
 
 void ModifiesTest::testGetModifies() {
 	modifies->printModifiesTable();

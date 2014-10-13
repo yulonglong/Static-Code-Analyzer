@@ -7,6 +7,8 @@ ProcTable* ProcTable::procTable=NULL;
 
 // constructor
 ProcTable::ProcTable() {
+	vector<PROCNAME> temp (1,"");
+	procedureTable = temp;
 }
 
 ProcTable::~ProcTable(){

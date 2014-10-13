@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <iterator>
+#include <cstdint>
 #include "TypeTable.h"
 #include "VarTable.h"
 #include "ProcTable.h"
@@ -37,11 +38,15 @@ class Modifies {
 private:
 	unordered_map<STMTNUM, vector<VARINDEX>> modifiesTable;
 	unordered_map<PROCINDEX, vector<VARINDEX>> modifiesProcTable;
+	vector<vector<int64_t>> modTable;
+	vector<vector<int64_t>> modVarTable;
 	static bool instanceFlag;
 	static Modifies *modifies;
 	TypeTable *typeTable; 
 	VarTable *varTable;
 	ProcTable *procTable;
+	vector<STMTNUM> modifiesList;
+	vector<VARINDEX> modifiedList;
 public:	
 	//! A constructor to initialize the Modifies class.
 	Modifies(TypeTable*, VarTable*, ProcTable*);

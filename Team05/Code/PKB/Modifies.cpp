@@ -49,27 +49,94 @@ void Modifies::setModifies(STMTNUM s, VARNAME v) {
 	}
 }
 
-
+//void Modifies::setModifies(STMTNUM s, VARNAME v) {
+//	try {
+//		VARINDEX index = varTable->getVarIndex(v);
+//		vector<int64_t> placeHolder (0,1);
+//		vector<int64_t> temp (0,1);
+//		try{
+//			temp = modTable.at(s);
+//		}catch(...){
+//			modTable.resize(s+1,placeHolder);
+//		}
+//		int location =ceil((double)index/63);
+//		int bitPos = index%63;
+//
+//		if(temp.size()<location)
+//			temp.resize(location);
+//
+//		int64_t bitArray = temp.at(location-1);
+//		bitArray = bitArray | (((int64_t)1)<<bitPos);
+//
+//		temp[location-1]=bitArray;
+//		modTable[s]=temp;
+//
+//		modifiesList.push_back(s);
+//		sort( modifiesList.begin(), modifiesList.end() );
+//		modifiesList.erase( unique( modifiesList.begin(), modifiesList.end() ), modifiesList.end() );
+//	}catch(...){
+//	}
+//
+//	try {
+//		VARINDEX index = varTable->getVarIndex(v);
+//		vector<int64_t> placeHolder (0,1);
+//		vector<int64_t> temp (0,1);
+//		try{
+//			temp = modVarTable.at(index);
+//		}catch(...){
+//			modVarTable.resize(index+1,placeHolder);
+//		}
+//		int location =ceil((double)s/63);
+//		int bitPos = s%63;
+//
+//		if(temp.size()<location)
+//			temp.resize(location);
+//
+//		int64_t bitArray = temp.at(location-1);
+//		bitArray = bitArray | (((int64_t)1)<<bitPos);
+//
+//		temp[location-1]=bitArray;
+//		modVarTable[index]=temp;
+//
+//		modifiedList.push_back(index);
+//		sort( modifiedList.begin(), modifiedList.end() );
+//		modifiedList.erase( unique( modifiedList.begin(), modifiedList.end() ), modifiedList.end() );
+//	}catch(...){
+//	}
+//}
 bool Modifies::isModifies(STMTNUM s, VARNAME v) {
 	//Select w such that Modifies(1, "y")
 	try {
 		VARINDEX index = varTable->getVarIndex(v);
-		if (index == -1) {
-			return false;
-		}
-		vector<VARINDEX> temp = modifiesTable.at(s);
-		vector<VARINDEX>::iterator it = temp.begin();
-		for (; it!=temp.end(); it++){
-			if (index == *it) {
-				return true;
-			}
-		}
+		if(isModifies(s,index))
+			return true;
 	} catch (...){
-		return false;
 	}
 	return false;
 }
 
+
+//bool Modifies::isModifies(STMTNUM s, VARINDEX index){
+//	//Select w such that Modifies(1, "y")
+//	try {
+//		if (index == -1) {
+//			return false;
+//		}
+//
+//		vector<int64_t> temp=modTable.at(s);
+//		int location =ceil((double)index/63);
+//		int bitPos = index%63;
+//		if(temp.size()<location)
+//			return false;
+//
+//		int64_t bitArray = temp.at(location-1);
+//		if((bitArray & ((int64_t)1<<bitPos))>0)
+//			return true;
+//	} catch (...){
+//		return false;
+//	}
+//	return false;
+//}
 
 bool Modifies::isModifies(STMTNUM s, VARINDEX index){
 	//Select w such that Modifies(1, "y")
@@ -90,6 +157,50 @@ bool Modifies::isModifies(STMTNUM s, VARINDEX index){
 	return false;
 }
 
+//vector<VARINDEX> Modifies::getModified(STMTNUM snum){
+//	vector<STMTNUM> ans;
+//	try{
+//		vector<int64_t> temp=modTable.at(snum);
+//
+//		for(size_t s = 0;s<temp.size();s++){
+//			int64_t bitArray = temp.at(s);
+//			while(bitArray>0){
+//				int64_t bit = bitArray & -bitArray;
+//				bitArray -= bit;
+//				int number = log((double)bit)/log(2.0) + s*63;
+//				ans.push_back(number);
+//			}
+//		}
+//		return ans;
+//	}
+//	catch(...){
+//		ans.clear();
+//		return ans;
+//	}
+//}
+
+vector<VARINDEX> Modifies::getModifies(VARINDEX i){
+	vector<STMTNUM> ans;
+	try{
+		vector<int64_t> temp=modVarTable.at(i);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.push_back(number);
+			}
+		}
+		return ans;
+	}
+	catch(...){
+		ans.clear();
+		return ans;
+	}
+}
+
 vector<VARINDEX> Modifies::getModified(STMTNUM s){
 	vector<STMTNUM> ans;
 	try{
@@ -101,41 +212,11 @@ vector<VARINDEX> Modifies::getModified(STMTNUM s){
 }
 
 vector<VARINDEX> Modifies::getAllModified(){
-	vector<VARINDEX> ans; 
-	vector<VARINDEX> temp;
-	vector<VARINDEX> temp2;
-	try{
-		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
-			try {
-				temp = it->second;
-
-				temp2.reserve(ans.size()+temp.size());
-				temp2.insert(temp2.end(), temp.begin(), temp.end());
-				temp2.insert(temp2.end(), ans.begin(), ans.end());
-				sort( temp2.begin(), temp2.end() );
-				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
-				ans = temp2;
-			} catch (...) {
-				continue;
-			}
-		}
-	}catch(...){
-		ans.clear();
-		return ans;
-	}
-	return ans;
+	return modifiedList;
 }
 
 vector<STMTNUM> Modifies::getAllModifies(){
-	vector<STMTNUM> ans;
-	for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++) {
-		try {
-			ans.push_back(it->first);
-		} catch (...) {
-			continue;
-		}
-	}
-	return ans;
+	return modifiesList;
 }
 
 bool Modifies::isModifiesProc(PROCINDEX procIndex, VARINDEX index){
@@ -249,18 +330,6 @@ vector<STMTNUM> Modifies::getModifies(SYNTYPE t, VARNAME v) {
 		sort(ans.begin(),ans.end());
 		return ans;
 	} catch(...){
-		ans.clear();
-	}
-	return ans;
-}
-
-vector<VARINDEX> Modifies::getModifies(STMTNUM stmt) {	
-	//Select v such that Modifies(1, v)	return empty vector if doesnt exist };
-	vector<VARINDEX> ans;
-	try {
-		ans = modifiesTable.at(stmt);
-		return ans;
-	} catch(...) {
 		ans.clear();
 	}
 	return ans;
