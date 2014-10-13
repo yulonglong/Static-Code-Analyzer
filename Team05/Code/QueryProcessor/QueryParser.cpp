@@ -421,6 +421,32 @@ Relationship::TokenType QueryParser::detectTokenType(string token){
 	}
 }
 
+bool QueryParser::isValidSynonymStatement(string syn){
+	unordered_map<string, TypeTable::SynType>::iterator it;
+	it = synMap.find(syn);
+	if(it==synMap.end()){
+		return false;
+	}
+	else if(it->second == TypeTable::PROGLINE){
+		return true;
+	}
+	else if(it->second == TypeTable::ASSIGN){
+		return true;
+	}
+	else if(it->second == TypeTable::IF){
+		return true;
+	}
+	else if(it->second == TypeTable::WHILE){
+		return true;
+	}
+	else if(it->second == TypeTable::CALL){
+		return true;
+	}
+	else if(it->second == TypeTable::STMT){
+		return true;
+	}
+	return false;
+}
 
 Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool& clauseValid){
 	v.at(i) = stringToLower(v.at(i));
@@ -461,13 +487,9 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
-			else if((relationRef == NEXT) || (relationRef == NEXTSTAR)){
-				if(!(it->second == TypeTable::PROGLINE)){
-					synValid = false;
-				}
-			}
-			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
-				if(!(it->second == TypeTable::ASSIGN)){
+			else if((relationRef == MODIFIES) || (relationRef == USES)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if ((!validStatement)&&(it->second != TypeTable::PROCEDURE)){
 					synValid = false;
 				}
 			}
@@ -476,7 +498,23 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
-			
+			else if((relationRef == FOLLOWS) || (relationRef == FOLLOWSSTAR)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
+					synValid = false;
+				}
+			}
+			else if((relationRef == NEXT) || (relationRef == NEXTSTAR)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
+					synValid = false;
+				}
+			}
+			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
+				if(!(it->second == TypeTable::ASSIGN)){
+					synValid = false;
+				}
+			}
 		}
 
 		//second argument
@@ -494,8 +532,26 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
+			else if((relationRef == MODIFIES) || (relationRef == USES)){
+				if(!(it->second == TypeTable::VARIABLE)){
+					synValid = false;
+				}
+			}
+			else if((relationRef == PARENT) || (relationRef == PARENTSTAR)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
+					synValid = false;
+				}
+			}
+			else if((relationRef == FOLLOWS) || (relationRef == FOLLOWSSTAR)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
+					synValid = false;
+				}
+			}
 			else if((relationRef == NEXT) || (relationRef == NEXTSTAR)){
-				if(!(it->second == TypeTable::PROGLINE)){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
 					synValid = false;
 				}
 			}
@@ -504,11 +560,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
-			else if((relationRef == MODIFIES) || (relationRef == USES)){
-				if(!(it->second == TypeTable::VARIABLE)){
-					synValid = false;
-				}
-			}
+			
 		}
 		
 	}
