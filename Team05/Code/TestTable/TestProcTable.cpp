@@ -45,5 +45,18 @@ void ProcTableTest::testTableSet()
 	// attempt to retrieve a course that does not exist
 	CPPUNIT_ASSERT_EQUAL(-1, procTable.getProcIndex("Fourth"));
 
+	CPPUNIT_ASSERT("First" == procTable.getProcName(0));
+	CPPUNIT_ASSERT("Second" == procTable.getProcName(1));
+	CPPUNIT_ASSERT("Third" == procTable.getProcName(2));
+	CPPUNIT_ASSERT("" == procTable.getProcName(3));
+	CPPUNIT_ASSERT("" == procTable.getProcName(-1));
+
+	CPPUNIT_ASSERT(3 == procTable.getNumProcedures());
+
+	vector<int> ans;
+	ans.emplace_back(0);
+	ans.emplace_back(1);
+	ans.emplace_back(2);
+	CPPUNIT_ASSERT(ans == procTable.getAllProcIndexes());
 	return;
 }

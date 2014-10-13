@@ -4,15 +4,14 @@
 
 bool ProcTable::instanceFlag=false;
 ProcTable* ProcTable::procTable=NULL;
-PROCINDEX ProcTable::currentIndex = 0;
 
 // constructor
 ProcTable::ProcTable() {
-	currentIndex = 0;
 }
 
 ProcTable::~ProcTable(){
 	procedureTable.clear();
+	procedureMapTable.clear();
 	instanceFlag=false;
 }
 
@@ -35,31 +34,34 @@ ProcTable* ProcTable::getInstance() {
 void ProcTable::insertProc(PROCNAME procName) {
 	PROCINDEX procIndex = getProcIndex(procName);
 	bool containsVariable = (procIndex != -1);
-		
+	
 	if (!containsVariable) {
-		procedureTable[currentIndex] = procName;
-		currentIndex++;
+		procedureMapTable[procName]=procedureTable.size();
+		procedureTable.emplace_back(procName);
 	}
 }
 
 // Returns the name of a proc at ProTable [ind]
 // If ‘ind’ is out of range, error (or throw exception)
-PROCNAME ProcTable::getProcName (PROCINDEX ind){
+PROCNAME ProcTable::getProcName (PROCINDEX i){
 	try{
-		return procedureTable.at(ind);
+		size_t index = i;
+		if(index>=procedureTable.size())
+			return "";
+		return procedureTable.at(index);
 	}catch(...){
+		return "";
 	}
-	return "";
 }
 
 // If procName is in procTable, returns its index; otherwise, returns -1 (special value)
 PROCINDEX ProcTable::getProcIndex (PROCNAME procName){
-	for(unordered_map<PROCINDEX, PROCNAME>::iterator it = procedureTable.begin(); it != procedureTable.end(); it++) {
-		if (procName == it->second) {
-			return it->first; 
-		}
+	try{
+		return procedureMapTable.at(procName);
 	}
-	return -1;
+	catch(...){
+		return -1;
+	}
 }
 
 int ProcTable::getNumProcedures() {
@@ -67,9 +69,9 @@ int ProcTable::getNumProcedures() {
 }
 
 vector<PROCINDEX> ProcTable::getAllProcIndexes(){
-	vector<PROCINDEX> toReturn;
+	vector<PROCINDEX> toReturn (procedureTable.size(),1);
 	for (int i=0; i< (signed int) procedureTable.size(); i++) {
-		toReturn.emplace_back(i);
+		toReturn[i]=i;
 	}
 	return toReturn; 
 }

@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include <unordered_map>
+#include <map>
 
 using namespace std;
 typedef int VARINDEX;
@@ -34,7 +34,8 @@ typedef string VARNAME;
 
 class VarTable {
 private: 
-	unordered_map<VARINDEX, VARNAME> variableTable; 
+	vector<VARNAME> variableTable;
+	map<VARNAME,VARINDEX> variableMapTable;
 	static bool instanceFlag;
 	static VarTable *varTable;
 	static VARINDEX currentIndex;

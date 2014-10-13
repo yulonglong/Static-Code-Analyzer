@@ -45,5 +45,18 @@ void VarTableTest::testTableSet()
 	// attempt to retrieve a course that does not exist
 	CPPUNIT_ASSERT_EQUAL(-1, varTable.getVarIndex("a"));
 
+	CPPUNIT_ASSERT("x" == varTable.getVarName(0));
+	CPPUNIT_ASSERT("y" == varTable.getVarName(1));
+	CPPUNIT_ASSERT("z" == varTable.getVarName(2));
+	CPPUNIT_ASSERT("" == varTable.getVarName(3));
+	CPPUNIT_ASSERT("" == varTable.getVarName(-1));
+
+	CPPUNIT_ASSERT(3 == varTable.getNumVar());
+
+	vector<int> ans;
+	ans.emplace_back(0);
+	ans.emplace_back(1);
+	ans.emplace_back(2);
+	CPPUNIT_ASSERT(ans == varTable.getAllVarIndex());
 	return;
 }

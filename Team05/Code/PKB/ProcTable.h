@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include <unordered_map>
+#include <map>
 
 using namespace std;
 typedef int PROCINDEX;
@@ -34,8 +34,8 @@ typedef string PROCNAME;
 
 class ProcTable {
 private: 
-	static PROCINDEX currentIndex;
-	unordered_map<PROCINDEX, PROCNAME> procedureTable; 
+	map<PROCNAME,PROCINDEX> procedureMapTable;
+	vector<PROCNAME> procedureTable;
 	static bool instanceFlag;
 	static ProcTable *procTable;
 public:
