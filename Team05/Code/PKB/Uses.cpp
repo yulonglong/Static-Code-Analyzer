@@ -46,13 +46,9 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 			usesTable[s] = temp;
 		}
 
-		usesList.push_back(s);
-		sort( usesList.begin(), usesList.end() );
-		usesList.erase( unique( usesList.begin(), usesList.end() ), usesList.end() );
+		usesList.insert(s);
 
-		usedList.push_back(index);
-		sort( usedList.begin(), usedList.end() );
-		usedList.erase( unique( usedList.begin(), usedList.end() ), usedList.end() );
+		usedList.insert(index);
 
 	}catch(...){
 	}
@@ -192,8 +188,8 @@ bool Uses::isUses(STMTNUM s, VARINDEX index){
 
 
 
-vector<VARINDEX> Uses::getUses(VARINDEX i){
-	vector<STMTNUM> ans;
+set<VARINDEX> Uses::getUses(VARINDEX i){
+	set<STMTNUM> ans;
 	try{
 		vector<int64_t> temp=usesBitVarTable.at(i);
 
@@ -203,7 +199,7 @@ vector<VARINDEX> Uses::getUses(VARINDEX i){
 				int64_t bit = bitArray & -bitArray;
 				bitArray -= bit;
 				int number = log((double)bit)/log(2.0) + s*63;
-				ans.push_back(number);
+				ans.insert(number);
 			}
 		}
 		return ans;
@@ -214,21 +210,24 @@ vector<VARINDEX> Uses::getUses(VARINDEX i){
 	}
 }
 
-vector<VARINDEX> Uses::getUsed(STMTNUM s){
-	vector<STMTNUM> ans;
+set<VARINDEX> Uses::getUsed(STMTNUM s){
+	set<STMTNUM> ans;
 	try{
-		ans = usesTable.at(s);
+		vector<STMTNUM> tempVec = usesTable.at(s);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch (...){
 		return ans;
 	}
 }
 
-vector<VARINDEX> Uses::getAllUsed(){
+set<VARINDEX> Uses::getAllUsed(){
 	return usedList;
 }
 
-vector<STMTNUM> Uses::getAllUses(){
+set<STMTNUM> Uses::getAllUses(){
 	return usesList;
 }
 
@@ -249,63 +248,31 @@ bool Uses::isUsesProc(PROCINDEX procIndex, VARINDEX index){
 	return false;
 }
 
-vector<VARINDEX> Uses::getUsedProc(PROCINDEX s){
-	vector<STMTNUM> ans;
+set<VARINDEX> Uses::getUsedProc(PROCINDEX s){
+	set<STMTNUM> ans;
 	try{
-		ans = usesProcTable.at(s);
+		vector<STMTNUM> tempVec = usesProcTable.at(s);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch (...){
 		return ans;
 	}
 }
 
-vector<VARINDEX> Uses::getAllUsedProc(){
-	vector<VARINDEX> ans; 
-	vector<VARINDEX> temp;
-	vector<VARINDEX> temp2;
-	try{
-		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesProcTable.begin(); it != usesProcTable.end(); it++) {
-			try {
-				temp = it->second;
-
-				temp2.reserve(ans.size()+temp.size());
-				temp2.insert(temp2.end(), temp.begin(), temp.end());
-				temp2.insert(temp2.end(), ans.begin(), ans.end());
-				sort( temp2.begin(), temp2.end() );
-				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
-				ans = temp2;
-			} catch (...) {
-				continue;
-			}
-		}
-	}catch(...){
-		ans.clear();
-		return ans;
-	}
-	return ans;
+set<VARINDEX> Uses::getAllUsedProc(){
+	return usedProcList;
 }
 
-vector<PROCINDEX> Uses::getAllUsesProc(){
-	vector<PROCINDEX> ans; 
-	for (unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = usesProcTable.begin(); it != usesProcTable.end(); it++) {
-		try {
-			ans.push_back(it->first);
-		} catch (...) {
-			continue;
-		}
-	}
-	return ans;
+set<PROCINDEX> Uses::getAllUsesProc(){
+	return usesProcList;
 }
 
 
 
-
-
-
-
-
-vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	Return an empty vector if not found.
-	vector<VARINDEX> ans;
+set<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	Return an empty vector if not found.
+	set<VARINDEX> ans;
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
 		if(index==-1){
@@ -317,17 +284,16 @@ vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a
 			for(;iter!=temp.end();++iter){
 				if(*iter==index){
 					if(t==TypeTable::STMT){
-						ans.push_back(it->first);
+						ans.insert(it->first);
 						break;
 					}
 					else if(typeTable->isType(t,it->first)){
-						ans.push_back(it->first);
+						ans.insert(it->first);
 						break;
 					}
 				}
 			}
 		}
-		sort(ans.begin(),ans.end());
 		return ans;
 	}catch(...){
 		ans.clear();
@@ -345,16 +311,15 @@ vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a
 //	}
 //}
 
-vector<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); return empty vector if does not exist
-	vector<VARINDEX> ans;
+set<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); return empty vector if does not exist
+	set<VARINDEX> ans;
 	try{
 		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
 			if(!it->second.empty() && it->second!=vector<int> (1,-1)){
 				if(typeTable->isType(type,it->first))
-					ans.push_back(it->first);
+					ans.insert(it->first);
 			}
 		}
-		sort(ans.begin(),ans.end());
 		return ans;
 	}catch(...){
 		ans.clear();
@@ -372,15 +337,22 @@ void Uses::setUsesProc(PROCINDEX p, vector<VARINDEX> v) {
 		sort( temp.begin(), temp.end() );
 		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
 		usesProcTable[p] = temp;
+
+		usesProcList.insert(p);
+		for(vector<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
+			usedProcList.insert(*it);
 	} catch(...){
 		usesProcTable[p] = v;
 	} 
 }
 
-vector<VARINDEX> Uses::getUsesProc(PROCINDEX p) {	
-	vector<VARINDEX> ans;
+set<VARINDEX> Uses::getUsesProc(PROCINDEX p) {	
+	set<VARINDEX> ans;
 	try {
-		ans = usesProcTable.at(p);
+		vector<STMTNUM> tempVec = usesProcTable.at(p);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch(...){
 		return ans;
@@ -402,12 +374,11 @@ void Uses::setUses(STMTNUM s, vector<VARINDEX> v) {
 	}
 }
 
-vector<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
+	set<PROCINDEX> ans;
 	try {
 		VARINDEX varIndex = varTable->getVarIndex(v);
 		if (varIndex == -1 ) {
-			ans = vector<PROCINDEX> (1,-1);
 			return ans;
 		}
 
@@ -416,7 +387,7 @@ vector<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
 			vector<VARINDEX>::iterator iter;
 			for (iter = temp.begin(); iter!=temp.end(); iter++) {
 				if (*iter == varIndex) {
-					ans.push_back(it->first);
+					ans.insert(it->first);
 					break;
 				}
 			}		

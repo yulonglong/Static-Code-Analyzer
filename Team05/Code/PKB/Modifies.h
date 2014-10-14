@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <set>
 #include <iterator>
 #include <cstdint>
 #include "TypeTable.h"
@@ -45,8 +46,10 @@ private:
 	TypeTable *typeTable; 
 	VarTable *varTable;
 	ProcTable *procTable;
-	vector<STMTNUM> modifiesList;
-	vector<VARINDEX> modifiedList;
+	set<STMTNUM> modifiesList;
+	set<VARINDEX> modifiedList;
+	set<PROCINDEX> modifiesProcList;
+	set<VARINDEX> modifiedProcList;
 public:	
 	//! A constructor to initialize the Modifies class.
 	Modifies(TypeTable*, VarTable*, ProcTable*);
@@ -61,25 +64,25 @@ public:
 	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")	
 	
 	bool isModifies(STMTNUM s, VARINDEX i);
-	vector<VARINDEX> getModified(STMTNUM s);
-	vector<STMTNUM> getModifies(VARINDEX i);
-	vector<VARINDEX> getAllModified();
-	vector<STMTNUM> getAllModifies();
+	set<VARINDEX> getModified(STMTNUM s);
+	set<STMTNUM> getModifies(VARINDEX i);
+	set<VARINDEX> getAllModified();
+	set<STMTNUM> getAllModifies();
 
 	bool isModifiesProc(PROCINDEX p, VARINDEX i);
-	vector<VARINDEX> getModifiedProc(PROCINDEX p);
-	vector<PROCINDEX> getModifiesProc(VARINDEX i);
-	vector<VARINDEX> getAllModifiedProc();
-	vector<PROCINDEX> getAllModifiesProc();
+	set<VARINDEX> getModifiedProc(PROCINDEX p);
+	set<PROCINDEX> getModifiesProc(VARINDEX i);
+	set<VARINDEX> getAllModifiedProc();
+	set<PROCINDEX> getAllModifiesProc();
 
 
 
 	//! Return all statement numbers such that each statement number has the given SynType and modifies any variable. Return an empty vector if not found.
-	vector<STMTNUM> getModifies(SYNTYPE);	//Returns STMTNUM of statements of type t that modifies any variable;
+	set<STMTNUM> getModifies(SYNTYPE);	//Returns STMTNUM of statements of type t that modifies any variable;
 	//! Return all variable indexes such that each variable index is modified in the given statement number. Return an empty vector if not found.
 //	vector<VARINDEX> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
 	//! Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. Return an empty vector if not found.
-	vector<STMTNUM> getModifies(SYNTYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
+	set<STMTNUM> getModifies(SYNTYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
 
 	//! Set the Modifies relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
 	void setModifies(STMTNUM, vector<VARINDEX>);
@@ -89,7 +92,7 @@ public:
 	//vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
 	
 	//! Return all the procedure indexes such that each procedure index modifies the given variable. Return an empty vector if not found.
-	vector<PROCINDEX> getModifiesProcVar(VARNAME);
+	set<PROCINDEX> getModifiesProcVar(VARNAME);
 	//! If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
 	bool isModifiesProc(PROCNAME, VARNAME); 
 

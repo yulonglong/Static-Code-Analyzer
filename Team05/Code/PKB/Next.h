@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <algorithm>
+#include <set>
 #include <utility>
 #include <iterator>
 #include "TypeTable.h"
@@ -51,8 +52,8 @@ public:
 	void setNext(STMTNUM, STMTNUM);
 
 
-	vector<STMTNUM> getAllNext();
-	vector<STMTNUM> getAllPrevious();
+	set<STMTNUM> getAllNext();
+	set<STMTNUM> getAllPrevious();
 
 	void setNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
@@ -60,9 +61,9 @@ public:
 
 
 	//Temp method. lacie give me the correct one please
-	vector<STMTNUM> getNext(STMTNUM);
+	set<STMTNUM> getNext(STMTNUM);
 	//Temp method. lacie give me the correct one please
-	vector<STMTNUM> getPrevious(STMTNUM);
+	set<STMTNUM> getPrevious(STMTNUM);
 
 	/// @cond
 	//ADDITIONAL METHODS

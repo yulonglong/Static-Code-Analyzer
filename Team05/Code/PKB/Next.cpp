@@ -57,20 +57,26 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 	}
 }
 
-vector<STMTNUM> Next::getNext(STMTNUM s){
-	vector<STMTNUM> ans;
+set<STMTNUM> Next::getNext(STMTNUM s){
+	set<STMTNUM> ans;
 	try{
-		ans = nextTable.at(s);
+		vector<STMTNUM> tempVec = nextTable.at(s);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch(...) {
 		return ans;
 	}
 }
 
-vector<STMTNUM> Next::getPrevious(STMTNUM s){
-	vector<STMTNUM> ans;
+set<STMTNUM> Next::getPrevious(STMTNUM s){
+	set<STMTNUM> ans;
 	try{
-		ans = previousTable.at(s);
+		vector<STMTNUM> tempVec = previousTable.at(s);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch(...) {
 		return ans;
@@ -154,22 +160,22 @@ void Next::printNextTableForTesting() {
 	}
 }
 
-vector<STMTNUM> Next::getAllNext(){
-	vector<STMTNUM> ans;
+set<STMTNUM> Next::getAllNext(){
+	set<STMTNUM> ans;
 	try{
 		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
-			ans.push_back(it->first);
+			ans.insert(it->first);
 		}
 	} catch(...) {
 		ans.clear();
 	}
 	return ans;
 }
-vector<STMTNUM> Next::getAllPrevious(){
-	vector<STMTNUM> ans;
+set<STMTNUM> Next::getAllPrevious(){
+	set<STMTNUM> ans;
 	try{
 		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = previousTable.begin(); it != previousTable.end(); it++) {
-			ans.push_back(it->first);
+			ans.insert(it->first);
 		}
 	} catch(...) {
 		ans.clear();

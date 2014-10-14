@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <cstdint>
+#include <set>
 #include "TypeTable.h"
 #include "VarTable.h"
 #include "ProcTable.h"
@@ -41,8 +42,10 @@ private:
 	TypeTable *typeTable;
 	VarTable *varTable;
 	ProcTable *procTable;
-	vector<STMTNUM> usesList;
-	vector<VARINDEX> usedList;
+	set<STMTNUM> usesList;
+	set<VARINDEX> usedList;
+	set<PROCINDEX> usesProcList;
+	set<VARINDEX> usedProcList;
 public:
 	//! A constructor to initialize the Uses class.
 	Uses(TypeTable*, VarTable*, ProcTable*);
@@ -56,26 +59,26 @@ public:
 	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
 
 	bool isUses(STMTNUM, VARINDEX);
-	vector<VARINDEX> getUsed(STMTNUM);
-	vector<STMTNUM> getUses(VARINDEX);
-	vector<VARINDEX> getAllUsed();
-	vector<STMTNUM> getAllUses();
+	set<VARINDEX> getUsed(STMTNUM);
+	set<STMTNUM> getUses(VARINDEX);
+	set<VARINDEX> getAllUsed();
+	set<STMTNUM> getAllUses();
 
 	bool isUsesProc(PROCINDEX, VARINDEX);
-	vector<VARINDEX> getUsedProc(PROCINDEX);
-	vector<PROCINDEX> getUsesProc(VARINDEX);
-	vector<VARINDEX> getAllUsedProc();
-	vector<PROCINDEX> getAllUsesProc();
+	set<VARINDEX> getUsedProc(PROCINDEX);
+	set<PROCINDEX> getUsesProc(VARINDEX);
+	set<VARINDEX> getAllUsedProc();
+	set<PROCINDEX> getAllUsesProc();
 
 
 
 
 	//! Return all statement numbers such that each statement number has the given SynType and uses any variable. Return an empty vector if not found.
-	vector<STMTNUM> getUses(SYNTYPE);//Select a such that Uses(a, v); 
+	set<STMTNUM> getUses(SYNTYPE);//Select a such that Uses(a, v); 
 	//! Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found.
 	//vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes.
 	//! Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found.
-	vector<STMTNUM> getUses(SYNTYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
+	set<STMTNUM> getUses(SYNTYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
 	
 	//! Set the Uses relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
 	void setUses(STMTNUM, vector<VARINDEX>);
@@ -85,7 +88,7 @@ public:
 	//vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
 	
 	//! Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found.
-	vector<PROCINDEX> getUsesProcVar(VARNAME);
+	set<PROCINDEX> getUsesProcVar(VARNAME);
 	//! If the Uses relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
 	bool isUsesProc(PROCNAME, VARNAME);
 

@@ -147,10 +147,10 @@ public:
 
 	//! If the Calls relationship between the two procedure names is true, return true. Otherwise, return false.
 	bool isCalls(PROCINDEX,PROCINDEX);
-	vector<PROCINDEX> getAllCalls(); 
-	vector<PROCINDEX> getCalls(PROCINDEX); 	
-	vector<PROCINDEX> getAllCalled(); 
-	vector<PROCINDEX> getCalled(PROCINDEX);
+	set<PROCINDEX> getAllCalls(); 
+	set<PROCINDEX> getCalls(PROCINDEX); 	
+	set<PROCINDEX> getAllCalled(); 
+	set<PROCINDEX> getCalled(PROCINDEX);
 
 	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	
@@ -167,34 +167,34 @@ public:
 
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isModifies(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
-	vector<VARINDEX> getModified(STMTNUM);
-	vector<STMTNUM> getModifies(VARINDEX); //NOT IMPLEMENTED YET
-	vector<VARINDEX> getAllModified();
-	vector<STMTNUM> getAllModifies();
+	set<VARINDEX> getModified(STMTNUM);
+	set<STMTNUM> getModifies(VARINDEX); //NOT IMPLEMENTED YET
+	set<VARINDEX> getAllModified();
+	set<STMTNUM> getAllModifies();
 
 	bool isModifiesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
-	vector<VARINDEX> getModifiedProc(STMTNUM);
-	vector<STMTNUM> getModifiesProc(PROCINDEX); //NOT IMPLEMENTED YET
-	vector<PROCINDEX> getAllModifiedProc();
-	vector<STMTNUM> getAllModifiesProc();
+	set<VARINDEX> getModifiedProc(STMTNUM);
+	set<STMTNUM> getModifiesProc(PROCINDEX); //NOT IMPLEMENTED YET
+	set<PROCINDEX> getAllModifiedProc();
+	set<STMTNUM> getAllModifiesProc();
 
 	bool isUses(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
-	vector<VARINDEX> getUsed(STMTNUM);
-	vector<STMTNUM> getUses(VARINDEX); //NOT IMPLEMENTED YET
-	vector<VARINDEX> getAllUsed();
-	vector<STMTNUM> getAllUses();
+	set<VARINDEX> getUsed(STMTNUM);
+	set<STMTNUM> getUses(VARINDEX); //NOT IMPLEMENTED YET
+	set<VARINDEX> getAllUsed();
+	set<STMTNUM> getAllUses();
 
 	bool isUsesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
-	vector<VARINDEX> getUsedProc(STMTNUM);
-	vector<STMTNUM> getUsesProc(PROCINDEX); //NOT IMPLEMENTED YET
-	vector<PROCINDEX> getAllUsedProc();
-	vector<STMTNUM> getAllUsesProc();
+	set<VARINDEX> getUsedProc(STMTNUM);
+	set<STMTNUM> getUsesProc(PROCINDEX); //NOT IMPLEMENTED YET
+	set<PROCINDEX> getAllUsedProc();
+	set<STMTNUM> getAllUsesProc();
 
 	bool isNext(STMTNUM, STMTNUM);
-	vector<STMTNUM> getNext(STMTNUM);
-	vector<STMTNUM> getPrevious(STMTNUM);
-	vector<STMTNUM> getAllNext();
-	vector<STMTNUM> getAllPrevious();
+	set<STMTNUM> getNext(STMTNUM);
+	set<STMTNUM> getPrevious(STMTNUM);
+	set<STMTNUM> getAllNext();
+	set<STMTNUM> getAllPrevious();
 	//printNextTable(); ??
 
 	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table

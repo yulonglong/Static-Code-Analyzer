@@ -249,19 +249,19 @@ bool PKB::isCalls(PROCINDEX p1,PROCINDEX p2){
 	return calls->isCalls2(p1,p2);
 }
 
-vector<PROCINDEX> PKB::getAllCalls(){
+set<PROCINDEX> PKB::getAllCalls(){
 	return calls->getCalls();
 }
 
-vector<PROCINDEX> PKB::getCalls(PROCINDEX p){
+set<PROCINDEX> PKB::getCalls(PROCINDEX p){
 	return calls->getCalls2(p);
 }
 
-vector<PROCINDEX> PKB::getAllCalled(){
+set<PROCINDEX> PKB::getAllCalled(){
 	return calls->getCalled();
 }
 
-vector<PROCINDEX> PKB::getCalled(PROCINDEX p){
+set<PROCINDEX> PKB::getCalled(PROCINDEX p){
 	return calls->getCalled2(p);
 }
 
@@ -311,19 +311,19 @@ bool PKB::isModifies(STMTNUM s, VARINDEX i){
 	return modifies->isModifies(s, i);
 }
 
-vector<VARINDEX> PKB::getModified(STMTNUM s){
+set<VARINDEX> PKB::getModified(STMTNUM s){
 	return modifies->getModified(s);
 }
 
-vector<STMTNUM> PKB::getModifies(VARINDEX i){
+set<STMTNUM> PKB::getModifies(VARINDEX i){
 	return modifies->getModifies(i);
 }
 
-vector<VARINDEX> PKB::getAllModified(){
+set<VARINDEX> PKB::getAllModified(){
 	return modifies->getAllModified();
 }
 
-vector<STMTNUM> PKB::getAllModifies(){
+set<STMTNUM> PKB::getAllModifies(){
 	return modifies->getAllModifies();
 }
 
@@ -332,19 +332,19 @@ bool PKB::isModifiesProc(STMTNUM s, PROCINDEX p){
 	return modifies->isModifiesProc(s,p);
 }
 
-vector<VARINDEX> PKB::getModifiedProc(STMTNUM s){
+set<VARINDEX> PKB::getModifiedProc(STMTNUM s){
 	return modifies->getModifiedProc(s);
 }
 
-vector<STMTNUM> PKB::getModifiesProc(PROCINDEX p){
+set<STMTNUM> PKB::getModifiesProc(PROCINDEX p){
 	return modifies->getModifiesProc(p);
 }
 
-vector<PROCINDEX> PKB::getAllModifiedProc(){
+set<PROCINDEX> PKB::getAllModifiedProc(){
 	return modifies->getAllModifiedProc();
 }
 
-vector<STMTNUM> PKB::getAllModifiesProc(){
+set<STMTNUM> PKB::getAllModifiesProc(){
 	return modifies->getAllModifiesProc();
 }
 
@@ -352,33 +352,33 @@ bool PKB::isUses(STMTNUM s, VARINDEX i){
 	return uses->isUses(s, i);
 }
 
-vector<VARINDEX> PKB::getUsed(STMTNUM s){
+set<VARINDEX> PKB::getUsed(STMTNUM s){
 	return uses->getUsed(s);
 }
 
-vector<STMTNUM> PKB::getUses(VARINDEX i){
+set<STMTNUM> PKB::getUses(VARINDEX i){
 	return uses->getUses(i);
 }
-vector<VARINDEX> PKB::getAllUsed(){
+set<VARINDEX> PKB::getAllUsed(){
 	return uses->getAllUsed();
 }
-vector<STMTNUM> PKB::getAllUses(){
+set<STMTNUM> PKB::getAllUses(){
 	return uses->getAllUses();
 }
 
 bool PKB::isUsesProc(STMTNUM s, PROCINDEX i){
 	return uses->isUsesProc(s, i);
 }
-vector<VARINDEX> PKB::getUsedProc(STMTNUM s){
+set<VARINDEX> PKB::getUsedProc(STMTNUM s){
 	return uses->getUsedProc(s);
 }
-vector<STMTNUM> PKB::getUsesProc(PROCINDEX i){
+set<STMTNUM> PKB::getUsesProc(PROCINDEX i){
 	return uses->getUsesProc(i);
 }
-vector<PROCINDEX> PKB::getAllUsedProc(){
+set<PROCINDEX> PKB::getAllUsedProc(){
 	return uses->getAllUsedProc();
 }
-vector<STMTNUM> PKB::getAllUsesProc(){
+set<STMTNUM> PKB::getAllUsesProc(){
 	return uses->getAllUsesProc();
 }
 
@@ -386,16 +386,16 @@ bool PKB::isNext(STMTNUM s1, STMTNUM s2){
 	return next->isNext(s1,s2);
 }
 
-vector<STMTNUM> PKB::getNext(STMTNUM s){
+set<STMTNUM> PKB::getNext(STMTNUM s){
 	return next->getNext(s);
 }
-vector<STMTNUM> PKB::getPrevious(STMTNUM s){
+set<STMTNUM> PKB::getPrevious(STMTNUM s){
 	return next->getPrevious(s);
 }
-vector<STMTNUM> PKB::getAllNext(){
+set<STMTNUM> PKB::getAllNext(){
 	return next->getAllNext();
 }
-vector<STMTNUM> PKB::getAllPrevious(){
+set<STMTNUM> PKB::getAllPrevious(){
 	return next->getAllPrevious();
 }
 

@@ -89,32 +89,30 @@ bool Calls::isCalls2(PROCINDEX index1, PROCINDEX index2){
 	}
 }
 
-vector<PROCINDEX> Calls::getCalls(){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalls(){
+	set<PROCINDEX> ans;
 	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it = callsTable.begin();it!=callsTable.end();it++)
-		ans.push_back(it->first);
+		ans.insert(it->first);
 	return ans;
 }
 
-vector<PROCINDEX> Calls::getCalled(){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalled(){
+	set<PROCINDEX> ans;
 	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1 = callsTable.begin();it1!=callsTable.end();it1++){
 		for(vector<CALLSPAIR>::iterator it2 = it1->second.begin();it2!=it1->second.end();it2++)
-			ans.push_back(it2->first);
+			ans.insert(it2->first);
 	}
-	sort( ans.begin(), ans.end() );
-	ans.erase( unique( ans.begin(), ans.end() ), ans.end() );
 	return ans;
 }
 
-vector<PROCINDEX> Calls::getCalls(PROCNAME p){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalls(PROCNAME p){
+	set<PROCINDEX> ans;
 	PROCINDEX index = procTable->getProcIndex(p);
 	try{
 		for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1 = callsTable.begin();it1!=callsTable.end();it1++){
 			for(vector<CALLSPAIR>::iterator it2 = it1->second.begin();it2!=it1->second.end();it2++){
 				if(it2->first == index){
-					ans.push_back(it1->first);
+					ans.insert(it1->first);
 					break;
 				}
 			}
@@ -124,13 +122,13 @@ vector<PROCINDEX> Calls::getCalls(PROCNAME p){
 	return ans;
 }
 
-vector<PROCINDEX> Calls::getCalls2(PROCINDEX index){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalls2(PROCINDEX index){
+	set<PROCINDEX> ans;
 	try{
 		for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1 = callsTable.begin();it1!=callsTable.end();it1++){
 			for(vector<CALLSPAIR>::iterator it2 = it1->second.begin();it2!=it1->second.end();it2++){
 				if(it2->first == index){
-					ans.push_back(it1->first);
+					ans.insert(it1->first);
 					break;
 				}
 			}
@@ -140,29 +138,29 @@ vector<PROCINDEX> Calls::getCalls2(PROCINDEX index){
 	return ans;
 }
 
-vector<PROCINDEX> Calls::getCalled(PROCNAME p){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalled(PROCNAME p){
+	set<PROCINDEX> ans;
 	PROCINDEX index = procTable->getProcIndex(p);
 	try{
 		vector<CALLSPAIR> temp;
 		temp = callsTable.at(index);
 		vector<CALLSPAIR>::iterator it = temp.begin();
 		for(;it!=temp.end();it++)
-			ans.push_back(it->first);
+			ans.insert(it->first);
 	}
 	catch(...){
 	}
 	return ans;
 }
 
-vector<PROCINDEX> Calls::getCalled2(PROCINDEX index){
-	vector<PROCINDEX> ans;
+set<PROCINDEX> Calls::getCalled2(PROCINDEX index){
+	set<PROCINDEX> ans;
 	try{
 		vector<CALLSPAIR> temp;
 		temp = callsTable.at(index);
 		vector<CALLSPAIR>::iterator it = temp.begin();
 		for(;it!=temp.end();it++)
-			ans.push_back(it->first);
+			ans.insert(it->first);
 	}
 	catch(...){
 	}
