@@ -1419,6 +1419,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	QueryEvaluator::relAns.insert(make_pair(relIndex, followsAns));
 }
 
+
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
