@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <set>
 #include <iterator>
 #include "TypeTable.h"
 
@@ -35,6 +36,8 @@ class Follows {
 private: 
 	unordered_map<STMTNUM,STMTNUM> followsTable;
 	unordered_map<STMTNUM,STMTNUM> followedByTable;
+	set<STMTNUM> followsList;
+	set<STMTNUM> followedByList;
 	static bool instanceFlag;
 	static Follows *follows;
 	TypeTable *typeTable; // public for the sake of unit testing
@@ -55,8 +58,8 @@ public:
 	STMTNUM getFollows(STMTNUM s);
 	STMTNUM getFollowedBy(STMTNUM s);
 
-	vector<STMTNUM> getAllFollows();
-	vector<STMTNUM> getAllFollowedBy();
+	set<STMTNUM> getAllFollows();
+	set<STMTNUM> getAllFollowedBy();
 	
 
 	//! If the Follows relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
@@ -71,9 +74,9 @@ public:
 	//! Return the statement number that is followed by the given statement number and has the given SynType.
 	STMTNUM getFollowedBy(SYNTYPE, STMTNUM); 
 	//! Return all statement numbers such that each statement number has the given first SynType and follows the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getFollows(SYNTYPE, SYNTYPE);	 //Select s1 such that getFollows(s1, s2)
+	set<STMTNUM> getFollows(SYNTYPE, SYNTYPE);	 //Select s1 such that getFollows(s1, s2)
 	//! Return all statement numbers such that each statement number has the given first SynType and are followed by the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getFollowedBy(SYNTYPE, SYNTYPE);	 //Select s2 such that getFollows(s1, s2)
+	set<STMTNUM> getFollowedBy(SYNTYPE, SYNTYPE);	 //Select s2 such that getFollows(s1, s2)
 
 	/// @cond
 	void printFollowsTable();

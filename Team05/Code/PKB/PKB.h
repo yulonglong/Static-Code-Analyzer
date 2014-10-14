@@ -156,13 +156,13 @@ public:
 	bool isFollows(STMTNUM, STMTNUM);	
 	STMTNUM getFollows(STMTNUM);	
 	STMTNUM getFollowedBy(STMTNUM); 
-	vector<STMTNUM> getAllFollows();	 //Select s1 such that getFollows(s1, s2)
-	vector<STMTNUM> getAllFollowedBy();
+	set<STMTNUM> getAllFollows();	 //Select s1 such that getFollows(s1, s2)
+	set<STMTNUM> getAllFollowedBy();
 
 	bool isParent(STMTNUM, STMTNUM);
-	vector<STMTNUM> getAllChildren(); 
-	vector<STMTNUM> getChildren(STMTNUM);
-	vector<STMTNUM> getAllParent();
+	set<STMTNUM> getAllChildren(); 
+	set<STMTNUM> getChildren(STMTNUM);
+	set<STMTNUM> getAllParent();
 	STMTNUM getParent(STMTNUM); 
 
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.

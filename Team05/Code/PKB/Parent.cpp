@@ -44,12 +44,8 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 
 		childrenTable[s2] = s1; 
 
-		parentList.push_back(s1);
-		sort( parentList.begin(), parentList.end() );
-		parentList.erase( unique( parentList.begin(), parentList.end() ), parentList.end() );
-		childrenList.push_back(s2);
-		sort( childrenList.begin(), childrenList.end() );
-		childrenList.erase( unique( childrenList.begin(), childrenList.end() ), childrenList.end() );
+		parentList.insert(s1);
+		childrenList.insert(s2);
 	}catch(...){
 	}
 }
@@ -112,18 +108,21 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-vector<STMTNUM> Parent::getAllChildren(){
+set<STMTNUM> Parent::getAllChildren(){
 	return childrenList;
 }
 
-vector<STMTNUM> Parent::getAllParent(){
+set<STMTNUM> Parent::getAllParent(){
 	return parentList;
 }
 
-vector<STMTNUM> Parent::getChildren(STMTNUM s){
-	vector<STMTNUM> ans;
+set<STMTNUM> Parent::getChildren(STMTNUM s){
+	set<STMTNUM> ans;
 	try{
-		ans = parentTable.at(s);
+		vector<STMTNUM> tempVec = parentTable.at(s);
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
 		return ans;
 	} catch (...){
 		return ans;
@@ -217,13 +216,19 @@ bool Parent::isChildren(SYNTYPE t, STMTNUM s){
 }
 
 
-vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
-	vector<STMTNUM> ans;
+set<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
+	set<STMTNUM> ans;
 	try{
+		vector<STMTNUM> tempVec;
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->isType(t2,temp)){
-			ans = typeTable->getAllStmts(t1);
+			tempVec = typeTable->getAllStmts(t1);
 		}
+		
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+		}
+
 		return ans;
 	} catch(...){
 		return ans;
@@ -231,15 +236,19 @@ vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	
 }
 
-vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
-	vector<STMTNUM> ans;
+set<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
+	set<STMTNUM> ans;
 	try{
+		vector<STMTNUM> tempVec;
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
 			if(typeTable->isType(t2,*it)){
-				ans = typeTable->getAllStmts(t1);
+				tempVec = typeTable->getAllStmts(t1);
 			}
+		}
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
 		}
 		return ans;
 	}catch(...){
@@ -247,8 +256,9 @@ vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	}
 }
 
-vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
-	vector<STMTNUM> list; 
+set<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
+	set<STMTNUM> list; 
+	vector<STMTNUM> tempVec;
 	STMTNUM j = -1; 
 	for (unordered_map<STMTNUM, STMTNUM>::iterator it = childrenTable.begin(); it != childrenTable.end(); it++) {
 		j = -1; 
@@ -260,13 +270,13 @@ vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
 		try {
 			if (j != -1) {
 				if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
-					list.push_back(it->first);
+					tempVec.push_back(it->first);
 				} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,it->first)) {
-					list.push_back(it->first);
+					tempVec.push_back(it->first);
 				} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,j)) {
-					list.push_back(it->first);
+					tempVec.push_back(it->first);
 				} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,j) && typeTable->isType(t2,it->first)) {
-					list.push_back(it->first);
+					tempVec.push_back(it->first);
 				}
 			}
 		} catch (...) {
@@ -274,13 +284,17 @@ vector<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2){
 			continue; 
 		}
 	}
-	sort(list.begin(),list.end());
+	sort(tempVec.begin(),tempVec.end());
+	for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			list.insert(*it);
+	}
 	return list;
 }
 
-vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
-	vector<STMTNUM> ans; 
+set<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
+	set<STMTNUM> ans; 
 	vector<STMTNUM> temp;
+	vector<STMTNUM> tempVec;
 	for (unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = parentTable.begin(); it != parentTable.end(); it++) {
 		try {
 			temp = it->second;
@@ -292,19 +306,19 @@ vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
 				try {
 					if (t1 == TypeTable::STMT && t2 == TypeTable::STMT) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(it->first);
+						tempVec.push_back(it->first);
 						break;
 					} else if (t1 == TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(it->first);
+						tempVec.push_back(it->first);
 						break;
 					} else if (t1 != TypeTable::STMT && t2 == TypeTable::STMT && typeTable->isType(t1,it->first)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(it->first);
+						tempVec.push_back(it->first);
 						break;
 					} else if (t1 != TypeTable::STMT && t2 != TypeTable::STMT && typeTable->isType(t1,it->first) && typeTable->isType(t2,j)) {
 						// cout << i << "  " << j << endl; 
-						ans.push_back(it->first);
+						tempVec.push_back(it->first);
 						break;
 					}
 				} catch (...) {
@@ -313,7 +327,10 @@ vector<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2){
 				}
 		}
 	}
-	sort(ans.begin(),ans.end());
+	sort(tempVec.begin(),tempVec.end());
+	for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+	}
 	return ans;
 }
 
@@ -328,16 +345,20 @@ STMTNUM Parent::getParent(SYNTYPE t1, STMTNUM s){
 	return -1;
 }
 
-vector<STMTNUM> Parent::getChildren(SYNTYPE t1, STMTNUM s){
-	vector<STMTNUM> ans;
+set<STMTNUM> Parent::getChildren(SYNTYPE t1, STMTNUM s){
+	set<STMTNUM> ans;
+	vector<STMTNUM> tempVec;
 	try{
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();it++){
 			if(typeTable->isType(t1,*it))
-				ans.push_back(*it);
+				tempVec.push_back(*it);
 		}
-		sort(ans.begin(),ans.end());
+		sort(tempVec.begin(),tempVec.end());
+		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+			ans.insert(*it);
+	}
 		return ans;
 	}catch(...){
 		ans.clear();

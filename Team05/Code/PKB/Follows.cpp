@@ -31,6 +31,8 @@ Follows* Follows::getInstance(TypeTable *table) {
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
 	followsTable[s1] = s2;
 	followedByTable[s2] = s1;
+	followsList.insert(s1);
+	followedByList.insert(s2);
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
@@ -65,46 +67,12 @@ STMTNUM Follows::getFollowedBy(STMTNUM s){
 	}
 }
 
-vector<STMTNUM> Follows::getAllFollows(){
-	vector<STMTNUM> ans; 
-	try {
-		for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
-			int j = -1; 
-			try {
-				j = followsTable.at(i);
-			} catch (...) {
-				continue;
-			}
-			if (j!=-1)  {
-				ans.push_back(j);
-			}
-		}
-		return ans; 
-	} catch (...) {
-		ans.clear();
-	}
-	return ans;
+set<STMTNUM> Follows::getAllFollows(){
+	return followsList;
 }
 
-vector<STMTNUM> Follows::getAllFollowedBy(){
-	vector<STMTNUM> ans; 
-	try {
-		for (vector<STMTNUM>::size_type i = 1; i != followedByTable.size(); i++) {
-			int j = -1; 
-			try {
-				j = followedByTable.at(i);
-			} catch (...) {
-				continue;
-			}
-			if (j!=-1)  {
-				ans.push_back(j);
-			}
-		}
-		return ans; 
-	} catch (...) {
-		ans.clear();
-	}
-	return ans;
+set<STMTNUM> Follows::getAllFollowedBy(){
+	return followedByList;
 }
 
 
@@ -127,7 +95,7 @@ bool Follows::isFollowedBy(SYNTYPE t, STMTNUM s) {
 }
 
 bool Follows::isFollows(SYNTYPE t1, SYNTYPE t2) {
-	vector<STMTNUM> temp = getFollows(t1, t2); 
+	set<STMTNUM> temp = getFollows(t1, t2); 
 	if (temp.empty()) {
 		return false;
 	}
@@ -163,8 +131,8 @@ STMTNUM Follows::getFollowedBy(SYNTYPE t, STMTNUM s) {
 	return -1; 
 }
 
-vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
-	vector<STMTNUM> list; 
+set<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
+	set<STMTNUM> list; 
 	STMTNUM j = -1; 
 	try {
 		for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
@@ -176,7 +144,7 @@ vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 			}
 			if (j!=-1 && typeTable->isType(t1, i) && typeTable->isType(t2, j))  {
 				//cout << i->first << " ,g "<< i->second<<endl; 
-				list.push_back(j);
+				list.insert(j);
 			}
 		}
 		return list; 
@@ -186,8 +154,8 @@ vector<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
 	return list;
 }
 
-vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
-	vector<STMTNUM> list; 
+set<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
+	set<STMTNUM> list; 
 	STMTNUM j = -1; 
 	for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
 		j = -1; 
@@ -205,7 +173,7 @@ vector<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
 		try {
 			if (j != -1) {
 				if (typeTable->isType(t1, i) && typeTable->isType(t2, j)) {
-					list.push_back(i);
+					list.insert(i);
 				}
 
 			}

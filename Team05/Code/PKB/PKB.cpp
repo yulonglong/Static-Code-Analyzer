@@ -277,11 +277,11 @@ STMTNUM PKB::getFollowedBy(STMTNUM s){
 	return follows->getFollowedBy(s);
 }
 
-vector<STMTNUM> PKB::getAllFollows(){
+set<STMTNUM> PKB::getAllFollows(){
 	return follows->getAllFollows();
 }
 
-vector<STMTNUM> PKB::getAllFollowedBy(){
+set<STMTNUM> PKB::getAllFollowedBy(){
 	return follows->getAllFollowedBy();
 }
 
@@ -290,15 +290,15 @@ bool PKB::isParent(STMTNUM s1, STMTNUM s2){
 	return parent->isParent(s1,s2);
 }
 
-vector<STMTNUM> PKB::getAllChildren(){
+set<STMTNUM> PKB::getAllChildren(){
 	return parent->getAllChildren();
 }
 
-vector<STMTNUM> PKB::getChildren(STMTNUM s){
+set<STMTNUM> PKB::getChildren(STMTNUM s){
 	return parent->getChildren(s);
 }
 
-vector<STMTNUM> PKB::getAllParent(){
+set<STMTNUM> PKB::getAllParent(){
 	return parent->getAllParent();
 }
 

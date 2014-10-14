@@ -13,6 +13,7 @@
 #include <math.h>
 #include <unordered_map>
 #include <cstdint>
+#include <set>
 #include <algorithm>
 #include <iterator>
 #include "TypeTable.h"
@@ -39,8 +40,8 @@ private:
 	unordered_map<STMTNUM,vector<STMTNUM>> parentTable; //given the stmtnum of the parent, return the children stmt num
 	unordered_map<STMTNUM,STMTNUM> childrenTable; //given the stmtnum of the children, return the parent stmt num 
 	vector<vector<int64_t>> parTable;
-	vector<STMTNUM> parentList;
-	vector<STMTNUM> childrenList;
+	set<STMTNUM> parentList;
+	set<STMTNUM> childrenList;
 	static bool instanceFlag;
 	static Parent *parent;
 	TypeTable *typeTable; 
@@ -57,9 +58,9 @@ public:
 	//! If the Parent relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isParent(STMTNUM, STMTNUM);	
 	
-	vector<STMTNUM> getAllChildren();
-	vector<STMTNUM> getAllParent();
-	vector<STMTNUM> getChildren(STMTNUM);
+	set<STMTNUM> getAllChildren();
+	set<STMTNUM> getAllParent();
+	set<STMTNUM> getChildren(STMTNUM);
 	STMTNUM getParent(STMTNUM);
 
 	//! If the Parent relationship between a SynType and a statement numbers exists, return true. Otherwise, return false.
@@ -72,15 +73,15 @@ public:
 	//! Return a statement number which has the given first SynType and has a parent relationship with the given statement number.
 	STMTNUM getParent(SYNTYPE, STMTNUM); 
 	//! Return all statement number such that each statement number has the given first SynType and has a child relationship with the given statement number. Return an empty vector if not found.
-	vector<STMTNUM> getChildren(SYNTYPE, STMTNUM); 
+	set<STMTNUM> getChildren(SYNTYPE, STMTNUM); 
 	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with the given statement number which has the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getParent(SYNTYPE, SYNTYPE,STMTNUM); 
+	set<STMTNUM> getParent(SYNTYPE, SYNTYPE,STMTNUM); 
 	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with the given statement number which has the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getChildren(SYNTYPE, SYNTYPE,STMTNUM);
+	set<STMTNUM> getChildren(SYNTYPE, SYNTYPE,STMTNUM);
 	//! Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with a statement number which has the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getParent(SYNTYPE, SYNTYPE); // Select w such that Parent(w,a)
+	set<STMTNUM> getParent(SYNTYPE, SYNTYPE); // Select w such that Parent(w,a)
 	//! Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType. Return an empty vector if not found.
-	vector<STMTNUM> getChildren(SYNTYPE, SYNTYPE); //Select a such that Parent(w,a)
+	set<STMTNUM> getChildren(SYNTYPE, SYNTYPE); //Select a such that Parent(w,a)
 	
 	/// @cond
 	//For parentStar
