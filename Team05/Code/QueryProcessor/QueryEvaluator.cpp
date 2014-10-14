@@ -1172,8 +1172,6 @@ void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vecto
 void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Follows *f = pkb->getFollows();
-	TypeTable *t = pkb->getTypeTable();
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
@@ -1194,7 +1192,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			//try all combinations in set A and set B
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
 				for(set<int>::iterator it2 = sb.begin(); it2!=sb.end(); it2++){
-					if(f->isFollows(*it, *it2)){
+					if(pkb->isFollows(*it, *it2)){
 						followsAns.push_back(Pair (*it, *it2));
 					}
 				}			
@@ -1213,8 +1211,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-				int follows = f->getFollows(i2->second, *it);
-				if(follows!=-1){
+				int follows = pkb->getFollows(*it);
+				if(follows!=-1 && pkb->isSynType(i2->second,*it)){
 					followsAns.push_back(Pair (*it, follows));
 				}
 			}
@@ -1235,8 +1233,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			}
 
 			for(set<int>::iterator it=sb.begin(); it!=sb.end(); it++){
-				int followedBy = f->getFollowedBy(i1->second, *it);
-				if(followedBy!=-1){
+				int followedBy = pkb->getFollowedBy(*it);
+				if(followedBy!=-1 && pkb->isSynType(i1->second,*it)){
 					followsAns.push_back(Pair (followedBy, *it));
 				}
 			}
@@ -1249,12 +1247,12 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		else {
 			cout<<"Both tokens are alpha and do not exist in linkages"<<endl;
 			//Retrieve both a and b from PKB
-			vector<int> first = t->getAllStmts(i1->second);
-			vector<int> second = t->getAllStmts(i2->second);
-			cout<<"trying is follows"<<f->isFollows(2,3)<<endl;
+			vector<int> first = pkb->getAllStmts(i1->second);
+			vector<int> second = pkb->getAllStmts(i2->second);
+			cout<<"trying is follows"<<pkb->isFollows(2,3)<<endl;
 			for(unsigned int i=0; i<first.size(); i++){
 				for(unsigned int j=0; j<second.size(); j++){
-					if(f->isFollows(first.at(i), second.at(j))){
+					if(pkb->isFollows(first.at(i), second.at(j))){
 						followsAns.push_back(Pair (first.at(i), second.at(j)));
 						cout<<"first.at(i) = "<<first.at(i)<<"second.at(i) = "<<second.at(i)<<endl;
 					}
@@ -1271,7 +1269,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 	//Follows(_,_) if both tokens are wildcards just evaluate true or false
 	else if(tk1=="_" && tk2=="_"){
-		vector<int> ans = f->getFollows(TypeTable::STMT, TypeTable::STMT);
+		vector<int> ans = pkb->getAllFollows();
 		if(!ans.empty()){
 			followsAns.push_back(Pair (-1,-1));
 		}else {
@@ -1287,7 +1285,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			if(isdigit(tk2[0])){
 				for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-					if(f->isFollows(*it, atoi(tk2.c_str()))){
+					if(pkb->isFollows(*it, atoi(tk2.c_str()))){
 						followsAns.push_back(Pair (*it, atoi(tk2.c_str())));
 					}
 				}
@@ -1295,8 +1293,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			//Follows(a, _)
 			else {
 				for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-					if(f->getFollows(TypeTable::STMT, *it)!=-1){
-						followsAns.push_back(Pair (*it, f->getFollows(TypeTable::STMT, *it)));
+					if(pkb->getFollows(*it)!=-1){
+						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
 					}
 				}
 			}
@@ -1311,16 +1309,18 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Retrieve a from PKB and push it into the answer vector
 			if(isdigit(tk2[0])){
-				int first = f->getFollowedBy(i1->second, atoi(tk2.c_str()));
-				followsAns.push_back(Pair (first, atoi(tk2.c_str())));
+				int first = pkb->getFollowedBy(atoi(tk2.c_str()));
+				if(pkb->isSynType(i1->second,first))
+					followsAns.push_back(Pair (first, atoi(tk2.c_str())));
 			}
 
 			//Follows(a, _)
 			else {
-				vector<int> a = f->getFollowedBy(i1->second, TypeTable::STMT);
+				vector<int> a = pkb->getAllFollowedBy();
 				cout<<a.at(0)<<endl;
 				for(vector<int>::iterator it = a.begin(); it!=a.end(); it++){
-					followsAns.push_back(Pair (*it, f->getFollows(TypeTable::STMT,*it)));
+					if(pkb->isSynType(i1->second, *it))
+						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
 				}
 			}
 		}
@@ -1337,7 +1337,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			if(isdigit(tk1[0])){
 				for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-					if(f->isFollows(atoi(tk1.c_str()), *it)){
+					if(pkb->isFollows(atoi(tk1.c_str()), *it)){
 						followsAns.push_back(Pair (atoi(tk1.c_str()), *it));
 					}
 				}
@@ -1346,8 +1346,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			//Follows(_,b)
 			else {
 				for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
-					if(f->getFollowedBy(TypeTable::STMT, *it)!=-1){
-						followsAns.push_back(Pair (f->getFollowedBy(TypeTable::STMT, *it),*it));
+					if(pkb->getFollowedBy(*it)!=-1){
+						followsAns.push_back(Pair (pkb->getFollowedBy(*it),*it));
 					}
 				}
 			}
@@ -1362,9 +1362,9 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			cout<<"Second token is alpha and it does not exist in linkages"<<endl;
 			if(isdigit(tk1[0])){
 				cout<<"First token is digit"<<endl;
-				int second = f->getFollows(i2->second, atoi(tk1.c_str()));
+				int second = pkb->getFollows(atoi(tk1.c_str()));
 				cout<<"Answer is = "<<second<<endl;
-				if(second!=-1){
+				if(second!=-1 && pkb->isSynType(i2->second, second)){
 					followsAns.push_back(Pair (atoi(tk1.c_str()), second));
 				}
 				cout<<"followsAns.size = "<<followsAns.size()<<endl;
@@ -1372,9 +1372,9 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(_,b)
 			else {
-				vector<int> a = f->getFollows(TypeTable::STMT, i2->second);
+				vector<int> a = pkb->getAllFollows();
 				for(vector<int>::iterator it = a.begin(); it!=a.end(); it++){
-					followsAns.push_back(Pair (f->getFollowedBy(TypeTable::STMT,*it), *it));
+					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}
 			}
 
@@ -1387,7 +1387,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	else {
 		//if Follows(1,2) is verified as false, clear all answers
 		if(isdigit(tk1[0]) && isdigit(tk2[0])){
-			if(!f->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			if(!pkb->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()))){
 				followsAns.push_back(Pair (-2,-2));
 			}
 			else{
@@ -1397,7 +1397,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 		//Follows(1, _)
 		else if(isdigit(tk1[0])){
-			if(f->getFollows(TypeTable::STMT, atoi(tk1.c_str()))==-1){
+			if(pkb->getFollows(atoi(tk1.c_str()))==-1){
 				followsAns.push_back(Pair (-2,-2));
 			}
 			else{
@@ -1407,7 +1407,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 		//Follows(_, 2)
 		else {
-			if(f->getFollows(TypeTable::STMT, atoi(tk2.c_str()))==-1){
+			if(pkb->getFollows(atoi(tk2.c_str()))==-1){
 				followsAns.push_back(Pair (-2,-2));
 			}
 			else{

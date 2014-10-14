@@ -149,6 +149,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	q.addRelationship(r);
 	selectedSyn.push_back("w");
 
+	
 	//Follows*(s2, s3) r4
 	r = Relationship("Follows*", "s2", "s3");
 	q.addRelationship(r);
@@ -187,6 +188,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Follows", "_", "_");
 	q.addRelationship(r);
 
+	/*
 	//Parent(w, a3) r13
 	r = Relationship("Parent", "w", "a3");
 	q.addRelationship(r);
