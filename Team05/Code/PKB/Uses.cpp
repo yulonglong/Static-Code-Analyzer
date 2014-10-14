@@ -45,27 +45,109 @@ void Uses::setUses(STMTNUM s,VARNAME v){
 		} catch(...){
 			usesTable[s] = temp;
 		}
+
+		usesList.push_back(s);
+		sort( usesList.begin(), usesList.end() );
+		usesList.erase( unique( usesList.begin(), usesList.end() ), usesList.end() );
+
+		usedList.push_back(index);
+		sort( usedList.begin(), usedList.end() );
+		usedList.erase( unique( usedList.begin(), usedList.end() ), usedList.end() );
+
 	}catch(...){
 	}
 }
+
+
+//void Uses::setUses(STMTNUM s, VARNAME v) {
+//	try {
+//		VARINDEX index = varTable->getVarIndex(v);
+//		vector<int64_t> placeHolder (0,1);
+//		vector<int64_t> temp (0,1);
+//		try{
+//			temp = usesBitTable.at(s);
+//		}catch(...){
+//			usesBitTable.resize(s+1,placeHolder);
+//		}
+//		int location =ceil((double)index/63);
+//		int bitPos = index%63;
+//
+//		if(temp.size()<location)
+//			temp.resize(location);
+//
+//		int64_t bitArray = temp.at(location-1);
+//		bitArray = bitArray | (((int64_t)1)<<bitPos);
+//
+//		temp[location-1]=bitArray;
+//		usesBitTable[s]=temp;
+//
+//		usesList.push_back(s);
+//		sort( usesList.begin(), usesList.end() );
+//		usesList.erase( unique( usesList.begin(), usesList.end() ), usesList.end() );
+//
+//	}catch(...){
+//	}
+//
+//	try {
+//		VARINDEX index = varTable->getVarIndex(v);
+//		vector<int64_t> placeHolder (0,1);
+//		vector<int64_t> temp (0,1);
+//		try{
+//			temp = usesBitVarTable.at(index);
+//		}catch(...){
+//			usesBitVarTable.resize(index+1,placeHolder);
+//		}
+//		int location =ceil((double)s/63);
+//		int bitPos = s%63;
+//
+//		if(temp.size()<location)
+//			temp.resize(location);
+//
+//		int64_t bitArray = temp.at(location-1);
+//		bitArray = bitArray | (((int64_t)1)<<bitPos);
+//
+//		temp[location-1]=bitArray;
+//		usesBitVarTable[index]=temp;
+//
+//		usedList.push_back(index);
+//		sort( usedList.begin(), usedList.end() );
+//		usedList.erase( unique( usedList.begin(), usedList.end() ), usedList.end() );
+//	}catch(...){
+//	}
+//}
+
+
 
 bool Uses::isUses(STMTNUM s, VARNAME v){
 	try{
 		VARINDEX index = varTable->getVarIndex(v);
-		if(index==-1)
-			return false;
-		vector<VARINDEX> temp = usesTable.at(s);
-		vector<VARINDEX>::iterator it = temp.begin();
-		for(;it!=temp.end();it++){
-			if(index==*it)
-				return true;
-		}
-		return false;
+		if(isUses(s,index))
+			return true;
 	}catch(...){
 		return false;
 	}
 }
 
+//bool Uses::isUses(STMTNUM s, VARINDEX index){
+//	try {
+//		if (index == -1) {
+//			return false;
+//		}
+//
+//		vector<int64_t> temp=usesBitTable.at(s);
+//		int location =ceil((double)index/63);
+//		int bitPos = index%63;
+//		if(temp.size()<location)
+//			return false;
+//
+//		int64_t bitArray = temp.at(location-1);
+//		if((bitArray & ((int64_t)1<<bitPos))>0)
+//			return true;
+//	} catch (...){
+//		return false;
+//	}
+//	return false;
+//}
 
 bool Uses::isUses(STMTNUM s, VARINDEX index){
 	//Select w such that Modifies(1, "y")
@@ -86,6 +168,52 @@ bool Uses::isUses(STMTNUM s, VARINDEX index){
 	return false;
 }
 
+//vector<VARINDEX> Uses::getUsed(STMTNUM snum){
+//	vector<STMTNUM> ans;
+//	try{
+//		vector<int64_t> temp=usesBitTable.at(snum);
+//
+//		for(size_t s = 0;s<temp.size();s++){
+//			int64_t bitArray = temp.at(s);
+//			while(bitArray>0){
+//				int64_t bit = bitArray & -bitArray;
+//				bitArray -= bit;
+//				int number = log((double)bit)/log(2.0) + s*63;
+//				ans.push_back(number);
+//			}
+//		}
+//		return ans;
+//	}
+//	catch(...){
+//		ans.clear();
+//		return ans;
+//	}
+//}
+
+
+
+vector<VARINDEX> Uses::getUses(VARINDEX i){
+	vector<STMTNUM> ans;
+	try{
+		vector<int64_t> temp=usesBitVarTable.at(i);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.push_back(number);
+			}
+		}
+		return ans;
+	}
+	catch(...){
+		ans.clear();
+		return ans;
+	}
+}
+
 vector<VARINDEX> Uses::getUsed(STMTNUM s){
 	vector<STMTNUM> ans;
 	try{
@@ -97,41 +225,11 @@ vector<VARINDEX> Uses::getUsed(STMTNUM s){
 }
 
 vector<VARINDEX> Uses::getAllUsed(){
-	vector<VARINDEX> ans; 
-	vector<VARINDEX> temp;
-	vector<VARINDEX> temp2;
-	try{
-		for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
-			try {
-				temp = it->second;
-
-				temp2.reserve(ans.size()+temp.size());
-				temp2.insert(temp2.end(), temp.begin(), temp.end());
-				temp2.insert(temp2.end(), ans.begin(), ans.end());
-				sort( temp2.begin(), temp2.end() );
-				temp2.erase( unique( temp2.begin(), temp2.end() ), temp2.end() );
-				ans = temp2;
-			} catch (...) {
-				continue;
-			}
-		}
-	}catch(...){
-		ans.clear();
-		return ans;
-	}
-	return ans;
+	return usedList;
 }
 
 vector<STMTNUM> Uses::getAllUses(){
-	vector<STMTNUM> ans; 
-	for (unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
-		try {
-			ans.push_back(it->first);
-		} catch (...) {
-			continue;
-		}
-	}
-	return ans;
+	return usesList;
 }
 
 bool Uses::isUsesProc(PROCINDEX procIndex, VARINDEX index){
@@ -237,15 +335,15 @@ vector<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a
 	}
 }
 
-vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
-	vector<VARINDEX> ans;
-	try{
-		ans = usesTable.at(s);
-		return ans;
-	}catch(...){
-		return ans;
-	}
-}
+//vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
+//	vector<VARINDEX> ans;
+//	try{
+//		ans = usesTable.at(s);
+//		return ans;
+//	}catch(...){
+//		return ans;
+//	}
+//}
 
 vector<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); return empty vector if does not exist
 	vector<VARINDEX> ans;

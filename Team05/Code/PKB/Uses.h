@@ -8,6 +8,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
+#include <cstdint>
 #include "TypeTable.h"
 #include "VarTable.h"
 #include "ProcTable.h"
@@ -33,11 +34,15 @@ class Uses {
 private:
 	unordered_map<STMTNUM, vector<VARINDEX>> usesTable;
 	unordered_map<PROCINDEX, vector<VARINDEX>> usesProcTable;
+	vector<vector<int64_t>> usesBitTable;
+	vector<vector<int64_t>> usesBitVarTable;
 	static bool instanceFlag;
 	static Uses *uses;
 	TypeTable *typeTable;
 	VarTable *varTable;
 	ProcTable *procTable;
+	vector<STMTNUM> usesList;
+	vector<VARINDEX> usedList;
 public:
 	//! A constructor to initialize the Uses class.
 	Uses(TypeTable*, VarTable*, ProcTable*);

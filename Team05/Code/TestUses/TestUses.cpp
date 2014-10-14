@@ -31,6 +31,54 @@ void UsesTest::tearDown() {
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( UsesTest ); // Note 4 
 
+
+void UsesTest::testUsesBitArray() {
+	varTable->insertVar("a");
+	varTable->insertVar("b");
+	varTable->insertVar("c");
+	
+	uses->setUses(1, "a");
+	uses->setUses(1, "b");
+	uses->setUses(1, "c");
+	uses->setUses(2, "b");
+	uses->setUses(4, "c");
+	uses->setUses(1500, "a");
+
+	CPPUNIT_ASSERT(uses->isUses(1,"a")==true);
+	CPPUNIT_ASSERT(uses->isUses(1,"b")==true);
+	CPPUNIT_ASSERT(uses->isUses(1,"c")==true);
+	CPPUNIT_ASSERT(uses->isUses(2,"b")==true);
+	CPPUNIT_ASSERT(uses->isUses(1500,"a")==true);
+	CPPUNIT_ASSERT(uses->isUses(1500,"b")==false);
+	CPPUNIT_ASSERT(uses->isUses(1501,"a")==false);
+	CPPUNIT_ASSERT(uses->isUses(1549,"a")==false);
+	CPPUNIT_ASSERT(uses->isUses(-1,"a")==false);
+
+	vector<int> ans;
+	ans.push_back(1);
+	ans.push_back(2);
+	ans.push_back(3);
+	CPPUNIT_ASSERT(uses->getUsed(1)==ans);
+
+	ans.clear();
+	ans.push_back(1);
+	CPPUNIT_ASSERT(uses->getUsed(1500)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(uses->getUsed(1499)==ans);
+
+	ans.clear();
+	ans.push_back(1);
+	ans.push_back(1500);
+	cout<<"size of ans ="<<uses->getUses(1).size();
+	CPPUNIT_ASSERT(uses->getUses(1)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(uses->getUses(0)==ans);
+	CPPUNIT_ASSERT(uses->getUses(4)==ans);
+
+}
+
+
+
 void UsesTest::testUsesUsingStmtNum() {  // Note 5
 	varTable->insertVar("x");
 	varTable->insertVar("y");
