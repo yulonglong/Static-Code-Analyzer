@@ -594,8 +594,6 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Next* n = pkb->getNext();
-	TypeTable *t = pkb->getTypeTable();
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
@@ -613,7 +611,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 			for(set<int>::iterator it = firstSet.begin(); it!=firstSet.end(); it++){
 				for(set<int>::iterator it2 = secondSet.begin(); it2!=secondSet.end(); it2++){
-					if(n->isNext(*it, *it2)){ 
+					if(pkb->isNext(*it, *it2)){ 
 						nextAns.push_back(Pair (*it, *it2));
 					}
 				}
@@ -626,12 +624,12 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		//If s exists, retrieve s then getNext check type
 		if(isExistInLinkages(tk1)){
 			set<int> firstSet = retrieveTokenEvaluatedAnswers(tk1);
-			vector<int> tk2Ans;
+			set<int> tk2Ans;
 
 			for(set<int>::iterator it = firstSet.begin(); it!=firstSet.end(); it++){
-				tk2Ans = n->getNext(*it);
-				for(vector<int>::iterator it1 = tk2Ans.begin(); it1!=tk2Ans.end(); it1++){
-					if(t->isType(i2->second, *it1)){
+				tk2Ans = pkb->getNext(*it);
+				for(set<int>::iterator it1 = tk2Ans.begin(); it1!=tk2Ans.end(); it1++){
+					if(pkb->isSynType(i2->second, *it1)){
 						nextAns.push_back(Pair (*it, *it1));
 					}
 				}
@@ -643,12 +641,12 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		//If a exists, retrieve a, get previous check type
 		if(isExistInLinkages(tk2)){
 			set<int> secondSet = retrieveTokenEvaluatedAnswers(tk2);
-			vector<int> tk1Ans;
+			set<int> tk1Ans;
 
 			for(set<int>::iterator it = secondSet.begin(); it!=secondSet.end(); it++){
-				tk1Ans = n->getPrevious(*it);
-				for(vector<int>::iterator it2 = tk1Ans.begin(); it2!=tk1Ans.end(); it2++){
-					if(t->isType(i1->second, *it2)){
+				tk1Ans = pkb->getPrevious(*it);
+				for(set<int>::iterator it2 = tk1Ans.begin(); it2!=tk1Ans.end(); it2++){
+					if(pkb->isSynType(i1->second, *it2)){
 						nextAns.push_back(Pair (*it2, *it));
 					}
 				}
@@ -659,12 +657,12 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 		//If both doesn't exist, then getNext(type, type)
 		else {
-			vector<int> allTk1 = t->getAllStmts(i2->second);
-			vector<int> tk1Ans;
+			vector<int> allTk1 = pkb->getAllStmts(i2->second);
+			set<int> tk1Ans;
 			for(vector<int>::iterator it= allTk1.begin(); it!=allTk1.end(); it++){
-				tk1Ans = n->getPrevious(*it);
-				for(vector<int>::iterator it2 = tk1Ans.begin(); it2!=tk1Ans.end(); it2++){
-					if(t->isType(i1->second,*it2)){
+				tk1Ans = pkb->getPrevious(*it);
+				for(set<int>::iterator it2 = tk1Ans.begin(); it2!=tk1Ans.end(); it2++){
+					if(pkb->isSynType(i1->second,*it2)){
 						nextAns.push_back(Pair (*it2, *it));
 					}
 				}
@@ -681,20 +679,20 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
-				if(!n->getNext(*it).empty()){
-					nextAns.push_back(Pair (*it, n->getNext(*it).at(0)));
+				if(!pkb->getNext(*it).empty()){
+					nextAns.push_back(Pair (*it, *pkb->getNext(*it).begin()));
 				}
 			}
 
 			removePairs(nextAns, tk1, 1);
 		} else {
 			cout<<"First Token does not Exist"<<endl;
-			vector<int> va = t->getAllStmts(i1->second);
+			vector<int> va = pkb->getAllStmts(i1->second);
 
 			for(vector<int>::iterator it = va.begin(); it!=va.end(); it++){
 				cout<<"Before retrieving getNext it = "<<*it<<endl;
-				if(!n->getNext(*it).empty()){
-					nextAns.push_back(Pair (*it, n->getNext(*it).at(0)));
+				if(!pkb->getNext(*it).empty()){
+					nextAns.push_back(Pair (*it, *pkb->getNext(*it).begin()));
 					cout<<"Pushing in it = "<<*it<<endl;
 				}
 			}
@@ -709,18 +707,18 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk2);
 
 			for(set<int>::iterator it = sa.begin(); it!=sa.end(); it++){
-				if(!n->getPrevious(*it).empty()){
-					nextAns.push_back(Pair (n->getPrevious(*it).at(0), *it));
+				if(!pkb->getPrevious(*it).empty()){
+					nextAns.push_back(Pair (*pkb->getPrevious(*it).begin(), *it));
 				}
 			}
 			
 			removePairs(nextAns, tk2, 2);
 		} else {
-			vector<int> va = t->getAllStmts(i2->second);
+			vector<int> va = pkb->getAllStmts(i2->second);
 
 			for(vector<int>::iterator it = va.begin(); it!=va.end(); it++){
-				if(!n->getPrevious(*it).empty()){
-					nextAns.push_back(Pair (n->getPrevious(*it).at(0), *it));
+				if(!pkb->getPrevious(*it).empty()){
+					nextAns.push_back(Pair (*pkb->getPrevious(*it).begin(), *it));
 				}
 			}
 		}
@@ -731,9 +729,9 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	//Next(n, 4)
 	else if(isalpha(tk1[0])){
 		int tk2Int = atoi(tk2.c_str());
-		vector<int> tk1Vec = n->getPrevious(tk2Int);
-		for(vector<int>::iterator it= tk1Vec.begin(); it!=tk1Vec.end(); it++){
-			if(t->isType(i1->second, *it)){
+		set<int> tk1Vec = pkb->getPrevious(tk2Int);
+		for(set<int>::iterator it= tk1Vec.begin(); it!=tk1Vec.end(); it++){
+			if(pkb->isSynType(i1->second, *it)){
 				nextAns.push_back(Pair (*it, tk2Int));
 			}
 		}
@@ -750,11 +748,11 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	else if(isalpha(tk2[0])){
 		cout<<"Second Token is Alpha"<<endl;
 		int tk1Int = atoi(tk1.c_str());
-		vector<int> tk1Vec = n->getNext(tk1Int);
+		set<int> tk1Vec = pkb->getNext(tk1Int);
 
-		for(vector<int>::iterator it = tk1Vec.begin(); it!=tk1Vec.end(); it++){
+		for(set<int>::iterator it = tk1Vec.begin(); it!=tk1Vec.end(); it++){
 			cout<<"Iterating through the vector of GETNEXT(TOKEN1)"<<endl;
-			if(t->isType(i2->second, *it)){
+			if(pkb->isSynType(i2->second, *it)){
 				cout<<"Pushing into Answer "<<*it<<endl;
 				nextAns.push_back(Pair (tk1Int, *it));
 			}
@@ -771,7 +769,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	//Next(_, 3)
 	else if(tk1=="_" && isdigit(tk2[0])){
 		int tk2Int = atoi(tk2.c_str());
-		if(n->getPrevious(tk2Int).empty()){
+		if(pkb->getPrevious(tk2Int).empty()){
 			nextAns.push_back(Pair (-2,-2));
 		}
 		else{
@@ -782,7 +780,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	//Next(3, _)
 	else if(isdigit(tk1[0]) && tk2=="_"){
 		int tk1Int = atoi(tk1.c_str());
-		if(n->getNext(tk1Int).empty()){
+		if(pkb->getNext(tk1Int).empty()){
 			nextAns.push_back(Pair (-2,-2));
 		}
 		else{
@@ -792,7 +790,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 
 	//Next(3,4)
 	else {
-		if(n->isNext(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+		if(pkb->isNext(atoi(tk1.c_str()), atoi(tk2.c_str()))){
 			nextAns.push_back(Pair (-1,-1));
 		}else{
 			nextAns.push_back(Pair (-2, -2));
@@ -803,6 +801,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 }
 
 void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	/*
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	Next *n = pkb->getNext();
@@ -896,15 +895,14 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 
 	intersectPairs(tk1,tk2,&nextStarAnsVec, relIndex);
 	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextStarAnsVec));
+	*/
 }
 
 void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * ans, TypeTable::SynType type){
-	Next * n = pkb->getNext();
-	TypeTable *t = pkb->getTypeTable();
-	vector<int> next = n->getNext(currentIndex);
+	set<int> next = pkb->getNext(currentIndex);
 
-	for(vector<int>::iterator it = next.begin(); it!=next.end(); it++){
-		if(t->isType(type,*it)){
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
+		if(pkb->isSynType(type,*it)){
 			ans->insert(Pair (rootIndex, *it));
 		}
 		recursiveNext(rootIndex, *it, ans, type);
@@ -913,31 +911,26 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 
 void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans){
 	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<endl;
-	Next * n = pkb->getNext();
-	TypeTable *t = pkb->getTypeTable();
-	vector<int> next = n->getNext(currentIndex);
-
-	for(int i=0; i<next.size(); i++){
+	set<int> next = pkb->getNext(currentIndex);
+	for(set<int>::iterator it; it!=next.end(); it++){
 		cout<<"Iterating through the next vector"<<endl;
-		if(next.at(i) == targetIndex){
+		if(*it == targetIndex){
 			cout<<"TargetIndex found"<<endl;
 			ans->insert(Pair (-1, -1));
 			break;
 		}
-		if(next.at(i)<targetIndex){
-			i++;
+		if(*it<targetIndex){
+			it++;
 		}
-		recursiveNextTarget(rootIndex, next.at(i), targetIndex, ans);
+		recursiveNextTarget(rootIndex, *it, targetIndex, ans);
 	}
 }
 
 void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<Pair> * ans, TypeTable::SynType type){
-	Next * n = pkb->getNext();
-	TypeTable *t = pkb->getTypeTable();
-	vector<int> prev = n->getPrevious(currentIndex);
+	set<int> prev = pkb->getPrevious(currentIndex);
 
-	for(vector<int>::iterator it = prev.begin(); it!=prev.end(); it++){
-		if(t->isType(type,*it)){
+	for(set<int>::iterator it = prev.begin(); it!=prev.end(); it++){
+		if(pkb->isSynType(type,*it)){
 			ans->insert(Pair (*it, rootIndex));
 		}
 		recursiveNextReverse(rootIndex, *it, ans, type);
@@ -945,22 +938,19 @@ void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<P
 }
 
 void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
-	Calls *call = pkb->getCalls();
-	ProcTable *proc = pkb->getProcTable();
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	vector<int> ans;
-	vector<int> called;
+	set<int> ans;
+	set<int> called;
 	vector<Pair> callAns;
 
 	//Calls(p, q) OR Calls(p, _) OR Calls(_,q)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (isalpha(tk1[0])&&tk2=="_") || (tk1=="_"&&isalpha(tk2[0]))){
-		ans = proc->getAllProcIndexes();
-		for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
-			string procName = proc->getProcName(*it);
-			called = call->getCalled(procName);
+		vector<int> procIndexes = pkb->getAllProcIndexes();
+		for(vector<int>::iterator it=procIndexes.begin(); it!=procIndexes.end(); it++){
+			called = pkb->getCalled(*it);
 
-			for(vector<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
+			for(set<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
 				callAns.push_back(Pair (*it, *it2));
 				cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
 			}
@@ -970,7 +960,10 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	//Select p Calls(p, "Second") Calls(_, "Second")
 	else if(isalpha(tk1[0]) || (tk1=="_" && tk2!="_")){
-		ans = call->getCalls(tk2.substr(1,tk2.length()-2));
+		int procIndex = pkb->getProcIndex(tk2.substr(1,tk2.length()-2));
+		ans = pkb->getCalls(procIndex);
+
+		//Calls(_, "Second")
 		if(tk1=="_"){
 			if(!ans.empty()){
 				callAns.push_back(Pair(-1,-1));
@@ -978,10 +971,10 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 				callAns.push_back(Pair(-2,-2));
 			}
 		}
-		else{
-			int procIndex = proc->getProcIndex(tk2.substr(1,tk2.length()-2));
 
-			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+		//Calls(p, "Second")
+		else{
+			for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
 				callAns.push_back(Pair (*it, procIndex));
 			}
 		}
@@ -989,8 +982,11 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	//Select q Calls("First", q) Calls("First", _)
 	else if(isalpha(tk2[0]) || (tk1!="_" && tk2=="_")){
-		ans = call->getCalled(tk1.substr(1,tk1.length()-2));
 
+		int procIndex = pkb->getProcIndex(tk1.substr(1,tk1.length()-2));
+		ans = pkb->getCalled(procIndex);
+
+		//Calls("First", _)
 		if(tk2=="_"){
 			if(!ans.empty()){
 				callAns.push_back(Pair(-1,-1));
@@ -998,10 +994,10 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 				callAns.push_back(Pair(-2,-2));
 			}
 		}
-		else{
-			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
 
-			for(vector<int>::iterator it=ans.begin(); it!=ans.end(); it++){
+		//Calls("First", q)
+		else{
+			for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
 				callAns.push_back(Pair (procIndex, *it));
 			}
 		}
@@ -1009,7 +1005,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	//Calls(_,_)
 	else if(tk1=="_" && tk2=="_"){
-		ans = call->getCalls();
+		ans = pkb->getAllCalls();
 		if(!ans.empty()){
 			callAns.push_back(Pair (-1, -1));
 		}else{
@@ -1020,9 +1016,10 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 	//Calls("Third", "Fourth")
 	else {
 		cout<<"supposed"<<endl;
-		call->setCalls("\"first\"", "\"second\"", 4);
 		cout<<tk1.substr(1, tk1.length()-2)<<tk2.substr(1,tk2.length()-2)<<endl;
-		if(call->isCalls(tk1.substr(1, tk1.length()-2), tk2.substr(1,tk2.length()-2))){
+		int procIndex1 = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
+		int procIndex2 = pkb->getProcIndex(tk2.substr(1,tk2.length()-2)));
+		if(pkb->isCalls(procIndex1, procIndex2)){
 			callAns.push_back(Pair (-1, -1));
 		}else{
 			callAns.push_back(Pair (-2, -2));
@@ -1039,14 +1036,12 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
 
 	vector<Pair> callsStarAns;
 
 	//Calls*(a,b) 
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		vector<int> allProc = p->getAllProcIndexes();
+		vector<int> allProc = pkb->getAllProcIndexes();
 
 		for(vector<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
 			recursiveCall(*it, *it, &callsStarAns);
@@ -1055,10 +1050,10 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	//Calls*(a,_)
 	else if(isalpha(tk1[0]) && tk2=="_"){
-			vector<int> allProc = p->getAllProcIndexes();
+			vector<int> allProc = pkb->getAllProcIndexes();
 
 			for(vector<int>::iterator it=allProc.begin(); it!=allProc.end(); it++){
-				if(!c->getCalled(p->getProcName(*it)).empty()){
+				if(!pkb->getCalled(*it).empty()){
 					callsStarAns.push_back(Pair (*it, -1));
 				}
 			}
@@ -1066,7 +1061,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	//Calls*(a, "second")
 	else if(isalpha(tk1[0])) {
-		int index = p->getProcIndex(tk2.substr(1,tk2.length()-2));
+		int index = pkb->getProcIndex(tk2.substr(1,tk2.length()-2));
 
 		recursiveInverseCall(index, index, &callsStarAns);
 
@@ -1075,10 +1070,10 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	//Calls*(_,b)
 	else if(isalpha(tk2[0]) && tk1=="_"){
 
-		vector<int> allProc = p->getAllProcIndexes();
+		vector<int> allProc = pkb->getAllProcIndexes();
 
 		for(vector<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
-			if(!c->getCalls(p->getProcName(*it)).empty()){
+			if(!pkb->getCalls(*it).empty()){
 				callsStarAns.push_back(Pair(-1, *it));
 			}
 		}
@@ -1087,14 +1082,14 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	//Calls*("first", b)
 	else if(isalpha(tk2[0])){
-		int index = p->getProcIndex(tk1.substr(1, tk1.length()-2));
+		int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
 
 		recursiveCall(index, index, &callsStarAns);
 	}
 
 	//Calls*(_,"Second")
 	else if(tk1=="_" && tk2[0]=='\"'){
-		vector<int> p = c->getCalls(tk2.substr(1, tk2.length()-2));
+		set<int> p = pkb->getCalls(pkb->getProcIndex(tk2.substr(1, tk2.length()-2)));
 		if(p.empty()){
 			callsStarAns.push_back(Pair (-2,-2));
 		}else{
@@ -1104,7 +1099,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	//Calls*("First", _)
 	else if(tk1[0]=='\"' && tk2=="_"){
-		vector<int> p = c->getCalled(tk1.substr(1, tk1.length()-2));
+		set<int> p = pkb->getCalled(pkb->getProcIndex(tk1.substr(1, tk1.length()-2)));
 		if(p.empty()){
 			callsStarAns.push_back(Pair (-2,-2));
 		}else{
@@ -1114,8 +1109,8 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 	//Calls*("first", "second")
 	else {
-		int index1 = p->getProcIndex(tk1.substr(1, tk1.length()-2));
-		int index2 = p->getProcIndex(tk2.substr(1, tk1.length()-2));
+		int index1 = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
+		int index2 = pkb->getProcIndex(tk2.substr(1, tk1.length()-2));
 
 		recursiveCallBoolean(index1, index1, index2, &callsStarAns);
 
@@ -1132,22 +1127,18 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 }
 
 void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+	set<int> called = pkb->getCalled(currentIndex);
 
-	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+	for(set<int>::iterator i=called.begin(); i!=called.end(); i++){
 		ans->push_back(Pair (rootProcIndex, *i));
 		recursiveCall(rootProcIndex, *i, ans);
 	}
 }
 
 void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> called = c->getCalled(p->getProcName(currentIndex));
+	set<int> called = pkb->getCalled(currentIndex);
 
-	for(vector<int>::iterator i=called.begin(); i!=called.end(); i++){
+	for(set<int>::iterator i=called.begin(); i!=called.end(); i++){
 		cout<<"Iterating throught called vector. *i = "<<*i <<endl;
 		if(*i==targetIndex){
 			cout<<"recursiveCallBoolean returns TRUE"<<endl;
@@ -1159,11 +1150,9 @@ void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, i
 }
 
 void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vector<Pair> * ans){
-	Calls *c = pkb->getCalls();
-	ProcTable *p = pkb->getProcTable();
-	vector<int> calls = c->getCalls(p->getProcName(currentIndex));
+	set<int> calls = pkb->getCalls(currentIndex);
 
-	for(vector<int>::iterator i=calls.begin(); i!=calls.end(); i++){
+	for(set<int>::iterator i=calls.begin(); i!=calls.end(); i++){
 		ans->push_back(Pair (*i, leafIndex));
 		recursiveInverseCall(leafIndex, *i, ans);
 	}
@@ -1423,10 +1412,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
-	Follows *f = pkb->getFollows();
-	TypeTable *t = pkb->getTypeTable();
 	set<int> answer;
-	vector<int> selected;
+	set<int> selected;
 	set<Pair> followsStarAnsSet;//REMEMBER TO INSERT SELF DEFINED COMPARATOR
 	vector<Pair> followsStarAns;
 
@@ -1440,6 +1427,10 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 		if(tk1=="_"){
 			selected = t->getAllStmts(TypeTable::STMT);
+		}
+
+		else if(isExistInLinkages(tk1)){
+			selected = 
 		}
 		else{
 			selected = t->getAllStmts(i1->second);	//get all while statements
@@ -1477,7 +1468,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
 			if(stmtNumber!=-1){
 				cout<<"Evaluated StmtNumber = "<<stmtNumber<<endl;
-				if(t->isType(i1->second, stmtNumber)){
+				if(pkb->isType(i1->second, stmtNumber)){
 					cout<<"Inserting StmtNumber "<<stmtNumber<<" into the answer set"<<endl;
 					followsStarAnsSet.insert(Pair (stmtNumber, atoi(tk2.c_str())));
 				}
