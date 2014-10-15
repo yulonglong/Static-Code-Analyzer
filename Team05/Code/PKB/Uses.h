@@ -81,9 +81,9 @@ public:
 	set<STMTNUM> getUses(SYNTYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
 	
 	//! Set the Uses relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
-	void setUses(STMTNUM, vector<VARINDEX>);
+	void setUses(STMTNUM, set<VARINDEX>);
 	//! Set the Uses relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
-	void setUsesProc(PROCINDEX, vector<VARINDEX>); 
+	void setUsesProc(PROCINDEX, set<VARINDEX>); 
 	//! Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found.
 	//vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
 	

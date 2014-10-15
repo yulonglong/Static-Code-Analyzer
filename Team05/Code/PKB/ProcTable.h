@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <set>
 #include <map>
 
 using namespace std;
@@ -36,6 +37,7 @@ class ProcTable {
 private: 
 	map<PROCNAME,PROCINDEX> procedureMapTable;
 	vector<PROCNAME> procedureTable;
+	set<PROCINDEX> procIndexList;
 	static bool instanceFlag;
 	static ProcTable *procTable;
 public:
@@ -56,7 +58,7 @@ public:
 	int getNumProcedures(); 
 
 	//REQUESTED PROCEDURES
-	vector<PROCINDEX> getAllProcIndexes();
+	set<PROCINDEX> getAllProcIndexes();
 	/// @endcond
 };
 

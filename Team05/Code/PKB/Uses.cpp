@@ -327,7 +327,7 @@ set<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); retu
 	return ans;
 }
 
-void Uses::setUsesProc(PROCINDEX p, vector<VARINDEX> v) {
+void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> v) {
 	try{
 		vector<VARINDEX> temp;
 		vector<VARINDEX> temp1 = usesProcTable.at(p);
@@ -339,10 +339,12 @@ void Uses::setUsesProc(PROCINDEX p, vector<VARINDEX> v) {
 		usesProcTable[p] = temp;
 
 		usesProcList.insert(p);
-		for(vector<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
+		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
 			usedProcList.insert(*it);
 	} catch(...){
-		usesProcTable[p] = v;
+		vector<VARINDEX> temp;
+		temp.insert(temp.end(), v.begin(), v.end());
+		usesProcTable[p] = temp;
 	} 
 }
 
@@ -359,7 +361,7 @@ set<VARINDEX> Uses::getUsesProc(PROCINDEX p) {
 	}
 }
 
-void Uses::setUses(STMTNUM s, vector<VARINDEX> v) {
+void Uses::setUses(STMTNUM s, set<VARINDEX> v) {
 	try{
 		vector<VARINDEX> temp;
 		vector<VARINDEX> temp1 = usesTable.at(s);
@@ -369,8 +371,14 @@ void Uses::setUses(STMTNUM s, vector<VARINDEX> v) {
 		sort( temp.begin(), temp.end() );
 		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
 		usesTable[s] = temp;
+
+		usesList.insert(s);
+		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
+			usedList.insert(*it);
 	} catch(...){
-		usesTable[s] = v;
+		vector<VARINDEX> temp;
+		temp.insert(temp.end(), v.begin(), v.end());
+		usesTable[s] = temp;
 	}
 }
 

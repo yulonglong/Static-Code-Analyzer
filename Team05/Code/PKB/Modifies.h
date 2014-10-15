@@ -85,9 +85,9 @@ public:
 	set<STMTNUM> getModifies(SYNTYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
 
 	//! Set the Modifies relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
-	void setModifies(STMTNUM, vector<VARINDEX>);
+	void setModifies(STMTNUM, set<VARINDEX>);
 	//! Set the Modifies relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
-	void setModifiesProc(PROCINDEX, vector<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
+	void setModifiesProc(PROCINDEX, set<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
 	//! Return all the variable indexes such that each variable index is modified by the given procedure index. Return an empty vector if not found.
 	//vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
 	

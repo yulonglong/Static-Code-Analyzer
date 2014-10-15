@@ -203,25 +203,40 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	pkb->~PKB();
 }
 
-// Given a vector of int, returns a String of the ints
-string FullDesignExtractorTest::print(vector<int> v) {
+// Given a set of int, returns a String of the ints
+string FullDesignExtractorTest::print(set<int> v) {
 	string s = "";
-	for (unsigned int i=0; i<v.size(); i++) {
+	/*for (unsigned int i=0; i<v.size(); i++) {
 		int j = v[i];
 		std::string str;
 		std::stringstream out;
 		out << j;
 		str = out.str();
 		s += ( str + " ");
+	}*/
+
+	set<int>::iterator it;
+	for (it = v.begin(); it != v.end(); ++it) {
+		int j = *it; 
+		std::string str;
+		std::stringstream out;
+		out << j; 
+		str = out.str();
+		s += ( str + " ");
 	}
 	return s; 
 }
 
-// Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
-string FullDesignExtractorTest::printVariables(vector<VARINDEX> v, PKB &pkb) {
+// Given a set of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
+string FullDesignExtractorTest::printVariables(set<VARINDEX> v, PKB &pkb) {
 	string s = "";
-	for (int i=0; i<v.size(); i++) {
+	/*for (int i=0; i<v.size(); i++) {
 		s += pkb.getVarName(v[i]);
+		s += " ";
+	}*/
+	set<int>::iterator it;
+	for (it = v.begin(); it != v.end(); ++it) {
+		s += pkb.getVarName(*it);
 		s += " ";
 	}
 	return s; 

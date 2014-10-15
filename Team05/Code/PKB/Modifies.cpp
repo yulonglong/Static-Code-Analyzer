@@ -307,7 +307,7 @@ set<STMTNUM> Modifies::getModifies(SYNTYPE t, VARNAME v) {
 	return ans;
 }
 
-void Modifies::setModifiesProc(PROCINDEX p, vector<VARINDEX> v) {
+void Modifies::setModifiesProc(PROCINDEX p, set<VARINDEX> v) {
 	try{
 		vector<VARINDEX> temp;
 		vector<VARINDEX> temp1 = modifiesProcTable.at(p);
@@ -320,11 +320,13 @@ void Modifies::setModifiesProc(PROCINDEX p, vector<VARINDEX> v) {
 		modifiesProcTable[p] = temp;
 
 		modifiesProcList.insert(p);
-		for(vector<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
+		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
 			modifiedProcList.insert(*it);
 
 	} catch(...){
-		modifiesProcTable[p] = v;
+		vector<VARINDEX> temp;
+		temp.insert(temp.end(), v.begin(), v.end());
+		modifiesProcTable[p] = temp;
 	}
 }
 
@@ -342,7 +344,7 @@ set<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {
 	return ans;
 }
 
-void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
+void Modifies::setModifies(STMTNUM s, set<VARINDEX> v) {
 	try{
 		vector<VARINDEX> temp;
 		vector<VARINDEX> temp1 = modifiesTable.at(s);
@@ -354,10 +356,12 @@ void Modifies::setModifies(STMTNUM s, vector<VARINDEX> v) {
 		modifiesTable[s] = temp;
 
 		modifiesList.insert(s);
-		for(vector<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
+		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
 			modifiedList.insert(*it);
 	} catch(...){
-		modifiesTable[s] = v;
+		vector<VARINDEX> temp;
+		temp.insert(temp.end(), v.begin(), v.end());
+		modifiesTable[s] = temp;
 	}
 }
 

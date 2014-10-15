@@ -30,7 +30,7 @@ public:
 	void testFullSourceDE2();
 
 private:
-	string print(vector<VARINDEX>, PKB &pkb);
+	string print(set<VARINDEX>, PKB &pkb);
 
 };
 #endif

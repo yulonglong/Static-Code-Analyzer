@@ -115,7 +115,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 		if (debugModeIteration3) {
 			cout << "StmtNum is " << stmtNum << endl;
 		}
-		vector<int> v = pkb.getNext(stmtNum);
+		/*vector<int> v = pkb.getNext(stmtNum);
 		for (unsigned int j=0; j<v.size(); j++) {
 			if (debugModeIteration3) {
 				cout << "Child is " << v[j] << endl;
@@ -126,24 +126,50 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 			}
 			pkb.setToNextPair(stmtNum, pairToAdd);
 
+		}*/
+		set<int> v = pkb.getNext(stmtNum);
+		set<int>::iterator it;
+		for (it = v.begin(); it != v.end(); ++it) {
+			int i = *it;
+			if (debugModeIteration3) {
+				cout << "Child is " << i << endl;
+			}
+			pair<int, int> pairToAdd = findPair(i, pkb);
+			if (debugModeIteration3) {
+				cout << "setToNextPair(" << stmtNum  << "): ["<< pairToAdd.first << ", " << pairToAdd.second << "]" << endl;
+			}
+			pkb.setToNextPair(stmtNum, pairToAdd);
 		}
 	}
 
 }
 
 pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
-	vector<int> v = pkb.getNext(fromIndex);
+	set<int> v = pkb.getNext(fromIndex);
 	int toIndex = fromIndex; 
 	
 	while (true) {
-		if (std::find(v.begin(), v.end(), toIndex+1) != v.end()) {
-			/* v contains toIndex+1 */
-			toIndex += 1; 
-			v = pkb.getNext(toIndex);
-		} else {
-			/* v does not contain toIndex+1 */
-			break;
-		}
+		std::set<int>::iterator it;
+		cout << "HEREEEE:" << *it << endl; 
+ 		it = v.find(toIndex+1);
+		//if (it != null) {
+		//	/* v contains toIndex+1*/
+		//	toIndex += 1; 
+		//	v = pkb.getNext(toIndex);
+		//} else {
+		//	/* v does not contain toIndex+1*/
+		//	break;
+		//}
+
+
+		//if (std::find(v.begin(), v.end(), toIndex+1) != v.end()) {
+		//	/* v contains toIndex+1 */
+		//	toIndex += 1; 
+		//	v = pkb.getNext(toIndex);
+		//} else {
+		//	/* v does not contain toIndex+1 */
+		//	break;
+		//}
 	}
 	return pair<int, int>(fromIndex, toIndex);
 }
@@ -415,21 +441,21 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
-			vector<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
+			set<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
 			// SET: procedure procIndex modifies these variables too
-			//pkb.setModifiesProc(procIndex, variablesModifiedByProgLine);
+			pkb.setToModifiesProc(procIndex, variablesModifiedByProgLine);
 
-			vector<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
+			set<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
 			// SET: procedure procIndex uses these variables too
-			//pkb.setUsesProc(procIndex, variablesUsedByProgLine); 
+			pkb.setToUsesProc(procIndex, variablesUsedByProgLine); 
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
 					// SET:
-					//pkb.setModifies(progLine, variablesModifiedByProgLine); 
+					pkb.setToModifies(progLine, variablesModifiedByProgLine); 
 					// SET:
-					//pkb.setUses(progLine, variablesUsedByProgLine); 
+					pkb.setToUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
 					if (debugModeIteration1) {

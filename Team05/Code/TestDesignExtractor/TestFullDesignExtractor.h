@@ -19,8 +19,8 @@ public:
 
 	void testIter2SimpleSource(); 
 private:
-	string print(vector<int>); 
-	string printVariables(vector<VARINDEX>, PKB &pkb);
+	string print(set<int>); 
+	string printVariables(set<VARINDEX>, PKB &pkb);
 
 };
 #endif

@@ -39,6 +39,7 @@ void ProcTable::insertProc(PROCNAME procName) {
 	
 	if (!containsVariable) {
 		procedureMapTable[procName]=procedureTable.size();
+		procIndexList.insert(procedureTable.size());
 		procedureTable.emplace_back(procName);
 	}
 }
@@ -70,10 +71,6 @@ int ProcTable::getNumProcedures() {
 	return procedureTable.size();
 }
 
-vector<PROCINDEX> ProcTable::getAllProcIndexes(){
-	vector<PROCINDEX> toReturn (procedureTable.size(),1);
-	for (int i=0; i< (signed int) procedureTable.size(); i++) {
-		toReturn[i]=i;
-	}
-	return toReturn; 
+set<PROCINDEX> ProcTable::getAllProcIndexes(){
+	return procIndexList;
 }

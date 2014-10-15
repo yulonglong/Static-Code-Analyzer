@@ -41,7 +41,7 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	}
 	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	
-	vector<int> v;
+	set<int> v;
 	//pkb->printNextTable();
 
 	string expected = "1 6 14 16 18 "; 
@@ -133,7 +133,7 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	}
 	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 
-	vector<int> v;
+	set<int> v;
 	//pkb->printNextTable();
 
 	string expected = "1 5 "; 
@@ -264,7 +264,7 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 	
-	vector<int> v;
+	set<int> v;
 	//pkb->printNextTable();
 	
 	string expected = "1 13 "; 
@@ -360,7 +360,7 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	vector<int> v;
+	set<int> v;
 	nextTable->printNextTable();
 	
 	string expected = "1 "; 
@@ -558,7 +558,7 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
-	vector<int> v;
+	set<int> v;
 	//pkb->printNextTable();
 
 	string expected = "7 21 "; 
@@ -596,14 +596,23 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	pkb->~PKB();
 }
 
-// Given a vector of int, returns a String of the ints
-string BuildCFGTest::print(vector<int> v) {
+// Given a set of int, returns a String of the ints
+string BuildCFGTest::print(set<int> v) {
 	string s = "";
-	for (unsigned int i=0; i<v.size(); i++) {
+	/*for (unsigned int i=0; i<v.size(); i++) {
 		int j = v[i];
 		std::string str;
 		std::stringstream out;
 		out << j;
+		str = out.str();
+		s += ( str + " ");
+	}*/
+	set<int>::iterator it;
+	for (it = v.begin(); it != v.end(); ++it) {
+		int j = *it; 
+		std::string str;
+		std::stringstream out;
+		out << j; 
 		str = out.str();
 		s += ( str + " ");
 	}

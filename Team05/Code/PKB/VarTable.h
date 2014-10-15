@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <set>
 #include <map>
 
 using namespace std;
@@ -36,9 +37,9 @@ class VarTable {
 private: 
 	vector<VARNAME> variableTable;
 	map<VARNAME,VARINDEX> variableMapTable;
+	set<VARINDEX> varIndexList;
 	static bool instanceFlag;
 	static VarTable *varTable;
-	static VARINDEX currentIndex;
 public: 
 	//! A constructor to initialize the VarTable class.
 	VarTable();
@@ -55,7 +56,7 @@ public:
 
 	/// @cond
 	int getNumVar(); 
-	vector<VARINDEX> getAllVarIndex();
+	set<VARINDEX> getAllVarIndex();
 	/// @endcond
 };
 

@@ -129,12 +129,12 @@ void PKB::setToModifies(STMTNUM s, VARNAME v){
 	modifies->setModifies(s,v);
 }
 
-void PKB::setToModifies(STMTNUM s, vector<VARINDEX> v){
+void PKB::setToModifies(STMTNUM s, set<VARINDEX> v){
 	modifies = getModifies();
 	modifies->setModifies(s,v);
 }
 
-void PKB::setToModifiesProc(PROCINDEX i, vector<VARINDEX> v){
+void PKB::setToModifiesProc(PROCINDEX i, set<VARINDEX> v){
 	modifies = getModifies();
 	modifies->setModifiesProc(i,v);
 }
@@ -144,12 +144,12 @@ void PKB::setToUses(STMTNUM s, VARNAME v){
 	uses->setUses(s,v);
 }
 
-void PKB::setToUses(STMTNUM s, vector<VARINDEX> v){
+void PKB::setToUses(STMTNUM s, set<VARINDEX> v){
 	uses = getUses();
 	uses->setUses(s,v);
 }
 
-void PKB::setToUsesProc(PROCINDEX i, vector<VARINDEX> v){
+void PKB::setToUsesProc(PROCINDEX i, set<VARINDEX> v){
 	uses = getUses();
 	uses->setUsesProc(i,v);
 }
@@ -197,7 +197,7 @@ int PKB::getNumVar(){
 	return varTable->getNumVar();
 }
 
-vector<VARINDEX> PKB::getAllVarIndex(){
+set<VARINDEX> PKB::getAllVarIndex(){
 	return varTable->getAllVarIndex();
 }
 
@@ -213,7 +213,7 @@ int PKB::getNumProcedures(){
 	return procTable->getNumProcedures();
 }
 
-vector<PROCINDEX> PKB::getAllProcIndexes(){
+set<PROCINDEX> PKB::getAllProcIndexes(){
 	return procTable->getAllProcIndexes();
 }
 
@@ -225,8 +225,8 @@ CONSTINDEX PKB::getConstIndex (CONSTVALUE v){
 	return constTable->getConstIndex(v);
 }
 
-vector<int> PKB::getAllConstValue(){
-	return constTable->getAllConstValue();
+set<int> PKB::getAllConstIndex(){
+	return constTable->getAllConstIndex();
 }
 
 TypeTable::SynType PKB::getSynType(STMTNUM s){

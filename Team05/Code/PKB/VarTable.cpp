@@ -39,7 +39,8 @@ void VarTable::insertVar(VARNAME varName) {
 		
 	if (!containsVar) {
 		variableMapTable[varName]=variableTable.size();
-		variableTable.emplace_back(varName);
+		varIndexList.insert(variableTable.size());
+		variableTable.push_back(varName);
 	}
 }
 
@@ -70,10 +71,6 @@ int VarTable::getNumVar() {
 	return variableTable.size();
 }
 
-vector<VARINDEX> VarTable::getAllVarIndex() {
-	vector<VARINDEX> toReturn (variableTable.size(),1);
-	for (int i=0; i< (signed int) variableTable.size(); i++) {
-		toReturn[i]=i;
-	}
-	return toReturn; 
+set<VARINDEX> VarTable::getAllVarIndex() {
+	return varIndexList;
 }
