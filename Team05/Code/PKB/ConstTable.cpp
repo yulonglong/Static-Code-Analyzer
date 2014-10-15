@@ -4,11 +4,11 @@
 
 bool ConstTable::instanceFlag=false;
 ConstTable* ConstTable::constTable=NULL;
-CONSTINDEX ConstTable::currentIndex = 0;
 
 // constructor
 ConstTable::ConstTable() {
-	currentIndex = 0;
+	vector<CONSTVALUE> temp (1,"");
+	constantTable = temp;
 }
 
 ConstTable::~ConstTable(){
@@ -35,8 +35,9 @@ void ConstTable::insertConst(CONSTVALUE constant) {
 	bool containsConstant = (constantIndex != -1);
 		
 	if (!containsConstant) {
-		constantTable[currentIndex] = constant;
-		currentIndex++;
+		constantMapTable[constant]=constantTable.size();
+		constIndexList.insert(constantTable.size());
+		constantTable.push_back(constant);
 	}
 }
 
@@ -49,20 +50,16 @@ CONSTVALUE ConstTable::getConst (CONSTINDEX ind){
 }
 
 CONSTINDEX ConstTable::getConstIndex (CONSTVALUE constValue){
-	for(unordered_map<CONSTINDEX, CONSTVALUE>::iterator it = constantTable.begin(); it != constantTable.end(); it++) {
-		if (constValue == it->second) {
-			return it->first; 
-		}
+	try{
+		return constantMapTable.at(constValue);
 	}
-	return -1;
+	catch(...){
+		return -1;
+	}
 }
 
-vector<int> ConstTable::getAllConstValue(){
-	vector<int> ans;
-	for(unordered_map<CONSTINDEX, CONSTVALUE>::iterator it = constantTable.begin(); it != constantTable.end(); it++) {
-		ans.push_back(stoi(it->second));
-	}
-	return ans;
+set<CONSTINDEX> ConstTable::getAllConstIndex(){
+	return constIndexList;
 }
 
 

@@ -11,7 +11,8 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include <unordered_map>
+#include <set>
+#include <map>
 
 using namespace std;
 typedef int CONSTINDEX;
@@ -34,10 +35,11 @@ typedef string CONSTVALUE;
 
 class ConstTable {
 private: 
-	unordered_map<CONSTINDEX, CONSTVALUE> constantTable; 
+	map<CONSTVALUE,CONSTINDEX> constantMapTable;
+	vector<CONSTVALUE> constantTable;
+	set<CONSTINDEX> constIndexList;
 	static bool instanceFlag;
 	static ConstTable *constTable;
-	static CONSTINDEX currentIndex;
 public:
 	//! A constructor to initialize the ConstTable class.
 	ConstTable();
@@ -54,7 +56,7 @@ public:
 
 	/// @cond
 	//NEW METHOD
-	vector<int> getAllConstValue();
+	set<CONSTINDEX> getAllConstIndex();
 	/// @endcond
 };
 
