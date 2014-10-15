@@ -221,11 +221,16 @@ void ExtractRelationshipsTest::testFullSourceDE2() {
 	pkb->~PKB();
 }
 
-// Given a vector of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
-string ExtractRelationshipsTest::print(vector<VARINDEX> v, PKB &pkb) {
+// Given a set of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
+string ExtractRelationshipsTest::print(set<VARINDEX> v, PKB &pkb) {
 	string s = "";
-	for (int i=0; i<v.size(); i++) {
+	/*for (int i=0; i<v.size(); i++) {
 		s += pkb.getVarName(v[i]);
+		s += " ";
+	}*/
+	set<int>::iterator it;
+	for (it = v.begin(); it != v.end(); ++it) {
+		s += pkb.getVarName(*it);
 		s += " ";
 	}
 	return s; 

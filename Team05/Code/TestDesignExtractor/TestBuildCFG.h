@@ -27,7 +27,7 @@ public:
 	void testBuildCFGForNestedIfStmts(); 
 	void testBuildCFGForNestedWhileStmts(); 
 private:
-	string print(vector<int>); 
+	string print(set<int>); 
 
 };
 #endif
