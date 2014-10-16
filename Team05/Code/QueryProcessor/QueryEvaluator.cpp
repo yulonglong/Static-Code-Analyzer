@@ -1258,7 +1258,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 	//Follows(_,_) if both tokens are wildcards just evaluate true or false
 	else if(tk1=="_" && tk2=="_"){
-		vector<int> ans = pkb->getAllFollows();
+		set<int> ans = pkb->getAllFollows();
 		if(!ans.empty()){
 			followsAns.push_back(Pair (-1,-1));
 		}else {
@@ -1305,9 +1305,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(a, _)
 			else {
-				vector<int> a = pkb->getAllFollowedBy();
-				cout<<a.at(0)<<endl;
-				for(vector<int>::iterator it = a.begin(); it!=a.end(); it++){
+				set<int> a = pkb->getAllFollowedBy();
+				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					if(pkb->isSynType(i1->second, *it))
 						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
 				}
@@ -1361,8 +1360,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(_,b)
 			else {
-				vector<int> a = pkb->getAllFollows();
-				for(vector<int>::iterator it = a.begin(); it!=a.end(); it++){
+				set<int> a = pkb->getAllFollows();
+				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}
 			}
@@ -1426,21 +1425,18 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (tk2=="_" && isalpha(tk1[0]))){
 
 		if(tk1=="_"){
-			selected = t->getAllStmts(TypeTable::STMT);
+			selected = pkb->getAllStmts(TypeTable::STMT);
 		}
 
-		else if(isExistInLinkages(tk1)){
-			selected = 
-		}
 		else{
-			selected = t->getAllStmts(i1->second);	//get all while statements
+			selected = pkb->getAllStmts(i1->second);	//get all while statements
 		}
 
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
+		for(set<int>::iterator it = selected.begin(); it!=selected.end(); it++){
 			if(tk2=="_"){
-				stmtNumber = f->getFollows(TypeTable::STMT, *it);
+				stmtNumber = pkb->getFollows(TypeTable::STMT, *it);
 			}else {
-				stmtNumber = f->getFollows(i2->second, *it);
+				stmtNumber = pkb->getFollows(i2->second, *it);
 			}
 			do{			
 				if(stmtNumber!=-1){
@@ -1561,9 +1557,6 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-
-	Parent *p = pkb->getParent();
-	TypeTable *t = pkb->getTypeTable();
 
 	vector<int> answer;
 	vector<Pair> parentAns;
