@@ -311,7 +311,7 @@ bool PKB::isModifies(STMTNUM s, VARINDEX i){
 	return modifies->isModifies(s, i);
 }
 
-set<VARINDEX> PKB::getModified(STMTNUM s){
+set<VARINDEX> PKB::getModified(VARINDEX s){
 	return modifies->getModified(s);
 }
 
@@ -328,23 +328,23 @@ set<STMTNUM> PKB::getAllModifies(){
 }
 
 
-bool PKB::isModifiesProc(STMTNUM s, PROCINDEX p){
+bool PKB::isModifiesProc(PROCINDEX s, VARINDEX p){
 	return modifies->isModifiesProc(s,p);
 }
 
-set<VARINDEX> PKB::getModifiedProc(STMTNUM s){
+set<VARINDEX> PKB::getModifiedProc(VARINDEX s){
 	return modifies->getModifiedProc(s);
 }
 
-set<STMTNUM> PKB::getModifiesProc(PROCINDEX p){
+set<PROCINDEX> PKB::getModifiesProc(PROCINDEX p){
 	return modifies->getModifiesProc(p);
 }
 
-set<PROCINDEX> PKB::getAllModifiedProc(){
+set<VARINDEX> PKB::getAllModifiedProc(){
 	return modifies->getAllModifiedProc();
 }
 
-set<STMTNUM> PKB::getAllModifiesProc(){
+set<PROCINDEX> PKB::getAllModifiesProc(){
 	return modifies->getAllModifiesProc();
 }
 
@@ -352,7 +352,7 @@ bool PKB::isUses(STMTNUM s, VARINDEX i){
 	return uses->isUses(s, i);
 }
 
-set<VARINDEX> PKB::getUsed(STMTNUM s){
+set<VARINDEX> PKB::getUsed(VARINDEX s){
 	return uses->getUsed(s);
 }
 
@@ -366,19 +366,19 @@ set<STMTNUM> PKB::getAllUses(){
 	return uses->getAllUses();
 }
 
-bool PKB::isUsesProc(STMTNUM s, PROCINDEX i){
+bool PKB::isUsesProc(PROCINDEX s, VARINDEX i){
 	return uses->isUsesProc(s, i);
 }
-set<VARINDEX> PKB::getUsedProc(STMTNUM s){
+set<VARINDEX> PKB::getUsedProc(PROCINDEX s){
 	return uses->getUsedProc(s);
 }
-set<STMTNUM> PKB::getUsesProc(PROCINDEX i){
+set<PROCINDEX> PKB::getUsesProc(VARINDEX i){
 	return uses->getUsesProc(i);
 }
-set<PROCINDEX> PKB::getAllUsedProc(){
+set<VARINDEX> PKB::getAllUsedProc(){
 	return uses->getAllUsedProc();
 }
-set<STMTNUM> PKB::getAllUsesProc(){
+set<PROCINDEX> PKB::getAllUsesProc(){
 	return uses->getAllUsesProc();
 }
 

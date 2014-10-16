@@ -172,23 +172,23 @@ public:
 	set<VARINDEX> getAllModified();
 	set<STMTNUM> getAllModifies();
 
-	bool isModifiesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
-	set<VARINDEX> getModifiedProc(STMTNUM);
-	set<STMTNUM> getModifiesProc(PROCINDEX); //NOT IMPLEMENTED YET
-	set<PROCINDEX> getAllModifiedProc();
-	set<STMTNUM> getAllModifiesProc();
+	bool isModifiesProc(PROCINDEX, VARINDEX);	//Select w such that Modifies(1, "y")	
+	set<VARINDEX> getModifiedProc(PROCINDEX);
+	set<PROCINDEX> getModifiesProc(VARINDEX); //NOT IMPLEMENTED YET
+	set<VARINDEX> getAllModifiedProc();
+	set<PROCINDEX> getAllModifiesProc();
 
 	bool isUses(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
 	set<VARINDEX> getUsed(STMTNUM);
-	set<STMTNUM> getUses(VARINDEX); //NOT IMPLEMENTED YET
+	set<STMTNUM> getUses(VARINDEX); 
 	set<VARINDEX> getAllUsed();
 	set<STMTNUM> getAllUses();
 
-	bool isUsesProc(STMTNUM, PROCINDEX);	//Select w such that Modifies(1, "y")	
-	set<VARINDEX> getUsedProc(STMTNUM);
-	set<STMTNUM> getUsesProc(PROCINDEX); //NOT IMPLEMENTED YET
-	set<PROCINDEX> getAllUsedProc();
-	set<STMTNUM> getAllUsesProc();
+	bool isUsesProc(PROCINDEX, VARINDEX);	//Select w such that Modifies(1, "y")	
+	set<VARINDEX> getUsedProc(PROCINDEX);
+	set<PROCINDEX> getUsesProc(VARINDEX); 
+	set<VARINDEX> getAllUsedProc();
+	set<PROCINDEX> getAllUsesProc();
 
 	bool isNext(STMTNUM, STMTNUM);
 	set<STMTNUM> getNext(STMTNUM);
