@@ -113,15 +113,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#aea4e3824cfe9a379010644bd71fc614f">isParent</a> (STMTNUM, STMTNUM)</td></tr>
 <tr class="memdesc:aea4e3824cfe9a379010644bd71fc614f"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_parent.html" title="A Parent class to store the Parent relationship. ">Parent</a> relationship between the two statement names is true, return true. Otherwise, return false. <br /></td></tr>
 <tr class="separator:aea4e3824cfe9a379010644bd71fc614f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab097945a6ec1afcc44edec316fc6a8e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab097945a6ec1afcc44edec316fc6a8e5"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllChildren</b> ()</td></tr>
-<tr class="separator:ab097945a6ec1afcc44edec316fc6a8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29ed5d50878fd134d238361f68163152"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29ed5d50878fd134d238361f68163152"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllParent</b> ()</td></tr>
-<tr class="separator:a29ed5d50878fd134d238361f68163152"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a003bdd6cb68526bc538b0482d3e3d6f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a003bdd6cb68526bc538b0482d3e3d6f4"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getChildren</b> (STMTNUM)</td></tr>
-<tr class="separator:a003bdd6cb68526bc538b0482d3e3d6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12f46eaa965c8126714f14d190524296"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12f46eaa965c8126714f14d190524296"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllChildren</b> ()</td></tr>
+<tr class="separator:a12f46eaa965c8126714f14d190524296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b671aeedfb062edcde1cdd80ba5b27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5b671aeedfb062edcde1cdd80ba5b27"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllParent</b> ()</td></tr>
+<tr class="separator:ac5b671aeedfb062edcde1cdd80ba5b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1356c0d1d0636caff747de173448cfc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1356c0d1d0636caff747de173448cfc5"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getChildren</b> (STMTNUM)</td></tr>
+<tr class="separator:a1356c0d1d0636caff747de173448cfc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78fcc43adb66a1fb6e03732931473727"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78fcc43adb66a1fb6e03732931473727"></a>
 STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getParent</b> (STMTNUM)</td></tr>
 <tr class="separator:a78fcc43adb66a1fb6e03732931473727"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,26 +141,26 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#a9a200283b890799965da17788a483396">getParent</a> (SYNTYPE, STMTNUM)</td></tr>
 <tr class="memdesc:a9a200283b890799965da17788a483396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a statement number which has the given first SynType and has a parent relationship with the given statement number. <br /></td></tr>
 <tr class="separator:a9a200283b890799965da17788a483396"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a102719cb84657cf6813446913d5209e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a102719cb84657cf6813446913d5209e1"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#a102719cb84657cf6813446913d5209e1">getChildren</a> (SYNTYPE, STMTNUM)</td></tr>
-<tr class="memdesc:a102719cb84657cf6813446913d5209e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement number such that each statement number has the given first SynType and has a child relationship with the given statement number. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:a102719cb84657cf6813446913d5209e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d9bb2881e25e6ee825b2bc65934364"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05d9bb2881e25e6ee825b2bc65934364"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#a05d9bb2881e25e6ee825b2bc65934364">getParent</a> (SYNTYPE, SYNTYPE, STMTNUM)</td></tr>
-<tr class="memdesc:a05d9bb2881e25e6ee825b2bc65934364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with the given statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:a05d9bb2881e25e6ee825b2bc65934364"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76e2c1267889426e8a83f1b6ac6ef9f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76e2c1267889426e8a83f1b6ac6ef9f8"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#a76e2c1267889426e8a83f1b6ac6ef9f8">getChildren</a> (SYNTYPE, SYNTYPE, STMTNUM)</td></tr>
-<tr class="memdesc:a76e2c1267889426e8a83f1b6ac6ef9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with the given statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:a76e2c1267889426e8a83f1b6ac6ef9f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc87bbd55e3005afdceb972e85d6f581"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc87bbd55e3005afdceb972e85d6f581"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#abc87bbd55e3005afdceb972e85d6f581">getParent</a> (SYNTYPE, SYNTYPE)</td></tr>
-<tr class="memdesc:abc87bbd55e3005afdceb972e85d6f581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with a statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:abc87bbd55e3005afdceb972e85d6f581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad50d7fd0401e825a51d5645c6abd3d50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad50d7fd0401e825a51d5645c6abd3d50"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#ad50d7fd0401e825a51d5645c6abd3d50">getChildren</a> (SYNTYPE, SYNTYPE)</td></tr>
-<tr class="memdesc:ad50d7fd0401e825a51d5645c6abd3d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:ad50d7fd0401e825a51d5645c6abd3d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a609a6e7c71e1db5708cb65ad0ba7a5b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a609a6e7c71e1db5708cb65ad0ba7a5b8"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#a609a6e7c71e1db5708cb65ad0ba7a5b8">getChildren</a> (SYNTYPE, STMTNUM)</td></tr>
+<tr class="memdesc:a609a6e7c71e1db5708cb65ad0ba7a5b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement number such that each statement number has the given first SynType and has a child relationship with the given statement number. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:a609a6e7c71e1db5708cb65ad0ba7a5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef51f3a015afb802b63da216f1c7db55"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef51f3a015afb802b63da216f1c7db55"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#aef51f3a015afb802b63da216f1c7db55">getParent</a> (SYNTYPE, SYNTYPE, STMTNUM)</td></tr>
+<tr class="memdesc:aef51f3a015afb802b63da216f1c7db55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with the given statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:aef51f3a015afb802b63da216f1c7db55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3ec4f56d03a96528c9dfa7da94089f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3ec4f56d03a96528c9dfa7da94089f6"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#ad3ec4f56d03a96528c9dfa7da94089f6">getChildren</a> (SYNTYPE, SYNTYPE, STMTNUM)</td></tr>
+<tr class="memdesc:ad3ec4f56d03a96528c9dfa7da94089f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with the given statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:ad3ec4f56d03a96528c9dfa7da94089f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa90a26e6057f5ebe0351fdbb3201b79"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa90a26e6057f5ebe0351fdbb3201b79"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#aaa90a26e6057f5ebe0351fdbb3201b79">getParent</a> (SYNTYPE, SYNTYPE)</td></tr>
+<tr class="memdesc:aaa90a26e6057f5ebe0351fdbb3201b79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a parent relationship with a statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:aaa90a26e6057f5ebe0351fdbb3201b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc1e98d714f314e233428d1d3d67cd8b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc1e98d714f314e233428d1d3d67cd8b"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_parent.html#acc1e98d714f314e233428d1d3d67cd8b">getChildren</a> (SYNTYPE, SYNTYPE)</td></tr>
+<tr class="memdesc:acc1e98d714f314e233428d1d3d67cd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that the each statement number has the given first SynType and has a child relationship with a statement number which has the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:acc1e98d714f314e233428d1d3d67cd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -183,7 +183,7 @@ static <a class="el" href="class_parent.html">Parent</a> *&#160;</td><td class="
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 11 2014 02:00:19 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 17 2014 00:01:38 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

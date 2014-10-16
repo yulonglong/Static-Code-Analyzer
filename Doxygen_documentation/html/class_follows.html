@@ -119,12 +119,12 @@ STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getFollows</b> (ST
 <tr class="memitem:a154ecbcf94a76039350d1e2400289da8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a154ecbcf94a76039350d1e2400289da8"></a>
 STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><b>getFollowedBy</b> (STMTNUM s)</td></tr>
 <tr class="separator:a154ecbcf94a76039350d1e2400289da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad2493c2c9c246d59c4ca6432878c600"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad2493c2c9c246d59c4ca6432878c600"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollows</b> ()</td></tr>
-<tr class="separator:aad2493c2c9c246d59c4ca6432878c600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f22a4d7497aa076fe4867ed6d1eee09"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f22a4d7497aa076fe4867ed6d1eee09"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollowedBy</b> ()</td></tr>
-<tr class="separator:a2f22a4d7497aa076fe4867ed6d1eee09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896cf3037ed81b867b84214b9b313bf9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a896cf3037ed81b867b84214b9b313bf9"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollows</b> ()</td></tr>
+<tr class="separator:a896cf3037ed81b867b84214b9b313bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098d3d6dfe33c7d45f063958fba46a3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a098d3d6dfe33c7d45f063958fba46a3e"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAllFollowedBy</b> ()</td></tr>
+<tr class="separator:a098d3d6dfe33c7d45f063958fba46a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac9d9d879b2ee3887af4d45085c8e07d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac9d9d879b2ee3887af4d45085c8e07d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#aac9d9d879b2ee3887af4d45085c8e07d">isFollows</a> (SYNTYPE, STMTNUM)</td></tr>
 <tr class="memdesc:aac9d9d879b2ee3887af4d45085c8e07d"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_follows.html" title="A Follows class to store the Follows relationship. ">Follows</a> relationship between a SynType and a statement numbers exists, return true. Otherwise, return false. <br /></td></tr>
@@ -145,14 +145,14 @@ STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 STMTNUM&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#aae502a2f96d7a11197db90113f2fda6e">getFollowedBy</a> (SYNTYPE, STMTNUM)</td></tr>
 <tr class="memdesc:aae502a2f96d7a11197db90113f2fda6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the statement number that is followed by the given statement number and has the given SynType. <br /></td></tr>
 <tr class="separator:aae502a2f96d7a11197db90113f2fda6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc6250b347bdc8faaf501010b5dc8e13"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc6250b347bdc8faaf501010b5dc8e13"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#afc6250b347bdc8faaf501010b5dc8e13">getFollows</a> (SYNTYPE, SYNTYPE)</td></tr>
-<tr class="memdesc:afc6250b347bdc8faaf501010b5dc8e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given first SynType and follows the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:afc6250b347bdc8faaf501010b5dc8e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3cd102e49278002b4f53c43d23b8e2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3cd102e49278002b4f53c43d23b8e2d"></a>
-vector&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#ac3cd102e49278002b4f53c43d23b8e2d">getFollowedBy</a> (SYNTYPE, SYNTYPE)</td></tr>
-<tr class="memdesc:ac3cd102e49278002b4f53c43d23b8e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given first SynType and are followed by the given second SynType. Return an empty vector if not found. <br /></td></tr>
-<tr class="separator:ac3cd102e49278002b4f53c43d23b8e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3990f1db920f3ae46ab785972c9d0860"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3990f1db920f3ae46ab785972c9d0860"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#a3990f1db920f3ae46ab785972c9d0860">getFollows</a> (SYNTYPE, SYNTYPE)</td></tr>
+<tr class="memdesc:a3990f1db920f3ae46ab785972c9d0860"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given first SynType and follows the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:a3990f1db920f3ae46ab785972c9d0860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03c08efeb198acbc3f23bc8f63bfce53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03c08efeb198acbc3f23bc8f63bfce53"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_follows.html#a03c08efeb198acbc3f23bc8f63bfce53">getFollowedBy</a> (SYNTYPE, SYNTYPE)</td></tr>
+<tr class="memdesc:a03c08efeb198acbc3f23bc8f63bfce53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return all statement numbers such that each statement number has the given first SynType and are followed by the given second SynType. Return an empty vector if not found. <br /></td></tr>
+<tr class="separator:a03c08efeb198acbc3f23bc8f63bfce53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -175,7 +175,7 @@ static <a class="el" href="class_follows.html">Follows</a> *&#160;</td><td class
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 11 2014 02:00:19 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 17 2014 00:01:38 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
