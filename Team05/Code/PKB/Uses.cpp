@@ -188,18 +188,36 @@ bool Uses::isUses(STMTNUM s, VARINDEX index){
 
 
 
-set<VARINDEX> Uses::getUses(VARINDEX i){
+//set<STMTNUM> Uses::getUses(VARINDEX i){
+//	set<STMTNUM> ans;
+//	try{
+//		vector<int64_t> temp=usesBitVarTable.at(i);
+//
+//		for(size_t s = 0;s<temp.size();s++){
+//			int64_t bitArray = temp.at(s);
+//			while(bitArray>0){
+//				int64_t bit = bitArray & -bitArray;
+//				bitArray -= bit;
+//				int number = log((double)bit)/log(2.0) + s*63;
+//				ans.insert(number);
+//			}
+//		}
+//		return ans;
+//	}
+//	catch(...){
+//		ans.clear();
+//		return ans;
+//	}
+//}
+
+set<STMTNUM> Uses::getUses(VARINDEX i){
 	set<STMTNUM> ans;
 	try{
-		vector<int64_t> temp=usesBitVarTable.at(i);
-
-		for(size_t s = 0;s<temp.size();s++){
-			int64_t bitArray = temp.at(s);
-			while(bitArray>0){
-				int64_t bit = bitArray & -bitArray;
-				bitArray -= bit;
-				int number = log((double)bit)/log(2.0) + s*63;
-				ans.insert(number);
+		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin();it!=usesTable.end();it++){
+			vector<VARINDEX> temp = it->second;
+			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
+				if(*it2==i)
+					ans.insert(it->first);
 			}
 		}
 		return ans;
@@ -209,6 +227,7 @@ set<VARINDEX> Uses::getUses(VARINDEX i){
 		return ans;
 	}
 }
+
 
 set<VARINDEX> Uses::getUsed(STMTNUM s){
 	set<STMTNUM> ans;
@@ -348,12 +367,15 @@ void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> v) {
 	} 
 }
 
-set<VARINDEX> Uses::getUsesProc(PROCINDEX p) {	
+set<PROCINDEX> Uses::getUsesProc(VARINDEX i) {	
 	set<VARINDEX> ans;
 	try {
-		vector<STMTNUM> tempVec = usesProcTable.at(p);
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
-			ans.insert(*it);
+		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesProcTable.begin();it!=usesProcTable.end();it++){
+			vector<VARINDEX> temp = it->second;
+			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
+				if(*it2==i)
+					ans.insert(it->first);
+			}
 		}
 		return ans;
 	} catch(...){

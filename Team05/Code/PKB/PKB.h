@@ -168,13 +168,13 @@ public:
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isModifies(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
 	set<VARINDEX> getModified(STMTNUM);
-	set<STMTNUM> getModifies(VARINDEX); //NOT IMPLEMENTED YET
+	set<STMTNUM> getModifies(VARINDEX); 
 	set<VARINDEX> getAllModified();
 	set<STMTNUM> getAllModifies();
 
 	bool isModifiesProc(PROCINDEX, VARINDEX);	//Select w such that Modifies(1, "y")	
 	set<VARINDEX> getModifiedProc(PROCINDEX);
-	set<PROCINDEX> getModifiesProc(VARINDEX); //NOT IMPLEMENTED YET
+	set<PROCINDEX> getModifiesProc(VARINDEX); 
 	set<VARINDEX> getAllModifiedProc();
 	set<PROCINDEX> getAllModifiesProc();
 

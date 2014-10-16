@@ -181,18 +181,36 @@ bool Modifies::isModifies(STMTNUM s, VARINDEX index){
 //	}
 //}
 
-set<VARINDEX> Modifies::getModifies(VARINDEX i){
+//set<VARINDEX> Modifies::getModifies(VARINDEX i){
+//	set<STMTNUM> ans;
+//	try{
+//		vector<int64_t> temp=modVarTable.at(i);
+//
+//		for(size_t s = 0;s<temp.size();s++){
+//			int64_t bitArray = temp.at(s);
+//			while(bitArray>0){
+//				int64_t bit = bitArray & -bitArray;
+//				bitArray -= bit;
+//				int number = log((double)bit)/log(2.0) + s*63;
+//				ans.insert(number);
+//			}
+//		}
+//		return ans;
+//	}
+//	catch(...){
+//		ans.clear();
+//		return ans;
+//	}
+//}
+
+set<STMTNUM> Modifies::getModifies(VARINDEX i){
 	set<STMTNUM> ans;
 	try{
-		vector<int64_t> temp=modVarTable.at(i);
-
-		for(size_t s = 0;s<temp.size();s++){
-			int64_t bitArray = temp.at(s);
-			while(bitArray>0){
-				int64_t bit = bitArray & -bitArray;
-				bitArray -= bit;
-				int number = log((double)bit)/log(2.0) + s*63;
-				ans.insert(number);
+		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = modifiesTable.begin();it!=modifiesTable.end();it++){
+			vector<VARINDEX> temp = it->second;
+			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
+				if(*it2==i)
+					ans.insert(it->first);
 			}
 		}
 		return ans;
@@ -241,11 +259,11 @@ bool Modifies::isModifiesProc(PROCINDEX procIndex, VARINDEX index){
 	return false;
 }
 
-set<VARINDEX> Modifies::getModifiedProc(PROCINDEX s){
-	set<STMTNUM> ans;
+set<VARINDEX> Modifies::getModifiedProc(PROCINDEX i){
+	set<VARINDEX> ans;
 	try{
-		vector<STMTNUM> tempVec = modifiesProcTable.at(s);
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+		vector<VARINDEX> tempVec = modifiesProcTable.at(i);
+		for(vector<VARINDEX>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
 			ans.insert(*it);
 		}
 		return ans;
@@ -330,18 +348,23 @@ void Modifies::setModifiesProc(PROCINDEX p, set<VARINDEX> v) {
 	}
 }
 
-set<VARINDEX> Modifies::getModifiesProc(PROCINDEX p) {	
-	set<VARINDEX> ans;
-	try {
-		vector<STMTNUM> tempVec = modifiesProcTable.at(p);
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
-			ans.insert(*it);
+
+set<PROCINDEX> Modifies::getModifiesProc(VARINDEX i){
+	set<STMTNUM> ans;
+	try{
+		for(unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = modifiesProcTable.begin();it!=modifiesProcTable.end();it++){
+			vector<VARINDEX> temp = it->second;
+			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
+				if(*it2==i)
+					ans.insert(it->first);
+			}
 		}
 		return ans;
-	} catch(...){
-		ans.clear();
 	}
-	return ans;
+	catch(...){
+		ans.clear();
+		return ans;
+	}
 }
 
 void Modifies::setModifies(STMTNUM s, set<VARINDEX> v) {
