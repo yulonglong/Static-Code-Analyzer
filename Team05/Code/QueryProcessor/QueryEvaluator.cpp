@@ -1928,7 +1928,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 			//iterate through all procedures
 			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				answer = pkb->getModifiesProc(*it);
+				answer = pkb->getModifiedProc(*it);
 				for(set<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
 					modAns.push_back(Pair (*it, *it2));
 				}
@@ -1957,12 +1957,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		//Modifies(p, "x")
 		if(i1->second==TypeTable::PROCEDURE){
 			cout<<"In Modifies(p, \"var\")"<<endl;
-			set<int> allProc = pkb->getAllProcIndexes();
-			//TAKE NOTE TAKE NOTE TAKE NOTE
-			for(set<int>::iterator iter=allProc.begin(); iter!=allProc.end(); iter++){
-				if(pkb->isModifies(
-			}
-			answer = pkb->getModifiesProc(varIndex); //TAKE NOTE TAKE NOTE TAKE NOTE
+			answer = pkb->getModifiesProc(varIndex);
 			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 				modAns.push_back(Pair (*it, varIndex));
 			}
