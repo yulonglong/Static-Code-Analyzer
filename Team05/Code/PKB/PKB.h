@@ -139,7 +139,7 @@ public:
 	//! Return the SynType given the statement number. If the statement number, return INVALID.
 	TypeTable::SynType getSynType(STMTNUM);
 	//! Return all the statement numbers given the SynType.
-	vector<STMTNUM> getAllStmts(TypeTable::SynType);
+	set<STMTNUM> getAllStmts(TypeTable::SynType);
 	//! Return true if the given statement number has the given SynType.
 	bool isSynType(TypeTable::SynType, STMTNUM);
 	//! Return the last statement number of the program. Return -1 if there is no source code

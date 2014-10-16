@@ -52,7 +52,7 @@ public:
 	//! Return the SynType given the statement number. If the statement number, return INVALID.
 	SynType getType(STMTNUM);
 	//! Return all the statement numbers given the SynType.
-	vector<STMTNUM> getAllStmts(SynType);
+	set<STMTNUM> getAllStmts(SynType);
 	//! Return true if the given statement number has the given SynType.
 	bool isType(SynType, STMTNUM);
 

@@ -233,7 +233,7 @@ TypeTable::SynType PKB::getSynType(STMTNUM s){
 	return typeTable->getType(s);
 }
 
-vector<STMTNUM> PKB::getAllStmts(TypeTable::SynType t){
+set<STMTNUM> PKB::getAllStmts(TypeTable::SynType t){
 	return typeTable->getAllStmts(t);
 }
 

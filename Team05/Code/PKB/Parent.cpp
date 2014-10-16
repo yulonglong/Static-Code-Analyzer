@@ -219,13 +219,13 @@ bool Parent::isChildren(SYNTYPE t, STMTNUM s){
 set<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	set<STMTNUM> ans;
 	try{
-		vector<STMTNUM> tempVec;
+		set<STMTNUM> tempSet;
 		STMTNUM temp = childrenTable.at(s);
 		if(typeTable->isType(t2,temp)){
-			tempVec = typeTable->getAllStmts(t1);
+			tempSet = typeTable->getAllStmts(t1);
 		}
 		
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+		for(set<STMTNUM>::iterator it = tempSet.begin(); it !=tempSet.end();it++){
 			ans.insert(*it);
 		}
 
@@ -239,15 +239,15 @@ set<STMTNUM> Parent::getParent(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 set<STMTNUM> Parent::getChildren(SYNTYPE t1, SYNTYPE t2, STMTNUM s) {
 	set<STMTNUM> ans;
 	try{
-		vector<STMTNUM> tempVec;
+		set<STMTNUM> tempSet;
 		vector<STMTNUM> temp = parentTable.at(s);
 		vector<STMTNUM>::iterator it = temp.begin();
 		for(;it!=temp.end();++it){
 			if(typeTable->isType(t2,*it)){
-				tempVec = typeTable->getAllStmts(t1);
+				tempSet = typeTable->getAllStmts(t1);
 			}
 		}
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
+		for(set<STMTNUM>::iterator it = tempSet.begin(); it !=tempSet.end();it++){
 			ans.insert(*it);
 		}
 		return ans;

@@ -86,11 +86,11 @@ TypeTable::SynType TypeTable::getType(STMTNUM s) {
 	}
 }
 
-vector<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
-	vector<STMTNUM> list;
+set<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
+	set<STMTNUM> list;
 	for (size_t i=1; i!=typeMap.size(); i++){
 		if (t == STMT || typeMap.at(i) == t) {
-			list.push_back (i);
+			list.insert (i);
 		}
 	}
 	return list;
