@@ -1415,7 +1415,6 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	set<int> selected;
 	set<Pair> followsStarAnsSet;//REMEMBER TO INSERT SELF DEFINED COMPARATOR
 	vector<Pair> followsStarAns;
-
 	
 	int stmtNumber = 0;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
@@ -1433,10 +1432,11 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		}
 
 		for(set<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			if(tk2=="_"){
-				stmtNumber = pkb->getFollows(TypeTable::STMT, *it);
-			}else {
-				stmtNumber = pkb->getFollows(i2->second, *it);
+			stmtNumber = pkb->getFollows(*it);
+			if(tk2!="_"){
+				if(!pkb->isSynType(i2->second, stmtNumber)){
+					stmtNumber = -1;
+				}
 			}
 			do{			
 				if(stmtNumber!=-1){
@@ -1445,11 +1445,11 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 				else{
 					break;
 				}
-				if(tk2=="_"){
-					stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
-				}
-				else {
-					stmtNumber = f->getFollows(i2->second, stmtNumber);
+				stmtNumber = pkb->getFollows(stmtNumber);
+				if(tk2!="_"){
+					if(!pkb->isSynType(i2->second, stmtNumber)){
+						stmtNumber = -1;
+					}
 				}
 			}while(true);
 		}
@@ -1461,10 +1461,10 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		stmtNumber = atoi(tk2.c_str());
 		do{			
 			cout<<"Calling getFollowedBy(type, stmtnum)"<<endl;
-			stmtNumber = f->getFollowedBy(TypeTable::STMT, stmtNumber);
+			stmtNumber = pkb->getFollowedBy(stmtNumber);
 			if(stmtNumber!=-1){
 				cout<<"Evaluated StmtNumber = "<<stmtNumber<<endl;
-				if(pkb->isType(i1->second, stmtNumber)){
+				if(pkb->isSynType(i1->second, stmtNumber)){
 					cout<<"Inserting StmtNumber "<<stmtNumber<<" into the answer set"<<endl;
 					followsStarAnsSet.insert(Pair (stmtNumber, atoi(tk2.c_str())));
 				}
@@ -1482,9 +1482,9 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		stmtNumber = atoi(tk1.c_str());
 		do{			
 			cout<<"Calling getFollows(type, stmtnum)"<<endl;
-			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
+			stmtNumber = pkb->getFollows(stmtNumber);
 			if(stmtNumber!=-1){
-				if(t->isType(i2->second, stmtNumber)){
+				if(pkb->isSynType(i2->second, stmtNumber)){
 					followsStarAnsSet.insert(Pair (atoi(tk1.c_str()), stmtNumber));
 				}
 			}
@@ -1497,9 +1497,9 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 	else if(tk1=="_" && tk2=="_"){
 		bool flag = false;
-		vector<int> dummy = t->getAllStmts(TypeTable::STMT);
-		for(vector<int>::iterator it=dummy.begin(); it!=dummy.end(); it++){
-			if(f->getFollows(TypeTable::STMT, *it)!=-1){
+		set<int> dummy = pkb->getAllStmts(TypeTable::STMT);
+		for(set<int>::iterator it=dummy.begin(); it!=dummy.end(); it++){
+			if(pkb->getFollows(*it)!=-1){
 				flag = true;
 				break;
 			}
@@ -1516,7 +1516,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	else if((isdigit(tk1[0]) && isdigit(tk2[0]))|| tk2=="_"){
 		stmtNumber = atoi(tk1.c_str());
 		while(stmtNumber!=-1){	
-			stmtNumber = f->getFollows(TypeTable::STMT, stmtNumber);
+			stmtNumber = pkb->getFollows(stmtNumber);
 			cout<<"STMTNUM is "<<stmtNumber<<endl;
 			if(stmtNumber==atoi(tk2.c_str()) || (tk2=="_" && stmtNumber!=-1)){
 				followsStarAnsSet.insert(Pair (-1,-1));
@@ -1531,7 +1531,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 
 	//Follows(_,2)
 	else{
-		stmtNumber = f->getFollowedBy(TypeTable::STMT, atoi(tk2.c_str()));
+		stmtNumber = pkb->getFollowedBy(atoi(tk2.c_str()));
 		if(stmtNumber==-1){
 			followsStarAnsSet.insert(Pair(-2,-2));
 		}
@@ -1558,7 +1558,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 
-	vector<int> answer;
+	set<int> answer;
 	vector<Pair> parentAns;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
@@ -1566,22 +1566,25 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	//Parent(a,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
-		answer = t->getAllStmts(i1->second);
+		answer = pkb->getAllStmts(i1->second);
 
 		//Parent(_, b)
 		if(tk1=="_"){
-			answer = t->getAllStmts(TypeTable::STMT);
+			answer = pkb->getAllStmts(TypeTable::STMT);
 		}
 		
-		for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+		for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 			
-			vector<int> children;
+			set<int> children;
 			if(tk2=="_"){
-				children = p->getChildren(TypeTable::STMT, *it);
+				children = pkb->getChildren(*it);
 			}else{
-				children = p->getChildren(i2->second, *it);
+				children = pkb->getChildren(*it);
+				if(!pkb->isSynType(i2->second, *children.begin())){
+					children.clear();
+				}
 			}
-			for(vector<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
+			for(set<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
 				parentAns.push_back(Pair(*it, *it2));
 				cout<<"it" << *it << "it2"<<*it2<<endl;
 			}
@@ -1594,7 +1597,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 		int parent;
 		//Parent(_,3)
 		if(tk1=="_"){
-			parent = p->getParent(TypeTable::STMT, atoi(tk2.c_str()));
+			parent = pkb->getParent(atoi(tk2.c_str()));
 			if(parent!=-1){
 				parentAns.push_back(Pair(-1,-1));
 			}
@@ -1603,7 +1606,10 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			}
 		}
 		else {
-			parent = p->getParent(i1->second, atoi(tk2.c_str()));
+			parent = pkb->getParent(atoi(tk2.c_str()));
+			if(!pkb->isSynType(i1->second, parent)){
+				parent = -1;
+			}
 			if(parent!=-1){
 				parentAns.push_back(Pair(parent, atoi(tk2.c_str())));
 			}
@@ -1614,13 +1620,16 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	else if(isalpha(tk2[0]) || tk2=="_"){
 		cout<<"Parent(STMTNUM, TYPE)"<<endl;
 		if(tk2!="_"){
-			vector<int> children = p->getChildren(i2->second, atoi(tk1.c_str()));
-			for(vector<int>::iterator it=children.begin(); it!=children.end(); it++){
+			set<int> children = pkb->getChildren(atoi(tk1.c_str()));
+			if(!pkb->isSynType(i2->second, *children.begin())){
+					children.clear();
+			}
+			for(set<int>::iterator it=children.begin(); it!=children.end(); it++){
 				parentAns.push_back(Pair(atoi(tk1.c_str()), *it));
 				cout<<"in for loop"<<endl;
 			}
 		} else {
-			vector<int> children = p->getChildren(TypeTable::STMT, atoi(tk1.c_str()));
+			set<int> children = pkb->getChildren(atoi(tk1.c_str()));
 			if(!children.empty()){
 				parentAns.push_back(Pair(-1,-1));
 			}else {
@@ -1631,7 +1640,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 
 	//Parent(_,_)
 	else if(tk1=="_" && tk2 == "_"){
-		vector<int> ans = p->getParent(TypeTable::STMT, TypeTable::STMT);
+		set<int> ans = pkb->getAllParent();
 		if(!ans.empty()){
 			parentAns.push_back(Pair(-1,-1));
 		}else {
@@ -1641,7 +1650,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 
 	//Parent(1,5)
 	else{
-		 if(p->isParent(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+		 if(pkb->isParent(atoi(tk1.c_str()), atoi(tk2.c_str()))){
 			 cout<<"istrue"<<endl;
 			 parentAns.push_back(Pair (-1,-1));
 		 }else{
@@ -1661,8 +1670,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	cout<<"Initialzing all Parent* variables"<<endl;
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
-	Parent *p = pkb->getParent();
-	TypeTable *t = pkb->getTypeTable();
+
 	vector<Pair> answer;
 	set<Pair> parentStarAnsSet;
 	int stmtNumber = 0;
@@ -1686,23 +1694,22 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 
 		if(!isExistInLinkages(tk2)){
 			cout<<"Token2 does not Exist in Linkages"<<endl;
-			vector<int> vb;
-			if(tk2=="_"){
-				vb = t->getAllStmts(TypeTable::STMT);
-			}else{
-				vb = t->getAllStmts(i2->second);
-			}
 			sb.clear();
-			copy(vb.begin(), vb.end(), inserter(sb, sb.begin()));
+			if(tk2=="_"){
+				sb = pkb->getAllStmts(TypeTable::STMT);
+			}else{
+				sb = pkb->getAllStmts(i2->second);
+			}
+
 		}
 
 		cout<<"sb is Empty: "<<sb.empty()<<endl;
 		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
 			cout<<"Iterating token 2 set Sb"<<endl;
-			stmt = p->getParent(*it);
+			stmt = pkb->getParent(*it);
 			while(stmt!=-1){
 				if(isExistInLinkages(tk1)){
-					if(t->isType(i1->second,stmt) && sa.find(stmt)!=sa.end()){
+					if(pkb->isSynType(i1->second,stmt) && sa.find(stmt)!=sa.end()){
 						parentStarAnsSet.insert(Pair (stmt, *it));
 					}
 				}
@@ -1711,12 +1718,12 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 						cout<<"Token = _ and Parent = "<<stmt<<endl;
 						parentStarAnsSet.insert(Pair (stmt, *it));
 					}else{
-						if(t->isType(i1->second,stmt)){
+						if(pkb->isSynType(i1->second,stmt)){
 							parentStarAnsSet.insert(Pair (stmt, *it));
 						}
 					}
 				}
-				stmt = p->getParent(stmt);
+				stmt = pkb->getParent(stmt);
 			}
 		}
 
@@ -1742,19 +1749,18 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			sa = retrieveTokenEvaluatedAnswers(tk1);
 		}else {
 			cout<<"TOKEN1 FOUND NOT TO EXIST IN LINKAGES"<<endl;
-			vector<int> va = t->getAllStmts(i1->second);
-			copy(va.begin(), va.end(), inserter(sa, sa.begin()));
+			sa = pkb->getAllStmts(i1->second);
 		}
 		
 		cout<<"Set is Empty: "<<sa.empty()<<endl;
-		stmt = p->getParent(tk2Int);
+		stmt = pkb->getParent(tk2Int);
 		while(stmt!=-1){
 			cout<<"Parent StmtNumber = "<<stmt<<endl;
 			if(sa.find(stmt)!=sa.end()){
 				cout<<"Insert stmtNum = "<<stmt<<" into set"<<endl;
 				parentStarAnsSet.insert(Pair (stmt, tk2Int));
 			}
-		stmt = p->getParent(stmt);
+		stmt = pkb->getParent(stmt);
 		}
 
 		insertLinks(tk1, relIndex);
@@ -1769,18 +1775,17 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 		if(isExistInLinkages(tk2)){
 			sb = retrieveTokenEvaluatedAnswers(tk2);
 		}else {
-			vector<int> va = t->getAllStmts(i2->second);
-			copy(va.begin(), va.end(), inserter(sb, sb.begin()));
+			sb = pkb->getAllStmts(i2->second);
 		}
 		
 		for(set<int>::iterator it = sb.begin(); it!=sb.end(); it++){
-		stmt = p->getParent(*it);
+		stmt = pkb->getParent(*it);
 			while(stmt!=-1){
 				if(stmt == tk1Int){
 					parentStarAnsSet.insert(Pair (tk1Int, *it));
 					break;
 				}
-			stmt = p->getParent(stmt);
+			stmt = pkb->getParent(stmt);
 			}
 		}
 
@@ -1788,7 +1793,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	}
 
 	else if(tk1=="_" && tk2=="_"){
-		vector<int> dummy = p->getParent(TypeTable::STMT, TypeTable::STMT);
+		set<int> dummy = pkb->getAllParent();
 		if(dummy.empty()){
 			parentStarAnsSet.insert(Pair(-2,-2));
 		}else {
@@ -1801,7 +1806,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 
 		//Parent*(3, _)
 		if(tk2=="_"){
-			if(p->getChildren(atoi(tk1.c_str())).empty()){
+			if(pkb->getChildren(atoi(tk1.c_str())).empty()){
 				answer.push_back(Pair(-2,-2));
 			}else{
 				answer.push_back(Pair(-1,-1));
@@ -1812,7 +1817,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 
 		//Parent*(_,3)
 		if(tk1=="_"){
-			if(p->getParent(atoi(tk2.c_str()))==-1){
+			if(pkb->getParent(atoi(tk2.c_str()))==-1){
 				answer.push_back(Pair(-2,-2));
 			}else{
 				answer.push_back(Pair(-1,-1));
@@ -1824,7 +1829,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 		int tk1Int = atoi(tk1.c_str());
 		int tk2Int = atoi(tk2.c_str());
 
-		int stmt = p->getParent(tk2Int);
+		int stmt = pkb->getParent(tk2Int);
 		while(stmt!=-1){
 			if(stmt == tk1Int){
 				answer.push_back(Pair(-1,-1));
@@ -1832,7 +1837,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 				return;
 			}
 
-			stmt = p->getParent(stmt);
+			stmt = pkb->getParent(stmt);
 		}
 
 		parentStarAnsSet.insert(Pair(-2,-2));
@@ -1905,13 +1910,10 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
-	Modifies *mod = pkb->getModifies();
-	TypeTable *t = pkb->getTypeTable();
-	VarTable *varTab = pkb->getVarTable();
-	ProcTable *proc = pkb->getProcTable();
-	vector<int> selected;
+
+	set<int> selected;
 	vector<Pair> modAns;
-	vector<int> answer;
+	set<int> answer;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
@@ -1922,12 +1924,12 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		//Modifies(p, v)
 		if(i1->second==TypeTable::PROCEDURE || tk1=="_"){
 
-			selected = proc->getAllProcIndexes();
+			selected = pkb->getAllProcIndexes();
 
 			//iterate through all procedures
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				answer = mod->getModifiesProc(*it);
-				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = pkb->getModifiesProc(*it);
+				for(set<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
 					modAns.push_back(Pair (*it, *it2));
 				}
 			}
@@ -1936,10 +1938,10 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 
 		//Otherwise
 		else {
-			selected = t->getAllStmts(i1->second);
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				answer = mod->getModifies(*it);
-				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+			selected = pkb->getAllStmts(i1->second);
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = pkb->getModifies(*it);
+				for(set<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
 					modAns.push_back(Pair (*it, *it2));
 				}
 			}
@@ -1949,24 +1951,33 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	//Modifies(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
+		int varIndex = pkb->getVarIndex(varName);
 
 		//If first token is of type procedure
 		//Modifies(p, "x")
 		if(i1->second==TypeTable::PROCEDURE){
 			cout<<"In Modifies(p, \"var\")"<<endl;
-			answer = mod->getModifiesProcVar(varName);
-			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-				modAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
+			set<int> allProc = pkb->getAllProcIndexes();
+			//TAKE NOTE TAKE NOTE TAKE NOTE
+			for(set<int>::iterator iter=allProc.begin(); iter!=allProc.end(); iter++){
+				if(pkb->isModifies(
+			}
+			answer = pkb->getModifiesProc(varIndex); //TAKE NOTE TAKE NOTE TAKE NOTE
+			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				modAns.push_back(Pair (*it, varIndex));
 			}
 		}
 
 		//otherwise
 		else {
-			answer = mod->getModifies(i1->second,varName);
+			answer = pkb->getModifies(varIndex);
+			if(!pkb->isSynType(i1->second, *answer.begin())){
+				answer.clear();
+			}
 			cout<<"answer is empty: "<<answer.empty()<<endl;
-			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-				cout<<"modifiesAnswer"<<*it<<" "<<varTab->getVarIndex(varName)<<endl;
-				modAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
+			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				cout<<"modifiesAnswer"<<*it<<" "<<varIndex<<endl;
+				modAns.push_back(Pair (*it, varIndex));
 				
 			}
 		}
@@ -1976,18 +1987,18 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	//Select v such that Modifies(1, v);
 	else if(isalpha(tk2[0])){
 		if(isdigit(tk1[0])){
-			selected = mod->getModifies(atoi(tk1.c_str()));
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			selected = pkb->getModifies(atoi(tk1.c_str()));
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
 				modAns.push_back(Pair (atoi(tk1.c_str()), *it));
 			}
 		}
 
 		//Modifies("First", v)
 		else {
-			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
-			vector<int> vars = mod->getModifiesProc(procIndex);
+			int procIndex = pkb->getProcIndex(tk1.substr(1,tk1.length()-2));
+			set<int> vars = pkb->getModifiesProc(procIndex);
 
-			for(vector<int>::iterator it = vars.begin(); it!=vars.end(); it++){
+			for(set<int>::iterator it = vars.begin(); it!=vars.end(); it++){
 				modAns.push_back(Pair(procIndex, *it));
 			}
 		}
@@ -1998,8 +2009,10 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		if(tk2!="_"){
 			cout<<"Modifies(\"Procname\", \"VarName\")"<<endl;
 			string procName = tk1.substr(1,tk1.length()-2);
+			int procIndex = pkb->getProcIndex(procName);
 			string varName = tk2.substr(1,tk2.length()-2);
-			if(mod->isModifiesProc(procName, varName)){
+			int varIndex = pkb->getVarIndex(varName);
+			if(pkb->isModifiesProc(procIndex, varIndex)){
 				modAns.push_back(Pair (-1,-1));
 			}else {
 				modAns.push_back(Pair (-2,-2));
@@ -2008,8 +2021,8 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		
 		//Modifies("Third", _)
 		else {
-			int index = proc->getProcIndex(tk1.substr(1, tk1.length()-2));
-			vector<int> allVariablesModifiedByProc = mod->getModifiesProc(index);
+			int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
+			set<int> allVariablesModifiedByProc = pkb->getModifiesProc(index);
 			if(allVariablesModifiedByProc.empty()){
 				modAns.push_back(Pair(-2,-2));
 			}
@@ -2023,10 +2036,10 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	//Modifies(_,_)
 	else if(tk1=="_" && tk2=="_"){
 		cout<<"Modifies(_,_)"<<endl;
-		vector<int> allProcIndexes = proc->getAllProcIndexes();
+		set<int> allProcIndexes = pkb->getAllProcIndexes();
 		bool flag = false;
-		for(vector<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
-			if(!mod->getModifiesProc(*it).empty()){
+		for(set<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
+			if(!pkb->getModifiesProc(*it).empty()){
 				cout<<"flag is true"<<endl;
 				flag = true;
 				break;
@@ -2056,9 +2069,9 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		else {
 		cout<<"supposed"<<endl;
 		string varName = tk2.substr(1,tk2.length()-2);
+		int varIndex = pkb->getVarIndex(varName);
 		cout<<atoi(tk1.c_str())<<varName<<endl;
-		mod->setModifies(1, "y");
-		if(mod->isModifies(atoi(tk1.c_str()), varName)){
+		if(pkb->isModifies(atoi(tk1.c_str()), varIndex)){
 			cout<<"supposed2"<<endl;
 			 modAns.push_back(Pair (-1,-1));
 		 }else{
@@ -2075,12 +2088,8 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
-	Uses *use = pkb->getUses();
-	TypeTable *t = pkb->getTypeTable();
-	VarTable *varTab = pkb->getVarTable();
-	ProcTable *proc = pkb->getProcTable();
-	vector<int> selected;
-	vector<int> answer;
+	set<int> selected;
+	set<int> answer;
 	vector<Pair> usesAns;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
@@ -2091,12 +2100,12 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 		//If first token is of procedure type
 		if(i1->second==TypeTable::PROCEDURE || tk1=="_"){
 
-			selected = proc->getAllProcIndexes();
+			selected = pkb->getAllProcIndexes();
 
 			//iterate through all procedures
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				answer = use->getUsesProc(*it);
-				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = pkb->getUsesProc(*it);
+				for(set<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
 					usesAns.push_back(Pair (*it, *it2));
 				}
 			}
@@ -2105,10 +2114,10 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 		//Otherwise
 		else {
-			selected = t->getAllStmts(i1->second);
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				answer = use->getUses(*it);
-				for(vector<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
+			selected = pkb->getAllStmts(i1->second);
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+				answer = pkb->getUses(*it);
+				for(set<int>::iterator it2=answer.begin(); it2!=answer.end(); it2++){
 					usesAns.push_back(Pair (*it, *it2));
 				}
 			}
@@ -2118,21 +2127,25 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	//Select a Uses(a, "x")
 	else if(isalpha(tk1[0])){
 		string varName = tk2.substr(1,tk2.length()-2);
+		int varIndex = pkb->getVarIndex(varName);
 
 		//If first token is of type procedure
 		if(i1->second==TypeTable::PROCEDURE){
 
 			answer = use->getUsesProcVar(varName);
-			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-				usesAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
+			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				usesAns.push_back(Pair (*it, varIndex));
 			}
 		}
 
 		//otherwise
 		else {
-			answer = use->getUses(i1->second,varName);
-			for(vector<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-				usesAns.push_back(Pair (*it, varTab->getVarIndex(varName)));
+			answer = pkb->getUses(varIndex);
+			if(!pkb->isSynType(i1->second, *answer.begin())){
+				answer.clear();
+			}
+			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
+				usesAns.push_back(Pair (*it, varIndex));
 			}
 		}
 
@@ -2143,18 +2156,18 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	else if(isalpha(tk2[0])){
 
 		if(isdigit(tk1[0])){
-			selected = use->getUses(atoi(tk1.c_str()));
-			for(vector<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+			selected = pkb->getUses(atoi(tk1.c_str()));
+			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
 				usesAns.push_back(Pair (atoi(tk1.c_str()), *it));
 			}
 		}
 
 		//Uses("First", v)
 		else {
-			int procIndex = proc->getProcIndex(tk1.substr(1,tk1.length()-2));
-			vector<int> vars = use->getUsesProc(procIndex);
+			int procIndex = pkb->getProcIndex(tk1.substr(1,tk1.length()-2));
+			set<int> vars = pkb->getUsesProc(procIndex);
 
-			for(vector<int>::iterator it = vars.begin(); it!=vars.end(); it++){
+			for(set<int>::iterator it = vars.begin(); it!=vars.end(); it++){
 				usesAns.push_back(Pair(procIndex, *it));
 			}
 		}
@@ -2164,8 +2177,10 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	else if(tk1[0]=='\"'){
 		if(tk2!="_"){
 			string procName = tk1.substr(1,tk1.length()-2);
+			int procIndex = pkb->getProcIndex(procName);
 			string varName = tk2.substr(1,tk2.length()-2);
-			if(use->isUsesProc(procName, varName)){
+			int varIndex = pkb->getVarIndex(varName);
+			if(pkb->isUsesProc(procIndex, varIndex)){
 				usesAns.push_back(Pair (-1,-1));
 			}else {
 				usesAns.push_back(Pair (-2,-2));
@@ -2174,8 +2189,8 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 		//Uses("Third", _)
 		else {
-			int index = proc->getProcIndex(tk1.substr(1, tk1.length()-2));
-			vector<int> allVariablesUsedByProc = use->getUsesProc(index);
+			int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
+			set<int> allVariablesUsedByProc = pkb->getUsesProc(index);
 			if(allVariablesUsedByProc.empty()){
 				usesAns.push_back(Pair(-2,-2));
 			}
@@ -2189,10 +2204,10 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	//Uses(_,_)
 	else if(tk1=="_" && tk2=="_"){
 		cout<<"Uses(_,_)"<<endl;
-		vector<int> allProcIndexes = proc->getAllProcIndexes();
+		set<int> allProcIndexes = pkb->getAllProcIndexes();
 		bool flag = false;
-		for(vector<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
-			if(!use->getUsesProc(*it).empty()){
+		for(set<int>::iterator it = allProcIndexes.begin(); it!=allProcIndexes.end(); it++){
+			if(!pkb->getUsesProc(*it).empty()){
 				cout<<"flag is true"<<endl;
 				flag = true;
 				break;
@@ -2221,7 +2236,8 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 		else{
 			string varName = tk2.substr(1,tk2.length()-2);
-			if(use->isUses(atoi(tk1.c_str()), varName)){
+			int varIndex = pkb->getVarIndex(varName);
+			if(pkb->isUses(atoi(tk1.c_str()), varIndex)){
 				 usesAns.push_back(Pair (-1,-1));
 			 }else{
 				 usesAns.push_back(Pair (-2,-2));

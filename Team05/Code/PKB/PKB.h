@@ -98,15 +98,15 @@ public:
 	//! Set a Modifies relationship between the given statement number and variable name.
 	void setToModifies(STMTNUM, VARNAME);
 	//! Set a Modifies relationship between the given statement number and vector of variable indexes.
-	void setToModifies(STMTNUM, set<VARINDEX>);
+	void setToModifies(STMTNUM, vector<VARINDEX>);
 	//! Set a Modifies relationship between the given procedure index and vector of variable indexes.
-	void setToModifiesProc(PROCINDEX, set<VARINDEX>);
+	void setToModifiesProc(PROCINDEX, vector<VARINDEX>);
 	//! Set a Uses relationship between the given statement number and variable name.
 	void setToUses(STMTNUM, VARNAME);
 	//! Set a Uses relationship between the given statement number and vector of variable indexes.
-	void setToUses(STMTNUM, set<VARINDEX>);
+	void setToUses(STMTNUM, vector<VARINDEX>);
 	//! Set a Uses relationship between the given procedure index and vector of variable indexes.
-	void setToUsesProc(PROCINDEX, set<VARINDEX>);
+	void setToUsesProc(PROCINDEX, vector<VARINDEX>);
 	//! Set a Calls relationship between the two given procedure name at the specified statement number.
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM);
 	//! Set a Next relationship between the two given statement numbers.
@@ -121,25 +121,25 @@ public:
 	//! Return the variable index given the variable name. If it is not found, return an -1.
 	VARINDEX getVarIndex (VARNAME);
 	int getNumVar(); 
-	set<VARINDEX> getAllVarIndex();
+	vector<VARINDEX> getAllVarIndex();
 
 	//! Return the procedure name given the procedure index. If it is not found, return an empty string.
 	PROCNAME getProcName (PROCINDEX);
 	//! Return the procedure index given the procedure name. If it is not found, return an -1.
 	PROCINDEX getProcIndex (PROCNAME);
 	int getNumProcedures(); 
-	set<PROCINDEX> getAllProcIndexes();
+	vector<PROCINDEX> getAllProcIndexes();
 
 	//! Return the constant value given the constant index. If it is not found, return an empty string.
 	CONSTVALUE getConstValue (CONSTINDEX);
 	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
-	set<int> getAllConstIndex();
+	vector<int> getAllConstValue();
 
 	//! Return the SynType given the statement number. If the statement number, return INVALID.
 	TypeTable::SynType getSynType(STMTNUM);
 	//! Return all the statement numbers given the SynType.
-	set<STMTNUM> getAllStmts(TypeTable::SynType);
+	vector<STMTNUM> getAllStmts(TypeTable::SynType);
 	//! Return true if the given statement number has the given SynType.
 	bool isSynType(TypeTable::SynType, STMTNUM);
 	//! Return the last statement number of the program. Return -1 if there is no source code
