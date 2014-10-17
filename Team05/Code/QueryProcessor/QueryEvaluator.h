@@ -59,9 +59,9 @@ private:
 	//! Evaluate all Next* Relationships
 	void evaluateNextStar(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 	//! A Recursive Method used in Next* to aid in finding the respective answers
-	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType);
-	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType);
-	void recursiveNextTarget(int, int, int, std::set<Pair> *);
+	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType, std::vector<int>*);
+	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType, std::vector<int>*);
+	void recursiveNextTarget(int, int, int, std::set<Pair> *, std::vector<int>*);
 
 	//! Evaluate all Affects Relationships
 	void evaluateAffects(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);

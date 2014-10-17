@@ -97,15 +97,15 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	m->setModifies(1, "y");
 	m->setModifies(1, "z");
 
-	vector<int> procedureFirstModifies;
-	procedureFirstModifies.push_back(0);
-	procedureFirstModifies.push_back(1);
-	procedureFirstModifies.push_back(2);
+	set<int> procedureFirstModifies;
+	procedureFirstModifies.insert(0);
+	procedureFirstModifies.insert(1);
+	procedureFirstModifies.insert(2);
 	m->setModifiesProc(0, procedureFirstModifies);
 
-	vector<int> procedureSecondModifies;
-	procedureSecondModifies.push_back(1);
-	procedureSecondModifies.push_back(2);
+	set<int> procedureSecondModifies;
+	procedureSecondModifies.insert(1);
+	procedureSecondModifies.insert(2);
 	m->setModifiesProc(1, procedureSecondModifies);
 
 	c->setCalls("First", "Second", 3);
@@ -188,12 +188,13 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Follows", "_", "_");
 	q.addRelationship(r);
 
-	/*
+	
 	//Parent(w, a3) r13
 	r = Relationship("Parent", "w", "a3");
 	q.addRelationship(r);
 	selectedSyn.push_back("a3");
 
+	
 	//Parent(s4, s5) r14
 	r = Relationship("Parent", "s4", "s5");
 	q.addRelationship(r);
@@ -203,20 +204,20 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Parent(s4, 10) r15
 	r = Relationship("Parent", "s4", "10");
 	q.addRelationship(r);
-
+	
 	//Parent*(8, 10) r16
 	r = Relationship("Parent*", "8", "10");
 	q.addRelationship(r);
-
+	
 	//Parent*(w2, 10) r17
 	r = Relationship("Parent*", "w2", "10");
 	q.addRelationship(r);
 	selectedSyn.push_back("w2");
-
+	/*
 	//Parent*(8, s5) r18
 	r = Relationship("Parent*", "8", "s5");
 	q.addRelationship(r);
-
+	
 	//Parent*(_, s5) r19
 	r = Relationship("Parent*", "_", "s5");
 	q.addRelationship(r);
@@ -232,7 +233,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Parent*(_, 9) r22
 	r = Relationship("Parent*", "_", "9");
 	q.addRelationship(r);
-
+	
 	//Modifies(p, v) r23
 	r = Relationship("Modifies", "p", "v");
 	q.addRelationship(r);
@@ -271,12 +272,12 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Modifies(a, "x") r31
 	r = Relationship("Modifies", "a", "\"x\"");
 	q.addRelationship(r);
-
+	
 	//Calls (p2, q) r32
 	r = Relationship("Calls", "p2", "q");
 	q.addRelationship(r);
 	selectedSyn.push_back("q");
-
+	
 	//Calls* (p2, q) 
 	r = Relationship("Calls*", "p2", "q");
 	q.addRelationship(r);
@@ -329,11 +330,11 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Next", "s8", "_");
 	q.addRelationship(r);
 	selectedSyn.push_back("s8");
-
+	
 	//Next*(1, 5)
 	r = Relationship("Next*", "1", "5");
 	q.addRelationship(r);
-
+	*/
 
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
