@@ -157,7 +157,7 @@ STMTNUM Parent::getParent(STMTNUM s){
 		ans = childrenTable.at(s);
 		return ans;
 	} catch (...){
-		return ans;
+		return -1;
 	}
 }
 
