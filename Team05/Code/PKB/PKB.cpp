@@ -11,7 +11,7 @@ PKB::PKB(){
 	procTable = ProcTable::getInstance();
 	typeTable = TypeTable::getInstance();
 	constTable = ConstTable::getInstance();
-	parent = Parent::getInstance(typeTable);
+	parent = Parent::getInstance();
 	follows = Follows::getInstance();
 	modifies = Modifies::getInstance(varTable);
 	uses = Uses::getInstance(varTable);

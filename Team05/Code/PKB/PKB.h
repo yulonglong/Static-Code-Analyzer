@@ -143,7 +143,7 @@ public:
 	//! Return true if the given statement number has the given SynType.
 	bool isSynType(TypeTable::SynType, STMTNUM);
 	//! Return the last statement number of the program. Return -1 if there is no source code
-	STMTNUM getStmtRange(); //return first and last stmtNum push_back into the vector
+	STMTNUM getStmtRange(); 
 
 	//! If the Calls relationship between the two procedure names is true, return true. Otherwise, return false.
 	bool isCalls(PROCINDEX,PROCINDEX);
