@@ -19,8 +19,7 @@ TypeTable::SynType TypeTable::getSynType(std::string input){
 	for(int i=0;i<(int)input.length();i++){
 		input[i] = tolower(input[i]);
 	}
-	
-	
+
 	if(input=="assign"){
 		return TypeTable::ASSIGN;
 	}

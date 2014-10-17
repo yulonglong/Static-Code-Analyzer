@@ -40,6 +40,7 @@ private:
 	set<VARINDEX> varIndexList;
 	static bool instanceFlag;
 	static VarTable *varTable;
+	int size;
 public: 
 	//! A constructor to initialize the VarTable class.
 	VarTable();

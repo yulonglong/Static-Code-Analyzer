@@ -57,7 +57,7 @@ public:
 	bool isType(SynType, STMTNUM);
 
 	//! Return the last statement number of the program. Return -1 if there is no source code
-	STMTNUM getStmtRange(); //return first and last stmtNum push_back into the vector
+	STMTNUM getStmtRange();
 };
 
 #endif

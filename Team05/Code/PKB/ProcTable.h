@@ -40,6 +40,7 @@ private:
 	set<PROCINDEX> procIndexList;
 	static bool instanceFlag;
 	static ProcTable *procTable;
+	int size;
 public:
 	//! A constructor to initialize the ProcTable class.
 	ProcTable();

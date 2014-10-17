@@ -9,11 +9,13 @@ VarTable* VarTable::varTable=NULL;
 VarTable::VarTable() {
 	vector<VARNAME> temp (1,"");
 	variableTable = temp;
+	size=0;
 }
 
 VarTable::~VarTable(){
 	variableTable.clear();
 	variableMapTable.clear();
+	size=0;
 	instanceFlag=false;
 }
 
@@ -41,6 +43,7 @@ void VarTable::insertVar(VARNAME varName) {
 		variableMapTable[varName]=variableTable.size();
 		varIndexList.insert(variableTable.size());
 		variableTable.push_back(varName);
+		size++;
 	}
 }
 
@@ -68,7 +71,7 @@ VARINDEX VarTable::getVarIndex (VARNAME varName){
 }
 
 int VarTable::getNumVar() {
-	return variableTable.size();
+	return size;
 }
 
 set<VARINDEX> VarTable::getAllVarIndex() {

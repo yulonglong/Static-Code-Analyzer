@@ -9,11 +9,14 @@ ProcTable* ProcTable::procTable=NULL;
 ProcTable::ProcTable() {
 	vector<PROCNAME> temp (1,"");
 	procedureTable = temp;
+	size=0;
 }
 
 ProcTable::~ProcTable(){
 	procedureTable.clear();
 	procedureMapTable.clear();
+	procIndexList.clear();
+	size=0;
 	instanceFlag=false;
 }
 
@@ -40,7 +43,8 @@ void ProcTable::insertProc(PROCNAME procName) {
 	if (!containsVariable) {
 		procedureMapTable[procName]=procedureTable.size();
 		procIndexList.insert(procedureTable.size());
-		procedureTable.emplace_back(procName);
+		procedureTable.push_back(procName);
+		size++;
 	}
 }
 
@@ -68,7 +72,7 @@ PROCINDEX ProcTable::getProcIndex (PROCNAME procName){
 }
 
 int ProcTable::getNumProcedures() {
-	return procedureTable.size();
+	return size;
 }
 
 set<PROCINDEX> ProcTable::getAllProcIndexes(){

@@ -7,69 +7,66 @@
 #include <string>
 #include <vector>
 
-void 
-TypeTableTest::setUp()
-{
+TypeTable* typeTable;
+
+void TypeTableTest::setUp(){
+	typeTable = typeTable->getInstance();
 }
 
-void 
-TypeTableTest::tearDown()
-{
+void TypeTableTest::tearDown() {
+	typeTable->~TypeTable();
+	typeTable = typeTable->getInstance();
 }
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( TypeTableTest ); // Note 4 
 
-void TypeTableTest::testConstructor()
-{  // Note 5
-	// create a student object
-	TypeTable typeTable;
-	return;
-}
+void TypeTableTest::testTableSet() {
+	typeTable->insertStmtNumAndType(0, TypeTable::WHILE);
+	typeTable->insertStmtNumAndType(4, TypeTable::IF);
+	typeTable->insertStmtNumAndType(15, TypeTable::WHILE);
+	typeTable->insertStmtNumAndType(21, TypeTable::ASSIGN);
+	typeTable->insertStmtNumAndType(22, TypeTable::WHILE);
 
-void TypeTableTest::testTableSet()
-{
-	TypeTable typeTable;
-
-	typeTable.insertStmtNumAndType(0, TypeTable::WHILE);
-	typeTable.insertStmtNumAndType(4, TypeTable::IF);
-	typeTable.insertStmtNumAndType(15, TypeTable::WHILE);
-	typeTable.insertStmtNumAndType(21, TypeTable::ASSIGN);
-
-	vector<STMTNUM> expected;
-	vector<STMTNUM> result;
-	expected.push_back(4);
-	result = typeTable.getAllStmts(TypeTable::IF);
+	set<STMTNUM> expected;
+	set<STMTNUM> result;
+	expected.insert(4);
+	result = typeTable->getAllStmts(TypeTable::IF);
 	// verify that the assignment is correct - Note 7
-	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
+	CPPUNIT_ASSERT(expected==result);
 
 	expected.clear();
 	result.clear();
-	expected.push_back(15);
-	result = typeTable.getAllStmts(TypeTable::WHILE);
-	CPPUNIT_ASSERT_EQUAL(expected[0], result[0]);
-	CPPUNIT_ASSERT_EQUAL(expected[1], result[1]);
+	expected.insert(15);
+	expected.insert(22);
+	result = typeTable->getAllStmts(TypeTable::WHILE);
+	CPPUNIT_ASSERT(expected==result);
 
 	expected.clear();
 	result.clear();
-	expected.push_back(21);
-	result = typeTable.getAllStmts(TypeTable::ASSIGN);
-	CPPUNIT_ASSERT_EQUAL(expected[0],result[0]);
+	expected.insert(21);
+	result = typeTable->getAllStmts(TypeTable::ASSIGN);
+	CPPUNIT_ASSERT(expected==result);
 
 	TypeTable::SynType expectedType;
 	expectedType = TypeTable::WHILE;
-	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(0));
+	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable->getType(0));
 	expectedType = TypeTable::IF;
-	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(4));
+	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable->getType(4));
 	expectedType = TypeTable::WHILE;
-	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(15));
+	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable->getType(15));
 	expectedType = TypeTable::ASSIGN;
-	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable.getType(21));
+	CPPUNIT_ASSERT_EQUAL(expectedType, typeTable->getType(21));
 
 	expected.clear();
 	result.clear();
-	result =  typeTable.getAllStmts(TypeTable::CALL);
-	CPPUNIT_ASSERT_EQUAL(expected.size(), result.size());
+	result =  typeTable->getAllStmts(TypeTable::CALL);
+	CPPUNIT_ASSERT(expected.size()== result.size());
+
+	result =  typeTable->getAllStmts(TypeTable::WHILE);
+	CPPUNIT_ASSERT(2== result.size());
+
+	CPPUNIT_ASSERT(typeTable->getStmtRange()==22);
 
 	return;
 }
