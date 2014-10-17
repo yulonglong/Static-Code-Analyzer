@@ -35,7 +35,10 @@ Next::Next(TypeTable* tt){
 void Next::setNext(STMTNUM s1, STMTNUM s2){
 	try{
 		vector<STMTNUM> temp (1,s2);
-
+		if(s1>=nextTable.size()){
+			vector<STMTNUM> empty;
+			nextTable.resize(s1+1,empty);
+		}
 		try{
 			vector<STMTNUM> temp1 = nextTable.at(s1);
 			temp1.push_back(s2);
@@ -44,8 +47,13 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 			nextTable[s1] = temp;
 		}
 
-		vector<STMTNUM> temp2 (1,s1);
+		nextList.insert(s1);
 
+		vector<STMTNUM> temp2 (1,s1);
+		if(s2>=previousTable.size()){
+			vector<STMTNUM> empty;
+			previousTable.resize(s2+1,empty);
+		}
 		try{
 			vector<STMTNUM> temp3 = previousTable.at(s2);
 			temp3.push_back(s1);
@@ -53,6 +61,8 @@ void Next::setNext(STMTNUM s1, STMTNUM s2){
 		} catch(...){
 			previousTable[s2] = temp2;
 		}
+
+		previousList.insert(s2);
 	}catch(...){
 	}
 }
@@ -83,10 +93,35 @@ set<STMTNUM> Next::getPrevious(STMTNUM s){
 	}
 }
 
+bool Next::isNext(STMTNUM s1, STMTNUM s2){
+	try{
+		vector<STMTNUM> temp = nextTable.at(s1);
+		vector<STMTNUM>::iterator iter;
+		for (iter = temp.begin(); iter!=temp.end(); iter++) {
+			if(*iter==s2)
+				return true;
+		}		
+	} catch(...){
+		return false;
+	}
+	return false;
+}
+
+set<STMTNUM> Next::getAllNext(){
+	return nextList;
+}
+set<STMTNUM> Next::getAllPrevious(){
+	return previousList;
+}
+
 void Next::setNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
 	try{
 		vector<pair<STMTNUM,STMTNUM>> temp (1,p);
 
+		if(s>=nextPairTable.size()){
+			vector<pair<STMTNUM,STMTNUM>> empty;
+			nextPairTable.resize(s+1,empty);
+		}
 		try{
 			vector<pair<STMTNUM,STMTNUM>> temp1 = nextPairTable.at(s);
 			temp1.push_back(p);
@@ -108,25 +143,12 @@ vector<pair<STMTNUM,STMTNUM>> Next::getNextPair(STMTNUM s){
 	}
 }
 
-bool Next::isNext(STMTNUM s1, STMTNUM s2){
-	try{
-		vector<STMTNUM> temp = nextTable.at(s1);
-		vector<STMTNUM>::iterator iter;
-		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			if(*iter==s2)
-				return true;
-		}		
-	} catch(...){
-		return false;
-	}
-	return false;
-}
-
 void Next::printNextTable() {
 	cout<< "Next Table" << endl;
-	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
-		cout<< it->first << " has next consisting of ";
-		vector<STMTNUM> temp = it->second; 
+	int index=0;
+	for(vector<vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++,index++) {
+		cout<< index << " has next consisting of ";
+		vector<STMTNUM> temp = *it; 
 		vector<STMTNUM>::iterator iter;
 		for (iter = temp.begin(); iter!=temp.end(); iter++) {
 			cout<< *iter<< ",";
@@ -137,50 +159,38 @@ void Next::printNextTable() {
 
 void Next::printNextPairTableForTesting() {
 	cout<< "Next pair Table" << endl;
-	for(unordered_map<STMTNUM, vector<pair<STMTNUM,STMTNUM>>>::iterator it = nextPairTable.begin(); it != nextPairTable.end(); it++) {
-		cout<<"("<< it->first<<"): [";
-		vector<pair<STMTNUM,STMTNUM>> temp = it->second; 
-		vector<pair<STMTNUM,STMTNUM>>::iterator iter;
-		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			cout<<"("<< iter->first<<","<<iter->second<<")";
-		}		
-		cout<<"]"<<endl;
+	int index=0;
+	for(vector<vector<pair<STMTNUM,STMTNUM>>>::iterator it = nextPairTable.begin(); it != nextPairTable.end(); it++,index++) {
+		vector<pair<STMTNUM,STMTNUM>> temp1 = *it;
+		if(!temp1.empty()){
+			cout<<"("<< index<<"): [";
+			vector<pair<STMTNUM,STMTNUM>> temp = *it; 
+			vector<pair<STMTNUM,STMTNUM>>::iterator iter;
+			for (iter = temp.begin(); iter!=temp.end(); iter++) {
+				cout<<"("<< iter->first<<","<<iter->second<<")";
+			}		
+			cout<<"]"<<endl;
+		}
 	}
 }
 
 void Next::printNextTableForTesting() {
-	for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
-		cout<< it->first << "-";
-		vector<STMTNUM> temp = it->second; 
-		vector<STMTNUM>::iterator iter;
-		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			cout<< *iter<< " ";
-		}		
-		cout<<"+";
+	cout<< "Next pair Table for testing" << endl;
+	int index=0;
+	for(vector<vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
+		vector<STMTNUM> temp1 = *it;
+		if(!temp1.empty()){
+			cout<< index << "-";
+			vector<STMTNUM> temp = *it; 
+			vector<STMTNUM>::iterator iter;
+			for (iter = temp.begin(); iter!=temp.end(); iter++) {
+				cout<< *iter<< " ";
+			}		
+			cout<<"+";
+		}
 	}
 }
 
-set<STMTNUM> Next::getAllNext(){
-	set<STMTNUM> ans;
-	try{
-		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = nextTable.begin(); it != nextTable.end(); it++) {
-			ans.insert(it->first);
-		}
-	} catch(...) {
-		ans.clear();
-	}
-	return ans;
-}
-set<STMTNUM> Next::getAllPrevious(){
-	set<STMTNUM> ans;
-	try{
-		for(unordered_map<STMTNUM, vector<STMTNUM>>::iterator it = previousTable.begin(); it != previousTable.end(); it++) {
-			ans.insert(it->first);
-		}
-	} catch(...) {
-		ans.clear();
-	}
-	return ans;
-}
+
 
 

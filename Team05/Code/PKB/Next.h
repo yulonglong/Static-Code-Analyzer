@@ -10,7 +10,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map>
 #include <algorithm>
 #include <set>
 #include <utility>
@@ -34,13 +33,14 @@ typedef int STMTNUM;
 
 class Next {
 private:
-	unordered_map<STMTNUM, vector<STMTNUM>> nextTable;
-	unordered_map<STMTNUM, vector<STMTNUM>> previousTable;
-	unordered_map<STMTNUM, vector<pair<STMTNUM,STMTNUM>>> nextPairTable;
+	vector<vector<STMTNUM>> nextTable;
+	vector<vector<STMTNUM>> previousTable;
+	vector<vector<pair<STMTNUM,STMTNUM>>> nextPairTable;
 	static bool instanceFlag;
 	static Next *next;
 	TypeTable *typeTable;
-
+	set<STMTNUM> nextList;
+	set<STMTNUM> previousList;
 public:	
 	//! A constructor to initialize the Next class.
 	Next(TypeTable*);
@@ -50,7 +50,7 @@ public:
 	static Next* getInstance(TypeTable*);	// to be used to get instance of singleton class 
 	//! Set the Follows relationship between the two statement numbers to be true.
 	void setNext(STMTNUM, STMTNUM);
-
+	bool isNext(STMTNUM, STMTNUM);
 
 	set<STMTNUM> getAllNext();
 	set<STMTNUM> getAllPrevious();
@@ -58,17 +58,12 @@ public:
 	void setNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
-
-
-	//Temp method. lacie give me the correct one please
 	set<STMTNUM> getNext(STMTNUM);
-	//Temp method. lacie give me the correct one please
+
 	set<STMTNUM> getPrevious(STMTNUM);
 
 	/// @cond
 	//ADDITIONAL METHODS
-	bool isNext(STMTNUM, STMTNUM);
-
 	void printNextTable();
 	void printNextTableForTesting();
 	void printNextPairTableForTesting();

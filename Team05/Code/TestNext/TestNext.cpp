@@ -39,24 +39,26 @@ void NextTest::testSetAndGetNext() {
 	next1->setNextPair(1,make_pair(4,5));
 	next1->setNextPair(5,make_pair(6,0));
 	next1->setNextPair(7,make_pair(8,11));
+
 	next1->printNextPairTableForTesting();
 
-	vector<STMTNUM> ans (1,2);
-	ans.push_back(3);
-	ans.push_back(4);
+	set<STMTNUM> ans;
+	ans.insert(2);
+	ans.insert(3);
+	ans.insert(4);
 
 	CPPUNIT_ASSERT(next1->getNext(1) == ans);
 	ans.clear();
-	ans.push_back(5);
+	ans.insert(5);
 	CPPUNIT_ASSERT(next1->getNext(4) == ans);
 	ans.clear();
 	CPPUNIT_ASSERT(next1->getNext(999) == ans);
 	CPPUNIT_ASSERT(next1->getNext(5) == ans);
 	ans.clear();
-	ans.push_back(1);
+	ans.insert(1);
 	CPPUNIT_ASSERT(next1->getPrevious(3) == ans);
 	ans.clear();
-	ans.push_back(4);
+	ans.insert(4);
 	CPPUNIT_ASSERT(next1->getPrevious(5) == ans);
 	ans.clear();
 	CPPUNIT_ASSERT(next1->getPrevious(1) == ans);
