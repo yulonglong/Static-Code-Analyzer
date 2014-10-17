@@ -8,8 +8,10 @@ bool Follows::instanceFlag=false;
 Follows* Follows::follows=NULL;
 
 // constructor
-Follows::Follows(TypeTable *table) {
-	typeTable = table;
+Follows::Follows() {
+	vector<STMTNUM> temp (1,-1);
+	followsTable = temp;
+	followedByTable=temp;
 }
 
 Follows::~Follows() {
@@ -18,9 +20,9 @@ Follows::~Follows() {
 	instanceFlag=false;
 }
 
-Follows* Follows::getInstance(TypeTable *table) {
+Follows* Follows::getInstance() {
 	if (!instanceFlag) {
-        follows = new Follows(table);
+        follows = new Follows();
         instanceFlag = true;
         return follows;
     } else {
@@ -29,25 +31,27 @@ Follows* Follows::getInstance(TypeTable *table) {
 }
 
 void Follows::setFollows(STMTNUM s1, STMTNUM s2) {
+	if(s1>=followsTable.size())
+		followsTable.resize(s1+1,-1);
 	followsTable[s1] = s2;
+
+	if(s2>=followedByTable.size())
+		followedByTable.resize(s2+1,-1);
 	followedByTable[s2] = s1;
+
 	followsList.insert(s1);
 	followedByList.insert(s2);
 }
 
 bool Follows::isFollows(STMTNUM s1, STMTNUM s2) {
-	
-	STMTNUM num = -1; 
 	try {
-		num = followsTable.at(s1);
-	} 
+		STMTNUM num = followsTable.at(s1);
+		if(num==s2)
+			return true; 
+	}
 	catch (...) {
 		return false;
-		// std::cerr << "Out of Range error: " << oor.what() << '\n';
 	}
-	if (num != -1 && num == s2){
-		return true;
-	} 
 	return false; 
 }
 
@@ -75,119 +79,11 @@ set<STMTNUM> Follows::getAllFollowedBy(){
 	return followedByList;
 }
 
-
-bool Follows::isFollows(SYNTYPE t, STMTNUM s) {
-	STMTNUM result = getFollows(t, s);
-	bool noResult = (result == -1);
-	if (noResult) {
-		return false;
-	} 
-	return true;
-}
-
-bool Follows::isFollowedBy(SYNTYPE t, STMTNUM s) {
-	STMTNUM result = getFollowedBy(t, s);
-	bool noResult = (result == -1);
-	if (noResult) {
-		return false;
-	} 
-	return true;
-}
-
-bool Follows::isFollows(SYNTYPE t1, SYNTYPE t2) {
-	set<STMTNUM> temp = getFollows(t1, t2); 
-	if (temp.empty()) {
-		return false;
-	}
-	return true;
-}
-
-STMTNUM Follows::getFollows(SYNTYPE t, STMTNUM s) {
-	STMTNUM num = -1;
-	try {
-		num = followsTable.at(s);
-	} 
-	catch (std::out_of_range) {
-		return -1;
-		// cout<<"In catch block"<<endl;
-	}
-	if (num != 0 && num != -1 && typeTable->isType(t,num)){
-		return num;
-	} 
-	return -1; 
-}
-
-STMTNUM Follows::getFollowedBy(SYNTYPE t, STMTNUM s) {
-	int num = -1; 
-	try {
-		num = followedByTable.at(s);
-	} 
-	catch (...) {
-		return -1; 
-	}
-	if (num != 0 && num != -1 && typeTable->isType(t, num)){
-		return num;
-	} 
-	return -1; 
-}
-
-set<STMTNUM> Follows::getFollows(SYNTYPE t1, SYNTYPE t2) {
-	set<STMTNUM> list; 
-	STMTNUM j = -1; 
-	try {
-		for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
-			j = -1; 
-			try {
-				j = followsTable.at(i);
-			} catch (...) {
-				continue;
-			}
-			if (j!=-1 && typeTable->isType(t1, i) && typeTable->isType(t2, j))  {
-				//cout << i->first << " ,g "<< i->second<<endl; 
-				list.insert(j);
-			}
-		}
-		return list; 
-	} catch (...) {
-		list.clear();
-	}
-	return list;
-}
-
-set<STMTNUM> Follows::getFollowedBy(SYNTYPE t1, SYNTYPE t2) {
-	set<STMTNUM> list; 
-	STMTNUM j = -1; 
-	for (vector<STMTNUM>::size_type i = 1; i != followsTable.size(); i++) {
-		j = -1; 
-		try {
-			// cout << "Try: i is " << i << endl; 
-			j = followsTable[i];
-			// cout << "Try: j is " << j << endl; 
-			
-		} catch (...) {
-			//const std::out_of_range& oor
-			// cout << "Catch: j is " << j << endl; 
-			continue;
-		}
-
-		try {
-			if (j != -1) {
-				if (typeTable->isType(t1, i) && typeTable->isType(t2, j)) {
-					list.insert(i);
-				}
-
-			}
-		} catch (...) {
-			// if that stmtnum doesnt have a type in typetable
-			continue; 
-		}
-	}
-	return list;
-}
-
 void Follows::printFollowsTable() {
 	cout<< "Follows Table" << endl;
-	for(unordered_map<STMTNUM, STMTNUM>::iterator it = followsTable.begin(); it != followsTable.end(); it++) {
-		cout<< it->first << " follows "<< it->second<< endl;
+	int index = 0;
+	for(vector<STMTNUM>::iterator it = followsTable.begin(); it != followsTable.end(); it++) {
+		cout<< index << " follows "<< *it<< endl;
+		index++;
 	}
 }
