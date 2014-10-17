@@ -167,27 +167,46 @@ public:
 
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isModifies(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
+	//! Return a set of all variable indexes that the given statement number has modified. Return an empty set if not found.
 	set<VARINDEX> getModified(STMTNUM);
-	set<STMTNUM> getModifies(VARINDEX); 
+	//! Return a set of all statement numbers that has modified the given variable index. Return an empty set if not found.
+	set<STMTNUM> getModifies(VARINDEX);
+	//! Return a set of all variable indexes that have been modified. Return an empty set if not found.
 	set<VARINDEX> getAllModified();
+	//! Return a set of all statement numbers that has modified any variables. Return an empty set if not found.
 	set<STMTNUM> getAllModifies();
 
-	bool isModifiesProc(PROCINDEX, VARINDEX);	//Select w such that Modifies(1, "y")	
+	//! If the Modifies relationship between a procedure index and a variable index is true, return true. Otherwise, return false.
+	bool isModifiesProc(PROCINDEX, VARINDEX);
+	//! Return a set of all variable indexes that the given procedure index has modified. Return an empty set if not found.
 	set<VARINDEX> getModifiedProc(PROCINDEX);
-	set<PROCINDEX> getModifiesProc(VARINDEX); 
+	//! Return a set of all procedure indexes that has modified the given variable index. Return an empty set if not found.
+	set<PROCINDEX> getModifiesProc(VARINDEX);
+	//! Return a set of all variable indexes that have been modified. Return an empty set if not found.
 	set<VARINDEX> getAllModifiedProc();
+	//! Return a set of all procedure indexes that has modified any variables. Return an empty set if not found.
 	set<PROCINDEX> getAllModifiesProc();
 
-	bool isUses(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
+	//! If the Uses relationship between a statement number and a variable index is true, return true. Otherwise, return false.
+	bool isUses(STMTNUM, VARINDEX);
+	//! Return a set of all variable indexes that the given statement number has used. Return an empty set if not found.
 	set<VARINDEX> getUsed(STMTNUM);
-	set<STMTNUM> getUses(VARINDEX); 
+	//! Return a set of all statement numbers that has used the given variable index. Return an empty set if not found.
+	set<STMTNUM> getUses(VARINDEX);
+	//! Return a set of all variable indexes that have been used. Return an empty set if not found.
 	set<VARINDEX> getAllUsed();
+	//! Return a set of all statement numbers that has used any variables. Return an empty set if not found.
 	set<STMTNUM> getAllUses();
 
-	bool isUsesProc(PROCINDEX, VARINDEX);	//Select w such that Modifies(1, "y")	
+	//! If the Uses relationship between a procedure index and a variable index is true, return true. Otherwise, return false.
+	bool isUsesProc(PROCINDEX, VARINDEX);
+	//! Return a set of all variable indexes that the given procedure index has used. Return an empty set if not found.
 	set<VARINDEX> getUsedProc(PROCINDEX);
-	set<PROCINDEX> getUsesProc(VARINDEX); 
+	//! Return a set of all procedure indexes that has used the given variable index. Return an empty set if not found.
+	set<PROCINDEX> getUsesProc(VARINDEX);
+	//! Return a set of all variable indexes that have been used. Return an empty set if not found.
 	set<VARINDEX> getAllUsedProc();
+	//! Return a set of all procedure indexes that has used any variables. Return an empty set if not found.
 	set<PROCINDEX> getAllUsesProc();
 
 	bool isNext(STMTNUM, STMTNUM);
