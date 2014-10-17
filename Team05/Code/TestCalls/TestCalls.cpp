@@ -17,6 +17,7 @@ void CallsTest::setUp() {
 
 void CallsTest::tearDown() {
 	pkb->~PKB();
+	pkb = PKB::getInstance();
 	procTable = ProcTable::getInstance();
 	calls = Calls::getInstance(procTable);
 }
@@ -34,10 +35,11 @@ void CallsTest::testSetCalls() {  // Note 5
 	calls->setCalls("y", "z",4);
 
 	calls->printCallsTable();
+	calls->printCallsPairTable();
 
-	CPPUNIT_ASSERT(calls->isCalls("x", "y") == true);
-	CPPUNIT_ASSERT(calls->isCalls("y", "z") == true);
-	CPPUNIT_ASSERT(calls->isCalls("z", "y") == false);
+	CPPUNIT_ASSERT(calls->isCalls(1, 2) == true);
+	CPPUNIT_ASSERT(calls->isCalls(2, 3) == true);
+	CPPUNIT_ASSERT(calls->isCalls(3, 2) == false);
 	return;
 }
 
@@ -57,17 +59,24 @@ void CallsTest::testGetCalls() {  // Note 5
 	cout<<"index of y = "<<procTable->getProcIndex("y")<<endl;
 	cout<<"index of z = "<<procTable->getProcIndex("z")<<endl;
 	
-	vector<PROCINDEX> temp;
-	temp.push_back(0);
-	temp.push_back(1);
-	temp.push_back(2);
-	CPPUNIT_ASSERT(calls->getCalls() == temp);
-	CPPUNIT_ASSERT(calls->getCalls("z") == temp);
+	set<PROCINDEX> temp;
+	temp.insert(1);
+	temp.insert(2);
+	temp.insert(3);
+	CPPUNIT_ASSERT(calls->getAllCalls() == temp);
+	CPPUNIT_ASSERT(calls->getCalls(4) == temp);
 
 	temp.clear();
-	temp.push_back(2);
-	temp.push_back(3);
-	CPPUNIT_ASSERT(calls->getCalled() == temp);
-	CPPUNIT_ASSERT(calls->getCalled("x") == temp);
+	temp.insert(3);
+	temp.insert(4);
+	CPPUNIT_ASSERT(calls->getAllCalled() == temp);
+	CPPUNIT_ASSERT(calls->getCalled(2) == temp);
+	temp.clear();
+	CPPUNIT_ASSERT(calls->getCalls(0) == temp);
+	CPPUNIT_ASSERT(calls->getCalls(-1) == temp);
+	CPPUNIT_ASSERT(calls->getCalls(10) == temp);
+	CPPUNIT_ASSERT(calls->getCalled(10) == temp);
+	CPPUNIT_ASSERT(calls->getCalled(-1) == temp);
+	CPPUNIT_ASSERT(calls->getCalled(0) == temp);
 	return;
 }

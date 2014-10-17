@@ -246,23 +246,23 @@ STMTNUM PKB::getStmtRange(){
 }
 
 bool PKB::isCalls(PROCINDEX p1,PROCINDEX p2){
-	return calls->isCalls2(p1,p2);
+	return calls->isCalls(p1,p2);
 }
 
 set<PROCINDEX> PKB::getAllCalls(){
-	return calls->getCalls();
+	return calls->getAllCalls();
 }
 
 set<PROCINDEX> PKB::getCalls(PROCINDEX p){
-	return calls->getCalls2(p);
+	return calls->getCalls(p);
 }
 
 set<PROCINDEX> PKB::getAllCalled(){
-	return calls->getCalled();
+	return calls->getAllCalled();
 }
 
 set<PROCINDEX> PKB::getCalled(PROCINDEX p){
-	return calls->getCalled2(p);
+	return calls->getCalled(p);
 }
 
 bool PKB::isFollows(STMTNUM s1, STMTNUM s2){

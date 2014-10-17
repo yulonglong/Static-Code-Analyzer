@@ -208,7 +208,7 @@ bool Uses::isUses(STMTNUM s, VARINDEX index){
 }
 
 set<VARINDEX> Uses::getUsed(STMTNUM snum){
-	set<STMTNUM> ans;
+	set<VARINDEX> ans;
 	try{
 		vector<int64_t> temp=usesTable.at(snum);
 

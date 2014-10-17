@@ -209,7 +209,7 @@ bool Modifies::isModifies(STMTNUM s, VARINDEX index){
 }
 
 set<VARINDEX> Modifies::getModified(STMTNUM snum){
-	set<STMTNUM> ans;
+	set<VARINDEX> ans;
 	try{
 		vector<int64_t> temp=modifiesTable.at(snum);
 
