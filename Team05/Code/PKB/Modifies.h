@@ -37,65 +37,54 @@ typedef TypeTable::SynType SYNTYPE;
 
 class Modifies {
 private:
-	unordered_map<STMTNUM, vector<VARINDEX>> modifiesTable;
-	unordered_map<PROCINDEX, vector<VARINDEX>> modifiesProcTable;
-	vector<vector<int64_t>> modTable;
-	vector<vector<int64_t>> modVarTable;
+	vector<vector<int64_t>> modifiesTable;
+	vector<vector<int64_t>> modifiedVarTable;
+	vector<vector<int64_t>> modifiesProcTable;
+	vector<vector<int64_t>> modifiedProcVarTable;
 	static bool instanceFlag;
 	static Modifies *modifies;
-	TypeTable *typeTable; 
 	VarTable *varTable;
-	ProcTable *procTable;
 	set<STMTNUM> modifiesList;
 	set<VARINDEX> modifiedList;
 	set<PROCINDEX> modifiesProcList;
 	set<VARINDEX> modifiedProcList;
 public:	
 	//! A constructor to initialize the Modifies class.
-	Modifies(TypeTable*, VarTable*, ProcTable*);
+	Modifies(VarTable*);
 	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~Modifies();
 	//! Returns the instance of Modifies singleton class.
-	static Modifies* getInstance(TypeTable*, VarTable*,ProcTable*);	// to be used to get instance of singleton class 
+	static Modifies* getInstance(VarTable*);	// to be used to get instance of singleton class 
 
 	//! Set the Modifies relationship between a statement number and a variable name to be true.
 	void setModifies(STMTNUM, VARNAME);
-	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
-	bool isModifies(STMTNUM, VARNAME);	//Select w such that Modifies(1, "y")	
-	
-	bool isModifies(STMTNUM s, VARINDEX i);
-	set<VARINDEX> getModified(STMTNUM s);
-	set<STMTNUM> getModifies(VARINDEX i);
-	set<VARINDEX> getAllModified();
-	set<STMTNUM> getAllModifies();
-
-	bool isModifiesProc(PROCINDEX p, VARINDEX i);
-	set<VARINDEX> getModifiedProc(PROCINDEX p);
-	set<PROCINDEX> getModifiesProc(VARINDEX i);
-	set<VARINDEX> getAllModifiedProc();
-	set<PROCINDEX> getAllModifiesProc();
-
-
-
-	//! Return all statement numbers such that each statement number has the given SynType and modifies any variable. Return an empty vector if not found.
-	set<STMTNUM> getModifies(SYNTYPE);	//Returns STMTNUM of statements of type t that modifies any variable;
-	//! Return all variable indexes such that each variable index is modified in the given statement number. Return an empty vector if not found.
-//	vector<VARINDEX> getModifies(STMTNUM);		//Select v such that Modifies(1, v)	return empty vector if doesnt exist
-	//! Return all statement numbers such that each statement number has the given SynType and modifies the given variable name. Return an empty vector if not found.
-	set<STMTNUM> getModifies(SYNTYPE, VARNAME);	//Select a such that Modifies(a, "x")	return empty vector if doesnt exist
-
 	//! Set the Modifies relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
 	void setModifies(STMTNUM, set<VARINDEX>);
 	//! Set the Modifies relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
-	void setModifiesProc(PROCINDEX, set<VARINDEX>); // if there already were variables modified by this procedure, then just add the 2 vectors.
-	//! Return all the variable indexes such that each variable index is modified by the given procedure index. Return an empty vector if not found.
-	//vector<VARINDEX> getModifiesProc(PROCINDEX); //for getting using procedure index
-	
-	//! Return all the procedure indexes such that each procedure index modifies the given variable. Return an empty vector if not found.
-	set<PROCINDEX> getModifiesProcVar(VARNAME);
-	//! If the Modifies relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
-	bool isModifiesProc(PROCNAME, VARNAME); 
+	void setModifiesProc(PROCINDEX, set<VARINDEX>);
 
+	//! If the Modifies relationship between a statement number and a variable index is true, return true. Otherwise, return false.
+	bool isModifies(STMTNUM, VARINDEX);
+	//! Return a set of all variable indexes that the given statement number has modified. Return an empty set if not found.
+	set<VARINDEX> getModified(STMTNUM);
+	//! Return a set of all statement numbers that has modified the given variable index. Return an empty set if not found.
+	set<STMTNUM> getModifies(VARINDEX);
+	//! Return a set of all variable indexes that have been modified. Return an empty set if not found.
+	set<VARINDEX> getAllModified();
+	//! Return a set of all statement numbers that has modified any variables. Return an empty set if not found.
+	set<STMTNUM> getAllModifies();
+
+	//! If the Modifies relationship between a procedure index and a variable index is true, return true. Otherwise, return false.
+	bool isModifiesProc(PROCINDEX, VARINDEX);
+	//! Return a set of all variable indexes that the given procedure index has modified. Return an empty set if not found.
+	set<VARINDEX> getModifiedProc(PROCINDEX);
+	//! Return a set of all procedure indexes that has modified the given variable index. Return an empty set if not found.
+	set<PROCINDEX> getModifiesProc(VARINDEX);
+	//! Return a set of all variable indexes that have been modified. Return an empty set if not found.
+	set<VARINDEX> getAllModifiedProc();
+	//! Return a set of all procedure indexes that has modified any variables. Return an empty set if not found.
+	set<PROCINDEX> getAllModifiesProc();
+	
 	/// @cond
 	void printModifiesTable();
 	/// @endcond

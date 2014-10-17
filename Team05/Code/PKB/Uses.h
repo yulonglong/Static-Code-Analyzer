@@ -33,10 +33,10 @@ typedef TypeTable::SynType SYNTYPE;
 
 class Uses {
 private:
-	unordered_map<STMTNUM, vector<VARINDEX>> usesTable;
-	unordered_map<PROCINDEX, vector<VARINDEX>> usesProcTable;
-	vector<vector<int64_t>> usesBitTable;
-	vector<vector<int64_t>> usesBitVarTable;
+	vector<vector<int64_t>> usesTable;
+	vector<vector<int64_t>> usedVarTable;
+	vector<vector<int64_t>> usesProcTable;
+	vector<vector<int64_t>> usedProcVarTable;
 	static bool instanceFlag;
 	static Uses *uses;
 	TypeTable *typeTable;
@@ -48,49 +48,40 @@ private:
 	set<VARINDEX> usedProcList;
 public:
 	//! A constructor to initialize the Uses class.
-	Uses(TypeTable*, VarTable*, ProcTable*);
+	Uses(VarTable*);
 	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~Uses();
 	//! Returns the instance of Uses singleton class.
-	static Uses* getInstance(TypeTable*,VarTable*,ProcTable*);	// to be used to get instance of singleton class
+	static Uses* getInstance(VarTable*);	// to be used to get instance of singleton class
+	
 	//! Set the Uses relationship between a statement number and a variable name to be true.
 	void setUses(STMTNUM, VARNAME);
-	//! If the Uses relationship between a statement number and a variable name is true, return true. Otherwise, return false.
-	bool isUses(STMTNUM, VARNAME);	//Select boolean such that Uses(1, "y")
-
-	bool isUses(STMTNUM, VARINDEX);
-	set<VARINDEX> getUsed(STMTNUM);
-	set<STMTNUM> getUses(VARINDEX);
-	set<VARINDEX> getAllUsed();
-	set<STMTNUM> getAllUses();
-
-	bool isUsesProc(PROCINDEX, VARINDEX);
-	set<VARINDEX> getUsedProc(PROCINDEX);
-	set<PROCINDEX> getUsesProc(VARINDEX);
-	set<VARINDEX> getAllUsedProc();
-	set<PROCINDEX> getAllUsesProc();
-
-
-
-
-	//! Return all statement numbers such that each statement number has the given SynType and uses any variable. Return an empty vector if not found.
-	set<STMTNUM> getUses(SYNTYPE);//Select a such that Uses(a, v); 
-	//! Return all variable indexes such that each variable index is used in the given statement number. Return an empty vector if not found.
-	//vector<VARINDEX> getUses(STMTNUM);		//Select v such that Uses(1, v)	return variable indexes.
-	//! Return all statement numbers such that each statement number has the given SynType and uses the given variable name. Return an empty vector if not found.
-	set<STMTNUM> getUses(SYNTYPE, VARNAME);	//Select a such that Uses(a, "x")	return empty vector if doesn't exist
-	
 	//! Set the Uses relationship between a statement number and a list of variable indexes to be true. Eliminate any duplicates
 	void setUses(STMTNUM, set<VARINDEX>);
 	//! Set the Uses relationship between a procedure index and a list of variable indexes to be true. Eliminate any duplicates
-	void setUsesProc(PROCINDEX, set<VARINDEX>); 
-	//! Return all the variable indexes such that each variable index is used by the given procedure index. Return an empty vector if not found.
-	//vector<VARINDEX> getUsesProc(PROCINDEX); //for getting using procedure index
-	
-	//! Return all the procedure indexes such that each procedure index uses the given variable. Return an empty vector if not found.
-	set<PROCINDEX> getUsesProcVar(VARNAME);
-	//! If the Uses relationship between a procedure name and a variable name is true, return true. Otherwise, return false.
-	bool isUsesProc(PROCNAME, VARNAME);
+	void setUsesProc(PROCINDEX, set<VARINDEX>);
+
+	//! If the Uses relationship between a statement number and a variable index is true, return true. Otherwise, return false.
+	bool isUses(STMTNUM, VARINDEX);
+	//! Return a set of all variable indexes that the given statement number has used. Return an empty set if not found.
+	set<VARINDEX> getUsed(STMTNUM);
+	//! Return a set of all statement numbers that has used the given variable index. Return an empty set if not found.
+	set<STMTNUM> getUses(VARINDEX);
+	//! Return a set of all variable indexes that have been used. Return an empty set if not found.
+	set<VARINDEX> getAllUsed();
+	//! Return a set of all statement numbers that has used any variables. Return an empty set if not found.
+	set<STMTNUM> getAllUses();
+
+	//! If the Uses relationship between a procedure index and a variable index is true, return true. Otherwise, return false.
+	bool isUsesProc(PROCINDEX, VARINDEX);
+	//! Return a set of all variable indexes that the given procedure index has used. Return an empty set if not found.
+	set<VARINDEX> getUsedProc(PROCINDEX);
+	//! Return a set of all procedure indexes that has used the given variable index. Return an empty set if not found.
+	set<PROCINDEX> getUsesProc(VARINDEX);
+	//! Return a set of all variable indexes that have been used. Return an empty set if not found.
+	set<VARINDEX> getAllUsedProc();
+	//! Return a set of all procedure indexes that has used any variables. Return an empty set if not found.
+	set<PROCINDEX> getAllUsesProc();
 
 	/// @cond
 	void printUsesTable();

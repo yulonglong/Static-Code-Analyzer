@@ -13,8 +13,8 @@ PKB::PKB(){
 	constTable = ConstTable::getInstance();
 	parent = Parent::getInstance(typeTable);
 	follows = Follows::getInstance(typeTable);
-	modifies = Modifies::getInstance(typeTable,varTable,procTable);
-	uses = Uses::getInstance(typeTable,varTable,procTable);
+	modifies = Modifies::getInstance(varTable);
+	uses = Uses::getInstance(varTable);
 	calls = Calls::getInstance(procTable);
 	next = Next::getInstance(typeTable);
 	ASTRoot = NULL;

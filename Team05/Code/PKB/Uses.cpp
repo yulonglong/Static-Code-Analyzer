@@ -6,10 +6,8 @@ bool Uses::instanceFlag=false;
 Uses* Uses::uses=NULL;
 
 //Constructor
-Uses::Uses(TypeTable *tt,VarTable *vt, ProcTable *pt){
-	typeTable = tt;
+Uses::Uses(VarTable *vt){
 	varTable = vt;
-	procTable = pt;
 }
 
 Uses::~Uses(){
@@ -17,10 +15,10 @@ Uses::~Uses(){
 	instanceFlag=false;
 }
 
-Uses* Uses::getInstance(TypeTable* tt, VarTable* vt, ProcTable* pt) {
+Uses* Uses::getInstance(VarTable* vt) {
 	if(!instanceFlag)
     {
-        uses = new Uses(tt,vt,pt);
+        uses = new Uses(vt);
         instanceFlag = true;
         return uses;
     }
@@ -30,194 +28,197 @@ Uses* Uses::getInstance(TypeTable* tt, VarTable* vt, ProcTable* pt) {
     }
 }
 
-void Uses::setUses(STMTNUM s,VARNAME v){
-	try{
+void Uses::setUses(STMTNUM s, VARNAME v) {
+	try {
 		VARINDEX index = varTable->getVarIndex(v);
-
-		vector<VARINDEX> temp (1,index);
-
+		vector<int64_t> placeHolder (0,1);
+		vector<int64_t> temp (0,1);
 		try{
-			vector<VARINDEX> temp1 = usesTable.at(s);
-			temp1.push_back(index);
-			sort( temp1.begin(), temp1.end() );
-			temp1.erase( unique( temp1.begin(), temp1.end() ), temp1.end() );
-			usesTable[s] = temp1;
-		} catch(...){
-			usesTable[s] = temp;
+			temp = usesTable.at(s);
+		}catch(...){
+			usesTable.resize(s+1,placeHolder);
 		}
+		int location =ceil((double)index/63);
+		int bitPos = index%63;
+
+		if(temp.size()<location)
+			temp.resize(location);
+
+		int64_t bitArray = temp.at(location-1);
+		bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+		temp[location-1]=bitArray;
+		usesTable[s]=temp;
 
 		usesList.insert(s);
+	}catch(...){
+	}
+
+	try {
+		VARINDEX index = varTable->getVarIndex(v);
+		vector<int64_t> placeHolder (0,1);
+		vector<int64_t> temp (0,1);
+		try{
+			temp = usedVarTable.at(index);
+		}catch(...){
+			usedVarTable.resize(index+1,placeHolder);
+		}
+		int location =ceil((double)s/63);
+		int bitPos = s%63;
+
+		if(temp.size()<location)
+			temp.resize(location);
+
+		int64_t bitArray = temp.at(location-1);
+		bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+		temp[location-1]=bitArray;
+		usedVarTable[index]=temp;
 
 		usedList.insert(index);
-
 	}catch(...){
 	}
 }
 
+void Uses::setUses(STMTNUM s, set<VARINDEX> varSet) {
+	for(set<VARINDEX>::iterator it = varSet.begin(); it!=varSet.end();it++){
+		int index = *it;
+		try {
+			vector<int64_t> placeHolder (0,1);
+			vector<int64_t> temp (0,1);
+			try{
+				temp = usesTable.at(s);
+			}catch(...){
+				usesTable.resize(s+1,placeHolder);
+			}
+			int location =ceil((double)index/63);
+			int bitPos = index%63;
 
-//void Uses::setUses(STMTNUM s, VARNAME v) {
-//	try {
-//		VARINDEX index = varTable->getVarIndex(v);
-//		vector<int64_t> placeHolder (0,1);
-//		vector<int64_t> temp (0,1);
-//		try{
-//			temp = usesBitTable.at(s);
-//		}catch(...){
-//			usesBitTable.resize(s+1,placeHolder);
-//		}
-//		int location =ceil((double)index/63);
-//		int bitPos = index%63;
-//
-//		if(temp.size()<location)
-//			temp.resize(location);
-//
-//		int64_t bitArray = temp.at(location-1);
-//		bitArray = bitArray | (((int64_t)1)<<bitPos);
-//
-//		temp[location-1]=bitArray;
-//		usesBitTable[s]=temp;
-//
-//		usesList.push_back(s);
-//		sort( usesList.begin(), usesList.end() );
-//		usesList.erase( unique( usesList.begin(), usesList.end() ), usesList.end() );
-//
-//	}catch(...){
-//	}
-//
-//	try {
-//		VARINDEX index = varTable->getVarIndex(v);
-//		vector<int64_t> placeHolder (0,1);
-//		vector<int64_t> temp (0,1);
-//		try{
-//			temp = usesBitVarTable.at(index);
-//		}catch(...){
-//			usesBitVarTable.resize(index+1,placeHolder);
-//		}
-//		int location =ceil((double)s/63);
-//		int bitPos = s%63;
-//
-//		if(temp.size()<location)
-//			temp.resize(location);
-//
-//		int64_t bitArray = temp.at(location-1);
-//		bitArray = bitArray | (((int64_t)1)<<bitPos);
-//
-//		temp[location-1]=bitArray;
-//		usesBitVarTable[index]=temp;
-//
-//		usedList.push_back(index);
-//		sort( usedList.begin(), usedList.end() );
-//		usedList.erase( unique( usedList.begin(), usedList.end() ), usedList.end() );
-//	}catch(...){
-//	}
-//}
+			if(temp.size()<location)
+				temp.resize(location);
 
+			int64_t bitArray = temp.at(location-1);
+			bitArray = bitArray | (((int64_t)1)<<bitPos);
 
+			temp[location-1]=bitArray;
+			usesTable[s]=temp;
 
-bool Uses::isUses(STMTNUM s, VARNAME v){
-	try{
-		VARINDEX index = varTable->getVarIndex(v);
-		if(isUses(s,index))
-			return true;
-	}catch(...){
-		return false;
+			usesList.insert(s);
+		}catch(...){
+		}
+
+		try {
+			vector<int64_t> placeHolder (0,1);
+			vector<int64_t> temp (0,1);
+			try{
+				temp = usedVarTable.at(index);
+			}catch(...){
+				usedVarTable.resize(index+1,placeHolder);
+			}
+			int location =ceil((double)s/63);
+			int bitPos = s%63;
+
+			if(temp.size()<location)
+				temp.resize(location);
+
+			int64_t bitArray = temp.at(location-1);
+			bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+			temp[location-1]=bitArray;
+			usedVarTable[index]=temp;
+
+			usedList.insert(index);
+		}catch(...){
+		}
 	}
 }
 
-//bool Uses::isUses(STMTNUM s, VARINDEX index){
-//	try {
-//		if (index == -1) {
-//			return false;
-//		}
-//
-//		vector<int64_t> temp=usesBitTable.at(s);
-//		int location =ceil((double)index/63);
-//		int bitPos = index%63;
-//		if(temp.size()<location)
-//			return false;
-//
-//		int64_t bitArray = temp.at(location-1);
-//		if((bitArray & ((int64_t)1<<bitPos))>0)
-//			return true;
-//	} catch (...){
-//		return false;
-//	}
-//	return false;
-//}
+void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> varSet) {
+	for(set<VARINDEX>::iterator it = varSet.begin(); it!=varSet.end();it++){
+		int index = *it;
+		try {
+			vector<int64_t> placeHolder (0,1);
+			vector<int64_t> temp (0,1);
+			try{
+				temp = usesProcTable.at(p);
+			}catch(...){
+				usesProcTable.resize(p+1,placeHolder);
+			}
+			int location =ceil((double)index/63);
+			int bitPos = index%63;
+
+			if(temp.size()<location)
+				temp.resize(location);
+
+			int64_t bitArray = temp.at(location-1);
+			bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+			temp[location-1]=bitArray;
+			usesProcTable[p]=temp;
+
+			usesProcList.insert(p);
+		}catch(...){
+		}
+
+		try {
+			vector<int64_t> placeHolder (0,1);
+			vector<int64_t> temp (0,1);
+			try{
+				temp = usedProcVarTable.at(index);
+			}catch(...){
+				usedProcVarTable.resize(index+1,placeHolder);
+			}
+			int location =ceil((double)p/63);
+			int bitPos = p%63;
+
+			if(temp.size()<location)
+				temp.resize(location);
+
+			int64_t bitArray = temp.at(location-1);
+			bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+			temp[location-1]=bitArray;
+			usedProcVarTable[index]=temp;
+
+			usedProcList.insert(index);
+		}catch(...){
+		}
+	}
+}
 
 bool Uses::isUses(STMTNUM s, VARINDEX index){
-	//Select w such that Modifies(1, "y")
 	try {
 		if (index == -1) {
 			return false;
 		}
-		vector<VARINDEX> temp = usesTable.at(s);
-		vector<VARINDEX>::iterator it = temp.begin();
-		for (; it!=temp.end(); it++){
-			if (index == *it) {
-				return true;
-			}
-		}
+
+		vector<int64_t> temp=usesTable.at(s);
+		int location =ceil((double)index/63);
+		int bitPos = index%63;
+		if(temp.size()<location)
+			return false;
+
+		int64_t bitArray = temp.at(location-1);
+		if((bitArray & ((int64_t)1<<bitPos))>0)
+			return true;
 	} catch (...){
 		return false;
 	}
 	return false;
 }
 
-//vector<VARINDEX> Uses::getUsed(STMTNUM snum){
-//	vector<STMTNUM> ans;
-//	try{
-//		vector<int64_t> temp=usesBitTable.at(snum);
-//
-//		for(size_t s = 0;s<temp.size();s++){
-//			int64_t bitArray = temp.at(s);
-//			while(bitArray>0){
-//				int64_t bit = bitArray & -bitArray;
-//				bitArray -= bit;
-//				int number = log((double)bit)/log(2.0) + s*63;
-//				ans.push_back(number);
-//			}
-//		}
-//		return ans;
-//	}
-//	catch(...){
-//		ans.clear();
-//		return ans;
-//	}
-//}
-
-
-
-//set<STMTNUM> Uses::getUses(VARINDEX i){
-//	set<STMTNUM> ans;
-//	try{
-//		vector<int64_t> temp=usesBitVarTable.at(i);
-//
-//		for(size_t s = 0;s<temp.size();s++){
-//			int64_t bitArray = temp.at(s);
-//			while(bitArray>0){
-//				int64_t bit = bitArray & -bitArray;
-//				bitArray -= bit;
-//				int number = log((double)bit)/log(2.0) + s*63;
-//				ans.insert(number);
-//			}
-//		}
-//		return ans;
-//	}
-//	catch(...){
-//		ans.clear();
-//		return ans;
-//	}
-//}
-
-set<STMTNUM> Uses::getUses(VARINDEX i){
+set<VARINDEX> Uses::getUsed(STMTNUM snum){
 	set<STMTNUM> ans;
 	try{
-		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin();it!=usesTable.end();it++){
-			vector<VARINDEX> temp = it->second;
-			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
-				if(*it2==i)
-					ans.insert(it->first);
+		vector<int64_t> temp=usesTable.at(snum);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.insert(number);
 			}
 		}
 		return ans;
@@ -228,16 +229,24 @@ set<STMTNUM> Uses::getUses(VARINDEX i){
 	}
 }
 
-
-set<VARINDEX> Uses::getUsed(STMTNUM s){
+set<STMTNUM> Uses::getUses(VARINDEX i){
 	set<STMTNUM> ans;
 	try{
-		vector<STMTNUM> tempVec = usesTable.at(s);
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
-			ans.insert(*it);
+		vector<int64_t> temp=usedVarTable.at(i);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.insert(number);
+			}
 		}
 		return ans;
-	} catch (...){
+	}
+	catch(...){
+		ans.clear();
 		return ans;
 	}
 }
@@ -250,32 +259,67 @@ set<STMTNUM> Uses::getAllUses(){
 	return usesList;
 }
 
-bool Uses::isUsesProc(PROCINDEX procIndex, VARINDEX index){
+bool Uses::isUsesProc(PROCINDEX p, VARINDEX index){
 	try {
-		if (index == -1 || procIndex == -1) {
+		if (index == -1) {
 			return false;
 		}
-		vector<VARINDEX> temp = usesProcTable.at(procIndex);
-		vector<VARINDEX>::iterator it = temp.begin();
-		for (; it!=temp.end(); it++){
-			if (index == *it) {
-				return true;
-			}
-		}
+
+		vector<int64_t> temp=usesProcTable.at(p);
+		int location =ceil((double)index/63);
+		int bitPos = index%63;
+		if(temp.size()<location)
+			return false;
+
+		int64_t bitArray = temp.at(location-1);
+		if((bitArray & ((int64_t)1<<bitPos))>0)
+			return true;
 	} catch (...){
+		return false;
 	}
 	return false;
 }
 
-set<VARINDEX> Uses::getUsedProc(PROCINDEX s){
-	set<STMTNUM> ans;
+set<VARINDEX> Uses::getUsedProc(PROCINDEX p){
+	set<VARINDEX> ans;
 	try{
-		vector<STMTNUM> tempVec = usesProcTable.at(s);
-		for(vector<STMTNUM>::iterator it = tempVec.begin(); it !=tempVec.end();it++){
-			ans.insert(*it);
+		vector<int64_t> temp=usesProcTable.at(p);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.insert(number);
+			}
 		}
 		return ans;
-	} catch (...){
+	}
+	catch(...){
+		ans.clear();
+		return ans;
+	}
+}
+
+set<PROCINDEX> Uses::getUsesProc(VARINDEX i){
+	set<PROCINDEX> ans;
+	try{
+		vector<int64_t> temp=usedProcVarTable.at(i);
+
+		for(size_t s = 0;s<temp.size();s++){
+			int64_t bitArray = temp.at(s);
+			while(bitArray>0){
+				int64_t bit = bitArray & -bitArray;
+				bitArray -= bit;
+				int number = log((double)bit)/log(2.0) + s*63;
+				ans.insert(number);
+			}
+		}
+		return ans;
+	}
+	catch(...){
+		ans.clear();
 		return ans;
 	}
 }
@@ -289,174 +333,24 @@ set<PROCINDEX> Uses::getAllUsesProc(){
 }
 
 
-
-set<STMTNUM> Uses::getUses(SYNTYPE t, VARNAME v){	//Select a such that Uses(a, "x")	Return an empty vector if not found.
-	set<VARINDEX> ans;
-	try{
-		VARINDEX index = varTable->getVarIndex(v);
-		if(index==-1){
-			return ans;
-		}
-		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
-			vector<VARINDEX> temp = it->second;
-			vector<VARINDEX>::iterator iter = temp.begin();
-			for(;iter!=temp.end();++iter){
-				if(*iter==index){
-					if(t==TypeTable::STMT){
-						ans.insert(it->first);
-						break;
-					}
-					else if(typeTable->isType(t,it->first)){
-						ans.insert(it->first);
-						break;
-					}
-				}
-			}
-		}
-		return ans;
-	}catch(...){
-		ans.clear();
-		return ans;
-	}
-}
-
-//vector<VARINDEX> Uses::getUses(STMTNUM s){	//Select v such that Uses(1, v)	return variable indexes. otherwise return empty vector if doesnt exist
-//	vector<VARINDEX> ans;
-//	try{
-//		ans = usesTable.at(s);
-//		return ans;
-//	}catch(...){
-//		return ans;
-//	}
-//}
-
-set<VARINDEX> Uses::getUses(SYNTYPE type){	//Select a such that Uses(a, v); return empty vector if does not exist
-	set<VARINDEX> ans;
-	try{
-		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
-			if(!it->second.empty() && it->second!=vector<int> (1,-1)){
-				if(typeTable->isType(type,it->first))
-					ans.insert(it->first);
-			}
-		}
-		return ans;
-	}catch(...){
-		ans.clear();
-	}
-	return ans;
-}
-
-void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> v) {
-	try{
-		vector<VARINDEX> temp;
-		vector<VARINDEX> temp1 = usesProcTable.at(p);
-		temp.reserve(temp1.size()+v.size());
-		temp.insert(temp.end(), v.begin(), v.end());
-		temp.insert(temp.end(), temp1.begin(), temp1.end());
-		sort( temp.begin(), temp.end() );
-		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
-		usesProcTable[p] = temp;
-
-		usesProcList.insert(p);
-		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
-			usedProcList.insert(*it);
-	} catch(...){
-		vector<VARINDEX> temp;
-		temp.insert(temp.end(), v.begin(), v.end());
-		usesProcTable[p] = temp;
-	} 
-}
-
-set<PROCINDEX> Uses::getUsesProc(VARINDEX i) {	
-	set<VARINDEX> ans;
-	try {
-		for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesProcTable.begin();it!=usesProcTable.end();it++){
-			vector<VARINDEX> temp = it->second;
-			for(vector<VARINDEX>::iterator it2 = temp.begin(); it2!=temp.end();it2++){
-				if(*it2==i)
-					ans.insert(it->first);
-			}
-		}
-		return ans;
-	} catch(...){
-		return ans;
-	}
-}
-
-void Uses::setUses(STMTNUM s, set<VARINDEX> v) {
-	try{
-		vector<VARINDEX> temp;
-		vector<VARINDEX> temp1 = usesTable.at(s);
-		temp.reserve(temp1.size()+v.size());
-		temp.insert(temp.end(), v.begin(), v.end());
-		temp.insert(temp.end(), temp1.begin(), temp1.end());
-		sort( temp.begin(), temp.end() );
-		temp.erase( unique( temp.begin(), temp.end() ), temp.end() );
-		usesTable[s] = temp;
-
-		usesList.insert(s);
-		for(set<VARINDEX>::iterator it = v.begin();it!=v.end();it++)
-			usedList.insert(*it);
-	} catch(...){
-		vector<VARINDEX> temp;
-		temp.insert(temp.end(), v.begin(), v.end());
-		usesTable[s] = temp;
-	}
-}
-
-set<PROCINDEX> Uses::getUsesProcVar(VARNAME v){
-	set<PROCINDEX> ans;
-	try {
-		VARINDEX varIndex = varTable->getVarIndex(v);
-		if (varIndex == -1 ) {
-			return ans;
-		}
-
-		for(unordered_map<PROCINDEX, vector<VARINDEX>>::iterator it = usesProcTable.begin(); it != usesProcTable.end(); it++) {
-			vector<VARINDEX> temp = it->second; 
-			vector<VARINDEX>::iterator iter;
-			for (iter = temp.begin(); iter!=temp.end(); iter++) {
-				if (*iter == varIndex) {
-					ans.insert(it->first);
-					break;
-				}
-			}		
-		}
-	} catch (...){
-		ans.clear();
-	}
-	return ans;
-}
-
-bool Uses::isUsesProc(PROCNAME p, VARNAME v){
-	try {
-		VARINDEX index = varTable->getVarIndex(v);
-		PROCINDEX procIndex = procTable->getProcIndex(p);
-		if (index == -1 || procIndex == -1) {
-			return false;
-		}
-		vector<VARINDEX> temp = usesProcTable.at(procIndex);
-		vector<VARINDEX>::iterator it = temp.begin();
-		for (; it!=temp.end(); it++){
-			if (index == *it) {
-				return true;
-			}
-		}
-	} catch (...){
-	}
-	return false;
-}
-
 void Uses::printUsesTable() {
 	cout<< "Uses Table" << endl;
-	for(unordered_map<STMTNUM, vector<VARINDEX>>::iterator it = usesTable.begin(); it != usesTable.end(); it++) {
-		cout<< it->first << " uses ";
-		vector<VARINDEX> temp = it->second; 
-		vector<VARINDEX>::iterator iter;
-		for (iter = temp.begin(); iter!=temp.end(); iter++) {
-			string name = varTable->getVarName(*iter);
-			cout<< name<< ",";
-		}		
-		cout<<endl;
+	int index =0;
+	for(vector<vector<int64_t>>::iterator it = usesTable.begin(); it != usesTable.end(); it++,index++) {
+		if(it->size()!=0){
+			cout<< index << " uses ";
+			vector<int64_t> temp = *it; 
+			for (size_t s =0; s!=temp.size(); s++) {
+				int64_t bitArray = temp.at(s);
+				while(bitArray>0){
+					int64_t bit = bitArray & -bitArray;
+					bitArray -= bit;
+					int number = log((double)bit)/log(2.0) + s*63;
+					string name = varTable->getVarName(number);
+					cout<< name<< ",";
+				}
+			}		
+			cout<<endl;
+		}
 	}
 }

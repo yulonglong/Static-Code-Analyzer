@@ -2,6 +2,7 @@
 #include "TestModifies.h"
 
 #include <iostream>
+#include <set>
 
 Modifies* modifies; 
 PKB* pkb;
@@ -15,53 +16,8 @@ void ModifiesTest::setUp() {
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
 	procTable = pkb->getProcTable();
-	modifies = Modifies::getInstance(typeTable,varTable,procTable);
+	modifies = Modifies::getInstance(varTable);
 
-	/*varTable->insertVar("z");
-	varTable->insertVar("x");
-	varTable->insertVar("i");
-	
-	typeTable->insertStmtNumAndType(1, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(2, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(3, TypeTable::CALL);
-	typeTable->insertStmtNumAndType(4, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(5, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(6, TypeTable::WHILE);
-	typeTable->insertStmtNumAndType(7, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(8, TypeTable::CALL);
-	typeTable->insertStmtNumAndType(9, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(10, TypeTable::IF);
-	typeTable->insertStmtNumAndType(11, TypeTable::ASSIGN);
-	typeTable->insertStmtNumAndType(12, TypeTable::ASSIGN);
-	
-	modifies->setModifies(1, "x");
-	modifies->setModifies(2, "z");
-	modifies->setModifies(4, "x");
-	modifies->setModifies(5, "i");
-	modifies->setModifies(6, "x");
-	modifies->setModifies(6, "i");
-	modifies->setModifies(7, "x");
-	modifies->setModifies(9, "i");
-	modifies->setModifies(10, "x");
-	modifies->setModifies(10, "z");
-	modifies->setModifies(11, "x");
-	modifies->setModifies(12, "z");*/
-	
-}
-
-void ModifiesTest::tearDown() {
-	pkb->~PKB();
-	pkb = PKB::getInstance();
-	typeTable = pkb->getTypeTable();
-	varTable = pkb->getVarTable();
-	procTable = pkb->getProcTable();
-	modifies = Modifies::getInstance(typeTable,varTable,procTable);
-}
-	
-// Registers the fixture into the 'registry'
-CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
-
-void ModifiesTest::test1() {
 	varTable->insertVar("a");
 	varTable->insertVar("b");
 	varTable->insertVar("c");
@@ -73,100 +29,146 @@ void ModifiesTest::test1() {
 	modifies->setModifies(4, "c");
 	modifies->setModifies(1500, "a");
 
-	CPPUNIT_ASSERT(modifies->isModifies(1,"a")==true);
-	CPPUNIT_ASSERT(modifies->isModifies(1,"b")==true);
-	CPPUNIT_ASSERT(modifies->isModifies(1,"c")==true);
-	CPPUNIT_ASSERT(modifies->isModifies(2,"b")==true);
-	CPPUNIT_ASSERT(modifies->isModifies(1500,"a")==true);
-	CPPUNIT_ASSERT(modifies->isModifies(1500,"b")==false);
-	CPPUNIT_ASSERT(modifies->isModifies(1501,"a")==false);
-	CPPUNIT_ASSERT(modifies->isModifies(1549,"a")==false);
-	CPPUNIT_ASSERT(modifies->isModifies(-1,"a")==false);
+	for(int i=0;i<200;i++){
+		string str = to_string((long long)i);
+		varTable->insertVar(str);
+	}
+	modifies->setModifies(4, "100");
 
-	vector<int> ans;
-	ans.push_back(1);
-	ans.push_back(2);
-	ans.push_back(3);
+	set<int> variableTemp;
+	variableTemp.insert(1);
+	variableTemp.insert(2);
+	variableTemp.insert(3);
+	modifies->setModifiesProc(1, variableTemp);
+	variableTemp.clear();
+	variableTemp.insert(2);
+	modifies->setModifiesProc(2, variableTemp);
+	variableTemp.clear();
+	variableTemp.insert(3);
+	modifies->setModifiesProc(4, variableTemp);
+	variableTemp.clear();
+	variableTemp.insert(1);
+	modifies->setModifiesProc(1500, variableTemp);
+}
+
+void ModifiesTest::tearDown() {
+	pkb->~PKB();
+	pkb = PKB::getInstance();
+	typeTable = pkb->getTypeTable();
+	varTable = pkb->getVarTable();
+	procTable = pkb->getProcTable();
+	modifies = Modifies::getInstance(varTable);
+}
+	
+// Registers the fixture into the 'registry'
+CPPUNIT_TEST_SUITE_REGISTRATION( ModifiesTest ); // Note 4 
+
+void ModifiesTest::testSetAndIsModifies() {
+	modifies->printModifiesTable();
+	CPPUNIT_ASSERT(modifies->isModifies(1,1)==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1,2)==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1,3)==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1,62)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1,63)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1,64)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1,65)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1,66)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(2,2)==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1500,1)==true);
+	CPPUNIT_ASSERT(modifies->isModifies(1500,2)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1501,1)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(1549,1)==false);
+	CPPUNIT_ASSERT(modifies->isModifies(-1,1)==false);
+}
+
+void ModifiesTest::testGetModifies() {
+	set<int> ans;
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(3);
 	CPPUNIT_ASSERT(modifies->getModified(1)==ans);
 
 	ans.clear();
-	ans.push_back(1);
+	ans.insert(1);
 	CPPUNIT_ASSERT(modifies->getModified(1500)==ans);
 	ans.clear();
 	CPPUNIT_ASSERT(modifies->getModified(1499)==ans);
+	CPPUNIT_ASSERT(modifies->getModified(0)==ans);
+	CPPUNIT_ASSERT(modifies->getModified(-1)==ans);
 
 	ans.clear();
-	ans.push_back(1);
-	ans.push_back(1500);
-	cout<<"size of ans ="<<modifies->getModifies(1).size();
+	ans.insert(1);
+	ans.insert(1500);
 	CPPUNIT_ASSERT(modifies->getModifies(1)==ans);
 	ans.clear();
 	CPPUNIT_ASSERT(modifies->getModifies(0)==ans);
+	CPPUNIT_ASSERT(modifies->getModifies(-1)==ans);
 	CPPUNIT_ASSERT(modifies->getModifies(4)==ans);
 
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(4);
+	ans.insert(1500);
+	CPPUNIT_ASSERT(modifies->getAllModifies()==ans);
+
+	ans.clear();
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(3);
+	ans.insert(104);
+	CPPUNIT_ASSERT(modifies->getAllModified()==ans);
 }
 
-
-
-void ModifiesTest::testGetModifies() {
-	modifies->printModifiesTable();
-	vector<VARINDEX> v = modifies->getModifies(6); 
-	CPPUNIT_ASSERT(varTable->getVarName(v.at(0)) == "x");
-	CPPUNIT_ASSERT(varTable->getVarName(v.at(1)) == "i");
-
-	v = modifies->getModifies(1); 
-	CPPUNIT_ASSERT(varTable->getVarName(v.at(0)) == "x");
-	
-	v = modifies->getModifies(3); 
-	CPPUNIT_ASSERT(v.empty() == true);
-
-	vector<int> list = modifies->getModifies(TypeTable::ASSIGN, "x");
-	CPPUNIT_ASSERT(list.size() == 4);
-	CPPUNIT_ASSERT(list.at(0) == 1);
-	CPPUNIT_ASSERT(list.at(1) == 4);
-	CPPUNIT_ASSERT(list.at(2) == 7);
-	CPPUNIT_ASSERT(list.at(3) == 11);
-
-	list = modifies->getModifies(TypeTable::WHILE, "i");
-	CPPUNIT_ASSERT(list.size() == 1);
-	CPPUNIT_ASSERT(list.at(0) == 6);
-		
-	list = modifies->getModifies(TypeTable::WHILE, "z");
-	CPPUNIT_ASSERT(list.empty() == true);
-
+void ModifiesTest::testSetAndIsModifiesProc() {
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,1)==true);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,2)==true);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,3)==true);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,62)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,63)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,64)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,65)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1,66)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(2,2)==true);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1500,1)==true);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1500,2)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1501,1)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(1549,1)==false);
+	CPPUNIT_ASSERT(modifies->isModifiesProc(-1,1)==false);
 }
 
-void ModifiesTest::testIsModifies() {
-	CPPUNIT_ASSERT(modifies->isModifies(1, "x") == true);
-	CPPUNIT_ASSERT(modifies->isModifies(2, "y") == false);
-	CPPUNIT_ASSERT(modifies->isModifies(2, "z") == true);
-	CPPUNIT_ASSERT(modifies->isModifies(3, "x") == false);
-	CPPUNIT_ASSERT(modifies->isModifies(4, "x") == true);
-	CPPUNIT_ASSERT(modifies->isModifies(5, "x") == false);
-	CPPUNIT_ASSERT(modifies->isModifies(111, "ashfwnelw") == false);
-	CPPUNIT_ASSERT(modifies->isModifies(-150, "ashfwnelw") == false);
+void ModifiesTest::testGetModifiesProc() {
+	set<int> ans;
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(3);
+	CPPUNIT_ASSERT(modifies->getModifiedProc(1)==ans);
 
-}
+	ans.clear();
+	ans.insert(1);
+	CPPUNIT_ASSERT(modifies->getModifiedProc(1500)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(modifies->getModifiedProc(1499)==ans);
+	CPPUNIT_ASSERT(modifies->getModifiedProc(0)==ans);
+	CPPUNIT_ASSERT(modifies->getModifiedProc(-1)==ans);
 
-void ModifiesTest::testSetProcModifies() {
-	vector<VARINDEX> temp (1,2);
-	temp.push_back(3);
-	temp.push_back(5);
+	ans.clear();
+	ans.insert(1);
+	ans.insert(1500);
+	CPPUNIT_ASSERT(modifies->getModifiesProc(1)==ans);
+	ans.clear();
+	CPPUNIT_ASSERT(modifies->getModifiesProc(0)==ans);
+	CPPUNIT_ASSERT(modifies->getModifiesProc(-1)==ans);
+	CPPUNIT_ASSERT(modifies->getModifiesProc(4)==ans);
 
-	modifies->setModifiesProc(2,temp);
-	vector<VARINDEX> temp1 (1,5);
-	temp1.push_back(7);
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(4);
+	ans.insert(1500);
+	CPPUNIT_ASSERT(modifies->getAllModifiesProc()==ans);
 
-	modifies->setModifiesProc(2,temp1);
-	CPPUNIT_ASSERT(modifies->getModifiesProc(2).at(3) == 7);
-
-
-	varTable->insertVar("x");
-	modifies->setModifies(1,"x");
-	cout<<modifies->getModifies(1).size()<<endl;
-	modifies->setModifies(1,"x");
-	cout<<modifies->getModifies(1).size()<<endl;
-	modifies->setModifies(1,"x");
-	cout<<modifies->getModifies(1).size()<<endl;
-	return;
+	ans.clear();
+	ans.insert(1);
+	ans.insert(2);
+	ans.insert(3);
+	CPPUNIT_ASSERT(modifies->getAllModifiedProc()==ans);
 }
