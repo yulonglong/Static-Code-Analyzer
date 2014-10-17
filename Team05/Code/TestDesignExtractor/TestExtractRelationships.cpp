@@ -36,7 +36,7 @@ void ExtractRelationshipsTest::testModifiesProcedure() {
 
 	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *pkb);
 
-	vector<VARINDEX> v;
+	set<VARINDEX> v;
 	v =	pkb->getModifiesProc(0);
 	string expected = "x z y i b d e f w a ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *pkb));
@@ -67,7 +67,7 @@ void ExtractRelationshipsTest::testUsesProcedure() {
 	callsTable = pkb->getCallsTable();
 	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *pkb);
 
-	vector<VARINDEX> v;
+	set<VARINDEX> v;
 	v =	pkb->getUsesProc(0);
 	string expected = "x z y i c g w ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *pkb));
@@ -101,7 +101,7 @@ void ExtractRelationshipsTest::testModifiesStatement() {
 	callsTable = pkb->getCallsTable();
 	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *pkb);
 
-	vector<VARINDEX> v;
+	set<VARINDEX> v;
 	v =	pkb->getModifies(3);
 	string expected = "x z y i b d e f ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *pkb));
@@ -144,7 +144,7 @@ void ExtractRelationshipsTest::testUsesStatement() {
 	callsTable = pkb->getCallsTable();
 	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *pkb);
 
-	vector<VARINDEX> v;
+	set<VARINDEX> v;
 	v =	pkb->getUses(3);
 	string expected = "x z y i c g ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *pkb));
@@ -186,7 +186,7 @@ void ExtractRelationshipsTest::testFullSourceDE2() {
 	callsTable = pkb->getCallsTable();
 	DesignExtractor::extractRelationships(*ASTRoot, callsTable, *pkb);
 
-	vector<VARINDEX> v;
+	set<VARINDEX> v;
 	v =	pkb->getUses(1);
 	string expected = "a beta tmp I k j1k chArlie x left right Romeo c delta l width w may june ";
 	CPPUNIT_ASSERT_EQUAL(expected, print(v, *pkb));

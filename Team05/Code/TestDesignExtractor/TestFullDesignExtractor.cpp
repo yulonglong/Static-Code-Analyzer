@@ -56,7 +56,7 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 		cout << "CFGRoot is STILL NULL!!" << endl;
 	}
 
-	vector<int> v;
+	set<int> v;
 
 	v =	pkb->getUses(5);
 	string expected = "y x z v t idx ";
@@ -206,15 +206,6 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 // Given a set of int, returns a String of the ints
 string FullDesignExtractorTest::print(set<int> v) {
 	string s = "";
-	/*for (unsigned int i=0; i<v.size(); i++) {
-		int j = v[i];
-		std::string str;
-		std::stringstream out;
-		out << j;
-		str = out.str();
-		s += ( str + " ");
-	}*/
-
 	set<int>::iterator it;
 	for (it = v.begin(); it != v.end(); ++it) {
 		int j = *it; 
@@ -230,10 +221,6 @@ string FullDesignExtractorTest::print(set<int> v) {
 // Given a set of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
 string FullDesignExtractorTest::printVariables(set<VARINDEX> v, PKB &pkb) {
 	string s = "";
-	/*for (int i=0; i<v.size(); i++) {
-		s += pkb.getVarName(v[i]);
-		s += " ";
-	}*/
 	set<int>::iterator it;
 	for (it = v.begin(); it != v.end(); ++it) {
 		s += pkb.getVarName(*it);

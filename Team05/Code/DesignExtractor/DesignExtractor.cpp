@@ -25,6 +25,7 @@ queue<QueueItem> queueToProcess;
 void DesignExtractor::extractorDriver(PKB *pkb) {
 	cout << "Begin DesignExtractor" << endl;
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+	// PKB GET:
 	callsTable = pkb->getCallsTable();
 	
 	if (debugModeIteration1) {
@@ -32,6 +33,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 		cout << "DE has obtained tables from PKB" << endl;
 	}
 	
+	// PKB GET: 
 	Node* ASTRoot = pkb->getASTRoot();
 	Node* CFGRoot = pkb->getCFGRoot();
 	
@@ -60,6 +62,7 @@ void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 		std::cerr << "Unknown failure occured in DE. Possible memory corruption" << std::endl;
 	}
 
+	// PKB SET: 
 	pkb.setCFGRoot(rootCFGNode);
 	CFGNode* temp = pkb.getCFGRoot();
 }
@@ -91,7 +94,9 @@ void DesignExtractor::buildCFG(Node &ASTRroot, PKB &pkb) {
 	
 }
 
-// traverse the CFG and then set the next relationship in PKB
+// traverse the CFG
+// then set the next relationship in PKB
+// set the next ranges relationship in NextPair in PKB
 void DesignExtractor::setNextRelationshipDriver(PKB &pkb) {
 	CFGNode* source = rootCFGNode;
 
@@ -109,28 +114,19 @@ void DesignExtractor::setNextRelationshipDriver(PKB &pkb) {
 }
 
 void DesignExtractor::setNextPairRelationship(PKB &pkb) {
-	vector<int> allStmts = pkb.getAllStmts(TypeTable::STMT); // check with Yolim
-	for (unsigned int i=0; i<allStmts.size(); i++) {
-		int stmtNum = allStmts.at(i);
+	// PKB GET: 
+	set<int> allStmts = pkb.getAllStmts(TypeTable::STMT);
+	set<int>::iterator it1;
+	for (it1 = allStmts.begin(); it1 != allStmts.end(); ++it1) {
+		int stmtNum = *it1;
 		if (debugModeIteration3) {
 			cout << "StmtNum is " << stmtNum << endl;
 		}
-		/*vector<int> v = pkb.getNext(stmtNum);
-		for (unsigned int j=0; j<v.size(); j++) {
-			if (debugModeIteration3) {
-				cout << "Child is " << v[j] << endl;
-			}
-			pair<int, int> pairToAdd = findPair(v[j], pkb);
-			if (debugModeIteration3) {
-				cout << "setToNextPair(" << stmtNum  << "): ["<< pairToAdd.first << ", " << pairToAdd.second << "]" << endl;
-			}
-			pkb.setToNextPair(stmtNum, pairToAdd);
-
-		}*/
+		// PKB GET:
 		set<int> v = pkb.getNext(stmtNum);
-		set<int>::iterator it;
-		for (it = v.begin(); it != v.end(); ++it) {
-			int i = *it;
+		set<int>::iterator it2;
+		for (it2 = v.begin(); it2 != v.end(); ++it2) {
+			int i = *it2;
 			if (debugModeIteration3) {
 				cout << "Child is " << i << endl;
 			}
@@ -138,6 +134,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 			if (debugModeIteration3) {
 				cout << "setToNextPair(" << stmtNum  << "): ["<< pairToAdd.first << ", " << pairToAdd.second << "]" << endl;
 			}
+			// PKB SET: 
 			pkb.setToNextPair(stmtNum, pairToAdd);
 		}
 	}
@@ -145,6 +142,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 }
 
 pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
+	// PKB GET: 
 	set<int> v = pkb.getNext(fromIndex);
 	int toIndex = fromIndex; 
 	
@@ -155,6 +153,7 @@ pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
 		//if (it != null) {
 		//	/* v contains toIndex+1*/
 		//	toIndex += 1; 
+		// PKB GET: 
 		//	v = pkb.getNext(toIndex);
 		//} else {
 		//	/* v does not contain toIndex+1*/
@@ -182,6 +181,7 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 		CFGNode* child = children[i];
 		int toProgLine = child->getProgLine();
 		if (fromProgLine != -1 && toProgLine != -1) {
+			// PKB SET: 
 			pkb.setToNext(fromProgLine, toProgLine);
 			if (debugModeIteration2) {
 				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
@@ -195,6 +195,7 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 				child = child->getMultiChild(0);
 				toProgLine = child->getProgLine();
 			}
+			// PKB SET:
 			pkb.setToNext(fromProgLine, toProgLine);
 			if (debugModeIteration2) {
 				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
@@ -205,6 +206,7 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 		}
 	}
 }
+
 // ASTNode is a pointer to the subtree rooted at the AST Node ":stmtLst"
 void DesignExtractor::createCFGForStmtLst(Node &ASTNode, PKB &pkb) {
 	Node* tempASTNode;
@@ -441,36 +443,46 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
+			// PKB GET:
 			set<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
-			// SET: procedure procIndex modifies these variables too
+			// PKB SET: procedure procIndex modifies these variables too
 			pkb.setToModifiesProc(procIndex, variablesModifiedByProgLine);
+			cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
 
+			// PKB GET: 
 			set<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
-			// SET: procedure procIndex uses these variables too
+			// PKB SET: procedure procIndex uses these variables too
 			pkb.setToUsesProc(procIndex, variablesUsedByProgLine); 
+			cout << "setToUsesProc(" << procIndex << ", " << "variablesUsedByProgLine)" << endl;
 			
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
-					// SET:
+					// PKB SET:
 					pkb.setToModifies(progLine, variablesModifiedByProgLine); 
-					// SET:
+					// PKB SET:
 					pkb.setToUses(progLine, variablesUsedByProgLine); 
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
 					if (debugModeIteration1) {
 						cout << "progLine: " << progLine << endl;
 					} 
+					// PKB GET: 
 					int parentProgLine = pkb.getParent(progLine);
 					bool existsParent = (parentProgLine != -1);
 					while (existsParent) {
 						if (debugModeIteration1) {
 							cout << "parentProgLine: " << parentProgLine << endl;
 						}
-						// SET:
-						//pkb.setModifies(parentProgLine, variablesModifiedByProgLine); 
-						// SET:
-						//pkb.setUses(parentProgLine, variablesUsedByProgLine); 
+						// PKB SET:
+						pkb.setToModifies(parentProgLine, variablesModifiedByProgLine); 
+						cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
+
+						// PKB SET:
+						pkb.setToUses(parentProgLine, variablesUsedByProgLine); 
+						cout << "setToUses(" << parentProgLine << ", " << "variablesUsedByProgLine)" << endl;
+
+						// PKB GET: 
 						parentProgLine = pkb.getParent(parentProgLine);
 						existsParent = (parentProgLine != -1);
 					}
@@ -608,6 +620,7 @@ int DesignExtractor::getFirstProgLine(int procIndex, Node &ASTRoot, PKB &pkb) {
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();
 	for (unsigned int i=0;i<curr->getChild().size();i++) {
+		// PKB GET: 
 		if (procIndex == pkb.getProcIndex(curr->getChild(i)->getData())) {
 			curr = (curr->getChild(i))->getChild(0);
 			break;
@@ -624,6 +637,7 @@ int DesignExtractor::getLastProgLine(int procIndex, Node &ASTRoot, PKB &pkb) {
 	string currType = curr->getType();
 	// vector<Node*> children = curr->getChild();
 	for (unsigned int i=0;i<curr->getChild().size();i++) {
+		// PKB GET: 
 		if (procIndex == pkb.getProcIndex(curr->getChild(i)->getData())) {
 			curr = (curr->getChild(i))->getChild(0);
 			break;
