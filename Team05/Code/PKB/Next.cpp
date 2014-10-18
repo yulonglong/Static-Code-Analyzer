@@ -139,6 +139,7 @@ vector<pair<STMTNUM,STMTNUM>> Next::getNextPair(STMTNUM s){
 		ans = nextPairTable.at(s);
 		return ans;
 	} catch(...){
+		ans.clear();
 		return ans;
 	}
 }

@@ -48,19 +48,23 @@ public:
 	~Next();
 	//! Returns the instance of Next singleton class.
 	static Next* getInstance(TypeTable*);	// to be used to get instance of singleton class 
-	//! Set the Follows relationship between the two statement numbers to be true.
+	//! Set the Next relationship between the two statement numbers to be true.
 	void setNext(STMTNUM, STMTNUM);
-	bool isNext(STMTNUM, STMTNUM);
-
-	set<STMTNUM> getAllNext();
-	set<STMTNUM> getAllPrevious();
-
+	//! Set the Next relationship between a statement number and a pair of statement numbers which represent the range of the Next relationship of the first statement number.
 	void setNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
-	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
+	//! If the Next relationship between the two numbers is true, return true. Otherwise, return false.
+	bool isNext(STMTNUM, STMTNUM);
+	//! Return a set of all statement numbers that will be executed after the given statement number in the same nesting level in a CFG.
 	set<STMTNUM> getNext(STMTNUM);
-
+	//! Return a set of all statement numbers that will be executed before the given statement number in the same nesting level in a CFG.
 	set<STMTNUM> getPrevious(STMTNUM);
+	//! Return a set of all statement numbers that has another statement number after it in a CFG.
+	set<STMTNUM> getAllNext();
+	//! Return a set of all statement numbers that has another statement number before it in a CFG.
+	set<STMTNUM> getAllPrevious();
+	//! Return a vector of ranges that the given statement number will have a Next relationship with.
+	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
 	/// @cond
 	//ADDITIONAL METHODS

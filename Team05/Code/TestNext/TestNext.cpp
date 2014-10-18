@@ -63,5 +63,31 @@ void NextTest::testSetAndGetNext() {
 	ans.clear();
 	CPPUNIT_ASSERT(next1->getPrevious(1) == ans);
 	CPPUNIT_ASSERT(next1->getPrevious(999) == ans);
+
+	ans.clear();
+	ans.insert(1);
+	ans.insert(4);
+	CPPUNIT_ASSERT(next1->getAllNext() == ans);
+	ans.clear();
+	ans.insert(2);
+	ans.insert(3);
+	ans.insert(4);
+	ans.insert(5);
+	CPPUNIT_ASSERT(next1->getAllPrevious() == ans);
+
+	vector<pair<STMTNUM,STMTNUM>> ans2;
+	pair<STMTNUM,STMTNUM> p1 = make_pair(2,3);
+	pair<STMTNUM,STMTNUM> p2 = make_pair(4,5);
+	ans2.push_back(p1);
+	ans2.push_back(p2);
+
+	CPPUNIT_ASSERT(next1->getNextPair(1) == ans2);
+	ans2.clear();
+	p1 = make_pair(6,0);
+	ans2.push_back(p1);
+	CPPUNIT_ASSERT(next1->getNextPair(5) == ans2);
+	ans2.clear();
+	CPPUNIT_ASSERT(next1->getNextPair(-1) == ans2);
+	CPPUNIT_ASSERT(next1->getNextPair(100) == ans2);
 	return;
 }
