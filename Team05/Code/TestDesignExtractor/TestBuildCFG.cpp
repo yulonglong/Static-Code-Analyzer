@@ -361,7 +361,7 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 	Next* nextTable; 
 	nextTable = pkb->getNext();
 	set<int> v;
-	nextTable->printNextTable();
+	//nextTable->printNextTable();
 	
 	string expected = "1 "; 
 	v = pkb->getNext(0);
@@ -577,7 +577,7 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = pkb->getNext(16);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "18 6 "; 
+	expected = "6 18 "; 
 	v = pkb->getNext(17);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -585,7 +585,7 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = pkb->getNext(21);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "29 26 "; 
+	expected = "26 29 "; 
 	v = pkb->getNext(28);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -593,6 +593,55 @@ void BuildCFGTest::testBuildCFGForNestedWhileStmts() {
 	v = pkb->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
+	pkb->~PKB();
+}
+
+void BuildCFGTest::testBuildCFGWithNextPairRelationship() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
+	
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("source-if.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
+
+	Next* nextTable; 
+	nextTable = pkb->getNext();
+	vector<pair<STMTNUM,STMTNUM>> v;
+	//nextTable->printNextTable();
+	
+	string expected = "";
+	
+	expected = "[ (38, 38) (39, 39) ]";
+	v = pkb->getNextPair(37);
+	CPPUNIT_ASSERT(v.size() == 2);
+	//CPPUNIT_ASSERT_EQUAL(expected, printVectorOfNextPairs(v));
+
+	v = pkb->getNextPair(38);
+	CPPUNIT_ASSERT(v.size() == 0);
+
+	v = pkb->getNextPair(39);
+	CPPUNIT_ASSERT(v.size() == 0);
+
 	pkb->~PKB();
 }
 
@@ -618,3 +667,21 @@ string BuildCFGTest::print(set<int> v) {
 	}
 	return s; 
 }
+//
+//string BuildCFGTest::printVectorOfNextPairs(vector<pair<STMTNUM,STMTNUM>> v) {
+//	string s = "[ ";
+//	vector<std::pair<int,int>> it;
+//	for (it = v.begin(); it != v.end(); ++it) {
+//		std::pair<int, int> j = *it; 
+//		std::string str;
+//		std::stringstream out;
+//		out << j.first; 
+//		str = out.str();
+//		//s += ( "(" + str + ", ");
+//		out << j.second; 
+//		str = out.str();
+//		//s += ( str + " )");
+//	}
+//	s += " ]"; 
+//	return s; 
+//}

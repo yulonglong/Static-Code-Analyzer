@@ -235,6 +235,9 @@ public:
 	CFGNode* getCFGRoot(); // do not delete this method from PKB.h (DE needs)
 
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable(); // do not delete this method from PKB.h
+	void printNextTable();
+	void printNextTableForTesting();
+	void printNextPairTableForTesting();
 	/// @endcond
 };
 

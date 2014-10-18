@@ -58,75 +58,75 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 
 	set<int> v;
 
-	v =	pkb->getUses(5);
+	v =	pkb->getUsed(5);
 	string expected = "y x z v t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(5);
+	v =	pkb->getModified(5);
 	expected = "y x ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(7);
+	v =	pkb->getUsed(7);
 	expected = "y x v ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(7);
+	v =	pkb->getModified(7);
 	expected = "y x ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(9);
+	v =	pkb->getUsed(9);
 	expected = "y x z v idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(9);
+	v =	pkb->getModified(9);
 	expected = "y x z t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(11);
+	v =	pkb->getUsed(11);
 	expected = "y x z v idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(11);
+	v =	pkb->getModified(11);
 	expected = "y x z idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(15);
+	v =	pkb->getUsed(15);
 	expected = "y x v ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(15);
+	v =	pkb->getModified(15);
 	expected = "y x ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(18);
+	v =	pkb->getUsed(18);
 	expected = "y x z v t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(18);
+	v =	pkb->getModified(18);
 	expected = "y x z idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(19);
+	v =	pkb->getUsed(19);
 	expected = "y x z v t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(19);
+	v =	pkb->getModified(19);
 	expected = "y x idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(21);
+	v =	pkb->getUsed(21);
 	expected = "y x z v t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(21);
+	v =	pkb->getModified(21);
 	expected = "y x ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getUses(27);
+	v =	pkb->getUsed(27);
 	expected = "y x z v t idx ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
-	v =	pkb->getModifies(27);
+	v =	pkb->getModified(27);
 	expected = "y x ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 
@@ -188,18 +188,19 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	v = pkb->getNext(29);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "31 32 "; 
+	expected = "27 "; 
 	v = pkb->getNext(30);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "27 "; 
+	expected = ""; 
 	v = pkb->getNext(31);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
-	expected = "27 "; 
+	expected = ""; 
 	v = pkb->getNext(32);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
+
 	pkb->~PKB();
 }
 

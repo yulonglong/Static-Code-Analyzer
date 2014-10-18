@@ -10,7 +10,7 @@ using namespace std;
 
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0; 
-bool debugModeIteration3 = 1; 
+bool debugModeIteration3 = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -28,6 +28,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	// PKB GET:
 	callsTable = pkb->getCallsTable();
 	
+
 	if (debugModeIteration1) {
 		printCallsTable(callsTable);
 		cout << "DE has obtained tables from PKB" << endl;
@@ -120,7 +121,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 	for (it1 = allStmts.begin(); it1 != allStmts.end(); ++it1) {
 		int stmtNum = *it1;
 		if (debugModeIteration3) {
-			cout << "StmtNum is " << stmtNum << endl;
+			//cout << "StmtNum is " << stmtNum << endl;
 		}
 		// PKB GET:
 		set<int> v = pkb.getNext(stmtNum);
@@ -128,7 +129,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 		for (it2 = v.begin(); it2 != v.end(); ++it2) {
 			int i = *it2;
 			if (debugModeIteration3) {
-				cout << "Child is " << i << endl;
+				//cout << "Child is " << i << endl;
 			}
 			pair<int, int> pairToAdd = findPair(i, pkb);
 			if (debugModeIteration3) {
@@ -144,31 +145,20 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
 	// PKB GET: 
 	set<int> v = pkb.getNext(fromIndex);
+	// cout << "getNext(" << fromIndex << ") " << "set size is: " << v.size() << endl; 
 	int toIndex = fromIndex; 
 	
 	while (true) {
-		std::set<int>::iterator it;
-		cout << "HEREEEE:" << *it << endl; 
- 		it = v.find(toIndex+1);
-		//if (it != null) {
-		//	/* v contains toIndex+1*/
-		//	toIndex += 1; 
-		// PKB GET: 
-		//	v = pkb.getNext(toIndex);
-		//} else {
-		//	/* v does not contain toIndex+1*/
-		//	break;
-		//}
-
-
-		//if (std::find(v.begin(), v.end(), toIndex+1) != v.end()) {
-		//	/* v contains toIndex+1 */
-		//	toIndex += 1; 
-		//	v = pkb.getNext(toIndex);
-		//} else {
-		//	/* v does not contain toIndex+1 */
-		//	break;
-		//}
+		const bool is_in = v.find(toIndex+1) != v.end();
+		if (is_in) {
+			/* v contains toIndex+1*/
+			toIndex += 1; 
+			//PKB GET: 
+			v = pkb.getNext(toIndex);
+		} else {
+			/* v does not contain toIndex+1*/
+			break;
+		}
 	}
 	return pair<int, int>(fromIndex, toIndex);
 }
@@ -444,17 +434,19 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
 			// PKB GET:
-			set<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
+			set<VARINDEX> variablesModifiedByProgLine = pkb.getModified(i);
 			// PKB SET: procedure procIndex modifies these variables too
 			pkb.setToModifiesProc(procIndex, variablesModifiedByProgLine);
-			cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
-
+			if (debugModeIteration1) {
+				cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
+			}
 			// PKB GET: 
-			set<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
+			set<VARINDEX> variablesUsedByProgLine = pkb.getUsed(i);
 			// PKB SET: procedure procIndex uses these variables too
 			pkb.setToUsesProc(procIndex, variablesUsedByProgLine); 
-			cout << "setToUsesProc(" << procIndex << ", " << "variablesUsedByProgLine)" << endl;
-			
+			if (debugModeIteration1) {
+				cout << "setToUsesProc(" << procIndex << ", " << "variablesUsedByProgLine)" << endl;
+			}
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
@@ -476,11 +468,14 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 						}
 						// PKB SET:
 						pkb.setToModifies(parentProgLine, variablesModifiedByProgLine); 
-						cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
-
+						if (debugModeIteration1) {
+							cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
+						}
 						// PKB SET:
 						pkb.setToUses(parentProgLine, variablesUsedByProgLine); 
-						cout << "setToUses(" << parentProgLine << ", " << "variablesUsedByProgLine)" << endl;
+						if (debugModeIteration1) {
+							cout << "setToUses(" << parentProgLine << ", " << "variablesUsedByProgLine)" << endl;
+						}
 
 						// PKB GET: 
 						parentProgLine = pkb.getParent(parentProgLine);
@@ -515,7 +510,9 @@ void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> c
 		printQueue();
 	}
 	vector<int> emptyVector = vector<int>();
-	DFS(0, emptyVector, callsTable);
+	// change to 1 because calls tree has root 1. All proc indices start with 1 
+	DFS(1, emptyVector, callsTable);
+
 }
 
 void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {

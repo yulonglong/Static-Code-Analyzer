@@ -11,12 +11,13 @@ class BuildCFGTest : public CPPUNIT_NS::TestFixture // Note 2
 { 
 	CPPUNIT_TEST_SUITE( BuildCFGTest ); // Note 3 
 
-	//CPPUNIT_TEST( testBuildCFGForAssignAndCallStmts );
-	//CPPUNIT_TEST( testBuildCFGForWhileStmts );
-	//CPPUNIT_TEST( testBuildCFGForIfStmts );
-	//CPPUNIT_TEST( testBuildCFGForNestedIfStmts ); 
-	//CPPUNIT_TEST( testBuildCFGForNestedWhileStmts );
-
+	CPPUNIT_TEST( testBuildCFGForAssignAndCallStmts );
+	CPPUNIT_TEST( testBuildCFGForWhileStmts );
+	CPPUNIT_TEST( testBuildCFGForIfStmts );
+	CPPUNIT_TEST( testBuildCFGForNestedIfStmts ); 
+	CPPUNIT_TEST( testBuildCFGForNestedWhileStmts );
+	CPPUNIT_TEST( testBuildCFGWithNextPairRelationship );
+	
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -28,9 +29,10 @@ public:
 	void testBuildCFGForIfStmts(); 
 	void testBuildCFGForNestedIfStmts(); 
 	void testBuildCFGForNestedWhileStmts(); 
+	void testBuildCFGWithNextPairRelationship(); 
 private:
 	string print(set<int>); 
-
+	//string printVectorOfNextPairs(vector<pair<int,int>> v);
 };
 #endif
     
