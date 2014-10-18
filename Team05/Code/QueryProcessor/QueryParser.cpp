@@ -92,7 +92,7 @@ const string QueryParser::expressionSpec = "(?:\"" + expr + "\")" + "|" + "(?:_\
 const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*\\,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
 const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\))";
-const string QueryParser::pattern = "(?:" + assignCl + "|" + whileCl + "|" + ifCl + ")";
+const string QueryParser::pattern = "(?:" + ifCl + "|" + assignCl + "|" + whileCl + ")";
 const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + ")";
 
@@ -592,6 +592,11 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patternValid){
 	v.at(i) = stringToLower(v.at(i));
 
+	bool patternAssign = false;
+	bool patternIf = false;
+	bool patternWhile = false;
+
+
 	bool patternSynValid = true;
 	string patternSyn = v.at(i+1);
 	unordered_map<string, TypeTable::SynType>::iterator it;
@@ -599,19 +604,47 @@ Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patte
 	if(it==synMap.end()){
 		patternSynValid = false;
 	}
-	else if(it->second != TypeTable::ASSIGN){
+	else if(it->second == TypeTable::ASSIGN){
+		patternAssign = true;
+	}
+	else if(it->second == TypeTable::WHILE){
+		patternWhile = true;
+	}
+	else{
 		patternSynValid = false;
 	}
-			
+	
 	bool varRefValid = true;
 	string firstParam = v.at(i+2);
-	bool match = regexMatch("("+synonym+")",firstParam);
-	//if it is a synonym
-	if(match){
-		it = synMap.find(firstParam);
-		if(it==synMap.end()){
+	string secondParam = v.at(i+3);
+
+	if(patternAssign){
+		bool match = regexMatch("("+synonym+")",firstParam);
+		//if it is a synonym, check whether it's declared
+		if(match){
+			it = synMap.find(firstParam);
+			if(it==synMap.end()){
+				varRefValid = false;
+			}
+		}
+		//second param need not to be declared because it is in valid format from the first regex valdiation
+	}
+	else if(patternWhile){
+		bool match = regexMatch("("+synonym+")",firstParam);
+		//if it is a synonym, check whether it's declared
+		if(match){
+			it = synMap.find(firstParam);
+			if(it==synMap.end()){
+				varRefValid = false;
+			}
+		}
+		//if it is a while, the second param must be an underscore
+		if(secondParam != "_"){
 			varRefValid = false;
 		}
+	}
+	else{
+		varRefValid = false;
 	}
 
 	if((patternSynValid)&&(varRefValid)){
