@@ -28,6 +28,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	// PKB GET:
 	callsTable = pkb->getCallsTable();
 	
+
 	if (debugModeIteration1) {
 		printCallsTable(callsTable);
 		cout << "DE has obtained tables from PKB" << endl;
@@ -444,17 +445,19 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 		
 		for (unsigned int i=firstProgLine; i<=lastProgLine; i++) {
 			// PKB GET:
-			set<VARINDEX> variablesModifiedByProgLine = pkb.getModifies(i);
+			set<VARINDEX> variablesModifiedByProgLine = pkb.getModified(i);
 			// PKB SET: procedure procIndex modifies these variables too
 			pkb.setToModifiesProc(procIndex, variablesModifiedByProgLine);
-			cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
-
+			if (debugModeIteration1) {
+				cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
+			}
 			// PKB GET: 
-			set<VARINDEX> variablesUsedByProgLine = pkb.getUses(i);
+			set<VARINDEX> variablesUsedByProgLine = pkb.getUsed(i);
 			// PKB SET: procedure procIndex uses these variables too
 			pkb.setToUsesProc(procIndex, variablesUsedByProgLine); 
-			cout << "setToUsesProc(" << procIndex << ", " << "variablesUsedByProgLine)" << endl;
-			
+			if (debugModeIteration1) {
+				cout << "setToUsesProc(" << procIndex << ", " << "variablesUsedByProgLine)" << endl;
+			}
 			try {
 				for (signed int j=(progLines.size()-1); j>=0; j--) {
 					int progLine = progLines[j];
@@ -476,11 +479,14 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 						}
 						// PKB SET:
 						pkb.setToModifies(parentProgLine, variablesModifiedByProgLine); 
-						cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
-
+						if (debugModeIteration1) {
+							cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
+						}
 						// PKB SET:
 						pkb.setToUses(parentProgLine, variablesUsedByProgLine); 
-						cout << "setToUses(" << parentProgLine << ", " << "variablesUsedByProgLine)" << endl;
+						if (debugModeIteration1) {
+							cout << "setToUses(" << parentProgLine << ", " << "variablesUsedByProgLine)" << endl;
+						}
 
 						// PKB GET: 
 						parentProgLine = pkb.getParent(parentProgLine);
@@ -515,7 +521,9 @@ void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> c
 		printQueue();
 	}
 	vector<int> emptyVector = vector<int>();
-	DFS(0, emptyVector, callsTable);
+	// change to 1 because calls tree has root 1. All proc indices start with 1 
+	DFS(1, emptyVector, callsTable);
+
 }
 
 void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
