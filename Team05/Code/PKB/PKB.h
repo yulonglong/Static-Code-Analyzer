@@ -120,20 +120,25 @@ public:
 	VARNAME getVarName (VARINDEX);
 	//! Return the variable index given the variable name. If it is not found, return an -1.
 	VARINDEX getVarIndex (VARNAME);
+	//! Return the total number of variables in the variable tables.
 	int getNumVar(); 
+	//! Return a set of all variable indexes in the variable tables.
 	set<VARINDEX> getAllVarIndex();
 
 	//! Return the procedure name given the procedure index. If it is not found, return an empty string.
 	PROCNAME getProcName (PROCINDEX);
 	//! Return the procedure index given the procedure name. If it is not found, return an -1.
 	PROCINDEX getProcIndex (PROCNAME);
+	//! Return the total number of procedures in the procedure tables. 
 	int getNumProcedures(); 
+	//! Return a set of all procedure indexes in the procedure tables.
 	set<PROCINDEX> getAllProcIndexes();
 
 	//! Return the constant value given the constant index. If it is not found, return an empty string.
 	CONSTVALUE getConstValue (CONSTINDEX);
 	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
+	//! Return a set of all constant indexes in the constant tables.
 	set<int> getAllConstIndex();
 
 	//! Return the SynType given the statement number. If the statement number, return INVALID.
@@ -147,23 +152,36 @@ public:
 
 	//! If the Calls relationship between the two procedure names is true, return true. Otherwise, return false.
 	bool isCalls(PROCINDEX,PROCINDEX);
+	//! Return a vector of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found.
 	set<PROCINDEX> getAllCalls(); 
-	set<PROCINDEX> getCalls(PROCINDEX); 	
+	//! Return a vector of procedure indexes where the procedure index had called the given procedure index. Return an empty vector if not found.
+	set<PROCINDEX> getCalls(PROCINDEX); 
+	//! Return a vector of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found.
 	set<PROCINDEX> getAllCalled(); 
-	set<PROCINDEX> getCalled(PROCINDEX);
+	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found.
+	set<PROCINDEX> getCalled(PROCINDEX); 
 
 	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	
-	STMTNUM getFollows(STMTNUM);	
-	STMTNUM getFollowedBy(STMTNUM); 
-	set<STMTNUM> getAllFollows();	 //Select s1 such that getFollows(s1, s2)
+	//! Return the statement number that s follows. Return -1 if not found.
+	STMTNUM getFollows(STMTNUM s);
+	//! Return the statement number that s is followed by. Return -1 if not found.
+	STMTNUM getFollowedBy(STMTNUM s);
+	//! Return a set of all statement numbers that follows another statement number.
+	set<STMTNUM> getAllFollows();
+	//! Return a set of all statement numbers that is followed by another statement number.
 	set<STMTNUM> getAllFollowedBy();
 
+	//! If the Parent relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isParent(STMTNUM, STMTNUM);
-	set<STMTNUM> getAllChildren(); 
+	//! Return a set of all statement numbers that is the children of the given statement number.
 	set<STMTNUM> getChildren(STMTNUM);
+	//! Return a statement number that is the parent of the given statement number. Return -1 if not found.
+	STMTNUM getParent(STMTNUM);
+	//! Return a set of all statement numbers that has children(s).
+	set<STMTNUM> getAllChildren();
+	//! Return a set of all statement numbers that has a parent.
 	set<STMTNUM> getAllParent();
-	STMTNUM getParent(STMTNUM); 
 
 	//! If the Modifies relationship between a statement number and a variable name is true, return true. Otherwise, return false.
 	bool isModifies(STMTNUM, VARINDEX);	//Select w such that Modifies(1, "y")	
@@ -209,15 +227,21 @@ public:
 	//! Return a set of all procedure indexes that has used any variables. Return an empty set if not found.
 	set<PROCINDEX> getAllUsesProc();
 
+	//! If the Next relationship between the two numbers is true, return true. Otherwise, return false.
 	bool isNext(STMTNUM, STMTNUM);
+	//! Return a set of all statement numbers that will be executed after the given statement number in the same nesting level in a CFG.
 	set<STMTNUM> getNext(STMTNUM);
+	//! Return a set of all statement numbers that will be executed before the given statement number in the same nesting level in a CFG.
 	set<STMTNUM> getPrevious(STMTNUM);
+	//! Return a set of all statement numbers that has another statement number after it in a CFG.
 	set<STMTNUM> getAllNext();
+	//! Return a set of all statement numbers that has another statement number before it in a CFG.
 	set<STMTNUM> getAllPrevious();
-	//printNextTable(); ??
 
 	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table
+	//! Set the Next relationship between a statement number and a pair of statement numbers which represent the range of the Next relationship of the first statement number.
 	void setToNextPair(STMTNUM, pair<STMTNUM,STMTNUM>);
+	//! Return a vector of ranges that the given statement number will have a Next relationship with.
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
 	/// @cond

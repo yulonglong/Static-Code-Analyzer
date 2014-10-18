@@ -54,10 +54,9 @@ public:
 	//! Return the constant index given the constant value. If it is not found, return an -1.
 	CONSTINDEX getConstIndex (CONSTVALUE);
 
-	/// @cond
-	//NEW METHOD
+	//! Return a set of all constant indexes in the constant tables.
 	set<CONSTINDEX> getAllConstIndex();
-	/// @endcond
+
 };
 
 #endif

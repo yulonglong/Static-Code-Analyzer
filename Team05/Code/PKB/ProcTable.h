@@ -55,12 +55,11 @@ public:
 	//! Return the procedure index given the procedure name. If it is not found, return an -1.
 	PROCINDEX getProcIndex (PROCNAME);
 
-	/// @cond
+	//! Return the total number of procedures in the procedure tables. 
 	int getNumProcedures(); 
-
-	//REQUESTED PROCEDURES
+	//! Return a set of all procedure indexes in the procedure tables.
 	set<PROCINDEX> getAllProcIndexes();
-	/// @endcond
+	
 };
 
 #endif

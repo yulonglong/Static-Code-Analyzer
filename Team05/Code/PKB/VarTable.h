@@ -55,10 +55,11 @@ public:
 	//! Return the variable index given the variable name. If it is not found, return an -1.
 	VARINDEX getVarIndex (VARNAME);
 
-	/// @cond
+	//! Return the total number of variables in the variable tables.
 	int getNumVar(); 
+	//! Return a set of all variable indexes in the variable tables.
 	set<VARINDEX> getAllVarIndex();
-	/// @endcond
+	
 };
 
 #endif
