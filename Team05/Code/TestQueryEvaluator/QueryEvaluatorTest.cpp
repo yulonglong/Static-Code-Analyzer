@@ -98,15 +98,15 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	m->setModifies(1, "z");
 
 	set<int> procedureFirstModifies;
-	procedureFirstModifies.insert(0);
 	procedureFirstModifies.insert(1);
 	procedureFirstModifies.insert(2);
-	m->setModifiesProc(0, procedureFirstModifies);
+	procedureFirstModifies.insert(3);
+	m->setModifiesProc(1, procedureFirstModifies);
 
 	set<int> procedureSecondModifies;
-	procedureSecondModifies.insert(1);
 	procedureSecondModifies.insert(2);
-	m->setModifiesProc(1, procedureSecondModifies);
+	procedureSecondModifies.insert(3);
+	m->setModifiesProc(2, procedureSecondModifies);
 
 	c->setCalls("First", "Second", 3);
 	c->setCalls("Second", "Third", 10);
@@ -238,7 +238,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	q.addRelationship(r);
 	selectedSyn.push_back("p");
 	selectedSyn.push_back("v");
-
+	
 	//Modifies(a, v) r24
 	r = Relationship("Modifies", "a", "v");
 	q.addRelationship(r);
@@ -251,6 +251,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Modifies", "w", "_");
 	q.addRelationship(r);
 
+	
 	//Modifies(p2, "y") r27
 	r = Relationship("Modifies", "p2", "\"y\"");
 	q.addRelationship(r);
@@ -263,7 +264,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Modifies("First", "z") r29
 	r = Relationship("Modifies", "\"First\"", "\"z\"");
 	q.addRelationship(r);
-
+	
 	//Modifies("First", v) r30
 	r = Relationship("Modifies", "\"First\"", "v");
 	q.addRelationship(r);
@@ -271,6 +272,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Modifies(a, "x") r31
 	r = Relationship("Modifies", "a", "\"x\"");
 	q.addRelationship(r);
+	
 	
 	//Calls (p2, q) r32
 	r = Relationship("Calls", "p2", "q");
@@ -280,7 +282,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Calls* (p2, q) 
 	r = Relationship("Calls*", "p2", "q");
 	q.addRelationship(r);
-
+	
 	//Calls*("First", "Third")
 	r = Relationship("Calls*", "\"First\"", "\"Third\"");
 	q.addRelationship(r);
@@ -288,7 +290,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	//Calls*(p, "Second")
 	r = Relationship("Calls*", "p", "\"Second\"");
 	q.addRelationship(r);
-	/*
+	
 	//Calls*("Second", q2)
 	r = Relationship("Calls*", "\"Second\"", "q2");
 	q.addRelationship(r);
@@ -330,24 +332,25 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	q.addRelationship(r);
 	selectedSyn.push_back("s8");
 	
+	
 	//Next*(1, 5)
 	r = Relationship("Next*", "1", "5");
-	q.addRelationship(r);*/
+	q.addRelationship(r);
 	
 
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 	cout<<"AFTER EVALUATE QUERY"<<endl;
-	
+	cout<<"EMPTY? "<<answer.find("a")->second.empty()<<endl;
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("a2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a3")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(3, answer.find("a3")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(4, answer.find("a3")->second.at(2));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("a3")->second.at(3));
-	CPPUNIT_ASSERT_EQUAL(0, answer.find("p")->second.at(0));
-	//CPPUNIT_ASSERT_EQUAL(0, answer.find("p2")->second.at(0));
-	//CPPUNIT_ASSERT_EQUAL(1, answer.find("p2")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("p")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("p2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("p2")->second.at(1));
 	
 //	CPPUNIT_ASSERT_EQUAL(1, answer.find("q")->second.at(0));
 //	CPPUNIT_ASSERT_EQUAL(2, answer.find("q")->second.at(1));
@@ -368,7 +371,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 //	CPPUNIT_ASSERT_EQUAL(11, answer.find("s6")->second.at(1));
 //	CPPUNIT_ASSERT_EQUAL(8, answer.find("s7")->second.at(0));
 //	CPPUNIT_ASSERT_EQUAL(9, answer.find("s7")->second.at(1));
-	CPPUNIT_ASSERT_EQUAL(0, answer.find("v")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("v")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	

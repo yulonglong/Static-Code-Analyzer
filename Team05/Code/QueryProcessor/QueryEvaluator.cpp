@@ -159,26 +159,38 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
 		cout<<"Iterating Selected Syn"<<endl;
-		int index = (linkages.find(*it)->second).at(0);
-		vector<string> param = relParameters.find(index)->second;
 
-		vector<Pair> p = relAns.at(index);
 		set<int> synAns;
 		vector<int> synAnsVec;
-		cout<<"token in selectedSyn = "<<*it<<" p.size = "<<p.size()<<endl;
-		cout<<"FIRST PARAM = "<<param.at(0)<<endl;
-		if(*it==param.at(0)){
-			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
-				synAns.insert(it2->ans1);
-				cout<<"it2->ans1 = "<<it2->ans1<<endl;
+		if(linkages.find(*it)!=linkages.end()){
+			int index;
+			vector<string> param;
+			index = (linkages.find(*it)->second).at(0);
+			param = relParameters.find(index)->second;
+
+			vector<Pair> p = relAns.at(index);
+		
+			cout<<"token in selectedSyn = "<<*it<<" p.size = "<<p.size()<<endl;
+			cout<<"FIRST PARAM = "<<param.at(0)<<endl;
+			if(*it==param.at(0)){
+				for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
+					synAns.insert(it2->ans1);
+					cout<<"it2->ans1 = "<<it2->ans1<<endl;
+				}
+
+			}else {
+				cout<<"SECOND PARAM = "<<param.at(1)<<endl;
+				for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
+					synAns.insert(it2->ans2);
+					cout<<"it2->ans2 = "<<it2->ans2<<endl;
+				}
 			}
 
-		}else {
-			cout<<"SECOND PARAM = "<<param.at(1)<<endl;
-			for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
-				synAns.insert(it2->ans2);
-				cout<<"it2->ans2 = "<<it2->ans2<<endl;
-			}
+		}
+
+		//If selectedSyn is not found in linkages or is BOOLEAN
+		else{
+			synAns = pkb->getAllStmts(m.find(*it)->second);
 		}
 
 		for(set<int>::iterator it3 = synAns.begin(); it3!=synAns.end(); it3++){
@@ -909,16 +921,20 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 }
 
 void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans, vector<int> *traverseTable){
-	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<endl;
+	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<targetIndex<<endl;
 	set<int> next = pkb->getNext(currentIndex);
 	for(set<int>::iterator it; it!=next.end(); it++){
 		cout<<"Iterating through the next vector"<<endl;
-		if(find(traverseTable->begin(), traverseTable->end(), *it)==traverseTable->end()){
+		int flag = (find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end());
+		cout<<"FLAG IS "<<flag<<endl;
+		if(flag){
+			cout<<*it<<" is traversed before. Moving on to the next node"<<endl;
 			it++;
 			if(it==next.end()){
 				break;
 			}
 		}else{
+			cout<<*it<<" is not traversed before. Inserting stmtnum into traverseTable"<<endl;
 			traverseTable->push_back(*it);
 		}
 		if(*it == targetIndex){
@@ -1978,13 +1994,13 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		//otherwise
 		else {
 			answer = pkb->getModifies(varIndex);
-			if(!pkb->isSynType(i1->second, *answer.begin())){
-				answer.clear();
-			}
+			cout<<varIndex<<endl;
 			cout<<"answer is empty: "<<answer.empty()<<endl;
 			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 				cout<<"modifiesAnswer"<<*it<<" "<<varIndex<<endl;
-				modAns.push_back(Pair (*it, varIndex));
+				if(pkb->isSynType(i1->second, *it)){
+					modAns.push_back(Pair (*it, varIndex));
+				}
 				
 			}
 		}
@@ -2148,11 +2164,11 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 		//otherwise
 		else {
 			answer = pkb->getUses(varIndex);
-			if(!pkb->isSynType(i1->second, *answer.begin())){
-				answer.clear();
-			}
+
 			for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-				usesAns.push_back(Pair (*it, varIndex));
+				if(pkb->isSynType(i1->second, *it)){
+					usesAns.push_back(Pair (*it, varIndex));
+				}
 			}
 		}
 
