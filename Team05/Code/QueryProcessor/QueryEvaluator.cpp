@@ -923,18 +923,20 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans, vector<int> *traverseTable){
 	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<targetIndex<<endl;
 	set<int> next = pkb->getNext(currentIndex);
-	for(set<int>::iterator it; it!=next.end(); it++){
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
 		cout<<"Iterating through the next vector"<<endl;
-		int flag = (find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end());
-		cout<<"FLAG IS "<<flag<<endl;
-		if(flag){
+		//int flag = (find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end());
+		//cout<<"FLAG IS "<<flag<<endl;
+		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
 			cout<<*it<<" is traversed before. Moving on to the next node"<<endl;
 			it++;
+			cout<<"HIHI"<<endl;
 			if(it==next.end()){
+				cout<<"Reached the end "<<endl;
 				break;
 			}
 		}else{
-			cout<<*it<<" is not traversed before. Inserting stmtnum into traverseTable"<<endl;
+			cout<<" is not traversed before. Inserting stmtnum into traverseTable"<<endl;
 			traverseTable->push_back(*it);
 		}
 		if(*it == targetIndex){
