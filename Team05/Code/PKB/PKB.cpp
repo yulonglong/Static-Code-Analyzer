@@ -406,3 +406,15 @@ void PKB::setToNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
 vector<pair<STMTNUM,STMTNUM>> PKB::getNextPair(STMTNUM s){
 	return next->getNextPair(s);
 }
+
+void PKB::printNextTable(){
+	return next->printNextTable();
+}
+
+void PKB::printNextTableForTesting(){
+	return next->printNextTableForTesting();
+}
+
+void PKB::printNextPairTableForTesting(){
+	return next->printNextPairTableForTesting();
+}
