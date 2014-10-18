@@ -10,7 +10,7 @@ using namespace std;
 
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0; 
-bool debugModeIteration3 = 1; 
+bool debugModeIteration3 = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -121,7 +121,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 	for (it1 = allStmts.begin(); it1 != allStmts.end(); ++it1) {
 		int stmtNum = *it1;
 		if (debugModeIteration3) {
-			cout << "StmtNum is " << stmtNum << endl;
+			//cout << "StmtNum is " << stmtNum << endl;
 		}
 		// PKB GET:
 		set<int> v = pkb.getNext(stmtNum);
@@ -129,7 +129,7 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 		for (it2 = v.begin(); it2 != v.end(); ++it2) {
 			int i = *it2;
 			if (debugModeIteration3) {
-				cout << "Child is " << i << endl;
+				//cout << "Child is " << i << endl;
 			}
 			pair<int, int> pairToAdd = findPair(i, pkb);
 			if (debugModeIteration3) {
@@ -145,31 +145,20 @@ void DesignExtractor::setNextPairRelationship(PKB &pkb) {
 pair<int, int> DesignExtractor::findPair(int fromIndex, PKB &pkb) {
 	// PKB GET: 
 	set<int> v = pkb.getNext(fromIndex);
+	// cout << "getNext(" << fromIndex << ") " << "set size is: " << v.size() << endl; 
 	int toIndex = fromIndex; 
 	
 	while (true) {
-		std::set<int>::iterator it;
-		cout << "HEREEEE:" << *it << endl; 
- 		it = v.find(toIndex+1);
-		//if (it != null) {
-		//	/* v contains toIndex+1*/
-		//	toIndex += 1; 
-		// PKB GET: 
-		//	v = pkb.getNext(toIndex);
-		//} else {
-		//	/* v does not contain toIndex+1*/
-		//	break;
-		//}
-
-
-		//if (std::find(v.begin(), v.end(), toIndex+1) != v.end()) {
-		//	/* v contains toIndex+1 */
-		//	toIndex += 1; 
-		//	v = pkb.getNext(toIndex);
-		//} else {
-		//	/* v does not contain toIndex+1 */
-		//	break;
-		//}
+		const bool is_in = v.find(toIndex+1) != v.end();
+		if (is_in) {
+			/* v contains toIndex+1*/
+			toIndex += 1; 
+			//PKB GET: 
+			v = pkb.getNext(toIndex);
+		} else {
+			/* v does not contain toIndex+1*/
+			break;
+		}
 	}
 	return pair<int, int>(fromIndex, toIndex);
 }

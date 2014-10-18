@@ -626,9 +626,22 @@ void BuildCFGTest::testBuildCFGWithNextPairRelationship() {
 
 	Next* nextTable; 
 	nextTable = pkb->getNext();
-	set<int> v;
+	vector<pair<STMTNUM,STMTNUM>> v;
 	//nextTable->printNextTable();
 	
+	string expected = "";
+	
+	expected = "[ (38, 38) (39, 39) ]";
+	v = pkb->getNextPair(37);
+	CPPUNIT_ASSERT(v.size() == 2);
+	//CPPUNIT_ASSERT_EQUAL(expected, printVectorOfNextPairs(v));
+
+	v = pkb->getNextPair(38);
+	CPPUNIT_ASSERT(v.size() == 0);
+
+	v = pkb->getNextPair(39);
+	CPPUNIT_ASSERT(v.size() == 0);
+
 	pkb->~PKB();
 }
 
@@ -654,3 +667,21 @@ string BuildCFGTest::print(set<int> v) {
 	}
 	return s; 
 }
+//
+//string BuildCFGTest::printVectorOfNextPairs(vector<pair<STMTNUM,STMTNUM>> v) {
+//	string s = "[ ";
+//	vector<std::pair<int,int>> it;
+//	for (it = v.begin(); it != v.end(); ++it) {
+//		std::pair<int, int> j = *it; 
+//		std::string str;
+//		std::stringstream out;
+//		out << j.first; 
+//		str = out.str();
+//		//s += ( "(" + str + ", ");
+//		out << j.second; 
+//		str = out.str();
+//		//s += ( str + " )");
+//	}
+//	s += " ]"; 
+//	return s; 
+//}
