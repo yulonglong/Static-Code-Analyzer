@@ -1165,7 +1165,7 @@ void QueryParserTest::testQueryMultipleWith(){
 
 void QueryParserTest::testQueryMultiplePattern(){
 	//INIT BEGIN
-	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_)";
+	string query = "prog_line n; assign s; Select s such that Follows*(n,s) pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_)";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -1195,7 +1195,7 @@ void QueryParserTest::testQueryMultiplePattern(){
 	unordered_map<string, TypeTable::SynType> expectedSynTable;
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("n", TypeTable::PROGLINE));
-	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("s", TypeTable::ASSIGN));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table
@@ -1233,7 +1233,7 @@ void QueryParserTest::testQueryMultiplePattern(){
 
 void QueryParserTest::testQueryMultiplePatternAndWith(){
 	//INIT BEGIN
-	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_) with n=10 and s.stmt#=9 and s.stmt#=11 with n=12 pattern s(s,\"x\") and s(_,_\"z+y\"_)";
+	string query = "prog_line n; assign s; stmt st;Select s such that Follows*(n,s) pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_) with n=10 and st.stmt#=9 and st.stmt#=11 with n=12 pattern s(s,\"x\") and s(_,_\"z+y\"_)";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -1263,7 +1263,8 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 	unordered_map<string, TypeTable::SynType> expectedSynTable;
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("n", TypeTable::PROGLINE));
-	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("s", TypeTable::ASSIGN));
+	expectedSynTable.insert(make_pair("st", TypeTable::STMT));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table
@@ -1285,8 +1286,8 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+y\"_",Relationship::UNDERSCOREEXPR));
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+z\"_",Relationship::UNDERSCOREEXPR));
 	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"10",Relationship::INTEGER));
-	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"9",Relationship::INTEGER));
-	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"11",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","st",Relationship::SYNONYM,"9",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","st",Relationship::SYNONYM,"11",Relationship::INTEGER));
 	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"12",Relationship::INTEGER));
 	expectedRelVect.push_back(Relationship("pattern","s", "s",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"z+y\"_",Relationship::UNDERSCOREEXPR));
@@ -1307,7 +1308,7 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 
 void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
 	//INIT BEGIN
-	string query = "prog_line n; stmt s; Select s such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\") pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_) with n=10 and s.stmt#=9 and s.stmt#=11 with n=12 pattern s(s,\"x\") and s(_,_\"z+y\"_) such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\")";
+	string query = "prog_line n; stmt st; assign s ;   Select s such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\") pattern s(_,_) and s(_,_\"x+y\"_) and s(_,_\"x+z\"_) with n=10 and st.stmt#=9 and st.stmt#=11 with n=12 pattern s(s,\"x\") and s(_,_\"z+y\"_) such that Follows*(n,s) and Follows(n,s) and Uses(n,\"x\")";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -1337,7 +1338,8 @@ void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
 	unordered_map<string, TypeTable::SynType> expectedSynTable;
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("n", TypeTable::PROGLINE));
-	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("st", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("s", TypeTable::ASSIGN));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table
@@ -1361,8 +1363,8 @@ void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+y\"_",Relationship::UNDERSCOREEXPR));
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"x+z\"_",Relationship::UNDERSCOREEXPR));
 	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"10",Relationship::INTEGER));
-	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"9",Relationship::INTEGER));
-	expectedRelVect.push_back(Relationship("with","s",Relationship::SYNONYM,"11",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","st",Relationship::SYNONYM,"9",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("with","st",Relationship::SYNONYM,"11",Relationship::INTEGER));
 	expectedRelVect.push_back(Relationship("with","n",Relationship::SYNONYM,"12",Relationship::INTEGER));
 	expectedRelVect.push_back(Relationship("pattern","s", "s",Relationship::SYNONYM,"\"x\"",Relationship::IDENTIFIER));
 	expectedRelVect.push_back(Relationship("pattern","s", "_",Relationship::UNDERSCORE,"_\"z+y\"_",Relationship::UNDERSCOREEXPR));

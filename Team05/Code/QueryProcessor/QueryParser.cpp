@@ -599,6 +599,9 @@ Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patte
 	if(it==synMap.end()){
 		patternSynValid = false;
 	}
+	else if(it->second != TypeTable::ASSIGN){
+		patternSynValid = false;
+	}
 			
 	bool varRefValid = true;
 	string firstParam = v.at(i+2);
