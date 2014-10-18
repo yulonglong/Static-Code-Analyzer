@@ -900,7 +900,7 @@ void QueryParserTest::testQueryPatternWhile1(){
 
 void QueryParserTest::testQueryPatternIf1(){
 	//INIT BEGIN
-	string query = "if a; Select a pattern a (\"y\", _, _)";
+	string query = "if a; Select a pattern a (\"y\", _   ,  _  )";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -929,7 +929,7 @@ void QueryParserTest::testQueryPatternIf1(){
 	//expected syn table
 	unordered_map<string, TypeTable::SynType> expectedSynTable;
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
-	expectedSynTable.insert(make_pair("a", TypeTable::WHILE));
+	expectedSynTable.insert(make_pair("a", TypeTable::IF));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table

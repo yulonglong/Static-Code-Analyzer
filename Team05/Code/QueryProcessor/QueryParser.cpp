@@ -303,15 +303,52 @@ bool QueryParser::parseSelectCl(string query){
 			getline(istream,patternToken[1],',');
 			getline(istream,patternToken[2],')');
 
-			for(int i=0;i<3;i++){
-				vector<string> subRes;
-				regexPattern = "\\s*(" + freeString + ")\\s*";
-				if(i==2){
-					regexPattern = "\\s*(" + expressionSpec + ")\\s*";
+			vector<string> subRes;
+			string readToken;
+
+			//the synonym before the bracket
+			subRes.clear();
+			match = false;
+			regexPattern = "\\s*(" + synonym + ")\\s*";
+			match = regexMatchWithResult(regexPattern,patternToken[0],subRes);
+			readToken = subRes[1];
+			selectStatement.push_back(readToken);
+
+			//first argument
+			subRes.clear();
+			match = false;
+			regexPattern = "\\s*(" + varRef + ")\\s*";
+			match = regexMatchWithResult(regexPattern,patternToken[1],subRes);
+			readToken = subRes[1];
+			selectStatement.push_back(readToken);
+			
+			//second (and third argument)
+			istringstream argStream(patternToken[2]);
+			string tok[2];
+			int index=0;
+			while(getline(argStream,tok[index],',')&&(index<=1)){
+				index++;
+			}
+
+			//if only second argument (no third argument)
+			if(tok[1].length()==0){
+				subRes.clear();
+				match = false;
+				regexPattern = "\\s*(" + expressionSpec + ")\\s*";
+				match = regexMatchWithResult(regexPattern,tok[0],subRes);
+				readToken = subRes[1];
+				selectStatement.push_back(readToken);
+			}
+			//if have third argument
+			else{
+				for(int i=0;i<2;i++){
+					subRes.clear();
+					match = false;
+					regexPattern = "\\s*(" + freeString +")\\s*"; // should be underscore though, but no boolean here, it is parsing, not validation
+					match = regexMatchWithResult(regexPattern,tok[i],subRes);
+					readToken = subRes[1];
+					selectStatement.push_back(readToken);
 				}
-				match = regexMatchWithResult(regexPattern,patternToken[i],subRes);
-				string variableName = subRes[1];
-				selectStatement.push_back(variableName);
 			}
 		}
 		else if(token == WITH){//read with
@@ -607,6 +644,9 @@ Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patte
 	else if(it->second == TypeTable::ASSIGN){
 		patternAssign = true;
 	}
+	else if(it->second == TypeTable::IF){
+		patternIf = true;
+	}
 	else if(it->second == TypeTable::WHILE){
 		patternWhile = true;
 	}
@@ -629,6 +669,32 @@ Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patte
 		}
 		//second param need not to be declared because it is in valid format from the first regex valdiation
 	}
+	else if(patternIf){
+		bool match = regexMatch("("+synonym+")",firstParam);
+		//if it is a synonym, check whether it's declared
+		if(match){
+			it = synMap.find(firstParam);
+			if(it==synMap.end()){
+				varRefValid = false;
+			}
+		}
+		//if it is a while, the second param must be an underscore
+		if(secondParam != "_"){
+			varRefValid = false;
+		}
+
+		//checking for third param
+		//check for index out of bounds, because third param is at i+4
+		if((int)v.size()>(i+4)){
+			string thirdParam = v.at(i+4);
+			if(thirdParam != "_"){
+				varRefValid = false;
+			}
+		}
+		else {
+			varRefValid = false;
+		}
+	}
 	else if(patternWhile){
 		bool match = regexMatch("("+synonym+")",firstParam);
 		//if it is a synonym, check whether it's declared
@@ -649,7 +715,12 @@ Relationship QueryParser::validatePattern(vector<string>& v, int& i, bool& patte
 
 	if((patternSynValid)&&(varRefValid)){
 		Relationship patternRel(v.at(i), v.at(i+1), v.at(i+2), detectTokenType(v.at(i+2)), v.at(i+3), detectTokenType(v.at(i+3)));
-		i = i+3;
+		if(patternIf){
+			i = i+4;
+		}
+		else{
+			i = i+3;
+		}
 		patternValid = true;
 		return patternRel;
 	}
