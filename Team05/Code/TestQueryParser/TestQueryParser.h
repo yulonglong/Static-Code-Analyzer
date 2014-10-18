@@ -23,6 +23,7 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryPattern1);
 	CPPUNIT_TEST(testQueryPattern2);
 	CPPUNIT_TEST(testQueryPatternWhile1);
+	CPPUNIT_TEST(testQueryPatternIf1);
 	CPPUNIT_TEST(testQueryWith1);
 	CPPUNIT_TEST(testQueryWith2);
 	CPPUNIT_TEST(testQueryWith3);
@@ -41,6 +42,8 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryValidationPattern2);
 	CPPUNIT_TEST(testQueryValidationPattern3);
 	CPPUNIT_TEST(testQueryValidationPatternWhile1);
+	CPPUNIT_TEST(testQueryValidationPatternIf1);
+	CPPUNIT_TEST(testQueryValidationPatternIf2);
 	CPPUNIT_TEST(testQueryValidationWith1);
 	CPPUNIT_TEST(testQueryValidationWith2);
 	CPPUNIT_TEST(testQueryValidationWith3);
@@ -76,6 +79,7 @@ public:
 	void testQueryPattern1();
 	void testQueryPattern2();
 	void testQueryPatternWhile1();
+	void testQueryPatternIf1();
 	void testQueryWith1();
 	void testQueryWith2();
 	void testQueryWith3();
@@ -94,6 +98,8 @@ public:
 	void testQueryValidationPattern2();
 	void testQueryValidationPattern3();
 	void testQueryValidationPatternWhile1();
+	void testQueryValidationPatternIf1();
+	void testQueryValidationPatternIf2();
 	void testQueryValidationWith1();
 	void testQueryValidationWith2();
 	void testQueryValidationWith3();
