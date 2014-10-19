@@ -830,17 +830,37 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 
 		if(tk2=="_"){
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+				traverseTable.clear();
 				recursiveNext(*it, *it, &nextStarAns, i2->second, &traverseTable);
 			}
-		}else{
+		}
+		//Next*(n, n)
+		else if(tk1==tk2){
+			cout<<"Token1 and Token2 are equal"<<endl;
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+				traverseTable.clear();
+				recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable);
+			}
+		}
+		else{
+			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+				traverseTable.clear();
 				recursiveNext(*it, *it, &nextStarAns, TypeTable::STMT, &traverseTable);
 			}
+		}
+
+		for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
+			nextStarAnsVec.push_back(*it);
 		}
 	}
 
 	else if(tk1=="_" && tk2=="_"){
-
+		set<int> x = pkb->getAllNext();
+		if(x.empty()){
+			nextStarAnsVec.push_back(Pair (-2,-2));
+		}else {
+			nextStarAnsVec.push_back(Pair (-1, -1));
+		}
 	}
 
 	//Next*(n, 3) //Next*(_, 3)
@@ -907,7 +927,7 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 	set<int> next = pkb->getNext(currentIndex);
 
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
-		if(find(traverseTable->begin(), traverseTable->end(), *it)==traverseTable->end()){
+		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
 			it++;
 			if(it==next.end()){
 				break;
@@ -938,12 +958,12 @@ void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int ta
 				break;
 			}
 		}else{
-			cout<<" is not traversed before. Inserting stmtnum into traverseTable"<<endl;
+			cout<<*it<<" is not traversed before. Inserting stmtnum "<<*it<<" into traverseTable"<<endl;
 			traverseTable->push_back(*it);
 		}
 		if(*it == targetIndex){
 			cout<<"TargetIndex found"<<endl;
-			ans->insert(Pair (-1, -1));
+			ans->insert(Pair (rootIndex, targetIndex));
 			break;
 		}
 		recursiveNextTarget(rootIndex, *it, targetIndex, ans, traverseTable);
@@ -955,16 +975,19 @@ void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<P
 
 	for(set<int>::iterator it = prev.begin(); it!=prev.end(); it++){
 		cout<<"Traversing "<<*it<<endl;
-		if(find(traverseTable->begin(), traverseTable->end(), *it)==traverseTable->end()){
+		cout<<"Type is "<<convertEnumToString(type)<<endl;
+		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
+			cout<<"Node traversed before. Moving on to next node"<<endl;
 			it++;
 			if(it==prev.end()){
 				break;
 			}
 		}else{
+			cout<<"Node not traversed before"<<endl;
 			traverseTable->push_back(*it);
 		}
 		if(pkb->isSynType(type,*it)){
-			cout<<"SHOULD BE HERE. SYNTYPE NOT RETURNED"<<endl;
+			cout<<"SynType match, inserting pair"<<endl;
 			ans->insert(Pair (*it, rootIndex));
 		}
 		recursiveNextReverse(rootIndex, *it, ans, type, traverseTable);

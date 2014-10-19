@@ -118,6 +118,8 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("p", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("p2", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("pr", TypeTable::PROGLINE));
+	map.insert(make_pair<string, TypeTable::SynType>("pr2", TypeTable::PROGLINE));
+	map.insert(make_pair<string, TypeTable::SynType>("pr3", TypeTable::PROGLINE));
 	map.insert(make_pair<string, TypeTable::SynType>("q", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("q2", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
@@ -338,11 +340,21 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Next*", "1", "5");
 	q.addRelationship(r);
 	
-	/*
+	
 	//Next*(pr, 5)
 	r = Relationship("Next*", "pr", "5");
 	q.addRelationship(r);
-	selectedSyn.push_back("pr");*/
+	selectedSyn.push_back("pr");
+
+	//Next*(9, pr2)
+	r = Relationship("Next*", "9", "pr2");
+	q.addRelationship(r);
+	selectedSyn.push_back("pr2");
+	
+	//Next*(pr3, pr3)
+	r = Relationship("Next*", "pr3", "pr3");
+	q.addRelationship(r);
+	selectedSyn.push_back("pr3");
 
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
@@ -357,6 +369,15 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("p")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("p2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("p2")->second.at(1));
+
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("pr")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("pr")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("pr")->second.at(2));
+	CPPUNIT_ASSERT_EQUAL(4, answer.find("pr")->second.at(3));
+	CPPUNIT_ASSERT_EQUAL(5, answer.find("pr")->second.at(4));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("pr2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(10, answer.find("pr2")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(11, answer.find("pr2")->second.at(2));
 	
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("q")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(3, answer.find("q")->second.at(1));
@@ -381,6 +402,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	
+	/*
 	//Next*(pr, 5)
 	Query q1;
 	r = Relationship("Next*", "pr", "5");
@@ -391,19 +413,18 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 
 	q1.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q1);
-	/*
-	vector<int> k = answer.find("p2")->second;
-	vector<int> j = answer.find("s8")->second;
+	*/
+	vector<int> k = answer.find("pr3")->second;
+	//vector<int> j = answer.find("s8")->second;
 
 	
 	for(int i = 0; i<k.size(); i++){
 		cout<<"parent ans1 = "<< k.at(i)<<endl;
 	}
-	for(int i=0; i<j.size(); i++){
+	/*for(int i=0; i<j.size(); i++){
 		cout<<"parent ans2 = "<<j.at(i)<<endl;
 	}
 
-	n->printNextTable();
 
 	/*
 	//Query 1 assign a; Select a such that Follows(_ , _); r0
