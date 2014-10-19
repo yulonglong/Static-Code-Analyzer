@@ -18,32 +18,32 @@ Select p such that Uses (p, "wrong")
 4 - Uses ::
 procedure p; variable v;
 Select BOOLEAN such that Uses ("First", "x")
-TRUE
+true
 5000
 5 - Uses ::
 procedure p; variable v; 
 Select BOOLEAN such that Uses ("Fourth", _)
-TRUE
+true
 5000
 6 - Uses ::
 procedure p; variable v;
 Select BOOLEAH such that Uses (p, "y")
-TRUE
+true
 5000
 7 - Uses ::
 procedure p; variable v;
 Select BOOLEAN such that Uses (p, "wrong")
-FALSE
+false
 5000
 8 - Uses ::
 procedure p; variable v;
 Select BOOELAN such that Uses ("Third", v)
-TRUE
+true
 5000
 9 - Uses ::
 procedure p; variable v;
 Select BOOLEAN such that Uses ("Fourth", "y")
-TRUE
+true
 5000
 10 - Uses ::
 procedure p; variable v;
@@ -73,7 +73,7 @@ y
 15 - Uses ::
 procedure p; variable v;
 Select BOOLEAN such that Uses (p, v)
-TRUE
+true
 5000
 16 - Uses ::
 procedure p; variable v;
@@ -83,7 +83,7 @@ First, Second, Third, Fourth, Fifth, Sixth
 17 - Uses ::
 procedure p; variable v;
 Select BOOLEAN such that Uses(p, _)
-TRUE
+true
 5000
 18 - Uses ::
 procedure p; variable v;

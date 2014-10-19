@@ -1,4 +1,4 @@
-34
+41
 cat: BASIC queries with entity attribute values and constants (with clause)
 1 - procName ::
 procedure p;
@@ -13,12 +13,12 @@ Select p with p.procName = "DoesNotExist"
 3 - procName, BOOLEAN ::
 procedure p;
 Select BOOLEAN with p.procName = "Main"
-TRUE
+true
 5000
 4 - procName, BOOLEAN ::
 procedure p;
 Select BOOLEAN with p.procName = "DoesNotExist"
-FALSE
+false
 5000
 5 - varName ::
 variable v;
@@ -32,12 +32,13 @@ Select v with v.varName = "DoesNotExist"
 5000
 7 - varName, BOOLEAN ::
 variable v;
-Select BOOLEAN with v.varName = "iter";
-TRUE
+Select BOOLEAN with v.varName = "iter"
+true
 5000
 8 - varName, BOOLEAN ::
+
 Select BOOLEAN with v.varName = "DoesNotExist"
-FALSE
+false
 5000
 9 - value ::
 constant c;
@@ -52,12 +53,12 @@ Select c with c.value = 999999999999
 11 - value, BOOLEAN ::
 constant c;
 Select BOOLEAN with c.value = 2
-TRUE
+true
 5000
 12 - value, BOOLEAN ::
 constant c;
 Select BOOLEAN with c.value = 99999999999999
-FALSE
+false
 5000
 13 - stmt# ::
 stmt s;
@@ -72,12 +73,13 @@ Select s with s.stmt# = 99999
 15 - stmt# ::
 stmt s;
 Select BOOLEAN with s.stmt# = 23
-TRUE
+true
 5000
 16 - stmt# ::
 stmt s;
 Select BOOLEAN with s.stmt# = 999999
-FALSE
+false
+5000
 17 - stmt# ::
 assign a;
 Select a with a.stmt# = 12
@@ -88,118 +90,118 @@ assign a;
 Select a with a.stmt# = 27
 
 5000
-13 - stmt#, BOOLEAN ::
+19 - stmt#, BOOLEAN ::
 assign a;
 Select BOOLEAN with a.stmt# = 30
-TRUE
+true
 5000
-14 - stmt#, BOOLEAN ::
+20 - stmt#, BOOLEAN ::
 assign a;
 Select BOOLEAN with a.stmt# = 19
-FALSE
+false
 5000
-15 - stmt# ::
+21 - stmt# ::
 while w;
 Select w with w.stmt# = 19
 19
 5000
-16 - stmt# ::
+22 - stmt# ::
 while w;
 Select w with w.stmt# = 34
 
 5000
-17 - stmt#, BOOLEAN ::
+23 - stmt#, BOOLEAN ::
 while w;
 Select BOOLEAN with w.stmt# = 8
-TRUE
+true
 5000
-18 - stmt#, BOOLEAN ::
+24 - stmt#, BOOLEAN ::
 while w;
 Select BOOLEAN with w.stmt# = 25
-FALSE
+false
 5000
-19 - stmt# ::
+25 - stmt# ::
 if i;
 Select i with i.stmt# = 38
 38
 5000
-20 - stmt# ::
+26 - stmt# ::
 if i;
 Select i with i.stmt# = 1
 
 5000
-21 - stmt#, BOOLEAN ::
+27 - stmt#, BOOLEAN ::
 if i;
 Select BOOLEAN with i.stmt# = 38
-TRUE
+true
 5000
-22 - stmt#, BOOLEAN ::
+28 - stmt#, BOOLEAN ::
 if i;
 Select BOOLEAN with i.stmt# = 15
-FALSE
+false
 5000
-23 - prog_line# ::
+29 - prog_line# ::
 prog_line pl;
 Select pl with pl.prog_line# = 23
 23
 5000
-24 - prog_line# ::
+30 - prog_line# ::
 prog_line pl;
 Select pl with pl.prog_line# = 15081992
 
 5000
-25 - prog_line#, boolean ::
+31 - prog_line#, boolean ::
 prog_line pl;
 Select BOLLEAN with pl.prog_line# = 1
-TRUE
+true
 5000
-26 - prog_line#, boolean ::
+32 - prog_line#, boolean ::
 prog_line pl;
 Select BOOLEAN with pl.prog_line# = 15081992
-FALSE
+false
 5000
-27 - procName, varName ::
+33 - procName, varName ::
 procedure p; variable v;
 Select p with p.procName = v.varName
 
 5000
-28 - stmt#, value ::
+34 - stmt#, value ::
 stmt s; constant c;
 Select s with s.stmt# = c.value
 1, 2, 3, 4, 5, 6, 8
 5000
-28 - stmt#, value ::
+35 - stmt#, value ::
 stmt s; constant c;
 Select c with c.value = s.stmt#
 1, 2, 3, 4, 5, 6, 8
 5000
-29 - procName, varName ::
+36 - procName, varName ::
 procedure p; variable v;
 Select v with p.procName = v.varName
 
 5000
-30 - procName, varName ::
+37 - procName, varName ::
 procedure p; variable v, boolean;
 Select BOOLEAN with p.procName = v.varName
-FALSE
+false
 5000
-31 - stmt#, value ::
+38 - stmt#, value ::
 constant c; while w;
 Select with w.stmt# = c.value
 8
 5000
-32 - stmt#, value ::
+39 - stmt#, value ::
 constant c; if i;
 Select i with i.stmt# = c.value
 
 5000
-33 - stmt#, value, boolean ::
+40 - stmt#, value, boolean ::
 constant c; if i;
 Select BOOLEAN with i.stmt# = c.value
-FALSE
+false
 5000
-34 - stmt#, value, boolean ::
+41- stmt#, value, boolean ::
 constant c; stmt s;
 Select BOOLEAN with s.stmt# = c.value
-TRUE
+true
 5000

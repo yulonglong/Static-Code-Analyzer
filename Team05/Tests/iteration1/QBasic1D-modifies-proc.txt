@@ -18,32 +18,32 @@ Select p such that Modifies (p, "wrong")
 4 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies ("First", "x")
-TRUE
+true
 5000
 5 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies ("Fourth", _)
-TRUE
+true
 5000
 6 - Modifies ::
 procedure p; variable v; 
 Select BOOLEAN such that Modifies (p, "y")
-TRUE
+true
 5000
 7 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies (p, "wrong")
-FALSE
+false
 5000
 8 - Modifies ::
 procedure p; variable v; 
 Select BOOLEAN such that Modifies ("Third", v)
-TRUE
+true
 5000
 9 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies ("Fourth", "y")
-TRUE
+true
 5000
 10 - Modifies ::
 procedure p; variable v;
@@ -78,7 +78,7 @@ y
 16 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies(p, v)
-TRUE
+true
 5000
 17 - Modifies ::
 procedure p; variable v;
@@ -88,7 +88,7 @@ First, Second, Third, Fourth, Fifth, Sixth
 18 - Modifies ::
 procedure p; variable v;
 Select BOOLEAN such that Modifies(p, _)
-TRUE
+true
 5000
 19 - Modifies ::
 procedure p; variable v;
