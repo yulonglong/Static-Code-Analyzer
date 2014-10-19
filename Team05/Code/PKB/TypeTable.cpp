@@ -97,7 +97,7 @@ set<STMTNUM> TypeTable:: getAllStmts (TypeTable::SynType t) {
 
 bool TypeTable::isType(TypeTable::SynType type, STMTNUM stmt) {
 	try{
-		if (type == STMT || typeMap.at(stmt) == type) {
+		if (type == STMT || typeMap.at(stmt) == type || type == PROGLINE) {
 			return true;
 		}
 		return false;

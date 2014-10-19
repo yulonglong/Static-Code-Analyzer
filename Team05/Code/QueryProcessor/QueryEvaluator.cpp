@@ -855,8 +855,10 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 			}
 		}
 		else{
+			cout<<"In Next*(token, digit)"<<endl;
 			recursiveNextReverse(tk2Int, tk2Int, &nextStarAns, i1->second, &traverseTable);
 			for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
+				cout<<"Pushing into answer the pair "<<it->ans1<<"and"<<it->ans2<<endl;
 				nextStarAnsVec.push_back(*it);
 			}
 		}
@@ -952,6 +954,7 @@ void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<P
 	set<int> prev = pkb->getPrevious(currentIndex);
 
 	for(set<int>::iterator it = prev.begin(); it!=prev.end(); it++){
+		cout<<"Traversing "<<*it<<endl;
 		if(find(traverseTable->begin(), traverseTable->end(), *it)==traverseTable->end()){
 			it++;
 			if(it==prev.end()){
@@ -961,6 +964,7 @@ void QueryEvaluator::recursiveNextReverse(int rootIndex, int currentIndex, set<P
 			traverseTable->push_back(*it);
 		}
 		if(pkb->isSynType(type,*it)){
+			cout<<"SHOULD BE HERE. SYNTYPE NOT RETURNED"<<endl;
 			ans->insert(Pair (*it, rootIndex));
 		}
 		recursiveNextReverse(rootIndex, *it, ans, type, traverseTable);

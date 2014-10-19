@@ -117,6 +117,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("c", TypeTable::CALL));
 	map.insert(make_pair<string, TypeTable::SynType>("p", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("p2", TypeTable::PROCEDURE));
+	map.insert(make_pair<string, TypeTable::SynType>("pr", TypeTable::PROGLINE));
 	map.insert(make_pair<string, TypeTable::SynType>("q", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("q2", TypeTable::PROCEDURE));
 	map.insert(make_pair<string, TypeTable::SynType>("s", TypeTable::STMT));
@@ -337,6 +338,11 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Next*", "1", "5");
 	q.addRelationship(r);
 	
+	/*
+	//Next*(pr, 5)
+	r = Relationship("Next*", "pr", "5");
+	q.addRelationship(r);
+	selectedSyn.push_back("pr");*/
 
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
@@ -352,9 +358,9 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("p2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("p2")->second.at(1));
 	
-//	CPPUNIT_ASSERT_EQUAL(1, answer.find("q")->second.at(0));
-//	CPPUNIT_ASSERT_EQUAL(2, answer.find("q")->second.at(1));
-//	CPPUNIT_ASSERT_EQUAL(2, answer.find("q2")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(2, answer.find("q")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("q")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(3, answer.find("q2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(3, answer.find("s")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("s2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("s2")->second.at(1));
@@ -367,14 +373,24 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("s4")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(10, answer.find("s5")->second.at(0));
 
-//	CPPUNIT_ASSERT_EQUAL(9, answer.find("s6")->second.at(0));
-//	CPPUNIT_ASSERT_EQUAL(11, answer.find("s6")->second.at(1));
-//	CPPUNIT_ASSERT_EQUAL(8, answer.find("s7")->second.at(0));
-//	CPPUNIT_ASSERT_EQUAL(9, answer.find("s7")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("s6")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(11, answer.find("s6")->second.at(1));
+	CPPUNIT_ASSERT_EQUAL(8, answer.find("s7")->second.at(0));
+	CPPUNIT_ASSERT_EQUAL(9, answer.find("s7")->second.at(1));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("v")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(1, answer.find("w")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(9, answer.find("w2")->second.at(0));
 	
+	//Next*(pr, 5)
+	Query q1;
+	r = Relationship("Next*", "pr", "5");
+	q1.addRelationship(r);
+	q1.setSynTable(map);
+	selectedSyn.clear();
+	selectedSyn.push_back("pr");
+
+	q1.setSelectedSyn(selectedSyn);
+	answer = qe.evaluateQuery(q1);
 	/*
 	vector<int> k = answer.find("p2")->second;
 	vector<int> j = answer.find("s8")->second;
