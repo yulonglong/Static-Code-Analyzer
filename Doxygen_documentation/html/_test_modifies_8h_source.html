@@ -99,20 +99,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_modifies_test.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_modifies_test.html">ModifiesTest</a> : <span class="keyword">public</span> CPPUNIT_NS::TestFixture <span class="comment">// Note 2 </span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{ </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    CPPUNIT_TEST_SUITE( <a class="code" href="class_modifies_test.html">ModifiesTest</a> ); <span class="comment">// Note 3 </span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    CPPUNIT_TEST( test1 );</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">/*CPPUNIT_TEST( testGetModifies );</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">    CPPUNIT_TEST( testIsModifies );</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">    CPPUNIT_TEST( testSetProcModifies );*/</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    CPPUNIT_TEST( testSetAndIsModifies );</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    CPPUNIT_TEST( testGetModifies );</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    CPPUNIT_TEST( testSetAndIsModifiesProc );</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    CPPUNIT_TEST( testGetModifiesProc );</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    CPPUNIT_TEST_SUITE_END();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> setUp();</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> tearDown();</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> test1();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> testSetAndIsModifies();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> testGetModifies();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> testIsModifies();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> testSetProcModifies();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> testSetAndIsModifiesProc();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> testGetModifiesProc();</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif</span></div>
@@ -121,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 17 2014 00:01:38 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 20 2014 00:32:17 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

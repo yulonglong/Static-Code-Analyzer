@@ -98,65 +98,65 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* Represents the statement number of the source code */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> STMTNUM;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/* The pair of procedure index being called and the statement number where it is called */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">typedef</span> pair&lt;PROCINDEX,STMTNUM&gt; CALLSPAIR;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_calls.html">   38</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_calls.html">Calls</a> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_calls.html">Calls</a> *calls;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>: </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_calls.html#a4d9250ac093b82c6483ea50d98094bd9">Calls</a>(<a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_calls.html#ad75bb5118d2cc374288afb07a3e3b7ab">~Calls</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_calls.html">Calls</a>* <a class="code" href="class_calls.html#a53be78b250718f757f7c9f43f4dd880a">getInstance</a>(<a class="code" href="class_proc_table.html">ProcTable</a>*);  <span class="comment">// to be used to get instance of singleton class </span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_calls.html#a4d7b6f64cc0b9dc117f324262419bc3a">setCalls</a>(PROCNAME, PROCNAME, STMTNUM);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_calls.html#a904359ceb46c397a48df73067b8a39a7">isCalls</a>(PROCNAME,PROCNAME);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> isCalls2(PROCINDEX,PROCINDEX);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;set&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;iterator&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;ProcTable.h&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* Represents the statement number of the source code */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">int</span> STMTNUM;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/* The pair of procedure index being called and the statement number where it is called */</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">typedef</span> pair&lt;PROCINDEX,STMTNUM&gt; CALLSPAIR;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_calls.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_calls.html">Calls</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsPairTable;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    vector&lt;vector&lt;int64_t&gt;&gt; callsTable;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    vector&lt;vector&lt;int64_t&gt;&gt; calledByTable;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_calls.html">Calls</a> *calls;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    set&lt;PROCINDEX&gt; callsList;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    set&lt;PROCINDEX&gt; calledList;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>: </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_calls.html#a4d9250ac093b82c6483ea50d98094bd9">Calls</a>(<a class="code" href="class_proc_table.html">ProcTable</a>*);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_calls.html#ad75bb5118d2cc374288afb07a3e3b7ab">~Calls</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_calls.html">Calls</a>* <a class="code" href="class_calls.html#a53be78b250718f757f7c9f43f4dd880a">getInstance</a>(<a class="code" href="class_proc_table.html">ProcTable</a>*);  <span class="comment">// to be used to get instance of singleton class </span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_calls.html#a4d7b6f64cc0b9dc117f324262419bc3a">setCalls</a>(PROCNAME, PROCNAME, STMTNUM);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#af6850750f391ccca57ba1f4a093cd3fd">getCalls</a>(); <span class="comment">//Calls(p,q) Select p, return empty if not found</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"></span>    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#af6850750f391ccca57ba1f4a093cd3fd">getCalls</a>(PROCNAME); <span class="comment">//Calls (p, &quot;Second&quot;) Select p, return empty if not found</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    set&lt;PROCINDEX&gt; getCalls2(PROCINDEX); <span class="comment">//Calls (p, &quot;Second&quot;) Select p, return empty if not found</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#abe16fce3bccd5eb128c3547607dfeb8b">getCalled</a>(); <span class="comment">//Calls(p,q) Select q, return empty if not found</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span>    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#abe16fce3bccd5eb128c3547607dfeb8b">getCalled</a>(PROCNAME); <span class="comment">//Calls(&quot;First&quot;, q) Select q, return empty if not found</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    set&lt;PROCINDEX&gt; getCalled2(PROCINDEX); <span class="comment">//Calls(&quot;First&quot;, q) Select q, return empty if not found</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_calls.html#a0f1f20d1e8a2779ac1d5033cb68236d6">isCalls</a>(PROCINDEX,PROCINDEX);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#a133c16d4640f1e367516bee419ff87ab">getAllCalls</a>(); <span class="comment">//Calls(p,q) Select p, return empty if not found</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span>    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#afd051ef25d961be59b323c700631b5ae">getCalls</a>(PROCINDEX); <span class="comment">//Calls (p, &quot;Second&quot;) Select p, return empty if not found</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#a7f8716b67c0e3284914e7e151f25b5a0">getAllCalled</a>(); <span class="comment">//Calls(p,q) Select q, return empty if not found</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span>    set&lt;PROCINDEX&gt; <a class="code" href="class_calls.html#a01c586205ed48006152449d1fae5c2a2">getCalled</a>(PROCINDEX); <span class="comment">//Calls(&quot;First&quot;, q) Select q, return empty if not found</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; getCallsTable();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> printCallsTable();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdoc">A Calls class to store the calls relationship. </div><div class="ttdef"><b>Definition:</b> Calls.h:38</div></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">void</span> printCallsTable();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span> printCallsPairTable();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_calls_html"><div class="ttname"><a href="class_calls.html">Calls</a></div><div class="ttdoc">A Calls class to store the calls relationship. </div><div class="ttdef"><b>Definition:</b> Calls.h:39</div></div>
 <div class="ttc" id="class_calls_html_a4d7b6f64cc0b9dc117f324262419bc3a"><div class="ttname"><a href="class_calls.html#a4d7b6f64cc0b9dc117f324262419bc3a">Calls::setCalls</a></div><div class="ttdeci">void setCalls(PROCNAME, PROCNAME, STMTNUM)</div><div class="ttdoc">Set the Calls relationship between the two procedure names to be true at the specified statement numb...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:35</div></div>
+<div class="ttc" id="class_calls_html_a133c16d4640f1e367516bee419ff87ab"><div class="ttname"><a href="class_calls.html#a133c16d4640f1e367516bee419ff87ab">Calls::getAllCalls</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getAllCalls()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had called another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:123</div></div>
+<div class="ttc" id="class_calls_html_a7f8716b67c0e3284914e7e151f25b5a0"><div class="ttname"><a href="class_calls.html#a7f8716b67c0e3284914e7e151f25b5a0">Calls::getAllCalled</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getAllCalled()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had been called by another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:127</div></div>
+<div class="ttc" id="class_calls_html_afd051ef25d961be59b323c700631b5ae"><div class="ttname"><a href="class_calls.html#afd051ef25d961be59b323c700631b5ae">Calls::getCalls</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getCalls(PROCINDEX)</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had called the given procedure index...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:132</div></div>
 <div class="ttc" id="class_calls_html_a4d9250ac093b82c6483ea50d98094bd9"><div class="ttname"><a href="class_calls.html#a4d9250ac093b82c6483ea50d98094bd9">Calls::Calls</a></div><div class="ttdeci">Calls(ProcTable *)</div><div class="ttdoc">A constructor to initialize the Calls class. </div><div class="ttdef"><b>Definition:</b> Calls.cpp:27</div></div>
-<div class="ttc" id="class_calls_html_af6850750f391ccca57ba1f4a093cd3fd"><div class="ttname"><a href="class_calls.html#af6850750f391ccca57ba1f4a093cd3fd">Calls::getCalls</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getCalls()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had called another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:92</div></div>
-<div class="ttc" id="class_calls_html_a904359ceb46c397a48df73067b8a39a7"><div class="ttname"><a href="class_calls.html#a904359ceb46c397a48df73067b8a39a7">Calls::isCalls</a></div><div class="ttdeci">bool isCalls(PROCNAME, PROCNAME)</div><div class="ttdoc">If the Calls relationship between the two procedure names is true, return true. Otherwise, return false. </div><div class="ttdef"><b>Definition:</b> Calls.cpp:55</div></div>
-<div class="ttc" id="class_calls_html_abe16fce3bccd5eb128c3547607dfeb8b"><div class="ttname"><a href="class_calls.html#abe16fce3bccd5eb128c3547607dfeb8b">Calls::getCalled</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getCalled()</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had been called by another procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:99</div></div>
+<div class="ttc" id="class_calls_html_a01c586205ed48006152449d1fae5c2a2"><div class="ttname"><a href="class_calls.html#a01c586205ed48006152449d1fae5c2a2">Calls::getCalled</a></div><div class="ttdeci">set&lt; PROCINDEX &gt; getCalled(PROCINDEX)</div><div class="ttdoc">Return a vector of procedure indexes where the procedure index had been called by the given procedure...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:154</div></div>
 <div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdoc">A ProcTable class to store the procedure names from the source code. </div><div class="ttdef"><b>Definition:</b> ProcTable.h:36</div></div>
 <div class="ttc" id="class_calls_html_a53be78b250718f757f7c9f43f4dd880a"><div class="ttname"><a href="class_calls.html#a53be78b250718f757f7c9f43f4dd880a">Calls::getInstance</a></div><div class="ttdeci">static Calls * getInstance(ProcTable *)</div><div class="ttdoc">Returns the instance of Calls singleton class. </div><div class="ttdef"><b>Definition:</b> Calls.cpp:14</div></div>
 <div class="ttc" id="class_calls_html_ad75bb5118d2cc374288afb07a3e3b7ab"><div class="ttname"><a href="class_calls.html#ad75bb5118d2cc374288afb07a3e3b7ab">Calls::~Calls</a></div><div class="ttdeci">~Calls()</div><div class="ttdoc">A destructor to clear all the tables and set the instance flag of the singleton class to false...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:9</div></div>
+<div class="ttc" id="class_calls_html_a0f1f20d1e8a2779ac1d5033cb68236d6"><div class="ttname"><a href="class_calls.html#a0f1f20d1e8a2779ac1d5033cb68236d6">Calls::isCalls</a></div><div class="ttdeci">bool isCalls(PROCINDEX, PROCINDEX)</div><div class="ttdoc">If the Calls relationship between the two procedure indexes is true, return true. Otherwise...</div><div class="ttdef"><b>Definition:</b> Calls.cpp:102</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 17 2014 00:01:38 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 20 2014 00:32:17 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

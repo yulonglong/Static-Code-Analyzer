@@ -122,9 +122,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> evaluateNext(<a class="code" href="class_relationship.html">Relationship</a>, std::unordered_map&lt;string, TypeTable::SynType&gt;, <span class="keywordtype">int</span>);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> evaluateNextStar(<a class="code" href="class_relationship.html">Relationship</a>, std::unordered_map&lt;string, TypeTable::SynType&gt;, <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> recursiveNext(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *, TypeTable::SynType);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> recursiveNextReverse(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *, TypeTable::SynType);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> recursiveNextTarget(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> recursiveNext(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *, TypeTable::SynType, std::vector&lt;int&gt;*);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> recursiveNextReverse(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *, TypeTable::SynType, std::vector&lt;int&gt;*);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> recursiveNextTarget(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, std::set&lt;Pair&gt; *, std::vector&lt;int&gt;*);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> evaluateAffects(<a class="code" href="class_relationship.html">Relationship</a>, std::unordered_map&lt;std::string, TypeTable::SynType&gt;, <span class="keywordtype">int</span>);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
@@ -176,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 17 2014 00:01:38 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 20 2014 00:32:17 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
