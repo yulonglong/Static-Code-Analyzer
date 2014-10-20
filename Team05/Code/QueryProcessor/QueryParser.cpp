@@ -763,8 +763,13 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
 				withValid1 = false;
 			}
-			else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
-				withValid1 = false;
+			else if ((it->second != TypeTable::STMT)&&
+				(it->second != TypeTable::IF)&&
+				(it->second != TypeTable::WHILE)&&
+				(it->second != TypeTable::ASSIGN)&&
+				(it->second != TypeTable::CALL)&&
+				(result[2] == "stmt#")){
+					withValid1 = false;
 			}
 			else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
 				withValid1 = false;
@@ -778,7 +783,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 		}
 	}
 
-	//check whether first token is a single synonym, must be of type prog_line
+	//check whether second token is a single synonym, must be of type prog_line
 	bool withValid2 = true;
 	string secondParam = v.at(i+2);
 	match = regexMatch("("+synonym+")",secondParam);
@@ -804,8 +809,13 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
 				withValid2 = false;
 			}
-			else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
-				withValid2 = false;
+			else if ((it->second != TypeTable::STMT)&&
+				(it->second != TypeTable::IF)&&
+				(it->second != TypeTable::WHILE)&&
+				(it->second != TypeTable::ASSIGN)&&
+				(it->second != TypeTable::CALL)&&
+				(result[2] == "stmt#")){
+					withValid2 = false;
 			}
 			else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
 				withValid2 = false;
@@ -861,8 +871,13 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
 		else{
 			unordered_map<string, TypeTable::SynType>::iterator it;
 			it = synMap.find(withToken[i]);
-			if((it->second == TypeTable::STMT)||(it->second == TypeTable::CONSTANT)||(it->second == TypeTable::PROGLINE)){
-				category[i] = categoryInt;
+			if((it->second == TypeTable::STMT)||
+				(it->second == TypeTable::IF)||
+				(it->second == TypeTable::WHILE)||
+				(it->second == TypeTable::ASSIGN)||
+				(it->second == TypeTable::CALL)||
+				(it->second == TypeTable::CONSTANT)||(it->second == TypeTable::PROGLINE)){
+					category[i] = categoryInt;
 			}
 			else if ((it->second == TypeTable::PROCEDURE)||(it->second == TypeTable::VARIABLE)){
 				category[i] = categoryCharStr;
