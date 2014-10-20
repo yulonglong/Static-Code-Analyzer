@@ -43,7 +43,7 @@ true
 9 - affects ::
 assign a1, a2;
 Select a2 such that Affects (12, a2)
-10, 12, 13, 17
+10, 12, 13, 14 17
 5000
 10 - affects ::
 assign a1, a2;
