@@ -85,6 +85,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	pt->insertProc("Second");
 	pt->insertProc("Third");
 	pt->insertProc("Fourth");
+	pt->insertProc("x");
 
 	vt->insertVar("x");
 	vt->insertVar("y");
@@ -135,7 +136,7 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	map.insert(make_pair<string, TypeTable::SynType>("w2", TypeTable::WHILE));
 
 	q.setSynTable(map);
-	
+	/*
 	//Follows(a,s)	r1
 	r = Relationship("Follows", "a", "s");
 	q.addRelationship(r);
@@ -350,16 +351,23 @@ void QueryEvaluatorTest::testEvaluateFollows(){
 	r = Relationship("Next*", "9", "pr2");
 	q.addRelationship(r);
 	selectedSyn.push_back("pr2");
+	*/
 	
 	//Next*(pr3, pr3)
 	r = Relationship("Next*", "pr3", "pr3");
 	q.addRelationship(r);
 	selectedSyn.push_back("pr3");
 
+	//With p = v
+	r = Relationship("With", "p", "v");
+	q.addRelationship(r);
+
 	q.setSelectedSyn(selectedSyn);
 	answer = qe.evaluateQuery(q);
 	cout<<"AFTER EVALUATE QUERY"<<endl;
 	cout<<"EMPTY? "<<answer.find("a")->second.empty()<<endl;
+	CPPUNIT_ASSERT_EQUAL(1, answer.find("pr3")->second.at(0));
+	/*
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(5, answer.find("a2")->second.at(0));
 	CPPUNIT_ASSERT_EQUAL(2, answer.find("a3")->second.at(0));

@@ -25,20 +25,33 @@ QueryEvaluator::~QueryEvaluator(){
 vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	int sorted = 0;
 	Relationship temp;
+	//Relationship with;
+	//bool flag = false;
 	cout<<"In orderRelationships"<<endl;
 
 	for(unsigned int i=0; i<r.size(); i++){
-		if(r.at(i).getRelType()==Relationship::PATTERN || !isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])){
+		if((r.at(i).getRelType()==Relationship::PATTERN || !isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])) && r.at(i).getRelType()!=Relationship::WITH){
+			cout<<"pattern or relationships with only one alpha token found"<<endl;
 			temp = r.at(sorted);
 			r.at(sorted) = r.at(i);
 			r.at(i) = temp;
 			sorted++;
 		} else if(r.at(i).getRelType() == Relationship::WITH){
+			cout<<"with relationship found"<<endl;
+			/*
+			with = r.at(i);
+			flag = true;
+			r.erase(r.begin()+i);
+			*/
 			temp = r.at(r.size()-1);
 			r.at(r.size()-1) = r.at(i);
 			r.at(i) = temp;
 		}
 	}
+	/*
+	if(flag){
+		r.push_back(with);
+	}*/
 
 	cout<<"After Ordering Relations, r.size = "<<r.size()<<endl;
 	return r;
@@ -260,9 +273,7 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 	else if(isExistInLinkages(tk1)){
 		cout<<"IntersectPairs tk1 Exists tk1 = "<<tk1<<endl;
 		removePairsFromRelAns(ans, tk1, 1);
-		cout<<"hihihihihi"<<endl;
 		removePairs(*ans, tk1, 1);
-		cout<<"nonononono"<<endl;
 		//insertLinks(tk1, relIndex);
 	}
 
@@ -357,31 +368,37 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 }
 
 void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
+	cout<<"\n---START REMOVE PAIRS METHOD---"<<endl;
 	int pairIndex;
-	vector<int> listOfRel = QueryEvaluator::linkages.find(token)->second;
+	vector<int> listOfRel = linkages.find(token)->second;
 	vector<int> list;
 	if(i==1){
 		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
 			list.push_back(iter->ans1);
+			cout<<"Inserting "<<iter->ans1<<endl;
 		}
 	}
 	else{
 		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
 			list.push_back(iter->ans2);
+			cout<<"Inserting "<<iter->ans2<<endl;
 		}
 	}
 
 	//iterate through all the relations that evaluated the token
 	for(vector<int>::iterator it=listOfRel.begin(); it!=listOfRel.end(); it++){
-		unordered_map<int, vector<Pair>>::iterator i = QueryEvaluator::relAns.find(*it);
+		cout<<"RelIndex of clause with contents being removed: "<<*it<<endl;
+		unordered_map<int, vector<Pair>>::iterator i = relAns.find(*it);
 		vector<Pair> *pr = &i->second;
 		int index = QueryEvaluator::relAns.find(*it)->first;
 
 		//find out whether the token is the first or second argument of the relationship
-		if(QueryEvaluator::relParameters.find(index)->second.at(0)==token){
+		if(relParameters.find(index)->second.at(0)==token){
+			cout<<"PairIndex: 1"<<endl;
 			pairIndex=1;
 		}
 		else{
+			cout<<"PairIndex: 2"<<endl;
 			pairIndex=2;
 		}
 
@@ -391,37 +408,151 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 			//remove all pairs that are eliminated
 			if(pairIndex==1){
 				if(find(list.begin(),list.end(),it2->ans1)==list.end()){
+					cout<<"Erasing element "<<it2->ans2<<endl;
 					it2 = pr->erase(it2);
 				} else{
 					++it2;
 				}
 			}else{
 				if(find(list.begin(),list.end(),it2->ans2)==list.end()){
+					cout<<"Erasing element "<<it2->ans2<<endl;
 					it2 = pr->erase(it2);
 				} else{
 					++it2;
 				}
 			}
 		}
+		/*
+		for(vector<Pair>::iterator ii = pr->begin(); ii!=pr->end(); ii++){
+			cout<<"Left element "<<ii->ans1<<endl;
+		}*/
 	}
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-
+	cout<<"\n---START EVALUATE WITH METHOD---"<<endl;
+	cout<<"Relationship Index: "<<relIndex<<endl;
 	//Retrieve the two with syns
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
+
+	cout<<"r.tk1: "<<tk1<<endl;
+	cout<<"r.tk2: "<<tk2<<endl;
 	vector<Pair> withAns;
 
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	
 
-	//with v1.varName = p.procName with c.value = s.stmt#
+	//with v1.varName = p.procName with c.value = s.stmt# = pr.progline
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		set<int> a;
+		set<int> b;
+		if(isExistInLinkages(tk1)){
+			a = retrieveTokenEvaluatedAnswers(tk1);
+		}else {
+			if(i1->second==TypeTable::PROCEDURE){
+				a = pkb->getAllProcIndexes();
+			}else if(i1->second == TypeTable::VARIABLE){
+				a = pkb->getAllVarIndex();
+			}else if(i1->second == TypeTable::CONSTANT){
+				a = pkb->getAllConstIndex();
+			}else {
+				a = pkb->getAllStmts(i1->second);
+			}
+		}
+
+		if(isExistInLinkages(tk2)){
+			b = retrieveTokenEvaluatedAnswers(tk2);
+		}else{
+			if(i2->second==TypeTable::PROCEDURE){
+				b = pkb->getAllProcIndexes();
+			}else if(i2->second == TypeTable::VARIABLE){
+				b = pkb->getAllVarIndex();
+			}else if(i2->second == TypeTable::CONSTANT){
+				b = pkb->getAllConstIndex();
+			}else {
+				b = pkb->getAllStmts(i2->second);
+			}
+		}
+		//if the two tokens are of the same type
+		if(i1->second == i2->second){
+
+			set<int> intersect;
+			set_intersection(a.begin(), a.end(), b.begin(), b.end(), std::inserter(intersect, intersect.begin()));
+
+			for(set<int>::iterator iter = intersect.begin(); iter!=intersect.end(); iter++){
+				withAns.push_back(Pair (*iter, *iter));
+			}
+
+			if(isExistInLinkages(tk1)){
+				removePairs(withAns, tk1, 1);
+			}
+
+			if(isExistInLinkages(tk2)){
+				removePairs(withAns, tk2, 1);
+			}
+
+			if(!intersect.empty()){
+				withAns.clear();
+				withAns.push_back(Pair (-1,-1));
+			}
+		}
+
+		else {
+			if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
+				vector<string> procNames;
+				vector<string> varNames;
+				if(i1->second == TypeTable::PROCEDURE){
+					for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
+						procNames.push_back(pkb->getProcName(*it));
+					}
+					for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
+						varNames.push_back(pkb->getVarName(*it2));
+					}
+				}else if(i1->second == TypeTable::VARIABLE){
+					for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
+						procNames.push_back(pkb->getProcName(*it));
+					}
+					for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
+						varNames.push_back(pkb->getVarName(*it2));
+					}
+				}
+
+				set<string> intersect;
+				set_intersection(procNames.begin(), procNames.end(), varNames.begin(), varNames.end(), std::inserter(intersect, intersect.begin()));
+				vector<Pair> ansProc;
+				vector<Pair> ansVar;
+				for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
+					if(i1->second == TypeTable::VARIABLE){
+						withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
+					}else {
+						withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
+					}
+					/*
+					ansProc.push_back(Pair (pkb->getProcIndex(*it), pkb->getProcIndex(*it)));
+					ansVar.push_back(Pair (pkb->getVarIndex(*it), pkb->getVarIndex(*it)));*/
+				}
+				/*
+				if(i1->second ==TypeTable::VARIABLE){
+					removePairs(ansVar, tk1, 1);
+					removePairs(ansProc, tk2, 2);
+				}
+				else {
+					removePairs(ansProc, tk1, 1);
+					removePairs(ansVar, tk2, 2);
+				}*/
+
+			}
+
+			//if constant = progline = stmt
+			
+
+		}
+		/*
 		//if both exist in links then remove all unnecessary tuples. push QueryEvaluator::relAns true
 		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
-			
+			cout<<"Both tokens exist in linkages"<<endl;
 			//if both tokens are of the same type e.g v1 v2
 			if(i1->second == i2->second){
 				set<int> tk1Set = retrieveTokenEvaluatedAnswers(tk1);
@@ -432,7 +563,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 				vector<Pair> withAns;
 				for(set<int>::iterator it = intersect.begin(); it!=intersect.end(); it++){
-					withAns.push_back(Pair (*it, 0));
+					withAns.push_back(Pair (*it, *it));
 				}
 
 				removePairs(withAns, tk1, 1);
@@ -499,6 +630,9 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 						removePairs(ans3stringProc, tk1,1);
 						removePairs(ans3stringVar, tk2,1);
 					}
+
+					withAns.push_back(Pair (-1,-1));
+					relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 				}
 				else{
 					std::set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), inserter(ans3, ans3.begin()));
@@ -510,12 +644,18 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 					removePairs(finalAns, tk1, 1);
 					removePairs(finalAns, tk2, 1);
+
+					withAns.push_back(Pair (-1,-1));
+					relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 				}
 			}
 		}
 
+		//else if both tokens do not exist or only 1 exists
 		else {
+			cout<<"Only 1 exist or None exist in linkages"<<endl;
 			vector<Pair> withAns;
+			//if is constant = stmt or constant = prog
 			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT) || (i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
 				set<int> allConst = pkb->getAllConstIndex();
 				int stmtRange = pkb->getStmtRange();
@@ -527,6 +667,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				}		
 			}
 
+			//if is stmt = prog
 			else if((i1->second==TypeTable::STMT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::STMT)){
 				int higher = pkb->getStmtRange();
 				for(int i=1; i<=higher; i++){
@@ -534,7 +675,21 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				}
 			}
 
+			//if is var = proc
 			else{
+				set<int> retrieved;
+				if(isExistInLinkages(tk1)){
+					retrieved = retrieveTokenEvaluatedAnswers(tk1);
+					if(i1->second == TypeTable::VARIABLE){
+						
+					}
+				}
+				else if(isExistInLinkages(tk2)){
+					retrieved = retrieveTokenEvaluatedAnswers(tk2);
+				}
+				else {
+
+				}
 
 			}
 
@@ -548,9 +703,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 			if(withAns.empty()){
 				withAns.push_back(Pair (-2, -2));
-				relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
+		
 			}
+
+			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 		}
+		*/
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
@@ -559,32 +717,55 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			tk2 = tk2.substr(1,tk2.length()-2);
 		}
 		if(isExistInLinkages(tk1)){
+			cout<<"Tk1 exist in linkages"<<endl;
 			int index;
 		
-			if(i2->second==TypeTable::VARIABLE){
+			if(i1->second==TypeTable::VARIABLE){
+				cout<<"First token VARIABLE"<<endl;
 				index = pkb->getVarIndex(tk2);
-			}else if(i2->second==TypeTable::PROCEDURE){
+			}else if(i1->second==TypeTable::PROCEDURE){
+				cout<<"First token PROCEDURE"<<endl;
 				index = pkb->getProcIndex(tk2);
 			} else{
+				cout<<"First token NEITHER VAR NOR PROC"<<endl;
 				index = atoi(tk2.c_str());
+				cout<<"Index: "<<index<<endl;
 			}
 
 			//push in a dummy value for removal purposes
 			withAns.push_back(Pair (index, index));
 			removePairs(withAns, tk1, 2);
+			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 		}
 
 		//else evaluate true or false
 		else {
-			if((i1->second == TypeTable::VARIABLE && pkb->getVarIndex(tk2)!=-1) || (i1->second == TypeTable::PROCEDURE && pkb->getProcIndex(tk2)!=-1)
-				|| (i1->second == TypeTable::CONSTANT && pkb->getConstIndex(tk2)!=-1)){
-				withAns.push_back(Pair (-1, -1));
+			if(i1->second == TypeTable::VARIABLE){
+				int varI = pkb->getVarIndex(tk2);
+				if(varI!=-1){
+					withAns.push_back(Pair (varI, varI));
+				}
 			}
+			else if(i1->second == TypeTable::PROCEDURE){
+				int procI = pkb->getProcIndex(tk2);
+				if(procI!=-1){
+					withAns.push_back(Pair (procI, procI));
+				}
+			}
+
+			else if(i1->second == TypeTable::CONSTANT){
+				int constI = pkb->getConstIndex(tk2);
+				if(constI!=-1){
+					withAns.push_back(Pair (constI, constI));
+				}
+			}
+
 
 			else if(i1->second == TypeTable::STMT || i1->second == TypeTable::PROGLINE){
 				int stmtRange = pkb->getStmtRange();
-				if(atoi(tk2.c_str())<=stmtRange){
-					withAns.push_back(Pair (-1, -1));
+				int chosenStmt = atoi(tk2.c_str());
+				if(chosenStmt<=stmtRange){
+					withAns.push_back(Pair (chosenStmt, chosenStmt));
 				}else {
 					withAns.push_back(Pair (-2, -2));
 				}
@@ -596,7 +777,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 		}
 	}
-	
+	cout<<"---END EVALUATE WITH METHOD---\n"<<endl;
 }
 
 void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -946,13 +1127,11 @@ void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int ta
 	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<targetIndex<<endl;
 	set<int> next = pkb->getNext(currentIndex);
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
-		cout<<"Iterating through the next vector"<<endl;
 		//int flag = (find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end());
 		//cout<<"FLAG IS "<<flag<<endl;
 		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
 			cout<<*it<<" is traversed before. Moving on to the next node"<<endl;
 			it++;
-			cout<<"HIHI"<<endl;
 			if(it==next.end()){
 				cout<<"Reached the end "<<endl;
 				break;
