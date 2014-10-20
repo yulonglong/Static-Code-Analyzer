@@ -8,7 +8,7 @@ Select n2 such that Next (11, n2)
 2 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (11, n2)
-TRUE
+true
 5000
 3 - Next ::
 prog_line n1, n2;
@@ -18,7 +18,7 @@ Select n1 such that Next (n1, 9)
 4 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (n1, 9)
-TRUE
+true
 5000
 5 - Next ::
 prog_line n1, n2;
@@ -28,7 +28,7 @@ Select n2 such that Next (11, _)
 6 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (18, _)
-FALSE
+false
 5000
 7 - Next ::
 prog_line n1, n2;
@@ -38,7 +38,7 @@ Select n1 such that Next (_, _)
 8 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (_, _)
-TRUE
+true
 5000
 9 - Next ::
 prog_line n1, n2;
@@ -53,20 +53,20 @@ Select n2 such that Next (n1, n2)
 11 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (4, 5)
-FALSE
+false
 5000
 12 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (17, 19)
-FALSE
+false
 5000
 13 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (29, 27)
-TRUE
+true
 5000
 14 - Next ::
 prog_line n1, n2;
 Select BOOLEAN such that Next (11, 14)
-TRUE
+true
 5000
