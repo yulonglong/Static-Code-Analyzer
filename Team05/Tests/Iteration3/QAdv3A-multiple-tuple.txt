@@ -1,0 +1,11 @@
+2
+cat: tuple of multiple clauses
+1 - multiple tuple ::
+procedure p1, p2; stmt s1, s2;
+Select <p1, p2> such that Calls*(p1, p2) and Modifies*(p1, "idx")
+Fern, Orchid
+5000
+2 - multiple tuple ::
+prog_line n1, n2;
+Select <n1, n3> such that Next(n1, n2) and Next*(n2, n3)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
