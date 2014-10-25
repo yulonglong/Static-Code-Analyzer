@@ -1,6 +1,6 @@
 16
 cat: BASIC queries with Calls*
-1- Calls* > all assignment stsms in the program :: 
+1 - Calls* > all assignment stsms in the program :: 
 assign a;
 Select a such that Calls* (_,_)
 1, 2, 4, 5, 7, 9, 14, 15, 16, 17, 18
@@ -33,22 +33,22 @@ First, Second, Third, Fourth, Fifth, Sixth, Seventh
 7 - Calls* > check if there's a procedure that calls other procedures transitively ::
 procedure p;
 Select BOOLEAN such that Calls* (_, _)
-TRUE
+true
 5000
 8 - Calls* > check if a procedure calls another transitively ::
 procedure p;
 Select BOOLEAN such that Calls* ("First", "Second")
-TRUE
+true
 5000
 9 - Calls* > check if a procedure calls another transitively :: 
 procedure p;
 Select BOOLEAN such that Calls* ("Third", "First")
-FALSE
+false
 5000
 10 - Calls* > check if a procedure calls another transitively :: 
 procedure p;
 Select BOOLEAN such that Calls* ("Second", "First")
-TRUE
+true
 5000
 11 - Calls* > procedures called by a procedure transitively ::
 procedure p;

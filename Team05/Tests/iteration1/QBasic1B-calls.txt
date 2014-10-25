@@ -33,22 +33,22 @@ First, Second, Third, Fourth, Fifth, Sixth, Seventh
 7 - Calls > check if there's a procedure that calls other procedures ::
 procedure p;
 Select BOOLEAN such that Calls (_, _)
-TRUE
+true
 5000
 8 - Calls > check if a procedure calls another ::
 procedure p;
 Select BOOLEAN such that Calls ("First", "Second")
-TRUE
+true
 5000
 9 - Calls > check if a procedure calls another :: 
 procedure p;
 Select BOOLEAN such that Calls ("Third", "First")
-FALSE
+false
 5000
 10 - Calls > check if a procedure calls another :: 
 procedure p;
 Select BOOLEAN such that Calls ("Seventh", "Sixth")
-TRUE
+true
 5000
 11 - Calls > procedures called by a procedure ::
 procedure p;
