@@ -408,8 +408,8 @@ void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
 // set the modifies and uses relationships for statements and procedures. 
 void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb) {
 	// Run DFS on callsTree to generate toposort queue
-	runDFSDriver(callsTable); 
 
+	runDFSDriver(callsTable, pkb); 
 	if (debugModeIteration1) {
 		printQueue();		
 	}	
@@ -419,6 +419,7 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 	// Find all the varaibles used, then set uses relationship for proglines and procedures
 	
 	while (!queueToProcess.empty()) {
+
 		QueueItem item;
 		item = queueToProcess.front();
 		queueToProcess.pop();
@@ -504,22 +505,34 @@ void DesignExtractor::clear( std::queue<QueueItem> &q ) {
    std::swap( q, empty );
 }
 
-void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb) {
 	if (debugModeIteration1) {
 		cout << "printing queue again: " << endl;
 		printQueue();
 	}
 	vector<int> emptyVector = vector<int>();
+
+	vector<int> temp(pkb.getNumProcedures()+1);
+	std::fill (temp.begin(), temp.end(), 0);
+	visited = temp; 
+
+	/*for (std::vector<int>::iterator it=visited.begin(); it!=visited.end(); ++it)
+	std::cout << ' ' << *it;
+	std::cout << '\n';
+	*/
+
 	// change to 1 because calls tree has root 1. All proc indices start with 1 
-	DFS(1, emptyVector, callsTable);
+	DFS(1, emptyVector, callsTable, visited);
+	visited.clear();
 
 }
 
-void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited) {
 	try {
 		if (debugModeIteration1) {
-			cout << callsTable.at(source).empty() << endl;
+			cout << "callsTable.at("<< source<< ").empty(): " << callsTable.at(source).empty() << endl;
 		}
+
 		vector<CALLSPAIR> v;
 		v = vector<CALLSPAIR>();
 		if (debugModeIteration1) {
@@ -529,44 +542,25 @@ void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCIN
 		if (debugModeIteration1) {
  			cout << "v updated" << endl;
 		}
-
-		if (!v.empty()) {
-			for (unsigned int i=0; i<callsTable.at(source).size(); i++) {
+		
+		if (visited[source] == 0 && v.empty() == 0) {
+			for (unsigned int i=0; i<v.size(); i++) {
 				vector<int> tempProgLine = progLine; 
-				tempProgLine.push_back(callsTable.at(source).at(i).second);
-				DFS(callsTable.at(source).at(i).first, tempProgLine, callsTable); 
+				tempProgLine.push_back(v.at(i).second);
+
+				vector<int> tempVisited = visited;
+				tempVisited[source] = 1; 
+				DFS(v.at(i).first, tempProgLine, callsTable, tempVisited); 
 			}
-			if (debugModeIteration1) {
+			
+		}
+
+		if (debugModeIteration1) {
 				cout << "push to queue: ";
 				QueueItem(source, progLine).print();
-			}
-			queueToProcess.push(QueueItem(source, progLine));
-		
-		
-		/*
-		unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1;
-		bool sourceFound = 0;
-		for (it1 = callsTable.begin(); it1!=callsTable.end(); it1++){
-			if (it1->first == source) {
-				sourceFound = 1;
-				break;
-			}
 		}
-		if (sourceFound == 0) {
-			return;
-		}
-		for (vector<CALLSPAIR>::iterator it2 = it1->second.begin(); it2!=it1->second.end(); it2++) {
-			// it2->first is the PROCINDEX; it2->second is the PROGLINE
-			vector<int> tempProgLine = progLine;
-			tempProgLine.push_back(it2->second);
-			DFS(it2->first, tempProgLine, callsTable);
-		}
-		cout << "push to queue: ";
-		QueueItem(source, progLine).print();
 		queueToProcess.push(QueueItem(source, progLine));
-		*/
 
-		}
 	} catch(const std::runtime_error& re) {
 		// specific handling for runtime_error
 		std::cerr << "DE: Runtime error: " << re.what() << std::endl;
@@ -574,10 +568,13 @@ void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCIN
 		// specific handling for all exceptions extending std::exception, except
 		// std::runtime_error which is handled explicitly
 		// cout << "Source: " << source << endl; 
-		// std::cerr << "Error occurred: " << ex.what() << std::endl; 
-		// cout << "push to queue from catch: ";
-		 // QueueItem(source, progLine).print();
+		//std::cerr << "Error occurred: " << ex.what() << std::endl; 
+		if (debugModeIteration1) {
+			cout << "push to queue from catch: ";
+			QueueItem(source, progLine).print();
+		}
 		queueToProcess.push(QueueItem(source, progLine));
+		
 	} catch(...) {
 		// catch any other errors (that we have no information about)
 		std::cerr << "DE: Unknown failure occured. Possible memory corruption" << std::endl;
@@ -585,6 +582,81 @@ void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCIN
 
 }
 
+//
+//void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
+//	try {
+//		if (debugModeIteration1) {
+//			cout << "callsTable.at("<< source<< ").empty(): " << callsTable.at(source).empty() << endl;
+//		}
+//
+//		vector<CALLSPAIR> v;
+//		v = vector<CALLSPAIR>();
+//		if (debugModeIteration1) {
+//			cout << "empty v created" << endl;
+//		}
+//		v = callsTable.at(source);
+//		if (debugModeIteration1) {
+// 			cout << "v updated" << endl;
+//		}
+//		
+//		if (v.empty() == 0) {
+//			for (unsigned int i=0; i<v.size(); i++) {
+//				vector<int> tempProgLine = progLine; 
+//				tempProgLine.push_back(v.at(i).second);
+//				DFS(v.at(i).first, tempProgLine, callsTable); 
+//			}
+//			if (debugModeIteration1) {
+//				cout << "push to queue: ";
+//				QueueItem(source, progLine).print();
+//			}
+//			queueToProcess.push(QueueItem(source, progLine));
+//		
+//		
+//		/*
+//		unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it1;
+//		bool sourceFound = 0;
+//		for (it1 = callsTable.begin(); it1!=callsTable.end(); it1++){
+//			if (it1->first == source) {
+//				sourceFound = 1;
+//				break;
+//			}
+//		}
+//		if (sourceFound == 0) {
+//			return;
+//		}
+//		for (vector<CALLSPAIR>::iterator it2 = it1->second.begin(); it2!=it1->second.end(); it2++) {
+//			// it2->first is the PROCINDEX; it2->second is the PROGLINE
+//			vector<int> tempProgLine = progLine;
+//			tempProgLine.push_back(it2->second);
+//			DFS(it2->first, tempProgLine, callsTable);
+//		}
+//		cout << "push to queue: ";
+//		QueueItem(source, progLine).print();
+//		queueToProcess.push(QueueItem(source, progLine));
+//		*/
+//
+//		}
+//	} catch(const std::runtime_error& re) {
+//		// specific handling for runtime_error
+//		std::cerr << "DE: Runtime error: " << re.what() << std::endl;
+//	} catch(const std::exception& ex) {
+//		// specific handling for all exceptions extending std::exception, except
+//		// std::runtime_error which is handled explicitly
+//		// cout << "Source: " << source << endl; 
+//		std::cerr << "Error occurred: " << ex.what() << std::endl; 
+//		if (debugModeIteration1) {
+//			cout << "push to queue from catch: ";
+//			QueueItem(source, progLine).print();
+//		}
+//		queueToProcess.push(QueueItem(source, progLine));
+//		
+//	} catch(...) {
+//		// catch any other errors (that we have no information about)
+//		std::cerr << "DE: Unknown failure occured. Possible memory corruption" << std::endl;
+//	}
+//
+//}
+//
 
 void DesignExtractor::printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable) {
 	cout << "Calls Table is:" << endl; 

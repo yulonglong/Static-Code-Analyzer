@@ -54,8 +54,8 @@ public:
 	static void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
 	static void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
 private:
-	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
-	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
+	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
+	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited);
 	static void buildCFG(Node &ASTroot, PKB &pkb);
 	static void setNextRelationshipDriver(PKB &pkb);
 	static void setNextRelationship(CFGNode &node, PKB &pkb);
