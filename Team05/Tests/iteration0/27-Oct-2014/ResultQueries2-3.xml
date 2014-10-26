@@ -1,0 +1,66 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration0</name><parsing_time_taken>2.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Meaningless Queries">
+<query>
+<id Typed="1" ImplStmtLine="1" comment="" >1</id><querystr><![CDATA[assign a;  Select a such that Follows(_,_)]]></querystr>
+<stuans>1,2,3,6,8,10,13,14,15,17,18,19,20,21,22,23</stuans>
+<correct>1,2,3,6,8,10,13,14,15,17,18,19,20,21,22,23</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Typed="1" ImplStmtLine="1" comment="	" >2</id><querystr><![CDATA[assign a;  Select a such that Parent(a,_)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >3</id><querystr><![CDATA[stmt stmt;  Select stmt]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >4</id><querystr><![CDATA[prog_line p;  Select p]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >5</id><querystr><![CDATA[variable v; Select v]]></querystr>
+<stuans>i,b,c,a,beta,oSCar,tmp,I,k,j1k,chArlie#,x,left,right,Romeo,delta,l,width,w</stuans>
+<correct>i,b,c,a,beta,oSCar,tmp,I,k,j1k,chArlie#,x,left,right,Romeo,delta,width,w,l</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >6</id><querystr><![CDATA[constant c;  Select c]]></querystr>
+<stuans>1,200,0,3,2</stuans>
+<correct>0,1,200,2,3</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >7</id><querystr><![CDATA[assign a;  Select a]]></querystr>
+<stuans>1,2,3,6,8,10,13,14,15,17,18,19,20,21,22,23</stuans>
+<correct>1,2,3,6,8,10,13,14,15,17,18,19,20,21,22,23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ImplStmtLine="1" comment="" >8</id><querystr><![CDATA[while w;  Select w]]></querystr>
+<stuans>4,5,7,9,11,12,16</stuans>
+<correct>4,5,7,9,11,12,16</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

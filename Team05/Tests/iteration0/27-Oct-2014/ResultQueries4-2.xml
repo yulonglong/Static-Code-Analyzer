@@ -1,0 +1,24 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration0</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Modifies and Uses">
+<query>
+<id Modifies="1" ImplStmtLine="1" comment="" >1</id><querystr><![CDATA[while w; Select w such that Modifies(w, "lacie")]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" ImplStmtLine="1" comment="" >2</id><querystr><![CDATA[while w; Select w such that Uses(w, "lacie")]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>
