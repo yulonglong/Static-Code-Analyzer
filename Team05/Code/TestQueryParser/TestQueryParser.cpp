@@ -67,6 +67,98 @@ void QueryParserTest::testQuerySelectOnly(){
 	}
 	//SYNTABLE END
 
+	return;
+}
+
+void QueryParserTest::testQuerySelectOnly2(){
+	//INIT BEGIN
+	string query = "variable v; Select v ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("v");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("v", TypeTable::VARIABLE));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+
+	return;
+}
+
+void QueryParserTest::testQuerySelectOnly3(){
+	//INIT BEGIN
+	string query = "constant c; Select c ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("c");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("c", TypeTable::CONSTANT));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
 
 	return;
 }
