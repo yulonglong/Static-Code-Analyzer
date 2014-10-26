@@ -543,7 +543,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if((relationRef == PARENT) || (relationRef == PARENTSTAR)){
-				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF))){
+				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF)||(it->second == TypeTable::STMT))){
 					synValid = false;
 				}
 			}
