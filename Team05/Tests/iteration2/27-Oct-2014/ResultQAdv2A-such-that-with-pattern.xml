@@ -1,0 +1,63 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration2</name><parsing_time_taken>2.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" such that, with, pattern in one query">
+<query>
+<id related="1" comment="" >1</id><querystr><![CDATA[prog_line n1, n2; procedure p1, p2; assign a1, a2; variable v; constant c; Select a1 such that Modifies (a1, v) with v.varName = "x" pattern a1 (_, "y+5")]]></querystr>
+<stuans>2</stuans>
+<correct>2</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id multiple="1" comment="" >2</id><querystr><![CDATA[prog_line n1, n2; procedure p1, p2; assign a1, a2; variable v; constant c; Select p1 such that Calls (p1, p2) with p2.procName = "Orchid" pattern a1 ("y", _)]]></querystr>
+<stuans>Fern</stuans>
+<correct>Fern</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id multiple="1" comment="" >3</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Parent (s1, s2) with s2.stmt# = 10 pattern s2 (_, "x + z")]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id multiple="1" comment="" >4</id><querystr><![CDATA[stmt s1, s2; variable v; Select s1 such that Uses (s1, "idx") with s1.stmt# = 18 pattern s1 (_, _)]]></querystr>
+<stuans></stuans>
+<correct>18</correct>
+<time_taken>3.000000</time_taken>
+<failed>
+<missing>18</missing>
+<additional></additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id multiple="1" comment="" >5</id><querystr><![CDATA[stmt s1, s2; variable v; procedure p1, p2; Select v such that Uses (p1, v) wtih p1.procName = "Orchid" pattern s1 (_, "idx - 1")]]></querystr>
+<stuans></stuans>
+<correct>idx</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing>idx</missing>
+<additional></additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+</category>
+</queries>
+</test_results>
