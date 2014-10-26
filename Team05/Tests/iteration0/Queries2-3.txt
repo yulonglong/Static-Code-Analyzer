@@ -8,6 +8,7 @@ Select a such that Follows(_,_)
 2 - Typed, ImplStmtLine :: 	
 assign a; 
 Select a such that Parent(a,_)
+
 5000
 3 - ImplStmtLine :: 
 stmt stmt; 
