@@ -1446,7 +1446,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 				cout<<"in for loop"<<endl;
 				int follows = pkb->getFollows(*it);
 				cout<<"follows: "<<convertEnumToString(i2->second)<<" "<<follows<<endl;
-				if(follows!=-1 && pkb->isSynType(i2->second,*it)){
+				if(follows!=-1 && pkb->isSynType(i2->second,follows)){
 					followsAns.push_back(Pair (*it, follows));
 					cout<<"Pushing back "<<*it<<endl;
 				}
@@ -1469,7 +1469,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			for(set<int>::iterator it=sb.begin(); it!=sb.end(); it++){
 				int followedBy = pkb->getFollowedBy(*it);
-				if(followedBy!=-1 && pkb->isSynType(i1->second,*it)){
+				if(followedBy!=-1 && pkb->isSynType(i1->second,followedBy)){
 					followsAns.push_back(Pair (followedBy, *it));
 				}
 			}
