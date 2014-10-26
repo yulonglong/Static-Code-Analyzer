@@ -1653,7 +1653,6 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 	QueryEvaluator::relAns.insert(make_pair(relIndex, followsAns));
 }
 
-
 void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1=r.getToken1();
 	string tk2=r.getToken2();
@@ -2492,6 +2491,12 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 	QueryEvaluator::relAns.insert(make_pair(relIndex, usesAns));
 }
 
+void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+}
+
+void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+}
+
 void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string lhs = r.getToken1();
 	string rhs = r.getToken2();
@@ -2512,9 +2517,11 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 			break;
 
 		case TypeTable::IF:
+			patternAns = findIf(*root, lhs, rhs, r);
 			break;
 
 		case TypeTable::WHILE:
+			patternAns = findWhile(*root, lhs, rhs, r);
 			break;
 
 	}
@@ -2526,12 +2533,6 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	}
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, patternAns));
-}
-
-void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
-}
-
-void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 }
 
 vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, Relationship r) {
@@ -2558,6 +2559,84 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 		}
 		else {
 			if(n.getType().compare("assign") == 0) {
+				if(matchPattern(n, lhs, rhs, false)) {
+					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
+			}
+		}
+	}
+
+	return ans;
+}
+
+vector<Pair> QueryEvaluator::findIf(Node startNode, string lhs, string rhs, Relationship r) {
+	vector<Pair> ans;
+	stack<Node> st;
+	st.push(startNode);
+	
+	while(!st.empty()) {
+		Node n = st.top();
+		st.pop();
+		if(r.getToken1Type() == Relationship::SYNONYM) {
+			if(n.getType().compare("if") == 0) {
+				if(matchPattern(n, lhs, rhs, true)) {
+					vector<Node*> children = n.getChild();
+					Node left = *children.at(0);
+					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
+			}
+		}
+		else {
+			if(n.getType().compare("if") == 0) {
+				if(matchPattern(n, lhs, rhs, false)) {
+					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
+			}
+		}
+	}
+
+	return ans;
+}
+
+vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, Relationship r) {
+	vector<Pair> ans;
+	stack<Node> st;
+	st.push(startNode);
+	
+	while(!st.empty()) {
+		Node n = st.top();
+		st.pop();
+		if(r.getToken1Type() == Relationship::SYNONYM) {
+			if(n.getType().compare("while") == 0) {
+				if(matchPattern(n, lhs, rhs, true)) {
+					vector<Node*> children = n.getChild();
+					Node left = *children.at(0);
+					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
+			}
+		}
+		else {
+			if(n.getType().compare("while") == 0) {
 				if(matchPattern(n, lhs, rhs, false)) {
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
