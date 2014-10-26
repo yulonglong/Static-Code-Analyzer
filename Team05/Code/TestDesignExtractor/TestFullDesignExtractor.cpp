@@ -204,6 +204,105 @@ void FullDesignExtractorTest::testIter2SimpleSource() {
 	pkb->~PKB();
 }
 
+
+void FullDesignExtractorTest::testSource1B() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("Source1B.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	// CALLS DE
+	DesignExtractor::extractorDriver(pkb);
+	// after this, PKB Next, Modifies, Uses and CFGRoot should be filled in
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
+
+	set<int> v;
+
+	v = pkb->getModifiedProc(1);
+	string expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v = pkb->getUsedProc(1);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(3);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(3);
+	expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(6);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(6);
+	expected = "x i z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(8);
+	expected = "z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(8);
+	expected = "z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(10);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(10);
+	expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(11);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(11);
+	expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(12);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(12);
+	expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getUsed(19);
+	expected = "x i y z ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+	v =	pkb->getModified(19);
+	expected = "x i y z v ";
+	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
+	
+}
 // Given a set of int, returns a String of the ints
 string FullDesignExtractorTest::print(set<int> v) {
 	string s = "";
