@@ -30,7 +30,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	cout<<"In orderRelationships"<<endl;
 
 	for(unsigned int i=0; i<r.size(); i++){
-
+		
 		if(r.at(i).getRelType()==Relationship::PATTERN){
 			cout<<"pattern found"<<endl;
 			temp = r.at(sorted);
@@ -65,7 +65,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	return r;
 }
 
-unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
+unordered_map<int, vector<int>> QueryEvaluator::evaluateQuery(Query q, vector<Relationship> *newRelations){
 
 	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
@@ -76,6 +76,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 	cout<<"Ordering Relationships"<<endl;
 	relations = orderRelationship(relations);
+	newRelations = &relations;
 
 	cout<<"Initializing Variables"<<endl;
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
@@ -103,7 +104,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 			answers.insert(make_pair<string, vector<int>>(*it, pairAns));
 		}
 
-		return answers;
+		//return answers;
 	}
 
 	//If relations are not empty
@@ -197,7 +198,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 		vector<Pair> v = relAns.find(i)->second;
 		if(v.empty() || v.at(0).ans1==-2){
 			cout<<"Found Relations to be False or Empty"<<endl;
-			return answers;
+			//return answers;
 		}
 	}
 
@@ -246,7 +247,7 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	}
 
 	cout<<"RETURNING FINAL ANSWERS"<<endl;
-	return answers;
+	return relAns;
 }
 
 //Returns true if token already exists in QueryEvaluator::linkages
