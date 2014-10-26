@@ -26,18 +26,21 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		unordered_map<string, vector<int>> ansTable = qe.evaluateQuery(parsedQuery);
 		unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
 		vector<string> selectedSyns =  parsedQuery.getSelectedSyn(); 
-
+		
 		unordered_map<string, TypeTable::SynType>::iterator i = synTable.find(selectedSyns.at(0));
 
-		vector<int> ans = ansTable.at(selectedSyns.at(0));
+		//vector<int> ans = ansTable.at(selectedSyns.at(0));
 
-		if(ans.size() == 0)
+		if(ansTable.size() == 0)
 			result.push_back("false");
 		else
 			result.push_back("true");
 	}
 	else {
 		unordered_map<string, vector<int>> ansTable = qe.evaluateQuery(parsedQuery);
+		if(ansTable.empty()){
+			return;
+		}
 		unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
 		vector<string> selectedSyns =  parsedQuery.getSelectedSyn(); 
 
