@@ -110,7 +110,7 @@ public:
 	~QueryEvaluator();	
 
 	//! To evaluate Queries, the Query Processor will call evaluateQuery and pass in the Query object returned by the Query Parser. This method will then return an unordered_map that has every selected syn and their corresponding vector of answers
-	std::unordered_map<int, std::vector<int>> evaluateQuery(Query, vector<Relationship> *newRelations);
+	std::unordered_map<int, std::vector<Pair>> evaluateQuery(Query, vector<Relationship> *newRelations);
 		std::string convertEnumToString(TypeTable::SynType);
 };
 

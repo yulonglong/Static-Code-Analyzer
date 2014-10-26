@@ -65,7 +65,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	return r;
 }
 
-unordered_map<int, vector<int>> QueryEvaluator::evaluateQuery(Query q, vector<Relationship> *newRelations){
+unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<Relationship> *newRelations){
 
 	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
@@ -73,10 +73,9 @@ unordered_map<int, vector<int>> QueryEvaluator::evaluateQuery(Query q, vector<Re
 	relAns.clear();
 	relParameters.clear();
 
-
 	cout<<"Ordering Relationships"<<endl;
 	relations = orderRelationship(relations);
-	newRelations = &relations;
+	*newRelations = relations;
 
 	cout<<"Initializing Variables"<<endl;
 	unordered_map<string, TypeTable::SynType> m = q.getSynTable();
@@ -116,7 +115,7 @@ unordered_map<int, vector<int>> QueryEvaluator::evaluateQuery(Query q, vector<Re
 		if(isalpha(it->getToken1()[0]) && isalpha(it->getToken2()[0]) && it->getToken1()==it->getToken2()){
 			if(it->getRelType()!=Relationship::NEXT){
 				answers.clear();
-				return answers;
+				//return answers;
 			}
 		}
 		switch(it->getRelType()){
