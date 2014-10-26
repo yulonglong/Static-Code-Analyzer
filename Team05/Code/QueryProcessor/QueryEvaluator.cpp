@@ -152,8 +152,14 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 
 		vector<string> parametersVec;
 		parametersVec.clear();
-		parametersVec.push_back(it->getToken1());
-		parametersVec.push_back(it->getToken2());
+		if(it->getRelType()==Relationship::PATTERN){
+			parametersVec.push_back(it->getPatternSyn());
+			parametersVec.push_back(it->getPatternSyn());
+		}
+		else{
+			parametersVec.push_back(it->getToken1());
+			parametersVec.push_back(it->getToken2());
+		}
 
 		cout<<"Inserting tokens into relParameters"<<endl;
 		relParameters.insert(make_pair<int, vector<string>>(relIndex, parametersVec));
@@ -1419,6 +1425,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 				for(set<int>::iterator it2 = sb.begin(); it2!=sb.end(); it2++){
 					if(pkb->isFollows(*it, *it2)){
 						followsAns.push_back(Pair (*it, *it2));
+					
 					}
 				}			
 			}
@@ -1436,9 +1443,12 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 
 			for(set<int>::iterator it=sa.begin(); it!=sa.end(); it++){
+				cout<<"in for loop"<<endl;
 				int follows = pkb->getFollows(*it);
+				cout<<"follows: "<<convertEnumToString(i2->second)<<" "<<follows<<endl;
 				if(follows!=-1 && pkb->isSynType(i2->second,*it)){
 					followsAns.push_back(Pair (*it, follows));
+					cout<<"Pushing back "<<*it<<endl;
 				}
 			}
 
@@ -1802,7 +1812,10 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	//Parent(a,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
-		answer = pkb->getAllStmts(i1->second);
+		if(isExistInLinkages(tk1))
+			answer = retrieveTokenEvaluatedAnswers(tk1);
+		else
+			answer = pkb->getAllStmts(i1->second);
 
 		//Parent(_, b)
 		if(tk1=="_"){
@@ -1810,19 +1823,18 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 		}
 		
 		for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-			
+			cout<<"answer = "<<*it<<endl;
 			set<int> children;
-			if(tk2=="_"){
+			if(tk2=="_"){	//Parent(a,_)
 				children = pkb->getChildren(*it);
 			}else{
 				children = pkb->getChildren(*it);
-				if(!pkb->isSynType(i2->second, *children.begin())){
-					children.clear();
-				}
 			}
 			for(set<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
-				parentAns.push_back(Pair(*it, *it2));
-				cout<<"it" << *it << "it2"<<*it2<<endl;
+				if(pkb->isSynType(i2->second, *it2)){
+					parentAns.push_back(Pair(*it, *it2));
+					cout<<"it" << *it << "it2"<<*it2<<endl;
+				}
 			}
 		}
 	}
@@ -1857,12 +1869,11 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 		cout<<"Parent(STMTNUM, TYPE)"<<endl;
 		if(tk2!="_"){
 			set<int> children = pkb->getChildren(atoi(tk1.c_str()));
-			if(!pkb->isSynType(i2->second, *children.begin())){
-					children.clear();
-			}
 			for(set<int>::iterator it=children.begin(); it!=children.end(); it++){
-				parentAns.push_back(Pair(atoi(tk1.c_str()), *it));
-				cout<<"in for loop"<<endl;
+				if(pkb->isSynType(i2->second, *it)){
+					parentAns.push_back(Pair(atoi(tk1.c_str()), *it));
+					cout<<"in for loop"<<endl;
+				}
 			}
 		} else {
 			set<int> children = pkb->getChildren(atoi(tk1.c_str()));
@@ -2490,7 +2501,7 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	Node* root = pkb->getASTRoot();
 
 	insertLinks(syn, relIndex);
-
+	cout<<"token 1 = "<<lhs<<"token 2 = "<<rhs<<endl;
 	switch(synType){
 		case TypeTable::ASSIGN:
 			patternAns = findAssign(*root, lhs, rhs);
@@ -2502,6 +2513,12 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 		case TypeTable::WHILE:
 			break;
 
+	}
+
+	//Printing patternAns
+	cout<<"PRINTING PATTERNANS"<<endl;
+	for(vector<Pair>::iterator it = patternAns.begin(); it!=patternAns.end(); it++){
+		cout<<"ans1 = "<<it->ans1<< " ans2 = "<<it->ans2<<endl;
 	}
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, patternAns));

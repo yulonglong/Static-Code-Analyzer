@@ -95,7 +95,7 @@ private:
 	void removePairsFromRelAns(std::vector<Pair> *,std::string, int);
 	void insertLinks(std::string, int);
 	bool isExistInLinkages(std::string);
-	std::string convertEnumToString(TypeTable::SynType);
+
 
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;
@@ -109,6 +109,7 @@ public:
 
 	//! To evaluate Queries, the Query Processor will call evaluateQuery and pass in the Query object returned by the Query Parser. This method will then return an unordered_map that has every selected syn and their corresponding vector of answers
 	std::unordered_map<std::string, std::vector<int>> evaluateQuery(Query);
+		std::string convertEnumToString(TypeTable::SynType);
 };
 
 #endif
