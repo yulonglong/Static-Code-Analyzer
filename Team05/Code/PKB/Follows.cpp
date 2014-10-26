@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable : 4018)
 
 #include "Follows.h"
 #include <stdexcept>      // std::out_of_range

@@ -1,4 +1,6 @@
 #pragma once
+#pragma warning( disable : 4018)
+#pragma warning( disable : 4244)
 
 #include "Uses.h"
 

@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable : 4018)
 
 #include "Calls.h"
 
@@ -58,7 +59,7 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 			}catch(...){
 				callsTable.resize(s+1,placeHolder);
 			}
-			int location =ceil((double)index2/63);
+			int location =(int) (ceil((double)index2/63));
 			int bitPos = index2%63;
 
 			if(temp.size()<location)
@@ -81,7 +82,7 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 			}catch(...){
 				calledByTable.resize(index2+1,placeHolder);
 			}
-			int location =ceil((double)index1/63);
+			int location =(int) (ceil((double)index1/63));
 			int bitPos = index1%63;
 
 			if(temp.size()<location)
@@ -105,7 +106,7 @@ bool Calls::isCalls(PROCINDEX index1, PROCINDEX index2){
 			return false;
 
 		vector<int64_t> temp=callsTable.at(index1);
-		int location =ceil((double)index2/63);
+		int location =(int) (ceil((double)index2/63));
 		int bitPos = index2%63;
 		if(temp.size()<location)
 			return false;
@@ -139,7 +140,7 @@ set<PROCINDEX> Calls::getCalls(PROCINDEX index){
 			while(bitArray>0){
 				int64_t bit = bitArray & -bitArray;
 				bitArray -= bit;
-				int number = log((double)bit)/log(2.0) + s*63;
+				int number = (int) (log((double)bit)/log(2.0) + s*63);
 				ans.insert(number);
 			}
 		}
@@ -161,7 +162,7 @@ set<PROCINDEX> Calls::getCalled(PROCINDEX index){
 			while(bitArray>0){
 				int64_t bit = bitArray & -bitArray;
 				bitArray -= bit;
-				int number = log((double)bit)/log(2.0) + s*63;
+				int number = (int) (log((double)bit)/log(2.0) + s*63);
 				ans.insert(number);
 			}
 		}
@@ -185,7 +186,7 @@ void Calls::printCallsTable() {
 				while(bitArray>0){
 					int64_t bit = bitArray & -bitArray;
 					bitArray -= bit;
-					int number = log((double)bit)/log(2.0) + s*63;
+					int number = (int) (log((double)bit)/log(2.0) + s*63);
 					cout<< number<< ",";
 				}
 			}		
