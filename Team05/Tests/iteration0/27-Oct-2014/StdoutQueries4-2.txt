@@ -43,6 +43,15 @@ FIRST PARAM = w
 it2->ans1 = 7
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -78,6 +87,15 @@ FIRST PARAM = w
 it2->ans1 = 7
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 

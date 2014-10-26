@@ -48,11 +48,20 @@ it2->ans2 = 7
 it2->ans2 = 4
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 1
+Case 1.1
+Tuple Table Size: 6
+End creating tuple table
+End projecting results
 
 
 
 
-Your answer: 4 7 9 11 16 
+Your answer: 16 11 9 7 4 
 Correct answer: 4 7 9 11 16 
 2 - Follows*, Typed, ImplStmtLine :: 
 while w; stmt s; 
@@ -95,11 +104,20 @@ it2->ans1 = 5
 it2->ans1 = 4
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 1
+Case 1.1
+Tuple Table Size: 10
+End creating tuple table
+End projecting results
 
 
 
 
-Your answer: 4 5 7 9 11 12 16 
+Your answer: 16 12 11 9 7 5 4 
 Correct answer: 4 5 7 9 11 12 16 
 3 - Follows*, ImplStmtLine ::
 stmt s;
@@ -140,6 +158,15 @@ it2->ans1 = 1
 it2->ans1 = 2
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 2
+Case 2.2
+Tuple Table Size: 2
+End creating tuple table
+End projecting results
 
 
 
@@ -189,6 +216,15 @@ it2->ans1 = 7
 it2->ans1 = 9
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 2
+Case 2.2
+Tuple Table Size: 3
+End creating tuple table
+End projecting results
 
 
 
@@ -236,6 +272,15 @@ it2->ans1 = 7
 it2->ans1 = 9
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 2
+Case 2.2
+Tuple Table Size: 2
+End creating tuple table
+End projecting results
 
 
 
@@ -276,6 +321,15 @@ SECOND PARAM = s
 it2->ans2 = 23
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -317,6 +371,15 @@ SECOND PARAM = w
 it2->ans2 = 16
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -346,7 +409,14 @@ In intersect Pairs: both do not exist
 Inserting into RelAns RelIndex = 0
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 1
+Case 4
 
 
 
@@ -391,6 +461,15 @@ it2->ans1 = 9
 it2->ans1 = 11
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 2
+Case 2.2
+Tuple Table Size: 4
+End creating tuple table
+End projecting results
 
 
 
@@ -433,6 +512,15 @@ it2->ans1 = 5
 it2->ans1 = 9
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 2
+Case 2.2
+Tuple Table Size: 3
+End creating tuple table
+End projecting results
 
 
 
@@ -479,6 +567,15 @@ it2->ans1 = 11
 it2->ans1 = 12
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 2
+Case 2.2
+Tuple Table Size: 5
+End creating tuple table
+End projecting results
 
 
 
@@ -525,6 +622,15 @@ it2->ans1 = 11
 it2->ans1 = 16
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 2
+Case 2.2
+Tuple Table Size: 5
+End creating tuple table
+End projecting results
 
 
 
@@ -554,6 +660,12 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 4
+End creating tuple table
 
 
 
@@ -583,6 +695,12 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 4
+End creating tuple table
 
 
 
@@ -612,6 +730,12 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 3
+Case 4
+End creating tuple table
 
 
 

@@ -42,6 +42,15 @@ SECOND PARAM = w
 it2->ans2 = 4
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -74,6 +83,18 @@ IN INSERT LINKS INSERTING TOKEN = w
 w Not Found in Linkages and relIndex = 0
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = w p.size = 0
+FIRST PARAM = 4
+SECOND PARAM = w
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
 
 
 
@@ -107,6 +128,15 @@ FIRST PARAM = s
 it2->ans1 = 11
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -135,6 +165,12 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 4
+End creating tuple table
 
 
 
@@ -161,7 +197,14 @@ follows(15, 16)
  EVALUATING FOLLOWS (15 16)
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 4
 
 
 
@@ -200,6 +243,15 @@ FIRST PARAM = s
 it2->ans1 = 5
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -238,6 +290,15 @@ FIRST PARAM = w
 it2->ans1 = 9
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -321,6 +382,15 @@ it2->ans1 = 12
 it2->ans1 = 16
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 1
+Case 1.1
+Tuple Table Size: 12
+End creating tuple table
+End projecting results
 
 
 
@@ -351,7 +421,14 @@ In intersect Pairs: both do not exist
 after intersect pairs
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 4
 
 
 
@@ -388,6 +465,14 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
 
 
 
@@ -428,6 +513,15 @@ SECOND PARAM = a
 it2->ans2 = 18
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 2
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -461,6 +555,15 @@ FIRST PARAM = s
 it2->ans1 = 11
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -489,6 +592,17 @@ IN INSERT LINKS INSERTING TOKEN = a
 a Not Found in Linkages and relIndex = 0
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = a
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
 
 
 

@@ -8,7 +8,7 @@ Select s such that Uses (s,"wrong")
 2 - Uses ::
 stmt x;
 Select x such that Uses(x,"left")
-3, 5, 7, 8, 9, 18, 19, 20, 24, 26, 27, 29 30, 33, 34
+3, 5, 7, 8, 9, 18, 19, 20, 24, 26, 27, 29, 30, 33, 34
 5000
 3 - Uses, Pattern ::
 assign a;

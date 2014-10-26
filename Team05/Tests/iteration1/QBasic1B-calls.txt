@@ -1,81 +1,81 @@
 16
 cat: BASIC queries with Calls
-1 - Calls > all assignment stmts in the program ::
+1 - Calls::
 assign a;
 Select a such that Calls (_,_)
 1, 2, 4, 5, 7, 9, 14, 15, 16, 17, 18
 5000
-2 - Calls > all while stmts in the program ::
+2 - Calls::
 while w;
 Select w such that Calls ("First", "Second")
 6
 5000
-3 - Calls > procedures that call other procedures ::
+3 - Calls::
 procedure p, q;
 Select p such that Calls (p, q)
 First, Second, Fourth, Fifth, Sixth, Seventh
 5000
-4 - Calls > procedures that call other procedures ::
+4 - Calls::
 procedure p;
 Select p such that Calls (p, _)
 First, Second, Fourth, Fifth, Sixth, Seventh
 5000
-5 - Calls > procedures that are called by other procedures ::
+5 - Calls::
 procedure p, q;
 Select q such that Calls (p, q)
 First, Second, Third, Fourth, Fifth, Sixth, Seventh
 5000
-6 - Calls > procedures that are called by other procedures ::
+6 - Calls::
 procedure p;
 Select p such that Calls (_, p)
 First, Second, Third, Fourth, Fifth, Sixth, Seventh
 5000
-7 - Calls > check if there's a procedure that calls other procedures ::
+7 - Calls::
 procedure p;
 Select BOOLEAN such that Calls (_, _)
 true
 5000
-8 - Calls > check if a procedure calls another ::
+8 - Calls::
 procedure p;
 Select BOOLEAN such that Calls ("First", "Second")
 true
 5000
-9 - Calls > check if a procedure calls another ::
+9 - Calls::
 procedure p;
 Select BOOLEAN such that Calls ("Third", "First")
 false
 5000
-10 - Calls > check if a procedure calls another ::
+10 - Calls::
 procedure p;
 Select BOOLEAN such that Calls ("Seventh", "Sixth")
 true
 5000
-11 - Calls > procedures called by a procedure ::
+11 - Calls::
 procedure p;
 Select p such that Calls ("Second", p)
 Third, Fourth, Fifth
 5000
-12 - Calls > procedures called by a procedure ::
+12 - Calls::
 procedure p;
 Select p such that Calls ("Third", p)
 
 5000
-13 - Calls > procedures calling a procedure ::
+13 - Calls::
 procedure p;
 Select p such that Calls (p, "Third")
 
 5000
-14 - Calls > procedures calling a procedure ::
+14 - Calls::
 procedure p;
 Select p such that Calls (p, "First")
 Fourth
 5000
-15 - Calls > procedure calling a procedure ::
+15 - Calls::
 procedure p;
 Select p such that Calls (p, "Second")
 First, Sixth
 5000
-16 - Calls > procedure calling itself ::
+16 - Calls::
 procedure p;
 Select p such that Calls (p, p)
 

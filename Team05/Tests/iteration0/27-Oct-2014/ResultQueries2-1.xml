@@ -9,14 +9,14 @@
 <id Follows="1" Typed="1" ImplStmtLine="1" comment="Which while statement follows statment in line 3" >1</id><querystr><![CDATA[while w; Select w such that Follows(3, w)]]></querystr>
 <stuans>4</stuans>
 <correct>4</correct>
-<time_taken>1.000000</time_taken>
+<time_taken>2.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" ImplStmtLine="1" comment="Which while statement follows statement in line 4" >2</id><querystr><![CDATA[while w; Select w such that Follows(4, w)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>2.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -51,7 +51,7 @@
 <id Parent="1" Typed="1" ImplStmtLine="1" comment="Which while statement is the parent of statement in line 11" >7</id><querystr><![CDATA[while w; Select w such that Parent(w, 11)]]></querystr>
 <stuans>9</stuans>
 <correct>9</correct>
-<time_taken>2.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -65,14 +65,14 @@
 <id Parent="1" Typed="1" ImplStmtLine="1" comment="Which while statements are the parent of some assignment statement" >9</id><querystr><![CDATA[while w; assign a; Select w such that Parent(w, a)]]></querystr>
 <stuans>4,5,7,9,11,12,16</stuans>
 <correct>4,5,7,9,11,12,16</correct>
-<time_taken>1.000000</time_taken>
+<time_taken>2.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Boolean="1" comment="Is line 4 the parent of line 9" >10</id><querystr><![CDATA[ Select BOOLEAN such that Parent(4, 9)]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>1.000000</time_taken>
+<time_taken>2.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -86,21 +86,21 @@
 <id Parent="1" Typed="1" ImplStmtLine="1" comment="Which are the assign statements that are the children of the statment in line 11" >12</id><querystr><![CDATA[assign a; Select a such that Parent(11, a)]]></querystr>
 <stuans>18</stuans>
 <correct>18</correct>
-<time_taken>2.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" ImplStmtLine="1" comment="getFollowedBy(s, 19)?" >13</id><querystr><![CDATA[stmt s; Select s such that Follows(s, 19)]]></querystr>
 <stuans>11</stuans>
 <correct>11</correct>
-<time_taken>2.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" ImplStmtLine="1" comment="getFollowedBy(a, 19)?" >14</id><querystr><![CDATA[assign a; Select a such that Follows(a, 19)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>1.000000</time_taken>
+<time_taken>2.000000</time_taken>
 <passed/>
 </query>
 </category>

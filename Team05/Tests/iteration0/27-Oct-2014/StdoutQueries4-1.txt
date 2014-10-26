@@ -40,6 +40,15 @@ FIRST PARAM = a
 it2->ans1 = 2
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -76,6 +85,15 @@ FIRST PARAM = a
 it2->ans1 = 8
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -126,6 +144,20 @@ FIRST PARAM = a
 it2->ans1 = 6
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 0
+Case 1
+Case 1.1
+Tuple Table Size: 1
+Adding relationship 1 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.1
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -180,11 +212,20 @@ it2->ans1 = 2
 it2->ans1 = 1
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 10
+End creating tuple table
+End projecting results
 
 
 
 
-Your answer: 1 2 3 4 5 6 8 9 10 11 
+Your answer: 11 10 9 8 6 5 4 3 2 1 
 Correct answer: 1 2 3 4 5 6 8 9 10 11 
 5 - Pattern ::
 assign a; while w;
@@ -216,6 +257,15 @@ FIRST PARAM = a
 it2->ans1 = 10
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -252,6 +302,15 @@ FIRST PARAM = a
 it2->ans1 = 5
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -292,11 +351,20 @@ it2->ans1 = 5
 it2->ans1 = 4
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 3
+End creating tuple table
+End projecting results
 
 
 
 
-Your answer: 4 5 6 
+Your answer: 6 5 4 
 Correct answer: 4 5 6 
 7 - Pattern ::
 assign a; while w;
@@ -330,11 +398,20 @@ it2->ans1 = 6
 it2->ans1 = 5
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 13
+Case 2
+Case 2.2
+Tuple Table Size: 2
+End creating tuple table
+End projecting results
 
 
 
 
-Your answer: 5 6 
+Your answer: 6 5 
 Correct answer: 5 6 
 End of evaluating Query File.
 AutoTester Completed !

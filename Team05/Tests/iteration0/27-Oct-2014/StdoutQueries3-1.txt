@@ -52,6 +52,15 @@ it2->ans1 = 15
 it2->ans1 = 17
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 2
+Case 2.2
+Tuple Table Size: 3
+End creating tuple table
+End projecting results
 
 
 
@@ -96,6 +105,15 @@ it2->ans1 = 10
 it2->ans1 = 18
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 2
+Case 2.2
+Tuple Table Size: 2
+End creating tuple table
+End projecting results
 
 
 
@@ -132,6 +150,15 @@ SECOND PARAM = v
 it2->ans2 = 6
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -168,6 +195,15 @@ SECOND PARAM = v
 it2->ans2 = 3
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 3
+Case 3.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -200,6 +236,14 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 3
+Case 3.2
+Tuple Table Size: 7
+End creating tuple table
 
 
 
@@ -232,14 +276,13 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
-
-
-
-
-Your answer: 
-Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
-Missing: I Romeo a b beta c chArlie delta i j1k k l left oSCar right tmp w width x 
-Additional: 
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 4
+End creating tuple table
+<exception/>
 7 - Modifies, Typed, ImplStmtLine ::
 while w;
 Select w such that Modifies(w, "Romeo")
@@ -281,6 +324,15 @@ it2->ans1 = 11
 it2->ans1 = 12
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 2
+Case 2.2
+Tuple Table Size: 5
+End creating tuple table
+End projecting results
 
 
 
@@ -316,6 +368,15 @@ FIRST PARAM = a
 it2->ans1 = 17
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
 
 
 
@@ -352,6 +413,15 @@ it2->ans1 = 10
 it2->ans1 = 18
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 2
+Case 2.2
+Tuple Table Size: 2
+End creating tuple table
+End projecting results
 
 
 
@@ -391,6 +461,15 @@ it2->ans2 = 10
 it2->ans2 = 11
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 3
+Case 3.2
+Tuple Table Size: 4
+End creating tuple table
+End projecting results
 
 
 
@@ -430,6 +509,15 @@ it2->ans2 = 17
 it2->ans2 = 18
 RETURNING FINAL ANSWERS
 End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 3
+Case 3.2
+Tuple Table Size: 4
+End creating tuple table
+End projecting results
 
 
 
@@ -459,14 +547,13 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
-
-
-
-
-Your answer: 
-Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
-Missing: I Romeo a b beta c chArlie delta i j1k k l left oSCar right tmp w width x 
-Additional: 
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 4
+End creating tuple table
+<exception/>
 13 - Uses, Typed, ImplStmtLine ::
 variable v;
 Select v such that Uses(5, "hello")
@@ -488,6 +575,15 @@ uses(5, "hello")
 In intersect Pairs: both do not exist
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 4
+End projecting results
 
 
 
@@ -517,14 +613,13 @@ Inserting tokens into relParameters
 Iterating Selected Syn
 RETURNING FINAL ANSWERS
 End evaluate query
-
-
-
-
-Your answer: 
-Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
-Missing: I Romeo a b beta c chArlie delta i j1k k l left oSCar right tmp w width x 
-Additional: 
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 4
+End creating tuple table
+<exception/>
 15 - Modifies, Typed, ImplStmtLine ::
 variable v;
 Select v such that Modifies(5, "hello")
@@ -548,6 +643,15 @@ supposed
 In intersect Pairs: both do not exist
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 4
+End projecting results
 
 
 
@@ -577,6 +681,15 @@ supposed
 In intersect Pairs: both do not exist
 Inserting tokens into relParameters
 Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 4
+End projecting results
 
 
 
