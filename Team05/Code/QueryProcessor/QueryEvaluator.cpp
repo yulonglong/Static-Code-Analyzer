@@ -2517,9 +2517,317 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 }
 
 void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+
+	set<int> selected;
+	vector<Pair> affAns;
+	set<int> answer;
+	vector<int> traverseTable;
+
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+
+	//Affects(a1, a2)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")) {
+		set<int> tk1List;
+		set<int> tk2List;
+		
+		if(tk1=="_")
+			tk1List = pkb->getAllStmts(TypeTable::STMT);
+		else if(isExistInLinkages(tk1)) {
+			tk1List = retrieveTokenEvaluatedAnswers(tk1);
+			insertLinks(tk1, relIndex);
+		}
+		else {
+			tk1List = pkb->getAllStmts(i1->second);
+			insertLinks(tk1, relIndex);
+		}
+		
+		if(tk2=="_")
+			tk2List = pkb->getAllStmts(TypeTable::STMT);
+		else if(isExistInLinkages(tk2)) {
+			tk2List = retrieveTokenEvaluatedAnswers(tk2);
+			insertLinks(tk2, relIndex);
+		}
+		else {
+			tk2List = pkb->getAllStmts(i2->second);
+			insertLinks(tk2, relIndex);
+		}
+
+		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
+			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
+				set<int> modifies = pkb->getModifies(*itA);
+				if( !(pkb->isUses(*itB, *modifies.begin())) )
+					continue;
+
+				set<Pair> afterTk1;
+				set<Pair> beforeTk2;
+				set<int> betweenTks;
+
+				recursiveNext(*itA, *itA, &afterTk1, TypeTable::STMT, &traverseTable);
+				traverseTable.clear();
+				recursiveNextReverse(*itB, *itB, &beforeTk2, TypeTable::STMT, &traverseTable);
+				traverseTable.clear();
+
+				for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
+					for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
+						if(it1->ans1 == it2->ans2)
+							betweenTks.insert(it1->ans2);
+					}
+				}
+
+				modifies = pkb->getModifies(*modifies.begin());
+
+				bool interfere=false;
+				for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
+					for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
+						if(*it1 == *it2)
+							interfere = true;
+					}
+				}
+
+				if(!interfere)
+					affAns.push_back(Pair(*itA, *itB));
+			}
+		}
+	}
+
+	//Affects(a, "7")
+	else if( isalpha(tk1[0]) || tk1=="_" ) {
+		set<int> tk1List;
+		if(tk1=="_")
+			tk1List = pkb->getAllStmts(TypeTable::STMT);
+		else if(isExistInLinkages(tk1)) {
+			tk1List = retrieveTokenEvaluatedAnswers(tk1);
+			insertLinks(tk1, relIndex);
+		}
+		else {
+			tk1List = pkb->getAllStmts(i1->second);
+			insertLinks(tk1, relIndex);
+		}
+
+		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
+			set<int> modifies = pkb->getModifies(*it);
+			if( !(pkb->isUses(atoi(tk2.c_str()), *modifies.begin())) )
+				continue;
+
+			set<Pair> afterTk1;
+			set<Pair> beforeTk2;
+			set<int> betweenTks;
+
+			recursiveNext(*it, *it, &afterTk1, TypeTable::STMT, &traverseTable);
+			traverseTable.clear();
+			recursiveNextReverse(atoi(tk2.c_str()), atoi(tk2.c_str()), &beforeTk2, TypeTable::STMT, &traverseTable);
+			traverseTable.clear();
+		
+			for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
+				for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
+					if(it1->ans1 == it2->ans2)
+						betweenTks.insert(it1->ans2);
+				}
+			}
+
+			modifies = pkb->getModifies(*modifies.begin());
+
+			bool interfere=false;
+			for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
+				for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
+					if(*it1 == *it2)
+						interfere = true;
+				}
+			}
+
+			if(!interfere)
+				affAns.push_back(Pair(*it, atoi(tk2.c_str())));
+			
+		}
+	}
+
+	//Affects("1", a)
+	else if( isalpha(tk2[0]) || tk2=="_" ) {
+		set<int> tk2List;
+		if(tk2=="_")
+			tk2List = pkb->getAllStmts(TypeTable::STMT);
+		else if(isExistInLinkages(tk2)) {
+			tk2List = retrieveTokenEvaluatedAnswers(tk2);
+			insertLinks(tk2, relIndex);
+		}
+		else {
+			tk2List = pkb->getAllStmts(i2->second);
+			insertLinks(tk2, relIndex);
+		}
+
+		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
+			set<int> modifies = pkb->getModifies(atoi(tk1.c_str()));
+			if( !(pkb->isUses(*it, *modifies.begin())) )
+				continue;
+
+			set<Pair> afterTk1;
+			set<Pair> beforeTk2;
+			set<int> betweenTks;
+
+			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &afterTk1, TypeTable::STMT, &traverseTable);
+			traverseTable.clear();
+			recursiveNextReverse(*it, *it, &beforeTk2, TypeTable::STMT, &traverseTable);
+			traverseTable.clear();
+
+			for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
+				for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
+					if(it1->ans1 == it2->ans2)
+						betweenTks.insert(it1->ans2);
+				}
+			}
+
+			modifies = pkb->getModifies(*modifies.begin());
+
+			bool interfere=false;
+			for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
+				for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
+					if(*it1 == *it2)
+						interfere = true;
+				}
+			}
+
+			if(!interfere)
+				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
+		}
+	}
+
+	//Affects("1", "2")
+	else if( tk1!="_" ) {
+		set<int> modifies = pkb->getModifies(atoi(tk1.c_str()));
+		if( !(pkb->isUses(atoi(tk2.c_str()), *modifies.begin())) ) {
+			affAns.push_back(Pair(-2, -2));
+			intersectPairs(tk1, tk2, &affAns, relIndex);
+			QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+			return;
+		}
+
+		set<Pair> afterTk1;
+		set<Pair> beforeTk2;
+		set<int> betweenTks;
+
+		recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &afterTk1, TypeTable::STMT, &traverseTable);
+		traverseTable.clear();
+		recursiveNextReverse(atoi(tk2.c_str()), atoi(tk2.c_str()), &beforeTk2, TypeTable::STMT, &traverseTable);
+		traverseTable.clear();
+		
+		for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
+			for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
+				if(it1->ans1 == it2->ans2)
+						betweenTks.insert(it1->ans2);
+			}
+		}
+
+		modifies = pkb->getModifies(*modifies.begin());
+
+		bool interfere=false;
+		for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
+			for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
+				if(*it1 == *it2)
+					interfere = true;
+			}
+		}
+
+		if(interfere)
+			affAns.push_back(Pair(-2, -2));
+		else
+			affAns.push_back(Pair(-1, -1));
+	}
+
+	//Affects(_,_)
+	else {
+		set<int> tk1List = pkb->getAllStmts(TypeTable::STMT);
+		set<int> tk2List = pkb->getAllStmts(TypeTable::STMT);
+
+		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
+			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
+				set<int> modifies = pkb->getModifies(*itA);
+				if( !(pkb->isUses(*itB, *modifies.begin())) )
+					continue;
+
+				set<Pair> afterTk1;
+				set<Pair> beforeTk2;
+				set<int> betweenTks;
+
+				recursiveNext(*itA, *itA, &afterTk1, TypeTable::STMT, &traverseTable);
+				traverseTable.clear();
+				recursiveNextReverse(*itB, *itB, &beforeTk2, TypeTable::STMT, &traverseTable);
+				traverseTable.clear();
+
+				for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
+					for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
+						if(it1->ans1 == it2->ans2)
+							betweenTks.insert(it1->ans2);
+					}
+				}
+
+				modifies = pkb->getModifies(*modifies.begin());
+
+				bool interfere=false;
+				for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
+					for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
+						if(*it1 == *it2)
+							interfere = true;
+					}
+				}
+
+				if(!interfere) {
+					affAns.push_back(Pair(-1, -1));
+					intersectPairs(tk1, tk2, &affAns, relIndex);
+					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+					return;
+				}
+			}
+		}
+
+		affAns.push_back(Pair(-2, -2));
+	}
+
+	intersectPairs(tk1, tk2, &affAns, relIndex);
+	QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 }
 
 void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
+	string tk1=r.getToken1();
+	string tk2=r.getToken2();
+
+	set<int> selected;
+	vector<Pair> affAns;
+	set<int> answer;
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	//Affects(a1, a2)
+	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")) {
+		;
+	}
+
+	//Affects(a, "7")
+	else if( isalpha(tk1[0]) || tk1=="_" ) {
+		;
+	}
+
+	//Affects("1", a)
+	else if( isalpha(tk2[0]) || tk2=="_" ) {
+		;
+	}
+
+	//Affects("1", "2")
+	else if( tk1!="_" ) {
+		;
+	}
+
+	//Affects(_,_)
+	else {
+		;
+	}
+
+	intersectPairs(tk1, tk2, &affAns, relIndex);
+
+	QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 }
 
 void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
