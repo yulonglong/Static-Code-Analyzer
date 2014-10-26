@@ -30,8 +30,16 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	cout<<"In orderRelationships"<<endl;
 
 	for(unsigned int i=0; i<r.size(); i++){
-		if((r.at(i).getRelType()==Relationship::PATTERN || !isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])) && r.at(i).getRelType()!=Relationship::WITH){
-			cout<<"pattern or relationships with only one alpha token found"<<endl;
+
+		if(r.at(i).getRelType()==Relationship::PATTERN){
+			cout<<"pattern found"<<endl;
+			temp = r.at(sorted);
+			r.at(sorted) = r.at(0);
+			r.at(0) = temp;
+			sorted++;
+		}
+		else if((!isalpha(r.at(i).getToken1()[0]) || !isalpha(r.at(i).getToken2()[0])) && r.at(i).getRelType()!=Relationship::WITH){
+			cout<<"relationships with only one alpha token found"<<endl;
 			temp = r.at(sorted);
 			r.at(sorted) = r.at(i);
 			r.at(i) = temp;
@@ -78,7 +86,18 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	if(relations.empty()){
 		cout<<"Relations found empty"<<endl;
 		for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
-			set<int> synAns = pkb->getAllStmts(m.find(*it)->second);
+			set<int> synAns;
+			
+			if(m.find(*it)->second==TypeTable::VARIABLE){
+				synAns = pkb->getAllVarIndex();
+			}else if(m.find(*it)->second==TypeTable::PROCEDURE){
+				synAns = pkb->getAllProcIndexes();
+			}else if(m.find(*it)->second== TypeTable::CONSTANT){
+				synAns = pkb->getAllConstIndex();
+			}else{
+				synAns = pkb->getAllStmts(m.find(*it)->second);
+
+			}
 			vector<int> pairAns;
 			copy(synAns.begin(), synAns.end(), back_inserter(pairAns));
 			answers.insert(make_pair<string, vector<int>>(*it, pairAns));
@@ -92,6 +111,13 @@ unordered_map<string, vector<int>> QueryEvaluator::evaluateQuery(Query q){
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		cout<<" "<<endl;
 		cout<<it->getRelName()<<"("<<it->getToken1()<<", "<< it->getToken2()<<")"<<endl;
+
+		if(isalpha(it->getToken1()[0]) && isalpha(it->getToken2()[0]) && it->getToken1()==it->getToken2()){
+			if(it->getRelType()!=Relationship::NEXT){
+				answers.clear();
+				return answers;
+			}
+		}
 		switch(it->getRelType()){
 		case Relationship::FOLLOWS:
 			cout<<"\n EVALUATING FOLLOWS ("<<it->getToken1()<<" "<<it->getToken2()<<")"<<endl;
@@ -1410,7 +1436,6 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 	//Follows(a,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0]))){
-
 		//If both tokens are already previously evaluated
 		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 			//get the set of answers that are previously evaluated by other relations
