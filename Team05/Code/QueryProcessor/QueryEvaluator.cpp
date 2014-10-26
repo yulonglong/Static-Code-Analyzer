@@ -2501,10 +2501,14 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	Node* root = pkb->getASTRoot();
 
 	insertLinks(syn, relIndex);
+	if(r.getToken1Type() == Relationship::SYNONYM)
+		insertLinks(lhs, relIndex);
+
+
 	cout<<"token 1 = "<<lhs<<"token 2 = "<<rhs<<endl;
 	switch(synType){
 		case TypeTable::ASSIGN:
-			patternAns = findAssign(*root, lhs, rhs);
+			patternAns = findAssign(*root, lhs, rhs, r);
 			break;
 
 		case TypeTable::IF:
@@ -2530,7 +2534,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 }
 
-vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs) {
+vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, Relationship r) {
 	vector<Pair> ans;
 	stack<Node> st;
 	st.push(startNode);
@@ -2538,22 +2542,38 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs) 
 	while(!st.empty()) {
 		Node n = st.top();
 		st.pop();
-		if(n.getType().compare("assign") == 0) {
-			if(matchPattern(n, lhs, rhs)) {
-				ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+		if(r.getToken1Type() == Relationship::SYNONYM) {
+			if(n.getType().compare("assign") == 0) {
+				if(matchPattern(n, lhs, rhs, true)) {
+					vector<Node*> children = n.getChild();
+					Node left = *children.at(0);
+					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 		}
 		else {
-			vector<Node*> children = n.getChild();
-			for(int i=0; i<children.size(); i++)
-				st.push(*children.at(i));
+			if(n.getType().compare("assign") == 0) {
+				if(matchPattern(n, lhs, rhs, false)) {
+					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
+				}
+			}
+			else {
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
+			}
 		}
 	}
 
 	return ans;
 }
 
-bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs) {
+bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs, bool leftIsSyn) {
 	lhs.erase(std::remove(lhs.begin(), lhs.end(), '\"'), lhs.end());
 	rhs.erase(std::remove(rhs.begin(), rhs.end(), '\"'), rhs.end());
 
@@ -2563,7 +2583,7 @@ bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs) {
 	Node right = *children.at(1);
 
 	//Check if lhs matches pattern
-	if(lhs.compare("_") == 0 || lhs.compare(left.getData()) == 0) {
+	if(lhs.compare("_") == 0 || lhs.compare(left.getData()) == 0 || leftIsSyn) {
 		leftMatch = true;
 	}
 

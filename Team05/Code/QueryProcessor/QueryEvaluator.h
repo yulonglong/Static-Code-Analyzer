@@ -75,8 +75,8 @@ private:
 	//! Evaluate Pattern Relationships
 	void evaluatePattern(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 	//! Helper functions used to evaluate Pattern Relationships
-	std::vector<Pair> findAssign(Node, string, string);
-	bool matchPattern(Node, string, string);
+	std::vector<Pair> findAssign(Node, string, string, Relationship);
+	bool matchPattern(Node, string, string, bool);
 	bool matchTree(Node, Node);
 	static Node* constructExpressionTree(vector<string> tokens);
 	static vector<string> getPostfix(vector<string> tokens);
