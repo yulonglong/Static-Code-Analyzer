@@ -15,7 +15,7 @@ prog_line n1, n2;
 Select n1 such that Next (n1, 9)
 8, 17
 5000
-4 - Next ::
+4 - Next :: 
 prog_line n1, n2;
 Select BOOLEAN such that Next (n1, 9)
 true

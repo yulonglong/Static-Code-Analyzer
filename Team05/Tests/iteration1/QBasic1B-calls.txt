@@ -40,12 +40,12 @@ procedure p;
 Select BOOLEAN such that Calls ("First", "Second")
 true
 5000
-9 - Calls > check if a procedure calls another :: 
+9 - Calls > check if a procedure calls another ::
 procedure p;
 Select BOOLEAN such that Calls ("Third", "First")
 false
 5000
-10 - Calls > check if a procedure calls another :: 
+10 - Calls > check if a procedure calls another ::
 procedure p;
 Select BOOLEAN such that Calls ("Seventh", "Sixth")
 true
