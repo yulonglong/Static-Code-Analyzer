@@ -1110,13 +1110,14 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	}
 
 	//Next*(3, n) Next*(3, _)
-	else if(isalpha(tk2[0])){
+	else if(isalpha(tk2[0]) || tk2=="_"){
 		if(tk2=="_"){
 			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &nextStarAns, TypeTable::STMT, &traverseTable);
 			if(nextStarAns.empty()){
 				nextStarAnsVec.push_back(Pair(-2,-2));
 			}else{
 				nextStarAnsVec.push_back(Pair(-1,-1));
+				cout<<"Evaluating true"<<endl;
 			}
 		}else{
 			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &nextStarAns, i2->second, &traverseTable);
