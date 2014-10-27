@@ -170,7 +170,7 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 	for (unsigned int i=0; i<children.size(); i++) {
 		CFGNode* child = children[i];
 		int toProgLine = child->getProgLine();
-		if (fromProgLine != -1 && toProgLine != -1) {
+		if (fromProgLine != -1 && toProgLine != -1 && fromProgLine != 0) {
 			// PKB SET: 
 			pkb.setToNext(fromProgLine, toProgLine);
 			if (debugModeIteration2) {
@@ -185,8 +185,10 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 				child = child->getMultiChild(0);
 				toProgLine = child->getProgLine();
 			}
-			// PKB SET:
-			pkb.setToNext(fromProgLine, toProgLine);
+			if (fromProgLine != 0) {
+				// PKB SET:
+				pkb.setToNext(fromProgLine, toProgLine);
+			}
 			if (debugModeIteration2) {
 				cout << "setToNext(" << fromProgLine << ", " << toProgLine << ")" <<endl;
 			}
