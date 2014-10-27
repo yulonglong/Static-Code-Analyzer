@@ -35,9 +35,9 @@ class Relationship
 		//constructor for clause, patternSyn, token1, token2
 		Relationship(string, string, string, string);
 		//constructor for clause, token1, token1type, token2, token2type
-		Relationship(string, string, TokenType, string ,TokenType);
-		//constructor for with-clause, token1, token1type, token2, token2type, callSynType
-		Relationship(string, string, TokenType, string ,TokenType,TypeTable::SynType);
+		Relationship(string, string, TokenType, string, TokenType);
+		//constructor for with-clause, token1, token1type, token2, token2type, callSynTypeProc
+		Relationship(string, string, TokenType, string, TokenType, bool);
 		//constructor for clause, patternSyn, token1, token1type, token2, token2type
 		Relationship(string, string, string, TokenType, string ,TokenType);
         

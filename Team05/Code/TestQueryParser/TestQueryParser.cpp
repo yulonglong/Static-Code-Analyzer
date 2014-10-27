@@ -1327,7 +1327,6 @@ void QueryParserTest::testQueryWith3(){
 	return;
 }
 
-
 void QueryParserTest::testQueryWith4(){
 	//INIT BEGIN
 	string query = "prog_line n; stmt s; call c;Select s such that Follows*(n,s) with c.procName=\"First\"";
@@ -1447,7 +1446,7 @@ void QueryParserTest::testQueryWith5(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("with","c",Relationship::SYNONYM,"p",Relationship::SYNONYM,TypeTable::PROCEDURE));
+	expectedRelVect.push_back(Relationship("with","c",Relationship::SYNONYM,"p",Relationship::SYNONYM, true));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
@@ -1462,7 +1461,6 @@ void QueryParserTest::testQueryWith5(){
 
 	return;
 }
-
 
 void QueryParserTest::testQueryMultipleSuchThat(){
 	//INIT BEGIN

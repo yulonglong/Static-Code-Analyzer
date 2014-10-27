@@ -734,6 +734,8 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	v.at(i) = stringToLower(v.at(i));
 	unordered_map<string, TypeTable::SynType>::iterator it;
 
+	bool callSynTypeProcedure = false;
+
 	string withToken[2];
 	withToken[0] = v.at(i+1);
 	withToken[1] = v.at(i+2);
@@ -760,7 +762,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			if(it==synMap.end()){//if synonym not found
 				withValid1 = false;
 			}
-			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+			else if ((it->second != TypeTable::PROCEDURE)&&(it->second != TypeTable::CALL)&&(result[2] == "procName")){
 				withValid1 = false;
 			}
 			else if ((it->second != TypeTable::STMT)&&
@@ -779,6 +781,11 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			}
 			else{
 				withToken[0]= result[1];
+			}
+
+			//check if it is call procedure
+			if ((it->second == TypeTable::CALL)&&(result[2] == "procName")){
+				callSynTypeProcedure = true; // mark the callSynTypeProc as true
 			}
 		}
 	}
@@ -806,7 +813,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			if(it==synMap.end()){//if synonym not found
 				withValid2 = false;
 			}
-			else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+			else if ((it->second != TypeTable::PROCEDURE)&&(it->second != TypeTable::CALL)&&(result[2] == "procName")){
 				withValid2 = false;
 			}
 			else if ((it->second != TypeTable::STMT)&&
@@ -826,16 +833,21 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 			else{
 				withToken[1]= result[1];
 			}
+
+			//check if it is call procedure
+			if ((it->second == TypeTable::CALL)&&(result[2] == "procName")){
+				callSynTypeProcedure = true; // mark the callSynTypeProc as true
+			}
 		}
 	}
 
 	bool combinedValid = false;
 	if((withValid1)&&(withValid2)){
-		combinedValid = validateWithLhsAndRhs(withToken);
+		combinedValid = validateWithLhsAndRhs(withToken,callSynTypeProcedure);
 	}
 
 	if(combinedValid){
-		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]));
+		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]), callSynTypeProcedure);
 		i = i+2;
 		withValid = true;
 		return withRel;
@@ -846,11 +858,11 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	}
 }
 
-bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
+bool QueryParser::validateWithLhsAndRhs(string withToken[2], bool callSynTypeProcedure){
 	//synonym 5 type : STMT,CONSTANT,PROCEDURE,VARIABLE,PROGLINE
 	//ref : IDENTIFIER, INTEGER
-	//INTEGER category : INTEGER, STMT, CONSTANT, PROGLINE
-	//CHARSTRING category : IDENTIFIER, PROCEDURE, VARIABLE
+	//INTEGER category : INTEGER, STMT, IF, WHILE, ASSIGN, CONSTANT, PROGLINE, CALL(if booleanflag is false)
+	//CHARSTRING category : IDENTIFIER, PROCEDURE, VARIABLE, CALL(if booleanflag is true)
 	const int lhs = 0;
 	const int rhs = 1;
 
@@ -875,12 +887,20 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2]){
 				(it->second == TypeTable::IF)||
 				(it->second == TypeTable::WHILE)||
 				(it->second == TypeTable::ASSIGN)||
-				(it->second == TypeTable::CALL)||
 				(it->second == TypeTable::CONSTANT)||(it->second == TypeTable::PROGLINE)){
 					category[i] = categoryInt;
 			}
 			else if ((it->second == TypeTable::PROCEDURE)||(it->second == TypeTable::VARIABLE)){
 				category[i] = categoryCharStr;
+			}
+			//if it is of type call, check whether is procName or stmt#
+			else if (it->second == TypeTable::CALL){
+				if(callSynTypeProcedure){
+					category[i] = categoryCharStr;
+				}
+				else{
+					category[i] = categoryInt;
+				}
 			}
 		}
 	}
