@@ -482,9 +482,11 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 	//with v1.varName = p.procName with c.value = s.stmt# = pr.progline
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
+		cout<<"2 alpha tokens found"<<endl;
 		set<int> a;
 		set<int> b;
 		if(isExistInLinkages(tk1)){
+			cout<<"tk1 exist in linkages"<<endl;
 			a = retrieveTokenEvaluatedAnswers(tk1);
 		}else {
 			if(i1->second==TypeTable::PROCEDURE){
@@ -492,13 +494,17 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			}else if(i1->second == TypeTable::VARIABLE){
 				a = pkb->getAllVarIndex();
 			}else if(i1->second == TypeTable::CONSTANT){
-				a = pkb->getAllConstIndex();
+				set<int> c = pkb->getAllConstIndex();
+				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
+					//a.insert(pkb->getConstValue(*iti));
+				}
 			}else {
 				a = pkb->getAllStmts(i1->second);
 			}
 		}
 
 		if(isExistInLinkages(tk2)){
+			cout<<"tk2 exist in linkages"<<endl;
 			b = retrieveTokenEvaluatedAnswers(tk2);
 		}else{
 			if(i2->second==TypeTable::PROCEDURE){
@@ -506,313 +512,94 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			}else if(i2->second == TypeTable::VARIABLE){
 				b = pkb->getAllVarIndex();
 			}else if(i2->second == TypeTable::CONSTANT){
-				b = pkb->getAllConstIndex();
+				set<int> c = pkb->getAllConstIndex();
+				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
+				//	b.insert(pkb->getConstValue(*iti));
+				}
 			}else {
 				b = pkb->getAllStmts(i2->second);
 			}
 		}
-		//if the two tokens are of the same type
-		if(i1->second == i2->second){
 
+		//else if the two tokens are of different type and of proc and var
+			//v.varName = p.procName OR p.procName = v.varName
+		if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
+			cout<<"tk1 type != tk2 type and tk1 type =variable OR procedure"<<endl;
+			vector<string> procNames;
+			vector<string> varNames;
+
+			//p.procName = v.varName
+			if(i1->second == TypeTable::PROCEDURE){
+				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
+					procNames.push_back(pkb->getProcName(*it));
+				}
+				for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
+					varNames.push_back(pkb->getVarName(*it2));
+				}
+			}
+			//v.varName = p.procName
+			else if(i1->second == TypeTable::VARIABLE){
+				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
+					varNames.push_back(pkb->getVarName(*it));
+				}
+				for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
+					procNames.push_back(pkb->getProcName(*it2));
+				}
+			}
+
+			set<string> intersect;
+			set_intersection(procNames.begin(), procNames.end(), varNames.begin(), varNames.end(), std::inserter(intersect, intersect.begin()));
+			vector<Pair> ansProc;
+			vector<Pair> ansVar;
+			for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
+				if(i1->second == TypeTable::VARIABLE){
+					withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
+				}else {
+					withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
+				}
+			}
+
+		}
+
+		//else	
+		else{
 			set<int> intersect;
 			set_intersection(a.begin(), a.end(), b.begin(), b.end(), std::inserter(intersect, intersect.begin()));
 
 			for(set<int>::iterator iter = intersect.begin(); iter!=intersect.end(); iter++){
 				withAns.push_back(Pair (*iter, *iter));
 			}
-
-			if(isExistInLinkages(tk1)){
-				removePairs(withAns, tk1, 1);
-			}
-
-			if(isExistInLinkages(tk2)){
-				removePairs(withAns, tk2, 1);
-			}
-
-			if(!intersect.empty()){
-				withAns.clear();
-				withAns.push_back(Pair (-1,-1));
-			}
 		}
 
-		else {
-			if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
-				vector<string> procNames;
-				vector<string> varNames;
-				if(i1->second == TypeTable::PROCEDURE){
-					for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-						procNames.push_back(pkb->getProcName(*it));
-					}
-					for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
-						varNames.push_back(pkb->getVarName(*it2));
-					}
-				}else if(i1->second == TypeTable::VARIABLE){
-					for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-						procNames.push_back(pkb->getProcName(*it));
-					}
-					for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
-						varNames.push_back(pkb->getVarName(*it2));
-					}
-				}
-
-				set<string> intersect;
-				set_intersection(procNames.begin(), procNames.end(), varNames.begin(), varNames.end(), std::inserter(intersect, intersect.begin()));
-				vector<Pair> ansProc;
-				vector<Pair> ansVar;
-				for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
-					if(i1->second == TypeTable::VARIABLE){
-						withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
-					}else {
-						withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
-					}
-					/*
-					ansProc.push_back(Pair (pkb->getProcIndex(*it), pkb->getProcIndex(*it)));
-					ansVar.push_back(Pair (pkb->getVarIndex(*it), pkb->getVarIndex(*it)));*/
-				}
-				/*
-				if(i1->second ==TypeTable::VARIABLE){
-					removePairs(ansVar, tk1, 1);
-					removePairs(ansProc, tk2, 2);
-				}
-				else {
-					removePairs(ansProc, tk1, 1);
-					removePairs(ansVar, tk2, 2);
-				}*/
-
-			}
-
-			//if constant = progline = stmt
-			
-
-		}
-		/*
-		//if both exist in links then remove all unnecessary tuples. push QueryEvaluator::relAns true
-		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
-			cout<<"Both tokens exist in linkages"<<endl;
-			//if both tokens are of the same type e.g v1 v2
-			if(i1->second == i2->second){
-				set<int> tk1Set = retrieveTokenEvaluatedAnswers(tk1);
-				set<int> tk2Set = retrieveTokenEvaluatedAnswers(tk2);
-
-				set<int> intersect;
-				set_intersection(tk1Set.begin(), tk1Set.end(), tk2Set.begin(), tk2Set.end(), std::inserter(intersect, intersect.begin()));
-
-				vector<Pair> withAns;
-				for(set<int>::iterator it = intersect.begin(); it!=intersect.end(); it++){
-					withAns.push_back(Pair (*it, *it));
-				}
-
-				removePairs(withAns, tk1, 1);
-				removePairs(withAns, tk2, 1);
-			}
-
-			//else if they are different type
-			else {
-				//get list of rel that link to v1
-				set<int> ans1 = retrieveTokenEvaluatedAnswers(tk1);
-				set<string> ans1string;
-				if(i1->second==TypeTable::PROCEDURE || i1->second==TypeTable::VARIABLE){
-					
-					if(i1->second==TypeTable::PROCEDURE){
-						for(set<int>::iterator it = ans1.begin(); it!=ans1.end(); it++){
-							ans1string.insert(pkb->getProcName(*it));
-						}
-					}
-
-					else{
-						for(set<int>::iterator it = ans1.begin(); it!=ans1.end(); it++){
-							ans1string.insert(pkb->getVarName(*it));
-						}
-					}
-				}
-				//get list of rel that link to p
-				set<int> ans2 = retrieveTokenEvaluatedAnswers(tk2);
-				set<string> ans2string;
-				if(i2->second==TypeTable::PROCEDURE || i2->second==TypeTable::VARIABLE){
-					
-					if(i2->second==TypeTable::PROCEDURE){
-						for(set<int>::iterator it = ans2.begin(); it!=ans2.end(); it++){
-							ans2string.insert(pkb->getProcName(*it));
-						}
-					}
-
-					else{
-						for(set<int>::iterator it = ans2.begin(); it!=ans2.end(); it++){
-							ans2string.insert(pkb->getVarName(*it));
-						}
-					}
-				}
-
-				set<int> ans3;
-				
-
-				if(!ans1string.empty()){
-					vector<Pair> ans3stringVar;
-					vector<Pair> ans3stringProc;
-					set<string> ans3string;
-
-					set_intersection(ans1string.begin(), ans1string.end(), ans2string.begin(), ans2string.end(), inserter(ans3string,ans3string.begin()));
-
-					for(set<string>::iterator it = ans3string.begin(); it!=ans3string.end(); it++){
-						ans3stringVar.push_back(Pair (pkb->getVarIndex(*it), pkb->getVarIndex(*it)));
-						ans3stringProc.push_back(Pair (pkb->getProcIndex(*it), pkb->getProcIndex(*it)));
-					}
-
-					if(i1->second==TypeTable::VARIABLE){
-						removePairs(ans3stringVar, tk1,1);
-						removePairs(ans3stringProc, tk2,1);
-					}
-					else{
-						removePairs(ans3stringProc, tk1,1);
-						removePairs(ans3stringVar, tk2,1);
-					}
-
-					withAns.push_back(Pair (-1,-1));
-					relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
-				}
-				else{
-					std::set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), inserter(ans3, ans3.begin()));
-					vector<Pair> finalAns;
-
-					for(set<int>::iterator it = ans3.begin(); it!=ans3.end(); it++){
-						finalAns.push_back(Pair(*it, *it));
-					}
-
-					removePairs(finalAns, tk1, 1);
-					removePairs(finalAns, tk2, 1);
-
-					withAns.push_back(Pair (-1,-1));
-					relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
-				}
-			}
-		}
-
-		//else if both tokens do not exist or only 1 exists
-		else {
-			cout<<"Only 1 exist or None exist in linkages"<<endl;
-			vector<Pair> withAns;
-			//if is constant = stmt or constant = prog
-			if((i1->second==TypeTable::CONSTANT && i2->second==TypeTable::STMT) || (i1->second==TypeTable::STMT && i2->second==TypeTable::CONSTANT) || (i1->second==TypeTable::CONSTANT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::CONSTANT)){
-				set<int> allConst = pkb->getAllConstIndex();
-				int stmtRange = pkb->getStmtRange();
-
-				for(set<int>::iterator it = allConst.begin(); it!=allConst.end(); it++){
-					if(atoi((pkb->getConstValue(*it)).c_str())<=stmtRange){
-						withAns.push_back(Pair(*it, *it));
-					}
-				}		
-			}
-
-			//if is stmt = prog
-			else if((i1->second==TypeTable::STMT && i2->second==TypeTable::PROGLINE) || (i1->second==TypeTable::PROGLINE && i2->second==TypeTable::STMT)){
-				int higher = pkb->getStmtRange();
-				for(int i=1; i<=higher; i++){
-					withAns.push_back(Pair (i, i));
-				}
-			}
-
-			//if is var = proc
-			else{
-				set<int> retrieved;
-				if(isExistInLinkages(tk1)){
-					retrieved = retrieveTokenEvaluatedAnswers(tk1);
-					if(i1->second == TypeTable::VARIABLE){
-						
-					}
-				}
-				else if(isExistInLinkages(tk2)){
-					retrieved = retrieveTokenEvaluatedAnswers(tk2);
-				}
-				else {
-
-				}
-
-			}
-
-			if(isExistInLinkages(tk1)){
-				removePairs(withAns, tk1, 1);
-			} else if(isExistInLinkages(tk2)){
-				removePairs(withAns, tk2, 2);
-			}else {
-
-			}
-
-			if(withAns.empty()){
-				withAns.push_back(Pair (-2, -2));
-		
-			}
-
-			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
-		}
-		*/
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
+		cout<<"only 1 alpha token found"<<endl;
 		//if exist in links then delete all unnecessary tuples then push into QueryEvaluator::relAns true
 		if(!isdigit(tk2[0])){ //if the query is with c.value = 3 then we do not have to remove the quotation marks
 			tk2 = tk2.substr(1,tk2.length()-2);
 		}
-		if(isExistInLinkages(tk1)){
-			cout<<"Tk1 exist in linkages"<<endl;
-			int index;
+
+		int index;
 		
-			if(i1->second==TypeTable::VARIABLE){
-				cout<<"First token VARIABLE"<<endl;
-				index = pkb->getVarIndex(tk2);
-			}else if(i1->second==TypeTable::PROCEDURE){
-				cout<<"First token PROCEDURE"<<endl;
-				index = pkb->getProcIndex(tk2);
-			} else{
-				cout<<"First token NEITHER VAR NOR PROC"<<endl;
-				index = atoi(tk2.c_str());
-				cout<<"Index: "<<index<<endl;
-			}
-
-			//push in a dummy value for removal purposes
-			withAns.push_back(Pair (index, index));
-			removePairs(withAns, tk1, 2);
-			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
+		if(i1->second==TypeTable::VARIABLE){
+			cout<<"First token VARIABLE"<<endl;
+			index = pkb->getVarIndex(tk2);
+			cout<<"tk2 = "<<tk2<<" index = "<<index<<endl;
+		}else if(i1->second==TypeTable::PROCEDURE){
+			cout<<"First token PROCEDURE"<<endl;
+			index = pkb->getProcIndex(tk2);
+		} else{
+			cout<<"First token NEITHER VAR NOR PROC"<<endl;
+			index = atoi(tk2.c_str());
+			cout<<"Index: "<<index<<endl;
 		}
 
-		//else evaluate true or false
-		else {
-			if(i1->second == TypeTable::VARIABLE){
-				int varI = pkb->getVarIndex(tk2);
-				if(varI!=-1){
-					withAns.push_back(Pair (varI, varI));
-				}
-			}
-			else if(i1->second == TypeTable::PROCEDURE){
-				int procI = pkb->getProcIndex(tk2);
-				if(procI!=-1){
-					withAns.push_back(Pair (procI, procI));
-				}
-			}
+		withAns.push_back(Pair (index, index));
 
-			else if(i1->second == TypeTable::CONSTANT){
-				int constI = pkb->getConstIndex(tk2);
-				if(constI!=-1){
-					withAns.push_back(Pair (constI, constI));
-				}
-			}
-
-
-			else if(i1->second == TypeTable::STMT || i1->second == TypeTable::PROGLINE){
-				int stmtRange = pkb->getStmtRange();
-				int chosenStmt = atoi(tk2.c_str());
-				if(chosenStmt<=stmtRange){
-					withAns.push_back(Pair (chosenStmt, chosenStmt));
-				}else {
-					withAns.push_back(Pair (-2, -2));
-				}
-			}
-
-			else{
-				withAns.push_back(Pair (-2, -2));
-			}
-			relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
-		}
 	}
+	intersectPairs(tk1,tk2,&withAns,relIndex);
+	relAns.insert(make_pair<int, vector<Pair>>(relIndex, withAns));
 	cout<<"---END EVALUATE WITH METHOD---\n"<<endl;
 }
 
