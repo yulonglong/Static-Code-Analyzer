@@ -36,6 +36,7 @@ unordered_map<PROCINDEX, vector<CALLSPAIR>> Calls::getCallsTable(){
 void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 	PROCINDEX index1 = procTable->getProcIndex(p1);
 	PROCINDEX index2 = procTable->getProcIndex(p2);
+	callStmtNumList.insert(s);
 	if(index1!=-1 && index2!=-1){
 		try{
 			CALLSPAIR tempPair (index2,s);
@@ -173,6 +174,11 @@ set<PROCINDEX> Calls::getCalled(PROCINDEX index){
 		return ans;
 	}
 }
+
+set<STMTNUM> Calls::getAllCallStmt(){
+	return callStmtNumList;
+}
+
 
 void Calls::printCallsTable() {
 	cout<< "Calls Table" << endl;

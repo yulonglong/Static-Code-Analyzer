@@ -265,6 +265,10 @@ set<PROCINDEX> PKB::getCalled(PROCINDEX p){
 	return calls->getCalled(p);
 }
 
+set<STMTNUM> PKB::getAllCallStmt(){
+	return calls->getAllCallStmt();
+}
+
 bool PKB::isFollows(STMTNUM s1, STMTNUM s2){
 	return follows->isFollows(s1,s2);
 }

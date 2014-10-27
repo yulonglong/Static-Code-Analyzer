@@ -152,14 +152,17 @@ public:
 
 	//! If the Calls relationship between the two procedure names is true, return true. Otherwise, return false.
 	bool isCalls(PROCINDEX,PROCINDEX);
-	//! Return a vector of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found.
+	//! Return a set of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found.
 	set<PROCINDEX> getAllCalls(); 
-	//! Return a vector of procedure indexes where the procedure index had called the given procedure index. Return an empty vector if not found.
+	//! Return a set of procedure indexes where the procedure index had called the given procedure index. Return an empty vector if not found.
 	set<PROCINDEX> getCalls(PROCINDEX); 
-	//! Return a vector of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found.
+	//! Return a set of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found.
 	set<PROCINDEX> getAllCalled(); 
-	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found.
+	//! Return a set of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found.
 	set<PROCINDEX> getCalled(PROCINDEX); 
+	//! Return a set of all statement numbers that contain the call relationship
+	set<STMTNUM> getAllCallStmt();
+
 
 	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	

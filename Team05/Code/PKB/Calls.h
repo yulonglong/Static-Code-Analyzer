@@ -46,6 +46,7 @@ private:
 	ProcTable *procTable;
 	set<PROCINDEX> callsList;
 	set<PROCINDEX> calledList;
+	set<STMTNUM> callStmtNumList;
 
 public:	
 	//! A constructor to initialize the Calls class.
@@ -69,6 +70,9 @@ public:
 	set<PROCINDEX> getAllCalled(); //Calls(p,q) Select q, return empty if not found
 	//! Return a vector of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found.
 	set<PROCINDEX> getCalled(PROCINDEX); //Calls("First", q) Select q, return empty if not found
+
+	//! Return a set of all statement numbers that contain the call relationship
+	set<STMTNUM> getAllCallStmt();
 
 	/// @cond
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();
