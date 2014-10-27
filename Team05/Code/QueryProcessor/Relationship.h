@@ -2,6 +2,7 @@
 #ifndef RELATIONSHIP_H
 #define RELATIONSHIP_H
 
+#include "PKB.h"
 #include <string>
 #include <iostream>
 #include <string>
@@ -20,6 +21,7 @@ class Relationship
 		string relName;
 		RelType relType;
 		string patternSyn; //for pattern
+		TypeTable::SynType callSynType;
         string token1;
         string token2;
 		TokenType token1Type;
@@ -45,6 +47,7 @@ class Relationship
         string getToken2();
 		TokenType getToken1Type();
 		TokenType getToken2Type();
+		TypeTable::SynType getCallSynType();
 		
 		//setter
 		void setRelName(string);
@@ -54,6 +57,7 @@ class Relationship
 		void setToken1Type(TokenType);
 		void setToken2Type(TokenType);
 		void setPatternSyn(string);
+		void setCallSynType(TypeTable::SynType);
 
 };
 

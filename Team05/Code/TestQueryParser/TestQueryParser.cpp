@@ -220,6 +220,7 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	
@@ -284,6 +285,7 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -347,6 +349,7 @@ void QueryParserTest::testQueryStmtSelectUses(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -410,6 +413,7 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -474,6 +478,7 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -541,6 +546,7 @@ void QueryParserTest::testQueryComplex1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -604,6 +610,7 @@ void QueryParserTest::testQueryFollows1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -667,6 +674,7 @@ void QueryParserTest::testQueryModifies1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -731,6 +739,7 @@ void QueryParserTest::testQueryModifies2(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -795,6 +804,7 @@ void QueryParserTest::testQueryParent1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -858,6 +868,7 @@ void QueryParserTest::testQueryCallStar1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -921,6 +932,7 @@ void QueryParserTest::testQueryPattern1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -985,6 +997,7 @@ void QueryParserTest::testQueryPattern2(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1048,6 +1061,7 @@ void QueryParserTest::testQueryPatternWhile1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1111,6 +1125,7 @@ void QueryParserTest::testQueryPatternIf1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1175,6 +1190,7 @@ void QueryParserTest::testQueryWith1(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -1238,6 +1254,7 @@ void QueryParserTest::testQueryWith2(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1303,6 +1320,7 @@ void QueryParserTest::testQueryWith3(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1370,6 +1388,7 @@ void QueryParserTest::testQueryMultipleSuchThat(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1439,6 +1458,7 @@ void QueryParserTest::testQueryMultipleWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1515,6 +1535,7 @@ void QueryParserTest::testQueryMultipleWith2(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1583,6 +1604,7 @@ void QueryParserTest::testQueryMultiplePattern(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1658,6 +1680,7 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1738,6 +1761,7 @@ void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1809,6 +1833,7 @@ void QueryParserTest::testQueryTupleModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -1880,6 +1905,7 @@ void QueryParserTest::testQueryTupleUses(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 
@@ -2118,6 +2144,7 @@ void QueryParserTest::testQuerySemanticSelect(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2192,6 +2219,7 @@ void QueryParserTest::testQuerySemanticModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2266,6 +2294,7 @@ void QueryParserTest::testQuerySemanticUses(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2340,6 +2369,7 @@ void QueryParserTest::testQuerySemanticCalls(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2414,6 +2444,7 @@ void QueryParserTest::testQuerySemanticCallsStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2488,6 +2519,7 @@ void QueryParserTest::testQuerySemanticParent(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2562,6 +2594,7 @@ void QueryParserTest::testQuerySemanticParentStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2636,6 +2669,7 @@ void QueryParserTest::testQuerySemanticNext(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2710,6 +2744,7 @@ void QueryParserTest::testQuerySemanticNextStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2784,6 +2819,7 @@ void QueryParserTest::testQuerySemanticAffects(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;
@@ -2858,6 +2894,7 @@ void QueryParserTest::testQuerySemanticAffectsStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
 	}
 	//RELATIONSHIP END
 	return;

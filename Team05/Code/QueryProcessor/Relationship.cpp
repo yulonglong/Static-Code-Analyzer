@@ -62,6 +62,8 @@ Relationship::TokenType Relationship::getTokenType(string tokenStr){
 //blank relationship
 Relationship::Relationship()
 {
+	//callSynType is Stmt# by default
+	callSynType = TypeTable::STMT;
 }
 
 //constructor for normal clause
@@ -71,6 +73,7 @@ Relationship::Relationship(string newRel, string newToken1, string newToken2)
 	relType = getRelType(relName);
     token1 = newToken1;
     token2 = newToken2;
+	callSynType = TypeTable::STMT;
 }
 
 //constructor for pattern clause
@@ -81,6 +84,7 @@ Relationship::Relationship(string newRel, string newPatternSyn, string newToken1
 	patternSyn = newPatternSyn;
     token1 = newToken1;
     token2 = newToken2;
+	callSynType = TypeTable::STMT;
 }
 
 //constructor for normal clause with type
@@ -92,6 +96,7 @@ Relationship::Relationship(string newRel, string newToken1, TokenType newType1, 
 	token1Type = newType1;
     token2 = newToken2;
 	token2Type = newType2;
+	callSynType = TypeTable::STMT;
 }
 
 //constructor for pattern clause with type
@@ -104,6 +109,7 @@ Relationship::Relationship(string newRel, string newPatternSyn, string newToken1
 	token1Type = newType1;
     token2 = newToken2;
 	token2Type = newType2;
+	callSynType = TypeTable::STMT;
 }
 
 //getter implementation
@@ -136,6 +142,10 @@ Relationship::TokenType Relationship::getToken2Type(){
 	return token2Type;
 }
 
+TypeTable::SynType Relationship::getCallSynType(){
+	return callSynType;
+}
+
 
 //setter implementation
 
@@ -165,4 +175,8 @@ void Relationship::setToken2Type(Relationship::TokenType newType2){
 
 void Relationship::setPatternSyn(string newPatternSyn){
 	patternSyn = newPatternSyn;
+}
+
+void Relationship::setCallSynType(TypeTable::SynType newCallSynType){
+	callSynType = newCallSynType;
 }
