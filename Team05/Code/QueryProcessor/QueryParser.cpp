@@ -913,7 +913,7 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2], bool callSynTypePro
 	}
 }
 
-bool QueryParser::isValidSelectedSyn(string &refSelectedName){
+bool QueryParser::isValidSelectedSyn(string &refSelectedName, bool &selectedSynIsCallProcedure){
 	string selectedName = refSelectedName;
 	unordered_map<string, TypeTable::SynType>::iterator it;
 
@@ -925,10 +925,15 @@ bool QueryParser::isValidSelectedSyn(string &refSelectedName){
 		if(it==synMap.end()){//if synonym not found
 			return false;
 		}
-		else if ((it->second != TypeTable::PROCEDURE)&&(result[2] == "procName")){
+		else if ((it->second != TypeTable::PROCEDURE)&&(it->second != TypeTable::CALL)&&(result[2] == "procName")){
 			return false;
 		}
-		else if ((it->second != TypeTable::STMT)&&(result[2] == "stmt#")){
+		else if ((it->second != TypeTable::STMT)&&
+				(it->second != TypeTable::IF)&&
+				(it->second != TypeTable::WHILE)&&
+				(it->second != TypeTable::ASSIGN)&&
+				(it->second != TypeTable::CALL)&&
+				(result[2] == "stmt#")){
 			return false;
 		}
 		else if ((it->second != TypeTable::CONSTANT)&&(result[2] == "value")){
@@ -938,7 +943,11 @@ bool QueryParser::isValidSelectedSyn(string &refSelectedName){
 			return false;
 		}
 		else{
+			//if the statement is valid
 			refSelectedName = result[1];
+			if((it->second == TypeTable::CALL)&&(result[2] == "procName")){
+				selectedSynIsCallProcedure = true;
+			}
 		}
 	}
 	//if it is a regular synonym
@@ -956,17 +965,23 @@ Query QueryParser::constructAndValidateQuery(vector<string> v, unordered_map<str
 
 	//set selected synonyms (supports tuple)
 	vector<string> selectedSynForQuery;
+	vector<bool> selectedSynIsCallProcedureForQuery;
+
 	for (int i=0;i<(int)selectedSyn.size();i++){
+		bool selectedSynIsProcedure = false;
 		//semantic check on whether the selected syn is present
-		if(isValidSelectedSyn(selectedSyn[i])){
+		if(isValidSelectedSyn(selectedSyn[i], selectedSynIsProcedure)){
 			selectedSynForQuery.push_back(selectedSyn[i]);
+			selectedSynIsCallProcedureForQuery.push_back(selectedSynIsProcedure);
 		}
 		else{
 			valid = false;
 			return Query();
 		}
 	}
+	//set both table
 	query.setSelectedSyn(selectedSynForQuery);
+	query.setSelectedSynIsCallProcedure(selectedSynIsCallProcedureForQuery);
 
 	//set synTable
 	query.setSynTable(map);

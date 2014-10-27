@@ -221,7 +221,7 @@ private:
 
 	bool validateWithLhsAndRhs(string withToken[2],bool);
 
-	bool isValidSelectedSyn(string&);
+	bool isValidSelectedSyn(string&, bool&);
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
 
 public:

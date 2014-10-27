@@ -15,9 +15,11 @@ class Query
     public:
         Query();
 		vector<string> getSelectedSyn();
-		void setSelectedSyn(vector<string> s);
+		void setSelectedSyn(vector<string>);
+		vector<bool> getSelectedSynIsCallProcedure();
+		void setSelectedSynIsCallProcedure(vector<bool>);
 		string getPatternSyn();
-		void setPatternSyn(string s);
+		void setPatternSyn(string);
         vector<Relationship> getRelVect();
 		unordered_map<string, TypeTable::SynType> getSynTable();
 		void setSynTable(unordered_map<string, TypeTable::SynType>);
@@ -25,6 +27,7 @@ class Query
 
 	private:
 		vector<string> selectedSyn; 
+		vector<bool> selectedSynIsCallProcedure;
 		string patternSyn;
         vector<Relationship> relVect;
 		unordered_map<string, TypeTable::SynType> synTable;

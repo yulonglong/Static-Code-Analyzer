@@ -8,6 +8,10 @@ void Query::setSelectedSyn(vector<string> s){
 	selectedSyn = s;
 }
 
+void Query::setSelectedSynIsCallProcedure(vector<bool> s){
+	selectedSynIsCallProcedure = s;
+}
+
 void Query::setPatternSyn(string s){
 	patternSyn = s;
 }
@@ -19,6 +23,11 @@ string Query::getPatternSyn(){
 vector<string> Query::getSelectedSyn()
 {
     return selectedSyn;
+}
+
+vector<bool> Query::getSelectedSynIsCallProcedure()
+{
+    return selectedSynIsCallProcedure;
 }
 
 void Query::addRelationship(Relationship r)
