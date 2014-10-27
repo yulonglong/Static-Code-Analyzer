@@ -22,7 +22,7 @@ x, y, z, v, idx, t
 5000
 5 - unrelated ::
 procedure p1, p2; stmt s1, s2; variable v;
-Select p2 such that Calls ("Fern", p2) and Modifies (s1, "wrong")
+Select p2 such that Calls ("Fern", p2) and Modifies (s1, "x")
 Tulip, Lily, Orchid
 5000
 6 - related ::
@@ -38,12 +38,12 @@ Select s2 such that Uses (s1, v) and Parent (s1, s2)
 8 - related, all::
 stmt s1, s2;
 Select s1 such that Parent (s1, s2) and Follows (s1, s2)
-9, 11, 19, 24, 27, 28
+
 5000
 9 - related ::
 stmt s1, s2;
 Select s2 such that Parent (s1, s2) and Follows (s1, s2)
-10, 12, 14, 20, 25, 28, 29
+
 5000
 10 - exhaustive ::
 procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;

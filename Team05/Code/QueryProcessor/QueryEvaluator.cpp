@@ -200,7 +200,11 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 			//return answers;
 		}
 	}
-
+	
+	set<int> test = retrieveTokenEvaluatedAnswers("s1");
+	for(set<int>::iterator y = test.begin(); y!=test.end(); y++){
+		cout<<"EVALUATED S1 = "<<*y<<endl;
+	}
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
 		cout<<"Iterating Selected Syn"<<endl;
@@ -1280,6 +1284,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 		else{
 			for(set<int>::iterator it=ans.begin(); it!=ans.end(); it++){
 				callAns.push_back(Pair (procIndex, *it));
+				cout<<"Call - Pushing Pair ("<<procIndex<<" "<<*it<<")"<<endl;
 			}
 		}
 	}
