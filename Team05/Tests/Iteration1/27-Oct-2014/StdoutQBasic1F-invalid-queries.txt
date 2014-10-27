@@ -1,0 +1,1259 @@
+Parameters : Source1D.txt QBasic1F-invalid-queries.txt ResultQBasic1F-invalid-queries.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration1
+Beginning to evaluate Query File.
+New Category :  syntatically correct queries that are invalid
+1 - type mismatch ::
+prog_line pl; variable v;
+Select pl with pl.prog_line# = v.varName
+
+5000
+Evaluating query 1 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - type mismatch ::
+prog_line pl; variable v;
+Select v with pl.prog_line# = v.varName
+
+5000
+Evaluating query 2 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+3 - type mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.prog_line# = p.procName
+
+5000
+Evaluating query 3 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - type mismatch ::
+prog_line pl; procedure p;
+Select p with pl.prog_line# = p.procName
+
+5000
+Evaluating query 4 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+5 - type mismatch ::
+constant c; variable v;
+Select c with c.value = v.varName
+
+5000
+Evaluating query 5 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - type mismatch ::
+constant c; procedure p;
+Select c with c.value = p.procName
+
+5000
+Evaluating query 6 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+7 - type mismatch ::
+constant c; variable v;
+Select v with c.value = v.varName
+
+5000
+Evaluating query 7 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - type mismatch ::
+constant c; procedure p;
+Select p with c.value = p.procName
+
+5000
+Evaluating query 8 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+9 - ambiguous query ::
+procedure p; variable v;
+Select p such that Modifies (_,_)
+
+5000
+Evaluating query 9 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, _)
+
+ EVALUATING MODIFIES (_ _)
+Modifies(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 4
+End creating tuple table
+<exception/>
+10 - ambiguous query ::
+procedure p; variable v;
+Select v such that Modifies (_, _)
+
+5000
+Evaluating query 10 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, _)
+
+ EVALUATING MODIFIES (_ _)
+Modifies(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 4
+End creating tuple table
+<exception/>
+11 - ambuguous query ::
+procedure p; variable v;
+Select p such that Modifies (_, v)
+
+5000
+Evaluating query 11 - ambuguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, v)
+
+ EVALUATING MODIFIES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 3
+Case 3.2
+Tuple Table Size: 15
+End creating tuple table
+<exception/>
+12 - ambiguous query ::
+procedure p; variable v;
+Select v such that Modifies (_, v)
+
+5000
+Evaluating query 12 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, v)
+
+ EVALUATING MODIFIES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 15
+FIRST PARAM = _
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 3
+it2->ans2 = 1
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 3
+Case 3.2
+Tuple Table Size: 15
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: x i y z v 
+Correct answer: 
+Missing: 
+Additional: i v x y z 
+13 - ambiguous query ::
+procedure p; variable v;
+Select p such that Uses (_, v)
+
+5000
+Evaluating query 13 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, v)
+
+ EVALUATING USES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 3
+Case 3.2
+Tuple Table Size: 12
+End creating tuple table
+<exception/>
+14 - ambiguous query ::
+procedure p; variable v;
+Select v such that Uses (_, v)
+
+5000
+Evaluating query 14 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, v)
+
+ EVALUATING USES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 12
+FIRST PARAM = _
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 1
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 3
+Case 3.2
+Tuple Table Size: 12
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: x i y z 
+Correct answer: 
+Missing: 
+Additional: i x y z 
+15 - ambiguous query ::
+procedure p; variable v;
+Select p such that Uses (_, _)
+
+5000
+Evaluating query 15 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, _)
+
+ EVALUATING USES (_ _)
+Uses(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 4
+End creating tuple table
+<exception/>
+16 - ambiguous query ::
+procedure p; variable v;
+Select v such that Uses (_, _)
+
+5000
+Evaluating query 16 - ambiguous query ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, _)
+
+ EVALUATING USES (_ _)
+Uses(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 5
+Case 4
+End creating tuple table
+<exception/>
+17 - type mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.procName = "wrong"
+
+5000
+Evaluating query 17 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+18 - type mismatch ::
+prog_line pl; procedure p;
+Select p with p.prog_line# = 34
+
+5000
+Evaluating query 18 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+19 - type mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.varName = "stillwrong"
+
+5000
+Evaluating query 19 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+20 - type mismatch ::
+prog_line pl; 
+Select pl with pl.value = 56
+
+5000
+Evaluating query 20 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+21 - type mismatch ::
+prog_line pl;
+Select pl with pl.stmt# = 999
+
+5000
+Evaluating query 21 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+22 - type mismatch ::
+procedure p;
+Select p with p.varName = "wrong"
+
+5000
+Evaluating query 22 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+23 - type mismatch ::
+procedure p;
+Select p with p.value = 23
+
+5000
+Evaluating query 23 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+24 - type mismatch ::
+variable v;
+Select v with v.procName = "fantastic"
+
+5000
+Evaluating query 24 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+25 - type mismatch ::
+variable v;
+Select v with v.value = 888
+
+5000
+Evaluating query 25 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+26 - type mismatch ::
+variable v;
+Select v with v.prog_line# = 89797
+
+5000
+Evaluating query 26 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+27 - type mismatch ::
+stmt s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 27 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+28 - type mismatch ::
+stmt s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 28 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+29 - type mismatch ::
+stmt s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 29 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+30 - type mismatch ::
+stmt s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 30 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+31 - type mismatch ::
+while s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 31 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+32 - type mismatch ::
+while s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 32 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+33 - type mismatch ::
+while s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 33 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+34 - type mismatch ::
+while s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 34 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+35 - type mismatch ::
+if s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 35 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+36 - type mismatch ::
+if s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 36 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+37 - type mismatch ::
+if s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 37 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+38 - type mismatch ::
+if s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 38 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+39 - type mismatch ::
+assign s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 39 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+40 - type mismatch ::
+assign s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 40 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+41 - type mismatch ::
+assign s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 41 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+42 - type mismatch ::
+assign s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 42 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+43 - type mismatch ::
+constant c;
+Select c with c.procName = "wrong"
+
+5000
+Evaluating query 43 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+44 - type mismatch ::
+constant c;
+Select c with c.stmt# = 78
+
+5000
+Evaluating query 44 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+45 - type mismatch ::
+constant c;
+Select c with c.varName = "wrong"
+
+5000
+Evaluating query 45 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+46 - type mismatch ::
+constant c;
+Select c with c.prog_line# = 89
+
+5000
+Evaluating query 46 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+47 - type mismatch ::
+procedure p;
+Select p with p.procName = 89
+
+5000
+Evaluating query 47 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+48 - type mismatch ::
+stmt s;
+Select s with s.stmt# = "number"
+
+5000
+Evaluating query 48 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+49 - type mismatch ::
+assign a;
+Select a with a.stmt# = "number"
+
+5000
+Evaluating query 49 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+50 - type mismatch ::
+while w;
+Select w with w.stmt# = "number"
+
+5000
+Evaluating query 50 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+51 - type mismatch ::
+if i;
+Select i with i.stmt# = "number"
+
+5000
+Evaluating query 51 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+52 - type mismatch ::
+variable v;
+Select v with v.varName = 000
+
+5000
+Evaluating query 52 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+53 - type mismatch ::
+constant c;
+Select c with c.value = somenum
+
+5000
+Evaluating query 53 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+54 - type mismatch ::
+constant c;
+Select c with c.value = "somenum"
+
+5000
+Evaluating query 54 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+55 - type mismatch ::
+prog_line pl;
+Select pl with pl.prog_line# = somenum
+
+5000
+Evaluating query 55 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+56 - type mismatch ::
+prog_line pl;
+Select pl with pl.prog_line# = "somenum"
+
+5000
+Evaluating query 56 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+57 - type mismatch ::
+constant c;
+Select c with c.value = 0098
+
+5000
+Evaluating query 57 - type mismatch ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 0098)
+
+ EVALUATING WITH (c 0098)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 0098
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 
+58 - type mismatch ::
+stmt s;
+Select s with s.stmt# = 009
+
+5000
+Evaluating query 58 - type mismatch ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 009)
+
+ EVALUATING WITH (s 009)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 009
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 9 
+Correct answer: 
+Missing: 
+Additional: 9 
+59 - type mismatch ::
+stmt s;
+Select s with s.stmt# = number
+
+5000
+Evaluating query 59 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+60 - type mismatch ::
+assign a;
+Select a with a.stmt# = number
+
+5000
+Evaluating query 60 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+61 - type mismatch ::
+while w;
+Select w with w.stmt# = number
+
+5000
+Evaluating query 61 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+62 - type mismatch ::
+if i;
+Select i with i.stmt# = number
+
+5000
+Evaluating query 62 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+63 - type mismatch ::
+stmt s1, s2;
+Select BOOLEAN such that Calls (s1, s2);
+
+5000
+Evaluating query 63 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+64 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, s2);
+
+5000
+Evaluating query 64 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+65 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (p, s1);
+
+5000
+Evaluating query 65 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+66 - type mismatch ::
+stmt s1; procedure p;
+Select BOOLEAN such that Calls (p, s1);
+
+5000
+Evaluating query 66 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+67 - type mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, p);
+
+5000
+Evaluating query 67 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+68 - type mismatch ::
+stmt s1, s2; procedure p;
+Select BOOLEAN such that Calls (s1, p);
+
+5000
+Evaluating query 68 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+69 - type mismatch ::
+stmt s1, s2; constant c; procedure p;
+Select BOOLEAN such that Calls* (p, c);
+
+5000
+Evaluating query 69 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+70 - type mismatch ::
+stmt s1, s2; procedure p; constant c;
+Select p such that Calls* (c, p);
+
+5000
+Evaluating query 70 - type mismatch ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

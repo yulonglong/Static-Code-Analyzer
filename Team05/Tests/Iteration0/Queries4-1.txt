@@ -1,0 +1,42 @@
+7
+cat: Pattern relationships
+1 - Pattern ::
+assign a; while w;
+Select a pattern a ("b", _)
+2
+5000
+2 - Pattern ::
+assign a; while w;
+Select a pattern a ("lacie", _)
+8
+5000
+3 - Pattern ::
+assign a; while w;
+Select a such that Follows (a, w) pattern a ("d",_)
+6
+5000
+4 - Pattern ::
+assign a; while w;
+Select a pattern a (_ , _)
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11
+5000
+5 - Pattern ::
+assign a; while w;
+Select a pattern a ("f" , _"lacie"_)
+10
+5000
+6 - Pattern ::
+assign a; while w;
+Select a pattern a ("d", _"d+2"_)
+5
+5000
+6 - Pattern ::
+assign a; while w;
+Select a pattern a ("d", _)
+4, 5, 6 
+5000
+7 - Pattern ::
+assign a; while w;
+Select a pattern a (_, _"d"_)
+5, 6
+5000

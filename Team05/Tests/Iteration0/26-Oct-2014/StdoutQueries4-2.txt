@@ -1,0 +1,88 @@
+Parameters : Source4.txt Queries4-2.txt ResultQueries4-2.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration0
+Beginning to evaluate Query File.
+New Category :  Modifies and Uses
+1 - Modifies, ImplStmtLine ::
+while w;
+Select w such that Modifies(w, "lacie")
+7
+5000
+Evaluating query 1 - Modifies, ImplStmtLine ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+pattern or relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(w, "lacie")
+
+ EVALUATING MODIFIES (w "lacie")
+6
+answer is empty: 0
+modifiesAnswer7 6
+modifiesAnswer8 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 1
+FIRST PARAM = w
+it2->ans1 = 7
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+2 - Uses, ImplStmtLine ::
+while w;
+Select w such that Uses(w, "lacie")
+7
+5000
+Evaluating query 2 - Uses, ImplStmtLine ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+pattern or relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(w, "lacie")
+
+ EVALUATING USES (w "lacie")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 1
+FIRST PARAM = w
+it2->ans1 = 7
+RETURNING FINAL ANSWERS
+End evaluate query
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+End of evaluating Query File.
+AutoTester Completed !

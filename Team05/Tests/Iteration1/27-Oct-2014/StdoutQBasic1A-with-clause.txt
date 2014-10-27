@@ -1,0 +1,1317 @@
+Parameters : Source1A.txt QBasic1A-with-clause.txt ResultQBasic1A-with-clause.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration1
+Beginning to evaluate Query File.
+New Category :  BASIC queries with entity attribute values and constants (with clause)
+1 - procName ::
+procedure p;
+Select p with p.procName = "Main"
+Main
+5000
+Evaluating query 1 - procName ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, "Main")
+
+ EVALUATING WITH (p "Main")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: "Main"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: Main 
+Correct answer: Main 
+2 - procName ::
+procedure p;
+Select p with p.procName = "DoesNotExist"
+
+5000
+Evaluating query 2 - procName ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, "DoesNotExist")
+
+ EVALUATING WITH (p "DoesNotExist")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: "DoesNotExist"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 
+3 - procName, BOOLEAN ::
+procedure p;
+Select BOOLEAN with p.procName = "Main"
+true
+5000
+Evaluating query 3 - procName, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, "Main")
+
+ EVALUATING WITH (p "Main")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: "Main"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+4 - procName, BOOLEAN ::
+procedure p;
+Select BOOLEAN with p.procName = "DoesNotExist"
+false
+5000
+Evaluating query 4 - procName, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, "DoesNotExist")
+
+ EVALUATING WITH (p "DoesNotExist")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: "DoesNotExist"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+
+
+
+
+Your answer: false 
+Correct answer: false 
+5 - varName ::
+variable v;
+Select v with v.varName = "x"
+x
+5000
+Evaluating query 5 - varName ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(v, "x")
+
+ EVALUATING WITH (v "x")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: v
+r.tk2: "x"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: x 
+Correct answer: x 
+6 - varName ::
+variable v;
+Select v with v.varName = "DoesNotExist"
+
+5000
+Evaluating query 6 - varName ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(v, "DoesNotExist")
+
+ EVALUATING WITH (v "DoesNotExist")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: v
+r.tk2: "DoesNotExist"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 
+7 - varName, BOOLEAN ::
+variable v;
+Select BOOLEAN with v.varName = "iter"
+true
+5000
+Evaluating query 7 - varName, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(v, "iter")
+
+ EVALUATING WITH (v "iter")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: v
+r.tk2: "iter"
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+8 - varName, BOOLEAN ::
+
+Select BOOLEAN with v.varName = "DoesNotExist"
+false
+5000
+Evaluating query 8 - varName, BOOLEAN ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: false 
+Missing: false 
+Additional: 
+9 - value ::
+constant c;
+Select c with c.value = 3
+3
+5000
+Evaluating query 9 - value ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 3)
+
+ EVALUATING WITH (c 3)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 3
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+10 - value ::
+constant c;
+Select c with c.value = 999999999999
+
+5000
+Evaluating query 10 - value ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 999999999999)
+
+ EVALUATING WITH (c 999999999999)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 999999999999
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 
+11 - value, BOOLEAN ::
+constant c;
+Select BOOLEAN with c.value = 2
+true
+5000
+Evaluating query 11 - value, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 2)
+
+ EVALUATING WITH (c 2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 2
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+12 - value, BOOLEAN ::
+constant c;
+Select BOOLEAN with c.value = 99999999999999
+false
+5000
+Evaluating query 12 - value, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 99999999999999)
+
+ EVALUATING WITH (c 99999999999999)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 99999999999999
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+empty clause detected, returning empty table
+End creating tuple table
+
+
+
+
+Your answer: false 
+Correct answer: false 
+13 - stmt ::
+stmt s;
+Select s with s.stmt# = 17
+17
+5000
+Evaluating query 13 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 17)
+
+ EVALUATING WITH (s 17)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 17
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: 17 
+Correct answer: 17 
+14 - stmt ::
+stmt s;
+Select s with s.stmt# = 99999
+
+5000
+Evaluating query 14 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 99999)
+
+ EVALUATING WITH (s 99999)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 99999
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 
+Missing: 
+Additional: -2 
+15 - stmt ::
+stmt s;
+Select BOOLEAN with s.stmt# = 23
+true
+5000
+Evaluating query 15 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 23)
+
+ EVALUATING WITH (s 23)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 23
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+16 - stmt ::
+stmt s;
+Select BOOLEAN with s.stmt# = 999999
+false
+5000
+Evaluating query 16 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 999999)
+
+ EVALUATING WITH (s 999999)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 999999
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+17 - stmt ::
+assign a;
+Select a with a.stmt# = 12
+12
+5000
+Evaluating query 17 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(a, 12)
+
+ EVALUATING WITH (a 12)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: a
+r.tk2: 12
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 12 
+Missing: 12 
+Additional: -2 
+18 - stmt ::
+assign a;
+Select a with a.stmt# = 27
+
+5000
+Evaluating query 18 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(a, 27)
+
+ EVALUATING WITH (a 27)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: a
+r.tk2: 27
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 
+Missing: 
+Additional: -2 
+19 - stmt, BOOLEAN ::
+assign a;
+Select BOOLEAN with a.stmt# = 30
+true
+5000
+Evaluating query 19 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(a, 30)
+
+ EVALUATING WITH (a 30)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: a
+r.tk2: 30
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+20 - stmt, BOOLEAN ::
+assign a;
+Select BOOLEAN with a.stmt# = 19
+false
+5000
+Evaluating query 20 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(a, 19)
+
+ EVALUATING WITH (a 19)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: a
+r.tk2: 19
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+21 - stmt ::
+while w;
+Select w with w.stmt# = 19
+19
+5000
+Evaluating query 21 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(w, 19)
+
+ EVALUATING WITH (w 19)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: 19
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 19 
+Missing: 19 
+Additional: -2 
+22 - stmt ::
+while w;
+Select w with w.stmt# = 34
+
+5000
+Evaluating query 22 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(w, 34)
+
+ EVALUATING WITH (w 34)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: 34
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 
+Missing: 
+Additional: -2 
+23 - stmt, BOOLEAN ::
+while w;
+Select BOOLEAN with w.stmt# = 8
+true
+5000
+Evaluating query 23 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(w, 8)
+
+ EVALUATING WITH (w 8)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: 8
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+24 - stmt, BOOLEAN ::
+while w;
+Select BOOLEAN with w.stmt# = 25
+false
+5000
+Evaluating query 24 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(w, 25)
+
+ EVALUATING WITH (w 25)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: 25
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+25 - stmt ::
+if i;
+Select i with i.stmt# = 38
+38
+5000
+Evaluating query 25 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 38)
+
+ EVALUATING WITH (i 38)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 38
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 38 
+Missing: 38 
+Additional: -2 
+26 - stmt ::
+if i;
+Select i with i.stmt# = 1
+
+5000
+Evaluating query 26 - stmt ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 1)
+
+ EVALUATING WITH (i 1)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 1
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+End projecting results
+
+
+
+
+Your answer: -2 
+Correct answer: 
+Missing: 
+Additional: -2 
+27 - stmt, BOOLEAN ::
+if i;
+Select BOOLEAN with i.stmt# = 38
+true
+5000
+Evaluating query 27 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 38)
+
+ EVALUATING WITH (i 38)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 38
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+28 - stmt, BOOLEAN ::
+if i;
+Select BOOLEAN with i.stmt# = 15
+false
+5000
+Evaluating query 28 - stmt, BOOLEAN ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 15)
+
+ EVALUATING WITH (i 15)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 15
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 2
+Case 2.2
+Tuple Table Size: 1
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+29 - prog_line ::
+prog_line pl;
+Select pl with pl.prog_line# = 23
+23
+5000
+Evaluating query 29 - prog_line ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 23 
+Missing: 23 
+Additional: 
+30 - prog_line ::
+prog_line pl;
+Select pl with pl.prog_line# = 15081992
+
+5000
+Evaluating query 30 - prog_line ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+31 - prog_line, boolean ::
+prog_line pl;
+Select BOLLEAN with pl.prog_line# = 1
+true
+5000
+Evaluating query 31 - prog_line, boolean ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: true 
+Missing: true 
+Additional: 
+32 - prog_line, boolean ::
+prog_line pl;
+Select BOOLEAN with pl.prog_line# = 15081992
+false
+5000
+Evaluating query 32 - prog_line, boolean ::
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: false 
+Missing: false 
+Additional: 
+33 - procName, varName ::
+procedure p; variable v;
+Select p with p.procName = v.varName
+
+5000
+Evaluating query 33 - procName, varName ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, v)
+
+ EVALUATING WITH (p v)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: v
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters

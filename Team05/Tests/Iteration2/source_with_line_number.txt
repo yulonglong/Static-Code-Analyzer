@@ -1,0 +1,39 @@
+procedure Fern {
+1  y = 10;
+2  x = y + 5;
+3  z = x * y + 4;
+4  v = x + z * 12;
+5  call Tulip;
+6  v = v + y + x;
+7  call Lily;
+8  t = v + y * x;
+9  while idx {
+10    t = x - z;
+11    if y then {
+12      z = z + y;
+13      idx = z + 1; }
+    else {
+14      x = z + y;
+15      call Lily;
+16      idx = idx - 16; }
+17    x = z + y; }
+18  call Orchid; }
+
+procedure Orchid {
+19  while idx {
+20    y = z*3 + 2*x;
+21    call Tulip;
+22    idx = idx - 1; }
+23  z = z + y + idx; }
+
+procedure Lily {
+24  while v {
+25    y = x + y; }
+26  x = y + x; }
+
+procedure Tulip {
+27  while t {
+28    if idx then {
+29      x = y + 80; }
+    else {
+30      y = y * x + z + t * v; } } }

@@ -1,0 +1,105 @@
+Parameters : Source1B.txt QBasic1C-calls-star.txt ResultQBasic1C-calls-star.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration1
+Beginning to evaluate Query File.
+New Category :  BASIC queries with Calls*
+1 - Calls* > all assignment stsms in the program :: 
+assign a;
+Select a such that Calls* (_,_)
+1, 2, 4, 5, 7, 9, 14, 15, 16, 17, 18
+5000
+Evaluating query 1 - Calls* > all assignment stsms in the program :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls*(_, _)
+
+ EVALUATING CALLS* (_ _)
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 7
+Case 4
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 1 2 4 5 7 9 14 15 16 17 18 
+Missing: 1 14 15 16 17 18 2 4 5 7 9 
+Additional: 
+2 - Calls* > all while stmt in the program ::
+while w;
+Select w such that Calls* (_,_)
+6
+5000
+Evaluating query 2 - Calls* > all while stmt in the program ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls*(_, _)
+
+ EVALUATING CALLS* (_ _)
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 7
+Case 4
+End projecting results
+
+
+
+
+Your answer: 
+Correct answer: 6 
+Missing: 6 
+Additional: 
+3 - Calls* > procedures that call other procedures transitively ::
+procedure p, q;
+Select p such that Calls* (p, q)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+Evaluating query 3 - Calls* > procedures that call other procedures transitively ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls*(p, q)
+
+ EVALUATING CALLS* (p q)

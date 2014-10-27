@@ -1,0 +1,142 @@
+28
+cat: BASIC queries with uses procedure
+1 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, v)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+2 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "x")
+First, Second, Fifth
+5000
+3 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "wrong")
+
+5000
+4 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses ("First", "x")
+true
+5000
+5 - Uses ::
+procedure p; variable v; 
+Select BOOLEAN such that Uses ("Fourth", _)
+true
+5000
+6 - Uses ::
+procedure p; variable v;
+Select BOOLEAH such that Uses (p, "y")
+true
+5000
+7 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses (p, "wrong")
+false
+5000
+8 - Uses ::
+procedure p; variable v;
+Select BOOELAN such that Uses ("Third", v)
+true
+5000
+9 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses ("Fourth", "y")
+true
+5000
+10 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "z")
+First, Second, Third
+5000
+11 - Uses ::
+procedure p; variable v;
+Select p such that Modifies (p, "y")
+First, Second, Fourth, Sixth
+5000
+12 - Uses ::
+procedure p; variable v;
+Select v such that Uses (p, v)
+i, x, y, z
+5000
+13 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Second", v)
+i, x, y, z
+5000
+14 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Fourth", v)
+y
+5000
+15 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses (p, v)
+true
+5000
+16 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+17 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses(p, _)
+true
+5000
+18 - Uses ::
+procedure p; variable v;
+Select v such that Uses (p, "v")
+v
+5000
+19 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", "y")
+Fourth
+5000
+20 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Third", "wrong")
+
+5000
+21 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "x")
+x
+5000
+22 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "wrong")
+
+5000
+23 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("First", _)
+First
+5000
+24 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("DoesNotExist", _)
+
+5000
+25 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Fourth", _)
+y
+5000
+26 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("DoesNotExist", _)
+
+5000
+27 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", v)
+Fourth
+5000
+28 - Uses ::
+procecure p; variable v;
+Select p such that Uses ("DoesNotExist", v)
+
+5000

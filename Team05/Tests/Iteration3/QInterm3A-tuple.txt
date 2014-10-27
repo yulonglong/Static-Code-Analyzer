@@ -1,0 +1,22 @@
+4
+cat: tuple
+1 - tuple ::
+procedure p1, p2;
+Select <p1, p2> such that Calls*(p1, p2)
+Fern, Lily, Orchid, Tulip
+5000
+2 - tuple ::
+stmt s1; variable v;
+Select <s1, v> such that Modifies*(s1, v)
+1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 20, 22, 23, 25, 26, 29, 30, x, y, z, t, idx, v
+5000
+3 - tuple ::
+procedure p1; variable v;
+Select <p1, v> such that Modifies*(p1, v)
+Fern, y, x, z, v, t, idx, Orchid, Lily, Tulip
+5000
+4 - tuple ::
+assign a1, a2;
+Select <a1, a2> such that Affects*(a1, a2)
+1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 22, 23, 25, 26, 29, 30
+5000
