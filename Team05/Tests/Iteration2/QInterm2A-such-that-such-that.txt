@@ -47,6 +47,6 @@ Select s2 such that Parent (s1, s2) and Follows (s1, s2)
 5000
 10 - exhaustive ::
 procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
-Select v such that Calls* (p1, p2) and Next* (n1, n2) and Uses* (s1, v)
+Select v such that Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v)
 idx, t, v, x, y, z
 5000
