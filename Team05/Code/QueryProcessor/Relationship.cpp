@@ -99,6 +99,18 @@ Relationship::Relationship(string newRel, string newToken1, TokenType newType1, 
 	callSynType = TypeTable::STMT;
 }
 
+//constructor for with-clause with callSynType
+Relationship::Relationship(string newRel, string newToken1, TokenType newType1, string newToken2, TokenType newType2, TypeTable::SynType newCallSynType )
+{
+    relName = stringToLower(newRel);
+	relType = getRelType(relName);
+    token1 = newToken1;
+	token1Type = newType1;
+    token2 = newToken2;
+	token2Type = newType2;
+	callSynType = newCallSynType;
+}
+
 //constructor for pattern clause with type
 Relationship::Relationship(string newRel, string newPatternSyn, string newToken1, TokenType newType1, string newToken2, TokenType newType2 )
 {

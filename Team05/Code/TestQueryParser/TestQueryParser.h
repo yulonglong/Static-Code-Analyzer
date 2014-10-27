@@ -30,6 +30,8 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryWith1);
 	CPPUNIT_TEST(testQueryWith2);
 	CPPUNIT_TEST(testQueryWith3);
+	CPPUNIT_TEST(testQueryWith4);
+	CPPUNIT_TEST(testQueryWith5);
 	CPPUNIT_TEST(testQueryMultipleSuchThat);
 	CPPUNIT_TEST(testQueryMultipleWith);
 	CPPUNIT_TEST(testQueryMultipleWith2);
@@ -90,6 +92,8 @@ public:
 	void testQueryWith1();
 	void testQueryWith2();
 	void testQueryWith3();
+	void testQueryWith4();
+	void testQueryWith5();
 	void testQueryMultipleSuchThat();
 	void testQueryMultipleWith();
 	void testQueryMultipleWith2();
