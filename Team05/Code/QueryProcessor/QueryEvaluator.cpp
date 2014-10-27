@@ -2544,6 +2544,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 	//Affects(a1, a2)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")) {
+		cout << "Case 1: Both are Synonyms" << endl;
 		set<int> tk1List;
 		set<int> tk2List;
 		
@@ -2571,37 +2572,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				set<int> modifies = pkb->getModifies(*itA);
-				if( !(pkb->isUses(*itB, *modifies.begin())) )
-					continue;
-
-				set<Pair> afterTk1;
-				set<Pair> beforeTk2;
-				set<int> betweenTks;
-
-				recursiveNext(*itA, *itA, &afterTk1, TypeTable::STMT, &traverseTable);
-				traverseTable.clear();
-				recursiveNextReverse(*itB, *itB, &beforeTk2, TypeTable::STMT, &traverseTable);
-				traverseTable.clear();
-
-				for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
-					for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
-						if(it1->ans1 == it2->ans2)
-							betweenTks.insert(it1->ans2);
-					}
-				}
-
-				modifies = pkb->getModifies(*modifies.begin());
-
-				bool interfere=false;
-				for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
-					for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
-						if(*it1 == *it2)
-							interfere = true;
-					}
-				}
-
-				if(!interfere)
+				if(isAffects(*itA, *itB))
 					affAns.push_back(Pair(*itA, *itB));
 			}
 		}
@@ -2609,6 +2580,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 	//Affects(a, "7")
 	else if( isalpha(tk1[0]) || tk1=="_" ) {
+		cout << "Case 2: Left is Synonym" << endl;
 		set<int> tk1List;
 		if(tk1=="_")
 			tk1List = pkb->getAllStmts(TypeTable::STMT);
@@ -2622,44 +2594,14 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
-			set<int> modifies = pkb->getModifies(*it);
-			if( !(pkb->isUses(atoi(tk2.c_str()), *modifies.begin())) )
-				continue;
-
-			set<Pair> afterTk1;
-			set<Pair> beforeTk2;
-			set<int> betweenTks;
-
-			recursiveNext(*it, *it, &afterTk1, TypeTable::STMT, &traverseTable);
-			traverseTable.clear();
-			recursiveNextReverse(atoi(tk2.c_str()), atoi(tk2.c_str()), &beforeTk2, TypeTable::STMT, &traverseTable);
-			traverseTable.clear();
-		
-			for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
-				for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
-					if(it1->ans1 == it2->ans2)
-						betweenTks.insert(it1->ans2);
-				}
-			}
-
-			modifies = pkb->getModifies(*modifies.begin());
-
-			bool interfere=false;
-			for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
-				for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
-					if(*it1 == *it2)
-						interfere = true;
-				}
-			}
-
-			if(!interfere)
-				affAns.push_back(Pair(*it, atoi(tk2.c_str())));
-			
+			if(isAffects(*it, atoi(tk2.c_str())))
+				affAns.push_back(Pair(*it, atoi(tk2.c_str())));	
 		}
 	}
 
 	//Affects("1", a)
 	else if( isalpha(tk2[0]) || tk2=="_" ) {
+		cout << "Case 3: Right is Synonym" << endl;
 		set<int> tk2List;
 		if(tk2=="_")
 			tk2List = pkb->getAllStmts(TypeTable::STMT);
@@ -2673,122 +2615,30 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
-			set<int> modifies = pkb->getModifies(atoi(tk1.c_str()));
-			if( !(pkb->isUses(*it, *modifies.begin())) )
-				continue;
-
-			set<Pair> afterTk1;
-			set<Pair> beforeTk2;
-			set<int> betweenTks;
-
-			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &afterTk1, TypeTable::STMT, &traverseTable);
-			traverseTable.clear();
-			recursiveNextReverse(*it, *it, &beforeTk2, TypeTable::STMT, &traverseTable);
-			traverseTable.clear();
-
-			for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
-				for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
-					if(it1->ans1 == it2->ans2)
-						betweenTks.insert(it1->ans2);
-				}
-			}
-
-			modifies = pkb->getModifies(*modifies.begin());
-
-			bool interfere=false;
-			for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
-				for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
-					if(*it1 == *it2)
-						interfere = true;
-				}
-			}
-
-			if(!interfere)
+			if(isAffects(atoi(tk1.c_str()), *it)) 
 				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
 		}
 	}
 
 	//Affects("1", "2")
 	else if( tk1!="_" ) {
-		set<int> modifies = pkb->getModifies(atoi(tk1.c_str()));
-		if( !(pkb->isUses(atoi(tk2.c_str()), *modifies.begin())) ) {
-			affAns.push_back(Pair(-2, -2));
-			intersectPairs(tk1, tk2, &affAns, relIndex);
-			QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
-			return;
-		}
-
-		set<Pair> afterTk1;
-		set<Pair> beforeTk2;
-		set<int> betweenTks;
-
-		recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &afterTk1, TypeTable::STMT, &traverseTable);
-		traverseTable.clear();
-		recursiveNextReverse(atoi(tk2.c_str()), atoi(tk2.c_str()), &beforeTk2, TypeTable::STMT, &traverseTable);
-		traverseTable.clear();
-		
-		for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
-			for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
-				if(it1->ans1 == it2->ans2)
-						betweenTks.insert(it1->ans2);
-			}
-		}
-
-		modifies = pkb->getModifies(*modifies.begin());
-
-		bool interfere=false;
-		for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
-			for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
-				if(*it1 == *it2)
-					interfere = true;
-			}
-		}
-
-		if(interfere)
-			affAns.push_back(Pair(-2, -2));
-		else
+		cout << "Case 4: Both are Constants" << endl;
+		if(isAffects(atoi(tk1.c_str()), atoi(tk2.c_str())))
 			affAns.push_back(Pair(-1, -1));
+		else
+			affAns.push_back(Pair(-2, -2));
 	}
 
 	//Affects(_,_)
 	else {
+		cout << "Case 5: Both are underscore" << endl;
 		set<int> tk1List = pkb->getAllStmts(TypeTable::STMT);
 		set<int> tk2List = pkb->getAllStmts(TypeTable::STMT);
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				set<int> modifies = pkb->getModifies(*itA);
-				if( !(pkb->isUses(*itB, *modifies.begin())) )
-					continue;
-
-				set<Pair> afterTk1;
-				set<Pair> beforeTk2;
-				set<int> betweenTks;
-
-				recursiveNext(*itA, *itA, &afterTk1, TypeTable::STMT, &traverseTable);
-				traverseTable.clear();
-				recursiveNextReverse(*itB, *itB, &beforeTk2, TypeTable::STMT, &traverseTable);
-				traverseTable.clear();
-
-				for(set<Pair>::iterator it1 = afterTk1.begin(); it1!=afterTk1.end(); it1++) {
-					for(set<Pair>::iterator it2 = beforeTk2.begin(); it2!=beforeTk2.end(); it2++) {
-						if(it1->ans1 == it2->ans2)
-							betweenTks.insert(it1->ans2);
-					}
-				}
-
-				modifies = pkb->getModifies(*modifies.begin());
-
-				bool interfere=false;
-				for(set<int>::iterator it1 = betweenTks.begin(); it1!=betweenTks.end(); it1++) {
-					for(set<int>::iterator it2 = modifies.begin(); it2!=modifies.end(); it2++) {
-						if(*it1 == *it2)
-							interfere = true;
-					}
-				}
-
-				if(!interfere) {
-					affAns.push_back(Pair(-1, -1));
+				if(isAffects(*itA, *itB)) {
+					affAns.push_back(Pair(-1,-1));
 					intersectPairs(tk1, tk2, &affAns, relIndex);
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 					return;
@@ -2799,7 +2649,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		affAns.push_back(Pair(-2, -2));
 	}
 
-	intersectPairs(tk1, tk2, &affAns, relIndex);
+	//intersectPairs(tk1, tk2, &affAns, relIndex);
 	QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 }
 
@@ -2841,6 +2691,44 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 	intersectPairs(tk1, tk2, &affAns, relIndex);
 
 	QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+}
+
+bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
+	stack<int> st;
+	set<int> next = pkb->getNext(start);
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
+		st.push(*it);
+	set<int> visited;
+
+	while(!st.empty()) {
+		int curr = st.top();
+		st.pop();
+		visited.insert(curr);
+
+		if(curr==target)
+			return true;
+
+		if(modifies.count(curr)!=0 && (pkb->getSynType(curr)==TypeTable::ASSIGN || pkb->getSynType(curr)==TypeTable::CALL))
+			continue;
+
+		set<int> next = pkb->getNext(curr);
+		for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {
+			if(visited.count(*it)==0)
+				st.push(*it);
+		}
+
+	}
+	return false;
+}
+
+bool QueryEvaluator::isAffects(int token1, int token2) {
+	set<int> modified = pkb->getModified(token1);
+	if( !(pkb->isUses(token2, *modified.begin())) )
+		return false;
+
+	set<int> modifies = pkb->getModifies(*modified.begin());
+
+	return findPath(token1, token2, modifies);
 }
 
 void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {

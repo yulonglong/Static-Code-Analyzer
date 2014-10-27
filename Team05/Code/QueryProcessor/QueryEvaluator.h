@@ -65,6 +65,8 @@ private:
 
 	//! Evaluate all Affects Relationships
 	void evaluateAffects(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+	bool findPath(int, int, set<int>);
+	bool isAffects(int, int);
 
 	//! Evaluate all Affects* Relationships
 	void evaluateAffectsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);	
