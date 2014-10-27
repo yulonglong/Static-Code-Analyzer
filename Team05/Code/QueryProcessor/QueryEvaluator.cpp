@@ -880,11 +880,13 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		else {
 			set<int> allTk1 = pkb->getAllStmts(i2->second);
 			set<int> tk1Ans;
+			pkb->printNextTable();
 			for(set<int>::iterator it= allTk1.begin(); it!=allTk1.end(); it++){
 				tk1Ans = pkb->getPrevious(*it);
 				for(set<int>::iterator it2 = tk1Ans.begin(); it2!=tk1Ans.end(); it2++){
 					if(pkb->isSynType(i1->second,*it2)){
 						nextAns.push_back(Pair (*it2, *it));
+						cout<<"Pushing in pairs ("<<*it2<<" "<<*it<<")"<<endl;
 					}
 				}
 			}
@@ -920,6 +922,16 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		}
 
 		insertLinks(tk1, relIndex);
+	}
+
+	//Next(_,_)
+	else if(tk1=="_" && tk2=="_"){
+		set<int> s = pkb->getAllNext();
+		if(!s.empty()){
+			nextAns.push_back(Pair(-1,-1));
+		}else{
+			nextAns.push_back(Pair(-2,-2));
+		}
 	}
 
 	//Next(_, n)
