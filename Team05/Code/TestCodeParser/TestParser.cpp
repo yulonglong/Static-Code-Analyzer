@@ -43,22 +43,22 @@ void ParserTest::testModifyTable()
 	Node* root = pkb->getASTRoot();
 
 	string expected = "x";
-	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(0));
-	expected = "z";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(1));
-	expected = "i";
+	expected = "z";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(2));
-	expected = "y";
+	expected = "i";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(3));
-	expected = "v";
+	expected = "y";
 	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(4));
+	expected = "v";
+	CPPUNIT_ASSERT_EQUAL(expected, varTable->getVarName(5));
 
 	expected = "First";
-	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(0));
-	expected = "Second";
 	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(1));
-	expected = "Third";
+	expected = "Second";
 	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(2));
+	expected = "Third";
+	CPPUNIT_ASSERT_EQUAL(expected, procTable->getProcName(3));
 
 	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(1,2));
 	CPPUNIT_ASSERT_EQUAL(false,parent->isParent(3,2));
@@ -85,21 +85,21 @@ void ParserTest::testModifyTable()
 	CPPUNIT_ASSERT_EQUAL(TypeTable::ASSIGN,typeTable->getType(11));
 
 	
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,"x"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,"z"));
-	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,"v"));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(2,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(3,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(1,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(4,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(5,varTable->getVarIndex("i")));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(13,varTable->getVarIndex("z")));
+	CPPUNIT_ASSERT_EQUAL(true,modifies->isModifies(16,varTable->getVarIndex("z")));
+	CPPUNIT_ASSERT_EQUAL(false,modifies->isModifies(21,varTable->getVarIndex("v")));
 	
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,"i"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"x"));
-	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,"y"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,"z"));
-	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,"z"));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(6,varTable->getVarIndex("i")));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,varTable->getVarIndex("x")));
+	CPPUNIT_ASSERT_EQUAL(true,uses->isUses(7,varTable->getVarIndex("y")));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(1,varTable->getVarIndex("z")));
+	CPPUNIT_ASSERT_EQUAL(false,uses->isUses(2,varTable->getVarIndex("z")));
 	
 	return;
 }
