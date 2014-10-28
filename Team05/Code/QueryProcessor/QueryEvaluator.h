@@ -70,7 +70,8 @@ private:
 
 	//! Evaluate all Affects* Relationships
 	void evaluateAffectsStar(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);	
-	
+	bool isAffectsStar(int, int, unordered_map<Pair, bool> *, vector<int>);
+
 	//! Evaluate all With Relationships
 	void evaluateWith(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
 
@@ -117,3 +118,4 @@ public:
 };
 
 #endif
+
