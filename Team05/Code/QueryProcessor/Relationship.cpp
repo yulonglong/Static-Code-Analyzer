@@ -100,7 +100,7 @@ Relationship::Relationship(string newRel, string newToken1, TokenType newType1, 
 }
 
 //constructor for with-clause with callSynType
-Relationship::Relationship(string newRel, string newToken1, TokenType newType1, string newToken2, TokenType newType2, TypeTable::SynType newCallSynType )
+Relationship::Relationship(string newRel, string newToken1, TokenType newType1, string newToken2, TokenType newType2, bool callSynTypeProcedure )
 {
     relName = stringToLower(newRel);
 	relType = getRelType(relName);
@@ -108,7 +108,10 @@ Relationship::Relationship(string newRel, string newToken1, TokenType newType1, 
 	token1Type = newType1;
     token2 = newToken2;
 	token2Type = newType2;
-	callSynType = newCallSynType;
+	callSynType = TypeTable::STMT;
+	if(callSynTypeProcedure){
+		callSynType = TypeTable::PROCEDURE;
+	}
 }
 
 //constructor for pattern clause with type

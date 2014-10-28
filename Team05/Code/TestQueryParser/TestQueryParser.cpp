@@ -47,6 +47,18 @@ void QueryParserTest::testQuerySelectOnly(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -92,6 +104,18 @@ void QueryParserTest::testQuerySelectOnly2(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -140,6 +164,18 @@ void QueryParserTest::testQuerySelectOnly3(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -185,6 +221,18 @@ void QueryParserTest::testQueryAssignSelectModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -249,6 +297,18 @@ void QueryParserTest::testQueryAssignVariableSelectModifies(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -315,6 +375,19 @@ void QueryParserTest::testQueryStmtSelectUses(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -379,6 +452,18 @@ void QueryParserTest::testQueryStmtSelectParentStar(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -441,6 +526,18 @@ void QueryParserTest::testQueryAssignSelectModifiesPattern(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -506,6 +603,18 @@ void QueryParserTest::testQueryComplex1(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -575,6 +684,18 @@ void QueryParserTest::testQueryFollows1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -639,6 +760,18 @@ void QueryParserTest::testQueryModifies1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -702,6 +835,18 @@ void QueryParserTest::testQueryModifies2(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -770,6 +915,18 @@ void QueryParserTest::testQueryParent1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -834,6 +991,18 @@ void QueryParserTest::testQueryCallStar1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -897,6 +1066,18 @@ void QueryParserTest::testQueryPattern1(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -963,6 +1144,18 @@ void QueryParserTest::testQueryPattern2(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1026,6 +1219,18 @@ void QueryParserTest::testQueryPatternWhile1(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1091,6 +1296,18 @@ void QueryParserTest::testQueryPatternIf1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1155,6 +1372,18 @@ void QueryParserTest::testQueryWith1(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1218,6 +1447,18 @@ void QueryParserTest::testQueryWith2(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1284,6 +1525,18 @@ void QueryParserTest::testQueryWith3(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1327,7 +1580,6 @@ void QueryParserTest::testQueryWith3(){
 	return;
 }
 
-
 void QueryParserTest::testQueryWith4(){
 	//INIT BEGIN
 	string query = "prog_line n; stmt s; call c;Select s such that Follows*(n,s) with c.procName=\"First\"";
@@ -1350,6 +1602,18 @@ void QueryParserTest::testQueryWith4(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1420,6 +1684,18 @@ void QueryParserTest::testQueryWith5(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1447,7 +1723,7 @@ void QueryParserTest::testQueryWith5(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("with","c",Relationship::SYNONYM,"p",Relationship::SYNONYM,TypeTable::PROCEDURE));
+	expectedRelVect.push_back(Relationship("with","c",Relationship::SYNONYM,"p",Relationship::SYNONYM, true));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
@@ -1463,6 +1739,86 @@ void QueryParserTest::testQueryWith5(){
 	return;
 }
 
+
+void QueryParserTest::testQueryWith6(){
+	//INIT BEGIN
+	string query = "procedure p; stmt s; call c;Select <c.procName,c.stmt#> with c.stmt# = s.stmt#";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("c");
+	expectedSelectedSyn.push_back("c");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(true);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("p", TypeTable::PROCEDURE));
+	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("c", TypeTable::CALL));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("with","c",Relationship::SYNONYM,"s",Relationship::SYNONYM, false));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
 
 void QueryParserTest::testQueryMultipleSuchThat(){
 	//INIT BEGIN
@@ -1486,6 +1842,18 @@ void QueryParserTest::testQueryMultipleSuchThat(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1554,6 +1922,18 @@ void QueryParserTest::testQueryMultipleWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1624,6 +2004,18 @@ void QueryParserTest::testQueryMultipleWith2(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1702,6 +2094,18 @@ void QueryParserTest::testQueryMultiplePattern(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -1770,6 +2174,18 @@ void QueryParserTest::testQueryMultiplePatternAndWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1846,6 +2262,18 @@ void QueryParserTest::testQueryMultipleSuchThatAndPatternAndWith(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -1931,6 +2359,21 @@ void QueryParserTest::testQueryTupleModifies(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2002,6 +2445,21 @@ void QueryParserTest::testQueryTupleUses(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -2243,6 +2701,22 @@ void QueryParserTest::testQuerySemanticSelect(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2322,6 +2796,18 @@ void QueryParserTest::testQuerySemanticModifies(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2397,6 +2883,18 @@ void QueryParserTest::testQuerySemanticUses(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2470,6 +2968,18 @@ void QueryParserTest::testQuerySemanticCalls(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -2546,6 +3056,18 @@ void QueryParserTest::testQuerySemanticCallsStar(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2620,6 +3142,18 @@ void QueryParserTest::testQuerySemanticParent(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -2696,6 +3230,18 @@ void QueryParserTest::testQuerySemanticParentStar(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2770,6 +3316,18 @@ void QueryParserTest::testQuerySemanticNext(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table
@@ -2846,6 +3404,18 @@ void QueryParserTest::testQuerySemanticNextStar(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2921,6 +3491,18 @@ void QueryParserTest::testQuerySemanticAffects(){
 	}
 	//SELECTEDSYN END
 
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
 	//SYNTABLE BEGIN
 	//actual syn table
 	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
@@ -2995,6 +3577,18 @@ void QueryParserTest::testQuerySemanticAffectsStar(){
 		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
 	}
 	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
 
 	//SYNTABLE BEGIN
 	//actual syn table

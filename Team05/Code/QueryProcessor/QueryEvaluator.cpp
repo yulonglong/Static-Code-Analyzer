@@ -200,11 +200,6 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 			//return answers;
 		}
 	}
-	
-	set<int> test = retrieveTokenEvaluatedAnswers("s1");
-	for(set<int>::iterator y = test.begin(); y!=test.end(); y++){
-		cout<<"EVALUATED S1 = "<<*y<<endl;
-	}
 
 	for(vector<string>::iterator it = selectedSyn.begin(); it!=selectedSyn.end(); it++){
 		cout<<"Iterating Selected Syn"<<endl;
@@ -496,7 +491,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			}else if(i1->second == TypeTable::CONSTANT){
 				set<int> c = pkb->getAllConstIndex();
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
-					//a.insert(pkb->getConstValue(*iti));
+					a.insert(atoi((pkb->getConstValue(*iti)).c_str()));
 				}
 			}else {
 				a = pkb->getAllStmts(i1->second);
@@ -514,7 +509,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			}else if(i2->second == TypeTable::CONSTANT){
 				set<int> c = pkb->getAllConstIndex();
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
-				//	b.insert(pkb->getConstValue(*iti));
+					b.insert(atoi((pkb->getConstValue(*iti)).c_str()));
 				}
 			}else {
 				b = pkb->getAllStmts(i2->second);
@@ -574,21 +569,23 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
+		string dum;
 		cout<<"only 1 alpha token found"<<endl;
 		//if exist in links then delete all unnecessary tuples then push into QueryEvaluator::relAns true
 		if(!isdigit(tk2[0])){ //if the query is with c.value = 3 then we do not have to remove the quotation marks
-			tk2 = tk2.substr(1,tk2.length()-2);
+			dum = tk2.substr(1,tk2.length()-2);
 		}
 
 		int index;
 		
 		if(i1->second==TypeTable::VARIABLE){
 			cout<<"First token VARIABLE"<<endl;
-			index = pkb->getVarIndex(tk2);
+			index = pkb->getVarIndex(dum);
 			cout<<"tk2 = "<<tk2<<" index = "<<index<<endl;
 		}else if(i1->second==TypeTable::PROCEDURE){
 			cout<<"First token PROCEDURE"<<endl;
-			index = pkb->getProcIndex(tk2);
+			index = pkb->getProcIndex(dum);
+			cout<<"tk2 = "<<tk2 <<" index = "<<index<<endl;
 		} else{
 			cout<<"First token NEITHER VAR NOR PROC"<<endl;
 			index = atoi(tk2.c_str());
