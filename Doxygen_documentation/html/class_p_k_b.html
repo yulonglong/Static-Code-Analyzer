@@ -235,20 +235,24 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a0b6f0b32fe93dcbc77c6b52ae1f21997"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e63385bb76b713216d456a33c19365f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e63385bb76b713216d456a33c19365f"></a>
 set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a4e63385bb76b713216d456a33c19365f">getAllCalls</a> ()</td></tr>
-<tr class="memdesc:a4e63385bb76b713216d456a33c19365f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found. <br /></td></tr>
+<tr class="memdesc:a4e63385bb76b713216d456a33c19365f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of procedure indexes where the procedure index had called another procedure. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a4e63385bb76b713216d456a33c19365f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277e0fc63d1bb3804da079da34da0ce0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a277e0fc63d1bb3804da079da34da0ce0"></a>
 set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a277e0fc63d1bb3804da079da34da0ce0">getCalls</a> (PROCINDEX)</td></tr>
-<tr class="memdesc:a277e0fc63d1bb3804da079da34da0ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had called the given procedure index. Return an empty vector if not found. <br /></td></tr>
+<tr class="memdesc:a277e0fc63d1bb3804da079da34da0ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of procedure indexes where the procedure index had called the given procedure index. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a277e0fc63d1bb3804da079da34da0ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac86d282523bd86a71ded6b9e2cbc2b61"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac86d282523bd86a71ded6b9e2cbc2b61"></a>
 set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ac86d282523bd86a71ded6b9e2cbc2b61">getAllCalled</a> ()</td></tr>
-<tr class="memdesc:ac86d282523bd86a71ded6b9e2cbc2b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found. <br /></td></tr>
+<tr class="memdesc:ac86d282523bd86a71ded6b9e2cbc2b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of procedure indexes where the procedure index had been called by another procedure. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:ac86d282523bd86a71ded6b9e2cbc2b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d95f3bba400622e24717c4d8530ac50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d95f3bba400622e24717c4d8530ac50"></a>
 set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a6d95f3bba400622e24717c4d8530ac50">getCalled</a> (PROCINDEX)</td></tr>
-<tr class="memdesc:a6d95f3bba400622e24717c4d8530ac50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a vector of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found. <br /></td></tr>
+<tr class="memdesc:a6d95f3bba400622e24717c4d8530ac50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a6d95f3bba400622e24717c4d8530ac50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08736508449048c4468edfb3a2f6329b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08736508449048c4468edfb3a2f6329b"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a08736508449048c4468edfb3a2f6329b">getAllCallStmt</a> ()</td></tr>
+<tr class="memdesc:a08736508449048c4468edfb3a2f6329b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of all statement numbers that contain the call relationship. <br /></td></tr>
+<tr class="separator:a08736508449048c4468edfb3a2f6329b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8a85f4db70f30fb6856c57f6de1f308"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8a85f4db70f30fb6856c57f6de1f308"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ac8a85f4db70f30fb6856c57f6de1f308">isFollows</a> (STMTNUM, STMTNUM)</td></tr>
 <tr class="memdesc:ac8a85f4db70f30fb6856c57f6de1f308"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_follows.html" title="A Follows class to store the Follows relationship. ">Follows</a> relationship between the two statement names is true, return true. Otherwise, return false. <br /></td></tr>
@@ -433,7 +437,7 @@ static <a class="el" href="class_p_k_b.html">PKB</a> *&#160;</td><td class="memI
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 26 2014 00:26:32 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 29 2014 00:57:11 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

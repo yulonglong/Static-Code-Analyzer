@@ -2,6 +2,7 @@ var searchData=
 [
   ['getallcalled',['getAllCalled',['../class_calls.html#a7f8716b67c0e3284914e7e151f25b5a0',1,'Calls::getAllCalled()'],['../class_p_k_b.html#ac86d282523bd86a71ded6b9e2cbc2b61',1,'PKB::getAllCalled()']]],
   ['getallcalls',['getAllCalls',['../class_calls.html#a133c16d4640f1e367516bee419ff87ab',1,'Calls::getAllCalls()'],['../class_p_k_b.html#a4e63385bb76b713216d456a33c19365f',1,'PKB::getAllCalls()']]],
+  ['getallcallstmt',['getAllCallStmt',['../class_calls.html#a5106df73516749fb8fbe3dc40e430868',1,'Calls::getAllCallStmt()'],['../class_p_k_b.html#a08736508449048c4468edfb3a2f6329b',1,'PKB::getAllCallStmt()']]],
   ['getallchildren',['getAllChildren',['../class_parent.html#a12f46eaa965c8126714f14d190524296',1,'Parent::getAllChildren()'],['../class_p_k_b.html#afd6ead73ca56512f60126a76dbbc6ef2',1,'PKB::getAllChildren()']]],
   ['getallconstindex',['getAllConstIndex',['../class_const_table.html#a1bc65651fa64381cf9a2db619992c0be',1,'ConstTable::getAllConstIndex()'],['../class_p_k_b.html#a04df9680783ceb5d05094813e7d775c9',1,'PKB::getAllConstIndex()']]],
   ['getallfollowedby',['getAllFollowedBy',['../class_follows.html#a098d3d6dfe33c7d45f063958fba46a3e',1,'Follows::getAllFollowedBy()'],['../class_p_k_b.html#a75edaf1b352ccc39da273143d59c1efa',1,'PKB::getAllFollowedBy()']]],

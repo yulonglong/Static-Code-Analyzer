@@ -100,12 +100,14 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_query_evaluator.html#a861e04948c25774d74a7dcb4137864aa">QueryEvaluator</a> (<a class="el" href="class_p_k_b.html">PKB</a> *)</td></tr>
 <tr class="memdesc:a861e04948c25774d74a7dcb4137864aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_query_evaluator.html" title="Query Evaluator class. ">QueryEvaluator</a>. Takes in the singleton <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a> as input parameter. <br /></td></tr>
 <tr class="separator:a861e04948c25774d74a7dcb4137864aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b4e7218194d6338941eee6ba5a1cd42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b4e7218194d6338941eee6ba5a1cd42"></a>
-std::unordered_map<br class="typebreak" />
-&lt; std::string, std::vector<br class="typebreak" />
-&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_query_evaluator.html#a3b4e7218194d6338941eee6ba5a1cd42">evaluateQuery</a> (<a class="el" href="class_query.html">Query</a>)</td></tr>
-<tr class="memdesc:a3b4e7218194d6338941eee6ba5a1cd42"><td class="mdescLeft">&#160;</td><td class="mdescRight">To evaluate Queries, the <a class="el" href="class_query.html">Query</a> Processor will call evaluateQuery and pass in the <a class="el" href="class_query.html">Query</a> object returned by the <a class="el" href="class_query.html">Query</a> Parser. This method will then return an unordered_map that has every selected syn and their corresponding vector of answers. <br /></td></tr>
-<tr class="separator:a3b4e7218194d6338941eee6ba5a1cd42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e79f4ecc410777ac5eef747873eb91d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e79f4ecc410777ac5eef747873eb91d"></a>
+std::unordered_map&lt; int, <br class="typebreak" />
+std::vector&lt; <a class="el" href="class_pair.html">Pair</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_query_evaluator.html#a9e79f4ecc410777ac5eef747873eb91d">evaluateQuery</a> (<a class="el" href="class_query.html">Query</a>, vector&lt; <a class="el" href="class_relationship.html">Relationship</a> &gt; *newRelations)</td></tr>
+<tr class="memdesc:a9e79f4ecc410777ac5eef747873eb91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">To evaluate Queries, the <a class="el" href="class_query.html">Query</a> Processor will call evaluateQuery and pass in the <a class="el" href="class_query.html">Query</a> object returned by the <a class="el" href="class_query.html">Query</a> Parser. This method will then return an unordered_map that has every selected syn and their corresponding vector of answers. <br /></td></tr>
+<tr class="separator:a9e79f4ecc410777ac5eef747873eb91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6009a09852fd47089ff5eb574b40e806"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6009a09852fd47089ff5eb574b40e806"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>convertEnumToString</b> (TypeTable::SynType)</td></tr>
+<tr class="separator:a6009a09852fd47089ff5eb574b40e806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_query.html">Query</a> Evaluator class. </p>
@@ -113,7 +115,7 @@ std::unordered_map<br class="typebreak" />
 <li>Accepting <a class="el" href="class_query.html">Query</a> object made by the <a class="el" href="class_query.html">Query</a> Parser</li>
 <li>And evaluate the set of answers resquested by the user</li>
 </ul>
-<p>To evaluate query, call </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> unordered_map&lt;string, vector&lt;Pair&gt;&gt; <a class="code" href="class_query_evaluator.html#a3b4e7218194d6338941eee6ba5a1cd42">evaluateQuery</a>(<a class="code" href="class_query.html">Query</a>);</div>
+<p>To evaluate query, call </p><div class="fragment"><div class="line"><span class="keywordtype">void</span> unordered_map&lt;string, vector&lt;Pair&gt;&gt; <a class="code" href="class_query_evaluator.html#a9e79f4ecc410777ac5eef747873eb91d">evaluateQuery</a>(<a class="code" href="class_query.html">Query</a>);</div>
 </div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/QueryProcessor/<a class="el" href="_query_evaluator_8h_source.html">QueryEvaluator.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/QueryProcessor/QueryEvaluator.cpp</li>
@@ -121,7 +123,7 @@ std::unordered_map<br class="typebreak" />
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 26 2014 00:26:32 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 29 2014 00:57:11 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
