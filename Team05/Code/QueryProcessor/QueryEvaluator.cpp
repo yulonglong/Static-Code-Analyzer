@@ -621,8 +621,10 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 					index = -1;
 				}
 			}
-			else {
-
+			else{
+				if(!pkb->isSynType(i1->second, index)){
+					index = -1;
+				}
 			}
 		}
 
@@ -1954,65 +1956,6 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 
 	copy(parentStarAnsSet.begin(), parentStarAnsSet.end(), back_inserter(answer));
 	relAns.insert(make_pair<int, vector<Pair>>(relIndex, answer));
-	/*
-	//Select w such that Parent*(w, a)
-	if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk1){
-		selected = t->getAllStmts(i2->second);	//get all assign statements
-
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			stmtNumber = p->getParent(*it);
-			answer.insert(stmtNumber);
-			stmtNumber = p->getParent(stmtNumber);
-			while(stmtNumber!=-1){
-				answer.insert(stmtNumber);
-				stmtNumber = p->getParent(stmtNumber);
-			}
-		}
-	}
-
-	//Select a such that Parent*(w, a)
-	else if(isalpha(tk1[0]) && isalpha(tk2[0]) && selectedSyn==tk2){
-		cout<<"In supposed area"<<endl;
-		selected = t->getAllStmts(i2->second);	//get all assign statements
-
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){
-			stmtNumber = p->getParent(*it);
-			if(stmtNumber!=-1)
-				answer.insert(*it);
-		}
-	}
-
-	//Select w such that Parent*(w, 13)
-	else if(selectedSyn==tk1){
-
-		stmtNumber = atoi(tk2.c_str());
-		stmtNumber = p->getParent(stmtNumber);
-
-		while(stmtNumber!=-1){
-			answer.insert(stmtNumber);
-			stmtNumber = p->getParent(stmtNumber);
-		}
-	}
-
-	//Select a such that Parent*(3, a)
-	else {
-		
-		selected = t->getAllStmts(i2->second);
-		
-		for(vector<int>::iterator it = selected.begin(); it!=selected.end(); it++){			
-			stmtNumber = p->getParent(*it);
-			while(stmtNumber!=-1){
-				if(stmtNumber == atoi(tk1.c_str())){
-					answer.insert(*it);	
-					break;
-				}
-				stmtNumber = p->getParent(stmtNumber);
-			}
-			
-		}
-	}
-
-	copy(answer.begin(), answer.end(), back_inserter(vectorAnswer));*/
 }
 
 void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
@@ -2652,6 +2595,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2, unordered_map<Pair, b
 		processed->insert(make_pair(Pair(token1, token2), false));
 
 	return processed->at(Pair(token1, token2));*/
+	return true;
 }
 
 

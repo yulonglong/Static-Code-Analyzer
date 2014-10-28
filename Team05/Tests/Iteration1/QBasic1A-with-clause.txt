@@ -140,22 +140,22 @@ if i;
 Select BOOLEAN with i.stmt# = 15
 false
 5000
-29 - prog_line ::
+29 - progline ::
 prog_line pl;
 Select pl with pl.prog_line# = 23
 23
 5000
-30 - prog_line ::
+30 - progline ::
 prog_line pl;
 Select pl with pl.prog_line# = 15081992
 
 5000
-31 - prog_line, boolean ::
+31 - progline, boolean ::
 prog_line pl;
 Select BOLLEAN with pl.prog_line# = 1
 true
 5000
-32 - prog_line, boolean ::
+32 - progline, boolean ::
 prog_line pl;
 Select BOOLEAN with pl.prog_line# = 15081992
 false
