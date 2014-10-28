@@ -36,7 +36,7 @@ Select BOOLEAN with v.varName = "iter"
 true
 5000
 8 - varName, BOOLEAN ::
-
+variable v;
 Select BOOLEAN with v.varName = "DoesNotExist"
 false
 5000

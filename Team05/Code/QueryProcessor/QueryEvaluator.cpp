@@ -243,6 +243,12 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 
 		answers.insert(make_pair<string, vector<int>>(*it, synAnsVec));
 	}
+	/*
+	set<int> cc = retrieveTokenEvaluatedAnswers("p");
+	cout<<"IS SET EMPTY: "<<cc.empty()<<endl;
+	for(set<int>::iterator xx = cc.begin(); xx!=cc.end(); xx++){
+		cout<<*xx<<endl;
+	}*/
 
 	cout<<"RETURNING FINAL ANSWERS"<<endl;
 	return relAns;
@@ -493,6 +499,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
 					a.insert(atoi((pkb->getConstValue(*iti)).c_str()));
 				}
+			}else if(i1->second == TypeTable::CALL){
+				if(r.getCallSynType() == TypeTable::PROCEDURE){
+					a = pkb->getAllCalled();
+				}else {
+					a = pkb->getAllCallStmt();
+				}
 			}else {
 				a = pkb->getAllStmts(i1->second);
 			}
@@ -510,6 +522,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				set<int> c = pkb->getAllConstIndex();
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
 					b.insert(atoi((pkb->getConstValue(*iti)).c_str()));
+				}
+			}else if(i1->second == TypeTable::CALL){
+				if(r.getCallSynType() == TypeTable::PROCEDURE){
+					b = pkb->getAllCalled();
+				}else {
+					b = pkb->getAllCallStmt();
 				}
 			}else {
 				b = pkb->getAllStmts(i2->second);
@@ -535,10 +553,12 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			//v.varName = p.procName
 			else if(i1->second == TypeTable::VARIABLE){
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-					varNames.push_back(pkb->getVarName(*it));
+					if(pkb->getVarName(*it)!="-1")
+						varNames.push_back(pkb->getVarName(*it));
 				}
 				for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
-					procNames.push_back(pkb->getProcName(*it2));
+					if(pkb->getProcName(*it2)!="-1")
+						procNames.push_back(pkb->getProcName(*it2));
 				}
 			}
 
@@ -590,9 +610,24 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			cout<<"First token NEITHER VAR NOR PROC"<<endl;
 			index = atoi(tk2.c_str());
 			cout<<"Index: "<<index<<endl;
+			if(i1->second==TypeTable::STMT||i1->second==TypeTable::PROGLINE){
+				int range = pkb->getStmtRange();
+				if(range<index){
+					index = -1;
+				}
+			}
+			else if(i1->second==TypeTable::CONSTANT){
+				if(pkb->getConstIndex(tk2)==-1){
+					index = -1;
+				}
+			}
+			else {
+
+			}
 		}
 
-		withAns.push_back(Pair (index, index));
+		if(index!=-1)
+			withAns.push_back(Pair (index, index));
 
 	}
 	intersectPairs(tk1,tk2,&withAns,relIndex);
