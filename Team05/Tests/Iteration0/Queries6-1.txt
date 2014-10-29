@@ -28,7 +28,7 @@ Select a such that pattern a(_,_"iter+ 1")
 6 - Pattern ::
 assign a; variable v; 
 Select v pattern a(v,_"x+left"_)
-
+radius,radius1,x
 5000
 7 - Pattern ::
 assign a; 

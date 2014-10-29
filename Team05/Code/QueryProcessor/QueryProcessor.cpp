@@ -85,7 +85,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	}
 	cout << "End handling unprocessed selected synonyms" << endl;
 
-	cout << tupleTable.size() << endl;
+	cout << tupleTable.at(0).size() << endl;
 	cout << "Begin creating tuple of answers" << endl;
 	for(int i=0; i<tupleTable.size(); i++) {
 		string ans = "";
