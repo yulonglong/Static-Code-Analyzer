@@ -47,6 +47,46 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		return;
 	}
 
+	cout << "Begin handling unprocessed selected synonyms" << endl;
+	for(int i=0; i<selectedSyn.size(); i++) {
+		cout << "Checking for the: " << selectedSyn.at(i) << endl;
+		if(synIndexMap.count(selectedSyn.at(i)) == 0) {
+			cout << selectedSyn.at(i) << " has not been processed" << endl;
+			unordered_map<string, TypeTable::SynType>::iterator it = synTable.find(selectedSyn.at(i));
+
+			vector<vector<int>> newTable;
+			set<int> allOfType;
+
+			if(it->second == TypeTable::VARIABLE) {
+				allOfType = pkb->getAllVarIndex();
+			}
+			else if(it->second == TypeTable::CONSTANT) {
+				allOfType = pkb->getAllConstIndex();
+			}
+			else if(it->second == TypeTable::PROCEDURE) {
+				allOfType = pkb->getAllProcIndexes();
+			}
+			else {
+				allOfType = pkb->getAllStmts(it->second);
+			}
+
+			for(vector<vector<int>>::iterator it1=tupleTable.begin(); it1!=tupleTable.end(); it1++) {
+				for(set<int>::iterator it2=allOfType.begin(); it2!=allOfType.end(); it2++) {
+					vector<int> newTuple;
+					newTuple.insert(newTuple.begin(), it1->begin(), it1->end());
+					newTuple.push_back(*it2);
+					newTable.push_back(newTuple);
+				}				
+			}
+
+			synIndexMap.insert(make_pair(selectedSyn.at(i), synIndexMap.size()));
+			tupleTable = newTable;
+		}
+	}
+	cout << "End handling unprocessed selected synonyms" << endl;
+
+	cout << tupleTable.size() << endl;
+	cout << "Begin creating tuple of answers" << endl;
 	for(int i=0; i<tupleTable.size(); i++) {
 		string ans = "";
 		for(int j=0; j<selectedSyn.size(); j++) {
@@ -76,6 +116,8 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 			ansSet.insert(ans);
 		}
 	}
+	cout << "End creating tuple of answers" << endl;
+
 	cout <<"End projecting results"<< endl;
 	
 }
