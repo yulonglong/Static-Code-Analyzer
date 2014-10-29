@@ -734,7 +734,9 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	v.at(i) = stringToLower(v.at(i));
 	unordered_map<string, TypeTable::SynType>::iterator it;
 
-	bool callSynTypeProcedure = false;
+	bool callSynTypeProcedure[2];
+	callSynTypeProcedure[0]=false;
+	callSynTypeProcedure[1]=false;
 
 	string withToken[2];
 	withToken[0] = v.at(i+1);
@@ -785,7 +787,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 
 			//check if it is call procedure
 			if ((it->second == TypeTable::CALL)&&(result[2] == "procName")){
-				callSynTypeProcedure = true; // mark the callSynTypeProc as true
+				callSynTypeProcedure[0] = true; // mark the callSynTypeProc as true
 			}
 		}
 	}
@@ -836,7 +838,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 
 			//check if it is call procedure
 			if ((it->second == TypeTable::CALL)&&(result[2] == "procName")){
-				callSynTypeProcedure = true; // mark the callSynTypeProc as true
+				callSynTypeProcedure[1] = true; // mark the callSynTypeProc as true
 			}
 		}
 	}
@@ -847,7 +849,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	}
 
 	if(combinedValid){
-		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]), callSynTypeProcedure);
+		Relationship withRel(v.at(i), withToken[0], detectTokenType(withToken[0]), withToken[1], detectTokenType(withToken[1]), (callSynTypeProcedure[0]||callSynTypeProcedure[1]) );
 		i = i+2;
 		withValid = true;
 		return withRel;
@@ -858,7 +860,7 @@ Relationship QueryParser::validateWith(vector<string>& v, int& i, bool& withVali
 	}
 }
 
-bool QueryParser::validateWithLhsAndRhs(string withToken[2], bool callSynTypeProcedure){
+bool QueryParser::validateWithLhsAndRhs(string withToken[2], bool callSynTypeProcedure[2]){
 	//synonym 5 type : STMT,CONSTANT,PROCEDURE,VARIABLE,PROGLINE
 	//ref : IDENTIFIER, INTEGER
 	//INTEGER category : INTEGER, STMT, IF, WHILE, ASSIGN, CONSTANT, PROGLINE, CALL(if booleanflag is false)
@@ -895,7 +897,7 @@ bool QueryParser::validateWithLhsAndRhs(string withToken[2], bool callSynTypePro
 			}
 			//if it is of type call, check whether is procName or stmt#
 			else if (it->second == TypeTable::CALL){
-				if(callSynTypeProcedure){
+				if(callSynTypeProcedure[i]){
 					category[i] = categoryCharStr;
 				}
 				else{

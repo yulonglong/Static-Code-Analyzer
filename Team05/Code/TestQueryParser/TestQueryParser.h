@@ -54,6 +54,7 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryValidationWith1);
 	CPPUNIT_TEST(testQueryValidationWith2);
 	CPPUNIT_TEST(testQueryValidationWith3);
+	CPPUNIT_TEST(testQueryValidationWith4);
 	CPPUNIT_TEST(testQuerySemanticSelect);
 	CPPUNIT_TEST(testQuerySemanticModifies);
 	CPPUNIT_TEST(testQuerySemanticUses);
@@ -117,6 +118,7 @@ public:
 	void testQueryValidationWith1();
 	void testQueryValidationWith2();
 	void testQueryValidationWith3();
+	void testQueryValidationWith4();
 	void testQuerySemanticSelect();
 	void testQuerySemanticModifies();
 	void testQuerySemanticUses();

@@ -2654,6 +2654,17 @@ void QueryParserTest::testQueryValidationWith3(){
 	return;
 }
 
+void QueryParserTest::testQueryValidationWith4(){
+	string query = "call c1,c2; Select c1 with c1.procName=c2.stmt# ";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = false;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	return;
+}
+
 void QueryParserTest::testQuerySemanticSelect(){
 	//TEST INVALID
 	string query = "procedure p; constant c; Select c such that Modifies (c,p)  ";

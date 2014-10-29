@@ -219,7 +219,7 @@ private:
 	Relationship validatePattern(vector<string>&,int&,bool&);
 	Relationship validateWith(vector<string>&,int&,bool&);
 
-	bool validateWithLhsAndRhs(string withToken[2],bool);
+	bool validateWithLhsAndRhs(string withToken[2],bool callSynTypeProcedure[2]);
 
 	bool isValidSelectedSyn(string&, bool&);
 	Query constructAndValidateQuery(vector<string>, unordered_map<string, TypeTable::SynType>,bool&);
