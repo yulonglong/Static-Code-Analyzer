@@ -57,11 +57,11 @@ Select s1 such that Modifies (s1, "y") and Modifies (a1, "x") with a1.stmt# = 2 
 5000
 12 - multiple ::
 while w1, w2; stmt s1, s2; assign a1, a2; procedure p;
-Select w1 such that Parent (w1, s2) and Next (a1, s2) with p.procName = "Orchid" pattern w1 ("idx", _)
+Select w1 such that Parent (w1, s2) and Next (a1, s2) and Parent (w1, a1) with p.procName = "Orchid" pattern w1 ("idx", _)
 9, 19
 5000
 13 - multiple ::
 while w1, w2; stmt s1, s2; assign a1, a2; procedure p;
-Select a1 such that Parent (w1, s2) and Next (a1, s2) with p.procName = "Orchid" pattern w1 ("idx", _)
+Select a1 such that Parent (w1, s2) and Next (a1, s2) and Parent (w1, a1) with p.procName = "Orchid" pattern w1 ("idx", _)
 10, 20
 5000
