@@ -12,7 +12,7 @@ procedure Fern {
 11    if y then {
 12      z = z + y;
 13      idx = z + 1; }
-    else {
+      else {
 14      x = z + y;
 15      call Lily;
 16      idx = idx - 16; }
@@ -35,5 +35,5 @@ procedure Tulip {
 27  while t {
 28    if idx then {
 29      x = y + 80; }
-    else {
+      else {
 30      y = y * x + z + t * v; } } }
