@@ -1,0 +1,23 @@
+Queries1-1 follows(3,a) exception
+Queries2-1
+Queries3-1 modifies, uses exception
+Queries5-1 some exceptions, 1 wrong result
+Queries6-1 exceptions
+
+Qbasic1A-with : exception and a few wrong answers
+Qbasic1B-calls : some exceptions
+Qbasic1C : still runtime error and all exceptions cant even run a single thing
+Qbasic1D : some exceptions and wrong answer (ipsi please help to check the answers)
+
+Qadv2A : exceptions and a a few wrong answers (ipsi please help to check)
+Qbasic2A-next : perfect
+Qbasic2B-next-star : perfect
+Qbasic2C-invalid-queries :  a lot of errors, dinda please check
+Qinterm2A-such-that-such-that : some exceptions, and one error (ipsi please help me check answers)
+
+Qadv3A : multiple tuple format please read the descriptions in the book and ask dr. Soo for exact format (dinda and hisyam) do you need the < bracket > ?
+Qbasic3A-affects : one wrong answer (ipsi please help me check)
+Qinterm3A-tuple : dinda and hisyam again, please follow the correct format (especially dinda)
+
+exception always occur after the following sentence being couted:
+End handling unprocessed selected synonyms
