@@ -1,0 +1,108 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration2</name><parsing_time_taken>2.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Next">
+<query>
+<id Next="1" comment="" >1</id><querystr><![CDATA[prog_line n1, n2; Select n2 such that Next (11, n2)]]></querystr>
+<stuans>12,14</stuans>
+<correct>12,14</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >2</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (11, n2)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >3</id><querystr><![CDATA[prog_line n1, n2; Select n1 such that Next (n1, 9)]]></querystr>
+<stuans>8,17</stuans>
+<correct>8,17</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >4</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (n1, 9)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >5</id><querystr><![CDATA[prog_line n1, n2; Select n2 such that Next (11, _)]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >6</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (18, _)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >7</id><querystr><![CDATA[prog_line n1, n2; Select n1 such that Next (_, _)]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >8</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (_, _)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >9</id><querystr><![CDATA[prog_line n1, n2; Select n1 such that Next (n1, n2)]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,17,9,10,11,12,14,15,13,16,22,19,20,21,25,24,29,30,27,28</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,20,21,22,24,25,27,28,29,30</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >10</id><querystr><![CDATA[prog_line n1, n2; Select n2 such that Next (n1, n2)]]></querystr>
+<stuans>2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</stuans>
+<correct>2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >11</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (4, 5)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >12</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (17, 19)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >13</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (29, 27)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >14</id><querystr><![CDATA[prog_line n1, n2; Select BOOLEAN such that Next (11, 14)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

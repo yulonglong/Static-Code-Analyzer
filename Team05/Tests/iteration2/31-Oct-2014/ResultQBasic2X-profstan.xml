@@ -1,0 +1,70 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration2</name><parsing_time_taken>3.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" All Category">
+<query>
+<id ParenStar="1" comment="" >1</id><querystr><![CDATA[while w; Select w such that Parent*(w, 13)]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >2</id><querystr><![CDATA[stmt s; while w; Select w such that Follows* (s, w)]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >3</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 17)]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >4</id><querystr><![CDATA[variable v; Select v such that Modifies (9, v)]]></querystr>
+<stuans>y,x,z,t,idx</stuans>
+<correct>idx,t,x,y,z</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Uses="1" comment="" >5</id><querystr><![CDATA[assign a; Select a such that Modifies (a, "idx") and Uses (a, "idx")]]></querystr>
+<stuans>16,22</stuans>
+<correct>16,22</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id CallsStar="1" comment="" >6</id><querystr><![CDATA[procedure p; Select p such that Calls* (p, "Tulip")]]></querystr>
+<stuans>Fern,Orchid</stuans>
+<correct>Fern,Orchid</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id comment="" >7</id><querystr><![CDATA[assign a; Select a pattern a ("y", "2 * x")]]></querystr>
+<exception/>
+</query>
+<query>
+<id NextStar="1" comment="" >8</id><querystr><![CDATA[prog_line n; Select n such that Next* (10, n) and Next* (n, 9)]]></querystr>
+<stuans>16,15,14,10,9,17,13,12,11</stuans>
+<correct>9,10,11,12,13,14,15,16,17</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Uses="1" Follows="1" ParentStar="1" comment="Tests multiple clauses (it is not in Assignment 1)." >9</id><querystr><![CDATA[assign a; while w; Select a such that Modifies (a, "idx") and Uses (a, "idx") and Follows (15, a) and Parent* (w, a)]]></querystr>
+<stuans>16</stuans>
+<correct>16</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>
