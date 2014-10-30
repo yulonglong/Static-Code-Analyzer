@@ -141,8 +141,8 @@ Select BOOLEAN with i.stmt# = 15
 false
 5000
 29 - progline ::
-prog_line pl;
-Select pl with pl.prog_line# = 23
+stmt pl;
+Select pl with pl.stmt# = 23
 23
 5000
 30 - progline ::
@@ -151,13 +151,13 @@ Select pl with pl.prog_line# = 15081992
 
 5000
 31 - progline, boolean ::
-prog_line pl;
-Select BOLLEAN with pl.prog_line# = 1
+stmt pl;
+Select BOOLEAN with pl.stmt# = 1
 true
 5000
 32 - progline, boolean ::
-prog_line pl;
-Select BOOLEAN with pl.prog_line# = 15081992
+stmt pl;
+Select BOOLEAN with pl.stmt# = 15081992
 false
 5000
 33 - procName, varName ::
