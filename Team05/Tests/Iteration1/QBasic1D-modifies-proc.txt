@@ -8,7 +8,7 @@ First, Second, Third, Fourth, Fifth, Sixth
 2 - Modifies ::
 procedure p; variable v;
 Select p such that Modifies (p, "x")
-First, Second
+First, Second, Fifth
 5000
 3 - Modifies ::
 procedure p; variable v;
@@ -68,7 +68,7 @@ i, v, x, y, z
 14 - Modifies ::
 procedure p; variable v;
 Select v such that Modifies ("Second", v)
-i, x, y, z
+i, x, y, z, v
 5000
 15 - Modifies ::
 procedure p; variable v;
@@ -93,17 +93,17 @@ true
 19 - Modifies ::
 procedure p; variable v;
 Select v such that Modifies (p, "x")
-x
+x, i y, z, v
 5000
 20 - Modifies ::
 procedure p; variable v;
 Select p such that Modifies ("Sixth", "y")
-Sixth
+First, Second, Third, Fourth, Fifth, Sixth
 5000
 21 - Modifies ::
 procedure p; variable v;
 Select v such that Modifies ("Third", "z")
-z
+x, i, y, z, v
 5000
 22 - Modifies ::
 procedure p; variable v;
@@ -113,17 +113,17 @@ Select v such that Modifies ("Third", "wrong")
 23 - Modifies ::
 procedure p; variable v;
 Select p such that Modifies ("Third", _)
-Third
+First, Second, Third, Fourth, Fifth, Sixth
 5000
 24 - Modifies ::
 procedure p; variable v;
 Select v such that Modifies ("Fourth", _)
-y
+x, i, y, z, v
 5000
 25 - Modifies ::
 procedure p; variable v;
 Select p such that Modifies ("Fourth", v)
-Fourth
+First, Second, Third, Fourth, Fifth, Sixth
 5000
 26 - Modifies ::
 procedure p; variable v;
