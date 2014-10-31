@@ -17,8 +17,8 @@ Select s1 such that Parent (s1, a2) with a2.stmt# = 10 pattern a2 (_, "x + z")
 5000
 4 - multiple ::
 stmt s1, s2; variable v; assign a1, a2;
-Select a1 such that Uses (a1, "idx") with a1.stmt# = 18 pattern a1 (_, _)
-
+Select a1 such that Uses (a1, "idx") with a1.stmt# = 16 pattern a1 (_, _)
+16
 5000
 5 - multiple ::
 stmt s1, s2; assign a1, a2; variable v; procedure p1, p2;
@@ -43,7 +43,7 @@ Select i1 such that Uses (w1, "idx") and Uses (w2, "idx") and Parent (w1, i1) wi
 9 - multiple ::
 stmt s1, s2; assign a1, a2; while w1, w2; if i1, i2;
 Select s2 such that Modifies (a1, "x") and Modifies (s2, "y") and Uses (s2, "x") with a1.stmt# = 2 pattern a1 ("x", _)
-5,7,9,11,15,18,19,20,21,24,25,27,28,30
+5, 7, 9, 11, 15, 18, 19, 20, 21, 24, 25, 27, 28, 30
 5000
 10 - multiple ::
 stmt s1, s2; assign a1, a2; while w1, w2; if i1, i2;
@@ -53,7 +53,7 @@ Select  such that Parent (w1, s2) and Next (s1, s2) with s1.stmt# = s2.stmt# pat
 11 - multiple ::
 stmt s1, s2; assign a1, a2;
 Select s1 such that Modifies (s1, "y") and Modifies (a1, "x") with a1.stmt# = 2 pattern a1 ("x", _)
-1,5,7,9,11,15,18,19,20,21,24,25,27,28,30
+1, 5, 7, 9, 11, 15, 18, 19, 20, 21, 24, 25, 27, 28, 30
 5000
 12 - multiple ::
 while w1, w2; stmt s1, s2; assign a1, a2; procedure p;
