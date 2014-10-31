@@ -16,7 +16,7 @@ Qbasic2C-invalid-queries :  a lot of errors, dinda please check
 Qinterm2A-such-that-such-that : some exceptions, and one error (ipsi please help me check answers; DONE)
 
 Qadv3A : multiple tuple format please read the descriptions in the book and ask dr. Soo for exact format (dinda and hisyam) do you need the < bracket > ?
-Qbasic3A-affects : one wrong answer (ipsi please help me check)
+Qbasic3A-affects : one wrong answer (ipsi please help me check; DONE; NOW PERFECT) 
 Qinterm3A-tuple : dinda and hisyam again, please follow the correct format (especially dinda)
 
 exception always occur after the following sentence being couted:
