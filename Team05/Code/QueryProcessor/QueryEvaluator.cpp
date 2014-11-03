@@ -536,13 +536,13 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 		//else if the two tokens are of different type and of proc and var
 			//v.varName = p.procName OR p.procName = v.varName
-		if(i1->second == TypeTable::PROCEDURE || i1->second == TypeTable::VARIABLE){
+		if((i1->second == TypeTable::PROCEDURE && (i1->second!=i2->second || i1->second!=r.getCallSynType())) || (i1->second == TypeTable::VARIABLE && i1->second!=i2->second)|| (i1->second==TypeTable::CALL && r.getCallSynType()!=i2->second)){
 			cout<<"tk1 type != tk2 type and tk1 type =variable OR procedure"<<endl;
 			vector<string> procNames;
 			vector<string> varNames;
 
 			//p.procName = v.varName
-			if(i1->second == TypeTable::PROCEDURE){
+			if(i1->second == TypeTable::PROCEDURE || i1->second==TypeTable::CALL){
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					procNames.push_back(pkb->getProcName(*it));
 				}
@@ -602,7 +602,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			cout<<"First token VARIABLE"<<endl;
 			index = pkb->getVarIndex(dum);
 			cout<<"tk2 = "<<tk2<<" index = "<<index<<endl;
-		}else if(i1->second==TypeTable::PROCEDURE){
+		}else if(i1->second==TypeTable::PROCEDURE || (i1->second==TypeTable::CALL && r.getCallSynType()==TypeTable::PROCEDURE)){
 			cout<<"First token PROCEDURE"<<endl;
 			index = pkb->getProcIndex(dum);
 			cout<<"tk2 = "<<tk2 <<" index = "<<index<<endl;
@@ -610,10 +610,15 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			cout<<"First token NEITHER VAR NOR PROC"<<endl;
 			index = atoi(tk2.c_str());
 			cout<<"Index: "<<index<<endl;
-			if(i1->second==TypeTable::STMT||i1->second==TypeTable::PROGLINE){
+			if(i1->second==TypeTable::STMT){
 				int range = pkb->getStmtRange();
 				if(range<index){
 					index = -1;
+				}
+			}
+			else if(i1->second==TypeTable::CALL){
+				if(!pkb->isSynType(TypeTable::CALL, index)){
+					index=-1;
 				}
 			}
 			else if(i1->second==TypeTable::CONSTANT){
