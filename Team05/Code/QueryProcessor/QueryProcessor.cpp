@@ -92,29 +92,41 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 
 	cout << "Begin creating tuple of answers" << endl;
 	for(int i=0; i<tupleTable.size(); i++) {
+		cout << "Creating tuple of answer " << i << endl;
 		string ans = "";
 		for(int j=0; j<selectedSyn.size(); j++) {
+			cout << "Adding \"" << selectedSyn.at(j) << " \"to tuple." << endl;
 			unordered_map<string, TypeTable::SynType>::iterator it = synTable.find(selectedSyn.at(j));
 			int index = synIndexMap.at(selectedSyn.at(j));
+			cout << selectedSyn.at(j) << " has index " << index << endl;
+
 			int tempAns = tupleTable.at(i).at(index);
 
 			if(it->second == TypeTable::VARIABLE) {
 				VarTable* varTable = pkb->getVarTable();
 				ans = ans + varTable->getVarName(tempAns) + " ";
+				cout << "Adding " << varTable->getVarName(tempAns) << " to tuple" << endl;
 			}
 			else if(it->second == TypeTable::CONSTANT) {
 				ConstTable* constTable = pkb->getConstTable();
 				ans = ans + constTable->getConst(tempAns) + " ";
+				cout << "Adding " << constTable->getConst(tempAns) << " to tuple" << endl;
 			}
 			else if(it->second == TypeTable::PROCEDURE) {
 				ProcTable* procTable = pkb->getProcTable();
 				ans = ans + procTable->getProcName(tempAns) + " ";
+				cout << "Adding " << procTable->getProcName(tempAns) << " to tuple" << endl;
 			}
 			else {
 				ans = ans + to_string(static_cast<long long>(tempAns)) + " ";
+				cout << "Adding " << to_string(static_cast<long long>(tempAns)) << " to tuple" << endl;
 			}
+			cout << endl;
 		}
 		ans = ans.substr(0, ans.length()-1);
+		cout << "Final Tuple: " << ans << endl;
+		cout << endl;
+		cout << endl;
 		if(ansSet.find(ans) == ansSet.end()) {
 			result.push_back(ans);
 			ansSet.insert(ans);
@@ -182,14 +194,17 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 
 			if(synIndexMap->find(token1) != synIndexMap->end())
 				tk1InMap = true;
-			else
+			else {
+				cout << "Adding " << token1 << " to synMap with index " << synIndexMap->size() << endl;
 				synIndexMap->insert(make_pair(token1, synIndexMap->size()));
+			}
 			
 			if(synIndexMap->find(token2) != synIndexMap->end())
 				tk2InMap = true;
-			else
+			else {
+				cout << "Adding " << token2 << " to synMap with index " << synIndexMap->size() << endl;
 				synIndexMap->insert(make_pair(token2, synIndexMap->size()));
-
+			}
 			// Check if clause has no answer, return empty tuple table
 			if(clauseAns.size()==0) {
 				cout << "empty clause detected, returning empty table" << endl;
@@ -208,6 +223,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
 						tuple.insert(tuple.begin(), tuple1.begin(), tuple1.end());
+						cout << tuple2.ans1 << " " << tuple2.ans2 << endl; 
 						tuple.push_back(tuple2.ans1);
 						tuple.push_back(tuple2.ans2);
 						
@@ -245,7 +261,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 						int index = synIndexMap->at(token1);
 						if(tuple1.at(index) == tuple2.ans1) {
 							tuple.insert(tuple.begin(), tuple1.begin(), tuple1.end());
-							tuple.push_back(tuple2.ans1);
+							tuple.push_back(tuple2.ans2);
 							newTable.push_back(tuple);
 						}
 					}
@@ -280,8 +296,10 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 
 			if(synIndexMap->find(token1) != synIndexMap->end())
 				tkInMap = true;
-			else
+			else {
+				cout << "Adding " << token1 << " to synMap with index " << synIndexMap->size() << endl;
 				synIndexMap->insert(make_pair(token1, synIndexMap->size()));
+			}
 						
 			// Check if clause has no answer, return empty tuple table
 			if(clauseAns.size()==0) {
@@ -334,8 +352,10 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 
 			if(synIndexMap->find(token2) != synIndexMap->end())
 				tkInMap = true;
-			else
+			else {
+				cout << "Adding " << token2 << " to synMap with index " << synIndexMap->size() << endl;
 				synIndexMap->insert(make_pair(token2, synIndexMap->size()));
+			}
 
 			// Check if clause has no answer, return empty tuple table
 			if(clauseAns.size()==0) {
@@ -397,6 +417,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			return tupleTable;
 		cout <<"Tuple Table Size: " << tupleTable.size() << endl;
 
+		cout << "Current Tuple Length: " << tupleTable.at(0).size() << endl;
 	}
 
 	cout << "End creating tuple table" << endl;
