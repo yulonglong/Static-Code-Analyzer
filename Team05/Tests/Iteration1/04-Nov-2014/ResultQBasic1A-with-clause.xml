@@ -1,0 +1,315 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>Iteration1</name><parsing_time_taken>24.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" BASIC queries with entity attribute values and constants (with clause)">
+<query>
+<id procName="1" comment="" >1</id><querystr><![CDATA[procedure p; Select p with p.procName = "Main"]]></querystr>
+<stuans>Main</stuans>
+<correct>Main</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" comment="" >2</id><querystr><![CDATA[procedure p; Select p with p.procName = "DoesNotExist"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" BOOLEAN="1" comment="" >3</id><querystr><![CDATA[procedure p; Select BOOLEAN with p.procName = "Main"]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" BOOLEAN="1" comment="" >4</id><querystr><![CDATA[procedure p; Select BOOLEAN with p.procName = "DoesNotExist"]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" comment="" >5</id><querystr><![CDATA[variable v; Select v with v.varName = "x"]]></querystr>
+<stuans>x</stuans>
+<correct>x</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" comment="" >6</id><querystr><![CDATA[variable v; Select v with v.varName = "DoesNotExist"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" BOOLEAN="1" comment="" >7</id><querystr><![CDATA[variable v; Select BOOLEAN with v.varName = "iter"]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" BOOLEAN="1" comment="" >8</id><querystr><![CDATA[variable v; Select BOOLEAN with v.varName = "DoesNotExist"]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id value="1" comment="" >9</id><querystr><![CDATA[constant c; Select c with c.value = 3]]></querystr>
+<stuans>1</stuans>
+<correct>3</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing>3</missing>
+<additional>1</additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id value="1" comment="" >10</id><querystr><![CDATA[constant c; Select c with c.value = 999999999999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id value="1" BOOLEAN="1" comment="" >11</id><querystr><![CDATA[constant c; Select BOOLEAN with c.value = 2]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id value="1" BOOLEAN="1" comment="" >12</id><querystr><![CDATA[constant c; Select BOOLEAN with c.value = 99999999999999]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >13</id><querystr><![CDATA[stmt s; Select s with s.stmt# = 17]]></querystr>
+<stuans>17</stuans>
+<correct>17</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >14</id><querystr><![CDATA[stmt s; Select s with s.stmt# = 99999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >15</id><querystr><![CDATA[stmt s; Select BOOLEAN with s.stmt# = 23]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >16</id><querystr><![CDATA[stmt s; Select BOOLEAN with s.stmt# = 999999]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >17</id><querystr><![CDATA[assign a; Select a with a.stmt# = 12]]></querystr>
+<stuans>12</stuans>
+<correct>12</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >18</id><querystr><![CDATA[assign a; Select a with a.stmt# = 27]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >19</id><querystr><![CDATA[assign a; Select BOOLEAN with a.stmt# = 30]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >20</id><querystr><![CDATA[assign a; Select BOOLEAN with a.stmt# = 19]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >21</id><querystr><![CDATA[while w; Select w with w.stmt# = 19]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >22</id><querystr><![CDATA[while w; Select w with w.stmt# = 34]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >23</id><querystr><![CDATA[while w; Select BOOLEAN with w.stmt# = 8]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >24</id><querystr><![CDATA[while w; Select BOOLEAN with w.stmt# = 25]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >25</id><querystr><![CDATA[if i; Select i with i.stmt# = 38]]></querystr>
+<stuans>38</stuans>
+<correct>38</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" comment="" >26</id><querystr><![CDATA[if i; Select i with i.stmt# = 1]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >27</id><querystr><![CDATA[if i; Select BOOLEAN with i.stmt# = 38]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" BOOLEAN="1" comment="" >28</id><querystr><![CDATA[if i; Select BOOLEAN with i.stmt# = 15]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id progline="1" comment="" >29</id><querystr><![CDATA[stmt pl; Select pl with pl.stmt# = 23]]></querystr>
+<stuans>23</stuans>
+<correct>23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id progline="1" comment="" >30</id><querystr><![CDATA[prog_line pl; Select pl with pl.prog_line# = 15081992]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id progline="1" boolean="1" comment="" >31</id><querystr><![CDATA[stmt pl; Select BOOLEAN with pl.stmt# = 1]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id progline="1" boolean="1" comment="" >32</id><querystr><![CDATA[stmt pl; Select BOOLEAN with pl.stmt# = 15081992]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" varName="1" comment="" >33</id><querystr><![CDATA[procedure p; variable v; Select p with p.procName = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" value="1" comment="" >34</id><querystr><![CDATA[stmt s; constant c; Select s with s.stmt# = c.value]]></querystr>
+<stuans>1,2,3,4,5,6,7,8</stuans>
+<correct>1,2,3,4,5,6,7,8</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" value="1" comment="" >35</id><querystr><![CDATA[stmt s; constant c; Select c with c.value = s.stmt#]]></querystr>
+<stuans>8,2,1,3,4,5,6,7</stuans>
+<correct>1,2,3,4,5,6,7,8</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" varName="1" comment="" >36</id><querystr><![CDATA[procedure p; variable v; Select v with p.procName = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" varName="1" comment="" >37</id><querystr><![CDATA[procedure p; variable v, boolean; Select BOOLEAN with p.procName = v.varName]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" value="1" comment="" >38</id><querystr><![CDATA[constant c; while w; Select with w.stmt# = c.value]]></querystr>
+<stuans></stuans>
+<correct>8</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing>8</missing>
+<additional></additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id stmt="1" value="1" comment="" >39</id><querystr><![CDATA[constant c; if i; Select i with i.stmt# = c.value]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" value="1" boolean="1" comment="" >40</id><querystr><![CDATA[constant c; if i; Select BOOLEAN with i.stmt# = c.value]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmt="1" value="1" boolean="1" comment="" >41</id><querystr><![CDATA[constant c; stmt s; Select BOOLEAN with s.stmt# = c.value]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,0 +1,1147 @@
+Parameters : Source1D.txt QBasic1F-invalid-queries.txt ResultQBasic1F-invalid-queries.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration1
+Beginning to evaluate Query File.
+New Category :  syntatically correct queries that are invalid
+1 - mismatch ::
+prog_line pl; variable v;
+Select pl with pl.prog_line# = v.varName
+
+5000
+Evaluating query 1 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - mismatch ::
+prog_line pl; variable v;
+Select v with pl.prog_line# = v.varName
+
+5000
+Evaluating query 2 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+3 - mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.prog_line# = p.procName
+
+5000
+Evaluating query 3 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - mismatch ::
+prog_line pl; procedure p;
+Select p with pl.prog_line# = p.procName
+
+5000
+Evaluating query 4 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+5 - mismatch ::
+constant c; variable v;
+Select c with c.value = v.varName
+
+5000
+Evaluating query 5 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - mismatch ::
+constant c; procedure p;
+Select c with c.value = p.procName
+
+5000
+Evaluating query 6 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+7 - mismatch ::
+constant c; variable v;
+Select v with c.value = v.varName
+
+5000
+Evaluating query 7 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - mismatch ::
+constant c; procedure p;
+Select p with c.value = p.procName
+
+5000
+Evaluating query 8 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+9 - ambiguous ::
+procedure p; variable v;
+Select p such that Modifies (_,_)
+
+5000
+Evaluating query 9 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, _)
+
+ EVALUATING MODIFIES (_ _)
+Modifies(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: 
+Missing: 
+Additional: Fifth First Fourth Second Sixth Third 
+10 - ambiguous ::
+procedure p; variable v;
+Select v such that Modifies (_, _)
+
+5000
+Evaluating query 10 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, _)
+
+ EVALUATING MODIFIES (_ _)
+Modifies(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x i y z v 
+Correct answer: 
+Missing: 
+Additional: i v x y z 
+11 - ambiguous ::
+procedure p; variable v;
+Select p such that Modifies (_, v)
+
+5000
+Evaluating query 11 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, v)
+
+ EVALUATING MODIFIES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: 
+Missing: 
+Additional: Fifth First Fourth Second Sixth Third 
+12 - ambiguous ::
+procedure p; variable v;
+Select v such that Modifies (_, v)
+
+5000
+Evaluating query 12 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(_, v)
+
+ EVALUATING MODIFIES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 15
+FIRST PARAM = _
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 3
+it2->ans2 = 1
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x i y z v 
+Correct answer: 
+Missing: 
+Additional: i v x y z 
+13 - ambiguous ::
+procedure p; variable v;
+Select p such that Uses (_, v)
+
+5000
+Evaluating query 13 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, v)
+
+ EVALUATING USES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: 
+Missing: 
+Additional: Fifth First Fourth Second Sixth Third 
+14 - ambiguous ::
+procedure p; variable v;
+Select v such that Uses (_, v)
+
+5000
+Evaluating query 14 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, v)
+
+ EVALUATING USES (_ v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 12
+FIRST PARAM = _
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 1
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x i y z 
+Correct answer: 
+Missing: 
+Additional: i x y z 
+15 - ambiguous ::
+procedure p; variable v;
+Select p such that Uses (_, _)
+
+5000
+Evaluating query 15 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, _)
+
+ EVALUATING USES (_ _)
+Uses(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: 
+Missing: 
+Additional: Fifth First Fourth Second Sixth Third 
+16 - ambiguous ::
+procedure p; variable v;
+Select v such that Uses (_, _)
+
+5000
+Evaluating query 16 - ambiguous ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(_, _)
+
+ EVALUATING USES (_ _)
+Uses(_,_)
+flag is true
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x i y z v 
+Correct answer: 
+Missing: 
+Additional: i v x y z 
+17 - mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.procName = "wrong"
+
+5000
+Evaluating query 17 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+18 - mismatch ::
+prog_line pl; procedure p;
+Select p with p.prog_line# = 34
+
+5000
+Evaluating query 18 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+19 - mismatch ::
+prog_line pl; procedure p;
+Select pl with pl.varName = "stillwrong"
+
+5000
+Evaluating query 19 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+20 - mismatch ::
+prog_line pl; 
+Select pl with pl.value = 56
+
+5000
+Evaluating query 20 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+21 - mismatch ::
+prog_line pl;
+Select pl with pl.stmt# = 999
+
+5000
+Evaluating query 21 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+22 - mismatch ::
+procedure p;
+Select p with p.varName = "wrong"
+
+5000
+Evaluating query 22 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+23 - mismatch ::
+procedure p;
+Select p with p.value = 23
+
+5000
+Evaluating query 23 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+24 - mismatch ::
+variable v;
+Select v with v.procName = "fantastic"
+
+5000
+Evaluating query 24 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+25 - mismatch ::
+variable v;
+Select v with v.value = 888
+
+5000
+Evaluating query 25 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+26 - mismatch ::
+variable v;
+Select v with v.prog_line# = 89797
+
+5000
+Evaluating query 26 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+27 - mismatch ::
+stmt s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 27 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+28 - mismatch ::
+stmt s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 28 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+29 - mismatch ::
+stmt s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 29 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+30 - mismatch ::
+stmt s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 30 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+31 - mismatch ::
+while s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 31 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+32 - mismatch ::
+while s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 32 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+33 - mismatch ::
+while s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 33 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+34 - mismatch ::
+while s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 34 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+35 - mismatch ::
+if s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 35 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+36 - mismatch ::
+if s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 36 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+37 - mismatch ::
+if s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 37 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+38 - mismatch ::
+if s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 38 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+39 - mismatch ::
+assign s;
+Select s with s.procName = "somthing"
+
+5000
+Evaluating query 39 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+40 - mismatch ::
+assign s;
+Select s with s.varName = "somthing"
+
+5000
+Evaluating query 40 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+41 - mismatch ::
+assign s;
+Select s with s.value = 90000
+
+5000
+Evaluating query 41 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+42 - mismatch ::
+assign s;
+Select s with s.prog_line# = 999
+
+5000
+Evaluating query 42 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+43 - mismatch ::
+constant c;
+Select c with c.procName = "wrong"
+
+5000
+Evaluating query 43 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+44 - mismatch ::
+constant c;
+Select c with c.stmt# = 78
+
+5000
+Evaluating query 44 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+45 - mismatch ::
+constant c;
+Select c with c.varName = "wrong"
+
+5000
+Evaluating query 45 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+46 - mismatch ::
+constant c;
+Select c with c.prog_line# = 89
+
+5000
+Evaluating query 46 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+47 - mismatch ::
+procedure p;
+Select p with p.procName = 89
+
+5000
+Evaluating query 47 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+48 - mismatch ::
+stmt s;
+Select s with s.stmt# = "number"
+
+5000
+Evaluating query 48 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+49 - mismatch ::
+assign a;
+Select a with a.stmt# = "number"
+
+5000
+Evaluating query 49 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+50 - mismatch ::
+while w;
+Select w with w.stmt# = "number"
+
+5000
+Evaluating query 50 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+51 - mismatch ::
+if i;
+Select i with i.stmt# = "number"
+
+5000
+Evaluating query 51 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+52 - mismatch ::
+variable v;
+Select v with v.varName = 000
+
+5000
+Evaluating query 52 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+53 - mismatch ::
+constant c;
+Select c with c.value = somenum
+
+5000
+Evaluating query 53 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+54 - mismatch ::
+constant c;
+Select c with c.value = "somenum"
+
+5000
+Evaluating query 54 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+55 - mismatch ::
+prog_line pl;
+Select pl with pl.prog_line# = somenum
+
+5000
+Evaluating query 55 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+56 - mismatch ::
+prog_line pl;
+Select pl with pl.prog_line# = "somenum"
+
+5000
+Evaluating query 56 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+57 - mismatch ::
+constant c;
+Select c with c.value = 0098
+
+5000
+Evaluating query 57 - mismatch ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(c, 0098)
+
+ EVALUATING WITH (c 0098)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 0098
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 98
+In intersect Pairs: both do not exist
+Insert links for tk1 =c
+IN INSERT LINKS INSERTING TOKEN = c
+c Not Found in Linkages and relIndex = 0
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = c p.size = 0
+FIRST PARAM = c
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+58 - mismatch ::
+stmt s;
+Select s with s.stmt# = 009
+
+5000
+Evaluating query 58 - mismatch ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, 009)
+
+ EVALUATING WITH (s 009)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 009
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 9
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 
+Correct answer: 
+Missing: 
+Additional: 9 
+59 - mismatch ::
+stmt s;
+Select s with s.stmt# = number
+
+5000
+Evaluating query 59 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+60 - mismatch ::
+assign a;
+Select a with a.stmt# = number
+
+5000
+Evaluating query 60 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+61 - mismatch ::
+while w;
+Select w with w.stmt# = number
+
+5000
+Evaluating query 61 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+62 - mismatch ::
+if i;
+Select i with i.stmt# = number
+
+5000
+Evaluating query 62 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+63 - mismatch ::
+stmt s1, s2;
+Select BOOLEAN such that Calls (s1, s2);
+
+5000
+Evaluating query 63 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+64 - mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, s2);
+
+5000
+Evaluating query 64 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+65 - mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (p, s1);
+
+5000
+Evaluating query 65 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+66 - mismatch ::
+stmt s1; procedure p;
+Select BOOLEAN such that Calls (p, s1);
+
+5000
+Evaluating query 66 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+67 - mismatch ::
+stmt s1, s2; procedure p;
+Select p such that Calls (s1, p);
+
+5000
+Evaluating query 67 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+68 - mismatch ::
+stmt s1, s2; procedure p;
+Select BOOLEAN such that Calls (s1, p);
+
+5000
+Evaluating query 68 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+69 - mismatch ::
+stmt s1, s2; constant c; procedure p;
+Select BOOLEAN such that Calls* (p, c);
+
+5000
+Evaluating query 69 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+70 - mismatch ::
+stmt s1, s2; procedure p; constant c;
+Select p such that Calls* (c, p);
+
+5000
+Evaluating query 70 - mismatch ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

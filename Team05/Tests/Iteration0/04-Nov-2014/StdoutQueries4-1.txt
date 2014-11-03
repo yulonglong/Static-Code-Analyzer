@@ -1,0 +1,466 @@
+Parameters : Source4.txt Queries4-1.txt ResultQueries4-1.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  Pattern relationships
+1 - Pattern ::
+assign a; while w;
+Select a pattern a ("b", _)
+2
+5000
+Evaluating query 1 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("b", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ "b"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 2 ans2 = 2
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+2 - Pattern ::
+assign a; while w;
+Select a pattern a ("lacie", _)
+8
+5000
+Evaluating query 2 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("lacie", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ "lacie"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 8 ans2 = 8
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 8
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 8 
+Correct answer: 8 
+3 - Pattern ::
+assign a; while w;
+Select a such that Follows (a, w) pattern a ("d",_)
+6
+5000
+Evaluating query 3 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+follows(a, w)
+
+ EVALUATING FOLLOWS (a w)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 6second.at(i) = 7
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern("d", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ "d"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+MATCH FOUND AT PROG_LINE 5
+NOW AT PROG_LINE 4
+MATCH FOUND AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 6 ans2 = 6
+ans1 = 5 ans2 = 5
+ans1 = 4 ans2 = 4
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+4 - Pattern ::
+assign a; while w;
+Select a pattern a (_ , _)
+1, 2, 3, 4, 5, 6, 8, 9, 10, 11
+5000
+Evaluating query 4 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern(_, _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+MATCH FOUND AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+MATCH FOUND AT PROG_LINE 9
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+MATCH FOUND AT PROG_LINE 5
+NOW AT PROG_LINE 4
+MATCH FOUND AT PROG_LINE 4
+NOW AT PROG_LINE 3
+MATCH FOUND AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 11 ans2 = 11
+ans1 = 10 ans2 = 10
+ans1 = 9 ans2 = 9
+ans1 = 8 ans2 = 8
+ans1 = 6 ans2 = 6
+ans1 = 5 ans2 = 5
+ans1 = 4 ans2 = 4
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 10
+FIRST PARAM = a
+it2->ans1 = 11
+it2->ans1 = 10
+it2->ans1 = 9
+it2->ans1 = 8
+it2->ans1 = 6
+it2->ans1 = 5
+it2->ans1 = 4
+it2->ans1 = 3
+it2->ans1 = 2
+it2->ans1 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 11 10 9 8 6 5 4 3 2 1 
+Correct answer: 1 2 3 4 5 6 8 9 10 11 
+5 - Pattern ::
+assign a; while w;
+Select a pattern a ("f" , _"lacie"_)
+10
+5000
+Evaluating query 5 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("f", _"lacie"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"lacie"_ "f"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 10 ans2 = 10
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+6 - Pattern ::
+assign a; while w;
+Select a pattern a ("d", _"d+2"_)
+5
+5000
+Evaluating query 6 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("d", _"d+2"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"d+2"_ "d"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+MATCH FOUND AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 5 ans2 = 5
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 5
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 5 
+Correct answer: 5 
+6 - Pattern ::
+assign a; while w;
+Select a pattern a ("d", _)
+4, 5, 6 
+5000
+Evaluating query 6 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern("d", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ "d"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+MATCH FOUND AT PROG_LINE 5
+NOW AT PROG_LINE 4
+MATCH FOUND AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 6 ans2 = 6
+ans1 = 5 ans2 = 5
+ans1 = 4 ans2 = 4
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 3
+FIRST PARAM = a
+it2->ans1 = 6
+it2->ans1 = 5
+it2->ans1 = 4
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 5 4 
+Correct answer: 4 5 6 
+7 - Pattern ::
+assign a; while w;
+Select a pattern a (_, _"d"_)
+5, 6
+5000
+Evaluating query 7 - Pattern ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern(_, _"d"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"d"_ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+MATCH FOUND AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 6 ans2 = 6
+ans1 = 5 ans2 = 5
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 6
+it2->ans1 = 5
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 5 
+Correct answer: 5 6 
+End of evaluating Query File.
+AutoTester Completed !

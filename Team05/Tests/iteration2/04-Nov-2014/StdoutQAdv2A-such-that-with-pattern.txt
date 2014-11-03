@@ -1,0 +1,2135 @@
+Parameters : Source2A.txt QAdv2A-such-that-with-pattern.txt ResultQAdv2A-such-that-with-pattern.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration2
+Beginning to evaluate Query File.
+New Category :  such that, with, pattern in one query
+1 - related ::
+prog_line n1, n2; procedure p1, p2; assign a1, a2; variable v; constant c;
+Select a1 such that Modifies (a1, v) with v.varName = "x" pattern a1 (_, "y+5")
+2
+5000
+Evaluating query 1 - related ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+modifies(a1, v)
+
+ EVALUATING MODIFIES (a1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(_, "y+5")
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 "y+5" _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 2 ans2 = 2
+Inserting tokens into relParameters
+ 
+with(v, "x")
+
+ EVALUATING WITH (v "x")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: v
+r.tk2: "x"
+only 1 alpha token found
+First token VARIABLE
+tk2 = "x" index = 2
+IntersectPairs tk1 Exists tk1 = v
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+5
+6
+End retrieving token
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 1
+Erasing element 3
+Erasing element 4
+Erasing element 4
+Erasing element 5
+Erasing element 5
+Erasing element 3
+Erasing element 6
+Erasing element 6
+Erasing element 1
+Erasing element 6
+Erasing element 3
+Erasing element 1
+Erasing element 1
+Insert links for tk1 =v
+IN INSERT LINKS INSERTING TOKEN = v
+v Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a1 p.size = 5
+FIRST PARAM = a1
+it2->ans1 = 2
+it2->ans1 = 14
+it2->ans1 = 17
+it2->ans1 = 26
+it2->ans1 = 29
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+2 - multiple ::
+prog_line n1, n2; procedure p1, p2; assign a1, a2; variable v; constant c;
+Select p1 such that Calls (p1, p2) with p2.procName = "Orchid" pattern a1 ("y", _)
+Fern
+5000
+Evaluating query 2 - multiple ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+calls(p1, p2)
+
+ EVALUATING CALLS (p1 p2)
+it = 1 it2 = 2
+it = 1 it2 = 3
+it = 1 it2 = 4
+it = 2 it2 = 4
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern("y", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ "y"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+MATCH FOUND AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+MATCH FOUND AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+MATCH FOUND AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 30 ans2 = 30
+ans1 = 25 ans2 = 25
+ans1 = 20 ans2 = 20
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+ 
+with(p2, "Orchid")
+
+ EVALUATING WITH (p2 "Orchid")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: p2
+r.tk2: "Orchid"
+only 1 alpha token found
+First token PROCEDURE
+tk2 = "Orchid" index = 2
+IntersectPairs tk1 Exists tk1 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+4
+End retrieving token
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 3
+Erasing element 4
+Erasing element 4
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p1 p.size = 1
+FIRST PARAM = p1
+it2->ans1 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: Fern 
+Correct answer: Fern 
+3 - multiple ::
+assign a1, a2; stmt s1, s2;
+Select s1 such that Parent (s1, a2) with a2.stmt# = 10 pattern a2 (_, "x + z")
+
+5000
+Evaluating query 3 - multiple ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+parent(s1, a2)
+
+ EVALUATING PARENT (s1 a2)
+answer = 1
+answer = 2
+answer = 3
+answer = 4
+answer = 5
+answer = 6
+answer = 7
+answer = 8
+answer = 9
+it9it210
+it9it217
+answer = 10
+answer = 11
+it11it212
+it11it213
+it11it214
+it11it216
+answer = 12
+answer = 13
+answer = 14
+answer = 15
+answer = 16
+answer = 17
+answer = 18
+answer = 19
+it19it220
+it19it222
+answer = 20
+answer = 21
+answer = 22
+answer = 23
+answer = 24
+it24it225
+answer = 25
+answer = 26
+answer = 27
+answer = 28
+it28it229
+it28it230
+answer = 29
+answer = 30
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = a2
+IN INSERT LINKS INSERTING TOKEN = a2
+a2 Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+ 
+pattern(_, "x + z")
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a2
+a2 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a2 "x + z" _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+Inserting tokens into relParameters
+ 
+with(a2, 10)
+
+ EVALUATING WITH (a2 10)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: a2
+r.tk2: 10
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 10
+IntersectPairs tk1 Exists tk1 = a2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a2
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+12
+13
+14
+16
+17
+20
+22
+25
+29
+30
+End retrieving token
+in for loop
+pair index is 110
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 10
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 17
+Erasing element 12
+Erasing element 13
+Erasing element 14
+Erasing element 16
+Erasing element 20
+Erasing element 22
+Erasing element 25
+Erasing element 29
+Erasing element 30
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Insert links for tk1 =a2
+IN INSERT LINKS INSERTING TOKEN = a2
+a2 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 1
+FIRST PARAM = s1
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - multiple ::
+stmt s1, s2; variable v; assign a1, a2;
+Select a1 such that Uses (a1, "idx") with a1.stmt# = 16 pattern a1 (_, _)
+16
+5000
+Evaluating query 4 - multiple ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+uses(a1, "idx")
+
+ EVALUATING USES (a1 "idx")
+In intersect Pairs: both do not exist
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(_, _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+MATCH FOUND AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+MATCH FOUND AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+MATCH FOUND AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+MATCH FOUND AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+MATCH FOUND AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+MATCH FOUND AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+MATCH FOUND AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+MATCH FOUND AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+MATCH FOUND AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+MATCH FOUND AT PROG_LINE 4
+NOW AT PROG_LINE 3
+MATCH FOUND AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 30 ans2 = 30
+ans1 = 29 ans2 = 29
+ans1 = 26 ans2 = 26
+ans1 = 25 ans2 = 25
+ans1 = 23 ans2 = 23
+ans1 = 22 ans2 = 22
+ans1 = 20 ans2 = 20
+ans1 = 17 ans2 = 17
+ans1 = 16 ans2 = 16
+ans1 = 14 ans2 = 14
+ans1 = 13 ans2 = 13
+ans1 = 12 ans2 = 12
+ans1 = 10 ans2 = 10
+ans1 = 8 ans2 = 8
+ans1 = 6 ans2 = 6
+ans1 = 4 ans2 = 4
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+ 
+with(a1, 16)
+
+ EVALUATING WITH (a1 16)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: a1
+r.tk2: 16
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 16
+IntersectPairs tk1 Exists tk1 = a1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+16
+22
+23
+End retrieving token
+in for loop
+pair index is 116
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 16
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 6
+Erasing element 6
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 30
+Erasing element 29
+Erasing element 26
+Erasing element 25
+Erasing element 23
+Erasing element 22
+Erasing element 20
+Erasing element 17
+Erasing element 14
+Erasing element 13
+Erasing element 12
+Erasing element 10
+Erasing element 8
+Erasing element 6
+Erasing element 4
+Erasing element 3
+Erasing element 2
+Erasing element 1
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a1 p.size = 1
+FIRST PARAM = a1
+it2->ans1 = 16
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 16 
+Correct answer: 16 
+5 - multiple ::
+stmt s1, s2; assign a1, a2; variable v; procedure p1, p2;
+Select v such that Uses (p1, v) with p1.procName = "Orchid" pattern a1 (_, "idx - 1")
+idx, y, z, x, t, v
+5000
+Evaluating query 5 - multiple ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+uses(p1, v)
+
+ EVALUATING USES (p1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(_, "idx - 1")
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 "idx - 1" _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+Inserting tokens into relParameters
+ 
+with(p1, "Orchid")
+
+ EVALUATING WITH (p1 "Orchid")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: p1
+r.tk2: "Orchid"
+only 1 alpha token found
+First token PROCEDURE
+tk2 = "Orchid" index = 2
+IntersectPairs tk1 Exists tk1 = p1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+End retrieving token
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 1
+Erasing element 2
+Erasing element 3
+Erasing element 4
+Erasing element 5
+Erasing element 6
+Erasing element 1
+Erasing element 2
+Erasing element 4
+Erasing element 1
+Erasing element 2
+Erasing element 3
+Erasing element 4
+Erasing element 5
+Erasing element 6
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = v p.size = 6
+FIRST PARAM = p1
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: idx y z x t v 
+Missing: idx t v x y z 
+Additional: 
+6 - multiple, pattern, while ::
+stmt s1, s2; while w1, w2; if i1, i2;
+Select w1 such that Uses (w1, "idx") and Uses (w2, "idx") and Parent (w1, i1) with w1.stmt# = w2.stmt# pattern w2 ("idx", _)
+9
+5000
+Evaluating query 6 - multiple, pattern, while ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+relationships with only one alpha token found
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+uses(w1, "idx")
+
+ EVALUATING USES (w1 "idx")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+uses(w2, "idx")
+
+ EVALUATING USES (w2 "idx")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w2
+IN INSERT LINKS INSERTING TOKEN = w2
+w2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+parent(w1, i1)
+
+ EVALUATING PARENT (w1 i1)
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+answer = 9
+it9it211
+answer = 19
+answer = 27
+it27it228
+before intersect pairs
+IntersectPairs tk1 Exists tk1 = w1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 127
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 6
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = i1
+IN INSERT LINKS INSERTING TOKEN = i1
+i1 Not Found in Linkages and relIndex = 2
+after intersect pairs
+Inserting tokens into relParameters
+ 
+pattern("idx", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = w2
+w2 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: w2 _ "idx"
+PRINTING PATTERNANS
+ans1 = 19 ans2 = 19
+ans1 = 9 ans2 = 9
+Inserting tokens into relParameters
+ 
+with(w1, w2)
+
+ EVALUATING WITH (w1 w2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: w1
+r.tk2: w2
+2 alpha tokens found
+tk1 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+27
+End retrieving token
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = w2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+Both tk1 and tk2 Exists tk1 = w1 tk2 = w2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+27
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 127
+end of RemovePairsFromRelAns
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 6
+RelIndex of clause with contents being removed: 3
+PairIndex: 1
+Erasing element 19
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = w2
+IN INSERT LINKS INSERTING TOKEN = w2
+w2 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w1 p.size = 2
+FIRST PARAM = w1
+it2->ans1 = 9
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+7 - multiple, pattern, if ::
+stmt s1, s2; while w1, w2; if i1, i2;
+Select i1 such that Uses (w1, "idx") and Uses (w2, "idx") and Parent (w1, i1) with w1. stmt# = w2.stmt# pattern i1 ("idx", _, _)
+
+5000
+Evaluating query 7 - multiple, pattern, if ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - multiple, pattern, if ::
+stmt s1, s2; while w1, w2; if i1, i2;
+Select i1 such that Uses (w1, "idx") and Uses (w2, "idx") and Parent (w1, i1) with w1.stmt# = w2.stmt# pattern i1 ("y", _, _)
+11
+5000
+Evaluating query 8 - multiple, pattern, if ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+relationships with only one alpha token found
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+uses(w1, "idx")
+
+ EVALUATING USES (w1 "idx")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+uses(w2, "idx")
+
+ EVALUATING USES (w2 "idx")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w2
+IN INSERT LINKS INSERTING TOKEN = w2
+w2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+parent(w1, i1)
+
+ EVALUATING PARENT (w1 i1)
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+answer = 9
+it9it211
+answer = 19
+answer = 27
+it27it228
+before intersect pairs
+IntersectPairs tk1 Exists tk1 = w1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 127
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 6
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = i1
+IN INSERT LINKS INSERTING TOKEN = i1
+i1 Not Found in Linkages and relIndex = 2
+after intersect pairs
+Inserting tokens into relParameters
+ 
+pattern("y", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = i1
+i1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: i1 _ "y"
+PRINTING PATTERNANS
+ans1 = 11 ans2 = 11
+Inserting tokens into relParameters
+ 
+with(w1, w2)
+
+ EVALUATING WITH (w1 w2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: w1
+r.tk2: w2
+2 alpha tokens found
+tk1 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+27
+End retrieving token
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = w2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+Both tk1 and tk2 Exists tk1 = w1 tk2 = w2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+27
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 127
+end of RemovePairsFromRelAns
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+27
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 27
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 6
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = w2
+IN INSERT LINKS INSERTING TOKEN = w2
+w2 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = i1 p.size = 2
+FIRST PARAM = w1
+SECOND PARAM = i1
+it2->ans2 = 11
+it2->ans2 = 28
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+9 - multiple ::
+stmt s1, s2; assign a1, a2; while w1, w2; if i1, i2;
+Select s2 such that Modifies (a1, "x") and Modifies (s2, "y") and Uses (s2, "x") with a1.stmt# = 2 pattern a1 ("x", _)
+5, 7, 9, 11, 15, 18, 19, 20, 21, 24, 25, 27, 28, 30
+5000
+Evaluating query 9 - multiple ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+relationships with only one alpha token found
+relationships with only one alpha token found
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+modifies(a1, "x")
+
+ EVALUATING MODIFIES (a1 "x")
+2
+answer is empty: 0
+modifiesAnswer2 2
+modifiesAnswer5 2
+modifiesAnswer7 2
+modifiesAnswer9 2
+modifiesAnswer11 2
+modifiesAnswer14 2
+modifiesAnswer15 2
+modifiesAnswer17 2
+modifiesAnswer18 2
+modifiesAnswer19 2
+modifiesAnswer21 2
+modifiesAnswer26 2
+modifiesAnswer27 2
+modifiesAnswer28 2
+modifiesAnswer29 2
+In intersect Pairs: both do not exist
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+modifies(s2, "y")
+
+ EVALUATING MODIFIES (s2 "y")
+1
+answer is empty: 0
+modifiesAnswer1 1
+modifiesAnswer5 1
+modifiesAnswer7 1
+modifiesAnswer9 1
+modifiesAnswer11 1
+modifiesAnswer15 1
+modifiesAnswer18 1
+modifiesAnswer19 1
+modifiesAnswer20 1
+modifiesAnswer21 1
+modifiesAnswer24 1
+modifiesAnswer25 1
+modifiesAnswer27 1
+modifiesAnswer28 1
+modifiesAnswer30 1
+In intersect Pairs: both do not exist
+Insert links for tk1 =s2
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+uses(s2, "x")
+
+ EVALUATING USES (s2 "x")
+IntersectPairs tk1 Exists tk1 = s2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+5
+7
+9
+11
+15
+18
+19
+20
+21
+24
+25
+27
+28
+30
+End retrieving token
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 115
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 5
+Inserting 7
+Inserting 9
+Inserting 11
+Inserting 15
+Inserting 18
+Inserting 19
+Inserting 20
+Inserting 21
+Inserting 24
+Inserting 25
+Inserting 27
+Inserting 28
+Inserting 30
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 1
+Insert links for tk1 =s2
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Found in Linkages
+Inserting tokens into relParameters
+ 
+pattern("x", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ "x"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+MATCH FOUND AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+MATCH FOUND AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 29 ans2 = 29
+ans1 = 26 ans2 = 26
+ans1 = 17 ans2 = 17
+ans1 = 14 ans2 = 14
+ans1 = 2 ans2 = 2
+Inserting tokens into relParameters
+ 
+with(a1, 2)
+
+ EVALUATING WITH (a1 2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: a1
+r.tk2: 2
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 2
+IntersectPairs tk1 Exists tk1 = a1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+14
+17
+26
+29
+End retrieving token
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 2
+Erasing element 2
+Erasing element 2
+Erasing element 2
+RelIndex of clause with contents being removed: 3
+PairIndex: 1
+Erasing element 29
+Erasing element 26
+Erasing element 17
+Erasing element 14
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s2 p.size = 14
+FIRST PARAM = s2
+it2->ans1 = 5
+it2->ans1 = 7
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 15
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+it2->ans1 = 21
+it2->ans1 = 24
+it2->ans1 = 25
+it2->ans1 = 27
+it2->ans1 = 28
+it2->ans1 = 30
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 5 7 9 11 15 18 19 20 21 24 25 27 28 30 
+Correct answer: 5 7 9 11 15 18 19 20 21 24 25 27 28 30 
+10 - multiple ::
+stmt s1, s2; assign a1, a2; while w1, w2; if i1, i2;
+Select  such that Parent (w1, s2) and Next (s1, s2) with s1.stmt# = s2.stmt# pattern w1(_, _)
+
+5000
+Evaluating query 10 - multiple ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+11 - multiple ::
+stmt s1, s2; assign a1, a2;
+Select s1 such that Modifies (s1, "y") and Modifies (a1, "x") with a1.stmt# = 2 pattern a1 ("x", _)
+1, 5, 7, 9, 11, 15, 18, 19, 20, 21, 24, 25, 27, 28, 30
+5000
+Evaluating query 11 - multiple ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+relationships with only one alpha token found
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+modifies(s1, "y")
+
+ EVALUATING MODIFIES (s1 "y")
+1
+answer is empty: 0
+modifiesAnswer1 1
+modifiesAnswer5 1
+modifiesAnswer7 1
+modifiesAnswer9 1
+modifiesAnswer11 1
+modifiesAnswer15 1
+modifiesAnswer18 1
+modifiesAnswer19 1
+modifiesAnswer20 1
+modifiesAnswer21 1
+modifiesAnswer24 1
+modifiesAnswer25 1
+modifiesAnswer27 1
+modifiesAnswer28 1
+modifiesAnswer30 1
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+modifies(a1, "x")
+
+ EVALUATING MODIFIES (a1 "x")
+2
+answer is empty: 0
+modifiesAnswer2 2
+modifiesAnswer5 2
+modifiesAnswer7 2
+modifiesAnswer9 2
+modifiesAnswer11 2
+modifiesAnswer14 2
+modifiesAnswer15 2
+modifiesAnswer17 2
+modifiesAnswer18 2
+modifiesAnswer19 2
+modifiesAnswer21 2
+modifiesAnswer26 2
+modifiesAnswer27 2
+modifiesAnswer28 2
+modifiesAnswer29 2
+In intersect Pairs: both do not exist
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+pattern("x", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ "x"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 30
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 29
+MATCH FOUND AT PROG_LINE 29
+NOW AT PROG_LINE 28
+NOW AT PROG_LINE 27
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 26
+MATCH FOUND AT PROG_LINE 26
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE 25
+NOW AT PROG_LINE 24
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 23
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 22
+NOW AT PROG_LINE 21
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 29 ans2 = 29
+ans1 = 26 ans2 = 26
+ans1 = 17 ans2 = 17
+ans1 = 14 ans2 = 14
+ans1 = 2 ans2 = 2
+Inserting tokens into relParameters
+ 
+with(a1, 2)
+
+ EVALUATING WITH (a1 2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 3
+r.tk1: a1
+r.tk2: 2
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 2
+IntersectPairs tk1 Exists tk1 = a1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+14
+17
+26
+29
+End retrieving token
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 2
+Erasing element 2
+Erasing element 2
+Erasing element 2
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+Erasing element 29
+Erasing element 26
+Erasing element 17
+Erasing element 14
+Insert links for tk1 =a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 15
+FIRST PARAM = s1
+it2->ans1 = 1
+it2->ans1 = 5
+it2->ans1 = 7
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 15
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+it2->ans1 = 21
+it2->ans1 = 24
+it2->ans1 = 25
+it2->ans1 = 27
+it2->ans1 = 28
+it2->ans1 = 30
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 5 7 9 11 15 18 19 20 21 24 25 27 28 30 
+Correct answer: 1 5 7 9 11 15 18 19 20 21 24 25 27 28 30 
+12 - multiple ::
+while w1, w2; stmt s1, s2; assign a1, a2; procedure p;
+Select w1 such that Parent (w1, s2) and Next (a1, s2) and Parent (w1, a1) with p.procName = "Orchid" pattern w1 ("idx", _)
+9, 19
+5000
+Evaluating query 12 - multiple ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+parent(w1, s2)
+
+ EVALUATING PARENT (w1 s2)
+answer = 9
+it9it210
+it9it211
+it9it217
+answer = 19
+it19it220
+it19it221
+it19it222
+answer = 24
+it24it225
+answer = 27
+it27it228
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = s2
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+ 
+next(a1, s2)
+
+ EVALUATING NEXT (a1 s2)
+Both Tokens are Alpha
+In retrieveTokenEvaluatedAnswers Finding tk = s2
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+11
+17
+20
+21
+22
+25
+28
+End retrieving token
+
+---START REMOVE PAIRS METHOD---
+Inserting 11
+Inserting 17
+Inserting 17
+Inserting 21
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 10
+Erasing element 20
+Erasing element 22
+Erasing element 25
+Erasing element 28
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Found in Linkages
+Inserting tokens into relParameters
+ 
+parent(w1, a1)
+
+ EVALUATING PARENT (w1 a1)
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+End retrieving token
+answer = 9
+it9it210
+it9it217
+answer = 19
+it19it220
+it19it222
+before intersect pairs
+Both tk1 and tk2 Exists tk1 = w1 tk2 = a1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+end of RemovePairsFromRelAns
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+13
+16
+20
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 19
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+
+---START REMOVE PAIRS METHOD---
+Inserting 10
+Inserting 20
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 17
+Erasing element 17
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+after intersect pairs
+Inserting tokens into relParameters
+ 
+pattern("idx", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: w1 _ "idx"
+PRINTING PATTERNANS
+ans1 = 19 ans2 = 19
+ans1 = 9 ans2 = 9
+Inserting tokens into relParameters
+ 
+with(p, "Orchid")
+
+ EVALUATING WITH (p "Orchid")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: p
+r.tk2: "Orchid"
+only 1 alpha token found
+First token PROCEDURE
+tk2 = "Orchid" index = 2
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+IN INSERT LINKS INSERTING TOKEN = p
+p Not Found in Linkages and relIndex = 4
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w1 p.size = 3
+FIRST PARAM = w1
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 19
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 19 
+Correct answer: 9 19 
+13 - multiple ::
+while w1, w2; stmt s1, s2; assign a1, a2; procedure p;
+Select a1 such that Parent (w1, s2) and Next (a1, s2) and Parent (w1, a1) with p.procName = "Orchid" pattern w1 ("idx", _)
+10, 20
+5000
+Evaluating query 13 - multiple ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+parent(w1, s2)
+
+ EVALUATING PARENT (w1 s2)
+answer = 9
+it9it210
+it9it211
+it9it217
+answer = 19
+it19it220
+it19it221
+it19it222
+answer = 24
+it24it225
+answer = 27
+it27it228
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+Insert links for tk2 = s2
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+ 
+next(a1, s2)
+
+ EVALUATING NEXT (a1 s2)
+Both Tokens are Alpha
+In retrieveTokenEvaluatedAnswers Finding tk = s2
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+11
+17
+20
+21
+22
+25
+28
+End retrieving token
+
+---START REMOVE PAIRS METHOD---
+Inserting 11
+Inserting 17
+Inserting 17
+Inserting 21
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 10
+Erasing element 20
+Erasing element 22
+Erasing element 25
+Erasing element 28
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Found in Linkages
+Inserting tokens into relParameters
+ 
+parent(w1, a1)
+
+ EVALUATING PARENT (w1 a1)
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+End retrieving token
+answer = 9
+it9it210
+it9it217
+answer = 19
+it19it220
+it19it222
+before intersect pairs
+Both tk1 and tk2 Exists tk1 = w1 tk2 = a1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = w1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+19
+End retrieving token
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+end of RemovePairsFromRelAns
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+13
+16
+20
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 19
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+
+---START REMOVE PAIRS METHOD---
+Inserting 10
+Inserting 20
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 17
+Erasing element 17
+Insert links for tk1 =w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+Insert links for tk2 = a1
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+after intersect pairs
+Inserting tokens into relParameters
+ 
+pattern("idx", _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: w1 _ "idx"
+PRINTING PATTERNANS
+ans1 = 19 ans2 = 19
+ans1 = 9 ans2 = 9
+Inserting tokens into relParameters
+ 
+with(p, "Orchid")
+
+ EVALUATING WITH (p "Orchid")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: p
+r.tk2: "Orchid"
+only 1 alpha token found
+First token PROCEDURE
+tk2 = "Orchid" index = 2
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+IN INSERT LINKS INSERTING TOKEN = p
+p Not Found in Linkages and relIndex = 4
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a1 p.size = 2
+FIRST PARAM = a1
+it2->ans1 = 10
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 20 
+Correct answer: 10 20 
+End of evaluating Query File.
+AutoTester Completed !

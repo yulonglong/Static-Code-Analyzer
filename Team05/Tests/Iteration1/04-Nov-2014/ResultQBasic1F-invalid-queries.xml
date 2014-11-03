@@ -1,0 +1,581 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>Iteration1</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" syntatically correct queries that are invalid">
+<query>
+<id mismatch="1" comment="" >1</id><querystr><![CDATA[prog_line pl; variable v; Select pl with pl.prog_line# = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >2</id><querystr><![CDATA[prog_line pl; variable v; Select v with pl.prog_line# = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >3</id><querystr><![CDATA[prog_line pl; procedure p; Select pl with pl.prog_line# = p.procName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >4</id><querystr><![CDATA[prog_line pl; procedure p; Select p with pl.prog_line# = p.procName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >5</id><querystr><![CDATA[constant c; variable v; Select c with c.value = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >6</id><querystr><![CDATA[constant c; procedure p; Select c with c.value = p.procName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >7</id><querystr><![CDATA[constant c; variable v; Select v with c.value = v.varName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >8</id><querystr><![CDATA[constant c; procedure p; Select p with c.value = p.procName]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ambiguous="1" comment="" >9</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (_,_)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Sixth,Third</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>6</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >10</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies (_, _)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,x,y,z</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >11</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (_, v)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Sixth,Third</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>6</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >12</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies (_, v)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,x,y,z</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >13</id><querystr><![CDATA[procedure p; variable v; Select p such that Uses (_, v)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Sixth,Third</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>6</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >14</id><querystr><![CDATA[procedure p; variable v; Select v such that Uses (_, v)]]></querystr>
+<stuans>x,i,y,z</stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,x,y,z</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>4</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >15</id><querystr><![CDATA[procedure p; variable v; Select p such that Uses (_, _)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Sixth,Third</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>6</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id ambiguous="1" comment="" >16</id><querystr><![CDATA[procedure p; variable v; Select v such that Uses (_, _)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,x,y,z</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id mismatch="1" comment="" >17</id><querystr><![CDATA[prog_line pl; procedure p; Select pl with pl.procName = "wrong"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >18</id><querystr><![CDATA[prog_line pl; procedure p; Select p with p.prog_line# = 34]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >19</id><querystr><![CDATA[prog_line pl; procedure p; Select pl with pl.varName = "stillwrong"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >20</id><querystr><![CDATA[prog_line pl;  Select pl with pl.value = 56]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >21</id><querystr><![CDATA[prog_line pl; Select pl with pl.stmt# = 999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >22</id><querystr><![CDATA[procedure p; Select p with p.varName = "wrong"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >23</id><querystr><![CDATA[procedure p; Select p with p.value = 23]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >24</id><querystr><![CDATA[variable v; Select v with v.procName = "fantastic"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >25</id><querystr><![CDATA[variable v; Select v with v.value = 888]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >26</id><querystr><![CDATA[variable v; Select v with v.prog_line# = 89797]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >27</id><querystr><![CDATA[stmt s; Select s with s.procName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >28</id><querystr><![CDATA[stmt s; Select s with s.varName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >29</id><querystr><![CDATA[stmt s; Select s with s.value = 90000]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >30</id><querystr><![CDATA[stmt s; Select s with s.prog_line# = 999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >31</id><querystr><![CDATA[while s; Select s with s.procName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >32</id><querystr><![CDATA[while s; Select s with s.varName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >33</id><querystr><![CDATA[while s; Select s with s.value = 90000]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >34</id><querystr><![CDATA[while s; Select s with s.prog_line# = 999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >35</id><querystr><![CDATA[if s; Select s with s.procName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >36</id><querystr><![CDATA[if s; Select s with s.varName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >37</id><querystr><![CDATA[if s; Select s with s.value = 90000]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >38</id><querystr><![CDATA[if s; Select s with s.prog_line# = 999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >39</id><querystr><![CDATA[assign s; Select s with s.procName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >40</id><querystr><![CDATA[assign s; Select s with s.varName = "somthing"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >41</id><querystr><![CDATA[assign s; Select s with s.value = 90000]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >42</id><querystr><![CDATA[assign s; Select s with s.prog_line# = 999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >43</id><querystr><![CDATA[constant c; Select c with c.procName = "wrong"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >44</id><querystr><![CDATA[constant c; Select c with c.stmt# = 78]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >45</id><querystr><![CDATA[constant c; Select c with c.varName = "wrong"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >46</id><querystr><![CDATA[constant c; Select c with c.prog_line# = 89]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >47</id><querystr><![CDATA[procedure p; Select p with p.procName = 89]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >48</id><querystr><![CDATA[stmt s; Select s with s.stmt# = "number"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >49</id><querystr><![CDATA[assign a; Select a with a.stmt# = "number"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >50</id><querystr><![CDATA[while w; Select w with w.stmt# = "number"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >51</id><querystr><![CDATA[if i; Select i with i.stmt# = "number"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >52</id><querystr><![CDATA[variable v; Select v with v.varName = 000]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >53</id><querystr><![CDATA[constant c; Select c with c.value = somenum]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >54</id><querystr><![CDATA[constant c; Select c with c.value = "somenum"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >55</id><querystr><![CDATA[prog_line pl; Select pl with pl.prog_line# = somenum]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >56</id><querystr><![CDATA[prog_line pl; Select pl with pl.prog_line# = "somenum"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >57</id><querystr><![CDATA[constant c; Select c with c.value = 0098]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >58</id><querystr><![CDATA[stmt s; Select s with s.stmt# = 009]]></querystr>
+<stuans>9</stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>9</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id mismatch="1" comment="" >59</id><querystr><![CDATA[stmt s; Select s with s.stmt# = number]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >60</id><querystr><![CDATA[assign a; Select a with a.stmt# = number]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >61</id><querystr><![CDATA[while w; Select w with w.stmt# = number]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >62</id><querystr><![CDATA[if i; Select i with i.stmt# = number]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >63</id><querystr><![CDATA[stmt s1, s2; Select BOOLEAN such that Calls (s1, s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >64</id><querystr><![CDATA[stmt s1, s2; procedure p; Select p such that Calls (s1, s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >65</id><querystr><![CDATA[stmt s1, s2; procedure p; Select p such that Calls (p, s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >66</id><querystr><![CDATA[stmt s1; procedure p; Select BOOLEAN such that Calls (p, s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >67</id><querystr><![CDATA[stmt s1, s2; procedure p; Select p such that Calls (s1, p);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >68</id><querystr><![CDATA[stmt s1, s2; procedure p; Select BOOLEAN such that Calls (s1, p);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >69</id><querystr><![CDATA[stmt s1, s2; constant c; procedure p; Select BOOLEAN such that Calls* (p, c);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id mismatch="1" comment="" >70</id><querystr><![CDATA[stmt s1, s2; procedure p; constant c; Select p such that Calls* (c, p);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,0 +1,2372 @@
+Parameters : Source5.txt Queries5-2.txt ResultQueries5-2.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  All Queries including complex queries
+1 - Modifies, Typed :: 
+assign a;
+Select a such that Modifies(a, "oSCar")
+6, 8
+5000
+Evaluating query 1 - Modifies, Typed :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(a, "oSCar")
+
+ EVALUATING MODIFIES (a "oSCar")
+6
+answer is empty: 0
+modifiesAnswer4 6
+modifiesAnswer5 6
+modifiesAnswer6 6
+modifiesAnswer7 6
+modifiesAnswer8 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 6
+it2->ans1 = 8
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 8 
+Correct answer: 6 8 
+2 - Modifies, Typed :: 
+assign a; variable v;
+Select a such that Modifies (a,v)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+Evaluating query 2 - Modifies, Typed :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(a, v)
+
+ EVALUATING MODIFIES (a v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 13
+FIRST PARAM = a
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+3 - Modifies :: 
+assign a;
+Select a such that Modifies (a,_)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+Evaluating query 3 - Modifies :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(a, _)
+
+ EVALUATING MODIFIES (a _)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 13
+FIRST PARAM = a
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+4 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,"oSCar")
+4, 5, 6, 7, 8 
+5000
+Evaluating query 4 - Modifies :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(s, "oSCar")
+
+ EVALUATING MODIFIES (s "oSCar")
+6
+answer is empty: 0
+modifiesAnswer4 6
+modifiesAnswer5 6
+modifiesAnswer6 6
+modifiesAnswer7 6
+modifiesAnswer8 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 5
+FIRST PARAM = s
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 6 7 8 
+Correct answer: 4 5 6 7 8 
+5 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+Evaluating query 5 - Modifies :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(s, _)
+
+ EVALUATING MODIFIES (s _)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 39
+FIRST PARAM = s
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 16
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+6 - Uses :: 
+assign a;
+Select a such that Uses (a, "beta")
+6
+5000
+Evaluating query 6 - Uses :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(a, "beta")
+
+ EVALUATING USES (a "beta")
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+7 - Uses :: 
+assign a; variable v;
+Select a such that Uses (a,v)
+3, 6, 8, 10, 13, 15, 17, 18, 20
+5000
+Evaluating query 7 - Uses :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(a, v)
+
+ EVALUATING USES (a v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 16
+FIRST PARAM = a
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 6 8 10 13 15 17 18 20 
+Correct answer: 3 6 8 10 13 15 17 18 20 
+8 - Uses :: 
+stmt s;
+Select s such that Uses (s,"delta")
+4, 5, 9, 11, 12, 15
+5000
+Evaluating query 8 - Uses :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(s, "delta")
+
+ EVALUATING USES (s "delta")
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 6
+FIRST PARAM = s
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 15
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 9 11 12 15 
+Correct answer: 4 5 9 11 12 15 
+9 - Uses :: 
+stmt s;
+Select s such that Uses (s,_)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 20
+5000
+Evaluating query 9 - Uses :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(s, _)
+
+ EVALUATING USES (s _)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 73
+FIRST PARAM = s
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 7
+it2->ans1 = 7
+it2->ans1 = 7
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 16
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 20 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 20 
+10 - Parent :: 
+stmt s;
+Select s such that Parent(s,6)
+5
+5000
+Evaluating query 10 - Parent :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent(s, 6)
+
+ EVALUATING PARENT (s 6)
+Calling getParent(TYPE, STMTNUM)
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 5
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 5 
+Correct answer: 5 
+11 - Parent :: 
+stmt s;
+Select s such that Parent(5,s)
+6, 7, 9, 19
+5000
+Evaluating query 11 - Parent :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent(5, s)
+
+ EVALUATING PARENT (5 s)
+Parent(STMTNUM, TYPE)
+in for loop
+in for loop
+in for loop
+in for loop
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk2 = s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 4
+FIRST PARAM = 5
+SECOND PARAM = s
+it2->ans2 = 6
+it2->ans2 = 7
+it2->ans2 = 9
+it2->ans2 = 19
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 7 9 19 
+Correct answer: 6 7 9 19 
+12 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s,6)
+4, 5
+5000
+Evaluating query 12 - ParentStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent*(s, 6)
+
+ EVALUATING PARENT* (s 6)
+Initialzing all Parent* variables
+tk2 is Integer 6
+TOKEN1 FOUND NOT TO EXIST IN LINKAGES
+Set is Empty: 0
+Insert stmtNum = 5 into set
+Insert stmtNum = 4 into set
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 2
+FIRST PARAM = s
+it2->ans1 = 4
+it2->ans1 = 5
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 
+Correct answer: 4 5 
+13 - ParentStar :: 
+stmt s;
+Select s such that Parent* (5,s)
+6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+5000
+Evaluating query 13 - ParentStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent*(5, s)
+
+ EVALUATING PARENT* (5 s)
+Initialzing all Parent* variables
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 14
+FIRST PARAM = 5
+SECOND PARAM = s
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 16
+it2->ans2 = 15
+it2->ans2 = 14
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 10
+it2->ans2 = 9
+it2->ans2 = 8
+it2->ans2 = 7
+it2->ans2 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 19 18 17 16 15 14 13 12 11 10 9 8 7 6 
+Correct answer: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+14 - Follows :: 
+stmt s;
+Select s such that Follows (s,4)
+3
+5000
+Evaluating query 14 - Follows :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(s, 4)
+
+ EVALUATING FOLLOWS (s 4)
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+15 - Follows :: 
+stmt s;
+Select s such that Follows (4,s)
+none
+5000
+Evaluating query 15 - Follows :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(4, s)
+
+ EVALUATING FOLLOWS (4 s)
+Second token is alpha and it does not exist in linkages
+First token is digit
+Answer is = -1
+followsAns.size = 0
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = s p.size = 0
+FIRST PARAM = 4
+SECOND PARAM = s
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - Follows :: 
+stmt s;
+Select s such that Follows (7,s)
+9
+5000
+Evaluating query 16 - Follows :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(7, s)
+
+ EVALUATING FOLLOWS (7 s)
+Second token is alpha and it does not exist in linkages
+First token is digit
+Answer is = 9
+followsAns.size = 1
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = 7
+SECOND PARAM = s
+it2->ans2 = 9
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+17 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (7,s)
+9, 19
+5000
+Evaluating query 17 - FollowsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(7, s)
+
+ EVALUATING FOLLOWS* (7 s)
+Handling Follows*(stmtnum, type)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+In intersect Pairs: both do not exist
+Insert links for tk2 = s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 2
+FIRST PARAM = 7
+SECOND PARAM = s
+it2->ans2 = 19
+it2->ans2 = 9
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 19 9 
+Correct answer: 9 19 
+18 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (1, s)
+2, 3, 4
+5000
+Evaluating query 18 - FollowsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(1, s)
+
+ EVALUATING FOLLOWS* (1 s)
+Handling Follows*(stmtnum, type)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+In intersect Pairs: both do not exist
+Insert links for tk2 = s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 3
+FIRST PARAM = 1
+SECOND PARAM = s
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 3 2 
+Correct answer: 2 3 4 
+19 - Pattern :: 
+assign a;
+Select a pattern a(_,_"x"_)
+10, 18
+5000
+Evaluating query 19 - Pattern :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern(_, _"x"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"x"_ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+MATCH FOUND AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 18 ans2 = 18
+ans1 = 10 ans2 = 10
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 18
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 18 10 
+Correct answer: 10 18 
+20 - Pattern :: 
+assign a, a1;
+Select a such that Modifies (a, "x") pattern a1(_,_)
+10, 18
+5000
+Evaluating query 20 - Pattern :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+pattern(_, _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+MATCH FOUND AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+MATCH FOUND AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+MATCH FOUND AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+MATCH FOUND AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+MATCH FOUND AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 20 ans2 = 20
+ans1 = 19 ans2 = 19
+ans1 = 18 ans2 = 18
+ans1 = 17 ans2 = 17
+ans1 = 15 ans2 = 15
+ans1 = 14 ans2 = 14
+ans1 = 13 ans2 = 13
+ans1 = 10 ans2 = 10
+ans1 = 8 ans2 = 8
+ans1 = 6 ans2 = 6
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+ 
+modifies(a, "x")
+
+ EVALUATING MODIFIES (a "x")
+12
+answer is empty: 0
+modifiesAnswer4 12
+modifiesAnswer5 12
+modifiesAnswer9 12
+modifiesAnswer10 12
+modifiesAnswer11 12
+modifiesAnswer18 12
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 10
+it2->ans1 = 18
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 18 
+Correct answer: 10 18 
+21 - Modifes, Pattern :: 
+assign a; variable v; assign a1;
+Select a such that Modifies (a,v) pattern a("x",_"beta"_)
+none
+5000
+Evaluating query 21 - Modifes, Pattern :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+modifies(a, v)
+
+ EVALUATING MODIFIES (a v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern("x", _"beta"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"beta"_ "x"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 13
+FIRST PARAM = a
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+22 - Uses, Pattern :: 
+assign a;
+Select a such that Uses (a,"beta") pattern a("oSCar", _"beta"_)
+6
+5000
+Evaluating query 22 - Uses, Pattern :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+pattern("oSCar", _"beta"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"beta"_ "oSCar"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 6 ans2 = 6
+Inserting tokens into relParameters
+ 
+uses(a, "beta")
+
+ EVALUATING USES (a "beta")
+IntersectPairs tk1 Exists tk1 = a
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+6
+End retrieving token
+in for loop
+pair index is 16
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 6
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Found in Linkages
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = a
+it2->ans1 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+23 - Modifies, while :: 
+while w;
+Select w such that Modifies (w, "oSCar")
+4, 5, 7
+5000
+Evaluating query 23 - Modifies, while :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(w, "oSCar")
+
+ EVALUATING MODIFIES (w "oSCar")
+6
+answer is empty: 0
+modifiesAnswer4 6
+modifiesAnswer5 6
+modifiesAnswer6 6
+modifiesAnswer7 6
+modifiesAnswer8 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 3
+FIRST PARAM = w
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 7
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 7 
+Correct answer: 4 5 7 
+24 - Uses, while :: 
+while w;
+Select w such that Uses (w, "x")
+4, 5, 9, 11
+5000
+Evaluating query 24 - Uses, while :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses(w, "x")
+
+ EVALUATING USES (w "x")
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 4
+FIRST PARAM = w
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 9
+it2->ans1 = 11
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 9 11 
+Correct answer: 4 5 9 11 
+25 - Follows :: 
+assign a;
+Select a such that Follows (1, a)
+2
+5000
+Evaluating query 25 - Follows :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(1, a)
+
+ EVALUATING FOLLOWS (1 a)
+Second token is alpha and it does not exist in linkages
+First token is digit
+Answer is = 2
+followsAns.size = 1
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = 1
+SECOND PARAM = a
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+26 - Modifies :: 
+stmt s; variable v;
+Select v such that Modifies (s, v)
+i, b, c, oSCar, x, Romeo, a, w
+5000
+Evaluating query 26 - Modifies :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(s, v)
+
+ EVALUATING MODIFIES (s v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 39
+FIRST PARAM = s
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 6
+it2->ans2 = 12
+it2->ans2 = 15
+it2->ans2 = 19
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 6
+it2->ans2 = 12
+it2->ans2 = 15
+it2->ans2 = 6
+it2->ans2 = 6
+it2->ans2 = 6
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 12
+it2->ans2 = 15
+it2->ans2 = 12
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 12
+it2->ans2 = 15
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 15
+it2->ans2 = 15
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 3
+it2->ans2 = 3
+it2->ans2 = 12
+it2->ans2 = 4
+it2->ans2 = 19
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: i b c a oSCar x Romeo w 
+Correct answer: i b c oSCar x Romeo a w 
+27 - Typed :: 
+assign a;
+Select a
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20
+5000
+Evaluating query 27 - Typed :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+28 - Modifies :: 
+variable v;
+Select v
+I, Romeo, a, b, beta, c, chArlie, delta, i, j1k, k, l, left, oSCar, right, tmp, w, width, x
+5000
+Evaluating query 28 - Modifies :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+Correct answer: I Romeo a b beta c chArlie delta i j1k k l left oSCar right tmp w width x 
+29 - Invalid :: 
+assign a, a1;
+Select a such that Modifies(a,a1);
+
+5000
+Evaluating query 29 - Invalid :: 
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+30 - Uses, Pattern :: 
+assign a; stmt s; variable v; assign a1; variable v2;
+Select a such that Uses (s,v) pattern a1(v2, _"asd"_)
+none
+5000
+Evaluating query 30 - Uses, Pattern :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+uses(s, v)
+
+ EVALUATING USES (s v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(v2, _"asd"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+IN INSERT LINKS INSERTING TOKEN = v2
+v2 Not Found in Linkages and relIndex = 1
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _"asd"_ v2
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+33 - Indirect :: 
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1(v,_)
+3, 10, 13, 15, 17, 18, 20
+5000
+Evaluating query 33 - Indirect :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+uses(a, v)
+
+ EVALUATING USES (a v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(v, _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 1
+IN INSERT LINKS INSERTING TOKEN = v
+v Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _ v
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+MATCH FOUND AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+MATCH FOUND AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+MATCH FOUND AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+MATCH FOUND AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+MATCH FOUND AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 20 ans2 = 19
+ans1 = 19 ans2 = 4
+ans1 = 18 ans2 = 12
+ans1 = 17 ans2 = 3
+ans1 = 15 ans2 = 3
+ans1 = 14 ans2 = 2
+ans1 = 13 ans2 = 15
+ans1 = 10 ans2 = 12
+ans1 = 8 ans2 = 6
+ans1 = 6 ans2 = 6
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 16
+FIRST PARAM = a
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 10 13 15 17 18 20 
+Correct answer: 3 10 13 15 17 18 20 
+34 - Direct :: 
+assign a; variable v;
+Select a such that Uses (a,v) pattern a(v,_)
+10, 13, 17, 18, 20
+5000
+Evaluating query 34 - Direct :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+uses(a, v)
+
+ EVALUATING USES (a v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(v, _)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Found in Linkages
+IN INSERT LINKS INSERTING TOKEN = v
+v Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _ v
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+MATCH FOUND AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+MATCH FOUND AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+MATCH FOUND AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+MATCH FOUND AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+MATCH FOUND AT PROG_LINE 15
+NOW AT PROG_LINE 14
+MATCH FOUND AT PROG_LINE 14
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+MATCH FOUND AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+MATCH FOUND AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+MATCH FOUND AT PROG_LINE 3
+NOW AT PROG_LINE 2
+MATCH FOUND AT PROG_LINE 2
+NOW AT PROG_LINE 1
+MATCH FOUND AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 20 ans2 = 19
+ans1 = 19 ans2 = 4
+ans1 = 18 ans2 = 12
+ans1 = 17 ans2 = 3
+ans1 = 15 ans2 = 3
+ans1 = 14 ans2 = 2
+ans1 = 13 ans2 = 15
+ans1 = 10 ans2 = 12
+ans1 = 8 ans2 = 6
+ans1 = 6 ans2 = 6
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 16
+FIRST PARAM = a
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 8
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 15
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 13 17 18 20 
+Correct answer: 10 13 17 18 20 
+35 - Indirect :: 
+assign a, a1;
+Select a such that Follows(a1, a) pattern a1(_,_"Romeo"_)
+14
+5000
+Evaluating query 35 - Indirect :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+follows(a1, a)
+
+ EVALUATING FOLLOWS (a1 a)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 1second.at(i) = 2
+first.at(i) = 2second.at(i) = 3
+first.at(i) = 13second.at(i) = 14
+first.at(i) = 14second.at(i) = 15
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+pattern(_, _"Romeo"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a1
+a1 Found in Linkages
+PATTERN WITH THE FOLLOWING ARGUMENTS: a1 _"Romeo"_ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+MATCH FOUND AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 15 ans2 = 15
+ans1 = 13 ans2 = 13
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 4
+FIRST PARAM = a1
+SECOND PARAM = a
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 14
+it2->ans2 = 15
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 14 
+Correct answer: 14 
+36 - Constant :: 
+constant c;
+Select c
+0, 1, 200, 2
+5000
+Evaluating query 36 - Constant :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 200 0 2 
+Correct answer: 0 1 200 2 
+37 - ProgLine :: 
+prog_line n;
+Select n
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+Evaluating query 37 - ProgLine :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+38 - Follows :: 
+stmt s;
+Select s such that Follows(s,s)
+
+5000
+Evaluating query 38 - Follows :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(s, s)
+
+ EVALUATING FOLLOWS (s s)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 1second.at(i) = 2
+first.at(i) = 2second.at(i) = 3
+first.at(i) = 3second.at(i) = 4
+first.at(i) = 5second.at(i) = 20
+first.at(i) = 6second.at(i) = 7
+first.at(i) = 7second.at(i) = 9
+first.at(i) = 9second.at(i) = 19
+first.at(i) = 10second.at(i) = 11
+first.at(i) = 12second.at(i) = 16
+first.at(i) = 13second.at(i) = 14
+first.at(i) = 14second.at(i) = 15
+first.at(i) = 16second.at(i) = 18
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = s
+s Found in Linkages
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 12
+FIRST PARAM = s
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 16
+RETURNING FINAL ANSWERS
+<exception/>
+39 - Follows :: 
+while w;
+Select w such that Follows(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 39 - Follows :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(_, _)
+
+ EVALUATING FOLLOWS (_ _)
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+40 - Follows, Pattern :: 
+stmt s; assign a;
+Select a such that Follows (s,s) pattern a (_, _"Romeo"_)
+
+5000
+Evaluating query 40 - Follows, Pattern :: 
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+follows(s, s)
+
+ EVALUATING FOLLOWS (s s)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 1second.at(i) = 2
+first.at(i) = 2second.at(i) = 3
+first.at(i) = 3second.at(i) = 4
+first.at(i) = 5second.at(i) = 20
+first.at(i) = 6second.at(i) = 7
+first.at(i) = 7second.at(i) = 9
+first.at(i) = 9second.at(i) = 19
+first.at(i) = 10second.at(i) = 11
+first.at(i) = 12second.at(i) = 16
+first.at(i) = 13second.at(i) = 14
+first.at(i) = 14second.at(i) = 15
+first.at(i) = 16second.at(i) = 18
+IN INSERT LINKS INSERTING TOKEN = s
+s Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = s
+s Found in Linkages
+Inserting tokens into relParameters
+ 
+pattern(_, _"Romeo"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 1
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"Romeo"_ _
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+MATCH FOUND AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+MATCH FOUND AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 15 ans2 = 15
+ans1 = 13 ans2 = 13
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 15
+it2->ans1 = 13
+RETURNING FINAL ANSWERS
+<exception/>
+41 - Follows :: 
+while w, w1;
+Select w such that Follows (w,w1)
+7, 12
+5000
+Evaluating query 41 - Follows :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(w, w1)
+
+ EVALUATING FOLLOWS (w w1)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 7second.at(i) = 9
+first.at(i) = 12second.at(i) = 16
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 2
+FIRST PARAM = w
+it2->ans1 = 7
+it2->ans1 = 12
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 7 12 
+Correct answer: 7 12 
+42 - Follows, All :: 
+while w;
+Select w such that Follows (_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 42 - Follows, All :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(_, _)
+
+ EVALUATING FOLLOWS (_ _)
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+43 - Uses, Pattern, indirect :: 
+assign a;
+Select a such that Uses(a,"x") pattern a("x" , _"x"_)
+10, 18
+5000
+Evaluating query 43 - Uses, Pattern, indirect :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+pattern found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+pattern("x", _"x"_)
+
+ EVALUATING PATTERN
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+PATTERN WITH THE FOLLOWING ARGUMENTS: a _"x"_ "x"
+START DFS
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE -1
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 20
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 19
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 18
+MATCH FOUND AT PROG_LINE 18
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 17
+NOW AT PROG_LINE 16
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 15
+NOW AT PROG_LINE 14
+NOW AT PROG_LINE 13
+NOW AT PROG_LINE 12
+NOW AT PROG_LINE 11
+NOW AT PROG_LINE 10
+MATCH FOUND AT PROG_LINE 10
+NOW AT PROG_LINE 9
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 8
+NOW AT PROG_LINE 7
+NOW AT PROG_LINE 6
+NOW AT PROG_LINE 5
+NOW AT PROG_LINE 4
+NOW AT PROG_LINE 3
+NOW AT PROG_LINE 2
+NOW AT PROG_LINE 1
+PRINTING PATTERNANS
+ans1 = 18 ans2 = 18
+ans1 = 10 ans2 = 10
+Inserting tokens into relParameters
+ 
+uses(a, "x")
+
+ EVALUATING USES (a "x")
+IntersectPairs tk1 Exists tk1 = a
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = a
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+10
+18
+End retrieving token
+in for loop
+pair index is 110
+in for loop
+pair index is 118
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 10
+Inserting 18
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =a
+IN INSERT LINKS INSERTING TOKEN = a
+a Found in Linkages
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = a
+it2->ans1 = 18
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 18 10 
+Correct answer: 10 18 
+44 - Parent :: 
+while w, w1;
+Select w such that Parent(w,w1)
+4, 5, 9, 11
+5000
+Evaluating query 44 - Parent :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent(w, w1)
+
+ EVALUATING PARENT (w w1)
+answer = 4
+it4it25
+answer = 5
+it5it27
+it5it29
+answer = 7
+answer = 9
+it9it211
+answer = 11
+it11it212
+it11it216
+answer = 12
+answer = 16
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Insert links for tk2 = w1
+IN INSERT LINKS INSERTING TOKEN = w1
+w1 Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 6
+FIRST PARAM = w
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 11
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 9 11 
+Correct answer: 4 5 9 11 
+45 - FollowsStar :: 
+while w;
+Select w such that Follows*(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 45 - FollowsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(_, _)
+
+ EVALUATING FOLLOWS* (_ _)
+In intersect Pairs: both do not exist
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+46 - Parent :: 
+while w; assign a;
+Select w such that Parent(w,a)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 46 - Parent :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent(w, a)
+
+ EVALUATING PARENT (w a)
+answer = 4
+it4it220
+answer = 5
+it5it26
+it5it219
+answer = 7
+it7it28
+answer = 9
+it9it210
+answer = 11
+it11it218
+answer = 12
+it12it213
+it12it214
+it12it215
+answer = 16
+it16it217
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Insert links for tk2 = a
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+after intersect pairs
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 10
+FIRST PARAM = w
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 5
+it2->ans1 = 7
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 16
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+47 - Follows :: 
+while w; assign a;
+Select a such that Follows(a,w)
+3, 6, 10
+5000
+Evaluating query 47 - Follows :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(a, w)
+
+ EVALUATING FOLLOWS (a w)
+Both tokens are alpha and do not exist in linkages
+trying is follows1
+first.at(i) = 3second.at(i) = 4
+first.at(i) = 6second.at(i) = 7
+first.at(i) = 10second.at(i) = 11
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+IN INSERT LINKS INSERTING TOKEN = w
+w Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 3
+FIRST PARAM = a
+it2->ans1 = 3
+it2->ans1 = 6
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 6 10 
+Correct answer: 3 6 10 
+End of evaluating Query File.
+AutoTester Completed !

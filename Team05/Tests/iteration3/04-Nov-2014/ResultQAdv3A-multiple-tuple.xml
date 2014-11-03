@@ -1,0 +1,49 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration3</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" tuple of multiple clauses">
+<query>
+<id multiple="1" tuple="1" comment="" >1</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; Select <p1, p2> such that Calls*(p1, p2) and Modifies(p1, "idx")]]></querystr>
+<stuans>Fern Lily,Fern Tulip,Fern Orchid,Orchid Tulip</stuans>
+<correct>Fern Orchid</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fern Lily,Fern Tulip,Orchid Tulip</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>3</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id multiple="1" tuple="1" comment="" >2</id><querystr><![CDATA[procedure p1, p2; variable v; Select <p1, p2> such that Calls (p1, p2) and Modifies (p1, v)]]></querystr>
+<stuans>Fern Orchid,Fern Lily,Fern Tulip,Orchid Tulip</stuans>
+<correct>Fern Tulip,Fern Lily,Fern Orchid,Orchid Tulip</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id multiple="1" tuple="1" comment="" >3</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; variable v; Select <p1, p2, s1, v> such that Calls (p1, p2) and Modifies (s1, v)]]></querystr>
+<stuans>Fern Orchid 1 y,Fern Orchid 2 x,Fern Orchid 3 z,Fern Orchid 4 v,Fern Orchid 5 y,Fern Orchid 5 x,Fern Orchid 6 v,Fern Orchid 7 y,Fern Orchid 7 x,Fern Orchid 8 t,Fern Orchid 9 y,Fern Orchid 9 x,Fern Orchid 9 z,Fern Orchid 9 t,Fern Orchid 9 idx,Fern Orchid 10 t,Fern Orchid 11 y,Fern Orchid 11 x,Fern Orchid 11 z,Fern Orchid 11 idx,Fern Orchid 12 z,Fern Orchid 13 idx,Fern Orchid 14 x,Fern Orchid 15 y,Fern Orchid 15 x,Fern Orchid 16 idx,Fern Orchid 17 x,Fern Orchid 18 y,Fern Orchid 18 x,Fern Orchid 18 z,Fern Orchid 18 idx,Fern Orchid 19 y,Fern Orchid 19 x,Fern Orchid 19 idx,Fern Orchid 20 y,Fern Orchid 21 y,Fern Orchid 21 x,Fern Orchid 22 idx,Fern Orchid 23 z,Fern Orchid 24 y,Fern Orchid 25 y,Fern Orchid 26 x,Fern Orchid 27 y,Fern Orchid 27 x,Fern Orchid 28 y,Fern Orchid 28 x,Fern Orchid 29 x,Fern Orchid 30 y,Fern Lily 1 y,Fern Lily 2 x,Fern Lily 3 z,Fern Lily 4 v,Fern Lily 5 y,Fern Lily 5 x,Fern Lily 6 v,Fern Lily 7 y,Fern Lily 7 x,Fern Lily 8 t,Fern Lily 9 y,Fern Lily 9 x,Fern Lily 9 z,Fern Lily 9 t,Fern Lily 9 idx,Fern Lily 10 t,Fern Lily 11 y,Fern Lily 11 x,Fern Lily 11 z,Fern Lily 11 idx,Fern Lily 12 z,Fern Lily 13 idx,Fern Lily 14 x,Fern Lily 15 y,Fern Lily 15 x,Fern Lily 16 idx,Fern Lily 17 x,Fern Lily 18 y,Fern Lily 18 x,Fern Lily 18 z,Fern Lily 18 idx,Fern Lily 19 y,Fern Lily 19 x,Fern Lily 19 idx,Fern Lily 20 y,Fern Lily 21 y,Fern Lily 21 x,Fern Lily 22 idx,Fern Lily 23 z,Fern Lily 24 y,Fern Lily 25 y,Fern Lily 26 x,Fern Lily 27 y,Fern Lily 27 x,Fern Lily 28 y,Fern Lily 28 x,Fern Lily 29 x,Fern Lily 30 y,Fern Tulip 1 y,Fern Tulip 2 x,Fern Tulip 3 z,Fern Tulip 4 v,Fern Tulip 5 y,Fern Tulip 5 x,Fern Tulip 6 v,Fern Tulip 7 y,Fern Tulip 7 x,Fern Tulip 8 t,Fern Tulip 9 y,Fern Tulip 9 x,Fern Tulip 9 z,Fern Tulip 9 t,Fern Tulip 9 idx,Fern Tulip 10 t,Fern Tulip 11 y,Fern Tulip 11 x,Fern Tulip 11 z,Fern Tulip 11 idx,Fern Tulip 12 z,Fern Tulip 13 idx,Fern Tulip 14 x,Fern Tulip 15 y,Fern Tulip 15 x,Fern Tulip 16 idx,Fern Tulip 17 x,Fern Tulip 18 y,Fern Tulip 18 x,Fern Tulip 18 z,Fern Tulip 18 idx,Fern Tulip 19 y,Fern Tulip 19 x,Fern Tulip 19 idx,Fern Tulip 20 y,Fern Tulip 21 y,Fern Tulip 21 x,Fern Tulip 22 idx,Fern Tulip 23 z,Fern Tulip 24 y,Fern Tulip 25 y,Fern Tulip 26 x,Fern Tulip 27 y,Fern Tulip 27 x,Fern Tulip 28 y,Fern Tulip 28 x,Fern Tulip 29 x,Fern Tulip 30 y,Orchid Tulip 1 y,Orchid Tulip 2 x,Orchid Tulip 3 z,Orchid Tulip 4 v,Orchid Tulip 5 y,Orchid Tulip 5 x,Orchid Tulip 6 v,Orchid Tulip 7 y,Orchid Tulip 7 x,Orchid Tulip 8 t,Orchid Tulip 9 y,Orchid Tulip 9 x,Orchid Tulip 9 z,Orchid Tulip 9 t,Orchid Tulip 9 idx,Orchid Tulip 10 t,Orchid Tulip 11 y,Orchid Tulip 11 x,Orchid Tulip 11 z,Orchid Tulip 11 idx,Orchid Tulip 12 z,Orchid Tulip 13 idx,Orchid Tulip 14 x,Orchid Tulip 15 y,Orchid Tulip 15 x,Orchid Tulip 16 idx,Orchid Tulip 17 x,Orchid Tulip 18 y,Orchid Tulip 18 x,Orchid Tulip 18 z,Orchid Tulip 18 idx,Orchid Tulip 19 y,Orchid Tulip 19 x,Orchid Tulip 19 idx,Orchid Tulip 20 y,Orchid Tulip 21 y,Orchid Tulip 21 x,Orchid Tulip 22 idx,Orchid Tulip 23 z,Orchid Tulip 24 y,Orchid Tulip 25 y,Orchid Tulip 26 x,Orchid Tulip 27 y,Orchid Tulip 27 x,Orchid Tulip 28 y,Orchid Tulip 28 x,Orchid Tulip 29 x,Orchid Tulip 30 y</stuans>
+<correct>Fern Tulip 1 y,Fern Lily 1 y,Fern Orchid 1 y,Orchid Tulip 1 y,Fern Tulip 2 x,Fern Lily 2 x,Fern Orchid 2 x,Orchid Tulip 2 x,Fern Tulip 3 z,Fern Lily 3 z,Fern Orchid 3 z,Orchid Tulip 3 z,Fern Tulip 4 v,Fern Lily 4 v,Fern Orchid 4 v,Orchid Tulip 4 v,Fern Tulip 6 v,Fern Lily 6 v,Fern Orchid 6 v,Orchid Tulip 6 v,Fern Tulip 8 t,Fern Lily 8 t,Fern Orchid 8 t,Orchid Tulip 8 t,Fern Tulip 10 t,Fern Lily 10 t,Fern Orchid 10 t,Orchid Tulip 10 t,Fern Tulip 12 z,Fern Lily 12 z,Fern Orchid 12 z,Orchid Tulip 12 z,Fern Tulip 13 idx,Fern Lily 13 idx,Fern Orchid 13 idx,Orchid Tulip 13 idx,Fern Tulip 14 x,Fern Lily 14 x,Fern Orchid 14 x,Orchid Tulip 14 x,Fern Tulip 16 idx,Fern Lily 16 idx,Fern Orchid 16 idx,Orchid Tulip 16 idx,Fern Tulip 17 x,Fern Lily 17 x,Fern Orchid 17 x,Orchid Tulip 17 x,Fern Tulip 20 y,Fern Lily 20 y,Fern Orchid 20 y,Orchid Tulip 20 y,Fern Tulip 22 idx,Fern Lily 22 idx,Fern Orchid 22 idx,Orchid Tulip 22 idx,Fern Tulip 23 z,Fern Lily 23 z,Fern Orchid 23 z,Orchid Tulip 23 z,Fern Tulip 25 y,Fern Lily 25 y,Fern Orchid 25 y,Orchid Tulip 25 y,Fern Tulip 26 x,Fern Lily 26 x,Fern Orchid 26 x,Orchid Tulip 26 x,Fern Tulip 29 x,Fern Lily 29 x,Fern Orchid 29 x,Orchid Tulip 29 x,Fern Tulip 30 y,Fern Lily 30 y,Fern Orchid 30 y,Orchid Tulip 30 y</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fern Lily 11 idx,Fern Lily 11 x,Fern Lily 11 y,Fern Lily 11 z,Fern Lily 15 x,Fern Lily 15 y,Fern Lily 18 idx,Fern Lily 18 x,Fern Lily 18 y,Fern Lily 18 z,Fern Lily 19 idx,Fern Lily 19 x,Fern Lily 19 y,Fern Lily 21 x,Fern Lily 21 y,Fern Lily 24 y,Fern Lily 27 x,Fern Lily 27 y,Fern Lily 28 x,Fern Lily 28 y,Fern Lily 5 x,Fern Lily 5 y,Fern Lily 7 x,Fern Lily 7 y,Fern Lily 9 idx,Fern Lily 9 t,Fern Lily 9 x,Fern Lily 9 y,Fern Lily 9 z,Fern Orchid 11 idx,Fern Orchid 11 x,Fern Orchid 11 y,Fern Orchid 11 z,Fern Orchid 15 x,Fern Orchid 15 y,Fern Orchid 18 idx,Fern Orchid 18 x,Fern Orchid 18 y,Fern Orchid 18 z,Fern Orchid 19 idx,Fern Orchid 19 x,Fern Orchid 19 y,Fern Orchid 21 x,Fern Orchid 21 y,Fern Orchid 24 y,Fern Orchid 27 x,Fern Orchid 27 y,Fern Orchid 28 x,Fern Orchid 28 y,Fern Orchid 5 x,Fern Orchid 5 y,Fern Orchid 7 x,Fern Orchid 7 y,Fern Orchid 9 idx,Fern Orchid 9 t,Fern Orchid 9 x,Fern Orchid 9 y,Fern Orchid 9 z,Fern Tulip 11 idx,Fern Tulip 11 x,Fern Tulip 11 y,Fern Tulip 11 z,Fern Tulip 15 x,Fern Tulip 15 y,Fern Tulip 18 idx,Fern Tulip 18 x,Fern Tulip 18 y,Fern Tulip 18 z,Fern Tulip 19 idx,Fern Tulip 19 x,Fern Tulip 19 y,Fern Tulip 21 x,Fern Tulip 21 y,Fern Tulip 24 y,Fern Tulip 27 x,Fern Tulip 27 y,Fern Tulip 28 x,Fern Tulip 28 y,Fern Tulip 5 x,Fern Tulip 5 y,Fern Tulip 7 x,Fern Tulip 7 y,Fern Tulip 9 idx,Fern Tulip 9 t,Fern Tulip 9 x,Fern Tulip 9 y,Fern Tulip 9 z,Orchid Tulip 11 idx,Orchid Tulip 11 x,Orchid Tulip 11 y,Orchid Tulip 11 z,Orchid Tulip 15 x,Orchid Tulip 15 y,Orchid Tulip 18 idx,Orchid Tulip 18 x,Orchid Tulip 18 y,Orchid Tulip 18 z,Orchid Tulip 19 idx,Orchid Tulip 19 x,Orchid Tulip 19 y,Orchid Tulip 21 x,Orchid Tulip 21 y,Orchid Tulip 24 y,Orchid Tulip 27 x,Orchid Tulip 27 y,Orchid Tulip 28 x,Orchid Tulip 28 y,Orchid Tulip 5 x,Orchid Tulip 5 y,Orchid Tulip 7 x,Orchid Tulip 7 y,Orchid Tulip 9 idx,Orchid Tulip 9 t,Orchid Tulip 9 x,Orchid Tulip 9 y,Orchid Tulip 9 z</additional>
+<summary>
+<expected>76</expected>
+<matched>76</matched>
+<missing>0</missing>
+<additional>116</additional>
+</summary>
+</failed>
+</query>
+</category>
+</queries>
+</test_results>
