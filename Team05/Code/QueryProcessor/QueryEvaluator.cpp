@@ -1148,15 +1148,21 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
-
-	vector<Pair> callsStarAns;
+	cout<<"---STARTING CALLS STAR---"<<endl;
+	set<Pair> callsStarAns;
+	vector<int> traverseTable;
 
 	//Calls*(a,b) 
 	if(isalpha(tk1[0]) && isalpha(tk2[0])){
-		set<int> allProc = pkb->getAllProcIndexes();
+		if(tk1==tk2){
+			
+		}else {
+			cout<<"tk1 = "<<tk1<<" and tk2 = "<<tk2<<endl;
+			set<int> allProc = pkb->getAllProcIndexes();
 
-		for(set<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
-			recursiveCall(*it, *it, &callsStarAns);
+			for(set<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
+				recursiveCall(*it, *it, &callsStarAns, &traverseTable);
+			}
 		}
 	}
 
@@ -1166,7 +1172,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 			for(set<int>::iterator it=allProc.begin(); it!=allProc.end(); it++){
 				if(!pkb->getCalled(*it).empty()){
-					callsStarAns.push_back(Pair (*it, -1));
+					callsStarAns.insert(Pair (*it, -1));
 				}
 			}
 	}
@@ -1175,7 +1181,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(isalpha(tk1[0])) {
 		int index = pkb->getProcIndex(tk2.substr(1,tk2.length()-2));
 
-		recursiveInverseCall(index, index, &callsStarAns);
+		recursiveInverseCall(index, index, &callsStarAns, &traverseTable);
 
 	}
 
@@ -1186,7 +1192,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 
 		for(set<int>::iterator it = allProc.begin(); it!=allProc.end(); it++){
 			if(!pkb->getCalls(*it).empty()){
-				callsStarAns.push_back(Pair(-1, *it));
+				callsStarAns.insert(Pair(-1, *it));
 			}
 		}
 
@@ -1196,16 +1202,16 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(isalpha(tk2[0])){
 		int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
 
-		recursiveCall(index, index, &callsStarAns);
+		recursiveCall(index, index, &callsStarAns, &traverseTable);
 	}
 
 	//Calls*(_,"Second")
 	else if(tk1=="_" && tk2[0]=='\"'){
 		set<int> p = pkb->getCalls(pkb->getProcIndex(tk2.substr(1, tk2.length()-2)));
 		if(p.empty()){
-			callsStarAns.push_back(Pair (-2,-2));
+			callsStarAns.insert(Pair (-2,-2));
 		}else{
-			callsStarAns.push_back(Pair (-1,-1));
+			callsStarAns.insert(Pair (-1,-1));
 		}
 	}
 
@@ -1213,60 +1219,108 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(tk1[0]=='\"' && tk2=="_"){
 		set<int> p = pkb->getCalled(pkb->getProcIndex(tk1.substr(1, tk1.length()-2)));
 		if(p.empty()){
-			callsStarAns.push_back(Pair (-2,-2));
+			callsStarAns.insert(Pair (-2,-2));
 		}else{
-			callsStarAns.push_back(Pair (-1,-1));
+			callsStarAns.insert(Pair (-1,-1));
+		}
+	}
+
+	else if(tk1=="_" && tk2=="_"){
+		cout<<"tk1=_ and tk2=_"<<endl;
+		if(pkb->getAllCalled().empty()){
+			callsStarAns.insert(Pair(-2,-2));
+		}else{
+			callsStarAns.insert(Pair(-1,-1));
 		}
 	}
 
 	//Calls*("first", "second")
 	else {
 		int index1 = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
-		int index2 = pkb->getProcIndex(tk2.substr(1, tk1.length()-2));
+		int index2 = pkb->getProcIndex(tk2.substr(1, tk2.length()-2));
 
-		recursiveCallBoolean(index1, index1, index2, &callsStarAns);
+		recursiveCallBoolean(index1, index1, index2, &callsStarAns, &traverseTable);
 
 		if(callsStarAns.empty()){
-			callsStarAns.push_back(Pair (-2, -2));
+			callsStarAns.insert(Pair (-2, -2));
 		}
 	}
-
+	vector<Pair> callsStarAnsVector;
+	for (set<Pair>::iterator x = callsStarAns.begin(); x!=callsStarAns.end(); x++){
+		callsStarAnsVector.push_back(*x);
+	}
 	//If both a and b exist in QueryEvaluator::linkages
-	intersectPairs(tk1,tk2,&callsStarAns,relIndex);
+	intersectPairs(tk1,tk2,&callsStarAnsVector,relIndex);
 
-	QueryEvaluator::relAns.insert(make_pair(relIndex, callsStarAns));
+	QueryEvaluator::relAns.insert(make_pair(relIndex, callsStarAnsVector));
+
+	cout<<"---END OF CALLS STAR---"<<endl;
 
 }
 
-void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, vector<Pair> * ans){
+void QueryEvaluator::recursiveCall(int rootProcIndex, int currentIndex, set<Pair> * ans, vector<int> *traverseTable){
+	cout<<"in recursive Call"<<endl;
+	cout<<"rootindex = "<<rootProcIndex<<" currentIndex= "<<currentIndex<<endl;
 	set<int> called = pkb->getCalled(currentIndex);
-
+	cout<<"after getting called"<<endl;
 	for(set<int>::iterator i=called.begin(); i!=called.end(); i++){
-		ans->push_back(Pair (rootProcIndex, *i));
-		recursiveCall(rootProcIndex, *i, ans);
+		ans->insert(Pair (rootProcIndex, *i));
+		if(find(traverseTable->begin(), traverseTable->end(), *i)!=traverseTable->end()){
+			i++;
+			if(i==called.end()){
+				break;
+			}
+			ans->insert(Pair (rootProcIndex, *i));
+		}else{
+			traverseTable->push_back(*i);
+		}
+		recursiveCall(rootProcIndex, *i, ans, traverseTable);
 	}
 }
 
-void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, vector<Pair> * ans){
+void QueryEvaluator::recursiveCallBoolean(int rootProcIndex, int currentIndex, int targetIndex, set<Pair> * ans, vector<int> *traverseTable){
 	set<int> called = pkb->getCalled(currentIndex);
-
+	cout<<"rootIndex = "<<rootProcIndex<<" currentIndex = "<<currentIndex<< " targetIndex = "<<targetIndex<<endl;
 	for(set<int>::iterator i=called.begin(); i!=called.end(); i++){
 		cout<<"Iterating throught called vector. *i = "<<*i <<endl;
 		if(*i==targetIndex){
 			cout<<"recursiveCallBoolean returns TRUE"<<endl;
-			ans->push_back(Pair (-1,-1));
+			ans->insert(Pair (-1,-1));
 			break;
 		}
-		recursiveCallBoolean(rootProcIndex, *i, targetIndex, ans);
+		if(find(traverseTable->begin(), traverseTable->end(), *i)!=traverseTable->end()){
+			i++;
+			if(i==called.end()){
+				break;
+			}
+			if(*i==targetIndex){
+			cout<<"recursiveCallBoolean returns TRUE"<<endl;
+			ans->insert(Pair (-1,-1));
+			break;
+		}
+		}else{
+			traverseTable->push_back(*i);
+		}
+		recursiveCallBoolean(rootProcIndex, *i, targetIndex, ans, traverseTable);
 	}
 }
 
-void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, vector<Pair> * ans){
+void QueryEvaluator::recursiveInverseCall(int leafIndex, int currentIndex, set<Pair> * ans, vector<int> *traverseTable){
 	set<int> calls = pkb->getCalls(currentIndex);
-
+	cout<<"in recursiveInverseCall currentIndex = "<<currentIndex<<endl;
 	for(set<int>::iterator i=calls.begin(); i!=calls.end(); i++){
-		ans->push_back(Pair (*i, leafIndex));
-		recursiveInverseCall(leafIndex, *i, ans);
+		cout<<"inserting "<<*i<<endl;
+		ans->insert(Pair (*i, leafIndex));
+		if(find(traverseTable->begin(), traverseTable->end(), *i)!=traverseTable->end()){
+			i++;
+			if(i==calls.end()){
+				break;
+			}
+			ans->insert(Pair (*i, leafIndex));
+		}else{
+			traverseTable->push_back(*i);
+		}
+		recursiveInverseCall(leafIndex, *i, ans,traverseTable);
 	}
 }
 

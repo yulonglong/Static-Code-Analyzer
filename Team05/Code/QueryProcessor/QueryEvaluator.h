@@ -49,9 +49,9 @@ private:
 	//! Evaluate all Calls* Relationships
 	void evaluateCallsStar(Relationship,int);
 	//! A Recursive Method used in Call* to aid in finding the respective answers
-	void recursiveCall(int, int, std::vector<Pair> *);
-	void recursiveInverseCall(int, int, std::vector<Pair> *);
-	void recursiveCallBoolean(int, int, int, std::vector<Pair> *);
+	void recursiveCall(int, int, std::set<Pair> *, std::vector<int>*);
+	void recursiveInverseCall(int, int, std::set<Pair> *, std::vector<int>*);
+	void recursiveCallBoolean(int, int, int, std::set<Pair> *, std::vector<int>*);
 
 	//! Evaluate all Next Relationships
 	void evaluateNext(Relationship, std::unordered_map<string, TypeTable::SynType>, int);
