@@ -1,5 +1,5 @@
 8
-cat : such that and with compound clauses
+cat: such that and with compound clauses
 1 - multiple ::
 assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
 Select p2 such that Calls (p1, p2) with p1.procName = "Fern"
