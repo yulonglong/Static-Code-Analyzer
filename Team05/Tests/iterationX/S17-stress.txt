@@ -1,0 +1,175 @@
+procedure A{
+	a = 1;
+	b = 2;
+	c = 3;
+	while a{
+		d = c;
+		if d then{
+			thereissomeveryverylongvariablenameherewhichequals0 = 0;
+			z = 10;
+			while z{
+				a = b;
+				call B;
+				while b{
+					if z then{
+						z = z - 1;
+						y = z * 2 + 7 * (a + 3 * (2 - y));
+						if  y then{
+							while y{
+								z = ((y + 5) * (x -3)) - (2*3+z);
+								x = z + c + b;
+							}
+							w = 12;
+						}
+						else{
+							w = 0;
+							while w{
+								if thereissomeveryverylongvariablenameherewhichequals0  then{
+									w = w + 2;
+								}
+								else{
+									w = w - 1;
+									thereissomeveryverylongvariablenameherewhichequals0 = 1;
+								}
+							}
+						}
+					}
+					else{
+						z = z * 2 + 3*(4-y+x*3*(2+1+5));
+						w = 1000000000000000000000000000000000;
+						while w{
+							call E;
+							w = w - 10000000;
+						}
+					}
+					call C;
+				}
+				while z{
+					c = e;
+					d = c;
+					c = a;
+					a = b;
+				}
+			}
+		}
+		else{
+			call F;
+			while b{
+				a = 3;
+				a = 5;
+				b = a;
+			}
+			call B;
+		}
+	}
+	if x then{
+		b = 0;
+	}
+	else{
+		a = 0;
+	}
+}
+
+procedure B{
+	b = bazooka - (ammunition*0);
+	while bazooka{
+		if b then{
+			bravo = charlie + alpha * delta + foxtrot - gamma * (hotel - tango);
+			delta = delta + delta;
+		}
+		else{
+			the = quick + brown + fox;
+			jumps = (over-the)*lazy - moon;
+		}
+	}
+	why = is + this - so + hard + questionmark;
+	call DizIzAVeryLongLongProcProcProcName;
+}
+
+procedure C{
+	while x{
+		while y{
+			x = a * ((a+b) - (a-c)*2 + (b-c)*(x+2))*(y + 5 - 7) + 3*z;
+		}
+		doSomethingHere = 1;
+		while z{
+			c = doSomethingHere;
+			b = c;
+			a = b;
+			zz = a;
+			yy = zz;
+			xx = yy;
+		}
+		startOftheEvilLoop = 1;
+		while startOftheEvilLoop{
+			while evil1{
+				while evil2{
+					charlie = delta + startOftheEvilLoop;
+					while evil3{
+						while evil4{
+							somevariable = 1;
+							while evil5{
+								onemore = 1;
+								while evil6{
+									okayweredone = 1;
+								}
+								maybemore = onemore + 1;
+							}
+						}
+						bravo = 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+procedure DizIzAVeryLongLongProcProcProcName{
+	apparentlyThisDoesNothing = 2147483647;
+}
+
+procedure E{
+	evilBranchHere = 1 * tango - (ww*xx-zz+yy);
+	muahahaha = evilBranchHere + z;
+	if muahahaha then{
+		if b1 then{
+			thisisanarrowhead = 1;
+			if b2 then{
+				if b3 then{
+					if b4 then{
+						thisisanarrowhead = thisisanarrowhead + 1;
+						if b5 then{
+							thisisanarrowhead = thisisanarrowhead + b4;
+						}
+						else{
+							muahahaha = 0;
+						}
+					}
+					else{
+						tango = foxtrot - gamma;
+					}
+				}
+				else{
+					y = zz + ww;
+				}
+			}
+			else{
+				thisisanarrowhead = thisisanarrowhead + 1;
+				b4 = 10;
+			}
+		}
+		else{
+			w = october;
+		}
+	}
+	else{
+		x = y + 1;
+	}
+}
+
+procedure F{
+	call B;
+	call C;
+	call E;
+	yesWeAreDone = canConstantBeNegative;
+}

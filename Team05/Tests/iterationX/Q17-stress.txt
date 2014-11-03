@@ -1,0 +1,7 @@
+30
+cat: All Queries
+1 - Millions :: 
+assign a1,a2,a3,a4,a5,a6,a7,a8;
+Select <a1,a2,a3,a4,a5,a6,a7,a8> such that Follows*(a1,a2) and Follows*(a3,a4) and Follows*(a5,a6) and Follows*(a7,a8)
+
+60000

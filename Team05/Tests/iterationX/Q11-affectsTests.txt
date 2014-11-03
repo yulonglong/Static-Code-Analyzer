@@ -1,0 +1,47 @@
+9
+cat: Mainly Affect*
+1 - Affects* :: 
+assign a1, a2, a3, a4, a5;
+Select a3 such that Affects*(1, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) 
+8,12,19,25
+5000
+2 - Affects* :: 
+assign a, a1, a2, a3, a4, a5;
+Select a3 such that Affects*(a, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) 
+8,12,19,25
+5000
+3 - Affects* :: 
+assign a, a1, a2, a3, a4, a5;
+Select a2 such that Affects*(a, a1) and Affects*(a1, 8) and Affects*(8,a2) and Affects*(a2,a3)
+19,28
+5000
+4 - Affects* :: 
+assign a1, a2, a3;
+Select a2 such that Affects*(a1, a2) and Affects*(a2, a3)
+24,31,8,19,28,15,17,12,25,9
+5000
+5 - Affects* :: 
+assign a;
+Select a such that Affects*(1, 34) and Affects*(24, 22) and Affects*(12,35) and Affects*(17,a)
+12,25,9,35
+5000
+6 - Affects* :: 
+assign a;
+Select a such that Affects*(_, 19) and Affects*(19, a)
+20,28,34,22
+5000
+7 - Affects*, Modifies :: 
+assign a1, a2, a3;
+Select a2 such that Modifies(a1,"h") and Modifies(a3,"l") and Affects*(a1, a2) and Affects*(a2, a3)
+17,12,25
+5000
+8 - Affects*, Modifies :: 
+variable v; assign a1, a2, a3;
+Select v such that Modifies(a1,"h") and Modifies(a3,"b") and Affects*(a1, _) and Affects*(_, a3)
+a,b,c,d,e,f,g,h,i,j,k,l,m
+5000
+9 - Affects*, Modifies :: 
+variable v,v1,v2; assign a1, a2, a3, a4;
+Select v such that Modifies(a1,v) and Modifies(a3,v1) and Affects*(a1, a3) and Modifies(a2,v) and Modifies(a4,v2) and Affects*(a2,a4)
+a,b,c,d,e,f,h,i,j,k,l
+5000

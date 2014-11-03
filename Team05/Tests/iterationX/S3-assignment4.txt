@@ -1,0 +1,17 @@
+procedure Bill {
+	x = 5;
+	call Mary;
+	y = x + 6;
+	x = 5;
+	z = x * y + 2; }
+	
+procedure Mary {
+	y = x * 3;
+	call John;
+	z = x + y; }
+
+procedure John {
+	if i then {
+		x = x + z; }
+	else {
+		y = x * y; }}

@@ -1,0 +1,517 @@
+91
+cat: All Queries
+1 - Follows :: 
+stmt s;
+Select s such that Follows (_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+2 - Follows :: 
+stmt s;
+Select s such that Follows (s, _)
+1,2,3,4,5,7,8,9,10,16,17,18,19,21,22,24,26,32,35,37,38,39,40,43,44
+5000
+3 - Follows :: 
+stmt s;
+Select s such that Follows (_, s)
+2,3,4,5,6,8,10,11,12,17,18,20,22,23,25,27,33,34,36,38,40,41,42,44,45
+5000
+4 - Follows :: 
+stmt s;
+Select s such that Follows (_, 1)
+none
+5000
+5 - Follows :: 
+stmt s;
+Select s such that Follows (3, s)
+4
+5000
+6 - Follows :: 
+stmt s, s1;
+Select s such that Follows (s, s1)
+1,2,3,4,5,7,8,9,10,16,17,18,19,21,22,24,26,32,35,37,38,39,40,43,44
+5000
+7 - Follows :: 
+stmt s;
+Select s such that Follows (3, 4)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+8 - Follows :: 
+stmt s;
+Select s such that Follows (3, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+9 - Follows :: 
+stmt s;
+Select s such that Follows (_, 3)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+10 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+11 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, _)
+1,2,3,4,5,7,8,9,10,16,17,18,19,21,22,24,26,32,35,37,38,39,40,43,44
+5000
+12 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (_, s)
+2,3,4,5,6,8,10,11,12,17,18,20,22,23,25,27,33,34,36,38,40,41,42,44,45
+5000
+13 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 3)
+1,2
+5000
+14 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (3, s)
+4,5,6
+5000
+15 - FollowsStar :: 
+stmt s, s1;
+Select s such that Follows* (s, s1)
+1,2,3,4,5,7,8,9,10,16,17,18,19,21,22,24,26,32,35,37,38,39,40,43,44
+5000
+16 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (3, 6)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+17 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (3, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+18 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (_, 3)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+19 - Parent :: 
+stmt s;
+Select s such that Parent (_, _)
+1,10,11,12,13,14,15,16,17,18,19,2,20,21,22,23,24,25,26,27,28,29,3,30,31,32,33,34,35,36,37,38,39,4,40,41,42,43,44,45,46,5,6,7,8,9
+5000
+20 - Parent :: 
+stmt s;
+Select s such that Parent (s, _)
+6,8,13,18,20,23,25,27,29,31,36,38,42
+5000
+21 - Parent :: 
+stmt s;
+Select s such that Parent (_, s)
+7,8,9,10,11,12,13,14,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,37,38,39,40,41,42,43,44,45
+5000
+22 - Parent :: 
+stmt s;
+Select s such that Parent (s, 10)
+8
+5000
+23 - Parent :: 
+stmt s;
+Select s such that Parent (9, s)
+none
+5000
+24 - Parent :: 
+stmt s, s1;
+Select s such that Parent (s, s1)
+6,8,13,18,20,23,25,27,29,31,36,38,42
+5000
+25 - Parent :: 
+stmt s;
+Select s such that Parent (7, 8)
+none
+5000
+26 - Parent :: 
+stmt s;
+Select s such that Parent (7, _)
+none
+5000
+27 - Parent :: 
+stmt s;
+Select s such that Parent (_, 9)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+28 - ParentStar :: 
+stmt s;
+Select s such that Parent* (_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+29 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, _)
+6,8,13,18,20,23,25,27,29,31,36,38,42
+5000
+30 - ParentStar :: 
+stmt s;
+Select s such that Parent* (_, s)
+7,8,9,10,11,12,13,14,15,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,37,38,39,40,41,42,43,44,45
+5000
+31 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, 10)
+6,8
+5000
+32 - ParentStar :: 
+stmt s;
+Select s such that Parent* (7, s)
+none
+5000
+33 - ParentStar :: 
+stmt s, s1;
+Select s such that Parent* (s, s1)
+6,8,13,18,20,23,25,27,29,31,36,38,42
+5000
+34 - ParentStar :: 
+stmt s;
+Select s such that Parent* (7, 11)
+none
+5000
+35 - ParentStar :: 
+stmt s;
+Select s such that Parent* (7, _)
+none
+5000
+36 - ParentStar :: 
+stmt s;
+Select s such that Parent* (_, 11)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+37 - Calls :: 
+procedure p;
+Select p such that Calls (_, _)
+Alpha,Bravo,Charlie,Delta
+5000
+38 - Calls :: 
+procedure p;
+Select p such that Calls (p, _)
+Alpha,Bravo,Delta
+5000
+39 - Calls :: 
+procedure p;
+Select p such that Calls (_, p)
+Bravo,Charlie,Delta
+5000
+40 - Calls :: 
+procedure p;
+Select p such that Calls (p, "Bravo")
+Alpha,Delta
+5000
+41 - Calls :: 
+procedure p;
+Select p such that Calls ("Bravo", p)
+Charlie
+5000
+42 - Calls :: 
+procedure p, p1;
+Select p such that Calls (p, p1)
+Alpha,Bravo,Delta
+5000
+43 - Calls :: 
+procedure p;
+Select p such that Calls ("Alpha", "Bravo")
+Alpha,Bravo,Charlie,Delta
+5000
+44 - Calls :: 
+procedure p;
+Select p such that Calls ("Alpha", _)
+Alpha,Bravo,Charlie,Delta
+5000
+45 - Calls :: 
+procedure p;
+Select p such that Calls (_, "Bravo")
+Alpha,Bravo,Charlie,Delta
+5000
+46 - CallsStar :: 
+procedure p;
+Select p such that Calls* (_, _)
+Alpha,Bravo,Charlie,Delta
+5000
+47 - CallsStar :: 
+procedure p;
+Select p such that Calls* (p, _)
+Alpha,Bravo,Delta
+5000
+48 - CallsStar :: 
+procedure p;
+Select p such that Calls* (_, p)
+Bravo,Charlie,Delta
+5000
+49 - CallsStar :: 
+procedure p;
+Select p such that Calls* (p, "Charlie")
+Alpha,Bravo,Delta
+5000
+50 - CallsStar :: 
+procedure p;
+Select p such that Calls* ("Alpha", p)
+Bravo,Charlie,Delta
+5000
+51 - CallsStar :: 
+procedure p, p1;
+Select p such that Calls* (p, p1)
+Alpha,Bravo,Delta
+5000
+52 - CallsStar :: 
+procedure p;
+Select p such that Calls* ("Alpha", "Charlie")
+Alpha,Bravo,Charlie,Delta
+5000
+53 - CallsStar :: 
+procedure p;
+Select p such that Calls* ("Alpha", _)
+Alpha,Bravo,Charlie,Delta
+5000
+54 - CallsStar :: 
+procedure p;
+Select p such that Calls* (_, "Charlie")
+Alpha,Bravo,Charlie,Delta
+5000
+55 - Modifies :: 
+procedure p;
+Select p such that Modifies (_, _)
+none
+5000
+56 - Modifies :: 
+procedure p;
+Select p such that Modifies (p, _)
+Alpha,Bravo,Charlie,Delta
+5000
+57 - Modifies :: 
+procedure p;
+Select p such that Modifies (_, p)
+none
+5000
+58 - Modifies :: 
+procedure p;
+Select p such that Modifies (p, "a")
+Alpha,Bravo,Delta
+5000
+59 - Modifies :: 
+procedure p; variable v;
+Select p such that Modifies (p, v)
+Alpha,Bravo,Charlie,Delta
+5000
+60 - Modifies :: 
+procedure p;
+Select p such that Modifies ("Alpha", "a")
+Alpha,Bravo,Charlie,Delta
+5000
+61 - Modifies :: 
+procedure p;
+Select p such that Modifies ("Alpha", _)
+Alpha,Bravo,Charlie,Delta
+5000
+62 - Modifies :: 
+stmt s;
+Select s such that Modifies (_, _)
+none
+5000
+63 - Modifies :: 
+stmt s;
+Select s such that Modifies (s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+64 - Modifies :: 
+variable v;
+Select v such that Modifies (_, v)
+none
+5000
+65 - Modifies :: 
+stmt s;
+Select s such that Modifies (s, "b")
+2,6,8,11,12,17,46
+5000
+66 - Modifies :: 
+variable v;
+Select v such that Modifies (6, v)
+a,x,y,b,c,d,e,h,i,j,k
+5000
+67 - Modifies :: 
+stmt s; variable v;
+Select v such that Modifies (s, v)
+a,b,c,d,e,x,y,h,i,j,k
+5000
+68 - Modifies :: 
+stmt s;
+Select s such that Modifies ("a", "b")
+none
+5000
+69 - Modifies :: 
+stmt s;
+Select s such that Modifies (6, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+70 - Modifies :: 
+stmt s;
+Select s such that Modifies (_, "b")
+none
+5000
+71 - Uses :: 
+procedure p;
+Select p such that Uses (_, _)
+none
+5000
+72 - Uses :: 
+procedure p;
+Select p such that Uses (p, _)
+Alpha,Bravo,Charlie,Delta
+5000
+73 - Uses :: 
+procedure p;
+Select p such that Uses (p, "a")
+Alpha,Bravo,Delta
+5000
+74 - Uses :: 
+procedure p; variable v;
+Select p such that Uses ("Bravo", v)
+Alpha,Bravo,Charlie,Delta
+5000
+75 - Uses :: 
+procedure p; variable v;
+Select p such that Uses (p, v)
+Alpha,Bravo,Charlie,Delta
+5000
+76 - Uses :: 
+procedure p;
+Select p such that Uses ("Bravo", "b")
+Alpha,Bravo,Charlie,Delta
+5000
+77 - Uses :: 
+procedure p;
+Select p such that Uses ("Bravo", _)
+Alpha,Bravo,Charlie,Delta
+5000
+78 - Uses :: 
+procedure p;
+Select p such that Uses (_, _)
+none
+5000
+79 - Uses :: 
+procedure p;
+Select p such that Uses (p, _)
+Alpha,Bravo,Charlie,Delta
+5000
+80 - Uses :: 
+procedure p;
+Select p such that Uses (p, "b")
+Alpha,Bravo,Delta
+5000
+81 - Uses :: 
+variable v;
+Select v such that Uses ("Bravo", v)
+a,b,c,e,h,i,j,k,p,x
+5000
+82 - Uses :: 
+procedure p; variable v;
+Select p such that Uses (p, v)
+Alpha,Bravo,Charlie,Delta
+5000
+83 - Uses :: 
+procedure p;
+Select p such that Uses ("Bravo", "b")
+Alpha,Bravo,Charlie,Delta
+5000
+84 - Uses :: 
+procedure p;
+Select p such that Uses ("Bravo", _)
+Alpha,Bravo,Charlie,Delta
+5000
+85 - Uses :: 
+stmt s;
+Select s such that Uses (_, _)
+none
+5000
+86 - Uses :: 
+stmt s;
+Select s such that Uses (s, _)
+3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,22,23,24,25,26,27,28,29,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+87 - Uses :: 
+stmt s;
+Select s such that Uses (s, "b")
+3,4,5,6,7,8,9,10,11,12,13,14,15,18,19,20,22,23,24,25,29,31,32,46
+5000
+88 - Uses :: 
+variable v;
+Select v such that Uses (10, v)
+a,b,c
+5000
+89 - Uses :: 
+stmt s; variable v;
+Select s such that Uses (s, v)
+3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19,20,22,23,24,25,26,27,28,29,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+90 - Uses :: 
+stmt s;
+Select s such that Uses (4, "a")
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+91 - Uses :: 
+stmt s;
+Select s such that Uses (4, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46
+5000
+92 - Uses :: 
+stmt s;
+Select s such that Uses (s, "abc")
+none
+5000
+93 - Modifies :: 
+stmt s;
+Select s such that Modifies (s, "abc")
+none
+5000
+94 - Next :: 
+prog_line n;
+Select n such that Next (n, 10) with n = 9
+9
+5000
+95 - With :: 
+stmt s;
+Select s with s.stmt# = 1
+1
+5000
+96 - With :: 
+assign a;
+Select a with a.stmt# = 1
+1
+5000
+97 - With :: 
+if ifstat;
+Select ifstat with ifstat.stmt# = 6
+6
+5000
+98 - With :: 
+while w;
+Select w with w.stmt# = 8
+8
+5000
+99 - With :: 
+procedure p;
+Select p with p.procName = "Alpha"
+Alpha
+5000
+100 - With :: 
+procedure p;
+Select p with p.procName = "Charlie"
+Charlie
+5000
+101 - With :: 
+variable v;
+Select v with v.varName = "a"
+a
+5000
+102 - With :: 
+variable v;
+Select v with v.varName = "h"
+h
+5000
+103 - With :: 
+call c;
+Select c with c.procName = "Bravo"
+11,46
+5000
