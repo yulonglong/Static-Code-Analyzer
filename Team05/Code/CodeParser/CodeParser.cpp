@@ -80,7 +80,7 @@ vector<string> CodeParser::getPostfix(vector<string> tokens){
 			st.push(tokens[i]);
 		}
 		else if(tokens[i]==")"){
-			if(!st.empty()){
+			if(st.empty()){
 				ans.clear();
 				ans.push_back("invalid");
 				return ans;
@@ -186,8 +186,14 @@ vector<string> CodeParser::getPostfix(vector<string> tokens){
 	}
 	
 	while(!st.empty()){
+		if((st.top()=="(")||(st.top()==")")){
+			ans.clear();
+			ans.push_back("invalid");
+			return ans;
+		}
 		ans.push_back(st.top());
 		st.pop();
+
 	}
 	return ans;
 }
