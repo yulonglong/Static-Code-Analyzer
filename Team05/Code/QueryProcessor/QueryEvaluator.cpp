@@ -2672,7 +2672,7 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 		insertLinks(lhs, relIndex);
 
 
-	cout << "PATTERN WITH THE FOLLOWING ARGUMENTS: " << syn <<  " " << rhs << " " << lhs << endl;
+	cout << "PATTERN WITH THE FOLLOWING ARGUMENTS: " << syn <<  " " << lhs << " " << rhs << endl;
 	switch(synType){
 		case TypeTable::ASSIGN:
 			patternAns = findAssign(*root, lhs, rhs, r);
@@ -2701,18 +2701,14 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 	vector<Pair> ans;
 	stack<Node> st;
 	st.push(startNode);
-	cout << "START DFS" << endl;
 	
 	while(!st.empty()) {
 		Node n = st.top();
 		st.pop();
-		
-		cout << "NOW AT PROG_LINE " << n.getProgLine() << endl;
 
 		if(r.getToken1Type() == Relationship::SYNONYM) {
 			if(n.getType().compare("assign") == 0) {
 				if(matchPattern(n, lhs, rhs, true)) {
-					cout << "MATCH FOUND AT PROG_LINE " << n.getProgLine() << endl;
 					vector<Node*> children = n.getChild();
 					Node left = *children.at(0);
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
@@ -2727,7 +2723,6 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 		else {
 			if(n.getType().compare("assign") == 0) {
 				if(matchPattern(n, lhs, rhs, false)) {
-					cout << "MATCH FOUND AT PROG_LINE " << n.getProgLine() << endl;
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
 			}
@@ -2875,13 +2870,20 @@ bool QueryEvaluator::matchTree(Node a, Node b) {
 	vector<Node*> children1 = a.getChild();
 	vector<Node*> children2 = b.getChild();
 
+	string aData = a.getData();
+	string bData = b.getData();
+
+	//aData.erase(std::remove(aData.begin(), aData.end(), '('), aData.end());
+	//bData.erase(std::remove(bData.begin(), bData.end(), '('), bData.end());
+	//aData.erase(std::remove(aData.begin(), aData.end(), ')'), aData.end());
+	//bData.erase(std::remove(bData.begin(), bData.end(), ')'), bData.end());
 	if(children1.size() != children2.size())
 		return false;
 
-	if(a.getData().compare(b.getData()) != 0)
+	if(aData.compare(bData) != 0)
 		return false;
 
-	if(a.getData().compare(b.getData()) == 0 && children1.size() == 0)
+	if(aData.compare(bData) == 0 && children1.size() == 0)
 		return true;
 
 	Node childA1 = *children1.at(0);
@@ -3047,7 +3049,7 @@ vector<string> QueryEvaluator::getPostfix(vector<string> tokens){
 void QueryEvaluator::tokenizeTokens(string word, vector<string> &storage){
 	string token ="";
 	for(int i=0;i<(int) word.length();i++){
-		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
+		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')||(word[i]=='(')||(word[i]==')')){
 			if(token.length()>0){
 				storage.push_back(token);
 			}
