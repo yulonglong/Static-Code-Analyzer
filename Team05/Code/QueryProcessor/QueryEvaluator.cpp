@@ -1057,16 +1057,17 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 
 	//Calls(p, q) OR Calls(p, _) OR Calls(_,q)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (isalpha(tk1[0])&&tk2=="_") || (tk1=="_"&&isalpha(tk2[0]))){
-		set<int> procIndexes = pkb->getAllProcIndexes();
-		for(set<int>::iterator it=procIndexes.begin(); it!=procIndexes.end(); it++){
-			called = pkb->getCalled(*it);
+		if(tk1!=tk2){
+			set<int> procIndexes = pkb->getAllProcIndexes();
+			for(set<int>::iterator it=procIndexes.begin(); it!=procIndexes.end(); it++){
+				called = pkb->getCalled(*it);
 
-			for(set<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
-				callAns.push_back(Pair (*it, *it2));
-				cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
+				for(set<int>::iterator it2=called.begin(); it2!=called.end(); it2++){
+					callAns.push_back(Pair (*it, *it2));
+					cout<<"it = "<<*it<<" "<<"it2 = "<<*it2<<endl;
+				}
 			}
 		}
-
 	}
 
 	//Select p Calls(p, "Second") Calls(_, "Second")
