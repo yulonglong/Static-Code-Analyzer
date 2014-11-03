@@ -17,6 +17,7 @@ class BuildCFGTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST( testBuildCFGForNestedIfStmts ); 
 	CPPUNIT_TEST( testBuildCFGForNestedWhileStmts );
 	CPPUNIT_TEST( testBuildCFGWithNextPairRelationship );
+	CPPUNIT_TEST( testBuildCFGS5 );
 	
 	CPPUNIT_TEST_SUITE_END();
 
@@ -30,6 +31,8 @@ public:
 	void testBuildCFGForNestedIfStmts(); 
 	void testBuildCFGForNestedWhileStmts(); 
 	void testBuildCFGWithNextPairRelationship(); 
+	void testBuildCFGS5();
+
 private:
 	string print(set<int>); 
 	//string printVectorOfNextPairs(vector<pair<int,int>> v);

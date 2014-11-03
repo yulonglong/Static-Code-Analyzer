@@ -9,7 +9,7 @@
 using namespace std;
 
 bool debugModeIteration1 = 0; 
-bool debugModeIteration2 = 0; 
+bool debugModeIteration2 = 0;
 bool debugModeIteration3 = 0; 
 
 int counter = 0;
@@ -256,7 +256,8 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 			// get the child which is -1 and set that as the fromNode 
 			while (fromNode->getProgLine() != -1) {
 				if (fromNode->getMultiChild().size() != 0) {
-					fromNode = fromNode->getMultiChild(0);
+					//fromNode = fromNode->getMultiChild(0);
+					fromNode = fromNode->getMultiChild(fromNode->getMultiChild().size()-1);
 				} else {
 					cout << "Error in DE 1!" << endl;
 					break;
@@ -376,13 +377,12 @@ CFGNode* DesignExtractor::getCFGNode(int progLine) {
 	CFGNode* source;
 	source = rootCFGNode;
 	traverseGraph(*source, progLine);
-
+	
 	/*for (std::vector<int>::iterator it=visited.begin(); it!=visited.end(); ++it)
 	std::cout << ' ' << *it;
 	std::cout << '\n';*/
 	
 	visited.clear();
-
 	return foundNode;
 }
 

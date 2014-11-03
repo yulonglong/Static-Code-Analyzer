@@ -44,11 +44,7 @@ void BuildCFGTest::testBuildCFGForAssignAndCallStmts() {
 	set<int> v;
 	//pkb->printNextTable();
 
-	string expected = "1 6 14 16 18 "; 
-	v = pkb->getNext(0);
-	CPPUNIT_ASSERT_EQUAL(expected, print(v));
-
-	expected = "2 "; 
+	string expected = "2 "; 
 	v = pkb->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -136,11 +132,7 @@ void BuildCFGTest::testBuildCFGForWhileStmts() {
 	set<int> v;
 	//pkb->printNextTable();
 
-	string expected = "1 5 "; 
-	v = pkb->getNext(0);
-	CPPUNIT_ASSERT_EQUAL(expected, print(v));
-	
-	expected = "2 4 "; 
+	string expected = "2 4 "; 
 	v = pkb->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -266,12 +258,8 @@ void BuildCFGTest::testBuildCFGForIfStmts() {
 	
 	set<int> v;
 	//pkb->printNextTable();
-	
-	string expected = "1 13 "; 
-	v = pkb->getNext(0);
-	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 
-	expected = "2 "; 
+	string expected = "2 "; 
 	v = pkb->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -363,11 +351,7 @@ void BuildCFGTest::testBuildCFGForNestedIfStmts() {
 	set<int> v;
 	//nextTable->printNextTable();
 	
-	string expected = "1 "; 
-	v = pkb->getNext(0);
-	CPPUNIT_ASSERT_EQUAL(expected, print(v));
-
-	expected = "2 "; 
+	string expected = "2 "; 
 	v = pkb->getNext(1);
 	CPPUNIT_ASSERT_EQUAL(expected, print(v));
 	
@@ -645,6 +629,32 @@ void BuildCFGTest::testBuildCFGWithNextPairRelationship() {
 	pkb->~PKB();
 }
 
+
+void BuildCFGTest::testBuildCFGS5() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
+
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("S5-basicTests.txt",pkb);
+
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} else {
+		cout << "CFGRoot is NOT NULL!! or ASTRoot is null" << endl;
+	}
+	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	
+	set<int> v;
+	//pkb->printNextTable();
+	
+	pkb->~PKB();
+
+}
+
+
 // Given a set of int, returns a String of the ints
 string BuildCFGTest::print(set<int> v) {
 	string s = "";
@@ -667,6 +677,7 @@ string BuildCFGTest::print(set<int> v) {
 	}
 	return s; 
 }
+
 //
 //string BuildCFGTest::printVectorOfNextPairs(vector<pair<STMTNUM,STMTNUM>> v) {
 //	string s = "[ ";
