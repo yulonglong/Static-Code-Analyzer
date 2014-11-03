@@ -603,7 +603,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if((relationRef == PARENT) || (relationRef == PARENTSTAR)){
-				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF)||(it->second == TypeTable::STMT))){
+				if(!((it->second == TypeTable::WHILE)||(it->second == TypeTable::IF)||(it->second == TypeTable::STMT)||(it->second == TypeTable::PROGLINE))){
 					synValid = false;
 				}
 			}
@@ -620,7 +620,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
-				if(!((it->second == TypeTable::ASSIGN)||(it->second == TypeTable::STMT))){
+				if(!((it->second == TypeTable::ASSIGN)||(it->second == TypeTable::STMT)||(it->second == TypeTable::PROGLINE))){
 					synValid = false;
 				}
 			}
@@ -665,7 +665,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
-				if(!((it->second == TypeTable::ASSIGN)||(it->second == TypeTable::STMT))){
+				if(!((it->second == TypeTable::ASSIGN)||(it->second == TypeTable::STMT)||(it->second == TypeTable::PROGLINE))){
 					synValid = false;
 				}
 			}
