@@ -1,0 +1,184 @@
+Parameters : S3-assignment4.txt Q3-assignment4.txt R3-assignment4.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - Contains :: 
+if ifstmt; variable v;
+Select v such that Contains (ifstmt, v)
+i
+5000
+Evaluating query 1 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: i 
+Missing: i 
+Additional: 
+2 - Contains, ContainsStar, With :: 
+if ifstmt; variable v; procedure p;
+Select v such that Contains (ifstmt, v) and Contains* (p, ifstmt) with p.procName = "Bill"
+none
+5000
+Evaluating query 2 - Contains, ContainsStar, With :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+3 - ContainsStar, With :: 
+assign a; variable v;
+Select a such that Contains* (a, v) with v.varName = "x"
+1,3,4,5,6,8,10,11 
+5000
+Evaluating query 3 - ContainsStar, With :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 1 3 4 5 6 8 10 11 
+Missing: 1 10 11 3 4 5 6 8 
+Additional: 
+4 - Contains :: 
+procedure p; constant c;
+Select p such that Contains* (p, c) with c.value = 2
+Bill
+5000
+Evaluating query 4 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: Bill 
+Missing: Bill 
+Additional: 
+5 - Contains :: 
+assign a; plus add; variable v;
+Select a such that Contains* (a, add) and Contains* (add,v) with v.varName = "x"
+3,5,8,10
+5000
+Evaluating query 5 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 3 5 8 10 
+Missing: 10 3 5 8 
+Additional: 
+6 - Contains :: 
+if ifstmt; procedure p; while w;
+Select p such that Contains* (p, ifstmt) and Contains* (ifstmt, w)
+none
+5000
+Evaluating query 6 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+7 - Contains :: 
+stmt s;
+Select s such that Contains* (9, s)
+10,11
+5000
+Evaluating query 7 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 10 11 
+Missing: 10 11 
+Additional: 
+8 - Contains :: 
+
+Select BOOLEAN such that Contains* (9, 10)
+true
+5000
+Evaluating query 8 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: true 
+Missing: true 
+Additional: 
+9 - Contains :: 
+variable v;
+Select v such that Contains* (10, v)
+x,z
+5000
+Evaluating query 9 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: x z 
+Missing: x z 
+Additional: 
+10 - Sibling :: 
+stmt s;
+Select s such that Sibling (s, 4)
+1,2,3,5
+5000
+Evaluating query 10 - Sibling :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 1 2 3 5 
+Missing: 1 2 3 5 
+Additional: 
+11 - Contains :: 
+variable v; if ifstmt; stmtLst then, else; while w;
+Select v such that Contains (ifstmt, v) and Modifies ("Mary", v) pattern ifstmt("i", then, else) such that Contains (then, w) and Contains (else, ifstmt)
+none
+5000
+Evaluating query 11 - Contains :: 
+Begin parse query
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

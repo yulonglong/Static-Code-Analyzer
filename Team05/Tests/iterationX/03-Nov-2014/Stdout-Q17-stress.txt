@@ -1,0 +1,7 @@
+Parameters : S17-stress.txt Q17-stress.txt R17-stress.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG

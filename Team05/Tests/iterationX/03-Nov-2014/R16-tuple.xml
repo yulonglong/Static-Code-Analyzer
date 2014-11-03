@@ -1,0 +1,116 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iterationX</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Tuple">
+<query>
+<id NoLinks="1" comment="" >1</id><querystr><![CDATA[assign a1, a2; while w; Select <a1, a2, w> such that Affects*(6,a1) and Uses(a2, "b")]]></querystr>
+<stuans>1 9 2,3 9 2,4 9 2,5 9 2,6 9 2,8 9 2,9 9 2,10 9 2</stuans>
+<correct>5 9 2,10 9 2</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>1 9 2,3 9 2,4 9 2,6 9 2,8 9 2,9 9 2</additional>
+<summary>
+<expected>2</expected>
+<matched>2</matched>
+<missing>0</missing>
+<additional>6</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id SomeLinks="1" comment="" >2</id><querystr><![CDATA[stmt s1, s2; assign a; Select <s1, s2, a> such that Parent(s1, s2) pattern a("a", _)]]></querystr>
+<stuans>2 3 9,2 3 8,2 4 9,2 4 8,2 5 9,2 5 8,2 6 9,2 6 8,7 8 9,7 8 8,7 9 9,7 9 8</stuans>
+<correct>2 3 8,2 4 8,2 5 8,2 6 8,2 3 9,2 4 9,2 5 9,2 6 9,7 8 8,7 9 8,7 8 9,7 9 9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id SomeLinks="1" comment="linked component is split" >3</id><querystr><![CDATA[stmt s1, s2; assign a; Select <s1, a, s2> such that Parent(s1, s2) pattern a("a", _)]]></querystr>
+<stuans>2 9 3,2 8 3,2 9 4,2 8 4,2 9 5,2 8 5,2 9 6,2 8 6,7 9 8,7 8 8,7 9 9,7 8 9</stuans>
+<correct>2 8 3,2 8 4,2 8 5,2 8 6,2 9 3,2 9 4,2 9 5,2 9 6,7 8 8,7 9 8,7 8 9,7 9 9</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id AllLinks="1" comment="" >4</id><querystr><![CDATA[stmt s1, s2, s3; Select <s1, s2, s3> such that Parent(s1, s2) and Follows(s2, s3)]]></querystr>
+<stuans>2 3 3,2 4 4,2 5 5</stuans>
+<correct>2 3 4,2 4 5,2 5 6</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing>2 3 4,2 4 5,2 5 6</missing>
+<additional>2 3 3,2 4 4,2 5 5</additional>
+<summary>
+<expected>3</expected>
+<matched>0</matched>
+<missing>3</missing>
+<additional>3</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id KnownValue="1" comment="" >5</id><querystr><![CDATA[stmt s1, s2; variable v; Select <s1, s2, v> such that Parent(s1, s2) with v.varName = "w"]]></querystr>
+<stuans>2 3 w,2 4 w,2 5 w,2 6 w,7 8 w,7 9 w</stuans>
+<correct>2 3 w,2 4 w,2 5 w,2 6 w,7 8 w,7 9 w</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id KnownValue="1" comment="" >6</id><querystr><![CDATA[stmt s1, s2; assign a; Select <s1, s2, a> such that Parent(s1, s2) with a.stmt# = 8]]></querystr>
+<stuans>2 3 8,2 4 8,2 5 8,2 6 8,7 8 8,7 9 8</stuans>
+<correct>2 3 8,2 4 8,2 5 8,2 6 8,7 8 8,7 9 8</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id KnownValue="1" comment="with the known value inserted in between" >7</id><querystr><![CDATA[stmt s1, s2; assign a; Select <s1, a, s2> such that Parent(s1, s2) with a.stmt# = 8]]></querystr>
+<stuans>2 8 3,2 8 4,2 8 5,2 8 6,7 8 8,7 8 9</stuans>
+<correct>2 8 3,2 8 4,2 8 5,2 8 6,7 8 8,7 8 9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Mix="1" comment="" >8</id><querystr><![CDATA[assign a1, a2, a3, x, y; stmt w; Select <a1,x,y,a2,a3,w> such that Follows(a1,a2) and Follows(a1,a3) and Follows(x,y) and Parent(w,_)]]></querystr>
+<stuans></stuans>
+<correct>3 3 4 4 4 2,3 4 5 4 4 2,3 5 6 4 4 2,3 3 4 4 4 7,3 4 5 4 4 7,3 5 6 4 4 7,4 3 4 5 5 2,4 4 5 5 5 2,4 5 6 5 5 2,4 3 4 5 5 7,4 4 5 5 5 7,4 5 6 5 5 7,5 3 4 6 6 2,5 4 5 6 6 2,5 5 6 6 6 2,5 3 4 6 6 7,5 4 5 6 6 7,5 5 6 6 6 7</correct>
+<time_taken>3.000000</time_taken>
+<failed>
+<missing>3 3 4 4 4 2,3 3 4 4 4 7,3 4 5 4 4 2,3 4 5 4 4 7,3 5 6 4 4 2,3 5 6 4 4 7,4 3 4 5 5 2,4 3 4 5 5 7,4 4 5 5 5 2,4 4 5 5 5 7,4 5 6 5 5 2,4 5 6 5 5 7,5 3 4 6 6 2,5 3 4 6 6 7,5 4 5 6 6 2,5 4 5 6 6 7,5 5 6 6 6 2,5 5 6 6 6 7</missing>
+<additional></additional>
+<summary>
+<expected>18</expected>
+<matched>0</matched>
+<missing>18</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Duplicates="1" comment="" >9</id><querystr><![CDATA[assign a1, a2, a3, x, y; stmt w; Select <a1,a1,x,a1> such that Follows(a1,a2) and Follows(a1,a3) and Follows(x,y) and Parent(w,_)]]></querystr>
+<stuans></stuans>
+<correct>3 3 3 3,3 3 4 3,3 3 5 3,4 4 3 4,4 4 4 4,4 4 5 4,5 5 3 5,5 5 4 5,5 5 5 5</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing>3 3 3 3,3 3 4 3,3 3 5 3,4 4 3 4,4 4 4 4,4 4 5 4,5 5 3 5,5 5 4 5,5 5 5 5</missing>
+<additional></additional>
+<summary>
+<expected>9</expected>
+<matched>0</matched>
+<missing>9</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Duplicates="1" comment="" >9</id><querystr><![CDATA[assign a; Select <a,a>]]></querystr>
+<stuans>1 1,3 3,4 4,5 5,6 6,8 8,9 9,10 10</stuans>
+<correct>1 1,3 3,4 4,5 5,6 6,8 8,9 9,10 10</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

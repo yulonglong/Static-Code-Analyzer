@@ -1,0 +1,391 @@
+Parameters : S1-simple.txt Q1-simple.txt R1-simple.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  Simple Queries
+1 - Statement :: 
+stmt s;
+Select s
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 1 - Statement :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: s
+s has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+2 - Assignment :: 
+assign a;
+Select a
+1,3,4,6,8
+5000
+Evaluating query 2 - Assignment :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: a
+a has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 1 3 4 6 8 
+Correct answer: 1 3 4 6 8 
+3 - While :: 
+while w;
+Select w
+5
+5000
+Evaluating query 3 - While :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: w
+w has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 5 
+Correct answer: 5 
+4 - If :: 
+if ifs;
+Select ifs
+2
+5000
+Evaluating query 4 - If :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: ifs
+ifs has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+5 - Call :: 
+call c;
+Select c
+7
+5000
+Evaluating query 5 - Call :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: c
+c has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+6 - Procedure :: 
+procedure p;
+Select p
+A, B
+5000
+Evaluating query 6 - Procedure :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: p
+p has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: A B 
+Correct answer: A B 
+7 - Variable :: 
+variable v;
+Select v
+a,b,d,x
+5000
+Evaluating query 7 - Variable :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: v
+v has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: a b x d 
+Correct answer: a b d x 
+8 - Constant :: 
+constant co;
+Select co
+3,5,7,8,10
+5000
+Evaluating query 8 - Constant :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: co
+co has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 5 7 8 3 10 
+Correct answer: 3 5 7 8 10 
+9 - ProgLine :: 
+prog_line n;
+Select n
+1,2,3,4,5,6,7,8
+5000
+Evaluating query 9 - ProgLine :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 0
+Initializing Variables
+Relations found empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: n
+n has not been processed
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 
+Correct answer: 1 2 3 4 5 6 7 8 
+10 - Boolean ::
+
+Select BOOLEAN with 1=2
+false
+5000
+Evaluating query 10 - Boolean ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(1, 2)
+
+ EVALUATING WITH (1 2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: 1
+r.tk2: 2
+only 1 alpha token found
+First token NEITHER VAR NOR PROC
+Index: 2
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 4
+<exception/>
+11 - Boolean ::
+
+Select BOOLEAN with "abc" = "abc"
+true
+5000
+Evaluating query 11 - Boolean ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with("abc", "abc")
+
+ EVALUATING WITH ("abc" "abc")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: "abc"
+r.tk2: "abc"
+only 1 alpha token found
+First token VARIABLE
+tk2 = "abc" index = -1
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 12
+Case 4
+<exception/>
+End of evaluating Query File.
+AutoTester Completed !

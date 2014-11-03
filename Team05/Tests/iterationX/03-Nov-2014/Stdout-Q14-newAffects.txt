@@ -1,0 +1,144 @@
+Parameters : S14-newAffects.txt Q14-newAffects.txt R14-newAffects.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - AffectsStar :: 
+assign a, a1;
+Select a such that Affects*(a, 8)
+2,3,4,6,7
+5000
+Evaluating query 1 - AffectsStar :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(a, 8)
+
+ EVALUATING AFFECTSSTAR
+Case 2: Left is Synonym
+IN INSERT LINKS INSERTING TOKEN = a
+a Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 8
+FIRST PARAM = a
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 11
+Case 2
+Case 2.2
+Tuple Table Size: 8
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the following syn: a
+Syn has already been processed.
+End handling unprocessed selected synonyms
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: 1 2 3 4 6 7 8 9 
+Correct answer: 2 3 4 6 7 
+Missing: 
+Additional: 1 8 9 
+2 - AffectsStar :: 
+assign a, a1;
+Select BOOLEAN such that Affects*(1, 9)
+false
+5000
+Evaluating query 2 - AffectsStar :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(1, 9)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 11
+Case 4
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+3 - AffectsStar :: 
+assign a, a1;
+Select BOOLEAN such that Affects*(2, 9)
+true
+5000
+Evaluating query 3 - AffectsStar :: 
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(2, 9)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 11
+Case 4
+End creating tuple table
+
+
+
+
+Your answer: true 
+Correct answer: true 
+End of evaluating Query File.
+AutoTester Completed !

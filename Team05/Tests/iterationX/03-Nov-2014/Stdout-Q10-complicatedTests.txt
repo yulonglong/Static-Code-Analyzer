@@ -1,0 +1,7 @@
+Parameters : S10-complicatedTests.txt Q10-complicatedTests.txt R10-complicatedTests.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG

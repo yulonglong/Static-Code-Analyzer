@@ -1,0 +1,7 @@
+Parameters : S15-demo.txt Q15-demo.txt R15-demo.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
