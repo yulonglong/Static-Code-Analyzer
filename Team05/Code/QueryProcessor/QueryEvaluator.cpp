@@ -2672,7 +2672,7 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 		insertLinks(lhs, relIndex);
 
 
-	cout<<"token 1 = "<<lhs<<"token 2 = "<<rhs<<endl;
+	cout << "PATTERN WITH THE FOLLOWING ARGUMENTS: " << syn <<  " " << rhs << " " << lhs << endl;
 	switch(synType){
 		case TypeTable::ASSIGN:
 			patternAns = findAssign(*root, lhs, rhs, r);
@@ -2701,13 +2701,18 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 	vector<Pair> ans;
 	stack<Node> st;
 	st.push(startNode);
+	cout << "START DFS" << endl;
 	
 	while(!st.empty()) {
 		Node n = st.top();
 		st.pop();
+		
+		cout << "NOW AT PROG_LINE " << n.getProgLine() << endl;
+
 		if(r.getToken1Type() == Relationship::SYNONYM) {
 			if(n.getType().compare("assign") == 0) {
 				if(matchPattern(n, lhs, rhs, true)) {
+					cout << "MATCH FOUND AT PROG_LINE " << n.getProgLine() << endl;
 					vector<Node*> children = n.getChild();
 					Node left = *children.at(0);
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
@@ -2722,6 +2727,7 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 		else {
 			if(n.getType().compare("assign") == 0) {
 				if(matchPattern(n, lhs, rhs, false)) {
+					cout << "MATCH FOUND AT PROG_LINE " << n.getProgLine() << endl;
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
 			}
@@ -2926,7 +2932,7 @@ vector<string> QueryEvaluator::getPostfix(vector<string> tokens){
 			st.push(tokens[i]);
 		}
 		else if(tokens[i]==")"){
-			if(!st.empty()){
+			if(st.empty()){
 				ans.clear();
 				ans.push_back("invalid");
 				return ans;
