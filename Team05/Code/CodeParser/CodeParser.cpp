@@ -201,7 +201,7 @@ vector<string> CodeParser::getPostfix(vector<string> tokens){
 void CodeParser::tokenizeTokens(string word, vector<string> &storage){
 	string token ="";
 	for(int i=0;i<(int) word.length();i++){
-		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')){
+		if((word[i]=='+')||(word[i]=='-')||(word[i]=='/')||(word[i]=='*')||(word[i]=='=')||(word[i]=='(')||(word[i]==')')){
 			if(token.length()>0){
 				storage.push_back(token);
 			}
@@ -274,10 +274,10 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 			continue;
 		}
 
-		/*
-		for(int i=0;i<tokens.size();i++){
-			cout << tokens[i] << endl;
-		}*/
+		
+		//for(int i=0;i<tokens.size();i++){
+		//	cout << tokens[i] << endl;
+		//}
 
 		//cout << realProgLine << ". " << endl;
 		//checking syntax whether there are matching open and close curly bracket
@@ -643,6 +643,7 @@ Node* CodeParser::parseCode(string filename,PKB *pkb){
 	//after parsing,
 	//set all calls to PKB that were stored
 	for(int i=0;i<(int)callStore.size();i++){
+		//cout << callStore[i].parentProcName <<" "<< callStore[i].calledProcName << callStore[i].progLine << endl;
 		pkb->setToCalls(callStore[i].parentProcName,callStore[i].calledProcName,callStore[i].progLine);
 	}
 	

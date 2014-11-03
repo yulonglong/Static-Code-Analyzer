@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoTester", "AutoTester\AutoTester.vcxproj", "{20A7FBF3-D972-4220-A6AA-960484999FBB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A28F6BBC-5250-4FDB-9B56-E18978C61FF2} = {A28F6BBC-5250-4FDB-9B56-E18978C61FF2}
@@ -46,6 +46,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestModifies", "TestModifie
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCodeParser", "TestCodeParser\TestCodeParser.vcxproj", "{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE} = {DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestIntegration", "TestIntegration\TestIntegration.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
 EndProject
