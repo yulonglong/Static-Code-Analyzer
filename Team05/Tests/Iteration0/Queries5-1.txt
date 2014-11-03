@@ -198,7 +198,7 @@ Select w such that Parent(w,a) pattern a(_,_"x"_)
 40 - Direct :: 
 assign a; variable v;
 Select a such that Uses (a,v) pattern a(v,_)
-3,6,8,10,13,15,17,18,20
+10, 13, 17, 18, 20
 5000
 41 - Indirect :: 
 assign a, a1;

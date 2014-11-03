@@ -168,12 +168,12 @@ Select p with p.procName = v.varName
 34 - stmt, value ::
 stmt s; constant c;
 Select s with s.stmt# = c.value
-1, 2, 3, 4, 5, 6, 8
+1, 2, 3, 4, 5, 6, 7, 8
 5000
 35 - stmt, value ::
 stmt s; constant c;
 Select c with c.value = s.stmt#
-1, 2, 3, 4, 5, 6, 8
+1, 2, 3, 4, 5, 6, 7, 8
 5000
 36 - procName, varName ::
 procedure p; variable v;

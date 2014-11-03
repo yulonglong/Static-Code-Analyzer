@@ -49,7 +49,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 
 	cout << "Begin handling unprocessed selected synonyms" << endl;
 	for(int i=0; i<selectedSyn.size(); i++) {
-		cout << "Checking for the: " << selectedSyn.at(i) << endl;
+		cout << "Checking for the following syn: " << selectedSyn.at(i) << endl;
 		if(synIndexMap.count(selectedSyn.at(i)) == 0) {
 			cout << selectedSyn.at(i) << " has not been processed" << endl;
 			unordered_map<string, TypeTable::SynType>::iterator it = synTable.find(selectedSyn.at(i));
@@ -82,10 +82,14 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 			synIndexMap.insert(make_pair(selectedSyn.at(i), synIndexMap.size()));
 			tupleTable = newTable;
 		}
+		else
+			cout << "Syn has already been processed." << endl;
 	}
 	cout << "End handling unprocessed selected synonyms" << endl;
 
-	cout << tupleTable.at(0).size() << endl;
+	if(tupleTable.size()==0)
+		return;
+
 	cout << "Begin creating tuple of answers" << endl;
 	for(int i=0; i<tupleTable.size(); i++) {
 		string ans = "";
@@ -133,13 +137,6 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 		cout << "Adding relationship " << i << " to tuple table" << endl;
 
 		vector<Pair> clauseAns = clauseAnswers.at(i);
-		// Check if clause has no answer, return empty tuple table
-		if(clauseAns.size()==0) {
-			cout << "empty clause detected, returning empty table" << endl;
-			tupleTable.clear();
-			break;
-		}
-		
 		//Initialize variables
 		Relationship r = relationships.at(i);
 		Relationship::RelType rt = r.getRelType();
@@ -192,6 +189,13 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 				tk2InMap = true;
 			else
 				synIndexMap->insert(make_pair(token2, synIndexMap->size()));
+
+			// Check if clause has no answer, return empty tuple table
+			if(clauseAns.size()==0) {
+				cout << "empty clause detected, returning empty table" << endl;
+				tupleTable.clear();
+				break;
+			}
 
 			vector<vector<int>> newTable;
 
@@ -278,6 +282,13 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 				tkInMap = true;
 			else
 				synIndexMap->insert(make_pair(token1, synIndexMap->size()));
+						
+			// Check if clause has no answer, return empty tuple table
+			if(clauseAns.size()==0) {
+				cout << "empty clause detected, returning empty table" << endl;
+				tupleTable.clear();
+				break;
+			}
 			
 			vector<vector<int>> newTable;
 
@@ -325,6 +336,13 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 				tkInMap = true;
 			else
 				synIndexMap->insert(make_pair(token2, synIndexMap->size()));
+
+			// Check if clause has no answer, return empty tuple table
+			if(clauseAns.size()==0) {
+				cout << "empty clause detected, returning empty table" << endl;
+				tupleTable.clear();
+				break;
+			}
 
 			vector<vector<int>> newTable;
 
