@@ -1,6 +1,5 @@
 AutoTester.exe S1-simple.txt Q1-simple.txt R1-simple.xml >Stdout-Q1-simple.txt
 AutoTester.exe S2-assignment1.txt Q2-assignment1.txt R2-assignment1.xml >Stdout-Q2-assignment1.txt
-AutoTester.exe S3-assignment4.txt Q3-assignment4.txt R3-assignment4.xml >Stdout-Q3-assignment4.txt
 AutoTester.exe S4-example.txt Q4-example.txt R4-example.xml >Stdout-Q4-example.txt
 AutoTester.exe S5-basicTests.txt Q5-basicTests.txt R5-basicTests.xml >Stdout-Q5-basicTests.txt
 AutoTester.exe S6-pattern.txt Q6-pattern.txt R6-pattern.xml >Stdout-Q6-pattern.txt
