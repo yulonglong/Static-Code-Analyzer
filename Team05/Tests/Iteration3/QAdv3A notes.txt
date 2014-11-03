@@ -1,0 +1,19 @@
+QAdv3A notes.txt
+#2 ====================
+<p1, p2> where p1: procedure that calls another procedure and modifies a variable
+p2: procedure that is called by p1
+
+procedure calls:
+Fern --> Tulip
+Fern --> Lily
+Fern --> Orchid
+Orchid --> Tulip
+
+#3 ====================
+<p1, p2>
+Fern Tulip
+Fern Lily
+Fern Orchid
+Orchid Tulip
+
+<s1, v>

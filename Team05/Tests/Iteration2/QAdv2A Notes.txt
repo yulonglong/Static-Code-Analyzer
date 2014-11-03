@@ -9,7 +9,10 @@ modifies (s2, y)
 1, 5, 7, 15, 18, 20, 21, 25, 30
 
 uses x
-3, 4, 6, 8, 10, 20, 25, 26, 30
+3, 4, 5, 6, 7, 8, 10, 18, 20, 21, 25, 26, 30
+
+modifies (s2, y) and uses (s2, x)
+5, 7, 18, 20, 21, 25, 30
 
 modifies y and uses x
 20, 25, 30
@@ -36,6 +39,8 @@ a1      --> s2
 
 s1.stmt# = s2.stmt#
 10, 20, 21
+or
+none?
 
 pattern w1 (_, _)
 
