@@ -60,7 +60,7 @@ const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
 const string QueryParser::freeStringWithSpace = "[.]+";
 
-const string QueryParser::expr = "\\s*" + LETTERORINTEGER +"(?:"+"\\s*" + OPERATOR + "\\s*" + LETTERORINTEGER + ")*" + "\\s*";
+const string QueryParser::expr = "\\s*(?:\\()*\\s*" + LETTERORINTEGER +"(?:\\s*(?:\\))*"+"\\s*" + OPERATOR + "\\s*(?:\\()*\\s*" + LETTERORINTEGER + "\\s*(?:\\))*)*" + "\\s*";
 
 
 const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
@@ -89,9 +89,12 @@ const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
 //const string QueryParser::suchThatCl = "(such)\\s+(that)";
 
 const string QueryParser::expressionSpec = "(?:\"" + expr + "\")" + "|" + "(?:_\"" + expr + "\"_)" + "|" + "(?:_)";
-const string QueryParser::assignCl = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*\\,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
-const string QueryParser::ifCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\,\\s*" + "("+"_"+")" + "\\s*\\))";
-const string QueryParser::whileCl = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::assignCl = "(?:(?:"+synonym +")" + "\\s*\\(\\s*" + "(?:"+varRef+")" + "\\s*\\,\\s*" + "(?:"+expressionSpec+")" + "\\s*\\))";
+const string QueryParser::ifCl = "(?:(?:"+synonym+")" + "\\s*\\(\\s*" + "(?:"+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::whileCl = "(?:(?:"+synonym+")" + "\\s*\\(\\s*" + "(?:"+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::assignClToken = "(?:("+synonym +")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\s*\\,\\s*" + "("+expressionSpec+")" + "\\s*\\))";
+const string QueryParser::ifClToken = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\,\\s*" + "("+"_"+")" + "\\s*\\))";
+const string QueryParser::whileClToken = "(?:("+synonym+")" + "\\s*\\(\\s*" + "("+varRef+")" + "\\,\\s*" + "("+"_"+")" + "\\s*\\))";
 const string QueryParser::pattern = "(?:" + ifCl + "|" + assignCl + "|" + whileCl + ")";
 const string QueryParser::patternCond = pattern + "(?:" + "\\s+" + "and" + "\\s+" + pattern + ")*";
 const string QueryParser::patternCl = "(?:(?:[Pp]attern)\\s+" + patternCond + ")";
@@ -203,15 +206,15 @@ bool QueryParser::parseSelectCl(string query){
 		return false;
 	}
 	
-	istringstream istream(query);
+	istringstream* istream = new istringstream(query);
 	string token;
 	string prevToken;
 
-	token = getNextToken(istream);
+	token = getNextToken(*istream);
 	//selectStatement.push_back(token); //Select
 
 	//BEGIN SELECT STATEMENT PARSING
-	token = getNextToken(istream);
+	token = getNextToken(*istream);
 	//case 1: no tuple
 	if(token[0] != '<'){
 		selectedSyn.push_back(token);//result-Cl
@@ -225,7 +228,7 @@ bool QueryParser::parseSelectCl(string query){
 		//case 2.2: token does not include complete tuple
 		else{
 			string secondToken;
-			getline(istream,secondToken,'>');
+			getline(*istream,secondToken,'>');
 			token = token + secondToken;
 		}
 		token = token.substr(1); // remove the '<' as the first character
@@ -257,12 +260,12 @@ bool QueryParser::parseSelectCl(string query){
 	}
 	//END SELECT STATEMENT PARSING
 
-	while(getline(istream,token,' ')){
+	while(getline(*istream,token,' ')){
 		if (token.length()==0){
 			continue;
 		}
 		if (token == such){
-			string next = getNextToken(istream);//read that
+			string next = getNextToken(*istream);//read that
 			token = token + " " + next;
 		}
 		if (token == AND){
@@ -273,9 +276,9 @@ bool QueryParser::parseSelectCl(string query){
 			selectStatement.push_back(token);//push such that
 
 			string generalToken[3];
-			getline(istream,generalToken[0],'(');
-			getline(istream,generalToken[1],',');
-			getline(istream,generalToken[2],')');
+			getline(*istream,generalToken[0],'(');
+			getline(*istream,generalToken[1],',');
+			getline(*istream,generalToken[2],')');
 
 			vector<string> subRes;
 			regexPattern = "\\s*(" + allClause + ")\\s*";
@@ -297,7 +300,63 @@ bool QueryParser::parseSelectCl(string query){
 			
 			prevToken = PATTERN;
 			selectStatement.push_back(token);//push pattern
+			
+			string sentence;
+			getline(*istream,sentence);
 
+			vector<string> subRes;
+
+			subRes.clear();
+			match = false;
+			regexPattern = "\\s*" + assignClToken + "\\s*(.*)";
+			match = regexMatchWithResult(regexPattern,sentence,subRes);
+			
+			if(match){//if it is assignCl;
+				selectStatement.push_back(subRes[1]);
+				selectStatement.push_back(subRes[2]);
+				selectStatement.push_back(subRes[3]);
+				if(subRes.size()>=5){
+					istringstream* newStream = new istringstream(subRes[4]);
+					istream = newStream;
+				}
+				continue;
+			}
+
+			subRes.clear();
+			match = false;
+			regexPattern = "\\s*" + whileClToken + "\\s*(.*)";
+			match = regexMatchWithResult(regexPattern,sentence,subRes);
+
+			if(match){//if it is whileCl;
+				selectStatement.push_back(subRes[1]);
+				selectStatement.push_back(subRes[2]);
+				selectStatement.push_back(subRes[3]);
+				if(subRes.size()>=5){
+					istringstream* newStream = new istringstream(subRes[4]);
+					istream = newStream;
+				}
+				continue;
+			}
+
+			
+			subRes.clear();
+			match = false;
+			regexPattern = "\\s*" + ifClToken + "\\s*(.*)";
+			match = regexMatchWithResult(regexPattern,sentence,subRes);
+
+			if(match){//if it is whileCl;
+				selectStatement.push_back(subRes[1]);
+				selectStatement.push_back(subRes[2]);
+				selectStatement.push_back(subRes[3]);
+				selectStatement.push_back(subRes[4]);
+				if(subRes.size()>=6){
+					istringstream* newStream = new istringstream(subRes[5]);
+					istream = newStream;
+				}
+				continue;
+			}
+
+			/*
 			string patternToken[3];
 			getline(istream,patternToken[0],'(');
 			getline(istream,patternToken[1],',');
@@ -350,14 +409,15 @@ bool QueryParser::parseSelectCl(string query){
 					selectStatement.push_back(readToken);
 				}
 			}
+			*/
 		}
 		else if(token == WITH){//read with
 			prevToken = WITH;
 			selectStatement.push_back(token);//push with
 
 			string withToken[2];
-			getline(istream,withToken[0],'=');
-			withToken[1]=getNextToken(istream);
+			getline(*istream,withToken[0],'=');
+			withToken[1]=getNextToken(*istream);
 
 			for(int i=0;i<2;i++){
 				vector<string> subRes;

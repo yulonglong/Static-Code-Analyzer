@@ -25,6 +25,8 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryCallStar1);
 	CPPUNIT_TEST(testQueryPattern1);
 	CPPUNIT_TEST(testQueryPattern2);
+	CPPUNIT_TEST(testQueryPattern3);
+	CPPUNIT_TEST(testQueryPattern4);
 	CPPUNIT_TEST(testQueryPatternWhile1);
 	CPPUNIT_TEST(testQueryPatternIf1);
 	CPPUNIT_TEST(testQueryWith1);
@@ -48,6 +50,7 @@ class QueryParserTest : public CPPUNIT_NS::TestFixture{
 	CPPUNIT_TEST(testQueryValidationPattern1);
 	CPPUNIT_TEST(testQueryValidationPattern2);
 	CPPUNIT_TEST(testQueryValidationPattern3);
+	CPPUNIT_TEST(testQueryValidationPattern4);
 	CPPUNIT_TEST(testQueryValidationPatternWhile1);
 	CPPUNIT_TEST(testQueryValidationPatternIf1);
 	CPPUNIT_TEST(testQueryValidationPatternIf2);
@@ -89,6 +92,8 @@ public:
 	void testQueryCallStar1();
 	void testQueryPattern1();
 	void testQueryPattern2();
+	void testQueryPattern3();
+	void testQueryPattern4();
 	void testQueryPatternWhile1();
 	void testQueryPatternIf1();
 	void testQueryWith1();
@@ -112,6 +117,7 @@ public:
 	void testQueryValidationPattern1();
 	void testQueryValidationPattern2();
 	void testQueryValidationPattern3();
+	void testQueryValidationPattern4();
 	void testQueryValidationPatternWhile1();
 	void testQueryValidationPatternIf1();
 	void testQueryValidationPatternIf2();

@@ -175,6 +175,9 @@ private:
 	static const string assignCl;
 	static const string whileCl;
 	static const string ifCl;
+	static const string assignClToken;
+	static const string whileClToken;
+	static const string ifClToken;
 	static const string pattern;
 	static const string patternCond;
 	static const string patternCl;
