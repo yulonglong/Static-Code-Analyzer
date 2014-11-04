@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm>
 #include "QueryEvaluator.h"
+
 #include <ctype.h>
 #include <set>
 #include <stack>
@@ -1731,7 +1732,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	vector<Pair> parentAns;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
-
+	cout<<"tk1 = "<<tk1<<" tk2 = "<<tk2<<endl;
 	//Parent(a,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
@@ -1759,6 +1760,18 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 					cout<<"it" << *it << "it2"<<*it2<<endl;
 				}
 			}
+		}
+	}
+
+		//Parent(_,_)
+	else if(tk1=="_" && tk2 == "_"){
+		set<int> ans = pkb->getAllParent();
+		if(!ans.empty()){
+			cout<<"parent found to be not empty"<<endl;
+			parentAns.push_back(Pair(-1,-1));
+		}else {
+			parentAns.push_back(Pair(-2,-2));
+			cout<<"parent found to be empty"<<endl;
 		}
 	}
 	//Parent(a,3)
@@ -1805,16 +1818,6 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			}else {
 				parentAns.push_back(Pair(-2,-2));
 			}
-		}
-	}
-
-	//Parent(_,_)
-	else if(tk1=="_" && tk2 == "_"){
-		set<int> ans = pkb->getAllParent();
-		if(!ans.empty()){
-			parentAns.push_back(Pair(-1,-1));
-		}else {
-			parentAns.push_back(Pair(-2,-2));
 		}
 	}
 
