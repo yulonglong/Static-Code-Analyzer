@@ -3,7 +3,7 @@ Testing Summary 4-Nov-2014
 
 Q1- 2 exception
 Q2-	3 wrong ans
-Q3- 
+
 Q4- 3 wrong ans
 Q5- 13 wrong ans 
 Q6- perfect
