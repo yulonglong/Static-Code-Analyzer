@@ -1,0 +1,27 @@
+5
+cat: optimization tests
+1 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v) and Affects*(1, 30)
+false
+5000
+2 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx")
+9, 11, 13, 16, 19, 22
+5000
+3 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s2 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20
+20
+5000
+4 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select p1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20 with p1.procName = "Fern" and Modifies (p1, v)
+Fern
+5000
+5 - optimization ::
+procedure p1, p2; stmt s1, s2, s3, s4, s5, s6, s7;
+Select s7 such that Calls*(p1, p2) and Modifies (s1, v1) and Uses (s2, v2) and Modifies (s2, v2) and Affects* (s2, s3) and Affects* (s3, s4) and Parent* (s5, s6) and Modifies (s7, v) with s7.stmt# = 29
+29
+5000
