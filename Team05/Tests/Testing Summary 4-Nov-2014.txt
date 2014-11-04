@@ -1,0 +1,56 @@
+Testing Summary 4-Nov-2014
+
+
+Q1- 2 exception
+Q2-	3 wrong ans
+Q3- 
+Q4- 3 wrong ans
+Q5- 13 wrong ans 
+Q6- perfect
+Q7- 2 exception
+Q8- 7 wrong ans; 4 exception
+Q9- 4 exception; 15 wrong ans
+Q10- 5 wrong ans; 
+Q11- 2 exception; 5 wrong ans
+Q12- not tested because it contains affects*
+Q13- 13 wrong ans; 3 exception
+Q14- not tested because it contains affects*
+Q15- 3 wrong ans; 
+Q16- 1 wrong ans due to affects*; 
+Q17- 1 wrong ans 
+
+
+
+Queries1-1 perfect 
+Queries2-1 perfect 
+Queries2-2 perfect 
+Queries2-3 perfect 
+Queries3-1 perfect
+Queries4-1 perfect
+Queries4-2 perfect
+Queries5-1 2 exception
+Queries5-2 2 exception
+Queries6-1 perfect
+
+Qbasic1A-with :  2 failed 
+Qbasic1B-calls : perfect 
+Qbasic1C : 2 wrong ans
+Qbasic1D : perfect
+Qbasic1E : 8 wrong ans 
+Qbasic1F : 9 wrong ans 
+
+QBasic2X: perfect 
+Qadv2A : perfect
+Qbasic2A-next : perfect
+Qbasic2B-next-star : perfect
+Qbasic2C-invalid-queries :  perfect
+Qinterm2A-such-that-such-that : perfect 
+Qinterm2B-such-that-with : 2 wrong ans
+
+Qbasic3A-affects : perfect
+QBasic3B-affects-star : not tested because it contains affects*
+QInterm3A-tuple : 4 wrong ans
+Qadv3A-multiple-tuple : 2 wrong ans
+QAdv3B-optimization : not tested because it contains affects*
+
+
