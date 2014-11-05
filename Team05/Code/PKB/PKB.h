@@ -21,6 +21,7 @@
 #include "Uses.h"
 #include "Calls.h"
 #include "Next.h"
+#include "Sibling.h"
 #include "CFGNode.h"
 
 /* TO USE PKB:
@@ -72,6 +73,7 @@ private:
 	Uses *uses;
 	Calls *calls;
 	Next *next;
+	Sibling *sibling;
 	Node* ASTRoot;
 	CFGNode* CFGRoot; 
 	
@@ -111,6 +113,8 @@ public:
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM);
 	//! Set a Next relationship between the two given statement numbers.
 	void setToNext(STMTNUM, STMTNUM);
+	//! Set a Sibling relationship between the two given statement numbers.
+	void setToSibling(STMTNUM, STMTNUM);
 	//! Set the new AST Root.
 	void setASTRoot(Node* newASTRoot);
 	//! Set the new CFG Root.
@@ -240,6 +244,14 @@ public:
 	set<STMTNUM> getAllNext();
 	//! Return a set of all statement numbers that has another statement number before it in a CFG.
 	set<STMTNUM> getAllPrevious();
+
+	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
+	bool isSibling(STMTNUM, STMTNUM);	
+	//! Return a statement number that is the parent of the given statement number.
+	set<STMTNUM> getSibling(STMTNUM);
+	//! Return a set of all statement numbers that has a sibling.
+	set<STMTNUM> getAllSibling();
+
 
 	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table
 	//! Set the Next relationship between a statement number and a pair of statement numbers which represent the range of the Next relationship of the first statement number.

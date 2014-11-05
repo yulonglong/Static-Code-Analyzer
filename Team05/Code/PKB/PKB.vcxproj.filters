@@ -51,6 +51,9 @@
     <ClCompile Include="Follows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sibling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PKB.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Next.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sibling.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
