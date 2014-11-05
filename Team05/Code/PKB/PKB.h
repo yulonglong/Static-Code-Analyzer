@@ -164,6 +164,8 @@ public:
 	set<PROCINDEX> getAllCalled(); 
 	//! Return a set of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found.
 	set<PROCINDEX> getCalled(PROCINDEX); 
+	//! Return a set of all statement numbers that contain the calls relationship under the given procedure index
+	set<STMTNUM> getCallStmt(PROCINDEX);
 	//! Return a set of all statement numbers that contain the call relationship
 	set<STMTNUM> getAllCallStmt();
 

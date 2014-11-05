@@ -49,10 +49,10 @@ void CallsTest::testGetCalls() {  // Note 5
 	procTable->insertProc("y");
 	procTable->insertProc("z");
 	
-	calls->setCalls("w", "z",1);
-	calls->setCalls("x", "y",2);
-	calls->setCalls("x", "z",3);
-	calls->setCalls("y", "z",4);
+	calls->setCalls("w", "z",11);
+	calls->setCalls("x", "y",22);
+	calls->setCalls("x", "z",33);
+	calls->setCalls("y", "z",44);
 	
 	cout<<"index of w = "<<procTable->getProcIndex("w")<<endl;
 	cout<<"index of x = "<<procTable->getProcIndex("x")<<endl;
@@ -78,5 +78,14 @@ void CallsTest::testGetCalls() {  // Note 5
 	CPPUNIT_ASSERT(calls->getCalled(10) == temp);
 	CPPUNIT_ASSERT(calls->getCalled(-1) == temp);
 	CPPUNIT_ASSERT(calls->getCalled(0) == temp);
+
+	temp.clear();
+	temp.insert(22);
+	temp.insert(33);
+	CPPUNIT_ASSERT(calls->getCallStmt(2) == temp);
+	temp.clear();
+	CPPUNIT_ASSERT(calls->getCallStmt(5) == temp);
+	temp.insert(44);
+	CPPUNIT_ASSERT(calls->getCallStmt(3) == temp);
 	return;
 }

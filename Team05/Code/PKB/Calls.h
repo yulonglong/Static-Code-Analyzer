@@ -73,6 +73,8 @@ public:
 
 	//! Return a set of all statement numbers that contain the call relationship
 	set<STMTNUM> getAllCallStmt();
+	//! Return a set of all statement numbers that contain the calls relationship under the given procedure index
+	set<STMTNUM> getCallStmt(PROCINDEX);
 
 	/// @cond
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable();

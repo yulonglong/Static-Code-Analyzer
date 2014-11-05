@@ -179,6 +179,22 @@ set<STMTNUM> Calls::getAllCallStmt(){
 	return callStmtNumList;
 }
 
+set<STMTNUM> Calls::getCallStmt(PROCINDEX p){
+	set<STMTNUM> ans;
+	try{
+		vector<CALLSPAIR> temp = callsPairTable.at(p);
+
+		for(vector<CALLSPAIR>::iterator it= temp.begin(); it!=temp.end();it++)
+			ans.insert(it->second);
+
+		return ans;
+	}
+	catch(...){
+		ans.clear();
+		return ans;
+	}
+}
+
 
 void Calls::printCallsTable() {
 	cout<< "Calls Table" << endl;

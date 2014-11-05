@@ -271,6 +271,10 @@ set<PROCINDEX> PKB::getCalled(PROCINDEX p){
 	return calls->getCalled(p);
 }
 
+set<STMTNUM> PKB::getCallStmt(PROCINDEX p){
+	return calls->getCallStmt(p);
+}
+
 set<STMTNUM> PKB::getAllCallStmt(){
 	return calls->getAllCallStmt();
 }
