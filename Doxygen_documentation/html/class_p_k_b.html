@@ -161,6 +161,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a506b5ab3d13843a49e3301d5119fc038">setToNext</a> (STMTNUM, STMTNUM)</td></tr>
 <tr class="memdesc:a506b5ab3d13843a49e3301d5119fc038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship between the two given statement numbers. <br /></td></tr>
 <tr class="separator:a506b5ab3d13843a49e3301d5119fc038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d5e3cdfd94135bb949064bbcccf37c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d5e3cdfd94135bb949064bbcccf37c1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a4d5e3cdfd94135bb949064bbcccf37c1">setToSibling</a> (STMTNUM, STMTNUM)</td></tr>
+<tr class="memdesc:a4d5e3cdfd94135bb949064bbcccf37c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a <a class="el" href="class_sibling.html" title="A Sibling class to store the Sibling relationship. ">Sibling</a> relationship between the two given statement numbers. <br /></td></tr>
+<tr class="separator:a4d5e3cdfd94135bb949064bbcccf37c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab66b49e40d4d185680e2dbade5eabc4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab66b49e40d4d185680e2dbade5eabc4c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ab66b49e40d4d185680e2dbade5eabc4c">setASTRoot</a> (<a class="el" href="class_node.html">Node</a> *newASTRoot)</td></tr>
 <tr class="memdesc:ab66b49e40d4d185680e2dbade5eabc4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the new AST Root. <br /></td></tr>
@@ -249,6 +253,10 @@ set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a cla
 set&lt; PROCINDEX &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a6d95f3bba400622e24717c4d8530ac50">getCalled</a> (PROCINDEX)</td></tr>
 <tr class="memdesc:a6d95f3bba400622e24717c4d8530ac50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of procedure indexes where the procedure index had been called by the given procedure index. Return an empty vector if not found. <br /></td></tr>
 <tr class="separator:a6d95f3bba400622e24717c4d8530ac50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ca8e6b7b515c53af5fe47a06ef20b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89ca8e6b7b515c53af5fe47a06ef20b3"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a89ca8e6b7b515c53af5fe47a06ef20b3">getCallStmt</a> (PROCINDEX)</td></tr>
+<tr class="memdesc:a89ca8e6b7b515c53af5fe47a06ef20b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of all statement numbers that contain the calls relationship under the given procedure index. <br /></td></tr>
+<tr class="separator:a89ca8e6b7b515c53af5fe47a06ef20b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08736508449048c4468edfb3a2f6329b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08736508449048c4468edfb3a2f6329b"></a>
 set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a08736508449048c4468edfb3a2f6329b">getAllCallStmt</a> ()</td></tr>
 <tr class="memdesc:a08736508449048c4468edfb3a2f6329b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of all statement numbers that contain the call relationship. <br /></td></tr>
@@ -393,6 +401,18 @@ set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class
 set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a533c33fd638e4dc83b06abe82c3602cc">getAllPrevious</a> ()</td></tr>
 <tr class="memdesc:a533c33fd638e4dc83b06abe82c3602cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of all statement numbers that has another statement number before it in a CFG. <br /></td></tr>
 <tr class="separator:a533c33fd638e4dc83b06abe82c3602cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab82630d25a308b566bd1318b7e9be2fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab82630d25a308b566bd1318b7e9be2fe"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#ab82630d25a308b566bd1318b7e9be2fe">isSibling</a> (STMTNUM, STMTNUM)</td></tr>
+<tr class="memdesc:ab82630d25a308b566bd1318b7e9be2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the <a class="el" href="class_sibling.html" title="A Sibling class to store the Sibling relationship. ">Sibling</a> relationship between the two statement numbers is true, return true. Otherwise, return false. <br /></td></tr>
+<tr class="separator:ab82630d25a308b566bd1318b7e9be2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b87058bb26115ad12106815cd1b95f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b87058bb26115ad12106815cd1b95f2"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a1b87058bb26115ad12106815cd1b95f2">getSibling</a> (STMTNUM)</td></tr>
+<tr class="memdesc:a1b87058bb26115ad12106815cd1b95f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a statement number that is the parent of the given statement number. <br /></td></tr>
+<tr class="separator:a1b87058bb26115ad12106815cd1b95f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a488296d8fcdf23006569c476d4d5c85e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a488296d8fcdf23006569c476d4d5c85e"></a>
+set&lt; STMTNUM &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a488296d8fcdf23006569c476d4d5c85e">getAllSibling</a> ()</td></tr>
+<tr class="memdesc:a488296d8fcdf23006569c476d4d5c85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a set of all statement numbers that has a sibling. <br /></td></tr>
+<tr class="separator:a488296d8fcdf23006569c476d4d5c85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ed3d9ef965d4edae3267008fae868cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ed3d9ef965d4edae3267008fae868cc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_p_k_b.html#a4ed3d9ef965d4edae3267008fae868cc">setToNextPair</a> (STMTNUM, pair&lt; STMTNUM, STMTNUM &gt;)</td></tr>
 <tr class="memdesc:a4ed3d9ef965d4edae3267008fae868cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship between a statement number and a pair of statement numbers which represent the range of the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationship of the first statement number. <br /></td></tr>
@@ -437,7 +457,7 @@ static <a class="el" href="class_p_k_b.html">PKB</a> *&#160;</td><td class="memI
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 5 2014 04:16:27 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 6 2014 00:12:03 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

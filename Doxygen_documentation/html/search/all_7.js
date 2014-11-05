@@ -11,6 +11,7 @@ var searchData=
   ['ismodifiesproc',['isModifiesProc',['../class_modifies.html#ad3c87854704c9c2623413a2b6acd59c9',1,'Modifies::isModifiesProc()'],['../class_p_k_b.html#a58df63d02521928a5c4c6a9f6982134b',1,'PKB::isModifiesProc()']]],
   ['isnext',['isNext',['../class_next.html#a447461ec7092d7c5a468a1774a960561',1,'Next::isNext()'],['../class_p_k_b.html#a2ddc872cef06b4e442133c05276b9722',1,'PKB::isNext()']]],
   ['isparent',['isParent',['../class_parent.html#aea4e3824cfe9a379010644bd71fc614f',1,'Parent::isParent()'],['../class_p_k_b.html#ae93551c4c6bd04434d373fee73706ce6',1,'PKB::isParent()']]],
+  ['issibling',['isSibling',['../class_p_k_b.html#ab82630d25a308b566bd1318b7e9be2fe',1,'PKB::isSibling()'],['../class_sibling.html#a28a8bc8779ac40d3e7a46f26f8975a5b',1,'Sibling::isSibling()']]],
   ['issyntype',['isSynType',['../class_p_k_b.html#a4ca3fe9f6fc37b43da2019c189845e58',1,'PKB']]],
   ['istype',['isType',['../class_type_table.html#aaebd41616226ac203a2f013871ee8590',1,'TypeTable']]],
   ['isuses',['isUses',['../class_p_k_b.html#a02ebd85a3fb539a51039bc0ce6b3a91b',1,'PKB::isUses()'],['../class_uses.html#a70a1ebd69ed96e285f0df227d24638dd',1,'Uses::isUses()']]],
