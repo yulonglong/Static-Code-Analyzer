@@ -1478,7 +1478,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			//Retrieve a from PKB and push it into the answer vector
 			if(isdigit(tk2[0])){
 				int first = pkb->getFollowedBy(atoi(tk2.c_str()));
-				if(pkb->isSynType(i1->second,first))
+				if(pkb->isSynType(i1->second,first) && first!=-1)
 					followsAns.push_back(Pair (first, atoi(tk2.c_str())));
 			}
 
