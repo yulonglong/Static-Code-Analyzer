@@ -588,6 +588,14 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 		}
 
 	}
+
+	else if((isdigit(tk1[0]) && isdigit(tk2[0])) || (tk1[0]=='\"' && tk2[0]=='\"')){
+		if(tk1==tk2){
+			withAns.push_back(Pair(-1,-1));
+		}else{
+			withAns.push_back(Pair(-2,-2));
+		}
+	}
 	//with v.varName = "x" with p.procName = "Third"
 	else {
 		string dum;
