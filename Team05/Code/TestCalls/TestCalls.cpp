@@ -81,11 +81,12 @@ void CallsTest::testGetCalls() {  // Note 5
 
 	temp.clear();
 	temp.insert(22);
-	temp.insert(33);
-	CPPUNIT_ASSERT(calls->getCallStmt(2) == temp);
+	CPPUNIT_ASSERT(calls->getCallStmt(3) == temp);
 	temp.clear();
 	CPPUNIT_ASSERT(calls->getCallStmt(5) == temp);
+	temp.insert(11);
+	temp.insert(33);
 	temp.insert(44);
-	CPPUNIT_ASSERT(calls->getCallStmt(3) == temp);
+	CPPUNIT_ASSERT(calls->getCallStmt(4) == temp);
 	return;
 }

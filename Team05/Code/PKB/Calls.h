@@ -41,6 +41,7 @@ private:
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsPairTable;
 	vector<vector<int64_t>> callsTable;
 	vector<vector<int64_t>> calledByTable;
+	vector<vector<STMTNUM>> calledAtStmtNumTable;
 	static bool instanceFlag;
 	static Calls *calls;
 	ProcTable *procTable;

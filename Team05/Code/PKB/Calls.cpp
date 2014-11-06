@@ -98,7 +98,28 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 			calledList.insert(index2);
 		}catch(...){
 		}
+		try{
+			vector<STMTNUM> temp (1,s);
+			vector<STMTNUM> placeHolder (1,-1);
+			if(calledAtStmtNumTable.size()==0)
+				calledAtStmtNumTable.push_back(placeHolder);
+			if(index2>calledAtStmtNumTable.size()-1)
+				calledAtStmtNumTable.resize(index2+1,placeHolder);
+			try{
+				vector<STMTNUM> temp1 = calledAtStmtNumTable.at(index2);
+				if(temp1.at(0)==-1){
+					temp1.clear();
+				}
+				temp1.push_back(s);
+				calledAtStmtNumTable[index2] = temp1;
+			} catch(...){
+				calledAtStmtNumTable[index2] = temp;
+			}
+		}catch(...){
+		}
 	}
+
+
 }
 
 bool Calls::isCalls(PROCINDEX index1, PROCINDEX index2){
@@ -182,10 +203,11 @@ set<STMTNUM> Calls::getAllCallStmt(){
 set<STMTNUM> Calls::getCallStmt(PROCINDEX p){
 	set<STMTNUM> ans;
 	try{
-		vector<CALLSPAIR> temp = callsPairTable.at(p);
+		vector<STMTNUM> temp = calledAtStmtNumTable.at(p);
 
-		for(vector<CALLSPAIR>::iterator it= temp.begin(); it!=temp.end();it++)
-			ans.insert(it->second);
+		cout<<"loop"<<endl;
+		for(vector<STMTNUM>::iterator it= temp.begin(); it!=temp.end();it++)
+			ans.insert(*it);
 
 		return ans;
 	}
@@ -221,7 +243,7 @@ void Calls::printCallsPairTable() {
 	cout<< "Calls Table" << endl;
 	for(unordered_map<PROCINDEX, vector<CALLSPAIR>>::iterator it = callsPairTable.begin(); it != callsPairTable.end(); it++) {
 		string name1 = procTable->getProcName(it->first);
-		cout<< name1 << " modifies ";
+		cout<< name1 << " calls ";
 		vector<CALLSPAIR> temp = it->second; 
 		vector<CALLSPAIR>::iterator iter;
 		for (iter = temp.begin(); iter!=temp.end(); iter++) {

@@ -279,6 +279,7 @@ public:
 	void printNextTable();
 	void printNextTableForTesting();
 	void printNextPairTableForTesting();
+	void printCallsPairTable();
 	/// @endcond
 };
 

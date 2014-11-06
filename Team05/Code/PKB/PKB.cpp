@@ -443,3 +443,7 @@ void PKB::printNextTableForTesting(){
 void PKB::printNextPairTableForTesting(){
 	return next->printNextPairTableForTesting();
 }
+
+void PKB::printCallsPairTable(){
+	return calls->printCallsPairTable();
+}
