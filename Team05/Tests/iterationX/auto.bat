@@ -14,4 +14,5 @@ AutoTester.exe S14-newAffects.txt Q14-newAffects.txt R14-newAffects.xml >Stdout-
 AutoTester.exe S15-demo.txt Q15-demo.txt R15-demo.xml >Stdout-Q15-demo.txt
 AutoTester.exe S16-tuple.txt Q16-tuple.txt R16-tuple.xml >Stdout-Q16-tuple.txt
 AutoTester.exe S17-stress.txt Q17-stress.txt R17-stress.xml >Stdout-Q17-stress.txt
+AutoTester.exe S18-sibling.txt Q18-sibling.txt R18-sibling.xml >Stdout-Q18-sibling.txt
 PAUSE

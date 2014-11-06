@@ -1,0 +1,737 @@
+150
+cat: All Queries
+293 - Sibling :: 
+procedure p, p1;
+Select p such that Sibling (p, p1)
+Operators, Loops, Ifs, WhileIfs
+5000
+294 - Sibling :: 
+procedure p; stmtLst sl;
+Select p such that Sibling (p, sl)
+none
+5000
+295 - Sibling :: 
+procedure p; stmt s;
+Select p such that Sibling (p, s)
+none
+5000
+296 - Sibling :: 
+procedure p; assign a;
+Select p such that Sibling (p, a)
+none
+5000
+297 - Sibling :: 
+procedure p; call c;
+Select p such that Sibling (p, c)
+none
+5000
+298 - Sibling :: 
+procedure p; while w;
+Select p such that Sibling (p, w)
+none
+5000
+299 - Sibling :: 
+procedure p; if ifstat;
+Select p such that Sibling (p, ifstat)
+none
+5000
+300 - Sibling :: 
+procedure p; plus add;
+Select p such that Sibling (p, add)
+none
+5000
+301 - Sibling :: 
+procedure p; minus m;
+Select p such that Sibling (p, m)
+none
+5000
+302 - Sibling :: 
+procedure p; times t;
+Select p such that Sibling (p, t)
+none
+5000
+303 - Sibling :: 
+procedure p; variable v;
+Select p such that Sibling (p, v)
+none
+5000
+304 - Sibling :: 
+procedure p; constant c;
+Select p such that Sibling (p, c)
+none
+5000
+305 - Sibling :: 
+stmtLst sl; procedure p;
+Select sl such that Sibling (sl, p)
+none
+5000
+306 - Sibling :: 
+stmtLst sl, sl1;
+Select sl such that Sibling (sl, sl1)
+18,19,22,23,24,25,29,30,32,34
+5000
+307 - Sibling :: 
+stmtLst sl; stmt s;
+Select sl such that Sibling (sl, s)
+none
+5000
+308 - Sibling :: 
+stmtLst sl; assign a;
+Select sl such that Sibling (sl, a)
+none
+5000
+309 - Sibling :: 
+stmtLst s1; call c;
+Select sl such that Sibling (sl, c)
+none
+5000
+310 - Sibling :: 
+stmtLst sl; while w;
+Select sl such that Sibling (sl, w)
+none
+5000
+311 - Sibling :: 
+stmtLst sl; if ifstat;
+Select sl such that Sibling (sl, ifstat)
+none
+5000
+312 - Sibling :: 
+stmtLst sl; plus add;
+Select sl such that Sibling (sl, add)
+none
+5000
+313 - Sibling :: 
+stmtLst sl; minus m;
+Select sl such that Sibling (sl, m)
+none
+5000
+314 - Sibling :: 
+stmtLst sl; times t;
+Select sl such that Sibling (sl, t)
+none
+5000
+315 - Sibling :: 
+stmtLst sl; variable v;
+Select sl such that Sibling (sl, v)
+7,11,13,18,19,22,23,24,25,28,29,30,32,33,34,35
+5000
+316 - Sibling :: 
+stmtLst sl; constant c;
+Select sl such that Sibling (sl, c)
+none
+5000
+317 - Sibling :: 
+stmt s; procedure p;
+Select s such that Sibling (s, p)
+none
+5000
+318 - Sibling :: 
+stmt s; stmtLst sl;
+Select s such that Sibling (s, sl)
+none
+5000
+319 - Sibling :: 
+stmt s, s1;
+Select s such that Sibling (s, s1)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,20,21,26,27,31,36
+5000
+320 - Sibling :: 
+stmt s; assign a;
+Select s such that Sibling (s, a)
+1,2,3,4,6,7,8,9,10,12,13,14,15,16,17,20,21,26,27,31
+5000
+321 - Sibling :: 
+stmt s; call c;
+Select s such that Sibling (s, c)
+1,2,3,5,6,10,16,17,20,21
+5000
+322 - Sibling :: 
+stmt s; while w;
+Select s such that Sibling (s, w)
+5,6,10,11,15,31,36
+5000
+323 - Sibling :: 
+stmt s; if ifstat;
+Select s such that Sibling (s, ifstat)
+16,17,20,21,26,27,36
+5000
+324 - Sibling :: 
+stmt s; plus add;
+Select s such that Sibling (s, add)
+none
+5000
+325 - Sibling :: 
+stmt s; minus m;
+Select s such that Sibling (s, m)
+none
+5000
+326 - Sibling :: 
+stmt s; times t;
+Select s such that Sibling (s, t)
+none
+5000
+327 - Sibling :: 
+stmt s; variable v;
+Select s such that Sibling (s, v)
+none
+5000
+328 - Sibling :: 
+stmt s; constant c;
+Select s such that Sibling (s, c)
+none
+5000
+329 - Sibling :: 
+assign a; procedure p;
+Select a such that Sibling (a, p)
+none
+5000
+330 - Sibling :: 
+assign a; stmtLst sl;
+Select a such that Sibling (a, sl)
+none
+5000
+331 - Sibling :: 
+assign a; stmt s;
+Select a such that Sibling (a, s)
+1,2,3,5,7,8,9,11,13,14,16,20,36
+5000
+332 - Sibling :: 
+assign a, a1;
+Select a such that Sibling (a, a1)
+1,2,3,7,8,9,13,14,16,20
+5000
+333 - Sibling :: 
+assign a; call c;
+Select a such that Sibling (a, c)
+1,2,3,5,16,20
+5000
+334 - Sibling :: 
+assign a; while w;
+Select a such that Sibling (a, w)
+5,11,36
+5000
+335 - Sibling :: 
+assign a; if ifstat;
+Select a such that Sibling (a, ifstat)
+16,20,36
+5000
+336 - Sibling :: 
+assign a; plus add;
+Select a such that Sibling (a, add)
+none
+5000
+337 - Sibling :: 
+assign a; minus m;
+Select a such that Sibling (a, m)
+none
+5000
+338 - Sibling :: 
+assign a; times t;
+Select a such that Sibling (a, t)
+none
+5000
+339 - Sibling :: 
+assign a; variable v;
+Select a such that Sibling (a, v)
+none
+5000
+340 - Sibling :: 
+assign a; constant c;
+Select a such that Sibling (a, c)
+none
+5000
+341 - Sibling :: 
+call c; procedure p;
+Select c such that Sibling (c, p)
+none
+5000
+342 - Sibling :: 
+call c; stmtLst sl;
+Select c such that Sibling (c, sl)
+none
+5000
+343 - Sibling :: 
+call c; stmt s;
+Select c such that Sibling (c, s)
+15,26,4
+5000
+344 - Sibling :: 
+assign a; call c;
+Select c such that Sibling (c, a)
+4,15,26
+5000
+345 - Sibling :: 
+call c, c1;
+Select c such that Sibling (c, c1)
+none
+5000
+346 - Sibling :: 
+call c; while w;
+Select c such that Sibling (c, w)
+15
+5000
+347 - Sibling :: 
+call c; if ifstat;
+Select c such that Sibling (c, ifstat)
+26
+5000
+348 - Sibling :: 
+call c; plus add;
+Select c such that Sibling (c, add)
+none
+5000
+349 - Sibling :: 
+call c; minus m;
+Select c such that Sibling (c, m)
+none
+5000
+350 - Sibling :: 
+call c; times t;
+Select c such that Sibling (c, t)
+none
+5000
+351 - Sibling :: 
+call c; variable v;
+Select c such that Sibling (c, v)
+none
+5000
+352 - Sibling :: 
+call c; constant co;
+Select c such that Sibling (c, co)
+none
+5000
+353 - Sibling :: 
+while w; procedure p;
+Select w such that Sibling (w, p)
+none
+5000
+354 - Sibling :: 
+while w; stmtLst sl;
+Select w such that Sibling (w, sl)
+none
+5000
+355 - Sibling :: 
+while w; stmt s;
+Select w such that Sibling (w, s)
+6,10,12,27
+5000
+356 - Sibling :: 
+while w; assign a;
+Select w such that Sibling (w, a)
+6,10,12,27
+5000
+357 - Sibling :: 
+while w; call c;
+Select w such that Sibling (w, c)
+6,10
+5000
+358 - Sibling :: 
+while w, w1;
+Select w such that Sibling (w, w1)
+6,10
+5000
+359 - Sibling :: 
+while w; if ifstat;
+Select w such that Sibling (w, ifstat)
+27
+5000
+360 - Sibling :: 
+while w; plus add;
+Select w such that Sibling (w, add)
+none
+5000
+361 - Sibling :: 
+while w; minus m;
+Select w such that Sibling (w, m)
+none
+5000
+362 - Sibling :: 
+while w; times t;
+Select w such that Sibling (w, t)
+none
+5000
+363 - Sibling :: 
+while w; variable v;
+Select w such that Sibling (w, v)
+none
+5000
+364 - Sibling :: 
+while w; constant co;
+Select w such that Sibling (w, co)
+none
+5000
+365 - Sibling :: 
+if ifstat; procedure p;
+Select ifstat such that Sibling (ifstat, p)
+none
+5000
+366 - Sibling :: 
+if ifstat; stmtLst sl;
+Select ifstat such that Sibling (ifstat, sl)
+none
+5000
+367 - Sibling :: 
+if ifstat; stmt s;
+Select ifstat such that Sibling (ifstat, s)
+17,21,31
+5000
+368 - Sibling :: 
+if ifstat; assign a;
+Select ifstat such that Sibling (ifstat, a)
+17,21,31
+5000
+369 - Sibling :: 
+if ifstat; call c;
+Select ifstat such that Sibling (ifstat, c)
+17,21
+5000
+370 - Sibling :: 
+if ifstat; while w;
+Select ifstat such that Sibling (ifstat, w)
+31
+5000
+371 - Sibling :: 
+if ifstat, ifstat1;
+Select ifstat such that Sibling (ifstat, ifstat1)
+17,21
+5000
+372 - Sibling :: 
+if ifstat; plus add;
+Select ifstat such that Sibling (ifstat, add)
+none
+5000
+373 - Sibling :: 
+if ifstat; minus m;
+Select ifstat such that Sibling (ifstat, m)
+none
+5000
+374 - Sibling :: 
+if ifstat; times t;
+Select ifstat such that Sibling (ifstat, t)
+none
+5000
+375 - Sibling :: 
+if ifstat; variable v;
+Select ifstat such that Sibling (ifstat, v)
+none
+5000
+376 - Sibling :: 
+if ifstat; constant co;
+Select ifstat such that Sibling (ifstat, co)
+none
+5000
+377 - Sibling :: 
+plus add; procedure p;
+Select BOOLEAN such that Sibling (add, p)
+false
+5000
+378 - Sibling :: 
+plus add; stmtLst sl;
+Select BOOLEAN such that Sibling (add, sl)
+false
+5000
+379 - Sibling :: 
+plus add; stmt s;
+Select BOOLEAN such that Sibling (add, s)
+false
+5000
+380 - Sibling :: 
+plus add; assign a;
+Select BOOLEAN such that Sibling (add, a)
+false
+5000
+381 - Sibling :: 
+plus add; call c;
+Select BOOLEAN such that Sibling (add, c)
+false
+5000
+382 - Sibling :: 
+plus add; while w;
+Select BOOLEAN such that Sibling (add, w)
+false
+5000
+383 - Sibling :: 
+plus add; ifstat;
+Select BOOLEAN such that Sibling (add, ifstat)
+false
+5000
+384 - Sibling :: 
+plus add, add1;
+Select BOOLEAN such that Sibling (add, add1)
+false
+5000
+385 - Sibling :: 
+plus add; minus m;
+Select BOOLEAN such that Sibling (add, m)
+false
+5000
+386 - Sibling :: 
+plus add; times t;
+Select BOOLEAN such that Sibling (add, t)
+false
+5000
+387 - Sibling :: 
+plus add; variable v;
+Select BOOLEAN such that Sibling (add, v)
+true
+5000
+388 - Sibling :: 
+plus add; constant co;
+Select BOOLEAN such that Sibling (add, co)
+true
+5000
+389 - Sibling :: 
+minus m; procedure p;
+Select BOOLEAN such that Sibling (m, p)
+false
+5000
+390 - Sibling :: 
+minus m; stmtLst sl;
+Select BOOLEAN such that Sibling (m, sl)
+false
+5000
+391 - Sibling :: 
+minus m; stmt s;
+Select BOOLEAN such that Sibling (m, s)
+false
+5000
+392 - Sibling :: 
+minus m; assign a;
+Select BOOLEAN such that Sibling (m, a)
+false
+5000
+393 - Sibling :: 
+minus m; call c;
+Select BOOLEAN such that Sibling (m, c)
+false
+5000
+394 - Sibling :: 
+minus m; while w;
+Select BOOLEAN such that Sibling (m, w)
+false
+5000
+395 - Sibling :: 
+minus m; ifstat;
+Select BOOLEAN such that Sibling (m, ifstat)
+false
+5000
+396 - Sibling :: 
+minus m; plus add;
+Select BOOLEAN such that Sibling (m, add)
+false
+5000
+397 - Sibling :: 
+minus m, m1;
+Select BOOLEAN such that Sibling (m, m1)
+false
+5000
+398 - Sibling :: 
+minus m; times t;
+Select BOOLEAN such that Sibling (m, t)
+true
+5000
+399 - Sibling :: 
+minus m; variable v;
+Select BOOLEAN such that Sibling (m, v)
+true
+5000
+400 - Sibling :: 
+minus m; constant co;
+Select BOOLEAN such that Sibling (m, co)
+true
+5000
+401 - Sibling :: 
+times t; procedure p;
+Select BOOLEAN such that Sibling (t, p)
+false
+5000
+402 - Sibling :: 
+times t; stmtLst sl;
+Select BOOLEAN such that Sibling (t, sl)
+false
+5000
+403 - Sibling :: 
+times t; stmt s;
+Select BOOLEAN such that Sibling (t, s)
+false
+5000
+404 - Sibling :: 
+times t; assign a;
+Select BOOLEAN such that Sibling (t, a)
+false
+5000
+405 - Sibling :: 
+times t; call c;
+Select BOOLEAN such that Sibling (t, c)
+false
+5000
+406 - Sibling :: 
+times t; while w;
+Select BOOLEAN such that Sibling (t, w)
+false
+5000
+407 - Sibling :: 
+times t; ifstat;
+Select BOOLEAN such that Sibling (t, ifstat)
+false
+5000
+408 - Sibling :: 
+times t; plus add;
+Select BOOLEAN such that Sibling (t, add)
+false
+5000
+409 - Sibling :: 
+times t; minus m;
+Select BOOLEAN such that Sibling (t, m)
+true
+5000
+410 - Sibling :: 
+times t, t1;
+Select BOOLEAN such that Sibling (t, t1)
+false
+5000
+411 - Sibling :: 
+times t; variable v;
+Select BOOLEAN such that Sibling (t, v)
+true
+5000
+412 - Sibling :: 
+times t; constant co;
+Select BOOLEAN such that Sibling (t, co)
+true
+5000
+413 - Sibling :: 
+variable v; procedure p;
+Select v such that Sibling (v, p)
+none
+5000
+414 - Sibling :: 
+variable v; stmtLst sl;
+Select v such that Sibling (v, sl)
+g,j,k,n,o,m,x,y,u,v
+5000
+415 - Sibling :: 
+variable v; stmt s;
+Select v such that Sibling (v, s)
+none
+5000
+416 - Sibling :: 
+variable v; assign a;
+Select v such that Sibling (v, a)
+none
+5000
+417 - Sibling :: 
+variable v; call c;
+Select v such that Sibling (v, c)
+none
+5000
+418 - Sibling :: 
+variable v; while w;
+Select v such that Sibling (v, w)
+none
+5000
+419 - Sibling :: 
+variable v; ifstat;
+Select v such that Sibling (v, ifstat)
+none
+5000
+420 - Sibling :: 
+variable v; plus add;
+Select v such that Sibling (v, add)
+a,b,c,d,e,h,i,j,k,m,n,o,p,v,w
+5000
+421 - Sibling :: 
+variable v; minus m;
+Select v such that Sibling (v, m)
+b,i,k,m,o,q,x
+5000
+422 - Sibling :: 
+variable v; times t;
+Select v such that Sibling (v, t)
+a,g,k,m,q,x
+5000
+423 - Sibling :: 
+variable v, v1;
+Select v such that Sibling (v, v1)
+b,c,e,f,g,h,i,j,k,m,n,o,p,q,w,v,y,z
+5000
+424 - Sibling :: 
+variable v; constant co;
+Select v such that Sibling (v, co)
+abc
+5000
+425 - Sibling :: 
+constant co; procedure p;
+Select co such that Sibling (co, p)
+none
+5000
+426 - Sibling :: 
+constant co; stmtLst sl;
+Select co such that Sibling (co, sl)
+none
+5000
+427 - Sibling :: 
+constant co; stmt s;
+Select co such that Sibling (co, s)
+none
+5000
+428 - Sibling :: 
+constant co; assign a;
+Select co such that Sibling (co, a)
+none
+5000
+429 - Sibling :: 
+constant co; call c;
+Select co such that Sibling (co, c)
+none
+5000
+430 - Sibling :: 
+constant co; while w;
+Select co such that Sibling (co, w)
+none
+5000
+431 - Sibling :: 
+constant co; ifstat;
+Select co such that Sibling (co, ifstat)
+none
+5000
+432 - Sibling :: 
+constant co; plus add;
+Select co such that Sibling (co, add)
+9
+5000
+433 - Sibling :: 
+constant co; minus m;
+Select co such that Sibling (co, m)
+5
+5000
+434 - Sibling :: 
+constant co; times t;
+Select co such that Sibling (co, t)
+5
+5000
+435 - Sibling :: 
+constant co; variable v;
+Select co such that Sibling (co, v)
+999
+5000
+436 - Sibling :: 
+constant co, co1;
+Select co such that Sibling (co, co1)
+0,5,6,7,8
+5000
+437 - Sibling :: 
+variable v;
+Select v such that Sibling (v, "999")
+abc
+5000
+438 - Sibling :: 
+variable v;
+Select v such that Sibling (v, "j")
+i
+5000
+439 - Contains ::
+stmt s;
+Select s such that Contains(s, 18)
+17
+5000
