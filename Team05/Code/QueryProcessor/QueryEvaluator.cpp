@@ -401,6 +401,14 @@ string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
 		return "progline";
 	case TypeTable::CONSTANT:
 		return "constant";
+	case TypeTable::PROCEDURE:
+		return "procedure";
+	case TypeTable::CALL:
+		return "call";
+	case TypeTable::VARIABLE:
+		return "variable";
+	case TypeTable::BOOLEAN:
+		return "boolean";
 	}
 	return "null";
 }
@@ -491,22 +499,29 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			cout<<"tk1 exist in linkages"<<endl;
 			a = retrieveTokenEvaluatedAnswers(tk1);
 		}else {
+			cout<<"tk1 does not exist in linkages"<<endl;
 			if(i1->second==TypeTable::PROCEDURE){
+				cout<<"getting all proc indexes"<<endl;
 				a = pkb->getAllProcIndexes();
 			}else if(i1->second == TypeTable::VARIABLE){
+				cout<<"getting all var indexes"<<endl;
 				a = pkb->getAllVarIndex();
 			}else if(i1->second == TypeTable::CONSTANT){
 				set<int> c = pkb->getAllConstIndex();
+				cout<<"getting all constants"<<endl;
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
 					a.insert(atoi((pkb->getConstValue(*iti)).c_str()));
 				}
 			}else if(i1->second == TypeTable::CALL){
 				if(r.getCallSynType() == TypeTable::PROCEDURE){
 					a = pkb->getAllCalled();
+					cout<<"getting all called procedures"<<endl;
 				}else {
+					cout<<"getting all call stmts"<<endl;
 					a = pkb->getAllCallStmt();
 				}
 			}else {
+				cout<<"getting all stmts"<<endl;
 				a = pkb->getAllStmts(i1->second);
 			}
 		}
@@ -516,21 +531,27 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			b = retrieveTokenEvaluatedAnswers(tk2);
 		}else{
 			if(i2->second==TypeTable::PROCEDURE){
+				cout<<"getting all proc indexes"<<endl;
 				b = pkb->getAllProcIndexes();
 			}else if(i2->second == TypeTable::VARIABLE){
+				cout<<"getting all var indexes"<<endl;
 				b = pkb->getAllVarIndex();
 			}else if(i2->second == TypeTable::CONSTANT){
 				set<int> c = pkb->getAllConstIndex();
+				cout<<"getting all constants"<<endl;
 				for(set<int>::iterator iti = c.begin(); iti!=c.end(); iti++){
 					b.insert(atoi((pkb->getConstValue(*iti)).c_str()));
 				}
 			}else if(i1->second == TypeTable::CALL){
 				if(r.getCallSynType() == TypeTable::PROCEDURE){
+					cout<<"getting all called procedures"<<endl;
 					b = pkb->getAllCalled();
 				}else {
+					cout<<"getting all call stmts"<<endl;
 					b = pkb->getAllCallStmt();
 				}
 			}else {
+				cout<<"getting all stmts"<<endl;
 				b = pkb->getAllStmts(i2->second);
 			}
 		}
@@ -539,35 +560,42 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			//v.varName = p.procName OR p.procName = v.varName
 		if((i1->second == TypeTable::PROCEDURE && (i1->second!=i2->second || i1->second!=r.getCallSynType())) || (i1->second == TypeTable::VARIABLE && i1->second!=i2->second)|| (i1->second==TypeTable::CALL && r.getCallSynType()!=i2->second)){
 			cout<<"tk1 type != tk2 type and tk1 type =variable OR procedure"<<endl;
-			vector<string> procNames;
-			vector<string> varNames;
+			set<string> procNames;
+			set<string> varNames;
 
 			//p.procName = v.varName
 			if(i1->second == TypeTable::PROCEDURE || i1->second==TypeTable::CALL){
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-					procNames.push_back(pkb->getProcName(*it));
+					cout<<"pushing back procName "<<pkb->getProcName(*it)<<endl;
+					procNames.insert(pkb->getProcName(*it));
 				}
 				for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
-					varNames.push_back(pkb->getVarName(*it2));
+					cout<<"pushing back varName "<<pkb->getVarName(*it2)<<endl;
+					varNames.insert(pkb->getVarName(*it2));
 				}
 			}
 			//v.varName = p.procName
 			else if(i1->second == TypeTable::VARIABLE){
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-					if(pkb->getVarName(*it)!="-1")
-						varNames.push_back(pkb->getVarName(*it));
+					if(pkb->getVarName(*it)!="-1"){
+						cout<<"pushing back varName "<<*it<<endl;
+						varNames.insert(pkb->getVarName(*it));
+					}
 				}
 				for(set<int>::iterator it2 = b.begin(); it2!=b.end(); it2++){
-					if(pkb->getProcName(*it2)!="-1")
-						procNames.push_back(pkb->getProcName(*it2));
+					if(pkb->getProcName(*it2)!="-1"){
+						cout<<"pushing back procName "<<*it2<<endl;
+						procNames.insert(pkb->getProcName(*it2));
+					}
 				}
 			}
 
-			set<string> intersect;
-			set_intersection(procNames.begin(), procNames.end(), varNames.begin(), varNames.end(), std::inserter(intersect, intersect.begin()));
+			vector<string> intersect;
+			set_intersection(procNames.begin(), procNames.end(), varNames.begin(), varNames.end(), back_inserter(intersect));
 			vector<Pair> ansProc;
 			vector<Pair> ansVar;
-			for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
+			cout<<"intersect is empty: "<<intersect.empty()<<endl;
+			for(vector<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
 				if(i1->second == TypeTable::VARIABLE){
 					if(i2->second==TypeTable::CALL){
 						set<int> stmts = pkb->getCallStmt(pkb->getProcIndex(*it));
@@ -575,6 +603,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 							withAns.push_back(Pair (pkb->getVarIndex(*it), *iter));
 						}
 					}else{
+						cout<<"Pushing var and proc "<<*it <<endl;
 						withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
 					}
 				}else {
@@ -584,6 +613,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 							withAns.push_back(Pair ( *iter, pkb->getVarIndex(*it)));
 						}
 					}else{
+						cout<<"Pushing var and proc  "<< *it <<endl;
 						withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
 					}
 					
@@ -621,7 +651,8 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 		}
 
 		int index = -1;
-		
+		cout<<convertEnumToString(i1->second)<<endl;
+		cout<<convertEnumToString(r.getCallSynType())<<endl;
 		if(i1->second==TypeTable::VARIABLE){
 			cout<<"First token VARIABLE"<<endl;
 			index = pkb->getVarIndex(dum);
@@ -632,9 +663,14 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 				index = pkb->getProcIndex(dum);
 				cout<<"tk2 = "<<tk2 <<" index = "<<index<<endl;
 			} else{
+				cout<<"call.procName"<<endl;
 				set<int> callstmts = pkb->getCallStmt(pkb->getProcIndex(dum));
+				cout<<"procedure name is "<<dum<<endl;
+				cout<<"procedure index is "<<pkb->getProcIndex(dum)<<endl;
+				cout<<"callstmts is empty: "<<callstmts.empty()<<endl;
 				for(set<int>::iterator x = callstmts.begin(); x!=callstmts.end(); x++){
 					withAns.push_back(Pair(*x, *x));
+					cout<<"Pushing back "<<*x<<endl;
 				}
 			}
 		} else{
@@ -1789,7 +1825,6 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 		}
 		
 		for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
-			cout<<"answer = "<<*it<<endl;
 			set<int> children;
 			if(tk2=="_"){	//Parent(a,_)
 				children = pkb->getChildren(*it);
@@ -1799,7 +1834,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			for(set<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
 				if(pkb->isSynType(i2->second, *it2)){
 					parentAns.push_back(Pair(*it, *it2));
-					cout<<"it" << *it << "it2"<<*it2<<endl;
+					cout<<"pushing into parent pair1 = " << *it << "pair2 = "<<*it2<<endl;
 				}
 			}
 		}
