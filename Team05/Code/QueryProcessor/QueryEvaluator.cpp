@@ -569,9 +569,24 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			vector<Pair> ansVar;
 			for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
 				if(i1->second == TypeTable::VARIABLE){
-					withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
+					if(i2->second==TypeTable::CALL){
+						set<int> stmts = pkb->getCalls(pkb->getProcIndex(*it));
+						for(set<int>::iterator iter = stmts.begin(); iter!=stmts.end(); iter++){
+							withAns.push_back(Pair (pkb->getVarIndex(*it), *iter));
+						}
+					}else{
+						withAns.push_back(Pair (pkb->getVarIndex(*it), pkb->getProcIndex(*it)));
+					}
 				}else {
-					withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
+					if(i1->second==TypeTable::CALL){
+						set<int> stmts = pkb->getCalls(pkb->getProcIndex(*it));
+						for(set<int>::iterator iter = stmts.begin(); iter!=stmts.end(); iter++){
+							withAns.push_back(Pair ( *iter, pkb->getVarIndex(*it)));
+						}
+					}else{
+						withAns.push_back(Pair (pkb->getProcIndex(*it), pkb->getVarIndex(*it)));
+					}
+					
 				}
 			}
 
@@ -1484,7 +1499,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(a, _)
 			else {
-				set<int> a = pkb->getAllFollowedBy();
+				set<int> a = pkb->getAllFollows();
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					if(pkb->isSynType(i1->second, *it))
 						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
@@ -1539,7 +1554,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(_,b)
 			else {
-				set<int> a = pkb->getAllFollows();
+				set<int> a = pkb->getAllFollowedBy();
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}
@@ -1574,7 +1589,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 		//Follows(_, 2)
 		else {
-			if(pkb->getFollows(atoi(tk2.c_str()))==-1){
+			if(pkb->getFollowedBy(atoi(tk2.c_str()))==-1){
 				followsAns.push_back(Pair (-2,-2));
 			}
 			else{
@@ -2104,9 +2119,20 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 	//Select v such that Modifies(1, v);
 	else if(isalpha(tk2[0])){
 		if(isdigit(tk1[0])){
+
 			selected = pkb->getModified(atoi(tk1.c_str()));
-			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
-				modAns.push_back(Pair (atoi(tk1.c_str()), *it));
+
+			//Modifies(1,_)
+			if(tk2=="_"){
+				if(selected.empty()){
+					modAns.push_back(Pair (-2,-2));
+				}else{
+					modAns.push_back(Pair(-1,-1));
+				}
+			}else{
+				for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
+					modAns.push_back(Pair (atoi(tk1.c_str()), *it));
+				}
 			}
 		}
 
@@ -2182,14 +2208,19 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 				modAns.push_back(Pair (-2, -2));
 			}
 		}
-
+		else if(tk2=="_"){
+			selected = pkb->getUsed(atoi(tk1.c_str()));
+			if(selected.empty()){
+				modAns.push_back(Pair(-2,-2));
+			}else {
+				modAns.push_back(Pair(-1,-1));
+			}
+		}
 		else {
-		cout<<"supposed"<<endl;
 		string varName = tk2.substr(1,tk2.length()-2);
 		int varIndex = pkb->getVarIndex(varName);
 		cout<<atoi(tk1.c_str())<<varName<<endl;
 		if(pkb->isModifies(atoi(tk1.c_str()), varIndex)){
-			cout<<"supposed2"<<endl;
 			 modAns.push_back(Pair (-1,-1));
 		 }else{
 			 modAns.push_back(Pair (-2,-2));
@@ -2274,6 +2305,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 
 		if(isdigit(tk1[0])){
 			selected = pkb->getUsed(atoi(tk1.c_str()));
+
 			for(set<int>::iterator it=selected.begin(); it!=selected.end(); it++){
 				usesAns.push_back(Pair (atoi(tk1.c_str()), *it));
 			}
@@ -2349,6 +2381,14 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 			}
 			else {
 				usesAns.push_back(Pair (-2, -2));
+			}
+		}
+		else if(tk2=="_"){
+			selected = pkb->getUsed(atoi(tk1.c_str()));
+			if(selected.empty()){
+				usesAns.push_back(Pair(-2,-2));
+			}else {
+				usesAns.push_back(Pair(-1,-1));
 			}
 		}
 
