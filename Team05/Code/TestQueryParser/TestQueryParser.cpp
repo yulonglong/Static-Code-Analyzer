@@ -2057,7 +2057,7 @@ void QueryParserTest::testQuerySibling1(){
 
 void QueryParserTest::testQuerySibling2(){
 	//INIT BEGIN
-	string query = " stmt s;Select s such that Sibling(s,4)";
+	string query = " stmt s; plus p;Select s such that Sibling(s,p)";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
@@ -2100,6 +2100,7 @@ void QueryParserTest::testQuerySibling2(){
 	unordered_map<string, TypeTable::SynType> expectedSynTable;
 	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
 	expectedSynTable.insert(make_pair("s", TypeTable::STMT));
+	expectedSynTable.insert(make_pair("p", TypeTable::PLUS));
 	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
 	expectedIter= expectedSynTable.begin();
 	//assert syn table
@@ -2116,7 +2117,7 @@ void QueryParserTest::testQuerySibling2(){
 	vector<Relationship> relVect = parsedQuery.getRelVect();
 	//expected relationship
 	vector<Relationship> expectedRelVect;
-	expectedRelVect.push_back(Relationship("sibling","s",Relationship::SYNONYM,"4",Relationship::INTEGER));
+	expectedRelVect.push_back(Relationship("sibling","s",Relationship::SYNONYM,"p",Relationship::SYNONYM));
 	//assert relationship
 	for(int i=0;i<(int)expectedRelVect.size();i++){
 		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());

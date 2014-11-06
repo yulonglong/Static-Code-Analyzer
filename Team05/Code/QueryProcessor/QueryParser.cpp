@@ -44,7 +44,7 @@ const string QueryParser::entRef = synonym + "|_|\"" + IDENT +"\"|" + INTEGER;
 const string QueryParser::varRef = synonym + "|_|\"" + IDENT +"\"";
 const string QueryParser::stmtRef = synonym + "|_|" + INTEGER;
 const string QueryParser::lineRef = synonym + "|_|" + INTEGER;
-const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line";
+const string QueryParser::designEntity = "procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line|plus|minus|times";
 const string QueryParser::attrRef = "(?:" + synonym + "\\." + attrName + ")";
 const string QueryParser::elem = "(?:" + attrRef + "|" + synonym + ")";
 const string QueryParser::tuple = "(?:" + elem + ")" + "|" + "(?:" + "\\<" + "\\s*" + elem + "(?:" + "\\s*\\,\\s*" +  elem  + ")*" + "\\s*" + "\\>" + ")";
@@ -634,10 +634,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if(relationRef == SIBLING){
-				bool validStatement = isValidSynonymStatement(param[index]);
-				if (!validStatement){
-					synValid = false;
-				}
+				//can literally take any argument
 			}
 		}
 
@@ -685,10 +682,7 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 				}
 			}
 			else if(relationRef == SIBLING){
-				bool validStatement = isValidSynonymStatement(param[index]);
-				if (!validStatement){
-					synValid = false;
-				}
+				//can literally take any argument
 			}
 			
 		}
