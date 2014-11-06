@@ -570,7 +570,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			for(set<string>::iterator it = intersect.begin(); it!=intersect.end(); it++){
 				if(i1->second == TypeTable::VARIABLE){
 					if(i2->second==TypeTable::CALL){
-						set<int> stmts = pkb->getCalls(pkb->getProcIndex(*it));
+						set<int> stmts = pkb->getCallStmt(pkb->getProcIndex(*it));
 						for(set<int>::iterator iter = stmts.begin(); iter!=stmts.end(); iter++){
 							withAns.push_back(Pair (pkb->getVarIndex(*it), *iter));
 						}
@@ -579,7 +579,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 					}
 				}else {
 					if(i1->second==TypeTable::CALL){
-						set<int> stmts = pkb->getCalls(pkb->getProcIndex(*it));
+						set<int> stmts = pkb->getCallStmt(pkb->getProcIndex(*it));
 						for(set<int>::iterator iter = stmts.begin(); iter!=stmts.end(); iter++){
 							withAns.push_back(Pair ( *iter, pkb->getVarIndex(*it)));
 						}
@@ -620,16 +620,23 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 			dum = tk2.substr(1,tk2.length()-2);
 		}
 
-		int index;
+		int index = -1;
 		
 		if(i1->second==TypeTable::VARIABLE){
 			cout<<"First token VARIABLE"<<endl;
 			index = pkb->getVarIndex(dum);
 			cout<<"tk2 = "<<tk2<<" index = "<<index<<endl;
 		}else if(i1->second==TypeTable::PROCEDURE || (i1->second==TypeTable::CALL && r.getCallSynType()==TypeTable::PROCEDURE)){
-			cout<<"First token PROCEDURE"<<endl;
-			index = pkb->getProcIndex(dum);
-			cout<<"tk2 = "<<tk2 <<" index = "<<index<<endl;
+			if(i1->second==TypeTable::PROCEDURE){
+				cout<<"First token PROCEDURE"<<endl;
+				index = pkb->getProcIndex(dum);
+				cout<<"tk2 = "<<tk2 <<" index = "<<index<<endl;
+			} else{
+				set<int> callstmts = pkb->getCallStmt(pkb->getProcIndex(dum));
+				for(set<int>::iterator x = callstmts.begin(); x!=callstmts.end(); x++){
+					withAns.push_back(Pair(*x, *x));
+				}
+			}
 		} else{
 			cout<<"First token NEITHER VAR NOR PROC"<<endl;
 			index = atoi(tk2.c_str());
