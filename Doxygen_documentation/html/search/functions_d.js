@@ -8,6 +8,7 @@ var searchData=
   ['_7eparent',['~Parent',['../class_parent.html#a2d761838a6d143fc0cfbb971a43418ba',1,'Parent']]],
   ['_7epkb',['~PKB',['../class_p_k_b.html#a4de1945c7c7414313f50c5b0c1936d8d',1,'PKB']]],
   ['_7eproctable',['~ProcTable',['../class_proc_table.html#a3f3cc42df8caf3bd1393f99962b0879f',1,'ProcTable']]],
+  ['_7esibling',['~Sibling',['../class_sibling.html#af8b382817480196f75a6b26ceb503248',1,'Sibling']]],
   ['_7etypetable',['~TypeTable',['../class_type_table.html#ac37cceed491a3cef275d5d098f7f14ef',1,'TypeTable']]],
   ['_7euses',['~Uses',['../class_uses.html#a15f2b9e28f10201b5a487f2cb6a5ccb3',1,'Uses']]],
   ['_7evartable',['~VarTable',['../class_var_table.html#a243ba0093d4dafccc88a1646b0a00017',1,'VarTable']]]

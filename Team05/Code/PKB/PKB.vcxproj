@@ -88,6 +88,7 @@
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="ProcTable.cpp" />
+    <ClCompile Include="Sibling.cpp" />
     <ClCompile Include="TypeTable.cpp" />
     <ClCompile Include="Uses.cpp" />
     <ClCompile Include="VarTable.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="Parent.h" />
     <ClInclude Include="PKB.h" />
     <ClInclude Include="ProcTable.h" />
+    <ClInclude Include="Sibling.h" />
     <ClInclude Include="TypeTable.h" />
     <ClInclude Include="Uses.h" />
     <ClInclude Include="VarTable.h" />

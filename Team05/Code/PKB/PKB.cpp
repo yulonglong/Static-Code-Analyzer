@@ -17,6 +17,7 @@ PKB::PKB(){
 	uses = Uses::getInstance(varTable);
 	calls = Calls::getInstance(procTable);
 	next = Next::getInstance(typeTable);
+	sibling = Sibling::getInstance();
 	ASTRoot = NULL;
 	CFGRoot = NULL;
 }
@@ -32,6 +33,7 @@ PKB::~PKB(){
 	uses->~Uses();
 	calls->~Calls();
 	next->~Next();
+	sibling->~Sibling();
 	delete ASTRoot;
 	delete CFGRoot;
 	ASTRoot = NULL;
@@ -164,6 +166,10 @@ void PKB::setToNext(STMTNUM s1, STMTNUM s2){
 	next->setNext(s1,s2);
 }
 
+void PKB::setToSibling(STMTNUM s1, STMTNUM s2){
+	sibling->setSibling(s1,s2);
+}
+
 void PKB::setToTypeTable(STMTNUM s,TypeTable::SynType t){
 	typeTable = getTypeTable();
 	typeTable->insertStmtNumAndType(s,t);
@@ -263,6 +269,10 @@ set<PROCINDEX> PKB::getAllCalled(){
 
 set<PROCINDEX> PKB::getCalled(PROCINDEX p){
 	return calls->getCalled(p);
+}
+
+set<STMTNUM> PKB::getCallStmt(PROCINDEX p){
+	return calls->getCallStmt(p);
 }
 
 set<STMTNUM> PKB::getAllCallStmt(){
@@ -401,6 +411,17 @@ set<STMTNUM> PKB::getAllNext(){
 }
 set<STMTNUM> PKB::getAllPrevious(){
 	return next->getAllPrevious();
+}
+
+bool PKB::isSibling(STMTNUM s1, STMTNUM s2){
+	return sibling->isSibling(s1,s2);
+}
+
+set<STMTNUM> PKB::getSibling(STMTNUM s){
+	return sibling->getSibling(s);
+}
+set<STMTNUM> PKB::getAllSibling(){
+	return sibling->getAllSibling();
 }
 
 void PKB::setToNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
