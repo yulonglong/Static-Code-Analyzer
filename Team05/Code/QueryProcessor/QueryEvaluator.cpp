@@ -1366,8 +1366,11 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 	//Follows(a,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0]))){
+		if(tk1==tk2){
+
+		}
 		//If both tokens are already previously evaluated
-		if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
+		else if(isExistInLinkages(tk1) && isExistInLinkages(tk2)){
 			//get the set of answers that are previously evaluated by other relations
 			set<int> sa = retrieveTokenEvaluatedAnswers(tk1);
 			set<int> sb = retrieveTokenEvaluatedAnswers(tk2);
@@ -1621,7 +1624,11 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	
 	//Select w such that Follows*(w, a) OR Follows*(_, a) OR Follows*(w, _)
-	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (tk2=="_" && isalpha(tk1[0]))){
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) &&tk1==tk2){
+
+	}
+
+	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (tk2=="_" && isalpha(tk1[0]))){
 
 		if(tk1=="_"){
 			selected = pkb->getAllStmts(TypeTable::STMT);
@@ -1763,7 +1770,12 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 	cout<<"tk1 = "<<tk1<<" tk2 = "<<tk2<<endl;
+
 	//Parent(a,b)
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) && tk1==tk2){
+
+	}
+
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
 		if(isExistInLinkages(tk1))
@@ -1881,7 +1893,10 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	//Parent*(w, a) Parent(_,a) Parent(w,_)
-	if((isalpha(tk1[0]) && isalpha(tk2[0]))|| (isalpha(tk1[0])&& tk2=="_") || (tk1=="_" && isalpha(tk2[0]))){
+	if(isalpha(tk1[0]) && isalpha(tk2[0]) && tk1==tk2){
+
+	}
+	else if((isalpha(tk1[0]) && isalpha(tk2[0]))|| (isalpha(tk1[0])&& tk2=="_") || (tk1=="_" && isalpha(tk2[0]))){
 		cout<<"If both tokens are alpha or one of them is a wildcard"<<endl;
 		set<int> sa;
 		set<int> sb;
