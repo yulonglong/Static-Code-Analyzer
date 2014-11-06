@@ -25,6 +25,7 @@ const string QueryParser::NEXT = "next";
 const string QueryParser::NEXTSTAR = "next*";
 const string QueryParser::AFFECTS = "affects";
 const string QueryParser::AFFECTSSTAR = "affects*";
+const string QueryParser::SIBLING = "sibling";
 const string QueryParser::PATTERN = "pattern";
 const string QueryParser::WITH = "with";
 
@@ -37,6 +38,7 @@ const string QueryParser::OPERATOR = "(?:\\+|\\-|\\*)";
 const string QueryParser::LETTERORINTEGER = "(?:[A-Za-z]+|[0-9]+)";
 
 const string QueryParser::synonym = "(?:" + IDENT + ")";
+const string QueryParser::nodeRef = "(?:" + INTEGER + "|" + synonym + ")";
 const string QueryParser::attrName = "(?:procName|varName|value|stmt#)";
 const string QueryParser::entRef = synonym + "|_|\"" + IDENT +"\"|" + INTEGER;
 const string QueryParser::varRef = synonym + "|_|\"" + IDENT +"\"";
@@ -77,12 +79,13 @@ const string QueryParser::Next = "(?:(?:[Nn]ext)\\s*\\(\\s*(?:"+lineRef+")"+ "\\
 const string QueryParser::NextT = "(?:(?:[Nn]ext\\*)\\s*\\(\\s*(?:"+lineRef+")"+ "\\s*\\,\\s*" +"(?:"+lineRef+")" + "\\s*\\))";
 const string QueryParser::Affects = "(?:(?:[Aa]ffects)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
 const string QueryParser::AffectsT = "(?:(?:[Aa]ffects\\*)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+stmtRef+")" + "\\s*\\))";
+const string QueryParser::Sibling = "(?:(?:[Ss]ibling)\\s*\\(\\s*(?:"+nodeRef+")"+ "\\s*\\,\\s*" +"(?:"+nodeRef+")" + "\\s*\\))";
 const string QueryParser::TESTSTR = "\\s*\\(\\s*("+freeString+")"+ "\\s*\\,\\s*" +"("+freeString+")" + "\\s*\\)";
 
 const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" + Calls + "|" + CallsT
-+ "|" + Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + ")";
++ "|" + Parent + "|" + ParentT + "|" + Follows + "|" + FollowsT + "|" + Next + "|" + NextT + "|" + Affects + "|" + AffectsT + "|" + Sibling + ")";
 //const string QueryParser::relRef = "(?:" + ModifiesP + "|" + ModifiesS + "|" + UsesP + "|" + UsesS + "|" +  Follows +")";
-const string QueryParser::allClause = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*)";
+const string QueryParser::allClause = "([Mm]odifies|[Uu]ses|[Ff]ollows|[Ff]ollows\\*|[Pp]arent|[Pp]arent\\*|[Cc]alls|[Cc]alls\\*|[Nn]ext|[Nn]ext\\*|[Aa]ffects|[Aa]ffects\\*|[Ss]ibling)";
 
 const string QueryParser::relCond = relRef + "(?:" + "\\s+" + "and" + "\\s+" + relRef + ")*";
 const string QueryParser::suchThatCl = "(such)\\s+(that)\\s+" + relCond;
@@ -115,6 +118,7 @@ const string QueryParser::nextParam[] = {lineRef , lineRef};
 const string QueryParser::nextStarParam[] = {lineRef , lineRef};
 const string QueryParser::affectsParam[] = {stmtRef , stmtRef};
 const string QueryParser::affectsStarParam[] = {stmtRef , stmtRef};
+const string QueryParser::siblingParam[] = {nodeRef , nodeRef};
 
 //GRAMMAR RULES DECLARATION END
 
@@ -504,6 +508,11 @@ void QueryParser::deepCopyTableParam(string tableParam[2], string relationRef){
 			tableParam[index] = affectsStarParam[index];
 		}
 	}
+	else if(relationRef == SIBLING){
+		for(int index=0;index<2;index++){
+			tableParam[index] = siblingParam[index];
+		}
+	}
 }
 
 Relationship::TokenType QueryParser::detectTokenType(string token){
@@ -624,6 +633,12 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 					synValid = false;
 				}
 			}
+			else if(relationRef == SIBLING){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
+					synValid = false;
+				}
+			}
 		}
 
 		//second argument
@@ -666,6 +681,12 @@ Relationship QueryParser::validateDefaultClauses(vector<string>& v, int& i, bool
 			}
 			else if((relationRef == AFFECTS) || (relationRef == AFFECTSSTAR)){
 				if(!((it->second == TypeTable::ASSIGN)||(it->second == TypeTable::STMT)||(it->second == TypeTable::PROGLINE))){
+					synValid = false;
+				}
+			}
+			else if(relationRef == SIBLING){
+				bool validStatement = isValidSynonymStatement(param[index]);
+				if (!validStatement){
 					synValid = false;
 				}
 			}

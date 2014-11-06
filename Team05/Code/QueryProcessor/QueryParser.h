@@ -111,6 +111,7 @@ private:
 	static const string NEXTSTAR;
 	static const string AFFECTS;
 	static const string AFFECTSSTAR;
+	static const string SIBLING;
 	static const string PATTERN;
 	static const string WITH;
 
@@ -132,6 +133,7 @@ private:
 
 	//auxiliary grammar rules
 	static const string synonym;
+	static const string nodeRef;
 	static const string attrName;
 	static const string entRef;
 	static const string varRef;
@@ -163,6 +165,7 @@ private:
 	static const string NextT;
 	static const string Affects;
 	static const string AffectsT;
+	static const string Sibling;
 	static const string allClause;
 	static const string TESTSTR;
 
@@ -196,6 +199,7 @@ private:
 	static const string nextStarParam[2];
 	static const string affectsParam[2];
 	static const string affectsStarParam[2];
+	static const string siblingParam[2];
 
 	//query class table
 	vector<string> selectStatement;
