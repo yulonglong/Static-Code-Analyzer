@@ -273,7 +273,7 @@ Alpha,Bravo,Charlie,Delta
 55 - Modifies :: 
 procedure p;
 Select p such that Modifies (_, _)
-none
+Alpha,Bravo,Charlie,Delta
 5000
 56 - Modifies :: 
 procedure p;
