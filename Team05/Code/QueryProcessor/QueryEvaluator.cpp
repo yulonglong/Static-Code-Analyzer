@@ -558,7 +558,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 
 		//else if the two tokens are of different type and of proc and var
 			//v.varName = p.procName OR p.procName = v.varName
-		if((i1->second == TypeTable::PROCEDURE && (i1->second!=i2->second || i1->second!=r.getCallSynType())) || (i1->second == TypeTable::VARIABLE && i1->second!=i2->second)|| (i1->second==TypeTable::CALL && r.getCallSynType()!=i2->second)){
+		if((i1->second == TypeTable::PROCEDURE && i1->second!=i2->second && i1->second!=r.getCallSynType()) || (i1->second == TypeTable::VARIABLE && i1->second!=i2->second)|| (i1->second==TypeTable::CALL && r.getCallSynType()!=i2->second)){
 			cout<<"tk1 type != tk2 type and tk1 type =variable OR procedure"<<endl;
 			set<string> procNames;
 			set<string> varNames;
