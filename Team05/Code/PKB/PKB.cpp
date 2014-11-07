@@ -166,7 +166,7 @@ void PKB::setToNext(STMTNUM s1, STMTNUM s2){
 	next->setNext(s1,s2);
 }
 
-void PKB::setToSibling(STMTNUM s1, STMTNUM s2){
+void PKB::setToSiblingStmtNums(STMTNUM s1, STMTNUM s2){
 	sibling->setSibling(s1,s2);
 }
 
@@ -413,14 +413,14 @@ set<STMTNUM> PKB::getAllPrevious(){
 	return next->getAllPrevious();
 }
 
-bool PKB::isSibling(STMTNUM s1, STMTNUM s2){
+bool PKB::isSiblingStmtNums(STMTNUM s1, STMTNUM s2){
 	return sibling->isSibling(s1,s2);
 }
 
-set<STMTNUM> PKB::getSibling(STMTNUM s){
+set<STMTNUM> PKB::getSiblingStmtNum(STMTNUM s){
 	return sibling->getSibling(s);
 }
-set<STMTNUM> PKB::getAllSibling(){
+set<STMTNUM> PKB::getSiblingStmtNum(){
 	return sibling->getAllSibling();
 }
 

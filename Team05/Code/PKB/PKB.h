@@ -113,8 +113,6 @@ public:
 	void setToCalls(PROCNAME, PROCNAME, STMTNUM);
 	//! Set a Next relationship between the two given statement numbers.
 	void setToNext(STMTNUM, STMTNUM);
-	//! Set a Sibling relationship between the two given statement numbers.
-	void setToSibling(STMTNUM, STMTNUM);
 	//! Set the new AST Root.
 	void setASTRoot(Node* newASTRoot);
 	//! Set the new CFG Root.
@@ -247,13 +245,6 @@ public:
 	//! Return a set of all statement numbers that has another statement number before it in a CFG.
 	set<STMTNUM> getAllPrevious();
 
-	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
-	bool isSibling(STMTNUM, STMTNUM);	
-	//! Return a statement number that is the parent of the given statement number.
-	set<STMTNUM> getSibling(STMTNUM);
-	//! Return a set of all statement numbers that has a sibling.
-	set<STMTNUM> getAllSibling();
-
 
 	//Example = (1,(2,5)). If you need to insert two or more pairs, just call the insert method again. It will append the table
 	//! Set the Next relationship between a statement number and a pair of statement numbers which represent the range of the Next relationship of the first statement number.
@@ -261,6 +252,41 @@ public:
 	//! Return a vector of ranges that the given statement number will have a Next relationship with.
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
+	//SIBLINGS
+	//! Set a Sibling relationship between the two given statement numbers.
+	void setToSiblingStmtNums(STMTNUM, STMTNUM);
+	void setToSiblingVarNameConstant(VARNAME, CONSTVALUE);
+	void setToSiblingVarNameMathOp(VARNAME, string); //("plus","minus","times")
+	void setToSiblingProcNames(PROCNAME, PROCNAME);
+	void setToSiblingVarNameStmtList(VARNAME, STMTNUM);
+	void setToSiblingStmtLists(STMTNUM, STMTNUM);
+	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
+	bool isSiblingStmtNums(STMTNUM, STMTNUM);
+	bool isSiblingVarNameConstant(VARNAME, CONSTVALUE);
+	bool isSiblingVarNameMathOp(VARNAME, string); //("plus","minus","times")
+	bool isSiblingProcNames(PROCNAME, PROCNAME);
+	bool isSiblingVarNameStmtList(VARNAME, STMTNUM);
+	bool isSiblingStmtLists(STMTNUM, STMTNUM);
+	//! Return a statement number that is the parent of the given statement number.
+	set<STMTNUM> getSiblingStmtNum(STMTNUM);
+	set<VARNAME> getSiblingVarNameWithConstant(CONSTVALUE);
+	set<CONSTVALUE> getSiblingConstantWithVarName(VARNAME);
+	set<VARNAME> getSiblingVarNameWithMathOp(string);
+	set<string> getSiblingMathOpWithVarName(VARNAME);
+	set<PROCNAME> getSiblingProcNames(PROCNAME);
+	set<VARNAME> getSiblingVarNameWithStmtList(STMTNUM);
+	set<STMTNUM> getSiblingStmtListWithVarName(VARNAME);
+	set<STMTNUM> getSiblingStmtListWithStmtList(STMTNUM);
+	//! Return a set of all statement numbers that has a sibling.
+	set<STMTNUM> getSiblingStmtNum();
+	set<VARNAME> getSiblingVarNameWithConstant();
+	set<CONSTVALUE> getAllSiblingConstantWithVarName();
+	set<VARNAME> getAllSiblingVarNameWithMathOp();
+	set<string> getAllSiblingMathOpWithVarName();
+	set<PROCNAME> getAllSiblingProcNames();
+	set<VARNAME> getAllSiblingVarNameWithStmtList();
+	set<STMTNUM> getAllSiblingStmtListWithVarName();
+	set<STMTNUM> getAllSiblingStmtListWithStmtList();
 	/// @cond
 	VarTable* getVarTable(); 
 	ProcTable* getProcTable(); 
