@@ -105,7 +105,7 @@ private:
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;
 	static std::unordered_map<int, vector<std::string>> relParameters;
-	static std::unordered_map<int,int> nextStarTable;
+	static std::unordered_map<int,std::set<int>> nextStarTable;
 	PKB *pkb;
 
 public:
