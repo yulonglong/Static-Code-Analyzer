@@ -1,0 +1,122 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>Iteration1</name><parsing_time_taken>14.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" BASIC queries with Calls">
+<query>
+<id Calls="1" comment="" >1</id><querystr><![CDATA[assign a; Select a such that Calls (_,_)]]></querystr>
+<stuans>1,2,4,5,7,9,14,15,16,17,18</stuans>
+<correct>1,2,4,5,7,9,14,15,16,17,18</correct>
+<time_taken>7.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >2</id><querystr><![CDATA[while w; Select w such that Calls ("First", "Second")]]></querystr>
+<stuans>6</stuans>
+<correct>6</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >3</id><querystr><![CDATA[procedure p, q; Select p such that Calls (p, q)]]></querystr>
+<stuans>First,Second,Fourth,Fifth,Sixth,Seventh</stuans>
+<correct>First,Second,Fourth,Fifth,Sixth,Seventh</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >4</id><querystr><![CDATA[procedure p; Select p such that Calls (p, _)]]></querystr>
+<stuans>First,Second,Fourth,Fifth,Sixth,Seventh</stuans>
+<correct>First,Second,Fourth,Fifth,Sixth,Seventh</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >5</id><querystr><![CDATA[procedure p, q; Select q such that Calls (p, q)]]></querystr>
+<stuans>Second,Third,Fourth,Fifth,First,Sixth,Seventh</stuans>
+<correct>First,Second,Third,Fourth,Fifth,Sixth,Seventh</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >6</id><querystr><![CDATA[procedure p; Select p such that Calls (_, p)]]></querystr>
+<stuans>Second,Third,Fourth,Fifth,First,Sixth,Seventh</stuans>
+<correct>First,Second,Third,Fourth,Fifth,Sixth,Seventh</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >7</id><querystr><![CDATA[procedure p; Select BOOLEAN such that Calls (_, _)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >8</id><querystr><![CDATA[procedure p; Select BOOLEAN such that Calls ("First", "Second")]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >9</id><querystr><![CDATA[procedure p; Select BOOLEAN such that Calls ("Third", "First")]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >10</id><querystr><![CDATA[procedure p; Select BOOLEAN such that Calls ("Seventh", "Sixth")]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >11</id><querystr><![CDATA[procedure p; Select p such that Calls ("Second", p)]]></querystr>
+<stuans>Third,Fourth,Fifth</stuans>
+<correct>Third,Fourth,Fifth</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >12</id><querystr><![CDATA[procedure p; Select p such that Calls ("Third", p)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >13</id><querystr><![CDATA[procedure p; Select p such that Calls (p, "Third")]]></querystr>
+<stuans>Second</stuans>
+<correct>Second</correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >14</id><querystr><![CDATA[procedure p; Select p such that Calls (p, "First")]]></querystr>
+<stuans>Fourth</stuans>
+<correct>Fourth</correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >15</id><querystr><![CDATA[procedure p; Select p such that Calls (p, "Second")]]></querystr>
+<stuans>First,Sixth</stuans>
+<correct>First,Sixth</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" comment="" >16</id><querystr><![CDATA[procedure p; Select p such that Calls (p, p)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

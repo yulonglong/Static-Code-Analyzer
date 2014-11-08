@@ -42,30 +42,134 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
-	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
+	//extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
 }
 
 void DesignExtractor::extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb) {
 	cout << "Extracting Sibling" << endl;
-	// setSiblingforProcedure()
+	
+	vector<Node*> procNodes = ASTRoot.getChild();
+	setSiblingforProcedures(procNodes, pkb);
+
+	for (unsigned int i=0; i<procNodes.size(); i++) {
+		Node* n = procNodes[i];
+		vector<Node*> stmtNodes = n->getChild(0)->getChild();
+		setSiblingForStatements(stmtNodes, pkb);
+	}
+
 }
 
-void DesignExtractor::setSiblingforProcedure(vector<Node*> vector) {
+void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb) {
+	for (unsigned int i=0; i<procNodes.size()-1; i++) {
+		for (unsigned int j=i+1; j<procNodes.size(); j++) {
+			std::string procName1 = procNodes[i]->getData();
+			std::string procName2 = procNodes[j]->getData();
+			// PKB SET: 
+			if (debugModeExtension) {
+				cout<<"setToSiblingProcNames("<<procName1<<", "<<procName2<<")"<<endl;
+			}
+			//pkb.setToSiblingProcNames(procName1, procName2);
+		}
+	}
 }
 
-void DesignExtractor::setSiblingForStatements(vector<Node*> vector) {
+void DesignExtractor::setSiblingForStatements(vector<Node*> stmtNodes, PKB &pkb) {
+	for (unsigned int i=0; i<stmtNodes.size()-1; i++) {
+		for (unsigned int j=i+1; j<stmtNodes.size(); j++) {
+			int stmtNum1 = stmtNodes[i]->getProgLine();
+			int stmtNum2 = stmtNodes[j]->getProgLine();
+			// PKB SET: 
+			if (debugModeExtension) {
+				cout<<"setToSiblingStmtNums("<<stmtNum1<<", "<<stmtNum2<<")"<<endl;
+			}
+			//pkb.setToSiblingStmtNums(stmtNum1, stmtNum2);
+		}
+	}
+	for (unsigned int i=0; i<stmtNodes.size(); i++) {
+		Node* n = stmtNodes[i];
+		string type = n->getType();
+		if (type == "assign") {
+			setSiblingForAssign(n->getChild(), pkb);
+		} else if (type == "call") {
+			continue;
+		} else if (type == "if") {
+			setSiblingForIf(n->getChild(), pkb);
+		} else if (type == "while") {
+			setSiblingForWhile(n->getChild(), pkb);
+		}
+	}
+
 }
 
-void DesignExtractor::setSiblingForAssign(vector<Node*> vector) {
+void DesignExtractor::setSiblingForAssign(vector<Node*> vector, PKB &pkb) {
+	string leftNodeType = vector[0]->getType();
+	string rightNodeType = vector[1]->getType();
+	if (leftNodeType == "constant" && rightNodeType == "constant") {
+		// PKB SET:
+
+	} else if (leftNodeType == "variable" && rightNodeType == "variable") {
+		// PKB SET:
+
+	} else if (leftNodeType == "operator" && rightNodeType == "operator") {
+		// PKB SET:
+
+	} else if (leftNodeType == "variable" && rightNodeType == "constant") {
+		// PKB SET:
+
+	} else if (leftNodeType == "constant" && rightNodeType == "variable") {
+		// PKB SET:
+
+	} else if (leftNodeType == "variable" && rightNodeType == "operator") {
+		// PKB SET:
+
+	} else if (leftNodeType == "operator" && rightNodeType == "variable") {
+		// PKB SET:
+
+	} else if (leftNodeType == "constant" && rightNodeType == "operator") {
+		// PKB SET:
+
+	} else if (leftNodeType == "operator" && rightNodeType == "constant") {
+		// PKB SET:
+
+	}
+	if (vector[0]->getChild().size() == 2) {
+		setSiblingForAssign(vector[0]->getChild(), pkb);
+	}
+	if (vector[1]->getChild().size() == 2) {
+		setSiblingForAssign(vector[1]->getChild(), pkb);
+	}
 }
 
-void DesignExtractor::setSiblingForIf(vector<Node*> vector) {
+void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
+	string varName = vector[0]->getData();
+	int firstStmtOfThenStmtLst = vector[1]->getChild(0)->getProgLine();
+	int firstStmtOfElseStmtLst = vector[2]->getChild(0)->getProgLine();
+	// PKB SET:
+	if (debugModeExtension) {
+		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfThenStmtLst<<")"<<endl;
+		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
+		cout<<"setToSiblingStmtLists("<<firstStmtOfThenStmtLst<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
+	}
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
+	//pkb.setToSiblingStmtLists(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
+
+	setSiblingForStatements(vector[1]->getChild(), pkb);
+	setSiblingForStatements(vector[2]->getChild(), pkb);
 }
 
-void DesignExtractor::setSiblingForWhile(vector<Node*> vector) {
+void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
+	string varName = vector[0]->getData();
+	int firstStmtOfStmtLst = vector[1]->getChild(0)->getProgLine();
+	// PKB SET:
+	if (debugModeExtension) {
+		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfStmtLst<<")"<<endl;
+	}
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfStmtLst);
 
+	setSiblingForStatements(vector[1]->getChild(), pkb);
 }
 
 void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {

@@ -36,9 +36,7 @@ void ExtractSiblingTest::testSource1B() {
 		cout << "ASTRoot is null!!!" << endl;
 	}
 
-	// CALLS DE
 	DesignExtractor::extractSiblingRelationshipDriver(*ASTRoot, *pkb);
-	
 
 
 	pkb->~PKB();	

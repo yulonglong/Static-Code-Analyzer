@@ -1,0 +1,25 @@
+Parameters : S18-sibling.txt Q18-sibling.txt R18-sibling.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+293 - Sibling :: 
+procedure p, p1;
+Select p such that Sibling (p, p1)
+Operators, Loops, Ifs, WhileIfs
+5000
+Evaluating query 293 - Sibling :: 
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+sibling(p, p1)
+Inserting tokens into relParameters
