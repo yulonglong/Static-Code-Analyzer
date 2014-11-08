@@ -14,6 +14,7 @@ using namespace std;
 unordered_map<string, vector<int>> QueryEvaluator::linkages;
 unordered_map<int, vector<Pair>> QueryEvaluator::relAns;
 unordered_map<int, vector<std::string>> QueryEvaluator::relParameters;
+unordered_map<int, set<int>> QueryEvaluator::nextStarTable;
 
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
@@ -73,6 +74,7 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 	linkages.clear();
 	relAns.clear();
 	relParameters.clear();
+	nextStarTable.clear();
 
 	cout<<"Ordering Relationships"<<endl;
 	relations = orderRelationship(relations);
@@ -946,16 +948,35 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	//Next*(n,b) //Next*(m, _) //Next*(_,b)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0]) && tk2=="_")){
 		set<int> tk1List;
-		if(tk1=="_"){
-			tk1List = pkb->getAllStmts(TypeTable::STMT);
+		set<int> tk2List;
+
+		if(isExistInLinkages(tk2)){
+			tk2List = retrieveTokenEvaluatedAnswers(tk2);
+		}else{
+			tk2List = pkb->getAllStmts(i2->second);
+		}
+
+		if(isExistInLinkages(tk1)){
+			tk1List = retrieveTokenEvaluatedAnswers(tk1);
 		}else{
 			tk1List = pkb->getAllStmts(i1->second);
 		}
 
-		if(tk2=="_"){
+		//Next*(_, n)
+		if(tk1=="_"){
+			for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++){
+				if(!pkb->getPrevious(*it).empty()){
+					nextStarAns.insert(Pair (-1, *it));
+				}
+			}
+		}
+		
+		//Next*(n, _)
+		else if(tk2=="_"){
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
-				traverseTable.clear();
-				recursiveNext(*it, *it, &nextStarAns, i2->second, &traverseTable);
+				if(!pkb->getNext(*it).empty()){
+					nextStarAns.insert(Pair (*it, -1));
+				}
 			}
 		}
 		//Next*(n, n)
@@ -963,13 +984,25 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 			cout<<"Token1 and Token2 are equal"<<endl;
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
 				traverseTable.clear();
-				recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable);
+				if(nextStarTable.find(*it)!=nextStarTable.end() && nextStarTable.find(*it)->second.find(*it)!=nextStarTable.find(*it)->second.end()){
+					nextStarAns.insert(Pair(*it, *it));
+				}else {
+					recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable);
+				}
 			}
 		}
+
+		//Next*(n1,n2)
 		else{
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
-				traverseTable.clear();
-				recursiveNext(*it, *it, &nextStarAns, TypeTable::STMT, &traverseTable);
+				for(set<int>::iterator it2 = tk2List.begin(); it2!=tk2List.end(); it2++){
+					traverseTable.clear();
+					if(nextStarTable.find(*it)!=nextStarTable.end() && nextStarTable.find(*it)->second.find(*it2)!=nextStarTable.find(*it)->second.end()){
+						nextStarAns.insert(Pair(*it, *it2));
+					}else {
+						recursiveNextTarget(*it, *it, *it2, &nextStarAns, &traverseTable);
+					}
+				}
 			}
 		}
 
@@ -990,17 +1023,35 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	//Next*(n, 3) //Next*(_, 3)
 	else if(isalpha(tk1[0]) || tk1=="_"){
 		int tk2Int = atoi(tk2.c_str());
+		set<int> tk1List;
+
+		if(isExistInLinkages(tk1)){
+			tk1List = retrieveTokenEvaluatedAnswers(tk1);
+		}else{
+			tk1List = pkb->getAllStmts(i1->second);
+		}
+
+		//Next*(_,3)
 		if(tk1=="_"){
-			recursiveNextReverse(tk2Int, tk2Int, &nextStarAns, TypeTable::STMT, &traverseTable);
-			if(nextStarAns.empty()){
-				nextStarAnsVec.push_back(Pair(-2,-2));
-			}else{
+			if(!pkb->getPrevious(tk2Int).empty()){
 				nextStarAnsVec.push_back(Pair(-1,-1));
 			}
 		}
+
+		//Next*(n, 3)
 		else{
+
 			cout<<"In Next*(token, digit)"<<endl;
-			recursiveNextReverse(tk2Int, tk2Int, &nextStarAns, i1->second, &traverseTable);
+
+			for(set<int>::iterator it2 = tk1List.begin(); it2!=tk1List.end(); it2++){
+				traverseTable.clear();
+				if(nextStarTable.find(*it2)!=nextStarTable.end() && nextStarTable.find(*it2)->second.find(tk2Int)!=nextStarTable.find(*it2)->second.end()){
+					nextStarAns.insert(Pair(*it2, tk2Int));
+				}else {
+					recursiveNextTarget(*it2, *it2, tk2Int, &nextStarAns, &traverseTable);
+				}
+			}
+
 			for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
 				cout<<"Pushing into answer the pair "<<it->ans1<<"and"<<it->ans2<<endl;
 				nextStarAnsVec.push_back(*it);
@@ -1010,16 +1061,32 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 
 	//Next*(3, n) Next*(3, _)
 	else if(isalpha(tk2[0]) || tk2=="_"){
-		if(tk2=="_"){
-			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &nextStarAns, TypeTable::STMT, &traverseTable);
-			if(nextStarAns.empty()){
-				nextStarAnsVec.push_back(Pair(-2,-2));
-			}else{
-				nextStarAnsVec.push_back(Pair(-1,-1));
-				cout<<"Evaluating true"<<endl;
-			}
+		int tk1Int = atoi(tk1.c_str());
+		set<int> tk2List;
+
+		if(isExistInLinkages(tk2)){
+			tk2List = retrieveTokenEvaluatedAnswers(tk2);
 		}else{
-			recursiveNext(atoi(tk1.c_str()), atoi(tk1.c_str()), &nextStarAns, i2->second, &traverseTable);
+			tk2List = pkb->getAllStmts(i2->second);
+		}
+
+		//Next*(3, _)
+		if(tk2=="_"){
+			if(!pkb->getNext(tk1Int).empty()){
+				nextStarAnsVec.push_back(Pair(-1,-1));
+			}
+		}
+		
+		//Next*(3,n)
+		else{
+			for(set<int>::iterator it2 = tk2List.begin(); it2!=tk2List.end(); it2++){
+				if(nextStarTable.find(tk1Int)!=nextStarTable.end() && nextStarTable.find(tk1Int)->second.find(*it2)!=nextStarTable.find(tk1Int)->second.end()){
+					nextStarAns.insert(Pair(tk1Int, *it2));
+				}else {
+					traverseTable.clear();
+					recursiveNextTarget(tk1Int, tk1Int, *it2, &nextStarAns, &traverseTable);
+				}
+			}
 
 			for(set<Pair>::iterator it = nextStarAns.begin(); it!=nextStarAns.end(); it++){
 				nextStarAnsVec.push_back(*it);
@@ -1071,8 +1138,26 @@ void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int ta
 	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<targetIndex<<endl;
 	set<int> next = pkb->getNext(currentIndex);
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
-		//int flag = (find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end());
-		//cout<<"FLAG IS "<<flag<<endl;
+		if(nextStarTable.find(currentIndex)!=nextStarTable.end()){
+			set<int> s = nextStarTable.find(currentIndex)->second;
+			s.insert(*it);
+			nextStarTable.at(currentIndex) = s;
+		}else {
+			set<int> s;
+			s.insert(*it);
+			nextStarTable.insert(make_pair<int, set<int>>(currentIndex, s));
+		}
+
+		if(nextStarTable.find(rootIndex)!=nextStarTable.end()){
+			set<int> s = nextStarTable.find(rootIndex)->second;
+			s.insert(*it);
+			nextStarTable.at(rootIndex) = s;
+		}else {
+			set<int> s;
+			s.insert(*it);
+			nextStarTable.insert(make_pair<int, set<int>>(rootIndex, s));
+		}
+
 		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
 			cout<<*it<<" is traversed before. Moving on to the next node"<<endl;
 			it++;
@@ -2628,7 +2713,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				if(isAffectsStar(*itA, *itB, &processed, path))
+				if(isAffectsStar(*itA, *itB))
 					affAns.push_back(Pair(*itA, *itB));
 			}
 		}
@@ -2650,7 +2735,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
-			if(isAffectsStar(*it, atoi(tk2.c_str()), &processed, path))
+			if(isAffectsStar(*it, atoi(tk2.c_str())))
 				affAns.push_back(Pair(*it, atoi(tk2.c_str())));	
 		}
 	}
@@ -2671,7 +2756,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
-			if(isAffectsStar(atoi(tk1.c_str()), *it, &processed, path)) 
+			if(isAffectsStar(atoi(tk1.c_str()), *it)) 
 				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
 		}
 	}
@@ -2679,7 +2764,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 	//Affects("1", "2")
 	else if( tk1!="_" ) {
 		cout << "Case 4: Both are Constants" << endl;
-		if(isAffectsStar(atoi(tk1.c_str()), atoi(tk2.c_str()), &processed, path))
+		if(isAffectsStar(atoi(tk1.c_str()), atoi(tk2.c_str())))
 			affAns.push_back(Pair(-1, -1));
 		else
 			affAns.push_back(Pair(-2, -2));
@@ -2693,7 +2778,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				if(isAffectsStar(*itA, *itB, &processed, path)) {
+				if(isAffectsStar(*itA, *itB)) {
 					affAns.push_back(Pair(-1,-1));
 					//intersectPairs(tk1, tk2, &affAns, relIndex);
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
@@ -2747,25 +2832,56 @@ bool QueryEvaluator::isAffects(int token1, int token2) {
 	return findPath(token1, token2, modifies);
 }
 
-bool QueryEvaluator::isAffectsStar(int token1, int token2, unordered_map<Pair, bool> *processed, vector<int> path) {
-	/*if(processed->count(Pair(token1, token2)) !=0)
-		return processed->at(Pair(token1, token2));
+bool QueryEvaluator::isAffectsStar(int token1, int token2) {
+	set<int> next = getNextStar(token1);
+	stack<Pair> st;
+	set<pair<int, int>> visited;
 
-	if(isAffects(token1, token2)) {
-		processed->insert(make_pair(Pair(token1, token2), true));
-		for(int i=0; i<path.size(); i++)
-			processed->insert(make_pair(Pair(token1, token2), true));
-		
-		path.push_back(token1);
-		set<int> allAssign = pkb->getAllStmts(TypeTable::ASSIGN);
-		for(set<int>::iterator it=allAssign.begin(); it!=allAssign.end(); it++)
-			isAffectsStar(token2, *it, processed, path);
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
+		st.push(Pair(token1, *it));
+
+	while(!st.empty()) {
+		Pair curr = st.top();
+		st.pop();
+		visited.insert(make_pair(curr.ans1, curr.ans2));
+
+		if(isAffects(curr.ans1, curr.ans2)) {
+			if(curr.ans2 == token2) {
+				return true;
+			}
+			else {
+				next = getNextStar(curr.ans2);
+				for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {			
+					if(visited.count(make_pair(curr.ans2, *it)) == 0)
+						st.push(Pair(curr.ans2, *it));
+				}
+			}
+		}
 	}
-	else
-		processed->insert(make_pair(Pair(token1, token2), false));
 
-	return processed->at(Pair(token1, token2));*/
-	return true;
+	return false;
+}
+
+set<int> QueryEvaluator::getNextStar(int start) {
+	stack<int> st;
+	set<int> next = pkb->getNext(start);
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
+		st.push(*it);
+	set<int> visited;
+
+	while(!st.empty()) {
+		int curr = st.top();
+		st.pop();
+		visited.insert(curr);
+
+		next = pkb->getNext(curr);
+		for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {
+			if(visited.count(*it)==0)
+				st.push(*it);
+		}
+	}
+
+	return visited;
 }
 
 
