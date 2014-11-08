@@ -921,12 +921,14 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	//Next(3,4)
 	else {
 		if(pkb->isNext(atoi(tk1.c_str()), atoi(tk2.c_str()))){
+			cout<<"is true"<<endl;
 			nextAns.push_back(Pair (-1,-1));
 		}else{
+			cout<<"is false"<<endl;
 			nextAns.push_back(Pair (-2, -2));
 		}
 	}
-
+	pkb->printNextTable();
 	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextAns));
 }
 
