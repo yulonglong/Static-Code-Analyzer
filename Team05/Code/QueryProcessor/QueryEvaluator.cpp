@@ -2713,7 +2713,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				if(isAffectsStar(*itA, *itB, &processed, path))
+				if(isAffectsStar(*itA, *itB))
 					affAns.push_back(Pair(*itA, *itB));
 			}
 		}
@@ -2735,7 +2735,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
-			if(isAffectsStar(*it, atoi(tk2.c_str()), &processed, path))
+			if(isAffectsStar(*it, atoi(tk2.c_str())))
 				affAns.push_back(Pair(*it, atoi(tk2.c_str())));	
 		}
 	}
@@ -2756,7 +2756,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
-			if(isAffectsStar(atoi(tk1.c_str()), *it, &processed, path)) 
+			if(isAffectsStar(atoi(tk1.c_str()), *it)) 
 				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
 		}
 	}
@@ -2764,7 +2764,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 	//Affects("1", "2")
 	else if( tk1!="_" ) {
 		cout << "Case 4: Both are Constants" << endl;
-		if(isAffectsStar(atoi(tk1.c_str()), atoi(tk2.c_str()), &processed, path))
+		if(isAffectsStar(atoi(tk1.c_str()), atoi(tk2.c_str())))
 			affAns.push_back(Pair(-1, -1));
 		else
 			affAns.push_back(Pair(-2, -2));
@@ -2778,7 +2778,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
-				if(isAffectsStar(*itA, *itB, &processed, path)) {
+				if(isAffectsStar(*itA, *itB)) {
 					affAns.push_back(Pair(-1,-1));
 					//intersectPairs(tk1, tk2, &affAns, relIndex);
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
@@ -2832,25 +2832,56 @@ bool QueryEvaluator::isAffects(int token1, int token2) {
 	return findPath(token1, token2, modifies);
 }
 
-bool QueryEvaluator::isAffectsStar(int token1, int token2, unordered_map<Pair, bool> *processed, vector<int> path) {
-	/*if(processed->count(Pair(token1, token2)) !=0)
-		return processed->at(Pair(token1, token2));
+bool QueryEvaluator::isAffectsStar(int token1, int token2) {
+	set<int> next = getNextStar(token1);
+	stack<Pair> st;
+	set<pair<int, int>> visited;
 
-	if(isAffects(token1, token2)) {
-		processed->insert(make_pair(Pair(token1, token2), true));
-		for(int i=0; i<path.size(); i++)
-			processed->insert(make_pair(Pair(token1, token2), true));
-		
-		path.push_back(token1);
-		set<int> allAssign = pkb->getAllStmts(TypeTable::ASSIGN);
-		for(set<int>::iterator it=allAssign.begin(); it!=allAssign.end(); it++)
-			isAffectsStar(token2, *it, processed, path);
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
+		st.push(Pair(token1, *it));
+
+	while(!st.empty()) {
+		Pair curr = st.top();
+		st.pop();
+		visited.insert(make_pair(curr.ans1, curr.ans2));
+
+		if(isAffects(curr.ans1, curr.ans2)) {
+			if(curr.ans2 == token2) {
+				return true;
+			}
+			else {
+				next = getNextStar(curr.ans2);
+				for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {			
+					if(visited.count(make_pair(curr.ans2, *it)) == 0)
+						st.push(Pair(curr.ans2, *it));
+				}
+			}
+		}
 	}
-	else
-		processed->insert(make_pair(Pair(token1, token2), false));
 
-	return processed->at(Pair(token1, token2));*/
-	return true;
+	return false;
+}
+
+set<int> QueryEvaluator::getNextStar(int start) {
+	stack<int> st;
+	set<int> next = pkb->getNext(start);
+	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
+		st.push(*it);
+	set<int> visited;
+
+	while(!st.empty()) {
+		int curr = st.top();
+		st.pop();
+		visited.insert(curr);
+
+		next = pkb->getNext(curr);
+		for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {
+			if(visited.count(*it)==0)
+				st.push(*it);
+		}
+	}
+
+	return visited;
 }
 
 
