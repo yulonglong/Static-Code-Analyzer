@@ -39,6 +39,8 @@ Relationship::RelType Relationship::getRelType(string relStr){
 		return WITH;
 	} else if (relStr=="pattern"){
 		return PATTERN;
+	} else if (relStr=="sibling"){
+		return SIBLING;
 	} else {
 		return INVALIDREL;
 	}

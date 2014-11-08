@@ -177,6 +177,10 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 		case Relationship::AFFECTSSTAR:
 			cout<<"\n EVALUATING AFFECTSSTAR"<<endl;
 			evaluateAffectsStar(*it, m , relIndex); break;
+			
+		case Relationship::SIBLING:
+			cout<<"\n EVALUATING SIBLING"<<endl;
+			evaluateSibling(*it, m, relIndex); break;
 		}
 
 		vector<string> parametersVec;
@@ -472,6 +476,28 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 		for(vector<Pair>::iterator ii = pr->begin(); ii!=pr->end(); ii++){
 			cout<<"Left element "<<ii->ans1<<endl;
 		}*/
+	}
+}
+
+void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
+	string tk1 = r.getToken1();
+	string tk2 = r.getToken2();
+	set<int> tk1List;
+	set<int> tk2List;
+	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
+	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
+
+	if(isExistInLinkages(tk1)){
+
+	}else {
+
+	}
+
+	set<Pair> siblingAns;
+
+	//Sibling(s1,s2)
+	if(r.getToken1Type()==Relationship::SYNONYM && r.getToken2Type()==Relationship::SYNONYM){
+		
 	}
 }
 

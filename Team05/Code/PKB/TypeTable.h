@@ -34,7 +34,7 @@ typedef int STMTNUM;
 
 class TypeTable {
 public:
-	enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL, VARIABLE, CONSTANT, PROGLINE, PROCEDURE, PLUS, MINUS, TIMES, INVALID};
+	enum SynType{ASSIGN, IF, WHILE, STMT, BOOLEAN, CALL, VARIABLE, CONSTANT, PROGLINE, PROCEDURE, PLUS, MINUS, TIMES, INVALID, STMTLST};
 	static SynType getSynType(std::string);
 private:
 	vector<SynType> typeMap;

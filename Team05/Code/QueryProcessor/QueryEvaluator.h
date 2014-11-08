@@ -43,6 +43,9 @@ private:
 	//! Evaluate all Modifies Relationships
 	void evaluateModifies(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
 
+	//Evaluate all Sibling Relationships
+	void evaluateSibling(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
+
 	//! Evaluate all Calls Relationships
 	void evaluateCalls(Relationship, int);
 
