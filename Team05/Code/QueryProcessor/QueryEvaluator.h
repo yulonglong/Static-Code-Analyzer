@@ -61,7 +61,7 @@ private:
 	//! A Recursive Method used in Next* to aid in finding the respective answers
 	void recursiveNext(int, int, std::set<Pair> *, TypeTable::SynType, std::vector<int>*);
 	void recursiveNextReverse(int, int, std::set<Pair> *, TypeTable::SynType, std::vector<int>*);
-	void recursiveNextTarget(int, int, int, std::set<Pair> *, std::vector<int>*);
+	void recursiveNextTarget(int, int, int, std::set<Pair> *, std::vector<int>*, bool);
 
 	//! Evaluate all Affects Relationships
 	void evaluateAffects(Relationship, std::unordered_map<std::string, TypeTable::SynType>, int);
