@@ -262,20 +262,20 @@ public:
 	void setToSiblingStmtLists(STMTNUM, STMTNUM);
 	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
 	bool isSiblingStmtNums(STMTNUM, STMTNUM);
-	bool isSiblingVarNameConstant(VARNAME, CONSTVALUE);
-	bool isSiblingVarNameMathOp(VARNAME, string); //("plus","minus","times")
+	bool isSiblingVarNameConstant(VARINDEX, CONSTINDEX);
+	bool isSiblingVarNameMathOp(VARINDEX, string); //("plus","minus","times")
 	bool isSiblingProcNames(PROCNAME, PROCNAME);
-	bool isSiblingVarNameStmtList(VARNAME, STMTNUM);
+	bool isSiblingVarNameStmtList(VARINDEX, STMTNUM);
 	bool isSiblingStmtLists(STMTNUM, STMTNUM);
 	//! Return a statement number that is the parent of the given statement number.
 	set<STMTNUM> getSiblingStmtNum(STMTNUM);
 	set<VARNAME> getSiblingVarNameWithConstant(CONSTVALUE);
-	set<CONSTVALUE> getSiblingConstantWithVarName(VARNAME);
+	set<CONSTVALUE> getSiblingConstantWithVarName(VARINDEX);
 	set<VARNAME> getSiblingVarNameWithMathOp(string);
-	set<string> getSiblingMathOpWithVarName(VARNAME);
+	set<string> getSiblingMathOpWithVarName(VARINDEX);
 	set<PROCNAME> getSiblingProcNames(PROCNAME);
 	set<VARNAME> getSiblingVarNameWithStmtList(STMTNUM);
-	set<STMTNUM> getSiblingStmtListWithVarName(VARNAME);
+	set<STMTNUM> getSiblingStmtListWithVarName(VARINDEX);
 	set<STMTNUM> getSiblingStmtListWithStmtList(STMTNUM);
 	//! Return a set of all statement numbers that has a sibling.
 	set<STMTNUM> getSiblingStmtNum();

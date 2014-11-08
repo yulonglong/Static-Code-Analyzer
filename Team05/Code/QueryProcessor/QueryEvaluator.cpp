@@ -479,18 +479,51 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 	}
 }
 
+bool isStmtType(TypeTable::SynType t){
+	if(t == TypeTable::STMT || t == TypeTable::ASSIGN || t == TypeTable::WHILE || t == TypeTable::IF || t == TypeTable::CALL)
+		return true;
+	else
+		return false;
+}
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	set<int> tk1List;
 	set<int> tk2List;
+	bool flag = false;
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
 	if(isExistInLinkages(tk1)){
-
+		tk1List = retrieveTokenEvaluatedAnswers(tk1);
 	}else {
+		if(i1->second == TypeTable::PROCEDURE){
+			tk1List = pkb->getAllProcIndexes();
+		}else if(i1->second == TypeTable::CONSTANT){
+			tk1List = pkb->getAllConstIndex();
+		}else if(i1->second == TypeTable::VARIABLE){
+			tk1List = pkb->getAllVarIndex();
+		}else if(i1->second == TypeTable::PLUS || i1->second == TypeTable::MINUS || i1->second == TypeTable::TIMES){
+			flag = true;
+		}else {
+			tk1List = pkb->getAllStmts(i1->second);
+		}
+	}
 
+	if(isExistInLinkages(tk2)){
+		tk2List = retrieveTokenEvaluatedAnswers(tk2);
+	}else {
+		if(i2->second == TypeTable::PROCEDURE){
+			tk2List = pkb->getAllProcIndexes();
+		}else if(i2->second == TypeTable::CONSTANT){
+			tk2List = pkb->getAllConstIndex();
+		}else if(i2->second == TypeTable::VARIABLE){
+			tk2List = pkb->getAllVarIndex();
+		}else if(i2->second == TypeTable::PLUS || i2->second == TypeTable::MINUS || i2->second == TypeTable::TIMES){
+			flag = true;
+		}else {
+			tk2List = pkb->getAllStmts(i2->second);
+		}
 	}
 
 	set<Pair> siblingAns;
@@ -498,6 +531,53 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 	//Sibling(s1,s2)
 	if(r.getToken1Type()==Relationship::SYNONYM && r.getToken2Type()==Relationship::SYNONYM){
 		
+		//Sibling(p1, p2)
+		if(i1->second == TypeTable::PROCEDURE && i2->second == TypeTable::PROCEDURE){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingProcNames(pkb->getProcName(*i), pkb->getProcName(*i2))){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		//Sibling(stmtlst, stmtlst)
+		else if(i1->second == TypeTable::STMTLST && i2->second == TypeTable::STMTLST){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingStmtLists(*i, *i2)){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		//Sibling(stmt,stmt)
+		else if(isStmtType(i1->second) && isStmtType(i2->second)){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingStmtNums(*i, *i2)){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		//Sibling(stmtlst, variable)
+		else if((i1->second == TypeTable::STMTLST && i2->second == TypeTable::VARIABLE) || (i2->second == TypeTable::STMTLST && i1->second == TypeTable::VARIABLE)){
+			if(i1->second == TypeTable::STMTLST){
+				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+						if(pkb->isSiblingVarNameStmtList(*i2, *i)){
+							siblingAns.insert(Pair(*i2, *i));
+						}
+					}
+				}
+			}else{
+
+			}
+		}
 	}
 }
 
