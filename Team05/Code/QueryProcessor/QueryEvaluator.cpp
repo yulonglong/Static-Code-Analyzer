@@ -342,7 +342,7 @@ void QueryEvaluator::intersectPairs(string tk1, string tk2, vector<Pair> *ans, i
 
 void QueryEvaluator::insertLinks(string tk, int relIndex){
 	//Add the relationship into QueryEvaluator::linkages
-	cout<<"IN INSERT LINKS INSERTING TOKEN = "<<tk<<endl;
+	cout<<"--INSERTING "<<tk<<"--"<<endl;
 	//if tk exists
 	if(linkages.find(tk) != linkages.end()){
 		cout<<tk<<" Found in Linkages"<<endl;
@@ -355,10 +355,11 @@ void QueryEvaluator::insertLinks(string tk, int relIndex){
 		relIndexes.push_back(relIndex);
 		linkages.insert(make_pair(tk, relIndexes));
 	}
+	cout<<"--END OF INSERT--"<<endl;
 }
 
 void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string tk, int pairIndex){
-	cout<<"removePairsfrom RELANS"<<endl;
+	cout<<"--REMOVE PAIRS FROM REL ANS START--"<<endl;
 	//Retrieve the set of int of the token that was evaluated
 	set<int> s = retrieveTokenEvaluatedAnswers(tk);
 	//Delete it from the ans pairs made
@@ -368,9 +369,7 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 	}*/
 
 	for(vector<Pair>::iterator it = relationsAns->begin(); it!=relationsAns->end();){
-		cout<<"in for loop"<<endl;
 		if(pairIndex==1){
-			cout<<"pair index is 1"<< it->ans1<<endl;
 			//if ans from relationsAns is not found in the set, remove it
 			if(s.find(it->ans1)==s.end()){
 				it = relationsAns->erase(it);
@@ -380,7 +379,6 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 			}
 		}
 		else {
-			cout<<"in else"<<endl;
 			if(s.find(it->ans2)==s.end()){
 				it = relationsAns->erase(it);
 			}
@@ -390,7 +388,7 @@ void QueryEvaluator::removePairsFromRelAns(vector<Pair> * relationsAns, string t
 		}
 	}
 
-	cout<<"end of RemovePairsFromRelAns"<<endl;
+	cout<<"--REMOVE PAIRS FROM RELANS END--"<<endl;
 }
 
 string QueryEvaluator::convertEnumToString(TypeTable::SynType t){
@@ -419,17 +417,17 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 	cout<<"\n---START REMOVE PAIRS METHOD---"<<endl;
 	int pairIndex;
 	vector<int> listOfRel = linkages.find(token)->second;
-	vector<int> list;
+	set<int> list;
 	if(i==1){
 		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
-			list.push_back(iter->ans1);
-			cout<<"Inserting "<<iter->ans1<<endl;
+			list.insert(iter->ans1);
+			//cout<<"Inserting "<<iter->ans1<<endl;
 		}
 	}
 	else{
 		for(vector<Pair>::iterator iter=p.begin(); iter!=p.end(); iter++){
-			list.push_back(iter->ans2);
-			cout<<"Inserting "<<iter->ans2<<endl;
+			list.insert(iter->ans2);
+			//cout<<"Inserting "<<iter->ans2<<endl;
 		}
 	}
 
@@ -438,7 +436,7 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 		cout<<"RelIndex of clause with contents being removed: "<<*it<<endl;
 		unordered_map<int, vector<Pair>>::iterator i = relAns.find(*it);
 		vector<Pair> *pr = &i->second;
-		int index = QueryEvaluator::relAns.find(*it)->first;
+		int index = relAns.find(*it)->first;
 
 		//find out whether the token is the first or second argument of the relationship
 		if(relParameters.find(index)->second.at(0)==token){
@@ -935,7 +933,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 }
 
 void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-
+	cout<<"nextStarTable empty = "<<nextStarTable.empty()<<endl;
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 
@@ -985,9 +983,11 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
 				traverseTable.clear();
 				if(nextStarTable.find(*it)!=nextStarTable.end() && nextStarTable.find(*it)->second.find(*it)!=nextStarTable.find(*it)->second.end()){
+					cout<<"non recursive method"<<endl;
 					nextStarAns.insert(Pair(*it, *it));
 				}else {
-					recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable);
+					cout<<"recursive method"<<endl;
+					recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable, false);
 				}
 			}
 		}
@@ -998,9 +998,10 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 				for(set<int>::iterator it2 = tk2List.begin(); it2!=tk2List.end(); it2++){
 					traverseTable.clear();
 					if(nextStarTable.find(*it)!=nextStarTable.end() && nextStarTable.find(*it)->second.find(*it2)!=nextStarTable.find(*it)->second.end()){
+						cout<<"NEXTSTARTABLE("<<*it<<","<<*it2<<")"<<endl;
 						nextStarAns.insert(Pair(*it, *it2));
 					}else {
-						recursiveNextTarget(*it, *it, *it2, &nextStarAns, &traverseTable);
+						recursiveNextTarget(*it, *it, *it2, &nextStarAns, &traverseTable, false);
 					}
 				}
 			}
@@ -1048,7 +1049,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 				if(nextStarTable.find(*it2)!=nextStarTable.end() && nextStarTable.find(*it2)->second.find(tk2Int)!=nextStarTable.find(*it2)->second.end()){
 					nextStarAns.insert(Pair(*it2, tk2Int));
 				}else {
-					recursiveNextTarget(*it2, *it2, tk2Int, &nextStarAns, &traverseTable);
+					recursiveNextTarget(*it2, *it2, tk2Int, &nextStarAns, &traverseTable, false);
 				}
 			}
 
@@ -1084,7 +1085,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 					nextStarAns.insert(Pair(tk1Int, *it2));
 				}else {
 					traverseTable.clear();
-					recursiveNextTarget(tk1Int, tk1Int, *it2, &nextStarAns, &traverseTable);
+					recursiveNextTarget(tk1Int, tk1Int, *it2, &nextStarAns, &traverseTable, false);
 				}
 			}
 
@@ -1100,7 +1101,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 		int tk1Int = atoi(tk1.c_str());
 
 		cout<<"tk1Int = "<<tk1Int<<" tk2Int = "<<tk2Int<<endl;
-		recursiveNextTarget(tk1Int, tk1Int, tk2Int, &nextStarAns, &traverseTable);
+		recursiveNextTarget(tk1Int, tk1Int, tk2Int, &nextStarAns, &traverseTable, false);
 		
 		if(nextStarAns.empty()){
 			nextStarAnsVec.push_back(Pair (-2, -2));
@@ -1134,47 +1135,53 @@ void QueryEvaluator::recursiveNext(int rootIndex, int currentIndex, set<Pair> * 
 	}
 }
 
-void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans, vector<int> *traverseTable){
-	cout<<"In recursiveNextTarget where rootIndex = "<<rootIndex <<" and currentIndex = "<<currentIndex<<" and targetIndex = "<<targetIndex<<endl;
+void QueryEvaluator::recursiveNextTarget(int rootIndex, int currentIndex, int targetIndex, set<Pair> * ans, vector<int> *traverseTable, bool flag){
+	
 	set<int> next = pkb->getNext(currentIndex);
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++){
 		if(nextStarTable.find(currentIndex)!=nextStarTable.end()){
 			set<int> s = nextStarTable.find(currentIndex)->second;
 			s.insert(*it);
 			nextStarTable.at(currentIndex) = s;
+			//cout<<"NEXTSTARTABLE("<<currentIndex<<","<<*it<<")"<<endl;
 		}else {
 			set<int> s;
 			s.insert(*it);
 			nextStarTable.insert(make_pair<int, set<int>>(currentIndex, s));
+			//cout<<"NEXTSTARTABLE("<<currentIndex<<","<<*it<<")"<<endl;
 		}
 
 		if(nextStarTable.find(rootIndex)!=nextStarTable.end()){
 			set<int> s = nextStarTable.find(rootIndex)->second;
 			s.insert(*it);
 			nextStarTable.at(rootIndex) = s;
+			//cout<<"NEXTSTARTABLE("<<rootIndex<<","<<*it<<")"<<endl;
 		}else {
 			set<int> s;
 			s.insert(*it);
 			nextStarTable.insert(make_pair<int, set<int>>(rootIndex, s));
+			//cout<<"NEXTSTARTABLE("<<rootIndex<<","<<*it<<")"<<endl;
 		}
 
 		if(find(traverseTable->begin(), traverseTable->end(), *it)!=traverseTable->end()){
-			cout<<*it<<" is traversed before. Moving on to the next node"<<endl;
+			//cout<<*it<<" is traversed"<<endl;
 			it++;
 			if(it==next.end()){
-				cout<<"Reached the end "<<endl;
+				//cout<<"Reached the end "<<endl;
 				break;
 			}
 		}else{
-			cout<<*it<<" is not traversed before. Inserting stmtnum "<<*it<<" into traverseTable"<<endl;
 			traverseTable->push_back(*it);
 		}
 		if(*it == targetIndex){
 			cout<<"TargetIndex found"<<endl;
 			ans->insert(Pair (rootIndex, targetIndex));
+			flag = true;
 			break;
 		}
-		recursiveNextTarget(rootIndex, *it, targetIndex, ans, traverseTable);
+		recursiveNextTarget(rootIndex, *it, targetIndex, ans, traverseTable, flag);
+		if(flag)
+			return;
 	}
 }
 
