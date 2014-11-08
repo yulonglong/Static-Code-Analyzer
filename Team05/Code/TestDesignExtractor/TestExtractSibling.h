@@ -12,6 +12,7 @@ class ExtractSiblingTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST_SUITE( ExtractSiblingTest ); // Note 3 
 
 	CPPUNIT_TEST( testSource1B );
+	CPPUNIT_TEST( testSourceDE5 );
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -20,6 +21,7 @@ public:
 	void tearDown();
 
 	void testSource1B(); 
+	void testSourceDE5(); 
 };
 #endif
     
