@@ -57,11 +57,11 @@ public:
 	static void extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb);
 
 private:	
-	static void DesignExtractor::setSiblingforProcedure(vector<Node*> vector);
-	static void DesignExtractor::setSiblingForStatements(vector<Node*> vector);
-	static void DesignExtractor::setSiblingForAssign(vector<Node*> vector);
-	static void DesignExtractor::setSiblingForIf(vector<Node*> vector);
-	static void DesignExtractor::setSiblingForWhile(vector<Node*> vector);
+	static void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb);
+	static void DesignExtractor::setSiblingForStatements(vector<Node*> stmtNodes, PKB &pkb);
+	static void DesignExtractor::setSiblingForAssign(vector<Node*> vector, PKB &pkb);
+	static void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb);
+	static void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb);
 
 	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
 	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited);
