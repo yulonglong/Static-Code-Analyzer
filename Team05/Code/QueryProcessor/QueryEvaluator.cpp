@@ -479,11 +479,19 @@ void QueryEvaluator::removePairs(vector<Pair> p, string token, int i){
 	}
 }
 
-bool isStmtType(TypeTable::SynType t){
+bool QueryEvaluator::isStmtType(TypeTable::SynType t){
 	if(t == TypeTable::STMT || t == TypeTable::ASSIGN || t == TypeTable::WHILE || t == TypeTable::IF || t == TypeTable::CALL)
 		return true;
 	else
 		return false;
+}
+
+bool QueryEvaluator::isOperator(TypeTable::SynType t){
+	if(t == TypeTable::PLUS || t == TypeTable::MINUS || t == TypeTable::TIMES){
+		return true;
+	}else{
+		return false;
+	}
 }
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
@@ -575,8 +583,19 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 					}
 				}
 			}else{
-
+				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+						if(pkb->isSiblingVarNameStmtList(*i, *i2)){
+							siblingAns.insert(Pair(*i, *i2));
+						}
+					}
+				}
 			}
+		}
+
+		//Sibling(op, op)
+		else if(isOperator(i1->second) && isOperator(i2->second){
+
 		}
 	}
 }

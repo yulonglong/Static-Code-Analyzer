@@ -105,6 +105,7 @@ private:
 	void insertLinks(std::string, int);
 	bool isExistInLinkages(std::string);
 	bool isStmtType(TypeTable::SynType);
+	bool isOperator(TypeTable::SynType);
 
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;

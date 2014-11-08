@@ -267,6 +267,7 @@ public:
 	bool isSiblingProcNames(PROCNAME, PROCNAME);
 	bool isSiblingVarNameStmtList(VARINDEX, STMTNUM);
 	bool isSiblingStmtLists(STMTNUM, STMTNUM);
+	//YOLIM I NEED ONE METHOD THATS FOR SIBLING(OPERATOR, OPERATOR) e.g plus, plus
 	//! Return a statement number that is the parent of the given statement number.
 	set<STMTNUM> getSiblingStmtNum(STMTNUM);
 	set<VARNAME> getSiblingVarNameWithConstant(CONSTVALUE);
