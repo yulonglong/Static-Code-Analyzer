@@ -1,0 +1,54 @@
+Testing Summary 08-Nov-2014
+
+
+Q1- perfect 
+Q2-	perfect
+
+Q4- 3 wrong ans
+Q5- 6 wrong ans 
+Q6- perfect
+Q7- perfect 
+Q8- 1 wrong ans
+Q9- 2 exception; 9 wrong ans
+Q10- 5 wrong ans 
+Q11- 2 exception; 4 wrong ans
+Q12- 1 exception; 1 wrong ans
+Q13- 13 wrong ans; 3 exception
+Q14- 2 wrong ans
+Q15- 3 wrong ans 
+Q16- 1 wrong ans 
+Q17- 1 wrong ans 
+	
+
+Queries1-1 perfect 
+Queries2-1 perfect 
+Queries2-2 perfect 
+Queries2-3 perfect 
+Queries3-1 perfect
+Queries4-1 perfect
+Queries4-2 perfect
+Queries5-1 perfect
+Queries5-2 perfect
+Queries6-1 perfect
+
+Qbasic1A-with :  2 wrong ans 
+Qbasic1B-calls : perfect 
+Qbasic1C : 2 wrong ans
+Qbasic1D : perfect
+Qbasic1E : 8 wrong ans 
+Qbasic1F : 9 wrong ans 
+
+QBasic2X: perfect 
+Qadv2A : perfect
+Qbasic2A-next : perfect
+Qbasic2B-next-star : perfect
+Qbasic2C-invalid-queries :  perfect
+Qinterm2A-such-that-such-that : perfect 
+Qinterm2B-such-that-with : 2 wrong ans
+
+Qbasic3A-affects : perfect
+QBasic3B-affects-star : 8 wrong ans
+QInterm3A-tuple : 4 wrong ans
+Qadv3A-multiple-tuple : 2 wrong ans
+QAdv3B-optimization : 10 wrong ans
+

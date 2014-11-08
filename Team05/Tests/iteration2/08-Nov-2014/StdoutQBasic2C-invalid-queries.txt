@@ -1,0 +1,92 @@
+Parameters : Source2A.txt QBasic2C-invalid-queries.txt ResultQBasic2C-invalid-queries.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration2
+Beginning to evaluate Query File.
+New Category :  invalid queries
+1 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select p1 such that Next(p1, p2)
+
+5000
+Evaluating query 1 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select v such that Next(v, c)
+
+5000
+Evaluating query 2 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+3 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select p1 such that Next*(p1, p2)
+
+5000
+Evaluating query 3 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select v such that Next*(v, c)
+
+5000
+Evaluating query 4 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+5 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select v such that Next (w1, v)
+
+5000
+Evaluating query 5 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - invalid ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v; constant c;
+Select v such that Next* (w1, v)
+
+5000
+Evaluating query 6 - invalid ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

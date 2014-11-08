@@ -1,0 +1,2379 @@
+Parameters : Source3A.txt QAdv3B-optimization.txt ResultQAdv3B-optimization.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration3
+Beginning to evaluate Query File.
+New Category :  optimization tests
+1 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v) and Affects*(1, 30)
+false
+5000
+Evaluating query 1 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+affects*(1, 30)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 2
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 3
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 3
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+2 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Affects*(1, 30) and Next* (n1, n2) and Uses (s1, v)
+false
+5000
+Evaluating query 2 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+affects*(1, 30)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 1
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 2
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 3
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 3
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+3 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Affects*(1, 30) and Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v)
+false
+5000
+Evaluating query 3 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+affects*(1, 30)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 1
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 2
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 3
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 3
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+4 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Affects*(1, 30) and Uses (s1, v)
+false
+5000
+Evaluating query 4 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+affects*(1, 30)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 2
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 3
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 3
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: false 
+Missing: false 
+Additional: true 
+5 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx")
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 5 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+modifies(s1, "idx")
+
+ EVALUATING MODIFIES (s1 "idx")
+6
+answer is empty: 0
+modifiesAnswer9 6
+modifiesAnswer11 6
+modifiesAnswer13 6
+modifiesAnswer16 6
+modifiesAnswer18 6
+modifiesAnswer19 6
+modifiesAnswer22 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+calls*(p2, p3)
+
+ EVALUATING CALLS* (p2 p3)
+---STARTING CALLS STAR---
+tk1 = p2 and tk2 = p3
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = p3
+IN INSERT LINKS INSERTING TOKEN = p3
+p3 Not Found in Linkages and relIndex = 2
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+IntersectPairs tk1 Exists tk1 = s1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+11
+13
+16
+18
+19
+22
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 13
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 112
+in for loop
+pair index is 112
+in for loop
+pair index is 113
+in for loop
+pair index is 114
+in for loop
+pair index is 114
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 116
+in for loop
+pair index is 117
+in for loop
+pair index is 117
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 129
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 13
+Inserting 16
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 22
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Found in Linkages
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 3
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+IntersectPairs tk2 Exists tk2 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 2
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+Erasing element 3
+Erasing element 4
+Erasing element 2
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 4
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 7
+FIRST PARAM = s1
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 13
+it2->ans1 = 16
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 22
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+6 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Modifies (s1, "idx") and Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 6 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+modifies(s1, "idx")
+
+ EVALUATING MODIFIES (s1 "idx")
+6
+answer is empty: 0
+modifiesAnswer9 6
+modifiesAnswer11 6
+modifiesAnswer13 6
+modifiesAnswer16 6
+modifiesAnswer18 6
+modifiesAnswer19 6
+modifiesAnswer22 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 1
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 2
+Inserting tokens into relParameters
+ 
+calls*(p2, p3)
+
+ EVALUATING CALLS* (p2 p3)
+---STARTING CALLS STAR---
+tk1 = p2 and tk2 = p3
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+IntersectPairs tk1 Exists tk1 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+4
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 1
+PairIndex: 2
+Erasing element 4
+Erasing element 3
+Erasing element 4
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+Insert links for tk2 = p3
+IN INSERT LINKS INSERTING TOKEN = p3
+p3 Not Found in Linkages and relIndex = 3
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+IntersectPairs tk1 Exists tk1 = s1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+11
+13
+16
+18
+19
+22
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 13
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 112
+in for loop
+pair index is 112
+in for loop
+pair index is 113
+in for loop
+pair index is 114
+in for loop
+pair index is 114
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 116
+in for loop
+pair index is 117
+in for loop
+pair index is 117
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 129
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 13
+Inserting 16
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 22
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Found in Linkages
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 4
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 7
+FIRST PARAM = s1
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 13
+it2->ans1 = 16
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 22
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+7 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Modifies (s1, "idx") and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 7 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+modifies(s1, "idx")
+
+ EVALUATING MODIFIES (s1 "idx")
+6
+answer is empty: 0
+modifiesAnswer9 6
+modifiesAnswer11 6
+modifiesAnswer13 6
+modifiesAnswer16 6
+modifiesAnswer18 6
+modifiesAnswer19 6
+modifiesAnswer22 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 1
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 2
+Inserting tokens into relParameters
+ 
+calls*(p2, p3)
+
+ EVALUATING CALLS* (p2 p3)
+---STARTING CALLS STAR---
+tk1 = p2 and tk2 = p3
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+IntersectPairs tk1 Exists tk1 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+4
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 1
+PairIndex: 2
+Erasing element 4
+Erasing element 3
+Erasing element 4
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+Insert links for tk2 = p3
+IN INSERT LINKS INSERTING TOKEN = p3
+p3 Not Found in Linkages and relIndex = 3
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+IntersectPairs tk1 Exists tk1 = s1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+11
+13
+16
+18
+19
+22
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 13
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 112
+in for loop
+pair index is 112
+in for loop
+pair index is 113
+in for loop
+pair index is 114
+in for loop
+pair index is 114
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 116
+in for loop
+pair index is 117
+in for loop
+pair index is 117
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 129
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 13
+Inserting 16
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 22
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Found in Linkages
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 4
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 7
+FIRST PARAM = s1
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 13
+it2->ans1 = 16
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 22
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+8 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Modifies (s1, "idx") and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 8 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+modifies(s1, "idx")
+
+ EVALUATING MODIFIES (s1 "idx")
+6
+answer is empty: 0
+modifiesAnswer9 6
+modifiesAnswer11 6
+modifiesAnswer13 6
+modifiesAnswer16 6
+modifiesAnswer18 6
+modifiesAnswer19 6
+modifiesAnswer22 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 2
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+calls*(p2, p3)
+
+ EVALUATING CALLS* (p2 p3)
+---STARTING CALLS STAR---
+tk1 = p2 and tk2 = p3
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+IntersectPairs tk1 Exists tk1 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 2
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+4
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 2
+PairIndex: 2
+Erasing element 4
+Erasing element 3
+Erasing element 4
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+Insert links for tk2 = p3
+IN INSERT LINKS INSERTING TOKEN = p3
+p3 Not Found in Linkages and relIndex = 3
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+IntersectPairs tk1 Exists tk1 = s1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+11
+13
+16
+18
+19
+22
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 13
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 112
+in for loop
+pair index is 112
+in for loop
+pair index is 113
+in for loop
+pair index is 114
+in for loop
+pair index is 114
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 116
+in for loop
+pair index is 117
+in for loop
+pair index is 117
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 129
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 13
+Inserting 16
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 22
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Found in Linkages
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 4
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 7
+FIRST PARAM = s1
+it2->ans1 = 9
+it2->ans1 = 11
+it2->ans1 = 13
+it2->ans1 = 16
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 22
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+9 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s2 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20
+20
+5000
+Evaluating query 9 - optimization ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+with relationship found
+After Ordering Relations, r.size = 6
+Initializing Variables
+ 
+modifies(s1, "idx")
+
+ EVALUATING MODIFIES (s1 "idx")
+6
+answer is empty: 0
+modifiesAnswer9 6
+modifiesAnswer11 6
+modifiesAnswer13 6
+modifiesAnswer16 6
+modifiesAnswer18 6
+modifiesAnswer19 6
+modifiesAnswer22 6
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+IN INSERT LINKS INSERTING TOKEN = n1
+n1 Not Found in Linkages and relIndex = 1
+Insert links for tk2 = n2
+IN INSERT LINKS INSERTING TOKEN = n2
+n2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+ 
+calls*(p2, p3)
+
+ EVALUATING CALLS* (p2 p3)
+---STARTING CALLS STAR---
+tk1 = p2 and tk2 = p3
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk1 =p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 2
+Insert links for tk2 = p3
+IN INSERT LINKS INSERTING TOKEN = p3
+p3 Not Found in Linkages and relIndex = 2
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+uses(s1, v)
+
+ EVALUATING USES (s1 v)
+IntersectPairs tk1 Exists tk1 = s1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+11
+13
+16
+18
+19
+22
+End retrieving token
+in for loop
+pair index is 12
+in for loop
+pair index is 13
+in for loop
+pair index is 13
+in for loop
+pair index is 14
+in for loop
+pair index is 14
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 15
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 16
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 17
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 18
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 19
+in for loop
+pair index is 110
+in for loop
+pair index is 110
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 111
+in for loop
+pair index is 112
+in for loop
+pair index is 112
+in for loop
+pair index is 113
+in for loop
+pair index is 114
+in for loop
+pair index is 114
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 115
+in for loop
+pair index is 116
+in for loop
+pair index is 117
+in for loop
+pair index is 117
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 118
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 119
+in for loop
+pair index is 120
+in for loop
+pair index is 120
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 121
+in for loop
+pair index is 122
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 123
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 124
+in for loop
+pair index is 125
+in for loop
+pair index is 125
+in for loop
+pair index is 126
+in for loop
+pair index is 126
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 127
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 128
+in for loop
+pair index is 129
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+in for loop
+pair index is 130
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 9
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 11
+Inserting 13
+Inserting 16
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 18
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 19
+Inserting 22
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+IN INSERT LINKS INSERTING TOKEN = s1
+s1 Found in Linkages
+Insert links for tk2 = v
+IN INSERT LINKS INSERTING TOKEN = v
+v Not Found in Linkages and relIndex = 3
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+---STARTING CALLS STAR---
+tk1 = p1 and tk2 = p2
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 4
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 2 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 3 currentIndex= 3
+after getting called
+in recursive Call
+rootindex = 4 currentIndex= 4
+after getting called
+IntersectPairs tk2 Exists tk2 = p2
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p2
+Retrieving Token Evaluated Answers with first relationship index = 2
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+in for loop
+in else
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 2
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+Erasing element 3
+Erasing element 4
+Erasing element 2
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 4
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Found in Linkages
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+ 
+with(s2, 20)
+
+ EVALUATING WITH (s2 20)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 5
+r.tk1: s2
+r.tk2: 20
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 20
+In intersect Pairs: both do not exist
+Insert links for tk1 =s2
+IN INSERT LINKS INSERTING TOKEN = s2
+s2 Not Found in Linkages and relIndex = 5
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s2 p.size = 1
+FIRST PARAM = s2
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 20 
+Correct answer: 20 
+10 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select p1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20 with p1.procName = "Fern" and Modifies (p1, v)
+Fern
+5000
+Evaluating query 10 - optimization ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: Fern 
+Missing: Fern 
+Additional: 
+11 - optimization ::
+procedure p1, p2; stmt s1, s2, s3, s4, s5, s6, s7;
+Select s7 such that Calls*(p1, p2) and Modifies (s1, v1) and Uses (s2, v2) and Modifies (s2, v2) and Affects* (s2, s3) and Affects* (s3, s4) and Parent* (s5, s6) and Modifies (s7, v) with s7.stmt# = 29
+29
+5000
+Evaluating query 11 - optimization ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 29 
+Missing: 29 
+Additional: 
+End of evaluating Query File.
+AutoTester Completed !

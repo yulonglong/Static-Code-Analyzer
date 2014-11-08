@@ -42,7 +42,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
-	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
+	//extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
 }
@@ -70,7 +70,7 @@ void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb)
 			if (debugModeExtension) {
 				cout<<"setToSiblingProcNames("<<procName1<<", "<<procName2<<")"<<endl;
 			}
-			pkb.setToSiblingProcNames(procName1, procName2);
+			//pkb.setToSiblingProcNames(procName1, procName2);
 		}
 	}
 }
@@ -84,7 +84,7 @@ void DesignExtractor::setSiblingForStatements(vector<Node*> stmtNodes, PKB &pkb)
 			if (debugModeExtension) {
 				cout<<"setToSiblingStmtNums("<<stmtNum1<<", "<<stmtNum2<<")"<<endl;
 			}
-			pkb.setToSiblingStmtNums(stmtNum1, stmtNum2);
+			//pkb.setToSiblingStmtNums(stmtNum1, stmtNum2);
 		}
 	}
 	for (unsigned int i=0; i<stmtNodes.size(); i++) {
@@ -152,9 +152,9 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
 		cout<<"setToSiblingStmtLists("<<firstStmtOfThenStmtLst<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
 	}
-	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
-	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
-	pkb.setToSiblingStmtLists(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
+	//pkb.setToSiblingStmtLists(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
 
 	setSiblingForStatements(vector[1]->getChild(), pkb);
 	setSiblingForStatements(vector[2]->getChild(), pkb);
@@ -167,7 +167,7 @@ void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfStmtLst<<")"<<endl;
 	}
-	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfStmtLst);
+	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfStmtLst);
 
 	setSiblingForStatements(vector[1]->getChild(), pkb);
 }
