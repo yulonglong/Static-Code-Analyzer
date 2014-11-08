@@ -493,6 +493,14 @@ bool QueryEvaluator::isOperator(TypeTable::SynType t){
 		return false;
 	}
 }
+
+bool QueryEvaluator::isConstOrVar(TypeTable::SynType t){
+	if(t == TypeTable::CONSTANT || t == TypeTable::VARIABLE){
+		return true;
+	}else{
+		return false;
+	}
+}
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
@@ -594,10 +602,86 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 
 		//Sibling(op, op)
-		else if(isOperator(i1->second) && isOperator(i2->second){
+		else if(isOperator(i1->second) && isOperator(i2->second)){
+			if(pkb->isSiblingMathOpMathOp(i1->second, i2->second)){
+				siblingAns.insert(Pair(-1,-1));
+			}
+		}
+
+		else if(isOperator(i1->second) && isConstOrVar(i2->second) || isOperator(i2->second) || isConstOrVar(i1->second)){
+			if(isOperator(i1->second) && i2->second == TypeTable::VARIABLE){
+				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
+					if(pkb->isSiblingVarNameMathOp(*i, i1->second)){
+						siblingAns.insert(Pair(-1, *i)); //-1 cuz operator will nvr be selected
+					}
+				}
+			}else if(isOperator(i2->second) && i1->second == TypeTable::VARIABLE){
+				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+					if(pkb->isSiblingVarNameMathOp(*i, i1->second)){
+						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
+					}
+				}
+			}else if(isOperator(i1->second) && i2->second == TypeTable::CONSTANT){
+				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
+					if(pkb->isSiblingConstMathOp(*i, i1->second)){
+						siblingAns.insert(Pair(-1, *i)); //-1 cuz operator will nvr be selected
+					}
+				}
+			}else{
+				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+					if(pkb->isSiblingConstMathOp(*i, i1->second)){
+						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
+					}
+				}
+			}
+		}
+
+		else if(i1->second == TypeTable::CONSTANT && i2->second == TypeTable::CONSTANT){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingConstantConstant(*i, *i2)){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		else if(i1->second == TypeTable::VARIABLE && i2->second == TypeTable::VARIABLE){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingVarNameVarName(*i, *i2)){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		else if(i1->second == TypeTable::VARIABLE && i2->second == TypeTable::CONSTANT){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingVarNameConstant(*i, *i2)){
+						siblingAns.insert(Pair(*i, *i2));
+					}
+				}
+			}
+		}
+
+		else if(i1->second == TypeTable::CONSTANT && i2->second == TypeTable::VARIABLE){
+			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					if(pkb->isSiblingVarNameConstant(*i, *i2)){
+						siblingAns.insert(Pair(*i2, *i));
+					}
+				}
+			}
+		}
+
+		else{
 
 		}
 	}
+
+
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){

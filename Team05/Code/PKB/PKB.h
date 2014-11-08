@@ -263,11 +263,14 @@ public:
 	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
 	bool isSiblingStmtNums(STMTNUM, STMTNUM);
 	bool isSiblingVarNameConstant(VARINDEX, CONSTINDEX);
-	bool isSiblingVarNameMathOp(VARINDEX, string); //("plus","minus","times")
+	bool isSiblingVarNameVarName(VARINDEX, VARINDEX);
+	bool isSiblingConstantConstant(CONSTINDEX, CONSTINDEX);
+	bool isSiblingVarNameMathOp(VARINDEX, TypeTable::SynType); //("plus","minus","times")
+	bool isSiblingConstMathOp(CONSTINDEX, TypeTable::SynType);
 	bool isSiblingProcNames(PROCNAME, PROCNAME);
 	bool isSiblingVarNameStmtList(VARINDEX, STMTNUM);
 	bool isSiblingStmtLists(STMTNUM, STMTNUM);
-	//YOLIM I NEED ONE METHOD THATS FOR SIBLING(OPERATOR, OPERATOR) e.g plus, plus
+	bool isSiblingMathOpMathOp(TypeTable::SynType, TypeTable::SynType);
 	//! Return a statement number that is the parent of the given statement number.
 	set<STMTNUM> getSiblingStmtNum(STMTNUM);
 	set<VARNAME> getSiblingVarNameWithConstant(CONSTVALUE);

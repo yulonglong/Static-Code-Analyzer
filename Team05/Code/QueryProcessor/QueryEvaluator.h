@@ -106,6 +106,7 @@ private:
 	bool isExistInLinkages(std::string);
 	bool isStmtType(TypeTable::SynType);
 	bool isOperator(TypeTable::SynType);
+	bool isConstOrVar(TypeTable::SynType);
 
 	static std::unordered_map<string, std::vector<int>> linkages;
 	static std::unordered_map<int, std::vector<Pair>> relAns;
