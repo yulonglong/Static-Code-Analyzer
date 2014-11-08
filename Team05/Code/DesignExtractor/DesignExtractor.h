@@ -51,9 +51,18 @@ using namespace std;
 class DesignExtractor {
 public:
 	static void extractorDriver(PKB* pkb);
+
 	static void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
 	static void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
-private:
+	static void extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb);
+
+private:	
+	static void DesignExtractor::setSiblingforProcedure(vector<Node*> vector);
+	static void DesignExtractor::setSiblingForStatements(vector<Node*> vector);
+	static void DesignExtractor::setSiblingForAssign(vector<Node*> vector);
+	static void DesignExtractor::setSiblingForIf(vector<Node*> vector);
+	static void DesignExtractor::setSiblingForWhile(vector<Node*> vector);
+
 	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
 	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited);
 	static void buildCFG(Node &ASTroot, PKB &pkb);

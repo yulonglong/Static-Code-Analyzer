@@ -11,6 +11,7 @@ using namespace std;
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0;
 bool debugModeIteration3 = 0; 
+bool debugModeExtension = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -40,10 +41,31 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	
 	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
-	
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
+}
+
+void DesignExtractor::extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb) {
+	cout << "Extracting Sibling" << endl;
+	// setSiblingforProcedure()
+}
+
+void DesignExtractor::setSiblingforProcedure(vector<Node*> vector) {
+}
+
+void DesignExtractor::setSiblingForStatements(vector<Node*> vector) {
+}
+
+void DesignExtractor::setSiblingForAssign(vector<Node*> vector) {
+}
+
+void DesignExtractor::setSiblingForIf(vector<Node*> vector) {
+}
+
+void DesignExtractor::setSiblingForWhile(vector<Node*> vector) {
+
 }
 
 void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
