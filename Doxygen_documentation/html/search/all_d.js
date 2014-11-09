@@ -24,7 +24,7 @@ var searchData=
   ['settonextpair',['setToNextPair',['../class_p_k_b.html#a4ed3d9ef965d4edae3267008fae868cc',1,'PKB']]],
   ['settoparent',['setToParent',['../class_p_k_b.html#a018bb1e51977cd8cf2e8e77b012f6aaa',1,'PKB']]],
   ['settoproctable',['setToProcTable',['../class_p_k_b.html#ad1ac6083607df06b44d61ffa9f51ef5f',1,'PKB']]],
-  ['settosibling',['setToSibling',['../class_p_k_b.html#a4d5e3cdfd94135bb949064bbcccf37c1',1,'PKB']]],
+  ['settosiblingstmtnumstmtnum',['setToSiblingStmtNumStmtNum',['../class_p_k_b.html#af62751834974586bfd1ee8d54ffd1822',1,'PKB']]],
   ['settotypetable',['setToTypeTable',['../class_p_k_b.html#a7fe6421fe1da7ac3f1ecbd2496167f32',1,'PKB']]],
   ['settouses',['setToUses',['../class_p_k_b.html#a6af39a4b5b6f5ce6e7c85ba94516e006',1,'PKB::setToUses(STMTNUM, VARNAME)'],['../class_p_k_b.html#a56b0a5c7bc266824cc72a4acacef4997',1,'PKB::setToUses(STMTNUM, set&lt; VARINDEX &gt;)']]],
   ['settousesproc',['setToUsesProc',['../class_p_k_b.html#a9399edf128c82962cd9e1f512c0bc410',1,'PKB']]],
