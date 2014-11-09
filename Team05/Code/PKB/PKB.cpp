@@ -166,10 +166,6 @@ void PKB::setToNext(STMTNUM s1, STMTNUM s2){
 	next->setNext(s1,s2);
 }
 
-void PKB::setToSiblingStmtNums(STMTNUM s1, STMTNUM s2){
-	sibling->setSibling(s1,s2);
-}
-
 void PKB::setToTypeTable(STMTNUM s,TypeTable::SynType t){
 	typeTable = getTypeTable();
 	typeTable->insertStmtNumAndType(s,t);
@@ -411,17 +407,6 @@ set<STMTNUM> PKB::getAllNext(){
 }
 set<STMTNUM> PKB::getAllPrevious(){
 	return next->getAllPrevious();
-}
-
-bool PKB::isSiblingStmtNums(STMTNUM s1, STMTNUM s2){
-	return sibling->isSibling(s1,s2);
-}
-
-set<STMTNUM> PKB::getSiblingStmtNum(STMTNUM s){
-	return sibling->getSibling(s);
-}
-set<STMTNUM> PKB::getSiblingStmtNum(){
-	return sibling->getAllSibling();
 }
 
 void PKB::setToNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
