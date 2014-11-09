@@ -11,7 +11,7 @@ using namespace std;
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0;
 bool debugModeIteration3 = 0; 
-bool debugModeExtension = 1; 
+bool debugModeExtension = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -42,7 +42,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
-	//extractSiblingRelationshipDriver(*ASTRoot, *pkb);
+	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
 }
@@ -68,9 +68,9 @@ void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb)
 			std::string procName2 = procNodes[j]->getData();
 			// PKB SET: 
 			if (debugModeExtension) {
-				cout<<"setToSiblingProcNames("<<procName1<<", "<<procName2<<")"<<endl;
+				cout<<"setToSiblingProcNameProcName("<<procName1<<", "<<procName2<<")"<<endl;
 			}
-			//pkb.setToSiblingProcNames(procName1, procName2);
+			pkb.setToSiblingProcNameProcName(procName1, procName2);
 		}
 	}
 }
@@ -82,9 +82,9 @@ void DesignExtractor::setSiblingForStatements(vector<Node*> stmtNodes, PKB &pkb)
 			int stmtNum2 = stmtNodes[j]->getProgLine();
 			// PKB SET: 
 			if (debugModeExtension) {
-				cout<<"setToSiblingStmtNums("<<stmtNum1<<", "<<stmtNum2<<")"<<endl;
+				cout<<"setToSiblingStmtNumStmtNum("<<stmtNum1<<", "<<stmtNum2<<")"<<endl;
 			}
-			//pkb.setToSiblingStmtNums(stmtNum1, stmtNum2);
+			pkb.setToSiblingStmtNumStmtNum(stmtNum1, stmtNum2);
 		}
 	}
 	for (unsigned int i=0; i<stmtNodes.size(); i++) {
@@ -104,35 +104,115 @@ void DesignExtractor::setSiblingForStatements(vector<Node*> stmtNodes, PKB &pkb)
 }
 
 void DesignExtractor::setSiblingForAssign(vector<Node*> vector, PKB &pkb) {
-	string leftNodeType = vector[0]->getType();
-	string rightNodeType = vector[1]->getType();
+	Node* leftNode = vector[0];
+	Node* rightNode = vector[1];
+	string leftNodeType = leftNode->getType();
+	string rightNodeType = rightNode->getType();
+	string leftNodeData = leftNode->getData();
+	string rightNodeData = rightNode->getData();
+
 	if (leftNodeType == "constant" && rightNodeType == "constant") {
 		// PKB SET:
-
+		if (debugModeExtension) {
+			cout<<"setToSiblingConstantConstant("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingConstantConstant(leftNodeData, rightNodeData);
 	} else if (leftNodeType == "variable" && rightNodeType == "variable") {
 		// PKB SET:
-
+		if (debugModeExtension) {
+			cout<<"setToSiblingVarNameVarName("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingVarNameVarName(leftNodeData, rightNodeData);
 	} else if (leftNodeType == "operator" && rightNodeType == "operator") {
+		TypeTable::SynType leftNodeSynType; 
+		TypeTable::SynType rightNodeSynType;
+		if (leftNodeData == "+") {
+			leftNodeSynType = TypeTable::PLUS;
+		} else if (leftNodeData == "-") {
+			leftNodeSynType = TypeTable::MINUS;
+		} else if (leftNodeData == "*") {
+			leftNodeSynType = TypeTable::TIMES;
+		}
+		if (rightNodeData == "+") {
+			rightNodeSynType = TypeTable::PLUS;
+		} else if (rightNodeData == "-") {
+			rightNodeSynType = TypeTable::MINUS;
+		} else if (rightNodeData == "*") {
+			rightNodeSynType = TypeTable::TIMES;
+		}
 		// PKB SET:
-
+		if (debugModeExtension) {
+			cout<<"setToSiblingMathOpMathOp("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingMathOpMathOp(leftNodeSynType, rightNodeSynType);
 	} else if (leftNodeType == "variable" && rightNodeType == "constant") {
 		// PKB SET:
-
+		if (debugModeExtension) {
+			cout<<"setToSiblingVarNameConstant("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingVarNameConstant(leftNodeData, rightNodeData);
 	} else if (leftNodeType == "constant" && rightNodeType == "variable") {
 		// PKB SET:
-
+		if (debugModeExtension) {
+			cout<<"setToSiblingVarNameConstant("<<rightNodeData<<", "<<leftNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingVarNameConstant(rightNodeData, leftNodeData);
 	} else if (leftNodeType == "variable" && rightNodeType == "operator") {
 		// PKB SET:
-
+		TypeTable::SynType rightNodeSynType; 
+		if (rightNodeData == "+") {
+			rightNodeSynType = TypeTable::PLUS;
+		} else if (rightNodeData == "-") {
+			rightNodeSynType = TypeTable::MINUS;
+		} else if (rightNodeData == "*") {
+			rightNodeSynType = TypeTable::TIMES;
+		}
+		if (debugModeExtension) {
+			cout<<"setToSiblingVarNameMathOp("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingVarNameMathOp(leftNodeData, rightNodeSynType);
 	} else if (leftNodeType == "operator" && rightNodeType == "variable") {
 		// PKB SET:
-
+		TypeTable::SynType leftNodeSynType; 
+		if (leftNodeType == "+") {
+			leftNodeSynType = TypeTable::PLUS;
+		} else if (leftNodeType == "-") {
+			leftNodeSynType = TypeTable::MINUS;
+		} else if (leftNodeType == "*") {
+			leftNodeSynType = TypeTable::TIMES;
+		}
+		if (debugModeExtension) {
+			cout<<"setToSiblingVarNameMathOp("<<rightNodeData<<", "<<leftNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingVarNameMathOp(rightNodeData, leftNodeSynType);
 	} else if (leftNodeType == "constant" && rightNodeType == "operator") {
 		// PKB SET:
-
+		TypeTable::SynType rightNodeSynType; 
+		if (rightNodeData == "+") {
+			rightNodeSynType = TypeTable::PLUS;
+		} else if (rightNodeData == "-") {
+			rightNodeSynType = TypeTable::MINUS;
+		} else if (rightNodeData == "*") {
+			rightNodeSynType = TypeTable::TIMES;
+		}
+		if (debugModeExtension) {
+			cout<<"setToSiblingConstantMathOp("<<leftNodeData<<", "<<rightNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingConstantMathOp(leftNodeData, rightNodeSynType);
 	} else if (leftNodeType == "operator" && rightNodeType == "constant") {
 		// PKB SET:
-
+		TypeTable::SynType leftNodeSynType; 
+		if (leftNodeType == "+") {
+			leftNodeSynType = TypeTable::PLUS;
+		} else if (leftNodeType == "-") {
+			leftNodeSynType = TypeTable::MINUS;
+		} else if (leftNodeType == "*") {
+			leftNodeSynType = TypeTable::TIMES;
+		}
+		if (debugModeExtension) {
+			cout<<"setToSiblingConstantMathOp("<<rightNodeData<<", "<<leftNodeData<<")"<<endl;
+		}
+		pkb.setToSiblingConstantMathOp(rightNodeData, leftNodeSynType);
 	}
 	if (vector[0]->getChild().size() == 2) {
 		setSiblingForAssign(vector[0]->getChild(), pkb);
@@ -150,11 +230,11 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfThenStmtLst<<")"<<endl;
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
-		cout<<"setToSiblingStmtLists("<<firstStmtOfThenStmtLst<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
+		cout<<"setToSiblingStmtListStmtList("<<firstStmtOfThenStmtLst<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
 	}
-	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
-	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
-	//pkb.setToSiblingStmtLists(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
+	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
+	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
+	pkb.setToSiblingStmtListStmtList(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
 
 	setSiblingForStatements(vector[1]->getChild(), pkb);
 	setSiblingForStatements(vector[2]->getChild(), pkb);
@@ -167,7 +247,7 @@ void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfStmtLst<<")"<<endl;
 	}
-	//pkb.setToSiblingVarNameStmtList(varName, firstStmtOfStmtLst);
+	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfStmtLst);
 
 	setSiblingForStatements(vector[1]->getChild(), pkb);
 }
