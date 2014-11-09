@@ -254,42 +254,58 @@ public:
 
 	//SIBLINGS
 	//! Set a Sibling relationship between the two given statement numbers.
-	void setToSiblingStmtNums(STMTNUM, STMTNUM);
+	void setToSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
+	void setToSiblingVarNameVarName(VARNAME, VARNAME);
 	void setToSiblingVarNameConstant(VARNAME, CONSTVALUE);
-	void setToSiblingVarNameMathOp(VARNAME, string); //("plus","minus","times")
-	void setToSiblingProcNames(PROCNAME, PROCNAME);
+	void setToSiblingConstantConstant(CONSTVALUE, CONSTVALUE);
+	void setToSiblingVarNameMathOp(VARNAME, TypeTable::SynType);
+	void setToSiblingConstantMathOp(CONSTVALUE, TypeTable::SynType); 
+	void setToSiblingMathOpMathOp(TypeTable::SynType, TypeTable::SynType);
+	void setToSiblingProcNameProcName(PROCNAME, PROCNAME);
 	void setToSiblingVarNameStmtList(VARNAME, STMTNUM);
-	void setToSiblingStmtLists(STMTNUM, STMTNUM);
+	void setToSiblingStmtListStmtList(STMTNUM, STMTNUM);
 	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
-	bool isSiblingStmtNums(STMTNUM, STMTNUM);
-	bool isSiblingVarNameConstant(VARINDEX, CONSTINDEX);
-	bool isSiblingVarNameVarName(VARINDEX, VARINDEX);
-	bool isSiblingConstantConstant(CONSTINDEX, CONSTINDEX);
-	bool isSiblingVarNameMathOp(VARINDEX, TypeTable::SynType); //("plus","minus","times")
-	bool isSiblingConstMathOp(CONSTINDEX, TypeTable::SynType);
-	bool isSiblingProcNames(PROCNAME, PROCNAME);
-	bool isSiblingVarNameStmtList(VARINDEX, STMTNUM);
-	bool isSiblingStmtLists(STMTNUM, STMTNUM);
+	bool isSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
+	bool isSiblingVarNameVarName(VARNAME, VARNAME);
+	bool isSiblingVarNameConstant(VARNAME, CONSTVALUE);
+	bool isSiblingConstantConstant(CONSTVALUE, CONSTVALUE);
+	bool isSiblingVarNameMathOp(VARNAME, TypeTable::SynType);
+	bool isSiblingConstantMathOp(CONSTVALUE, TypeTable::SynType); 
 	bool isSiblingMathOpMathOp(TypeTable::SynType, TypeTable::SynType);
+	bool isSiblingProcNameProcName(PROCNAME, PROCNAME);
+	bool isSiblingVarNameStmtList(VARNAME, STMTNUM);
+	bool isSiblingStmtListStmtList(STMTNUM, STMTNUM);
+
 	//! Return a statement number that is the parent of the given statement number.
-	set<STMTNUM> getSiblingStmtNum(STMTNUM);
-	set<VARNAME> getSiblingVarNameWithConstant(CONSTVALUE);
-	set<CONSTVALUE> getSiblingConstantWithVarName(VARINDEX);
-	set<VARNAME> getSiblingVarNameWithMathOp(string);
-	set<string> getSiblingMathOpWithVarName(VARINDEX);
-	set<PROCNAME> getSiblingProcNames(PROCNAME);
-	set<VARNAME> getSiblingVarNameWithStmtList(STMTNUM);
-	set<STMTNUM> getSiblingStmtListWithVarName(VARINDEX);
+	set<STMTNUM> getSiblingStmtNumWithStmtNum(STMTNUM);
+	set<VARINDEX> getSiblingVarIndexWithVarIndex(VARINDEX);
+	set<VARINDEX> getSiblingVarIndexWithConstant(CONSTVALUE);
+	set<CONSTVALUE> getSiblingConstantWithVarIndex(VARINDEX);
+	set<CONSTVALUE> getSiblingConstantWithConstant(CONSTVALUE);
+	set<VARINDEX> getSiblingVarIndexWithMathOp(TypeTable::SynType);
+	set<TypeTable::SynType> getSiblingMathOpWithConstant(CONSTVALUE);
+	set<CONSTVALUE> getSiblingConstantWithMathOp(TypeTable::SynType);
+	set<TypeTable::SynType> getSiblingMathOpWithMathOp(TypeTable::SynType);
+	set<string> getSiblingMathOpWithVarIndex(VARINDEX);
+	set<PROCNAME> getSiblingProcNameWithProcName(PROCNAME);
+	set<VARINDEX> getSiblingVarIndexWithStmtList(STMTNUM);
+	set<STMTNUM> getSiblingStmtListWithVarIndex(VARINDEX);
 	set<STMTNUM> getSiblingStmtListWithStmtList(STMTNUM);
+
 	//! Return a set of all statement numbers that has a sibling.
-	set<STMTNUM> getSiblingStmtNum();
-	set<VARNAME> getSiblingVarNameWithConstant();
-	set<CONSTVALUE> getAllSiblingConstantWithVarName();
-	set<VARNAME> getAllSiblingVarNameWithMathOp();
-	set<string> getAllSiblingMathOpWithVarName();
-	set<PROCNAME> getAllSiblingProcNames();
-	set<VARNAME> getAllSiblingVarNameWithStmtList();
-	set<STMTNUM> getAllSiblingStmtListWithVarName();
+	set<STMTNUM> getAllSiblingStmtNumWithStmtNum();
+	set<VARINDEX> getAllSiblingVarIndexWithVarIndex();
+	set<VARINDEX> getAllSiblingVarIndexWithConstant();
+	set<CONSTVALUE> getAllSiblingConstantWithVarIndex();
+	set<CONSTVALUE> getAllSiblingConstantWithConstant();
+	set<VARINDEX> getAllSiblingVarIndexWithMathOp();
+	set<TypeTable::SynType> getAllSiblingMathOpWithConstant();
+	set<CONSTVALUE> getAllSiblingConstantWithMathOp();
+	set<TypeTable::SynType> getAllSiblingMathOpWithMathOp();
+	set<string> getAllSiblingMathOpWithVarIndex();
+	set<PROCNAME> getAllSiblingProcNameWithProcName();
+	set<VARINDEX> getAllSiblingVarIndexWithStmtList();
+	set<STMTNUM> getAllSiblingStmtListWithVarIndex();
 	set<STMTNUM> getAllSiblingStmtListWithStmtList();
 	/// @cond
 	VarTable* getVarTable(); 
