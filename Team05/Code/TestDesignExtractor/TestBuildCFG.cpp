@@ -630,7 +630,7 @@ void BuildCFGTest::testBuildCFGWithNextPairRelationship() {
 }
 
 
-void BuildCFGTest::testBuildCFGS5() {
+void BuildCFGTest::testBuildCFGS11() {
 	PKB *pkb;
 	Node* ASTRoot;
 	CFGNode* CFGRoot;

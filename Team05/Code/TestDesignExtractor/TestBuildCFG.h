@@ -32,7 +32,7 @@ public:
 	void testBuildCFGForNestedIfStmts(); 
 	void testBuildCFGForNestedWhileStmts(); 
 	void testBuildCFGWithNextPairRelationship(); 
-	void testBuildCFGS5();
+	void testBuildCFGS11();
 
 private:
 	string print(set<int>); 
