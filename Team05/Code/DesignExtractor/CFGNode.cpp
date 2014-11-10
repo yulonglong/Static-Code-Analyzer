@@ -49,3 +49,11 @@ void CFGNode::setMultiChild(CFGNode* newChild) {
 void CFGNode::printCFGNode() {
 	cout << "CFGNode(" << progLine << ", " << type + ")";
 }
+
+void CFGNode::setEndOfIfNode(CFGNode* n) {
+	endOfIfNode = n;
+}
+
+CFGNode* CFGNode::getEndOfIfNode() {
+	return endOfIfNode; 
+}

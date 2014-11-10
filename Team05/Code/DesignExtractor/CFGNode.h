@@ -32,6 +32,7 @@ class CFGNode: public Node {
 private:
 	std::vector<CFGNode*> multiParent;
 	std::vector<CFGNode*> multiChild;
+	CFGNode* endOfIfNode;
 public: 
 	//! A constructor to create a node with newType, and progLine as its attributes.
 	CFGNode(std::string newType, int newProgLine);
@@ -50,6 +51,9 @@ public:
 	CFGNode* getMultiChild(unsigned int index);
 
 	void printCFGNode();
+
+	void setEndOfIfNode(CFGNode*);
+	CFGNode* getEndOfIfNode();
 };
 
 #endif

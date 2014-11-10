@@ -636,7 +636,7 @@ void BuildCFGTest::testBuildCFGS5() {
 	CFGNode* CFGRoot;
 
 	pkb = PKB::getInstance();
-	CodeParser::parserDriver("S5-basicTests.txt",pkb);
+	CodeParser::parserDriver("S11-affectsTests.txt",pkb);
 
 	ASTRoot = pkb->getASTRoot();
 	CFGRoot = pkb->getCFGRoot();
@@ -648,7 +648,7 @@ void BuildCFGTest::testBuildCFGS5() {
 	DesignExtractor::buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
 	
 	set<int> v;
-	//pkb->printNextTable();
+	pkb->printNextTable();
 	
 	pkb->~PKB();
 

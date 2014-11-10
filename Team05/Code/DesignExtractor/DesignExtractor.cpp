@@ -11,7 +11,7 @@ using namespace std;
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0;
 bool debugModeIteration3 = 0; 
-bool debugModeExtension = 1; 
+bool debugModeExtension = 0; 
 
 int counter = 0;
 vector<int> visited; 
@@ -376,6 +376,9 @@ void DesignExtractor::setNextRelationship(CFGNode &node, PKB &pkb) {
 	for (unsigned int i=0; i<children.size(); i++) {
 		CFGNode* child = children[i];
 		int toProgLine = child->getProgLine();
+		if (fromProgLine == 5) {
+			cout << fromProgLine << "here" << toProgLine << endl;
+		}
 		if (fromProgLine != -1 && toProgLine != -1 && fromProgLine != 0) {
 			// PKB SET: 
 			pkb.setToNext(fromProgLine, toProgLine);
@@ -459,18 +462,16 @@ void DesignExtractor::createCFGForWhile(vector<Node*> children, PKB &pkb) {
 
 	if (fromNode != NULL) {
 		if (fromNode->getType() == "if") {
+			fromNode = fromNode->getEndOfIfNode();
 			// get the child which is -1 and set that as the fromNode 
-			while (fromNode->getProgLine() != -1) {
-				if (fromNode->getMultiChild().size() != 0) {
-					//fromNode = fromNode->getMultiChild(0);
-					fromNode = fromNode->getMultiChild(fromNode->getMultiChild().size()-1);
-				} else {
-					cout << "Error in DE 1!" << endl;
-					break;
-				}
-			}
 		}
 
+		/*cout << "HERE!" << endl;
+		cout << fromNode->getMultiParent().size() << endl;
+		cout << fromNode->getMultiParent(0)->getProgLine() << endl;
+		cout << fromNode->getMultiParent(1)->getProgLine() << endl;
+		cout << "HERE!" << endl;
+*/
 		if (debugModeIteration2) {
 			cout << "fromNode is found" << endl;
 		}
@@ -498,6 +499,8 @@ void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 	if (debugModeIteration2) {
 		cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	}
+
+	//then stmtLst
 	Node* stmtLst = children[1];
 	createCFGForStmtLst(*stmtLst, pkb);
 	vector<CFGNode*> leafNodes;
@@ -507,6 +510,7 @@ void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 		cout << "If node is at: " << ifCFGNode->getProgLine() << endl;
 	}
 	currCFGNode = ifCFGNode;
+	// else stmtLst
 	stmtLst = children[2];
 	createCFGForStmtLst(*stmtLst, pkb);
 	leafNodes.push_back(currCFGNode);	
@@ -542,6 +546,9 @@ void DesignExtractor::createCFGForIf(vector<Node*> children, PKB &pkb) {
 		leafNodes.pop_back();
 	}
 	currCFGNode = dummyNode; 
+
+	// from the IF CFG node, set a direct link to the dummy end-of-if Node 
+	ifCFGNode->setEndOfIfNode(dummyNode);
 }
 
 void DesignExtractor::createNewNodeAndAttachToCFG(string type, int progLine, PKB &pkb) {
