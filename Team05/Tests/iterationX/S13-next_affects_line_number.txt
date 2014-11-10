@@ -1,0 +1,39 @@
+procedure Alpha{
+1	x = 10;
+2	while a {
+3		c = b;
+4		if x then{
+5			b = d;		}
+		else{
+6			d = e;		}
+7		call Beta;	}}
+
+procedure Beta{
+8	y = 5;
+9	x = y;
+10	if y then{
+11		while c{
+12			e = f;
+13			f = g;		}	}
+	else{
+14		g = h;	}
+15	call Charlie;}
+
+procedure Charlie{
+16	i = 15;
+17	while i{
+18		a = b;
+19		if x then{
+20			b = c;
+21			if c then{
+22				c = d;			}
+			else {
+23				d = e;			}		}
+		else{
+24			c = e;		}
+		
+25		while y {
+26			b = k;		}
+27		b = z;
+	}
+}
