@@ -502,7 +502,7 @@ bool QueryEvaluator::isConstOrVar(TypeTable::SynType t){
 	}
 }
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	string tk1 = r.getToken1();
+	/*string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	set<int> tk1List;
 	set<int> tk2List;
@@ -681,7 +681,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 	}
 
-
+*/
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -3011,6 +3011,9 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 }
 
 bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
+	if(pkb->getSynType(target)!=TypeTable::ASSIGN)
+		return false;
+
 	stack<int> st;
 	set<int> next = pkb->getNext(start);
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
@@ -3022,11 +3025,15 @@ bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
 		st.pop();
 		visited.insert(curr);
 
+		cout << "now at " << curr << endl;
+
+		if(modifies.count(curr)!=0 && (pkb->getSynType(curr)==TypeTable::ASSIGN || pkb->getSynType(curr)==TypeTable::CALL) && curr!=target) {
+			cout << "blocked at " << curr << endl;
+			continue;
+		}
+
 		if(curr==target)
 			return true;
-
-		if(modifies.count(curr)!=0 && (pkb->getSynType(curr)==TypeTable::ASSIGN || pkb->getSynType(curr)==TypeTable::CALL))
-			continue;
 
 		set<int> next = pkb->getNext(curr);
 		for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {
@@ -3040,9 +3047,10 @@ bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
 
 bool QueryEvaluator::isAffects(int token1, int token2) {
 	set<int> modified = pkb->getModified(token1);
-	if( !(pkb->isUses(token2, *modified.begin())) )
+	if( !(pkb->isUses(token2, *modified.begin())) ) {
+		cout << "variable modified by " << token1 << " is not used by " << token2 << endl;
 		return false;
-
+	}
 	set<int> modifies = pkb->getModifies(*modified.begin());
 
 	return findPath(token1, token2, modifies);
@@ -3062,6 +3070,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 		visited.insert(make_pair(curr.ans1, curr.ans2));
 
 		if(isAffects(curr.ans1, curr.ans2)) {
+			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is true." << endl;
 			if(curr.ans2 == token2) {
 				return true;
 			}
@@ -3072,6 +3081,9 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 						st.push(Pair(curr.ans2, *it));
 				}
 			}
+		}
+		else {
+			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is false." << endl;
 		}
 	}
 
