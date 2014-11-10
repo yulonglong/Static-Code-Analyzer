@@ -3108,8 +3108,6 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 	stack<Pair> st;
 	set<pair<int, int>> visited;
 
-	cout << "Start: " << token1 << "\t" << "Target: " << token2 << endl;
-
 	for(set<int>::iterator it = next.begin(); it!=next.end(); it++)
 		st.push(Pair(token1, *it));
 
@@ -3171,8 +3169,6 @@ void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::str
 	if(r.getToken1Type() == Relationship::SYNONYM)
 		insertLinks(lhs, relIndex);
 
-
-	cout << "PATTERN WITH THE FOLLOWING ARGUMENTS: " << syn <<  " " << lhs << " " << rhs << endl;
 	switch(synType){
 		case TypeTable::ASSIGN:
 			patternAns = findAssign(*root, lhs, rhs, r);
@@ -3205,8 +3201,6 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 	while(!st.empty()) {
 		Node n = st.top();
 		st.pop();
-
-		cout << "NOW AT PROG_LINE " << n.getProgLine() << endl;
 
 		if(r.getToken1Type() == Relationship::SYNONYM) {
 			if(n.getType().compare("assign") == 0) {
@@ -3254,6 +3248,9 @@ vector<Pair> QueryEvaluator::findIf(Node startNode, string lhs, string rhs, Rela
 					Node left = *children.at(0);
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
 				}
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
@@ -3266,6 +3263,9 @@ vector<Pair> QueryEvaluator::findIf(Node startNode, string lhs, string rhs, Rela
 				if(matchPattern(n, lhs, rhs, false)) {
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
@@ -3293,6 +3293,9 @@ vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, R
 					Node left = *children.at(0);
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
 				}
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
@@ -3305,6 +3308,9 @@ vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, R
 				if(matchPattern(n, lhs, rhs, false)) {
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
+				vector<Node*> children = n.getChild();
+				for(int i=0; i<children.size(); i++)
+					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
@@ -3320,8 +3326,6 @@ vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, R
 bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs, bool leftIsSyn) {
 	lhs.erase(std::remove(lhs.begin(), lhs.end(), '\"'), lhs.end());
 	rhs.erase(std::remove(rhs.begin(), rhs.end(), '\"'), rhs.end());
-	cout << "LHS: " << lhs << endl;
-	cout << "RHS: " << rhs << endl;
 
 	bool leftMatch=false, rightMatch=false;
 	vector<Node*> children = n.getChild();
@@ -3377,24 +3381,19 @@ bool QueryEvaluator::matchTree(Node a, Node b) {
 	string aData = a.getData();
 	string bData = b.getData();
 	
-	cout << aData << " " << bData << endl;
-
 	aData.erase(std::remove(aData.begin(), aData.end(), ' '), aData.end());
 	bData.erase(std::remove(bData.begin(), bData.end(), ' '), bData.end());
 	//aData.erase(std::remove(aData.begin(), aData.end(), ')'), aData.end());
 	//bData.erase(std::remove(bData.begin(), bData.end(), ')'), bData.end());
 	if(children1.size() != children2.size()) {
-		cout << "Different number of children -> False" << endl;
 		return false;
 	}
 
 	if(aData.compare(bData) != 0) {
-		cout << "Different data values -> False" << endl;
 		return false;
 	}
 
 	if(aData.compare(bData) == 0 && children1.size() == 0) {
-		cout << "Same node and leaf of tree" << endl;
 		return true;
 	}
 
@@ -3403,7 +3402,6 @@ bool QueryEvaluator::matchTree(Node a, Node b) {
 	Node childB1 = *children2.at(0);
 	Node childB2 = *children2.at(1);
 
-	cout << "Recurse" << endl;
 	return matchTree(childA1, childB1) && matchTree(childA2, childB2);
 }
 
