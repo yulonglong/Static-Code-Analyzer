@@ -1,4 +1,4 @@
-Procedure SiblingTest {
+procedure SiblingTest {
   VarVar = b + c;
   ConsVons = 5 + 10;
   MathopMathop = a * b + c * d;
