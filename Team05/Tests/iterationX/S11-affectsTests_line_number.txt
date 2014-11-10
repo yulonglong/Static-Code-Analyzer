@@ -44,34 +44,34 @@ procedure Alpha {
 38	m = f;}
 
 procedure Bravo {
-	b = 0;
+39	b = 0;
 }
 
 procedure Charlie {
-	c = 0;
+40	c = 0;
 }
 
 procedure Delta {
-	d = 0;
+41	d = 0;
 }
 
 procedure Echo {
-	e = 0;
+42	e = 0;
 }
 
 procedure Foxtrot {
-	f = 0;
+43	f = 0;
 }
 
 procedure Hotel {
-	h = 0;
+44	h = 0;
 }
 
 procedure Break{
-	if b then{
-		l = 0;
+45	if b then{
+46		l = 0;
 	}
 	else {
-		f = 0;
+47		f = 0;
 	}	
 }
