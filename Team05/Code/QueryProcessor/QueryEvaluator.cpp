@@ -2784,7 +2784,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		set<int> tk2List;
 		
 		if(tk1=="_")
-			tk1List = pkb->getAllStmts(TypeTable::STMT);
+			tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk1)) {
 			tk1List = retrieveTokenEvaluatedAnswers(tk1);
 			insertLinks(tk1, relIndex);
@@ -2795,7 +2795,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 		
 		if(tk2=="_")
-			tk2List = pkb->getAllStmts(TypeTable::STMT);
+			tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk2)) {
 			tk2List = retrieveTokenEvaluatedAnswers(tk2);
 			insertLinks(tk2, relIndex);
@@ -2814,11 +2814,11 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 	}
 
 	//Affects(a, "7")
-	else if( isalpha(tk1[0]) || tk1=="_" ) {
+	else if( (isalpha(tk1[0]) || tk1=="_") && tk2!="_" ) {
 		cout << "Case 2: Left is Synonym" << endl;
 		set<int> tk1List;
 		if(tk1=="_")
-			tk1List = pkb->getAllStmts(TypeTable::STMT);
+			tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk1)) {
 			tk1List = retrieveTokenEvaluatedAnswers(tk1);
 			insertLinks(tk1, relIndex);
@@ -2829,17 +2829,28 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
-			if(isAffects(*it, atoi(tk2.c_str())))
-				affAns.push_back(Pair(*it, atoi(tk2.c_str())));	
+			if(isAffects(*it, atoi(tk2.c_str()))) {
+				if(tk1=="_") {
+					affAns.push_back(Pair(-1, -1));
+					break;
+				}
+				else {
+					affAns.push_back(Pair(*it, atoi(tk2.c_str())));
+				}
+			}
+		}
+
+		if(affAns.size()==0 && tk1=="_") {
+			affAns.push_back(Pair(-2, -2));
 		}
 	}
 
 	//Affects("1", a)
-	else if( isalpha(tk2[0]) || tk2=="_" ) {
+	else if( (isalpha(tk2[0]) || tk2=="_") && tk1!="_" ) {
 		cout << "Case 3: Right is Synonym" << endl;
 		set<int> tk2List;
 		if(tk2=="_")
-			tk2List = pkb->getAllStmts(TypeTable::STMT);
+			tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk2)) {
 			tk2List = retrieveTokenEvaluatedAnswers(tk2);
 			insertLinks(tk2, relIndex);
@@ -2850,8 +2861,19 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
-			if(isAffects(atoi(tk1.c_str()), *it)) 
-				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
+			if(isAffects(atoi(tk1.c_str()), *it)) {
+				if(tk2=="_"){
+					affAns.push_back(Pair(-1,-1));
+					break;
+				}
+				else {
+					affAns.push_back(Pair(atoi(tk1.c_str()), *it));
+				}
+			}
+		}
+
+		if(affAns.size()==0 && tk2=="_") {
+			affAns.push_back(Pair(-2, -2));
 		}
 	}
 
@@ -2867,8 +2889,8 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 	//Affects(_,_)
 	else {
 		cout << "Case 5: Both are underscore" << endl;
-		set<int> tk1List = pkb->getAllStmts(TypeTable::STMT);
-		set<int> tk2List = pkb->getAllStmts(TypeTable::STMT);
+		set<int> tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
+		set<int> tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
@@ -2906,7 +2928,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		set<int> tk2List;
 		
 		if(tk1=="_")
-			tk1List = pkb->getAllStmts(TypeTable::STMT);
+			tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk1)) {
 			tk1List = retrieveTokenEvaluatedAnswers(tk1);
 			insertLinks(tk1, relIndex);
@@ -2917,7 +2939,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 		
 		if(tk2=="_")
-			tk2List = pkb->getAllStmts(TypeTable::STMT);
+			tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk2)) {
 			tk2List = retrieveTokenEvaluatedAnswers(tk2);
 			insertLinks(tk2, relIndex);
@@ -2936,11 +2958,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 	}
 
 	//Affects(a, "7")
-	else if( isalpha(tk1[0]) || tk1=="_" ) {
+	else if( (isalpha(tk1[0]) || tk1=="_") && tk2!="_") {
 		cout << "Case 2: Left is Synonym" << endl;
 		set<int> tk1List;
 		if(tk1=="_")
-			tk1List = pkb->getAllStmts(TypeTable::STMT);
+			tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk1)) {
 			tk1List = retrieveTokenEvaluatedAnswers(tk1);
 			insertLinks(tk1, relIndex);
@@ -2952,16 +2974,28 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
 			if(isAffectsStar(*it, atoi(tk2.c_str())))
-				affAns.push_back(Pair(*it, atoi(tk2.c_str())));	
+			{	
+				if(tk1=="_") {
+					affAns.push_back(Pair(-1,-1));
+					break;
+				}
+				else {
+					affAns.push_back(Pair(*it, atoi(tk2.c_str())));
+				}
+			}
 		}
+
+		if(affAns.size()==0 && tk1=="_")
+			affAns.push_back(Pair(-2,-2));
+
 	}
 
 	//Affects("1", a)
-	else if( isalpha(tk2[0]) || tk2=="_" ) {
+	else if( (isalpha(tk2[0]) || tk2=="_")  && tk1!="_") {
 		cout << "Case 3: Right is Synonym" << endl;
 		set<int> tk2List;
 		if(tk2=="_")
-			tk2List = pkb->getAllStmts(TypeTable::STMT);
+			tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 		else if(isExistInLinkages(tk2)) {
 			tk2List = retrieveTokenEvaluatedAnswers(tk2);
 			insertLinks(tk2, relIndex);
@@ -2972,9 +3006,19 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
-			if(isAffectsStar(atoi(tk1.c_str()), *it)) 
-				affAns.push_back(Pair(atoi(tk1.c_str()), *it));
+			if(isAffectsStar(atoi(tk1.c_str()), *it)) {
+				if(tk2=="_") {
+					affAns.push_back(Pair(-1,-1));
+					break;
+				}
+				else {
+					affAns.push_back(Pair(atoi(tk1.c_str()), *it));
+				}
+			}
 		}
+
+		if(affAns.size()==0 && tk2=="_")
+			affAns.push_back(Pair(-2,-2));
 	}
 
 	//Affects("1", "2")
@@ -2989,8 +3033,8 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 	//Affects(_,_)
 	else {
 		cout << "Case 5: Both are underscore" << endl;
-		set<int> tk1List = pkb->getAllStmts(TypeTable::STMT);
-		set<int> tk2List = pkb->getAllStmts(TypeTable::STMT);
+		set<int> tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
+		set<int> tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk1List.begin(); itB!=tk1List.end(); itB++) {
@@ -3004,6 +3048,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		affAns.push_back(Pair(-2, -2));
+	}
+
+	cout << "ANSWERS FOR AFFECTS(" << tk1 << "," << tk2 << ") :" << endl;
+	for(int i=0; i<affAns.size(); i++) {
+		cout << "(" << affAns.at(i).ans1 << ", " << affAns.at(i).ans2 << ")" << endl;
 	}
 
 	//intersectPairs(tk1, tk2, &affAns, relIndex);
@@ -3048,8 +3097,11 @@ bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
 bool QueryEvaluator::isAffects(int token1, int token2) {
 	set<int> modified = pkb->getModified(token1);
 	if( !(pkb->isUses(token2, *modified.begin())) ) {
-		cout << "variable modified by " << token1 << " is not used by " << token2 << endl;
+		cout << token1 << " IS NOT USED BY " << token2 << endl;
 		return false;
+	}
+	else {
+		cout << token1 << " IS USED BY " << token2 << endl;
 	}
 	set<int> modifies = pkb->getModifies(*modified.begin());
 
@@ -3070,7 +3122,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 		visited.insert(make_pair(curr.ans1, curr.ans2));
 
 		if(isAffects(curr.ans1, curr.ans2)) {
-			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is true." << endl;
+			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is true." << endl << endl;
 			if(curr.ans2 == token2) {
 				return true;
 			}
@@ -3083,7 +3135,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 			}
 		}
 		else {
-			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is false." << endl;
+			cout << "isAffects(" << curr.ans1 << "," << curr.ans2 << ") is false." << endl << endl;
 		}
 	}
 
@@ -3103,6 +3155,7 @@ set<int> QueryEvaluator::getNextStar(int start) {
 		visited.insert(curr);
 
 		next = pkb->getNext(curr);
+
 		for(set<int>::iterator it = next.begin(); it!=next.end(); it++) {
 			if(visited.count(*it)==0)
 				st.push(*it);
