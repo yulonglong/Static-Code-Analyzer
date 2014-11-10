@@ -1,0 +1,766 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iterationX</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" All Queries">
+<query>
+<id Parent="1" comment="" >1</id><querystr><![CDATA[stmt s, s1; Select s such that Parent (s, s1) with s1.stmt# = 3]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >2</id><querystr><![CDATA[stmt s, s1; Select s such that Parent (s, s1) with s1.stmt# = 10]]></querystr>
+<stuans>8</stuans>
+<correct>8</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >3</id><querystr><![CDATA[stmt s, s1; Select s such that Parent (s, s1) with s1.stmt# = 12]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >4</id><querystr><![CDATA[stmt s, s1; Select s such that Parent (s, s1) with s1.stmt# = 20]]></querystr>
+<stuans>18</stuans>
+<correct>18</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >5</id><querystr><![CDATA[stmt s; Select s such that Parent (s, 3)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >6</id><querystr><![CDATA[stmt s; Select s such that Parent (s, 10)]]></querystr>
+<stuans>8</stuans>
+<correct>8</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >7</id><querystr><![CDATA[stmt s; Select s such that Parent (s, 12)]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >8</id><querystr><![CDATA[stmt s; Select s such that Parent (s, 20)]]></querystr>
+<stuans>18</stuans>
+<correct>18</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >9</id><querystr><![CDATA[stmt s; Select s such that Parent (3, s)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >10</id><querystr><![CDATA[stmt s; Select s such that Parent (8, s)]]></querystr>
+<stuans>9,10,13,14,15,16</stuans>
+<correct>9,10,13,14,15,16</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >11</id><querystr><![CDATA[stmt s; Select s such that Parent (9, s)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" comment="" >12</id><querystr><![CDATA[stmt s; Select s such that Parent (25, s)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >13</id><querystr><![CDATA[stmt s; Select s such that Parent* (s, 3)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >14</id><querystr><![CDATA[stmt s; Select s such that Parent* (s, 10)]]></querystr>
+<stuans>8</stuans>
+<correct>8</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >15</id><querystr><![CDATA[stmt s; Select s such that Parent* (s, 12)]]></querystr>
+<stuans>8,10</stuans>
+<correct>8,10</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >16</id><querystr><![CDATA[stmt s; Select s such that Parent* (s, 20)]]></querystr>
+<stuans>18</stuans>
+<correct>18</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >17</id><querystr><![CDATA[stmt s; while w; Select w such that Parent* (s, 3)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >18</id><querystr><![CDATA[stmt s; while w; Select w such that Parent* (s, 10)]]></querystr>
+<stuans>10,18,23</stuans>
+<correct>10,18,23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >19</id><querystr><![CDATA[stmt s; while w; Select w such that Parent* (s, 12)]]></querystr>
+<stuans>10,18,23</stuans>
+<correct>10,18,23</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >20</id><querystr><![CDATA[stmt s; while w; Select w such that Parent* (s, 20)]]></querystr>
+<stuans>10,18,23</stuans>
+<correct>10,18,23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >21</id><querystr><![CDATA[while w; Select w such that Parent* (w, 9)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >22</id><querystr><![CDATA[while w; Select w such that Parent* (w, 11)]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >23</id><querystr><![CDATA[while w; Select w such that Parent* (w, 13)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id ParentStar="1" comment="" >24</id><querystr><![CDATA[while w; Select w such that Parent* (w, 21)]]></querystr>
+<stuans>18</stuans>
+<correct>18</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >25</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 1)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>8.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >26</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 8)]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >27</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 9)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >28</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 10)]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >29</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 12)]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>12.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >30</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 13)]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >31</id><querystr><![CDATA[stmt s; Select s such that Follows (s, 23)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >32</id><querystr><![CDATA[assign a; Select a such that Follows (a, 1)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >33</id><querystr><![CDATA[assign a; Select a such that Follows (a, 8)]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >34</id><querystr><![CDATA[assign a; Select a such that Follows (a, 9)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >35</id><querystr><![CDATA[assign a; Select a such that Follows (a, 10)]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >36</id><querystr><![CDATA[assign a; Select a such that Follows (a, 12)]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" comment="" >37</id><querystr><![CDATA[assign a; Select a such that Follows (a, 13)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >38</id><querystr><![CDATA[stmt s; while w; Select w such that Follows* (s, w)]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >39</id><querystr><![CDATA[stmt s; while w; Select w such that Follows* (w, s)]]></querystr>
+<stuans>23,18,10</stuans>
+<correct>10,18,23</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >40</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 1)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >41</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 8)]]></querystr>
+<stuans>1,2,3,4,5,6,7</stuans>
+<correct>1,2,3,4,5,6,7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >42</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 9)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >43</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 13)]]></querystr>
+<stuans>9,10</stuans>
+<correct>9,10</correct>
+<time_taken>8.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >44</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 19)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >45</id><querystr><![CDATA[stmt s; Select s such that Follows* (s, 22)]]></querystr>
+<stuans>18</stuans>
+<correct>18</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >46</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 8)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >47</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 17)]]></querystr>
+<stuans>8</stuans>
+<correct>8</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >48</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 25)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >49</id><querystr><![CDATA[if ifstat; Select ifstat such that Follows* (ifstat, 27)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >50</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 6)]]></querystr>
+<stuans>1,2,3,5</stuans>
+<correct>1,2,3,5</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >51</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 9)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>7.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >52</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 10)]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >53</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 12)]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >54</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 17)]]></querystr>
+<stuans>1,2,3,5,7</stuans>
+<correct>1,2,3,5,7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id FollowsStar="1" comment="" >55</id><querystr><![CDATA[assign a; Select a such that Follows* (a, 28)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >56</id><querystr><![CDATA[variable v; Select v such that Modifies (3, v)]]></querystr>
+<stuans>x</stuans>
+<correct>x</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >57</id><querystr><![CDATA[variable v; Select v such that Modifies (4, v)]]></querystr>
+<stuans>y,x,z</stuans>
+<correct>x,y,z</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >58</id><querystr><![CDATA[variable v; Select v such that Modifies (6, v)]]></querystr>
+<stuans>idx</stuans>
+<correct>idx</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >59</id><querystr><![CDATA[variable v; Select v such that Modifies (18, v)]]></querystr>
+<stuans>idx,y,x,z</stuans>
+<correct>idx,x,y,z</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >60</id><querystr><![CDATA[variable v; Select v such that Modifies (24, v)]]></querystr>
+<stuans>y,x</stuans>
+<correct>x,y</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >61</id><querystr><![CDATA[variable v; Select v such that Modifies (28, v)]]></querystr>
+<stuans>idx</stuans>
+<correct>idx</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >62</id><querystr><![CDATA[while w; Select w such that Modifies (w, "x")]]></querystr>
+<stuans>10,18,23</stuans>
+<correct>10,18,23</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >63</id><querystr><![CDATA[while w; Select w such that Modifies (w, "z")]]></querystr>
+<stuans>10,18</stuans>
+<correct>10,18</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >64</id><querystr><![CDATA[variable v; Select v such that Modifies ("Bravo", v)]]></querystr>
+<stuans>idx,y,x,z</stuans>
+<correct>idx,x,y,z</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >65</id><querystr><![CDATA[stmt s; Select s such that Uses (s, "x")]]></querystr>
+<stuans>4,8,9,10,11,12,13,14,17,18,19,20,23,24,26,27</stuans>
+<correct>4,8,9,10,11,12,13,14,17,18,19,20,23,24,26,27</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >66</id><querystr><![CDATA[stmt s; Select s such that Uses (s, "z")]]></querystr>
+<stuans>8,10,16,17,18,19,21</stuans>
+<correct>8,10,16,17,18,19,21</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >67</id><querystr><![CDATA[variable v; Select v such that Uses (10, v)]]></querystr>
+<stuans>idx,x,z</stuans>
+<correct>x,z,idx</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >68</id><querystr><![CDATA[variable v; Select v such that Uses (18, v)]]></querystr>
+<stuans>idx,y,x,t,k,z</stuans>
+<correct>x,y,z,idx,k,t</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >69</id><querystr><![CDATA[variable v; Select v such that Uses (23, v)]]></querystr>
+<stuans>idx,y,x,t,k</stuans>
+<correct>k,t,x,y,idx</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" comment="" >70</id><querystr><![CDATA[assign a; variable v; Select v such that Uses (a, v)]]></querystr>
+<stuans>idx,y,x,z,t,k</stuans>
+<correct>x,y,z,idx,t,k</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Modifies="1" comment="" >71</id><querystr><![CDATA[assign a; Select a such that Modifies (a, "y") and Uses (a, "y")]]></querystr>
+<stuans>26</stuans>
+<correct>26</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Modifies="1" comment="" >72</id><querystr><![CDATA[assign a; Select a such that Modifies (a, "x") and Uses (a, "x")]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Modifies="1" comment="" >73</id><querystr><![CDATA[assign a; Select a such that Modifies (a, "t") and Uses (a, "t")]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Modifies="1" comment="" >74</id><querystr><![CDATA[assign a; Select a such that Modifies (a, "z") and Uses (a, "z")]]></querystr>
+<stuans>16,21</stuans>
+<correct>16,21</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Parent="1" comment="" >75</id><querystr><![CDATA[assign a; while w; Select a such that Modifies (a, "idx") and Parent (w, a)]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Parent="1" comment="" >76</id><querystr><![CDATA[assign a; while w; Select a such that Parent (w, a) and Modifies (a, "idx")]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Parent="1" comment="" >77</id><querystr><![CDATA[assign a; while w; Select a such that Modifies (a, "idx") such that Parent (w, a)]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id CallsStar="1" comment="" >78</id><querystr><![CDATA[procedure p; Select p such that Calls* (p, "Charlie")]]></querystr>
+<stuans>Bravo,Alpha</stuans>
+<correct>Alpha,Bravo</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Modifies="1" Uses="1" comment="" >79</id><querystr><![CDATA[procedure p; Select p such that Calls ("Alpha", p) and Modifies (p, "z") and Uses (p, "y")]]></querystr>
+<stuans>Bravo,Charlie</stuans>
+<correct>Bravo,Charlie</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id CallsStar="1" Modifies="1" comment="" >80</id><querystr><![CDATA[procedure p; Select p such that Calls* ("Alpha", p) and Modifies (p, "z")]]></querystr>
+<stuans>Charlie,Bravo</stuans>
+<correct>Bravo,Charlie</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >81</id><querystr><![CDATA[assign a; Select a pattern a ("x", _)]]></querystr>
+<stuans>25,22,11,3</stuans>
+<correct>3,11,22,25</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >82</id><querystr><![CDATA[assign a; Select a pattern a ("idx", "3 * y")]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" Follows="1" comment="" >83</id><querystr><![CDATA[assign a; while w; Select a pattern a ("y", _) such that Follows (w, a)]]></querystr>
+<stuans>13</stuans>
+<correct>13</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >84</id><querystr><![CDATA[assign a; Select a pattern a (_, "x + 1")]]></querystr>
+<stuans>12</stuans>
+<correct>12</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >85</id><querystr><![CDATA[assign a; Select a pattern a (_, "x * 5 + 3")]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >86</id><querystr><![CDATA[assign a; Select a pattern a (_, _"x + k * t"_)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >87</id><querystr><![CDATA[assign a; Select a pattern a (_, _"x + idx"_)]]></querystr>
+<stuans>14,13,11</stuans>
+<correct>11,13,14</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >88</id><querystr><![CDATA[assign a; Select a pattern a (_, _"k + x"_)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >89</id><querystr><![CDATA[assign a; Select a pattern a (_, _"x + 3"_)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >90</id><querystr><![CDATA[assign a; Select a pattern a (_, _"x + 3 * y"_)]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >91</id><querystr><![CDATA[assign a; Select a pattern a (_, _"3 * y"_)]]></querystr>
+<stuans>19</stuans>
+<correct>19</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >92</id><querystr><![CDATA[assign a; Select a pattern a (_, _"5 + 3"_)]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" comment="" >93</id><querystr><![CDATA[assign a, a1; Select a pattern a1 (_, _"x + 1"_)]]></querystr>
+<stuans>1,2,3,5,7,9,11,12,13,14,16,19,21,22,25,26,27,28</stuans>
+<correct>1,2,3,5,7,9,11,12,13,14,16,19,21,22,25,26,27,28</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id With="1" comment="" >94</id><querystr><![CDATA[stmt s; constant co; Select s with s.stmt# = co.value]]></querystr>
+<stuans>1,2,3</stuans>
+<correct>1,2,3</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Pattern="1" With="1" comment="" >95</id><querystr><![CDATA[if ifstat; constant co; Select BOOLEAN pattern ifstat ("idx", _, _) with co.value = 2]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >96</id><querystr><![CDATA[ Select BOOLEAN such that Next (1, 2)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >97</id><querystr><![CDATA[ Select BOOLEAN such that Next (6, 8)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >98</id><querystr><![CDATA[ Select BOOLEAN such that Next (8, 9)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >99</id><querystr><![CDATA[ Select BOOLEAN such that Next (10, 11)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>4.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >100</id><querystr><![CDATA[ Select BOOLEAN such that Next (12, 10)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >101</id><querystr><![CDATA[ Select BOOLEAN such that Next (12, 11)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>5.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >102</id><querystr><![CDATA[ Select BOOLEAN such that Next (13, 14)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >103</id><querystr><![CDATA[ Select BOOLEAN such that Next (17, 18)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" comment="" >104</id><querystr><![CDATA[ Select BOOLEAN such that Next (23, 27)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>6.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id NextStar="1" comment="" >105</id><querystr><![CDATA[ Select BOOLEAN such that Next* (9, 9)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id NextStar="1" comment="" >106</id><querystr><![CDATA[ Select BOOLEAN such that Next* (10, 10)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>3.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id NextStar="1" comment="" >107</id><querystr><![CDATA[ Select BOOLEAN such that Next* (12, 12)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id NextStar="1" comment="" >108</id><querystr><![CDATA[ Select BOOLEAN such that Next* (20, 20)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

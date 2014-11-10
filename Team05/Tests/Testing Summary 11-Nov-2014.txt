@@ -1,0 +1,21 @@
+Testing Summary 11-Nov-2014
+
+Iteration X - well done guys
+
+Q1- perfect 
+Q2-	perfect
+
+Q4- perfect
+Q5- 6 wrong ans (most prob wrong test case, ignore this)
+Q6- perfect
+Q7- perfect 
+Q8- 1 wrong ans (with, i think lacie?)
+Q9- 2 exception; 9 wrong ans (idk who)
+Q10- 1 timeout, (last killer massive next)
+Q11- perfect
+Q12- perfect
+Q13- 1 exception (might be lacie)
+Q14- perfect
+Q15- 1 wrong ans, followstar tuple, (might be lacie) 
+Q16- 2 wrong ans  (might be lacie), (might be test case wrong, please check test case again)
+Q17- no comment

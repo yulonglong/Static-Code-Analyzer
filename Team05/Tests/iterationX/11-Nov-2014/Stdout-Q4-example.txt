@@ -1,0 +1,1870 @@
+Parameters : S4-example.txt Q4-example.txt R4-example.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+Extracting Sibling
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - Parent, ImplStmtLine, Typed :: Which is the parent (type while) of the statement in line number 7
+while w;
+Select w such that Parent(w, 7)
+none
+5000
+Evaluating query 1 - Parent, ImplStmtLine, Typed :: Which is the parent (type while) of the statement in line number 7
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent(w, 7)
+
+ EVALUATING PARENT (w 7)
+tk1 = w tk2 = 7
+Calling getParent(TYPE, STMTNUM)
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+--INSERTING w--
+w Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+after intersect pairs
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = w p.size = 0
+FIRST PARAM = w
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - Follows, Typed, ImplStmtLine ::
+if ifs;
+Select ifs such that Follows(5, ifs)
+6
+5000
+Evaluating query 2 - Follows, Typed, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows(5, ifs)
+
+ EVALUATING FOLLOWS (5 ifs)
+Second token is alpha and it does not exist in linkages
+First token is digit
+Answer is = 6
+followsAns.size = 1
+--INSERTING ifs--
+ifs Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = ifs p.size = 1
+FIRST PARAM = 5
+SECOND PARAM = ifs
+it2->ans2 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+3 - ParentStar, Typed, ImplStmtLine ::
+assign a;
+Select a such that Parent*(4, a)
+5, 7, 8, 9, 11
+5000
+Evaluating query 3 - ParentStar, Typed, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+parent*(4, a)
+
+ EVALUATING PARENT* (4 a)
+Initialzing all Parent* variables
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 5
+FIRST PARAM = 4
+SECOND PARAM = a
+it2->ans2 = 11
+it2->ans2 = 9
+it2->ans2 = 8
+it2->ans2 = 7
+it2->ans2 = 5
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 11 9 8 7 5 
+Correct answer: 5 7 8 9 11 
+4 - FollowsStar, Typed, ImplStmtLine ::
+call c;
+Select c such that Follows*(1, c)
+12
+5000
+Evaluating query 4 - FollowsStar, Typed, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+follows*(1, c)
+
+ EVALUATING FOLLOWS* (1 c)
+Handling Follows*(stmtnum, type)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+Calling getFollows(type, stmtnum)
+In intersect Pairs: both do not exist
+Insert links for tk2 = c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = c p.size = 1
+FIRST PARAM = 1
+SECOND PARAM = c
+it2->ans2 = 12
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 12 
+Correct answer: 12 
+5 - Modifies ::
+stmt s;
+Select s such that Modifies(s, "i")
+3, 4, 11, 12, 13, 14, 17
+5000
+Evaluating query 5 - Modifies ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+modifies(s, "i")
+
+ EVALUATING MODIFIES (s "i")
+3
+answer is empty: 0
+modifiesAnswer3 3
+modifiesAnswer4 3
+modifiesAnswer11 3
+modifiesAnswer12 3
+modifiesAnswer13 3
+modifiesAnswer14 3
+modifiesAnswer17 3
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 7
+FIRST PARAM = s
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 4 11 12 13 14 17 
+Correct answer: 3 4 11 12 13 14 17 
+6 - Typed, Uses ::
+variable v;
+Select v such that Uses("p", v)
+i, x, y, z
+5000
+Evaluating query 6 - Typed, Uses ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+uses("p", v)
+
+ EVALUATING USES ("p" v)
+In intersect Pairs: both do not exist
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 4
+FIRST PARAM = "p"
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x z i y 
+Correct answer: i x y z 
+7 - Calls, Typed ::
+procedure p;
+Select p such that Calls(p, "q")
+Example, p
+5000
+Evaluating query 7 - Calls, Typed ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls(p, "q")
+
+ EVALUATING CALLS (p "q")
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+--INSERTING p--
+p Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p p.size = 2
+FIRST PARAM = p
+it2->ans1 = 1
+it2->ans1 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: Example p 
+Correct answer: Example p 
+8 - CallsStar, Typed ::
+procedure p;
+Select p such that Calls*("Example", p)
+p, q
+5000
+Evaluating query 8 - CallsStar, Typed ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+calls*("Example", p)
+
+ EVALUATING CALLS* ("Example" p)
+---STARTING CALLS STAR---
+in recursive Call
+rootindex = 1 currentIndex= 1
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 2
+after getting called
+in recursive Call
+rootindex = 1 currentIndex= 3
+after getting called
+In intersect Pairs: both do not exist
+Insert links for tk2 = p
+--INSERTING p--
+p Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END OF CALLS STAR---
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p p.size = 2
+FIRST PARAM = "Example"
+SECOND PARAM = p
+it2->ans2 = 3
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: q p 
+Correct answer: p q 
+9 - Typed, Next, ImplStmtLine ::
+prog_line n;
+Select n such that Next(4, n)
+5, 12
+5000
+Evaluating query 9 - Typed, Next, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(4, n)
+
+ EVALUATING NEXT (4 n)
+Second Token is Alpha
+Iterating through the vector of GETNEXT(TOKEN1)
+Pushing into Answer 5
+Iterating through the vector of GETNEXT(TOKEN1)
+Pushing into Answer 12
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,12,
+5 has next consisting of 6,
+6 has next consisting of 7,8,
+7 has next consisting of 9,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,
+11 has next consisting of 4,
+12 has next consisting of 
+13 has next consisting of 14,20,
+14 has next consisting of 15,18,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 14,
+18 has next consisting of 19,
+19 has next consisting of 21,
+20 has next consisting of 21,
+21 has next consisting of 
+22 has next consisting of 23,24,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 2
+FIRST PARAM = 4
+SECOND PARAM = n
+it2->ans2 = 5
+it2->ans2 = 12
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 5 12 
+Correct answer: 5 12 
+10 - NextStar, Typed, ImplStmtLine ::
+prog_line n;
+Select n such that Next*(n, 4)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+Evaluating query 10 - NextStar, Typed, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(n, 4)
+
+ EVALUATING NEXT* (n 4)
+nextStarTable empty = 1
+In Next*(token, digit)
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+Pushing into answer the pair 11and4
+Pushing into answer the pair 10and4
+Pushing into answer the pair 9and4
+Pushing into answer the pair 8and4
+Pushing into answer the pair 7and4
+Pushing into answer the pair 6and4
+Pushing into answer the pair 5and4
+Pushing into answer the pair 4and4
+Pushing into answer the pair 3and4
+Pushing into answer the pair 2and4
+Pushing into answer the pair 1and4
+In intersect Pairs: both do not exist
+Insert links for tk1 =n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 11
+FIRST PARAM = n
+it2->ans1 = 11
+it2->ans1 = 10
+it2->ans1 = 9
+it2->ans1 = 8
+it2->ans1 = 7
+it2->ans1 = 6
+it2->ans1 = 5
+it2->ans1 = 4
+it2->ans1 = 3
+it2->ans1 = 2
+it2->ans1 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 11 10 9 8 7 6 5 4 3 2 1 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 
+11 - Affects, Typed, ImplStmtLine ::
+assign a;
+Select a such that Affects(a, 9)
+2, 3, 5, 7, 11
+5000
+Evaluating query 11 - Affects, Typed, ImplStmtLine ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(a, 9)
+
+ EVALUATING AFFECTS
+Case 2: Left is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 5
+FIRST PARAM = a
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 5
+it2->ans1 = 7
+it2->ans1 = 11
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 3 5 7 11 
+Correct answer: 2 3 5 7 11 
+12 - AffectsStar, ImplStmtLine, Typed ::
+assign a;
+Select a such that Affects*(11, a)
+9, 11
+5000
+Evaluating query 12 - AffectsStar, ImplStmtLine, Typed ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(11, a)
+
+ EVALUATING AFFECTSSTAR
+Case 3: Right is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(11,a) :2
+ANSWERS FOR AFFECTS*(11,a) :
+(11, 9)
+(11, 11)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 2
+FIRST PARAM = 11
+SECOND PARAM = a
+it2->ans2 = 9
+it2->ans2 = 11
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 11 
+Correct answer: 9 11 
+13 - Pattern, Typed ::
+assign a;
+Select a pattern a("z", _"x+i")
+none
+5000
+Evaluating query 13 - Pattern, Typed ::
+Query Invalid
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - Pattern, Typed ::
+assign a;
+Select a pattern a(_, _"x + 1"_)
+7, 18, 23
+5000
+Evaluating query 14 - Pattern, Typed ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern(_, _"x + 1"_)
+
+ EVALUATING PATTERN
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+PRINTING PATTERNANS
+ans1 = 23 ans2 = 23
+ans1 = 18 ans2 = 18
+ans1 = 7 ans2 = 7
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 3
+FIRST PARAM = a
+it2->ans1 = 23
+it2->ans1 = 18
+it2->ans1 = 7
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 23 18 7 
+Correct answer: 7 18 23 
+15 - Pattern, Typed ::
+assign a;
+Select a pattern a(_, " 3  +  2 ")
+none
+5000
+Evaluating query 15 - Pattern, Typed ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+pattern(_, " 3  +  2 ")
+
+ EVALUATING PATTERN
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+PRINTING PATTERNANS
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = a
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - Typed, Modifies, With ::
+while w; variable v;
+Select w such that Modifies(w, v) with v.varName = "x"
+4, 14
+5000
+Evaluating query 16 - Typed, Modifies, With ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+modifies(w, v)
+
+ EVALUATING MODIFIES (w v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+--INSERTING w--
+w Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+with(v, "x")
+
+ EVALUATING WITH (v "x")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: v
+r.tk2: "x"
+only 1 alpha token found
+variable
+null
+First token VARIABLE
+tk2 = "x" index = 1
+IntersectPairs tk1 Exists tk1 = v
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 2
+Erasing element 3
+Erasing element 4
+Erasing element 2
+Erasing element 3
+Insert links for tk1 =v
+--INSERTING v--
+v Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 2
+FIRST PARAM = w
+it2->ans1 = 4
+it2->ans1 = 14
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 14 
+Correct answer: 4 14 
+17 - Typed, Uses, With ::
+if ifs; variable v;
+Select v such that Uses(ifs, v) with ifs.stmt# = 22
+x, z
+5000
+Evaluating query 17 - Typed, Uses, With ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+uses(ifs, v)
+
+ EVALUATING USES (ifs v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =ifs
+--INSERTING ifs--
+ifs Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+with(ifs, 22)
+
+ EVALUATING WITH (ifs 22)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: ifs
+r.tk2: 22
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 22
+IntersectPairs tk1 Exists tk1 = ifs
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = ifs
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+6
+13
+22
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 1
+Erasing element 2
+Erasing element 1
+Erasing element 2
+Erasing element 3
+Erasing element 4
+Insert links for tk1 =ifs
+--INSERTING ifs--
+ifs Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 2
+FIRST PARAM = ifs
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: x z 
+Correct answer: x z 
+18 - Typed, ReturnBoolean, Calls, With, With-And ::
+procedure p, q;
+Select BOOLEAN such that Calls(p, q) with q.procName = "p" and p.procName = "Example"
+true
+5000
+Evaluating query 18 - Typed, ReturnBoolean, Calls, With, With-And ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+calls(p, q)
+
+ EVALUATING CALLS (p q)
+it = 1 it2 = 2
+it = 1 it2 = 3
+it = 2 it2 = 3
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+--INSERTING p--
+p Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = q
+--INSERTING q--
+q Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+with(p, "Example")
+
+ EVALUATING WITH (p "Example")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: p
+r.tk2: "Example"
+only 1 alpha token found
+procedure
+null
+First token PROCEDURE
+tk2 = "Example" index = 1
+IntersectPairs tk1 Exists tk1 = p
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = p
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 3
+Insert links for tk1 =p
+--INSERTING p--
+p Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(q, "p")
+
+ EVALUATING WITH (q "p")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: q
+r.tk2: "p"
+only 1 alpha token found
+procedure
+null
+First token PROCEDURE
+tk2 = "p" index = 2
+IntersectPairs tk1 Exists tk1 = q
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = q
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 3
+Insert links for tk1 =q
+--INSERTING q--
+q Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - Typed, FollowsStar, Modifies, Uses, With, And-Multi ::
+if ifs; assign a1, a2; variable v1, v2;
+Select ifs such that Follows*(a1, ifs) and Follows*(ifs, a2) and Modifies(ifs, v1) and Uses(ifs, v2) with v1.varName = v2.varName
+6
+5000
+Evaluating query 19 - Typed, FollowsStar, Modifies, Uses, With, And-Multi ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 5
+Initializing Variables
+ 
+follows*(a1, ifs)
+
+ EVALUATING FOLLOWS* (a1 ifs)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a1
+--INSERTING a1--
+a1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = ifs
+--INSERTING ifs--
+ifs Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+ 
+follows*(ifs, a2)
+
+ EVALUATING FOLLOWS* (ifs a2)
+IntersectPairs tk1 Exists tk1 = ifs
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = ifs
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+6
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Insert links for tk1 =ifs
+--INSERTING ifs--
+ifs Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = a2
+--INSERTING a2--
+a2 Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Inserting into RelAns RelIndex = 1
+Inserting tokens into relParameters
+ 
+modifies(ifs, v1)
+
+ EVALUATING MODIFIES (ifs v1)
+IntersectPairs tk1 Exists tk1 = ifs
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = ifs
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+6
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Insert links for tk1 =ifs
+--INSERTING ifs--
+ifs Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v1
+--INSERTING v1--
+v1 Not Found in Linkages and relIndex = 2
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+uses(ifs, v2)
+
+ EVALUATING USES (ifs v2)
+IntersectPairs tk1 Exists tk1 = ifs
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = ifs
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+6
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+RelIndex of clause with contents being removed: 2
+PairIndex: 1
+Insert links for tk1 =ifs
+--INSERTING ifs--
+ifs Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v2
+--INSERTING v2--
+v2 Not Found in Linkages and relIndex = 3
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+with(v1, v2)
+
+ EVALUATING WITH (v1 v2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 4
+r.tk1: v1
+r.tk2: v2
+2 alpha tokens found
+tk1 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = v1
+Retrieving Token Evaluated Answers with first relationship index = 2
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+4
+End retrieving token
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = v2
+Retrieving Token Evaluated Answers with first relationship index = 3
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+Both tk1 and tk2 Exists tk1 = v1 tk2 = v2
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v1
+Retrieving Token Evaluated Answers with first relationship index = 2
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+4
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v2
+Retrieving Token Evaluated Answers with first relationship index = 3
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 2
+PairIndex: 2
+Erasing element 4
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 3
+PairIndex: 2
+Erasing element 1
+Insert links for tk1 =v1
+--INSERTING v1--
+v1 Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v2
+--INSERTING v2--
+v2 Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = ifs p.size = 1
+FIRST PARAM = a1
+SECOND PARAM = ifs
+it2->ans2 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+20 - Typed, NextStar, ParentStar, ImplStmtLine, And-Tuple ::
+prog_line n; stmt s;
+Select s such that Next*(16, n) and Parent*(s, n)
+13, 14
+5000
+Evaluating query 20 - Typed, NextStar, ParentStar, ImplStmtLine, And-Tuple ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+next*(16, n)
+
+ EVALUATING NEXT* (16 n)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk2 = n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+parent*(s, n)
+
+ EVALUATING PARENT* (s n)
+Initialzing all Parent* variables
+If both tokens are alpha or one of them is a wildcard
+In retrieveTokenEvaluatedAnswers Finding tk = n
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+14
+15
+16
+17
+18
+19
+21
+End retrieving token
+sb is Empty: 0
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+Iterating token 2 set Sb
+--INSERTING s--
+s Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+--INSERTING n--
+n Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 9
+FIRST PARAM = s
+it2->ans1 = 13
+it2->ans1 = 13
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 13 14 
+Correct answer: 13 14 
+21 - Typed, AffectsStar, NextStar, ImplStmtLine, And-Tuple ::
+prog_line n; assign a;
+Select a such that Affects*(a, n) and Next*(13, n)
+17, 18, 19, 20
+5000
+Evaluating query 21 - Typed, AffectsStar, NextStar, ImplStmtLine, And-Tuple ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+next*(13, n)
+
+ EVALUATING NEXT* (13 n)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk2 = n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+affects*(a, n)
+
+ EVALUATING AFFECTSSTAR
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+In retrieveTokenEvaluatedAnswers Finding tk = n
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+14
+15
+16
+17
+18
+19
+20
+21
+End retrieving token
+--INSERTING n--
+n Found in Linkages
+--END OF INSERT--
+Affects*(17,17) is true. Inserting into affAns.
+Affects*(17,21) is true. Inserting into affAns.
+Affects*(18,19) is true. Inserting into affAns.
+Affects*(18,21) is true. Inserting into affAns.
+Affects*(19,21) is true. Inserting into affAns.
+Affects*(20,21) is true. Inserting into affAns.
+NUMBER OF ANSWERS OF AFFECTS*(a,n) :6
+ANSWERS FOR AFFECTS*(a,n) :
+(17, 17)
+(17, 21)
+(18, 19)
+(18, 21)
+(19, 21)
+(20, 21)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 6
+FIRST PARAM = a
+it2->ans1 = 17
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 17 18 19 20 
+Correct answer: 17 18 19 20 
+22 - ReturnTriple, Modifies, Calls, Typed, And-Tuple ::
+procedure p, q; variable v;
+Select <p, q, v> such that Modifies(p, v) and Calls(p, q)
+Example p i, Example p x, Example p y, Example p z, Example q i, Example q x, Example q y, Example q z, p q i, p q x, p q z
+5000
+Evaluating query 22 - ReturnTriple, Modifies, Calls, Typed, And-Tuple ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+modifies(p, v)
+
+ EVALUATING MODIFIES (p v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+--INSERTING p--
+p Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+calls(p, q)
+
+ EVALUATING CALLS (p q)
+it = 1 it2 = 2
+it = 1 it2 = 3
+it = 2 it2 = 3
+IntersectPairs tk1 Exists tk1 = p
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = p
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 1
+Erasing element 2
+Insert links for tk1 =p
+--INSERTING p--
+p Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = q
+--INSERTING q--
+q Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p p.size = 7
+FIRST PARAM = p
+it2->ans1 = 1
+it2->ans1 = 1
+it2->ans1 = 1
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 2
+it2->ans1 = 2
+Iterating Selected Syn
+token in selectedSyn = q p.size = 3
+FIRST PARAM = p
+SECOND PARAM = q
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 3
+Iterating Selected Syn
+token in selectedSyn = v p.size = 7
+FIRST PARAM = p
+SECOND PARAM = v
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: Example p x Example q x Example p z Example q z Example p i Example q i Example p y Example q y p q x p q z p q i 
+Correct answer: Example p i Example p x Example p y Example p z Example q i Example q x Example q y Example q z p q i p q x p q z 
+23 - Typed, ReturnBoolean, UnnamedVar, FollowsStar, Affects, Uses, And-Multi :: Establish the truth if a call-statement followsStar some statement AND assignment a1 affects assignment a2 AND assignment a2 uses something
+call c; assign a1, a2;
+Select BOOLEAN such that Follows*(_, c) and Affects(a1, a2) and Uses(a2, _)
+true
+5000
+Evaluating query 23 - Typed, ReturnBoolean, UnnamedVar, FollowsStar, Affects, Uses, And-Multi :: Establish the truth if a call-statement followsStar some statement AND assignment a1 affects assignment a2 AND assignment a2 uses something
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+relationships with only one alpha token found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+follows*(_, c)
+
+ EVALUATING FOLLOWS* (_ c)
+In intersect Pairs: both do not exist
+Insert links for tk2 = c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+ 
+uses(a2, _)
+
+ EVALUATING USES (a2 _)
+In intersect Pairs: both do not exist
+Insert links for tk1 =a2
+--INSERTING a2--
+a2 Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+affects(a1, a2)
+
+ EVALUATING AFFECTS
+Case 1: Both are Synonyms
+--INSERTING a1--
+a1 Not Found in Linkages and relIndex = 2
+--END OF INSERT--
+In retrieveTokenEvaluatedAnswers Finding tk = a2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+5
+7
+8
+9
+11
+15
+17
+18
+19
+21
+23
+24
+End retrieving token
+--INSERTING a2--
+a2 Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+24 - Typed, Pattern, And-Tuple, AffectsStar, Uses ::
+assign a1, a2; variable v;
+Select v pattern a1(v, _) such that Affects*(a1, a2) and Uses(a2, v)
+i, x, z
+5000
+Evaluating query 24 - Typed, Pattern, And-Tuple, AffectsStar, Uses ::
+Ordering Relationships
+In orderRelationships
+pattern found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+pattern(v, _)
+
+ EVALUATING PATTERN
+--INSERTING a1--
+a1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+PRINTING PATTERNANS
+ans1 = 24 ans2 = 1
+ans1 = 23 ans2 = 2
+ans1 = 21 ans2 = 2
+ans1 = 20 ans2 = 2
+ans1 = 19 ans2 = 2
+ans1 = 18 ans2 = 1
+ans1 = 17 ans2 = 3
+ans1 = 15 ans2 = 1
+ans1 = 11 ans2 = 3
+ans1 = 9 ans2 = 2
+ans1 = 8 ans2 = 4
+ans1 = 7 ans2 = 2
+ans1 = 5 ans2 = 1
+ans1 = 3 ans2 = 3
+ans1 = 2 ans2 = 2
+ans1 = 1 ans2 = 1
+Inserting tokens into relParameters
+ 
+affects*(a1, a2)
+
+ EVALUATING AFFECTSSTAR
+Case 1: Both are Synonyms
+In retrieveTokenEvaluatedAnswers Finding tk = a1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+5
+7
+8
+9
+11
+15
+17
+18
+19
+20
+21
+23
+24
+End retrieving token
+--INSERTING a1--
+a1 Found in Linkages
+--END OF INSERT--
+--INSERTING a2--
+a2 Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Affects*(1,5) is true. Inserting into affAns.
+Affects*(1,7) is true. Inserting into affAns.
+Affects*(1,8) is true. Inserting into affAns.
+Affects*(1,9) is true. Inserting into affAns.
+Affects*(2,8) is true. Inserting into affAns.
+Affects*(2,9) is true. Inserting into affAns.
+Affects*(3,9) is true. Inserting into affAns.
+Affects*(3,11) is true. Inserting into affAns.
+Affects*(5,7) is true. Inserting into affAns.
+Affects*(5,8) is true. Inserting into affAns.
+Affects*(5,9) is true. Inserting into affAns.
+Affects*(7,9) is true. Inserting into affAns.
+Affects*(11,9) is true. Inserting into affAns.
+Affects*(11,11) is true. Inserting into affAns.
+Affects*(17,17) is true. Inserting into affAns.
+Affects*(17,21) is true. Inserting into affAns.
+Affects*(18,19) is true. Inserting into affAns.
+Affects*(18,21) is true. Inserting into affAns.
+Affects*(19,21) is true. Inserting into affAns.
+Affects*(20,21) is true. Inserting into affAns.
+NUMBER OF ANSWERS OF AFFECTS*(a1,a2) :20
+ANSWERS FOR AFFECTS*(a1,a2) :
+(1, 5)
+(1, 7)
+(1, 8)
+(1, 9)
+(2, 8)
+(2, 9)
+(3, 9)
+(3, 11)
+(5, 7)
+(5, 8)
+(5, 9)
+(7, 9)
+(11, 9)
+(11, 11)
+(17, 17)
+(17, 21)
+(18, 19)
+(18, 21)
+(19, 21)
+(20, 21)
+Inserting tokens into relParameters
+ 
+uses(a2, v)
+
+ EVALUATING USES (a2 v)
+Both tk1 and tk2 Exists tk1 = a2 tk2 = v
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = a2
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+5
+7
+8
+9
+11
+17
+19
+21
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 1
+PairIndex: 2
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 4
+Insert links for tk1 =a2
+--INSERTING a2--
+a2 Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v p.size = 15
+FIRST PARAM = a1
+SECOND PARAM = a1
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 2
+it2->ans2 = 2
+it2->ans2 = 2
+it2->ans2 = 1
+it2->ans2 = 3
+it2->ans2 = 1
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 2
+it2->ans2 = 1
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: z x i 
+Correct answer: i x z 
+25 - NextStar, Modifies, Uses, And-Multi ::
+prog_line n1, n2; variable v; call c;
+Select c such that Next*(n1, n2) and Modifies(n1, v) and Uses(n2, v) and Modifies(c, v)
+10, 12, 16
+5000
+Evaluating query 25 - NextStar, Modifies, Uses, And-Multi ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 4
+Initializing Variables
+ 
+next*(n1, n2)
+
+ EVALUATING NEXT* (n1 n2)
+nextStarTable empty = 1
+NEXTSTARTABLE(1,2)
+NEXTSTARTABLE(1,3)
+NEXTSTARTABLE(1,4)
+NEXTSTARTABLE(1,5)
+NEXTSTARTABLE(1,6)
+NEXTSTARTABLE(1,7)
+NEXTSTARTABLE(1,8)
+NEXTSTARTABLE(1,9)
+NEXTSTARTABLE(1,10)
+NEXTSTARTABLE(1,11)
+NEXTSTARTABLE(1,12)
+NEXTSTARTABLE(2,3)
+NEXTSTARTABLE(2,4)
+NEXTSTARTABLE(2,5)
+NEXTSTARTABLE(2,6)
+NEXTSTARTABLE(2,7)
+NEXTSTARTABLE(2,8)
+NEXTSTARTABLE(2,9)
+NEXTSTARTABLE(2,10)
+NEXTSTARTABLE(2,11)
+NEXTSTARTABLE(2,12)
+NEXTSTARTABLE(3,4)
+NEXTSTARTABLE(3,5)
+NEXTSTARTABLE(3,6)
+NEXTSTARTABLE(3,7)
+NEXTSTARTABLE(3,8)
+NEXTSTARTABLE(3,9)
+NEXTSTARTABLE(3,10)
+NEXTSTARTABLE(3,11)
+NEXTSTARTABLE(3,12)
+NEXTSTARTABLE(4,4)
+NEXTSTARTABLE(4,5)
+NEXTSTARTABLE(4,6)
+NEXTSTARTABLE(4,7)
+NEXTSTARTABLE(4,8)
+NEXTSTARTABLE(4,9)
+NEXTSTARTABLE(4,10)
+NEXTSTARTABLE(4,11)
+NEXTSTARTABLE(4,12)
+NEXTSTARTABLE(5,4)
+NEXTSTARTABLE(5,5)
+NEXTSTARTABLE(5,6)
+NEXTSTARTABLE(5,7)
+NEXTSTARTABLE(5,8)
+NEXTSTARTABLE(5,9)
+NEXTSTARTABLE(5,10)
+NEXTSTARTABLE(5,11)
+NEXTSTARTABLE(5,12)
+NEXTSTARTABLE(6,4)
+NEXTSTARTABLE(6,5)
+NEXTSTARTABLE(6,6)
+NEXTSTARTABLE(6,7)
+NEXTSTARTABLE(6,8)
+NEXTSTARTABLE(6,9)
+NEXTSTARTABLE(6,10)
+NEXTSTARTABLE(6,11)
+NEXTSTARTABLE(6,12)
+NEXTSTARTABLE(7,4)
+NEXTSTARTABLE(7,5)
+NEXTSTARTABLE(7,6)
+NEXTSTARTABLE(7,7)
+NEXTSTARTABLE(7,8)
+NEXTSTARTABLE(7,9)
+NEXTSTARTABLE(7,10)
+NEXTSTARTABLE(7,11)
+NEXTSTARTABLE(7,12)
+NEXTSTARTABLE(8,4)
+NEXTSTARTABLE(8,5)
+NEXTSTARTABLE(8,6)
+NEXTSTARTABLE(8,7)
+NEXTSTARTABLE(8,8)
+NEXTSTARTABLE(8,9)
+NEXTSTARTABLE(8,10)
+NEXTSTARTABLE(8,11)
+NEXTSTARTABLE(8,12)
+NEXTSTARTABLE(9,4)
+NEXTSTARTABLE(9,5)
+NEXTSTARTABLE(9,6)
+NEXTSTARTABLE(9,7)
+NEXTSTARTABLE(9,8)
+NEXTSTARTABLE(9,9)
+NEXTSTARTABLE(9,10)
+NEXTSTARTABLE(9,11)
+NEXTSTARTABLE(9,12)
+NEXTSTARTABLE(10,4)
+NEXTSTARTABLE(10,5)
+NEXTSTARTABLE(10,6)
+NEXTSTARTABLE(10,7)
+NEXTSTARTABLE(10,8)
+NEXTSTARTABLE(10,9)
+NEXTSTARTABLE(10,10)
+NEXTSTARTABLE(10,11)
+NEXTSTARTABLE(10,12)
+NEXTSTARTABLE(11,4)
+NEXTSTARTABLE(11,5)
+NEXTSTARTABLE(11,6)
+NEXTSTARTABLE(11,7)
+NEXTSTARTABLE(11,8)
+NEXTSTARTABLE(11,9)
+NEXTSTARTABLE(11,10)
+NEXTSTARTABLE(11,11)
+NEXTSTARTABLE(11,12)
+NEXTSTARTABLE(13,14)
+NEXTSTARTABLE(13,15)
+NEXTSTARTABLE(13,16)
+NEXTSTARTABLE(13,17)
+NEXTSTARTABLE(13,18)
+NEXTSTARTABLE(13,19)
+NEXTSTARTABLE(13,20)
+NEXTSTARTABLE(13,21)
+NEXTSTARTABLE(14,14)
+NEXTSTARTABLE(14,15)
+NEXTSTARTABLE(14,16)
+NEXTSTARTABLE(14,17)
+NEXTSTARTABLE(14,18)
+NEXTSTARTABLE(14,19)
+NEXTSTARTABLE(14,21)
+NEXTSTARTABLE(15,14)
+NEXTSTARTABLE(15,15)
+NEXTSTARTABLE(15,16)
+NEXTSTARTABLE(15,17)
+NEXTSTARTABLE(15,18)
+NEXTSTARTABLE(15,19)
+NEXTSTARTABLE(15,21)
+NEXTSTARTABLE(16,14)
+NEXTSTARTABLE(16,15)
+NEXTSTARTABLE(16,16)
+NEXTSTARTABLE(16,17)
+NEXTSTARTABLE(16,18)
+NEXTSTARTABLE(16,19)
+NEXTSTARTABLE(16,21)
+NEXTSTARTABLE(17,14)
+NEXTSTARTABLE(17,15)
+NEXTSTARTABLE(17,16)
+NEXTSTARTABLE(17,17)
+NEXTSTARTABLE(17,18)
+NEXTSTARTABLE(17,19)
+NEXTSTARTABLE(17,21)
+NEXTSTARTABLE(18,19)
+NEXTSTARTABLE(18,21)
+NEXTSTARTABLE(19,21)
+NEXTSTARTABLE(20,21)
+NEXTSTARTABLE(22,23)
+NEXTSTARTABLE(22,24)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n1
+--INSERTING n1--
+n1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = n2
+--INSERTING n2--
+n2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+modifies(n1, v)
+
+ EVALUATING MODIFIES (n1 v)
+IntersectPairs tk1 Exists tk1 = n1
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = n1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+13
+14
+15
+16
+17
+18
+19
+20
+22
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =n1
+--INSERTING n1--
+n1 Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+uses(n2, v)
+
+ EVALUATING USES (n2 v)
+Both tk1 and tk2 Exists tk1 = n2 tk2 = v
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = n2
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+14
+15
+16
+17
+18
+19
+20
+21
+23
+24
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 20
+Erasing element 3
+Erasing element 3
+Erasing element 2
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 1
+PairIndex: 2
+Insert links for tk1 =n2
+--INSERTING n2--
+n2 Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+modifies(c, v)
+
+ EVALUATING MODIFIES (c v)
+IntersectPairs tk2 Exists tk2 = v
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+4
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 1
+PairIndex: 2
+Erasing element 4
+Erasing element 4
+Erasing element 4
+RelIndex of clause with contents being removed: 2
+PairIndex: 2
+Erasing element 4
+Erasing element 4
+Erasing element 4
+Insert links for tk1 =c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 3
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = c p.size = 7
+FIRST PARAM = c
+it2->ans1 = 10
+it2->ans1 = 10
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 12
+it2->ans1 = 16
+it2->ans1 = 16
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 12 16 
+Correct answer: 10 12 16 
+End of evaluating Query File.
+AutoTester Completed !
