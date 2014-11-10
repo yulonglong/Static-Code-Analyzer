@@ -59,3 +59,21 @@ void ExtractSiblingTest::testSourceDE5() {
 
 	pkb->~PKB();	
 }
+
+void ExtractSiblingTest::testSourceSibling() {
+	PKB *pkb;
+	Node* ASTRoot;
+	
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("SourceSibling.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	DesignExtractor::extractSiblingRelationshipDriver(*ASTRoot, *pkb);
+
+
+	pkb->~PKB();	
+}
