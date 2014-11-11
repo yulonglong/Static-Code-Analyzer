@@ -171,9 +171,9 @@ public:
 	//! If the Follows relationship between the two statement names is true, return true. Otherwise, return false.
 	bool isFollows(STMTNUM, STMTNUM);	
 	//! Return the statement number that s follows. Return -1 if not found.
-	STMTNUM getFollows(STMTNUM s);
+	STMTNUM getFollows(STMTNUM);
 	//! Return the statement number that s is followed by. Return -1 if not found.
-	STMTNUM getFollowedBy(STMTNUM s);
+	STMTNUM getFollowedBy(STMTNUM);
 	//! Return a set of all statement numbers that follows another statement number.
 	set<STMTNUM> getAllFollows();
 	//! Return a set of all statement numbers that is followed by another statement number.
