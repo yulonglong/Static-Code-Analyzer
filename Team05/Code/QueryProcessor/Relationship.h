@@ -9,6 +9,39 @@
 
 using namespace std;
 
+/*! \brief A Relationship class which contains structured clauses
+ *  
+ *
+ * A Relationship object contains the necessary information with regard to a clause
+ * There are three types of clauses:
+ * - Such-that clause
+ * - Pattern clause
+ * - With clause
+ *
+ * An example of the clause will be \"such that Next(x,1)\"
+ * - The clause type, NEXT, will be set as the relationship type
+ * - x will be stored in token1
+ * - SYNONYM will be stored in token1Type
+ * - 1 will be stored in token2
+ * - INTEGER will be stored in token2Type
+ * 
+ * 
+ * Relationship class contains the following relevant data:
+ * \code
+ * string relName;
+ * RelType relType;
+ * string patternSyn; //for pattern
+ * TypeTable::SynType callSynType;
+ * string token1;
+ * string token2;
+ * TokenType token1Type;
+ * TokenType token2Type;
+ * \endcode
+ *
+ *
+ * \see Query, QueryParser, QueryEvaluator, Relationship
+ */
+
 class Relationship
 {	
 	public:
@@ -28,17 +61,17 @@ class Relationship
 		TokenType token2Type;
 
     public:
-		//blank relationship
+		//! blank relationship
 		Relationship();
-		//constructor for clause, token1, token2
+		//! constructor for clause, token1, token2
         Relationship(string, string, string);
-		//constructor for clause, patternSyn, token1, token2
+		//! constructor for clause, patternSyn, token1, token2
 		Relationship(string, string, string, string);
-		//constructor for clause, token1, token1type, token2, token2type
+		//! constructor for clause, token1, token1type, token2, token2type
 		Relationship(string, string, TokenType, string, TokenType);
-		//constructor for with-clause, token1, token1type, token2, token2type, callSynTypeProc
+		//! constructor for with-clause, token1, token1type, token2, token2type, callSynTypeProc
 		Relationship(string, string, TokenType, string, TokenType, bool);
-		//constructor for clause, patternSyn, token1, token1type, token2, token2type
+		//! constructor for clause, patternSyn, token1, token1type, token2, token2type
 		Relationship(string, string, string, TokenType, string ,TokenType);
         
 		//getter
