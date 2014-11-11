@@ -70,7 +70,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Table;$(SolutionDir)CodeParser;$(SolutionDir)Follows;$(SolutionDir)Parent;$(SolutionDir)PKB;$(SolutionDir)DesignExtractor;$(SolutionDir)AutoTester</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Table;$(SolutionDir)CodeParser;$(SolutionDir)Follows;$(SolutionDir)Parent;$(SolutionDir)PKB;$(SolutionDir)DesignExtractor</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
