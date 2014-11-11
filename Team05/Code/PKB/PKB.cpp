@@ -17,7 +17,7 @@ PKB::PKB(){
 	uses = Uses::getInstance(varTable);
 	calls = Calls::getInstance(procTable);
 	next = Next::getInstance(typeTable);
-	sibling = Sibling::getInstance();
+	sibling = Sibling::getInstance(varTable,procTable,constTable,typeTable);
 	ASTRoot = NULL;
 	CFGRoot = NULL;
 }
@@ -416,6 +416,44 @@ void PKB::setToNextPair(STMTNUM s, pair<STMTNUM,STMTNUM> p){
 vector<pair<STMTNUM,STMTNUM>> PKB::getNextPair(STMTNUM s){
 	return next->getNextPair(s);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void PKB::printNextTable(){
 	return next->printNextTable();

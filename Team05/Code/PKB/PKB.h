@@ -279,14 +279,14 @@ public:
 	//! Return a statement number that is the parent of the given statement number.
 	set<STMTNUM> getSiblingStmtNumWithStmtNum(STMTNUM);
 	set<VARINDEX> getSiblingVarIndexWithVarIndex(VARINDEX);
-	set<VARINDEX> getSiblingVarIndexWithConstant(CONSTVALUE);
-	set<CONSTVALUE> getSiblingConstantWithVarIndex(VARINDEX);
-	set<CONSTVALUE> getSiblingConstantWithConstant(CONSTVALUE);
+	set<VARINDEX> getSiblingVarIndexWithConstant(CONSTINDEX);
+	set<CONSTINDEX> getSiblingConstantWithVarIndex(VARINDEX);
+	set<CONSTINDEX> getSiblingConstantWithConstant(CONSTINDEX);
 	set<VARINDEX> getSiblingVarIndexWithMathOp(TypeTable::SynType);
-	set<TypeTable::SynType> getSiblingMathOpWithConstant(CONSTVALUE);
-	set<CONSTVALUE> getSiblingConstantWithMathOp(TypeTable::SynType);
+	set<TypeTable::SynType> getSiblingMathOpWithVarIndex(VARINDEX);
+	set<TypeTable::SynType> getSiblingMathOpWithConstant(CONSTINDEX);
+	set<CONSTINDEX> getSiblingConstantWithMathOp(TypeTable::SynType);
 	set<TypeTable::SynType> getSiblingMathOpWithMathOp(TypeTable::SynType);
-	set<string> getSiblingMathOpWithVarIndex(VARINDEX);
 	set<PROCNAME> getSiblingProcNameWithProcName(PROCNAME);
 	set<VARINDEX> getSiblingVarIndexWithStmtList(STMTNUM);
 	set<STMTNUM> getSiblingStmtListWithVarIndex(VARINDEX);
@@ -299,14 +299,15 @@ public:
 	set<CONSTVALUE> getAllSiblingConstantWithVarIndex();
 	set<CONSTVALUE> getAllSiblingConstantWithConstant();
 	set<VARINDEX> getAllSiblingVarIndexWithMathOp();
+	set<TypeTable::SynType> getAllSiblingMathOpWithVarIndex();
 	set<TypeTable::SynType> getAllSiblingMathOpWithConstant();
 	set<CONSTVALUE> getAllSiblingConstantWithMathOp();
 	set<TypeTable::SynType> getAllSiblingMathOpWithMathOp();
-	set<string> getAllSiblingMathOpWithVarIndex();
 	set<PROCNAME> getAllSiblingProcNameWithProcName();
 	set<VARINDEX> getAllSiblingVarIndexWithStmtList();
 	set<STMTNUM> getAllSiblingStmtListWithVarIndex();
 	set<STMTNUM> getAllSiblingStmtListWithStmtList();
+
 	/// @cond
 	VarTable* getVarTable(); 
 	ProcTable* getProcTable(); 
