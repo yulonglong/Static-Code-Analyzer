@@ -188,7 +188,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 
 		if(type1 != Relationship::SYNONYM)
 			ignore1 = true;
-		if(type2 != Relationship::SYNONYM)
+		if(type2 != Relationship::SYNONYM || (token1==token2))
 			ignore2 = true;
 
 		//Case 1: both are Synonyms
