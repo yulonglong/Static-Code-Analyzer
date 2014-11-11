@@ -15,6 +15,9 @@ unordered_map<string, vector<int>> QueryEvaluator::linkages;
 unordered_map<int, vector<Pair>> QueryEvaluator::relAns;
 unordered_map<int, vector<std::string>> QueryEvaluator::relParameters;
 unordered_map<int, set<int>> QueryEvaluator::nextStarTable;
+unordered_map<int, bool> QueryEvaluator::affectsTable;
+unordered_map<int, bool> QueryEvaluator::affectsStarTable;
+
 
 QueryEvaluator::QueryEvaluator(PKB* p){
 	pkb = p;
@@ -256,6 +259,10 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 	for(set<int>::iterator xx = cc.begin(); xx!=cc.end(); xx++){
 		cout<<*xx<<endl;
 	}*/
+
+	affectsTable.clear();
+	affectsStarTable.clear();
+
 
 	cout<<"RETURNING FINAL ANSWERS"<<endl;
 	return relAns;
@@ -3095,15 +3102,25 @@ bool QueryEvaluator::findPath(int start, int target, set<int> modifies) {
 }
 
 bool QueryEvaluator::isAffects(int token1, int token2) {
+	if(affectsTable.count(hashPair(Pair(token1, token2)))!=0)
+		return affectsTable.at(hashPair(Pair(token1, token2)));
+	
 	set<int> modified = pkb->getModified(token1);
 	if( !(pkb->isUses(token2, *modified.begin())) )
 		return false;
 	set<int> modifies = pkb->getModifies(*modified.begin());
 
-	return findPath(token1, token2, modifies);
+	bool ans = findPath(token1, token2, modifies);
+
+	affectsTable.insert(make_pair(hashPair(Pair(token1, token2)), ans));
+
+	return ans;
 }
 
 bool QueryEvaluator::isAffectsStar(int token1, int token2) {
+	if(affectsStarTable.count(hashPair(Pair(token1, token2)))!=0)
+		return affectsStarTable.at(hashPair(Pair(token1, token2)));
+	
 	set<int> next = getNextStar(token1);
 	stack<Pair> st;
 	set<pair<int, int>> visited;
@@ -3118,6 +3135,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 
 		if(isAffects(curr.ans1, curr.ans2)) {
 			if(curr.ans2 == token2) {
+				affectsStarTable.insert(make_pair(hashPair(Pair(token1, token2)), true));
 				return true;
 			}
 			else {
@@ -3130,6 +3148,7 @@ bool QueryEvaluator::isAffectsStar(int token1, int token2) {
 		}
 	}
 
+	affectsStarTable.insert(make_pair(hashPair(Pair(token1, token2)), false));
 	return false;
 }
 
@@ -3156,6 +3175,14 @@ set<int> QueryEvaluator::getNextStar(int start) {
 	return visited;
 }
 
+int QueryEvaluator::hashPair(Pair p) {
+	int tk1 = p.ans1;
+	int tk2 = p.ans2;
+
+	int range = pkb->getStmtRange()+1;
+
+	return tk1 + tk2*range;
+}
 
 void QueryEvaluator::evaluatePattern(Relationship r, std::unordered_map<std::string, TypeTable::SynType> m, int relIndex) {
 	string lhs = r.getToken1();
