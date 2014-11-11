@@ -7,6 +7,8 @@
 #include "QueryEvaluator.h"
 #include "PKB.h"
 
+#include "../AutoTester/source/AbstractWrapper.h"
+
 /*! \brief QueryProcessor is the brain of Static-Code Analyser
  *  
  *

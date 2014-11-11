@@ -115,6 +115,11 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 	//If relations are not empty
 	int relIndex = 0;
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
+		if (AbstractWrapper::GlobalStop) {
+			cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+			return relAns;
+		}
+
 		cout<<" "<<endl;
 		cout<<it->getRelName()<<"("<<it->getToken1()<<", "<< it->getToken2()<<")"<<endl;
 
@@ -2814,6 +2819,11 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
+				if (AbstractWrapper::GlobalStop) {
+					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+					return;
+				}
 				if(isAffects(*itA, *itB))
 					affAns.push_back(Pair(*itA, *itB));
 			}
@@ -2836,6 +2846,11 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
+			if (AbstractWrapper::GlobalStop) {
+				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+				return;
+			}
 			if(isAffects(*it, atoi(tk2.c_str()))) {
 				if(tk1=="_") {
 					affAns.push_back(Pair(-1, -1));
@@ -2868,6 +2883,11 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
+			if (AbstractWrapper::GlobalStop) {
+				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+				return;
+			}
 			if(isAffects(atoi(tk1.c_str()), *it)) {
 				if(tk2=="_"){
 					affAns.push_back(Pair(-1,-1));
@@ -2901,6 +2921,11 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
+				if (AbstractWrapper::GlobalStop) {
+					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+					return;
+				}
 				if(isAffects(*itA, *itB)) {
 					affAns.push_back(Pair(-1,-1));
 					intersectPairs(tk1, tk2, &affAns, relIndex);
@@ -2958,6 +2983,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
+				if (AbstractWrapper::GlobalStop) {
+					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+					return;
+				}
 				if(isAffectsStar(*itA, *itB)) {
 					cout << "Affects*(" << *itA << "," << *itB << ") is true. Inserting into affAns." << endl;
 					affAns.push_back(Pair(*itA, *itB));
@@ -2982,6 +3012,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
+			if (AbstractWrapper::GlobalStop) {
+				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+				return;
+			}
 			if(isAffectsStar(*it, atoi(tk2.c_str())))
 			{	
 				if(tk1=="_") {
@@ -3015,6 +3050,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		}
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
+			if (AbstractWrapper::GlobalStop) {
+				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+				return;
+			}
 			if(isAffectsStar(atoi(tk1.c_str()), *it)) {
 				if(tk2=="_") {
 					affAns.push_back(Pair(-1,-1));
@@ -3047,6 +3087,11 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
+				if (AbstractWrapper::GlobalStop) {
+					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
+					return;
+				}
 				if(isAffectsStar(*itA, *itB)) {
 					affAns.push_back(Pair(-1,-1));
 					//intersectPairs(tk1, tk2, &affAns, relIndex);

@@ -10,6 +10,8 @@
 #include <vector>
 #include <set>
 
+#include "../AutoTester/source/AbstractWrapper.h"
+
 /*! \brief Query Evaluator class 
  *  
  * Overview: Query Evaluator is responsible for :

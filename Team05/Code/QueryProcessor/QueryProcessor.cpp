@@ -151,6 +151,12 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 	tupleTable.push_back(emptyTuple);
 
 	for(int i=0; i<relationships.size(); i++) {
+
+		if (AbstractWrapper::GlobalStop) {
+			cout<< "Timeout detected! Stopping QueryProcessor Tuple!" << endl;
+			return tupleTable;
+		}
+
 		//cout << "Adding relationship " << i << " to tuple table" << endl;
 
 		vector<Pair> clauseAns = clauseAnswers.at(i);
