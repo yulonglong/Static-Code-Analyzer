@@ -97,7 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12db252feb56df9af4bd5fb415cafb99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_query.html">Query</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_query_parser.html#a12db252feb56df9af4bd5fb415cafb99">queryParse</a> (string queryStr, bool &amp;valid)</td></tr>
-<tr class="memdesc:a12db252feb56df9af4bd5fb415cafb99"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure.  <a href="#a12db252feb56df9af4bd5fb415cafb99">More...</a><br /></td></tr>
+<tr class="memdesc:a12db252feb56df9af4bd5fb415cafb99"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html" title="A Query class which contains structured queries. ">Query</a> class structure.  <a href="#a12db252feb56df9af4bd5fb415cafb99">More...</a><br /></td></tr>
 <tr class="separator:a12db252feb56df9af4bd5fb415cafb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -105,14 +105,14 @@ Public Member Functions</h2></td></tr>
 <p>Overview: Parser is responsible to :</p><ul>
 <li>Read the query code</li>
 <li>Tokenize the appropriate sentences</li>
-<li>Build a <a class="el" href="class_query.html">Query</a> class structure to be used by <a class="el" href="class_query_evaluator.html" title="Query Evaluator class. ">QueryEvaluator</a></li>
+<li>Build a <a class="el" href="class_query.html" title="A Query class which contains structured queries. ">Query</a> class structure to be used by <a class="el" href="class_query_evaluator.html" title="Query Evaluator class. ">QueryEvaluator</a></li>
 </ul>
 <p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> has only one public method: </p><div class="fragment"><div class="line"><a class="code" href="class_query.html">Query</a> <a class="code" href="class_query_parser.html#a12db252feb56df9af4bd5fb415cafb99">QueryParser::queryParse</a>(<span class="keywordtype">string</span> queryStr, <span class="keywordtype">bool</span> &amp;valid);</div>
 </div><!-- fragment --><p>It has many private functions and sub-functions to modularize the process of parsing and validating user queries.</p>
 <p>When queryParser() is called, it will call </p><div class="fragment"><div class="line"><span class="keywordtype">bool</span> parseDesignEntity(<span class="keywordtype">string</span>);</div>
 <div class="line"><span class="keywordtype">bool</span> parseSelectCl(<span class="keywordtype">string</span>);</div>
 </div><!-- fragment --><p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> will validate and parse the query against the pre-defined regular expressions which are stated in the grammar rules. (See sample of the pre-defined regex string further below)</p>
-<p>Then <a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> will call the function below to validate the tokens, while constructing the <a class="el" href="class_query.html">Query</a> class simultaneously </p><div class="fragment"><div class="line"><a class="code" href="class_query.html">Query</a> QueryParser::constructAndValidateQuery(vector&lt;string&gt; v, unordered_map&lt;string, TypeTable::SynType&gt; map, <span class="keywordtype">bool</span> &amp;valid){</div>
+<p>Then <a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> will call the function below to validate the tokens, while constructing the <a class="el" href="class_query.html" title="A Query class which contains structured queries. ">Query</a> class simultaneously </p><div class="fragment"><div class="line"><a class="code" href="class_query.html">Query</a> QueryParser::constructAndValidateQuery(vector&lt;string&gt; v, unordered_map&lt;string, TypeTable::SynType&gt; map, <span class="keywordtype">bool</span> &amp;valid){</div>
 <div class="line">   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 2; i &lt; (int) v.size(); i++){</div>
 <div class="line">      <a class="code" href="class_relationship.html">Relationship</a> clauseRel = validateDefaultClauses(v,i,clauseValid);</div>
 <div class="line">      <a class="code" href="class_relationship.html">Relationship</a> patternRel = validatePattern(v,i,patternValid);</div>
@@ -173,7 +173,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html">Query</a> class structure. </p>
+<p><a class="el" href="class_query_parser.html" title="A QueryParser class to validate and parse User Queries. ">QueryParser</a> reads in the query string, tokenizes and detects the structure of the query, create and store the relationship clauses, create and return a <a class="el" href="class_query.html" title="A Query class which contains structured queries. ">Query</a> class structure. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">queryStr</td><td>is the string which contains the query. (e.g. "assign a; while w; Select a such that Follows(w, a) pattern a ("x", _"x+y"_)") </td></tr>
@@ -181,7 +181,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="class_query.html">Query</a> object. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="class_query.html" title="A Query class which contains structured queries. ">Query</a> object. </dd></dl>
 
 </div>
 </div>
@@ -192,7 +192,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 10 2014 04:02:30 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 12 2014 02:32:23 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

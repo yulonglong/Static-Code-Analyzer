@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['follows',['Follows',['../class_follows.html#aaa40c14036dd666d5bf2b1d30cf0f30b',1,'Follows']]]
+  ['evaluatequery',['evaluateQuery',['../class_query_evaluator.html#a9e79f4ecc410777ac5eef747873eb91d',1,'QueryEvaluator']]]
 ];
