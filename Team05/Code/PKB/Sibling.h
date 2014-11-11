@@ -45,10 +45,12 @@ private:
 	vector<vector<CONSTINDEX>> siblingConstantConstantTable; 
 	vector<vector<int>> siblingVarIndexMathOpTable; 
 	vector<vector<STMTNUM>> siblingMathOpVarIndexTable; 
-	vector<vector<STMTNUM>> siblingConstantMathOpTable; 
-	vector<vector<STMTNUM>> siblingMathOpMathOpTable; 
-	vector<vector<STMTNUM>> siblingProcIndexProcIndexTable; 
-	vector<vector<STMTNUM>> siblingVarIndexStmtListTable; 
+	vector<vector<int>> siblingConstantMathOpTable; 
+	vector<vector<STMTNUM>> siblingMathOpConstantTable; 
+	vector<vector<int>> siblingMathOpMathOpTable; 
+	vector<vector<PROCINDEX>> siblingProcIndexProcIndexTable; 
+	vector<vector<STMTNUM>> siblingVarIndexStmtListTable;
+	vector<vector<VARINDEX>> siblingStmtListVarIndexTable; 
 	vector<vector<STMTNUM>> siblingStmtListStmtListTable;
 
 	vector<bool> flagStmtNumStmtNumTable; 
@@ -73,9 +75,11 @@ private:
 	set<VARINDEX> siblingVarIndexMathOpList; 
 	set<int> siblingMathOpVarIndexList; 
 	set<CONSTINDEX> siblingConstantMathOpList; 
-	set<STMTNUM> siblingMathOpMathOpList; 
+	set<int> siblingMathOpConstantList;
+	set<int> siblingMathOpMathOpList; 
 	set<PROCINDEX> siblingProcIndexProcIndexList; 
 	set<VARINDEX> siblingVarIndexStmtListList; 
+	set<STMTNUM> siblingStmtListVarIndexList; 
 	set<STMTNUM> siblingStmtListStmtListList; 
 
 
@@ -136,7 +140,7 @@ public:
 	set<TypeTable::SynType> getSiblingMathOpWithConstant(CONSTINDEX);
 	set<CONSTINDEX> getSiblingConstantWithMathOp(TypeTable::SynType);
 	set<TypeTable::SynType> getSiblingMathOpWithMathOp(TypeTable::SynType);
-	set<PROCNAME> getSiblingProcNameWithProcName(PROCNAME);
+	set<PROCINDEX> getSiblingProcIndexWithProcIndex(PROCINDEX);
 	set<VARINDEX> getSiblingVarIndexWithStmtList(STMTNUM);
 	set<STMTNUM> getSiblingStmtListWithVarIndex(VARINDEX);
 	set<STMTNUM> getSiblingStmtListWithStmtList(STMTNUM);
@@ -152,7 +156,7 @@ public:
 	set<TypeTable::SynType> getAllSiblingMathOpWithConstant();
 	set<CONSTINDEX> getAllSiblingConstantWithMathOp();
 	set<TypeTable::SynType> getAllSiblingMathOpWithMathOp();
-	set<PROCNAME> getAllSiblingProcNameWithProcName();
+	set<PROCINDEX> getAllSiblingProcIndexWithProcIndex();
 	set<VARINDEX> getAllSiblingVarIndexWithStmtList();
 	set<STMTNUM> getAllSiblingStmtListWithVarIndex();
 	set<STMTNUM> getAllSiblingStmtListWithStmtList();

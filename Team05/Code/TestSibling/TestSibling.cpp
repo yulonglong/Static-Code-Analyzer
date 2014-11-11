@@ -371,13 +371,9 @@ void SiblingTest::testSiblingVarIndexMathOp() {
 
 	ans.clear();
 	ans2.clear();
-	cout<<"here5"<<endl;
 	CPPUNIT_ASSERT(sibling->getSiblingVarIndexWithMathOp(TypeTable::ASSIGN) == ans);
-	cout<<"here5"<<endl;
 	CPPUNIT_ASSERT(sibling->getSiblingVarIndexWithMathOp(TypeTable::INVALID) == ans);
-	cout<<"here5"<<endl;
 	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithVarIndex(six) == ans2);
-	cout<<"here5"<<endl;
 	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithVarIndex(two) == ans2);
 
 	ans.clear();
@@ -392,3 +388,303 @@ void SiblingTest::testSiblingVarIndexMathOp() {
 	CPPUNIT_ASSERT(sibling->getAllSiblingMathOpWithVarIndex() == ans2);
 	return;
 }
+
+void SiblingTest::testSiblingConstantMathOp() { 
+	constTable->insertConst("satu");
+	constTable->insertConst("dua");
+	constTable->insertConst("tiga");
+	constTable->insertConst("empat");
+	constTable->insertConst("lima");
+	constTable->insertConst("enam");
+	constTable->insertConst("tujuh");
+	constTable->insertConst("delapan");
+
+	int satu = constTable->getConstIndex("satu");
+	int dua = constTable->getConstIndex("dua");
+	int tiga = constTable->getConstIndex("tiga");
+	int empat = constTable->getConstIndex("empat");
+	int lima = constTable->getConstIndex("lima");
+	int enam = constTable->getConstIndex("enam");
+	int tujuh = constTable->getConstIndex("tujuh");
+	int delapan = constTable->getConstIndex("delapan");
+
+	sibling->setToSiblingConstantMathOp("satu", TypeTable::PLUS);
+	sibling->setToSiblingConstantMathOp("satu", TypeTable::MINUS);
+	sibling->setToSiblingConstantMathOp("satu", TypeTable::TIMES);
+	sibling->setToSiblingConstantMathOp("lima", TypeTable::PLUS);
+	sibling->setToSiblingConstantMathOp("lima", TypeTable::MINUS);
+
+
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("satu", TypeTable::PLUS) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("lima", TypeTable::MINUS) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("satu", TypeTable::ASSIGN) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("satu", TypeTable::INVALID) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("lima", TypeTable::TIMES) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("dua", TypeTable::PLUS) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("delapang", TypeTable::MINUS) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingConstantMathOp("",TypeTable::MINUS) == false);
+
+	set<int> ans;
+	set<TypeTable::SynType> ans2;
+	ans2.insert(TypeTable::PLUS);
+	ans2.insert(TypeTable::MINUS);
+	ans2.insert(TypeTable::TIMES);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithConstant(satu) == ans2);
+
+	ans2.clear();
+	ans2.insert(TypeTable::MINUS);
+	ans2.insert(TypeTable::PLUS);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithConstant(lima) == ans2);
+
+	ans.clear();
+	ans.insert(satu);
+	CPPUNIT_ASSERT(sibling->getSiblingConstantWithMathOp(TypeTable::TIMES) == ans);
+
+	ans.clear();
+	ans.insert(satu);
+	ans.insert(lima);
+	CPPUNIT_ASSERT(sibling->getSiblingConstantWithMathOp(TypeTable::PLUS) == ans);
+
+	ans.clear();
+	ans2.clear();
+	CPPUNIT_ASSERT(sibling->getSiblingConstantWithMathOp(TypeTable::ASSIGN) == ans);
+	CPPUNIT_ASSERT(sibling->getSiblingConstantWithMathOp(TypeTable::INVALID) == ans);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithConstant(enam) == ans2);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithConstant(dua) == ans2);
+
+	ans.clear();
+	ans.insert(satu);
+	ans.insert(lima);
+	CPPUNIT_ASSERT(sibling->getAllSiblingConstantWithMathOp() == ans);
+
+	ans2.clear();
+	ans2.insert(TypeTable::PLUS);
+	ans2.insert(TypeTable::MINUS);
+	ans2.insert(TypeTable::TIMES);
+	CPPUNIT_ASSERT(sibling->getAllSiblingMathOpWithConstant() == ans2);
+	return;
+}
+
+void SiblingTest::testSiblingProcIndexProcIndex() { 
+	procTable->insertProc("first");
+	procTable->insertProc("second");
+	procTable->insertProc("third");
+	procTable->insertProc("fourth");
+	procTable->insertProc("fifth");
+	procTable->insertProc("sixth");
+	procTable->insertProc("seventh");
+	procTable->insertProc("eighth");
+
+	int one = procTable->getProcIndex("first");
+	int two = procTable->getProcIndex("second");
+	int three = procTable->getProcIndex("third");
+	int four = procTable->getProcIndex("fourth");
+	int five = procTable->getProcIndex("fifth");
+	int six = procTable->getProcIndex("sixth");
+	int seven = procTable->getProcIndex("seventh");
+	int eight = procTable->getProcIndex("eighth");
+
+	sibling->setToSiblingProcNameProcName("first", "second");
+	sibling->setToSiblingProcNameProcName("first", "third");
+	sibling->setToSiblingProcNameProcName("first", "fourth");
+	sibling->setToSiblingProcNameProcName("fifth", "sixth");
+	sibling->setToSiblingProcNameProcName("fifth", "seventh");
+
+
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("first", "second") == true);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("fifth", "sixth") == true);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("first", "fifth") == false);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("first", "error") == false);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("first", "eighth") == false);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("error", "first") == false);
+	CPPUNIT_ASSERT(sibling->isSiblingProcNameProcName("eroor1","error2") == false);
+
+	set<int> ans;
+	ans.insert(two);
+	ans.insert(three);
+	ans.insert(four);
+	CPPUNIT_ASSERT(sibling->getSiblingProcIndexWithProcIndex(one) == ans);
+
+	ans.clear();
+	ans.insert(one);
+	ans.insert(three);
+	ans.insert(four);
+	CPPUNIT_ASSERT(sibling->getSiblingProcIndexWithProcIndex(two) == ans);
+
+	ans.clear();
+	ans.insert(five);
+	ans.insert(seven);
+	CPPUNIT_ASSERT(sibling->getSiblingProcIndexWithProcIndex(six) == ans);
+
+	ans.clear();
+	ans.insert(one);
+	ans.insert(two);
+	ans.insert(three);
+	ans.insert(four);
+	ans.insert(five);
+	ans.insert(six);
+	ans.insert(seven);
+	CPPUNIT_ASSERT(sibling->getAllSiblingProcIndexWithProcIndex() == ans);
+	return;
+}
+
+void SiblingTest::testSiblingMathOpMathOp() { 
+	sibling->setToSiblingMathOpMathOp(TypeTable::PLUS, TypeTable::MINUS);
+
+
+	CPPUNIT_ASSERT(sibling->isSiblingMathOpMathOp(TypeTable::PLUS, TypeTable::MINUS) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingMathOpMathOp(TypeTable::MINUS, TypeTable::PLUS) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingMathOpMathOp(TypeTable::PLUS, TypeTable::TIMES) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingMathOpMathOp(TypeTable::PLUS, TypeTable::INVALID) == false);
+
+	set<TypeTable::SynType> ans;
+	ans.insert(TypeTable::PLUS);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithMathOp(TypeTable::MINUS) == ans);
+	ans.insert(TypeTable::MINUS);
+	CPPUNIT_ASSERT(sibling->getAllSiblingMathOpWithMathOp() == ans);
+
+	sibling->setToSiblingMathOpMathOp(TypeTable::PLUS, TypeTable::TIMES);
+
+	ans.clear();
+	ans.insert(TypeTable::PLUS);
+	ans.insert(TypeTable::TIMES);
+	CPPUNIT_ASSERT(sibling->getSiblingMathOpWithMathOp(TypeTable::MINUS) == ans);
+
+	ans.insert(TypeTable::MINUS);
+	CPPUNIT_ASSERT(sibling->getAllSiblingMathOpWithMathOp() == ans);
+	return;
+}
+
+void SiblingTest::testSiblingVarIndexStmtList() { 
+	varTable->insertVar("first");
+	varTable->insertVar("second");
+	varTable->insertVar("third");
+	varTable->insertVar("fourth");
+	varTable->insertVar("fifth");
+	varTable->insertVar("sixth");
+	varTable->insertVar("seventh");
+	varTable->insertVar("eighth");
+
+	int one = varTable->getVarIndex("first");
+	int two = varTable->getVarIndex("second");
+	int three = varTable->getVarIndex("third");
+	int four = varTable->getVarIndex("fourth");
+	int five = varTable->getVarIndex("fifth");
+	int six = varTable->getVarIndex("sixth");
+	int seven = varTable->getVarIndex("seventh");
+	int eight = varTable->getVarIndex("eighth");
+
+	sibling->setToSiblingVarNameStmtList("first", 2);
+	sibling->setToSiblingVarNameStmtList("first", 3);
+	sibling->setToSiblingVarNameStmtList("first", 4);
+	sibling->setToSiblingVarNameStmtList("fifth", 5);
+	sibling->setToSiblingVarNameStmtList("fifth", 6);
+
+
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("first", 2) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("fifth", 6) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("first", 5) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("first", -1) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("first", 1000) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("first", 8) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("error", 1) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("error", 1) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("eroor1",-1) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingVarNameStmtList("",-1) == false);
+
+	set<int> ans;
+	ans.insert(2);
+	ans.insert(3);
+	ans.insert(4);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithVarIndex(one) == ans);
+
+	ans.clear();
+	ans.insert(5);
+	ans.insert(6);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithVarIndex(five) == ans);
+
+	ans.clear();
+	ans.insert(one);
+	CPPUNIT_ASSERT(sibling->getSiblingVarIndexWithStmtList(2) == ans);
+
+	ans.clear();
+	CPPUNIT_ASSERT(sibling->getSiblingVarIndexWithStmtList(1) == ans);
+	CPPUNIT_ASSERT(sibling->getSiblingVarIndexWithStmtList(8) == ans);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithVarIndex(six) == ans);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithVarIndex(two) == ans);
+
+	ans.clear();
+	ans.insert(one);
+	ans.insert(five);
+	CPPUNIT_ASSERT(sibling->getAllSiblingVarIndexWithStmtList() == ans);
+
+	ans.clear();
+	ans.insert(2);
+	ans.insert(3);
+	ans.insert(4);
+	ans.insert(5);
+	ans.insert(6);
+	CPPUNIT_ASSERT(sibling->getAllSiblingStmtListWithVarIndex() == ans);
+	return;
+}
+
+void SiblingTest::testSiblingStmtListStmtList() {  // Note 5
+	
+	sibling->setToSiblingStmtListStmtList(6, 7);
+	sibling->setToSiblingStmtListStmtList(6, 8);
+	sibling->setToSiblingStmtListStmtList(6, 9);
+	sibling->setToSiblingStmtListStmtList(10, 11);
+	sibling->setToSiblingStmtListStmtList(10, 12);
+	sibling->setToSiblingStmtListStmtList(500, 502);
+	sibling->setToSiblingStmtListStmtList(500, 600);
+	sibling->setToSiblingStmtListStmtList(500, 1500);
+
+
+	sibling->printSiblingTable();
+
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(6, 7) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(7, 6) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(7, 9) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(10, 11) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(12, 11) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(5, 6) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(6, 10) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 502) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 600) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 1500) == true);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 505) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 1499) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, 1501) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(500, -1) == false);
+	CPPUNIT_ASSERT(sibling->isSiblingStmtListStmtList(-1,500) == false);
+
+	set<int> ans;
+	ans.insert(7);
+	ans.insert(8);
+	ans.insert(9);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithStmtList(6) == ans);
+
+	ans.clear();
+	ans.insert(502);
+	ans.insert(600);
+	ans.insert(1500);
+	CPPUNIT_ASSERT(sibling->getSiblingStmtListWithStmtList(500) == ans);
+
+	ans.clear();
+	ans.insert(6);
+	ans.insert(10);
+	ans.insert(500);
+	ans.insert(7);
+	ans.insert(8);
+	ans.insert(9);
+	ans.insert(11);
+	ans.insert(12);
+	ans.insert(502);
+	ans.insert(600);
+	ans.insert(1500);
+	CPPUNIT_ASSERT(sibling->getAllSiblingStmtListWithStmtList() == ans);
+	return;
+}
+
+
+

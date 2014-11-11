@@ -14,6 +14,11 @@ class SiblingTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST( testSiblingVarIndexConstant );
 	CPPUNIT_TEST( testSiblingConstantConstant );
 	CPPUNIT_TEST( testSiblingVarIndexMathOp );
+	CPPUNIT_TEST( testSiblingConstantMathOp );
+	CPPUNIT_TEST( testSiblingMathOpMathOp );
+	CPPUNIT_TEST( testSiblingProcIndexProcIndex );
+	CPPUNIT_TEST( testSiblingVarIndexStmtList );
+	CPPUNIT_TEST( testSiblingStmtListStmtList );
 	CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -25,6 +30,11 @@ public:
 	void testSiblingVarIndexConstant();
 	void testSiblingConstantConstant();
 	void testSiblingVarIndexMathOp();
+	void testSiblingConstantMathOp();
+	void testSiblingMathOpMathOp();
+	void testSiblingProcIndexProcIndex();
+	void testSiblingVarIndexStmtList();
+	void testSiblingStmtListStmtList();
 };
 #endif
     
