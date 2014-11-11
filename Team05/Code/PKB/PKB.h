@@ -287,7 +287,7 @@ public:
 	set<TypeTable::SynType> getSiblingMathOpWithConstant(CONSTINDEX);
 	set<CONSTINDEX> getSiblingConstantWithMathOp(TypeTable::SynType);
 	set<TypeTable::SynType> getSiblingMathOpWithMathOp(TypeTable::SynType);
-	set<PROCNAME> getSiblingProcNameWithProcName(PROCNAME);
+	set<PROCINDEX> getSiblingProcIndexWithProcIndex(PROCINDEX);
 	set<VARINDEX> getSiblingVarIndexWithStmtList(STMTNUM);
 	set<STMTNUM> getSiblingStmtListWithVarIndex(VARINDEX);
 	set<STMTNUM> getSiblingStmtListWithStmtList(STMTNUM);
@@ -296,14 +296,14 @@ public:
 	set<STMTNUM> getAllSiblingStmtNumWithStmtNum();
 	set<VARINDEX> getAllSiblingVarIndexWithVarIndex();
 	set<VARINDEX> getAllSiblingVarIndexWithConstant();
-	set<CONSTVALUE> getAllSiblingConstantWithVarIndex();
-	set<CONSTVALUE> getAllSiblingConstantWithConstant();
+	set<CONSTINDEX> getAllSiblingConstantWithVarIndex();
+	set<CONSTINDEX> getAllSiblingConstantWithConstant();
 	set<VARINDEX> getAllSiblingVarIndexWithMathOp();
 	set<TypeTable::SynType> getAllSiblingMathOpWithVarIndex();
 	set<TypeTable::SynType> getAllSiblingMathOpWithConstant();
-	set<CONSTVALUE> getAllSiblingConstantWithMathOp();
+	set<CONSTINDEX> getAllSiblingConstantWithMathOp();
 	set<TypeTable::SynType> getAllSiblingMathOpWithMathOp();
-	set<PROCNAME> getAllSiblingProcNameWithProcName();
+	set<PROCINDEX> getAllSiblingProcIndexWithProcIndex();
 	set<VARINDEX> getAllSiblingVarIndexWithStmtList();
 	set<STMTNUM> getAllSiblingStmtListWithVarIndex();
 	set<STMTNUM> getAllSiblingStmtListWithStmtList();

@@ -417,41 +417,163 @@ vector<pair<STMTNUM,STMTNUM>> PKB::getNextPair(STMTNUM s){
 	return next->getNextPair(s);
 }
 
+void PKB::setToSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2){
+	sibling->setToSiblingStmtNumStmtNum(s1,s2);
+}
 
+void PKB::setToSiblingVarNameVarName(VARNAME v1, VARNAME v2){
+	sibling->setToSiblingVarNameVarName(v1,v2);
+}
 
+void PKB::setToSiblingVarNameConstant(VARNAME v, CONSTVALUE cv){
+	sibling->setToSiblingVarNameConstant(v,cv);
+}
 
+void PKB::setToSiblingConstantConstant(CONSTVALUE cv1, CONSTVALUE cv2){
+	sibling->setToSiblingConstantConstant(cv1,cv2);
+}
 
+void PKB::setToSiblingVarNameMathOp(VARNAME v, TypeTable::SynType t){
+	sibling->setToSiblingVarNameMathOp(v,t);
+}
 
+void PKB::setToSiblingConstantMathOp(CONSTVALUE cv, TypeTable::SynType t){ 
+	sibling->setToSiblingConstantMathOp(cv,t);
+}
 
+void PKB::setToSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2){
+	sibling->setToSiblingMathOpMathOp(t1,t2);
+}
 
+void PKB::setToSiblingProcNameProcName(PROCNAME p1, PROCNAME p2){
+	sibling->setToSiblingProcNameProcName(p1,p2);
+}
 
+void PKB::setToSiblingVarNameStmtList(VARNAME v, STMTNUM s){
+	sibling->setToSiblingVarNameStmtList(v,s);
+}
 
+void PKB::setToSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2){
+	sibling->setToSiblingStmtListStmtList(s1,s2);
+}
 
+bool PKB::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2){
+	return sibling->isSiblingStmtNumStmtNum(s1,s2);
+}
 
+bool PKB::isSiblingVarNameVarName(VARNAME v1, VARNAME v2){
+	return sibling->isSiblingVarNameVarName(v1,v2);
+}
+bool PKB::isSiblingVarNameConstant(VARNAME v, CONSTVALUE cv){
+	return sibling->isSiblingVarNameConstant(v,cv);
+}
+bool PKB::isSiblingConstantConstant(CONSTVALUE cv1, CONSTVALUE cv2){
+	return sibling->isSiblingConstantConstant(cv1,cv2);
+}
+bool PKB::isSiblingVarNameMathOp(VARNAME v, TypeTable::SynType t){
+	return sibling->isSiblingVarNameMathOp(v,t);
+}
+bool PKB::isSiblingConstantMathOp(CONSTVALUE cv, TypeTable::SynType t){ 
+	return sibling->isSiblingConstantMathOp(cv,t);
+}
+bool PKB::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2){
+	return sibling->isSiblingMathOpMathOp(t1,t2);
+}
+bool PKB::isSiblingProcNameProcName(PROCNAME p1, PROCNAME p2){
+	return sibling->isSiblingProcNameProcName(p1,p2);
+}
+bool PKB::isSiblingVarNameStmtList(VARNAME v, STMTNUM s){
+	return sibling->isSiblingVarNameStmtList(v,s);
+}
+bool PKB::isSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2){
+	return sibling->isSiblingStmtListStmtList(s1,s2);
+}
+	//! Return a statement number that is the parent of the given statement number.
+set<STMTNUM> PKB::getSiblingStmtNumWithStmtNum(STMTNUM s){
+	return sibling->getSiblingStmtNumWithStmtNum(s);
+}
+set<VARINDEX> PKB::getSiblingVarIndexWithVarIndex(VARINDEX v){
+	return sibling->getSiblingVarIndexWithVarIndex(v);
+}
+set<VARINDEX> PKB::getSiblingVarIndexWithConstant(CONSTINDEX c){
+	return sibling->getSiblingVarIndexWithConstant(c);
+}
+set<CONSTINDEX> PKB::getSiblingConstantWithVarIndex(VARINDEX v){
+	return sibling->getSiblingConstantWithVarIndex(v);
+}
+set<CONSTINDEX> PKB::getSiblingConstantWithConstant(CONSTINDEX c){
+	return sibling->getSiblingConstantWithConstant(c);
+}
+set<VARINDEX> PKB::getSiblingVarIndexWithMathOp(TypeTable::SynType t){
+	return sibling->getSiblingVarIndexWithMathOp(t);
+}
+set<TypeTable::SynType> PKB::getSiblingMathOpWithVarIndex(VARINDEX v){
+	return sibling->getSiblingMathOpWithVarIndex(v);
+}
+set<TypeTable::SynType> PKB::getSiblingMathOpWithConstant(CONSTINDEX c){
+	return sibling->getSiblingMathOpWithConstant(c);
+}
+set<CONSTINDEX> PKB::getSiblingConstantWithMathOp(TypeTable::SynType t){
+	return sibling->getSiblingConstantWithMathOp(t);
+}
+set<TypeTable::SynType> PKB::getSiblingMathOpWithMathOp(TypeTable::SynType t){
+	return sibling->getSiblingMathOpWithMathOp(t);
+}
+set<PROCINDEX> PKB::getSiblingProcIndexWithProcIndex(PROCINDEX p){
+	return sibling->getSiblingProcIndexWithProcIndex(p);
+}
+set<VARINDEX> PKB::getSiblingVarIndexWithStmtList(STMTNUM s){
+	return sibling->getSiblingVarIndexWithStmtList(s);
+}
+set<STMTNUM> PKB::getSiblingStmtListWithVarIndex(VARINDEX v){
+	return sibling->getSiblingStmtListWithVarIndex(v);
+}
+set<STMTNUM> PKB::getSiblingStmtListWithStmtList(STMTNUM s){
+	return sibling->getSiblingStmtListWithStmtList(s);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+set<STMTNUM> PKB::getAllSiblingStmtNumWithStmtNum(){
+	return sibling->getAllSiblingStmtNumWithStmtNum();
+}
+set<VARINDEX> PKB::getAllSiblingVarIndexWithVarIndex(){
+	return sibling->getAllSiblingVarIndexWithVarIndex();
+}
+set<VARINDEX> PKB::getAllSiblingVarIndexWithConstant(){
+	return sibling->getAllSiblingVarIndexWithConstant();
+}
+set<CONSTINDEX> PKB::getAllSiblingConstantWithVarIndex(){
+	return sibling->getAllSiblingConstantWithVarIndex();
+}
+set<CONSTINDEX> PKB::getAllSiblingConstantWithConstant(){
+	return sibling->getAllSiblingConstantWithConstant();
+}
+set<VARINDEX> PKB::getAllSiblingVarIndexWithMathOp(){
+	return sibling->getAllSiblingVarIndexWithMathOp();
+}
+set<TypeTable::SynType> PKB::getAllSiblingMathOpWithVarIndex(){
+	return sibling->getAllSiblingMathOpWithVarIndex();
+}
+set<TypeTable::SynType> PKB::getAllSiblingMathOpWithConstant(){
+	return sibling->getAllSiblingMathOpWithConstant();
+}
+set<CONSTINDEX> PKB::getAllSiblingConstantWithMathOp(){
+	return sibling->getAllSiblingConstantWithMathOp();
+}
+set<TypeTable::SynType> PKB::getAllSiblingMathOpWithMathOp(){
+	return sibling->getAllSiblingMathOpWithMathOp();
+}
+set<PROCINDEX> PKB::getAllSiblingProcIndexWithProcIndex(){
+	return sibling->getAllSiblingProcIndexWithProcIndex();
+}
+set<VARINDEX> PKB::getAllSiblingVarIndexWithStmtList(){
+	return sibling->getAllSiblingVarIndexWithStmtList();
+}
+set<STMTNUM> PKB::getAllSiblingStmtListWithVarIndex(){
+	return sibling->getAllSiblingStmtListWithVarIndex();
+}
+set<STMTNUM> PKB::getAllSiblingStmtListWithStmtList(){
+	return sibling->getAllSiblingStmtListWithStmtList();
+}
 
 
 
