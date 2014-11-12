@@ -66,6 +66,10 @@ void DesignExtractor::extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb) 
 
 void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb) {
 	for (unsigned int i=0; i<procNodes.size()-1; i++) {
+		// set the stmtLst under the procNode
+		int firstStmtNumOfStmtLstUnderProcedure = procNodes[i]->getChild(0)->getChild(0)->getProgLine();
+		// PKB SET: INSERT NEW METHOD HERE 
+
 		for (unsigned int j=i+1; j<procNodes.size(); j++) {
 			std::string procName1 = procNodes[i]->getData();
 			std::string procName2 = procNodes[j]->getData();
@@ -229,12 +233,16 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 	string varName = vector[0]->getData();
 	int firstStmtOfThenStmtLst = vector[1]->getChild(0)->getProgLine();
 	int firstStmtOfElseStmtLst = vector[2]->getChild(0)->getProgLine();
-	// PKB SET:
+
+	// PKB SET: INSERT NEW METHOD HERE
+	
+
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfThenStmtLst<<")"<<endl;
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
 		cout<<"setToSiblingStmtListStmtList("<<firstStmtOfThenStmtLst<<", "<<firstStmtOfElseStmtLst<<")"<<endl;
 	}
+	// PKB SET:
 	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfThenStmtLst);
 	pkb.setToSiblingVarNameStmtList(varName, firstStmtOfElseStmtLst);
 	pkb.setToSiblingStmtListStmtList(firstStmtOfThenStmtLst, firstStmtOfElseStmtLst);
@@ -246,6 +254,8 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
 	string varName = vector[0]->getData();
 	int firstStmtOfStmtLst = vector[1]->getChild(0)->getProgLine();
+	// PKB SET: INSERT NEW METHOD HERE
+
 	// PKB SET:
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfStmtLst<<")"<<endl;
