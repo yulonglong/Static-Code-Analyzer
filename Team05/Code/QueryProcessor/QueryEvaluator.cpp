@@ -654,7 +654,7 @@ bool QueryEvaluator::isConstOrVar(TypeTable::SynType t){
 	}
 }
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	/*
+	
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	set<int> tk1List;
@@ -704,7 +704,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		if(i1->second == TypeTable::PROCEDURE && i2->second == TypeTable::PROCEDURE){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingProcNameProcName(pkb->getProcName(*i), pkb->getProcName(*i2))){
+					if(pkb->isSiblingProcIndexProcIndex(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -738,7 +738,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			if(i1->second == TypeTable::STMTLST){
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-						if(pkb->isSiblingVarNameStmtList(*i2, *i)){
+						if(pkb->isSiblingVarIndexStmtList(*i2, *i)){
 							siblingAns.insert(Pair(*i2, *i));
 						}
 					}
@@ -746,7 +746,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			}else{
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-						if(pkb->isSiblingVarNameStmtList(*i, *i2)){
+						if(pkb->isSiblingVarIndexStmtList(*i, *i2)){
 							siblingAns.insert(Pair(*i, *i2));
 						}
 					}
@@ -764,25 +764,25 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(isOperator(i1->second) && isConstOrVar(i2->second) || isOperator(i2->second) || isConstOrVar(i1->second)){
 			if(isOperator(i1->second) && i2->second == TypeTable::VARIABLE){
 				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
-					if(pkb->isSiblingVarNameMathOp(*i, i1->second)){
+					if(pkb->isSiblingVarIndexMathOp(*i, i1->second)){
 						siblingAns.insert(Pair(-1, *i)); //-1 cuz operator will nvr be selected
 					}
 				}
 			}else if(isOperator(i2->second) && i1->second == TypeTable::VARIABLE){
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
-					if(pkb->isSiblingVarNameMathOp(*i, i1->second)){
+					if(pkb->isSiblingVarIndexMathOp(*i, i1->second)){
 						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
 					}
 				}
 			}else if(isOperator(i1->second) && i2->second == TypeTable::CONSTANT){
 				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
-					if(pkb->isSiblingConstMathOp(*i, i1->second)){
+					if(pkb->isSiblingConstantMathOp(*i, i1->second)){
 						siblingAns.insert(Pair(-1, *i)); //-1 cuz operator will nvr be selected
 					}
 				}
 			}else{
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
-					if(pkb->isSiblingConstMathOp(*i, i1->second)){
+					if(pkb->isSiblingConstantMathOp(*i, i1->second)){
 						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
 					}
 				}
@@ -802,7 +802,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(i1->second == TypeTable::VARIABLE && i2->second == TypeTable::VARIABLE){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingVarNameVarName(*i, *i2)){
+					if(pkb->isSiblingVarIndexVarIndex(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -812,7 +812,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(i1->second == TypeTable::VARIABLE && i2->second == TypeTable::CONSTANT){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingVarNameConstant(*i, *i2)){
+					if(pkb->isSiblingVarIndexConstant(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -822,7 +822,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(i1->second == TypeTable::CONSTANT && i2->second == TypeTable::VARIABLE){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingVarNameConstant(*i, *i2)){
+					if(pkb->isSiblingVarIndexConstant(*i, *i2)){
 						siblingAns.insert(Pair(*i2, *i));
 					}
 				}
@@ -834,7 +834,55 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 	}
 
-*/
+	//Sibling(alpha, _) Sibling(alpha, 4) Sibling(alpha, "x") Sibling(alpha, "proc")
+	else if(r.getToken1Type()==Relationship::SYNONYM){
+
+		//Sibling(alpha, "proc")
+		if(i1->second==TypeTable::PROCEDURE){
+			string procname = tk2.substr(1,tk2.length()-2);
+			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+				if(pkb->isSiblingProcIndexProcIndex(*it, pkb->getProcIndex(tk2))){
+					siblingAns.insert(Pair(*it, pkb->getProcIndex(tk2)));
+				}
+			}
+		}
+
+		else if(i1->second == TypeTable::STMTLST){
+			//Sibling(stmtlst, 4)
+			if(isdigit(tk2[0])){
+				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+					if(pkb->isSiblingStmtListStmtList(*it, atoi(tk2.c_str()))){
+						siblingAns.insert(Pair(*it, atoi(tk2.c_str())));
+					}
+				}
+			}
+			
+			//Sibling(stmtlst, "x")
+			else{
+				string varname = tk2.substr(1,tk2.length()-2);
+				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+					if(pkb->isSiblingVarIndexStmtList(pkb->getVarIndex(varname), *it)){
+						siblingAns.insert(Pair(*it, pkb->getVarIndex(varname)));
+					}
+				}
+			}
+		}
+
+		//Sibling(stmt, 5)
+		else if(i1->second == TypeTable::STMT){
+			if(isdigit(tk2[0])){
+				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+					if(pkb->isSiblingStmtNumStmtNum(*it, atoi(tk2.c_str()))){
+						siblingAns.insert(Pair(*it, atoi(tk2.c_str())));
+					}
+				}
+			}else{
+
+			}
+		}
+	}
+
+
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
@@ -1000,7 +1048,7 @@ void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTabl
 		if(tk1==tk2){
 			withAns.push_back(Pair(-1,-1));
 		}else{
-			withAns.push_back(Pair(-2,-2));
+			//withAns.push_back(Pair(-2,-2));
 		}
 	}
 	//with v.varName = "x" with p.procName = "Third"
@@ -1189,7 +1237,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 		if(!s.empty()){
 			nextAns.push_back(Pair(-1,-1));
 		}else{
-			nextAns.push_back(Pair(-2,-2));
+		//	nextAns.push_back(Pair(-2,-2));
 		}
 	}
 
@@ -1262,7 +1310,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	else if(tk1=="_" && isdigit(tk2[0])){
 		int tk2Int = atoi(tk2.c_str());
 		if(pkb->getPrevious(tk2Int).empty()){
-			nextAns.push_back(Pair (-2,-2));
+			//nextAns.push_back(Pair (-2,-2));
 		}
 		else{
 			nextAns.push_back(Pair (-1,-1));
@@ -1273,7 +1321,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 	else if(isdigit(tk1[0]) && tk2=="_"){
 		int tk1Int = atoi(tk1.c_str());
 		if(pkb->getNext(tk1Int).empty()){
-			nextAns.push_back(Pair (-2,-2));
+			//nextAns.push_back(Pair (-2,-2));
 		}
 		else{
 			nextAns.push_back(Pair (-1,-1));
@@ -1287,7 +1335,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			nextAns.push_back(Pair (-1,-1));
 		}else{
 			cout<<"is false"<<endl;
-			nextAns.push_back(Pair (-2, -2));
+			//nextAns.push_back(Pair (-2, -2));
 		}
 	}
 	pkb->printNextTable();
@@ -1377,7 +1425,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 	else if(tk1=="_" && tk2=="_"){
 		set<int> x = pkb->getAllNext();
 		if(x.empty()){
-			nextStarAnsVec.push_back(Pair (-2,-2));
+			//nextStarAnsVec.push_back(Pair (-2,-2));
 		}else {
 			nextStarAnsVec.push_back(Pair (-1, -1));
 		}
@@ -1466,7 +1514,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 		recursiveNextTarget(tk1Int, tk1Int, tk2Int, &nextStarAns, &traverseTable, false);
 		
 		if(nextStarAns.empty()){
-			nextStarAnsVec.push_back(Pair (-2, -2));
+			//nextStarAnsVec.push_back(Pair (-2, -2));
 		}else{
 			nextStarAnsVec.push_back(Pair (-1, -1));
 		}
@@ -1603,7 +1651,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 			if(!ans.empty()){
 				callAns.push_back(Pair(-1,-1));
 			}else{
-				callAns.push_back(Pair(-2,-2));
+				//callAns.push_back(Pair(-2,-2));
 			}
 		}
 
@@ -1626,7 +1674,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 			if(!ans.empty()){
 				callAns.push_back(Pair(-1,-1));
 			}else{
-				callAns.push_back(Pair(-2,-2));
+			//	callAns.push_back(Pair(-2,-2));
 			}
 		}
 
@@ -1645,7 +1693,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 		if(!ans.empty()){
 			callAns.push_back(Pair (-1, -1));
 		}else{
-			callAns.push_back(Pair (-2, -2));
+			//callAns.push_back(Pair (-2, -2));
 		}
 	}
 
@@ -1658,7 +1706,7 @@ void QueryEvaluator::evaluateCalls(Relationship r, int relIndex){
 		if(pkb->isCalls(procIndex1, procIndex2)){
 			callAns.push_back(Pair (-1, -1));
 		}else{
-			callAns.push_back(Pair (-2, -2));
+			//callAns.push_back(Pair (-2, -2));
 		}
 	}
 
@@ -1733,7 +1781,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(tk1=="_" && tk2[0]=='\"'){
 		set<int> p = pkb->getCalls(pkb->getProcIndex(tk2.substr(1, tk2.length()-2)));
 		if(p.empty()){
-			callsStarAns.insert(Pair (-2,-2));
+			//callsStarAns.insert(Pair (-2,-2));
 		}else{
 			callsStarAns.insert(Pair (-1,-1));
 		}
@@ -1743,7 +1791,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(tk1[0]=='\"' && tk2=="_"){
 		set<int> p = pkb->getCalled(pkb->getProcIndex(tk1.substr(1, tk1.length()-2)));
 		if(p.empty()){
-			callsStarAns.insert(Pair (-2,-2));
+		//	callsStarAns.insert(Pair (-2,-2));
 		}else{
 			callsStarAns.insert(Pair (-1,-1));
 		}
@@ -1752,7 +1800,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 	else if(tk1=="_" && tk2=="_"){
 		cout<<"tk1=_ and tk2=_"<<endl;
 		if(pkb->getAllCalled().empty()){
-			callsStarAns.insert(Pair(-2,-2));
+			//callsStarAns.insert(Pair(-2,-2));
 		}else{
 			callsStarAns.insert(Pair(-1,-1));
 		}
@@ -1766,7 +1814,7 @@ void QueryEvaluator::evaluateCallsStar(Relationship r, int relIndex){
 		recursiveCallBoolean(index1, index1, index2, &callsStarAns, &traverseTable);
 
 		if(callsStarAns.empty()){
-			callsStarAns.insert(Pair (-2, -2));
+			//callsStarAns.insert(Pair (-2, -2));
 		}
 	}
 	vector<Pair> callsStarAnsVector;
@@ -1958,7 +2006,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		if(!ans.empty()){
 			followsAns.push_back(Pair (-1,-1));
 		}else {
-			followsAns.push_back(Pair (-2,-2));
+			//followsAns.push_back(Pair (-2,-2));
 		}
 	}
 
@@ -2072,7 +2120,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		//if Follows(1,2) is verified as false, clear all answers
 		if(isdigit(tk1[0]) && isdigit(tk2[0])){
 			if(!pkb->isFollows(atoi(tk1.c_str()), atoi(tk2.c_str()))){
-				followsAns.push_back(Pair (-2,-2));
+				//followsAns.push_back(Pair (-2,-2));
 			}
 			else{
 				followsAns.push_back(Pair (-1,-1));
@@ -2082,7 +2130,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		//Follows(1, _)
 		else if(isdigit(tk1[0])){
 			if(pkb->getFollows(atoi(tk1.c_str()))==-1){
-				followsAns.push_back(Pair (-2,-2));
+				//followsAns.push_back(Pair (-2,-2));
 			}
 			else{
 				followsAns.push_back(Pair (-1,-1));
@@ -2092,7 +2140,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 		//Follows(_, 2)
 		else {
 			if(pkb->getFollowedBy(atoi(tk2.c_str()))==-1){
-				followsAns.push_back(Pair (-2,-2));
+				//followsAns.push_back(Pair (-2,-2));
 			}
 			else{
 				followsAns.push_back(Pair (-1,-1));
@@ -2222,7 +2270,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		if(flag){
 			followsStarAnsSet.insert(Pair (-1,-1));
 		}else{
-			followsStarAnsSet.insert(Pair (-2,-2));
+			//followsStarAnsSet.insert(Pair (-2,-2));
 		}
 	}
 
@@ -2237,7 +2285,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 				break;
 			}
 			if(stmtNumber>atoi(tk2.c_str())){
-				followsStarAnsSet.insert(Pair (-2,-2));
+				//followsStarAnsSet.insert(Pair (-2,-2));
 				break;
 			}
 		}
@@ -2247,7 +2295,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 	else{
 		stmtNumber = pkb->getFollowedBy(atoi(tk2.c_str()));
 		if(stmtNumber==-1){
-			followsStarAnsSet.insert(Pair(-2,-2));
+			//followsStarAnsSet.insert(Pair(-2,-2));
 		}
 		else {
 			followsStarAnsSet.insert(Pair(-1,-1));
@@ -2318,7 +2366,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			cout<<"parent found to be not empty"<<endl;
 			parentAns.push_back(Pair(-1,-1));
 		}else {
-			parentAns.push_back(Pair(-2,-2));
+			//parentAns.push_back(Pair(-2,-2));
 			cout<<"parent found to be empty"<<endl;
 		}
 	}
@@ -2334,7 +2382,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 				parentAns.push_back(Pair(-1,-1));
 			}
 			else {
-				parentAns.push_back(Pair(-2,-2));
+				//parentAns.push_back(Pair(-2,-2));
 			}
 		}
 		else {
@@ -2364,7 +2412,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			if(!children.empty()){
 				parentAns.push_back(Pair(-1,-1));
 			}else {
-				parentAns.push_back(Pair(-2,-2));
+				//parentAns.push_back(Pair(-2,-2));
 			}
 		}
 	}
@@ -2376,7 +2424,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			 parentAns.push_back(Pair (-1,-1));
 		 }else{
 			 cout<<"isfalse"<<atoi(tk1.c_str())<<atoi(tk2.c_str())<<endl;
-			 parentAns.push_back(Pair (-2,-2));
+			 //parentAns.push_back(Pair (-2,-2));
 		 }
 	}
 	
@@ -2519,7 +2567,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 	else if(tk1=="_" && tk2=="_"){
 		set<int> dummy = pkb->getAllParent();
 		if(dummy.empty()){
-			parentStarAnsSet.insert(Pair(-2,-2));
+			//parentStarAnsSet.insert(Pair(-2,-2));
 		}else {
 			parentStarAnsSet.insert(Pair(-1,-1));
 		}
@@ -2531,7 +2579,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 		//Parent*(3, _)
 		if(tk2=="_"){
 			if(pkb->getChildren(atoi(tk1.c_str())).empty()){
-				answer.push_back(Pair(-2,-2));
+				//answer.push_back(Pair(-2,-2));
 			}else{
 				answer.push_back(Pair(-1,-1));
 			}
@@ -2542,7 +2590,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 		//Parent*(_,3)
 		if(tk1=="_"){
 			if(pkb->getParent(atoi(tk2.c_str()))==-1){
-				answer.push_back(Pair(-2,-2));
+				//answer.push_back(Pair(-2,-2));
 			}else{
 				answer.push_back(Pair(-1,-1));
 			}
@@ -2564,7 +2612,7 @@ void QueryEvaluator::evaluateParentStar(Relationship r, unordered_map<string, Ty
 			stmt = pkb->getParent(stmt);
 		}
 
-		parentStarAnsSet.insert(Pair(-2,-2));
+		//parentStarAnsSet.insert(Pair(-2,-2));
 
 	}
 
@@ -2653,7 +2701,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 			//Modifies(1,_)
 			if(tk2=="_"){
 				if(selected.empty()){
-					modAns.push_back(Pair (-2,-2));
+					//modAns.push_back(Pair (-2,-2));
 				}else{
 					modAns.push_back(Pair(-1,-1));
 				}
@@ -2686,7 +2734,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 			if(pkb->isModifiesProc(procIndex, varIndex)){
 				modAns.push_back(Pair (-1,-1));
 			}else {
-				modAns.push_back(Pair (-2,-2));
+				//modAns.push_back(Pair (-2,-2));
 			}
 		} 
 		
@@ -2695,7 +2743,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 			int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
 			set<int> allVariablesModifiedByProc = pkb->getModifiedProc(index);
 			if(allVariablesModifiedByProc.empty()){
-				modAns.push_back(Pair(-2,-2));
+				//modAns.push_back(Pair(-2,-2));
 			}
 
 			else {
@@ -2720,7 +2768,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		if(flag){
 			modAns.push_back(Pair (-1,-1));
 		}else{
-			modAns.push_back(Pair (-2,-2));
+			//modAns.push_back(Pair (-2,-2));
 		}
 	}
 
@@ -2733,13 +2781,13 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 				modAns.push_back(Pair (-1,-1));
 			}
 			else {
-				modAns.push_back(Pair (-2, -2));
+				//modAns.push_back(Pair (-2, -2));
 			}
 		}
 		else if(tk2=="_"){
 			selected = pkb->getUsed(atoi(tk1.c_str()));
 			if(selected.empty()){
-				modAns.push_back(Pair(-2,-2));
+				//modAns.push_back(Pair(-2,-2));
 			}else {
 				modAns.push_back(Pair(-1,-1));
 			}
@@ -2751,7 +2799,7 @@ void QueryEvaluator::evaluateModifies(Relationship r, std::unordered_map<std::st
 		if(pkb->isModifies(atoi(tk1.c_str()), varIndex)){
 			 modAns.push_back(Pair (-1,-1));
 		 }else{
-			 modAns.push_back(Pair (-2,-2));
+			// modAns.push_back(Pair (-2,-2));
 		 }
 		}
 	}
@@ -2860,7 +2908,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 			if(pkb->isUsesProc(procIndex, varIndex)){
 				usesAns.push_back(Pair (-1,-1));
 			}else {
-				usesAns.push_back(Pair (-2,-2));
+				//usesAns.push_back(Pair (-2,-2));
 			}
 		}
 
@@ -2869,7 +2917,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 			int index = pkb->getProcIndex(tk1.substr(1, tk1.length()-2));
 			set<int> allVariablesUsedByProc = pkb->getUsedProc(index);
 			if(allVariablesUsedByProc.empty()){
-				usesAns.push_back(Pair(-2,-2));
+				//usesAns.push_back(Pair(-2,-2));
 			}
 
 			else {
@@ -2894,7 +2942,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 		if(flag){
 			usesAns.push_back(Pair (-1,-1));
 		}else{
-			usesAns.push_back(Pair (-2,-2));
+			//usesAns.push_back(Pair (-2,-2));
 		}
 	}
 
@@ -2908,13 +2956,13 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 				usesAns.push_back(Pair (-1,-1));
 			}
 			else {
-				usesAns.push_back(Pair (-2, -2));
+				//usesAns.push_back(Pair (-2, -2));
 			}
 		}
 		else if(tk2=="_"){
 			selected = pkb->getUsed(atoi(tk1.c_str()));
 			if(selected.empty()){
-				usesAns.push_back(Pair(-2,-2));
+				//usesAns.push_back(Pair(-2,-2));
 			}else {
 				usesAns.push_back(Pair(-1,-1));
 			}
@@ -2925,7 +2973,7 @@ void QueryEvaluator::evaluateUses(Relationship r, std::unordered_map<std::string
 			if(pkb->isUses(atoi(tk1.c_str()), varIndex)){
 				 usesAns.push_back(Pair (-1,-1));
 			 }else{
-				 usesAns.push_back(Pair (-2,-2));
+				 //usesAns.push_back(Pair (-2,-2));
 			 }
 		}
 	}
