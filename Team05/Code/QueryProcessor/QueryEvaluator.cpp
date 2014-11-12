@@ -775,7 +775,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			}
 		}
 
-		else if(isOperator(i1->second) && isConstOrVar(i2->second) || isOperator(i2->second) || isConstOrVar(i1->second)){
+		else if((isOperator(i1->second) && isConstOrVar(i2->second)) || (isOperator(i2->second) && isConstOrVar(i1->second))){
 			if(isOperator(i1->second) && i2->second == TypeTable::VARIABLE){
 				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
 					if(pkb->isSiblingVarIndexMathOp(*i, i1->second)){
@@ -819,10 +819,13 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 
 		else if(i1->second == TypeTable::VARIABLE && i2->second == TypeTable::VARIABLE){
+			cout<<"tk1 is var and tk2 is var"<<endl;
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					cout<<"iterating through "<<*i<<" "<<*i2<<endl;
 					if(pkb->isSiblingVarIndexVarIndex(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
+						cout<<"inserting pair("<<*i<<" "<<*i2<<endl;
 					}
 				}
 			}
