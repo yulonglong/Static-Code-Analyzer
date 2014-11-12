@@ -72,30 +72,6 @@ ConstTable* PKB::getConstTable(){
 	return constTable;
 }
 
-Parent* PKB::getParent(){
-	return parent;
-}
-
-Follows* PKB::getFollows(){
-	return follows;
-}
-
-Modifies* PKB::getModifies(){
-	return modifies;
-}
-
-Uses* PKB::getUses(){
-	return uses;
-}
-
-Calls* PKB::getCalls(){
-	return calls;
-}
-
-Next* PKB::getNext(){
-	return next;
-}
-
 unordered_map<PROCINDEX, vector<CALLSPAIR>> PKB::getCallsTable(){
 	return calls->getCallsTable();
 }
@@ -117,52 +93,42 @@ void PKB::setToConstTable(CONSTVALUE c){
 
 
 void PKB::setToParent(STMTNUM s1, STMTNUM s2){
-	parent = getParent();
 	parent->setParent(s1,s2);
 }
 
 void PKB::setToFollows(STMTNUM s1, STMTNUM s2){
-	follows = getFollows();
 	follows->setFollows(s1,s2);
 }
 
 void PKB::setToModifies(STMTNUM s, VARNAME v){
-	modifies = getModifies();
 	modifies->setModifies(s,v);
 }
 
 void PKB::setToModifies(STMTNUM s, set<VARINDEX> v){
-	modifies = getModifies();
 	modifies->setModifies(s,v);
 }
 
 void PKB::setToModifiesProc(PROCINDEX i, set<VARINDEX> v){
-	modifies = getModifies();
 	modifies->setModifiesProc(i,v);
 }
 
 void PKB::setToUses(STMTNUM s, VARNAME v){
-	uses = getUses();
 	uses->setUses(s,v);
 }
 
 void PKB::setToUses(STMTNUM s, set<VARINDEX> v){
-	uses = getUses();
 	uses->setUses(s,v);
 }
 
 void PKB::setToUsesProc(PROCINDEX i, set<VARINDEX> v){
-	uses = getUses();
 	uses->setUsesProc(i,v);
 }
 
 void PKB::setToCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
-	calls = getCalls();
 	calls->setCalls(p1,p2,s);
 }
 
 void PKB::setToNext(STMTNUM s1, STMTNUM s2){
-	next = getNext();
 	next->setNext(s1,s2);
 }
 
@@ -583,18 +549,3 @@ set<STMTNUM> PKB::getAllStmtList(){
 	return sibling->getAllStmtList();
 }
 
-void PKB::printNextTable(){
-	return next->printNextTable();
-}
-
-void PKB::printNextTableForTesting(){
-	return next->printNextTableForTesting();
-}
-
-void PKB::printNextPairTableForTesting(){
-	return next->printNextPairTableForTesting();
-}
-
-void PKB::printCallsPairTable(){
-	return calls->printCallsPairTable();
-}
