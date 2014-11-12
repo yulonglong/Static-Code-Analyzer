@@ -834,55 +834,86 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 	}
 
-	//Sibling(alpha, _) Sibling(alpha, 4) Sibling(alpha, "x") Sibling(alpha, "proc")
-	else if(r.getToken1Type()==Relationship::SYNONYM){
+	//Sibling(alpha, 4)
+	else if(r.getToken1Type()==Relationship::SYNONYM && isdigit(tk2[0])){
 
-		//Sibling(alpha, "proc")
-		if(i1->second==TypeTable::PROCEDURE){
-			string procname = tk2.substr(1,tk2.length()-2);
-			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
-				if(pkb->isSiblingProcIndexProcIndex(*it, pkb->getProcIndex(tk2))){
-					siblingAns.insert(Pair(*it, pkb->getProcIndex(tk2)));
-				}
-			}
-		}
-
-		else if(i1->second == TypeTable::STMTLST){
+		if(i1->second == TypeTable::STMTLST){
 			//Sibling(stmtlst, 4)
-			if(isdigit(tk2[0])){
 				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
 					if(pkb->isSiblingStmtListStmtList(*it, atoi(tk2.c_str()))){
 						siblingAns.insert(Pair(*it, atoi(tk2.c_str())));
 					}
 				}
-			}
-			
-			//Sibling(stmtlst, "x")
-			else{
-				string varname = tk2.substr(1,tk2.length()-2);
-				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
-					if(pkb->isSiblingVarIndexStmtList(pkb->getVarIndex(varname), *it)){
-						siblingAns.insert(Pair(*it, pkb->getVarIndex(varname)));
-					}
-				}
-			}
 		}
 
 		//Sibling(stmt, 5)
 		else if(i1->second == TypeTable::STMT){
-			if(isdigit(tk2[0])){
 				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
 					if(pkb->isSiblingStmtNumStmtNum(*it, atoi(tk2.c_str()))){
 						siblingAns.insert(Pair(*it, atoi(tk2.c_str())));
 					}
 				}
-			}else{
+		}
 
+		//Sibling(v, 4) 
+		else if(i1->second == TypeTable::VARIABLE){
+			//Sibling(v,4)
+				for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
+					if(pkb->isSiblingVarIndexStmtList(*it, atoi(tk2.c_str()))){
+						siblingAns.insert(Pair(*it, atoi(tk2.c_str())));
+					}
+				}
+		}
+	}
+
+	//Sibling(4, alpha)
+	else if(r.getToken2Type()==Relationship::SYNONYM && isdigit(tk1[0])){
+		if(i2->second == TypeTable::STMT){
+			for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++){
+				if(pkb->isSiblingStmtNumStmtNum(atoi(tk1.c_str()), *it)){
+					siblingAns.insert(Pair(atoi(tk1.c_str()), *it));
+				}
+			}
+		}
+
+		else if(i2->second == TypeTable::STMTLST){
+			for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++){
+				if(pkb->isSiblingStmtListStmtList(*it, atoi(tk1.c_str()))){
+					siblingAns.insert(Pair(atoi(tk1.c_str()), *it));
+				}
+			}
+		}
+
+		else if(i2->second == TypeTable::VARIABLE){
+			for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++){
+				if(pkb->isSiblingVarIndexStmtList(*it, atoi(tk1.c_str()))){
+					siblingAns.insert(Pair(atoi(tk1.c_str()), *it));
+				}
 			}
 		}
 	}
 
+	//Sibling(1,2)
+	else if(r.getToken1Type()==Relationship::INTEGER && r.getToken2Type()==Relationship::INTEGER){
+		int tk1Int = atoi(tk1.c_str());
+		int tk2Int = atoi(tk2.c_str());
 
+		if(pkb->isSiblingStmtNumStmtNum(tk1Int, tk2Int)){
+			siblingAns.insert(Pair(-1,-1));
+		}
+	}
+
+	else{
+
+	}
+
+	vector<Pair> siblingVec;
+	for(set<Pair>::iterator i = siblingAns.begin(); i!=siblingAns.end(); i++){
+		siblingVec.push_back(*i);
+	}
+
+	intersectPairs(tk1,tk2,&siblingVec,relIndex);
+	relAns.insert(make_pair<int, vector<Pair>>(relIndex, siblingVec));
 }
 
 void QueryEvaluator::evaluateWith(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
