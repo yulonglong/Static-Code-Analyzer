@@ -117,7 +117,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 				ans = ans + constTable->getConst(tempAns) + " ";
 				//cout << "Adding " << constTable->getConst(tempAns) << " to tuple" << endl;
 			}*/
-			else if(it->second == TypeTable::PROCEDURE) {
+			else if(it->second == TypeTable::PROCEDURE && !parsedQuery.getSelectedSynIsCallProcedure().at(j)) {
 				ProcTable* procTable = pkb->getProcTable();
 				ans = ans + procTable->getProcName(tempAns) + " ";
 				//cout << "Adding " << procTable->getProcName(tempAns) << " to tuple" << endl;
