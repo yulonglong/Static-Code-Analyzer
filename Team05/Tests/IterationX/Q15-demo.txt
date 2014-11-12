@@ -1,0 +1,92 @@
+30
+cat: All Queries
+1 - ModifiesAssignment::Parent to limit the result 
+call c; assign a; while w; if i; stmt s;
+Select <a, c, i> such that Modifies (a, "delta") and Modifies (w, "x") and Modifies(c, "bravo") and Modifies(s, _) and Modifies(i, "b4") and Parent*(84, i)
+51 11 85, 51 11 87, 51 32 85, 51 32 87, 51 38 85, 51 38 87, 51 43 85, 51 43 87, 51 100 85, 51 100 87, 51 101 85, 51 101 87
+5000
+2 - ModifiesProcedure:: 
+procedure p, q;
+Select <p, q> such that Modifies (p, "apparentlyThisDoesNothing") and Modifies(q, "b")
+A A, A B, A C, A F, B A, B B, B C, B F, DizIzAVeryLongLongProcProcProcName A, DizIzAVeryLongLongProcProcProcName B, DizIzAVeryLongLongProcProcProcName C, DizIzAVeryLongLongProcProcProcName F, F A, F B, F C, F F
+5000
+3 - UsesAssignment::
+if i; assign a;
+Select <a, i> such that Uses(a,"a") and Uses (a, "y") and Uses (i, "yy")
+15 6, 15 13, 58 6, 58 13
+5000
+4 - UsesProcedure:: 
+procedure p; call c;
+Select <p, c> such that Uses (p, "delta") and Uses(c, "delta")
+A 11, A 32, A 38, A 43, A 100, A 101, B 11, B 32, B 38, B 43, B 100, B 101, C 11, C 32, C 38, C 43, C 100, C 101, F 11, F 32, F 38, F 43, F 100, F 101
+5000
+5 - Calls:: 
+procedure p, q;
+Select BOOLEAN such that Calls(p, q) and Calls(q, "DizIzAVeryLongLongProcProcProcName") with q.procName = "B"
+true
+5000
+6 - CallsStar:: 
+procedure p, q;
+Select p such that Calls*(p, "DizIzAVeryLongLongProcProcProcName") and Calls*(_, q) with q.procName = "E"
+A, B, F
+5000
+7 - Parent:: 
+stmt s1, s2, s3; assign a;
+Select s1 such that Parent(s1, s2) and Parent(s2, s3) and Parent(s3, a) with a.stmt# = 19
+13
+5000
+8 - ParentStar:: Select the 2nd level parent or more of a call statement
+stmt s1, s2, s3, s4; call c;
+Select s1 such that Parent*(s1, s2) and Parent*(s3, s4) and Parent*(s4, s2) and Parent(s2, c)
+4, 6, 9, 12, 13
+5000
+9 - Follows:: Find a while loop that is followed by at least 2 statements
+while w; stmt s1, s2;
+Select w such that Follows(w, s1) and Follows(s1, s2)
+48, 57, 60
+5000
+10 - FollowsStar:: Find an ordering of stmt --> while --> if in a single level
+while w; if i; stmt s;
+Select <w, i, s> such that Follows*(s, w) and Follows*(w, i)
+4 44 1, 4 44 2, 4 44 3
+5000
+11 - Next::Find all if statement that is executed after a while statement, and is a parent of some other if 
+while w; if i, k; call c;
+Select i such that Next(w, i) and Parent*(i, k)
+13
+5000
+12 - NextStar:: 
+while w1, w2; stmt s1, s2; call c;
+Select w1 such that Next*(w1, s1) and Next*(s1, w2) and Next*(w2, s2) and Next*(s2, c)
+4, 9, 12, 17, 22, 29, 33, 39, 48
+5000
+13 - Affects:: not manually calculated
+assign a1, a2, a3, a4;
+Select a1 such that Affects(a1, a2) and Affects(a2, a3) and Affects(a3, a4) and Affects(a4, a4)
+10,14,15,18,19,2,21,24,25,27,3,36,37,51,58,59,61,62,63,8
+5000
+14 - AffectsStar:: not manually calculated
+assign a1, a2, a3, a4;
+Select a1 such that Affects*(a1, 31) and Affects*(a2, 31) and Affects*(a2, 27) and Affects*(14, a4) and Affects*(a4, a2) and Affects*(a2, a1)
+none
+5000
+15 - With:: 
+stmt s; procedure p; variable v, x;
+Select <s, v> such that Calls(p, _) with p.procName = v.varName and p.procName = "B" such that Uses(s, x) with x.varName = "charlie"
+
+5000
+16 - FullPattern:: 
+assign a; while w; if i; variable v;
+Select <a, v> pattern a(_,"10") and w(v, _) and i(v,_,_)
+8 y, 97 y, 8 z, 97 z, 8 b, 97 b, 8 x, 97 x
+5000
+17 - SubPattern:: 
+assign a; while w; if i; variable v;
+Select <a, v> pattern a(_, _"y+5"_) and w(v,_) and i(v,_,_)
+18 y, 58 y, 18 z, 58 z, 18 b, 58 b, 18 x, 58 x
+5000
+18 - Constant::
+constant co;
+Select co
+1,2,3,10,7,5,12,4,10000000,0,2147483647
+5000

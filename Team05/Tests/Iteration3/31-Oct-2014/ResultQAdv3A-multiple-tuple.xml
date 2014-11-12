@@ -1,0 +1,26 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iteration3</name><parsing_time_taken>2.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" tuple of multiple clauses">
+<query>
+<id multiple="1" comment="" >1</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; Select <p1, p2> such that Calls*(p1, p2) and Modifies(p1, "idx")]]></querystr>
+<stuans>Fern Fern,Orchid Orchid</stuans>
+<correct>Fern,Orchid</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing>Fern,Orchid</missing>
+<additional>Fern Fern,Orchid Orchid</additional>
+<summary>
+<expected>2</expected>
+<matched>0</matched>
+<missing>2</missing>
+<additional>2</additional>
+</summary>
+</failed>
+</query>
+</category>
+</queries>
+</test_results>

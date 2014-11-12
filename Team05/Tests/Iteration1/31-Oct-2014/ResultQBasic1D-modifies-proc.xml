@@ -1,0 +1,256 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>Iteration1</name><parsing_time_taken>2.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" BASIC queries with modifies procedure">
+<query>
+<id Modifies="1" comment="" >1</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, v)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct>First,Second,Third,Fourth,Fifth,Sixth</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >2</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, "x")]]></querystr>
+<stuans>First,Second,Fifth</stuans>
+<correct>First,Second</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth</additional>
+<summary>
+<expected>2</expected>
+<matched>2</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >3</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, "wrong")]]></querystr>
+<exception/>
+</query>
+<query>
+<id Modifies="1" comment="" >4</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies ("First", "x")]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >5</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies ("Fourth", _)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >6</id><querystr><![CDATA[procedure p; variable v;  Select BOOLEAN such that Modifies (p, "y")]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >7</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies (p, "wrong")]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >8</id><querystr><![CDATA[procedure p; variable v;  Select BOOLEAN such that Modifies ("Third", v)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >9</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies ("Fourth", "y")]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >10</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, "y")]]></querystr>
+<stuans>First,Second,Fourth,Sixth</stuans>
+<correct>First,Second,Fourth,Sixth</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >11</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, "z")]]></querystr>
+<stuans>First,Second,Third</stuans>
+<correct>First,Second,Third</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >12</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies (p, "wrong")]]></querystr>
+<exception/>
+</query>
+<query>
+<id Modifies="1" comment="" >13</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies (p, v)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct>i,v,x,y,z</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >14</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies ("Second", v)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct>i,x,y,z</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>v</additional>
+<summary>
+<expected>4</expected>
+<matched>4</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >15</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies ("Fourth", v)]]></querystr>
+<stuans>y</stuans>
+<correct>y</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >16</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies(p, v)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >17</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies(p, _)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct>First,Second,Third,Fourth,Fifth,Sixth</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >18</id><querystr><![CDATA[procedure p; variable v; Select BOOLEAN such that Modifies(p, _)]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" comment="" >19</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies (p, "x")]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct>x</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,y,z</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>4</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >20</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies ("Sixth", "y")]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct>Sixth</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Third</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >21</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies ("Third", "z")]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct>z</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,x,y</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>4</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >22</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies ("Third", "wrong")]]></querystr>
+<exception/>
+</query>
+<query>
+<id Modifies="1" comment="" >23</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies ("Third", _)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct>Third</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Fourth,Second,Sixth</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >24</id><querystr><![CDATA[procedure p; variable v; Select v such that Modifies ("Fourth", _)]]></querystr>
+<stuans>x,i,y,z,v</stuans>
+<correct>y</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>i,v,x,z</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>4</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >25</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies ("Fourth", v)]]></querystr>
+<stuans>First,Second,Third,Fourth,Fifth,Sixth</stuans>
+<correct>Fourth</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>Fifth,First,Second,Sixth,Third</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>5</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Modifies="1" comment="" >26</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies ("DoesNotExist", v)]]></querystr>
+<exception/>
+</query>
+<query>
+<id Modifies="1" comment="" >27</id><querystr><![CDATA[procedure p; variable v; Select p such that Modifies ("DoesNotExist", _)]]></querystr>
+<exception/>
+</query>
+</category>
+</queries>
+</test_results>

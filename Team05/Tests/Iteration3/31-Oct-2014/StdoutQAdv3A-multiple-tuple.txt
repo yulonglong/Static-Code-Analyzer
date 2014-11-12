@@ -1,0 +1,122 @@
+Parameters : Source3A.txt QAdv3A-multiple-tuple.txt ResultQAdv3A-multiple-tuple.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+iteration3
+Beginning to evaluate Query File.
+New Category :  tuple of multiple clauses
+1 - multiple ::
+procedure p1, p2; stmt s1, s2;
+Select <p1, p2> such that Calls*(p1, p2) and Modifies(p1, "idx")
+Fern, Orchid
+5000
+Evaluating query 1 - multiple ::
+Begin parse query
+End parse query
+Begin evaluate query
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+modifies(p1, "idx")
+
+ EVALUATING MODIFIES (p1 "idx")
+In Modifies(p, "var")
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Not Found in Linkages and relIndex = 0
+Inserting tokens into relParameters
+ 
+calls*(p1, p2)
+
+ EVALUATING CALLS* (p1 p2)
+IntersectPairs tk1 Exists tk1 = p1
+removePairsfrom RELANS
+In retrieveTokenEvaluatedAnswers Finding tk = p1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+End retrieving token
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 11
+in for loop
+pair index is 12
+end of RemovePairsFromRelAns
+
+---START REMOVE PAIRS METHOD---
+Inserting 1
+Inserting 1
+Inserting 1
+Inserting 1
+Inserting 2
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =p1
+IN INSERT LINKS INSERTING TOKEN = p1
+p1 Found in Linkages
+Insert links for tk2 = p2
+IN INSERT LINKS INSERTING TOKEN = p2
+p2 Not Found in Linkages and relIndex = 1
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p1 p.size = 2
+FIRST PARAM = p1
+it2->ans1 = 1
+it2->ans1 = 2
+Iterating Selected Syn
+token in selectedSyn = p2 p.size = 5
+FIRST PARAM = p1
+SECOND PARAM = p2
+it2->ans2 = 2
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 4
+RETURNING FINAL ANSWERS
+End evaluate query
+Begin projecting results
+Begin creating tuple table
+Adding relationship 0 to tuple table
+Relation Type being added to tuple table: 4
+Case 2
+Case 2.2
+Tuple Table Size: 2
+Adding relationship 1 to tuple table
+Relation Type being added to tuple table: 7
+Case 1
+Case 1.3
+Tuple Table Size: 5
+End creating tuple table
+Begin handling unprocessed selected synonyms
+Checking for the: p1
+Checking for the: p2
+End handling unprocessed selected synonyms
+2
+Begin creating tuple of answers
+End creating tuple of answers
+End projecting results
+
+
+
+
+Your answer: Fern Fern Orchid Orchid 
+Correct answer: Fern Orchid 
+Missing: Fern Orchid 
+Additional: Fern Fern Orchid Orchid 
+End of evaluating Query File.
+AutoTester Completed !

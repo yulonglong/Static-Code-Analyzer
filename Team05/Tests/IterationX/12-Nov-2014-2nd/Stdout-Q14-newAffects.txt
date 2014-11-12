@@ -1,0 +1,113 @@
+Parameters : S14-newAffects.txt Q14-newAffects.txt R14-newAffects.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+Extracting Sibling
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - AffectsStar :: 
+assign a, a1;
+Select a such that Affects*(a, 8)
+2,3,4,6,7
+5000
+Evaluating query 1 - AffectsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(a, 8)
+
+ EVALUATING AFFECTSSTAR
+Case 2: Left is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(a,8) :5
+ANSWERS FOR AFFECTS*(a,8) :
+(2, 8)
+(3, 8)
+(4, 8)
+(6, 8)
+(7, 8)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 5
+FIRST PARAM = a
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 6
+it2->ans1 = 7
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 3 4 6 7 
+Correct answer: 2 3 4 6 7 
+2 - AffectsStar :: 
+assign a, a1;
+Select BOOLEAN such that Affects*(1, 9)
+false
+5000
+Evaluating query 2 - AffectsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(1, 9)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+NUMBER OF ANSWERS OF AFFECTS*(1,9) :0
+ANSWERS FOR AFFECTS*(1,9) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+3 - AffectsStar :: 
+assign a, a1;
+Select BOOLEAN such that Affects*(2, 9)
+true
+5000
+Evaluating query 3 - AffectsStar :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(2, 9)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+NUMBER OF ANSWERS OF AFFECTS*(2,9) :1
+ANSWERS FOR AFFECTS*(2,9) :
+(-1, -1)
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+End of evaluating Query File.
+AutoTester Completed !

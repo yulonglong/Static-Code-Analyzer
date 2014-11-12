@@ -1,0 +1,2166 @@
+Parameters : S8-with.txt Q8-with.txt R8-with.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+Extracting Sibling
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - constant, stmtNumber ::
+stmt s; constant co;
+Select s with s.stmt#=co.value
+1,2,3,13
+5000
+Evaluating query 1 - constant, stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, co)
+
+ EVALUATING WITH (s co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: co
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all constants
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 4
+FIRST PARAM = s
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+2 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=3
+3
+5000
+Evaluating query 2 - constant, stmtNumber, literal ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(co, 3)
+
+ EVALUATING WITH (co 3)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: co
+r.tk2: 3
+only 1 alpha token found
+constant
+null
+First token NEITHER VAR NOR PROC
+Index: 3
+In intersect Pairs: both do not exist
+Insert links for tk1 =co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(s, co)
+
+ EVALUATING WITH (s co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: s
+r.tk2: co
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = co
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+IntersectPairs tk2 Exists tk2 = co
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = co
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+3 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=9999
+none
+5000
+Evaluating query 3 - constant, stmtNumber, literal ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(co, 9999)
+
+ EVALUATING WITH (co 9999)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: co
+r.tk2: 9999
+only 1 alpha token found
+constant
+null
+First token NEITHER VAR NOR PROC
+Index: 9999
+In intersect Pairs: both do not exist
+Insert links for tk1 =co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(s, co)
+
+ EVALUATING WITH (s co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: s
+r.tk2: co
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = co
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9999
+End retrieving token
+IntersectPairs tk2 Exists tk2 = co
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = co
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9999
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 9999
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = s p.size = 0
+FIRST PARAM = s
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - procName, varName :: 
+variable v; procedure p;
+Select p with p.procName=v.varName
+TheOne
+5000
+Evaluating query 4 - procName, varName :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p, v)
+
+ EVALUATING WITH (p v)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p
+r.tk2: v
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all proc indexes
+getting all var indexes
+tk1 type != tk2 type and tk1 type =variable OR procedure
+pushing back procName TheOne
+pushing back procName TheCalledOne
+pushing back procName AgentSmith
+pushing back varName a
+pushing back varName b
+pushing back varName c
+pushing back varName x
+pushing back varName y
+pushing back varName TheOne
+pushing back varName notMe
+pushing back varName me
+pushing back varName awesome
+pushing back varName action
+pushing back varName killNeo
+pushing back varName NeoAlive
+pushing back varName wontLose
+intersect is empty: 0
+Pushing var and proc  TheOne
+In intersect Pairs: both do not exist
+Insert links for tk1 =p
+--INSERTING p--
+p Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p p.size = 1
+FIRST PARAM = p
+it2->ans1 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: TheOne 
+Correct answer: TheOne 
+5 - prog_line :: 
+prog_line n; stmt s;
+Select s such that Follows*(n,s) with n=5
+6,7
+5000
+Evaluating query 5 - prog_line :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+follows*(n, s)
+
+ EVALUATING FOLLOWS* (n s)
+In intersect Pairs: both do not exist
+Insert links for tk1 =n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting into RelAns RelIndex = 0
+Inserting tokens into relParameters
+ 
+with(n, 5)
+
+ EVALUATING WITH (n 5)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: n
+r.tk2: 5
+only 1 alpha token found
+progline
+null
+First token NEITHER VAR NOR PROC
+Index: 5
+IntersectPairs tk1 Exists tk1 = n
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = n
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+1
+2
+3
+5
+6
+8
+10
+14
+15
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 16
+Erasing element 16
+Erasing element 15
+Erasing element 13
+Erasing element 9
+Erasing element 7
+Erasing element 4
+Erasing element 4
+Erasing element 3
+Erasing element 4
+Erasing element 3
+Erasing element 2
+Insert links for tk1 =n
+--INSERTING n--
+n Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 2
+FIRST PARAM = n
+SECOND PARAM = s
+it2->ans2 = 7
+it2->ans2 = 6
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 7 6 
+Correct answer: 6 7 
+6 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheCalledOne"
+4
+5000
+Evaluating query 6 - call, procName :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+parent(s, c)
+
+ EVALUATING PARENT (s c)
+tk1 = s tk2 = c
+pushing into parent pair1 = 4pair2 = 7
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+after intersect pairs
+Inserting tokens into relParameters
+ 
+with(c, "TheCalledOne")
+
+ EVALUATING WITH (c "TheCalledOne")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: c
+r.tk2: "TheCalledOne"
+only 1 alpha token found
+call
+procedure
+call.procName
+loop
+procedure name is TheCalledOne
+procedure index is 2
+callstmts is empty: 0
+Pushing back 7
+IntersectPairs tk1 Exists tk1 = c
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = c
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+7
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Insert links for tk1 =c
+--INSERTING c--
+c Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 4
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 
+Correct answer: 4 
+7 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheOne"
+none
+5000
+Evaluating query 7 - call, procName :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+parent(s, c)
+
+ EVALUATING PARENT (s c)
+tk1 = s tk2 = c
+pushing into parent pair1 = 4pair2 = 7
+before intersect pairs
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+after intersect pairs
+Inserting tokens into relParameters
+ 
+with(c, "TheOne")
+
+ EVALUATING WITH (c "TheOne")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: c
+r.tk2: "TheOne"
+only 1 alpha token found
+call
+procedure
+call.procName
+loop
+procedure name is TheOne
+procedure index is 1
+callstmts is empty: 0
+Pushing back -1
+IntersectPairs tk1 Exists tk1 = c
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = c
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+7
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 7
+Insert links for tk1 =c
+--INSERTING c--
+c Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = s p.size = 0
+FIRST PARAM = s
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - invalid :: 
+assign a; stmt s; while w;
+Select s with a.stmt#=s.stmt# and w.stmt#=s.stmt#
+none
+5000
+Evaluating query 8 - invalid :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(w, s)
+
+ EVALUATING WITH (w s)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: s
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+--INSERTING w--
+w Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(a, s)
+
+ EVALUATING WITH (a s)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: a
+r.tk2: s
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = s
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+4
+13
+16
+End retrieving token
+IntersectPairs tk2 Exists tk2 = s
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = s
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+4
+13
+16
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Erasing element 4
+Erasing element 13
+Erasing element 16
+Insert links for tk1 =a
+--INSERTING a--
+a Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Insert links for tk2 = s
+--INSERTING s--
+s Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = s p.size = 0
+FIRST PARAM = w
+SECOND PARAM = s
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+9 - literal, stmtNumber ::
+assign a; stmt s;
+Select s with a.stmt#=s.stmt# and s.stmt#=3
+3
+5000
+Evaluating query 9 - literal, stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(s, 3)
+
+ EVALUATING WITH (s 3)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: 3
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 3
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(a, s)
+
+ EVALUATING WITH (a s)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: a
+r.tk2: s
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+tk2 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = s
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+IntersectPairs tk2 Exists tk2 = s
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = s
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =a
+--INSERTING a--
+a Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Insert links for tk2 = s
+--INSERTING s--
+s Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+10 - literal, stmtNumber :: 
+while w;
+Select w with w.stmt#=4
+4
+5000
+Evaluating query 10 - literal, stmtNumber :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(w, 4)
+
+ EVALUATING WITH (w 4)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: w
+r.tk2: 4
+only 1 alpha token found
+while
+null
+First token NEITHER VAR NOR PROC
+Index: 4
+In intersect Pairs: both do not exist
+Insert links for tk1 =w
+--INSERTING w--
+w Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = w p.size = 1
+FIRST PARAM = w
+it2->ans1 = 4
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 
+Correct answer: 4 
+11 - stmtNumber, constant :: 
+if i; while w; variable v; constant co;
+Select i such that Modifies(i,v) and Uses(w,v) with w.stmt#=co.value
+10
+5000
+Evaluating query 11 - stmtNumber, constant :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 3
+Initializing Variables
+ 
+modifies(i, v)
+
+ EVALUATING MODIFIES (i v)
+In intersect Pairs: both do not exist
+Insert links for tk1 =i
+--INSERTING i--
+i Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+uses(w, v)
+
+ EVALUATING USES (w v)
+IntersectPairs tk2 Exists tk2 = v
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = v
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+7
+8
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 2
+Insert links for tk1 =w
+--INSERTING w--
+w Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+Insert links for tk2 = v
+--INSERTING v--
+v Found in Linkages
+--END OF INSERT--
+Inserting tokens into relParameters
+ 
+with(w, co)
+
+ EVALUATING WITH (w co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 2
+r.tk1: w
+r.tk2: co
+2 alpha tokens found
+tk1 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = w
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+4
+13
+End retrieving token
+getting all constants
+IntersectPairs tk1 Exists tk1 = w
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = w
+Retrieving Token Evaluated Answers with first relationship index = 1
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+4
+13
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 1
+PairIndex: 1
+Erasing element 7
+Erasing element 8
+Insert links for tk1 =w
+--INSERTING w--
+w Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 2
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = i p.size = 2
+FIRST PARAM = i
+it2->ans1 = 10
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+12 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=10
+10
+5000
+Evaluating query 12 - stmtNumber, literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 10)
+
+ EVALUATING WITH (i 10)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 10
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 10
+In intersect Pairs: both do not exist
+Insert links for tk1 =i
+--INSERTING i--
+i Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = i p.size = 1
+FIRST PARAM = i
+it2->ans1 = 10
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+13 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=11
+none
+5000
+Evaluating query 13 - stmtNumber, literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 11)
+
+ EVALUATING WITH (i 11)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 11
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 11
+In intersect Pairs: both do not exist
+Insert links for tk1 =i
+--INSERTING i--
+i Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = i p.size = 0
+FIRST PARAM = i
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=10
+4,13,16
+5000
+Evaluating query 14 - stmtNumber, literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 10)
+
+ EVALUATING WITH (i 10)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 10
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 10
+In intersect Pairs: both do not exist
+Insert links for tk1 =i
+--INSERTING i--
+i Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 13 16 
+Correct answer: 4 13 16 
+15 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=11
+none
+5000
+Evaluating query 15 - stmtNumber, literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(i, 11)
+
+ EVALUATING WITH (i 11)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: i
+r.tk2: 11
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 11
+In intersect Pairs: both do not exist
+Insert links for tk1 =i
+--INSERTING i--
+i Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - literal :: 
+while w;
+Select w with 10=10
+4,13,16
+5000
+Evaluating query 16 - literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(10, 10)
+
+ EVALUATING WITH (10 10)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: 10
+r.tk2: 10
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 13 16 
+Correct answer: 4 13 16 
+17 - literal :: 
+while w;
+Select w with 10=11
+none
+5000
+Evaluating query 17 - literal :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(10, 11)
+
+ EVALUATING WITH (10 11)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: 10
+r.tk2: 11
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+18 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=1
+true
+5000
+Evaluating query 18 - literal, BOOLEAN :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(1, 1)
+
+ EVALUATING WITH (1 1)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: 1
+r.tk2: 1
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=2
+false
+5000
+Evaluating query 19 - literal, BOOLEAN :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(1, 2)
+
+ EVALUATING WITH (1 2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: 1
+r.tk2: 2
+In intersect Pairs: both do not exist
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+20 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=9
+true
+5000
+Evaluating query 20 - call, BOOLEAN :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(c, 9)
+
+ EVALUATING WITH (c 9)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 9
+only 1 alpha token found
+call
+null
+First token NEITHER VAR NOR PROC
+Index: 9
+In intersect Pairs: both do not exist
+Insert links for tk1 =c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(c, "AgentSmith")
+
+ EVALUATING WITH (c "AgentSmith")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: c
+r.tk2: "AgentSmith"
+only 1 alpha token found
+call
+procedure
+call.procName
+loop
+procedure name is AgentSmith
+procedure index is 3
+callstmts is empty: 0
+Pushing back 9
+IntersectPairs tk1 Exists tk1 = c
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = c
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =c
+--INSERTING c--
+c Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+21 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=7
+false
+5000
+Evaluating query 21 - call, BOOLEAN :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(c, 7)
+
+ EVALUATING WITH (c 7)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 7
+only 1 alpha token found
+call
+null
+First token NEITHER VAR NOR PROC
+Index: 7
+In intersect Pairs: both do not exist
+Insert links for tk1 =c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(c, "AgentSmith")
+
+ EVALUATING WITH (c "AgentSmith")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: c
+r.tk2: "AgentSmith"
+only 1 alpha token found
+call
+procedure
+call.procName
+loop
+procedure name is AgentSmith
+procedure index is 3
+callstmts is empty: 0
+Pushing back 9
+IntersectPairs tk1 Exists tk1 = c
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = c
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+7
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Erasing element 7
+Insert links for tk1 =c
+--INSERTING c--
+c Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+22 - call :: 
+call c;
+Select c with c.procName="AgentSmith" and c.stmt#=9
+9
+5000
+Evaluating query 22 - call :: 
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(c, 9)
+
+ EVALUATING WITH (c 9)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: c
+r.tk2: 9
+only 1 alpha token found
+call
+null
+First token NEITHER VAR NOR PROC
+Index: 9
+In intersect Pairs: both do not exist
+Insert links for tk1 =c
+--INSERTING c--
+c Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(c, "AgentSmith")
+
+ EVALUATING WITH (c "AgentSmith")
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: c
+r.tk2: "AgentSmith"
+only 1 alpha token found
+call
+procedure
+call.procName
+loop
+procedure name is AgentSmith
+procedure index is 3
+callstmts is empty: 0
+Pushing back 9
+IntersectPairs tk1 Exists tk1 = c
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = c
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+9
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =c
+--INSERTING c--
+c Found in Linkages
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = c p.size = 1
+FIRST PARAM = c
+it2->ans1 = 9
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+23 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select n with n = a.stmt#
+1,2,3,5,6,8,11,12,14,15,17
+5000
+Evaluating query 23 - stmtNumber, prog_line ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(n, a)
+
+ EVALUATING WITH (n a)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: n
+r.tk2: a
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = a
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 11
+FIRST PARAM = n
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 5 6 8 11 12 14 15 17 
+Correct answer: 1 2 3 5 6 8 11 12 14 15 17 
+24 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select a with a.stmt# = n
+1,2,3,5,6,8,11,12,14,15,17
+5000
+Evaluating query 24 - stmtNumber, prog_line ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(a, n)
+
+ EVALUATING WITH (a n)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: a
+r.tk2: n
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =a
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 11
+FIRST PARAM = a
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 5 6 8 11 12 14 15 17 
+Correct answer: 1 2 3 5 6 8 11 12 14 15 17 
+25 - constant, prog_line ::
+constant co; prog_line n;
+Select n with n = co.value
+1,2,3,13
+5000
+Evaluating query 25 - constant, prog_line ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(n, co)
+
+ EVALUATING WITH (n co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: n
+r.tk2: co
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all constants
+In intersect Pairs: both do not exist
+Insert links for tk1 =n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 4
+FIRST PARAM = n
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+26 - constant, stmtNumber ::
+stmt s; constant co;
+Select co with s.stmt#=co.value
+1,2,3,13
+5000
+Evaluating query 26 - constant, stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s, co)
+
+ EVALUATING WITH (s co)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s
+r.tk2: co
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all constants
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = co
+--INSERTING co--
+co Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = co p.size = 4
+FIRST PARAM = s
+SECOND PARAM = co
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+27 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s1.stmt#=s2.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 27 - stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s1, s2)
+
+ EVALUATING WITH (s1 s2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s1
+r.tk2: s2
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s2
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 17
+FIRST PARAM = s1
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 16
+it2->ans1 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+28 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s2.stmt#=s1.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 28 - stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s2, s1)
+
+ EVALUATING WITH (s2 s1)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s2
+r.tk2: s1
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =s2
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s1
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 17
+FIRST PARAM = s2
+SECOND PARAM = s1
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 6
+it2->ans2 = 7
+it2->ans2 = 8
+it2->ans2 = 9
+it2->ans2 = 10
+it2->ans2 = 11
+it2->ans2 = 12
+it2->ans2 = 13
+it2->ans2 = 14
+it2->ans2 = 15
+it2->ans2 = 16
+it2->ans2 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+29 - varName ::
+variable v1, v2;
+Select v1 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+Evaluating query 29 - varName ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(v1, v2)
+
+ EVALUATING WITH (v1 v2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: v1
+r.tk2: v2
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all var indexes
+getting all var indexes
+In intersect Pairs: both do not exist
+Insert links for tk1 =v1
+--INSERTING v1--
+v1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v2
+--INSERTING v2--
+v2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v1 p.size = 13
+FIRST PARAM = v1
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: a b c x y TheOne notMe me awesome action killNeo NeoAlive wontLose 
+Correct answer: NeoAlive TheOne a action awesome b c killNeo me notMe wontLose x y 
+30 - varName ::
+variable v1, v2;
+Select v2 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+Evaluating query 30 - varName ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(v1, v2)
+
+ EVALUATING WITH (v1 v2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: v1
+r.tk2: v2
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all var indexes
+getting all var indexes
+In intersect Pairs: both do not exist
+Insert links for tk1 =v1
+--INSERTING v1--
+v1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = v2
+--INSERTING v2--
+v2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = v2 p.size = 13
+FIRST PARAM = v1
+SECOND PARAM = v2
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 6
+it2->ans2 = 7
+it2->ans2 = 8
+it2->ans2 = 9
+it2->ans2 = 10
+it2->ans2 = 11
+it2->ans2 = 12
+it2->ans2 = 13
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: a b c x y TheOne notMe me awesome action killNeo NeoAlive wontLose 
+Correct answer: NeoAlive TheOne a action awesome b c killNeo me notMe wontLose x y 
+31 - procName ::
+procedure p1, p2;
+Select p1 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+Evaluating query 31 - procName ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p1, p2)
+
+ EVALUATING WITH (p1 p2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p1
+r.tk2: p2
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all proc indexes
+getting all proc indexes
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+--INSERTING p1--
+p1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = p2
+--INSERTING p2--
+p2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p1 p.size = 3
+FIRST PARAM = p1
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: TheOne TheCalledOne AgentSmith 
+Correct answer: AgentSmith TheCalledOne TheOne 
+32 - procName ::
+procedure p1, p2;
+Select p2 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+Evaluating query 32 - procName ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(p1, p2)
+
+ EVALUATING WITH (p1 p2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: p1
+r.tk2: p2
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all proc indexes
+getting all proc indexes
+In intersect Pairs: both do not exist
+Insert links for tk1 =p1
+--INSERTING p1--
+p1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = p2
+--INSERTING p2--
+p2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = p2 p.size = 3
+FIRST PARAM = p1
+SECOND PARAM = p2
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: TheOne TheCalledOne AgentSmith 
+Correct answer: AgentSmith TheCalledOne TheOne 
+33 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s2.stmt#=s1.stmt#
+1 1,2 2,3 3,4 4,5 5,6 6,7 7,8 8,9 9,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17
+5000
+Evaluating query 33 - stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+with(s2, s1)
+
+ EVALUATING WITH (s2 s1)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s2
+r.tk2: s1
+2 alpha tokens found
+tk1 does not exist in linkages
+getting all stmts
+getting all stmts
+In intersect Pairs: both do not exist
+Insert links for tk1 =s2
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s1
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 17
+FIRST PARAM = s2
+SECOND PARAM = s1
+it2->ans2 = 1
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 6
+it2->ans2 = 7
+it2->ans2 = 8
+it2->ans2 = 9
+it2->ans2 = 10
+it2->ans2 = 11
+it2->ans2 = 12
+it2->ans2 = 13
+it2->ans2 = 14
+it2->ans2 = 15
+it2->ans2 = 16
+it2->ans2 = 17
+Iterating Selected Syn
+token in selectedSyn = s2 p.size = 17
+FIRST PARAM = s2
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 15
+it2->ans1 = 16
+it2->ans1 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 
+Correct answer: 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 
+34 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s1.stmt#=s2.stmt# and s1.stmt#=3
+3 3
+5000
+Evaluating query 34 - stmtNumber ::
+Ordering Relationships
+In orderRelationships
+with relationship found
+with relationship found
+After Ordering Relations, r.size = 2
+Initializing Variables
+ 
+with(s1, 3)
+
+ EVALUATING WITH (s1 3)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 0
+r.tk1: s1
+r.tk2: 3
+only 1 alpha token found
+null
+null
+First token NEITHER VAR NOR PROC
+Index: 3
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+ 
+with(s1, s2)
+
+ EVALUATING WITH (s1 s2)
+
+---START EVALUATE WITH METHOD---
+Relationship Index: 1
+r.tk1: s1
+r.tk2: s2
+2 alpha tokens found
+tk1 exist in linkages
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+getting all stmts
+IntersectPairs tk1 Exists tk1 = s1
+--REMOVE PAIRS FROM REL ANS START--
+In retrieveTokenEvaluatedAnswers Finding tk = s1
+Retrieving Token Evaluated Answers with first relationship index = 0
+PRINTING ELEMENTS OF RETRIEVED TOKEN: 
+3
+End retrieving token
+--REMOVE PAIRS FROM RELANS END--
+
+---START REMOVE PAIRS METHOD---
+RelIndex of clause with contents being removed: 0
+PairIndex: 1
+Insert links for tk1 =s1
+--INSERTING s1--
+s1 Found in Linkages
+--END OF INSERT--
+Insert links for tk2 = s2
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 1
+--END OF INSERT--
+---END EVALUATE WITH METHOD---
+
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 1
+FIRST PARAM = s1
+it2->ans1 = 3
+Iterating Selected Syn
+token in selectedSyn = s2 p.size = 1
+FIRST PARAM = s1
+SECOND PARAM = s2
+it2->ans2 = 3
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 3 3 
+Correct answer: 3 3 
+End of evaluating Query File.
+AutoTester Completed !

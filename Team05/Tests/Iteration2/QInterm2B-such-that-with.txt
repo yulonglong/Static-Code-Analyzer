@@ -1,0 +1,42 @@
+8
+cat: such that and with compound clauses
+1 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select p2 such that Calls (p1, p2) with p1.procName = "Fern"
+Tulip, Lily, Orchid
+5000
+2 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select a1 such that Modifies(a1, v1) and Uses (a1, v2) with v1.varName = "x" with v2.varName = "y"
+2, 14, 17, 26, 29
+5000
+3 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Modifies (s1, v1) and Uses (s1, v2) with v1.varName = "x" with v2.varName = "y" with s1.stmt# = 9
+9
+5000
+4 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select p1 such that Modifies (p1, v1) and Uses (p1, v1) with v1.varName = "idx"
+Fern, Tulip
+5000
+5 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Parent (s1, s2) with s1.stmt# = s2.stmt#
+
+5000
+6 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Parent (s1, s2) with s2.stmt# = 12
+11
+5000
+7 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select i1 such that Follows (w1, i1) with w2.stmt# = 9
+28
+5000
+8 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s2 such that Next (i1, s2) with i1.stmt# = 11
+12, 14
+5000

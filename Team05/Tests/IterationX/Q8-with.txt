@@ -1,0 +1,172 @@
+22
+cat: All Category
+1 - constant, stmtNumber ::
+stmt s; constant co;
+Select s with s.stmt#=co.value
+1,2,3,13
+5000
+2 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=3
+3
+5000
+3 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=9999
+none
+5000
+4 - procName, varName :: 
+variable v; procedure p;
+Select p with p.procName=v.varName
+TheOne
+5000
+5 - prog_line :: 
+prog_line n; stmt s;
+Select s such that Follows*(n,s) with n=5
+6,7
+5000
+6 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheCalledOne"
+4
+5000
+7 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheOne"
+none
+5000
+8 - invalid :: 
+assign a; stmt s; while w;
+Select s with a.stmt#=s.stmt# and w.stmt#=s.stmt#
+none
+5000
+9 - literal, stmtNumber ::
+assign a; stmt s;
+Select s with a.stmt#=s.stmt# and s.stmt#=3
+3
+5000
+10 - literal, stmtNumber :: 
+while w;
+Select w with w.stmt#=4
+4
+5000
+11 - stmtNumber, constant :: 
+if i; while w; variable v; constant co;
+Select i such that Modifies(i,v) and Uses(w,v) with w.stmt#=co.value
+10
+5000
+12 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=10
+10
+5000
+13 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=11
+none
+5000
+14 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=10
+4,13,16
+5000
+15 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=11
+none
+5000
+16 - literal :: 
+while w;
+Select w with 10=10
+4,13,16
+5000
+17 - literal :: 
+while w;
+Select w with 10=11
+none
+5000
+18 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=1
+true
+5000
+19 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=2
+false
+5000
+20 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=9
+true
+5000
+21 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=7
+false
+5000
+22 - call :: 
+call c;
+Select c with c.procName="AgentSmith" and c.stmt#=9
+9
+5000
+23 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select n with n = a.stmt#
+1,2,3,5,6,8,11,12,14,15,17
+5000
+24 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select a with a.stmt# = n
+1,2,3,5,6,8,11,12,14,15,17
+5000
+25 - constant, prog_line ::
+constant co; prog_line n;
+Select n with n = co.value
+1,2,3,13
+5000
+26 - constant, stmtNumber ::
+stmt s; constant co;
+Select co with s.stmt#=co.value
+1,2,3,13
+5000
+27 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s1.stmt#=s2.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+28 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s2.stmt#=s1.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+29 - varName ::
+variable v1, v2;
+Select v1 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+30 - varName ::
+variable v1, v2;
+Select v2 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+31 - procName ::
+procedure p1, p2;
+Select p1 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+32 - procName ::
+procedure p1, p2;
+Select p2 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+33 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s2.stmt#=s1.stmt#
+1 1,2 2,3 3,4 4,5 5,6 6,7 7,8 8,9 9,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17
+5000
+34 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s1.stmt#=s2.stmt# and s1.stmt#=3
+3 3
+5000

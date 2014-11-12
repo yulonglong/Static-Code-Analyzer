@@ -1,0 +1,21 @@
+Testing Summary 12-Nov-2014 2nd try 3.40 p.m.
+
+Iteration X - well done guys
+
+Q1- perfect 
+Q2-	perfect
+
+Q4- perfect
+Q5- 6 wrong ans (most prob wrong test case, ignore this)
+Q6- perfect
+Q7- perfect 
+Q8- perfect
+Q9- perfect
+Q10- perfect except 2 timeout, (last killer massive next)
+Q11- perfect
+Q12- perfect
+Q13- perfect
+Q14- perfect
+Q15- perfect
+Q16- perfect
+Q17- no comment

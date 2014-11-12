@@ -1,0 +1,277 @@
+54
+cat: With 
+1 - With, stmt
+stmt s1;
+Select s1 with s1.stmt#=1
+1
+5000
+2 - With, stmt
+stmt s1;
+Select s1 with s1.stmt#=1312312311
+none
+5000
+3 - With, stmt
+stmt s1;
+Select s1 with s1.stmt#=999999
+none
+5000
+4 - With, constant
+constant c1;
+Select c1 with c1.value=2
+2
+5000
+5 - With, constant
+constant c1;
+Select c1 with c1.value=1
+1
+5000
+6 - With, constant
+constant c1;
+Select c1 with c1.value=12312
+none
+5000
+7 - With, constant
+constant c1;
+Select c1 with c1.value=999999
+none
+5000
+8 - With, constant
+constant c1;
+Select c1 with c1.value=1
+1
+5000
+9 - With, variable
+variable v1;
+Select v1 with v1.varName="j"
+j
+5000
+10 - With, variable
+variable v1;
+Select v1 with v1.varName="varLoop5"
+varLoop5
+5000
+11 - With, variable
+variable v1;
+Select v1 with v1.varName="vasdasdasd"
+none
+5000
+12 - With, procedure
+procedure p1;
+Select p1 with p1.procName="Second"
+Second
+5000
+13 - With, procedure
+procedure p1;
+Select p1 with p1.procName="InsaneWhile"
+InsaneWhile
+5000
+14 - With, procedure
+procedure p1;
+Select p1 with p1.procName="Wrong"
+none
+5000
+15 - With, stmt
+stmt s1;
+Select s1 with s1.stmt#=s1.stmt#
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57
+5000
+16 - With, stmt
+stmt s1,s2,s3;
+Select s1 with s1.stmt#=s2.stmt#
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57
+5000
+17 - With, stmt
+stmt s1,s2,s3;
+Select s1 with s1.stmt#=s2.stmt# and s2.stmt#=30
+30
+5000
+18 - With, stmt
+stmt s1,s2,s3;
+Select s1 with s1.stmt#=s2.stmt# and s2.stmt#=30 and s3.stmt#=s2.stmt#
+30
+5000
+19 - With, stmt
+stmt s1,s2,s3;
+Select s1 with s1.stmt#=s2.stmt# and s2.stmt#=12312
+none
+5000
+20 - With, stmt
+stmt s1,s2,s3;
+Select s1 with s1.stmt#=s2.stmt# and s3.stmt#=12312
+none
+5000
+21 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select s1 with s1.stmt#=c1.value
+1, 2, 4, 5, 6, 7, 8, 9, 10
+5000
+22 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select c1 with s1.stmt#=c1.value
+1, 2, 4, 5, 6, 7, 8, 9, 10
+5000
+23 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select s1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt#
+1, 2, 4, 5, 6, 7, 8, 9, 10
+5000
+24 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select c1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt#
+1, 2, 4, 5, 6, 7, 8, 9, 10
+5000
+25 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select c1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt# and c1.value=c2.value and c2.value = 0
+none
+5000
+26 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select s1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt# and c1.value=c2.value and c2.value = 0
+none
+5000
+27 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select c1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt# and c1.value=c2.value and c2.value = 1
+1
+5000
+28 - With, stmt, constant
+stmt s1,s2; constant c1,c2;
+Select s1 with s1.stmt#=s2.stmt# and c1.value=s2.stmt# and c1.value=c2.value and c2.value = 1
+1
+5000
+29 - With, constant
+constant c1,c2,c3;
+Select c1 with c1.value=c1.value
+0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12345
+5000
+30 - With, constant
+constant c1,c2,c3;
+Select c2 with c1.value=c2.value
+0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12345
+5000
+31 - With, constant
+constant c1,c2,c3;
+Select c1 with c1.value=c2.value and c2.value=0
+0
+5000
+32 - With, constant
+constant c1,c2,c3;
+Select c1 with c1.value=c2.value and c2.value=0 and c3.value=c2.value
+0
+5000
+33 - With, constant
+constant c1,c2,c3;
+Select c1 with c1.value=c2.value and c2.value=312931923
+none
+5000
+34 - With, constant
+constant c1,c2,c3;
+Select c1 with c1.value=c2.value and c3.value=312931923
+none
+5000
+35 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v1.varName
+i, j, x, z, y, a, b, c, d, e, f, varA, varB, varC, varD, g, varE, varF, varG, loop1, loop2, loop3, loop4, loop5, varLoop5, loop6, loop7, loop8, loop9, loop10, lastLoop, varLastLoop, varLoop10, varLoop9, varLoop8, varLoop7, varLoop6, loop4Inside, varLoop4, varLoop3, varLoop2, varLoop1
+5000
+36 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v2.varName
+i, j, x, z, y, a, b, c, d, e, f, varA, varB, varC, varD, g, varE, varF, varG, loop1, loop2, loop3, loop4, loop5, varLoop5, loop6, loop7, loop8, loop9, loop10, lastLoop, varLastLoop, varLoop10, varLoop9, varLoop8, varLoop7, varLoop6, loop4Inside, varLoop4, varLoop3, varLoop2, varLoop1
+5000
+37 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v2.varName and v2.varName="varLoop1"
+varLoop1
+5000
+38 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v2.varName and v2.varName="varLoop1" and v3.varName=v2.varName
+varLoop1
+5000
+39 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v2.varName and v2.varName="asdas"
+none
+5000
+40 - With, variable
+variable v1,v2,v3;
+Select v1 with v1.varName=v2.varName and v3.varName="gakada"
+none
+5000
+41 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p1.procName
+Second, InsaneWhile
+5000
+42 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName
+Second, InsaneWhile
+5000
+43 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and p2.procName="Second"
+Second
+5000
+44 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and p2.procName="InsaneWhile" and p3.procName=p1.procName
+InsaneWhile
+5000
+45 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and p2.procName="NoProcedure"
+none
+5000
+46 - With, procedure
+procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and p3.procName="NoProcedure"
+none
+5000
+47 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select p1 with p1.procName=v1.varName
+none
+5000
+48 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select v1 with p1.procName=v1.varName
+none
+5000
+49 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and v1.varName=v2.varName
+Second, InsaneWhile
+5000
+50 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select v1 with p1.procName=p2.procName and v1.varName=v2.varName
+i, j, x, z, y, a, b, c, d, e, f, varA, varB, varC, varD, g, varE, varF, varG, loop1, loop2, loop3, loop4, loop5, varLoop5, loop6, loop7, loop8, loop9, loop10, lastLoop, varLastLoop, varLoop10, varLoop9, varLoop8, varLoop7, varLoop6, loop4Inside, varLoop4, varLoop3, varLoop2, varLoop1
+5000
+51 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select v1 with p1.procName=p2.procName and v1.varName=p2.procName and v1.varName=v2.varName and v2.varName ="varLoop3"
+none
+5000
+52 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select p1 with p1.procName=p2.procName and v1.varName=p2.procName and v1.varName=v2.varName and v2.varName ="varLoop3"
+none
+5000
+53 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select v1 with p1.procName=p2.procName and v1.varName=p2.procName and v1.varName=v2.varName and v2.varName ="Second"
+none
+5000
+54 - With, variable, procedure
+variable v1,v2,v3; procedure p1,p2,p3;
+Select v1 with p1.procName=p2.procName and v1.varName=p2.procName and v1.varName=v2.varName and v2.varName ="InsaneWhile"
+none
+5000
+55 - With, boolean
+
+Select BOOLEAN with 1 = 2
+false
+5000

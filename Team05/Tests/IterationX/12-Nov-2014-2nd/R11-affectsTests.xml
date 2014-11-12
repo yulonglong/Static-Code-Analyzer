@@ -1,0 +1,73 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iterationX</name><parsing_time_taken>3.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Mainly Affect*">
+<query>
+<id Affectsstar="1" comment="" >1</id><querystr><![CDATA[assign a1, a2, a3, a4, a5; Select a3 such that Affects*(1, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) ]]></querystr>
+<stuans>25,12,19,8</stuans>
+<correct>8,12,19,25</correct>
+<time_taken>71.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" comment="" >2</id><querystr><![CDATA[assign a, a1, a2, a3, a4, a5; Select a3 such that Affects*(a, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) ]]></querystr>
+<stuans>25,12,19,8</stuans>
+<correct>8,12,19,25</correct>
+<time_taken>74.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" comment="" >3</id><querystr><![CDATA[assign a, a1, a2, a3, a4, a5; Select a2 such that Affects*(a, a1) and Affects*(a1, 8) and Affects*(8,a2) and Affects*(a2,a3)]]></querystr>
+<stuans>19,28</stuans>
+<correct>19,28</correct>
+<time_taken>23.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" comment="" >4</id><querystr><![CDATA[assign a1, a2, a3; Select a2 such that Affects*(a1, a2) and Affects*(a2, a3)]]></querystr>
+<stuans>8,9,12,15,17,19,24,25,28,31</stuans>
+<correct>24,31,8,19,28,15,17,12,25,9</correct>
+<time_taken>72.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" comment="" >5</id><querystr><![CDATA[assign a; Select a such that Affects*(1, 34) and Affects*(24, 22) and Affects*(12,35) and Affects*(17,a)]]></querystr>
+<stuans>9,12,25,35</stuans>
+<correct>12,25,9,35</correct>
+<time_taken>7.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" comment="" >6</id><querystr><![CDATA[assign a; Select a such that Affects*(_, 19) and Affects*(19, a)]]></querystr>
+<stuans>20,22,28,34</stuans>
+<correct>20,28,34,22</correct>
+<time_taken>7.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" Modifies="1" comment="" >7</id><querystr><![CDATA[assign a1, a2, a3; Select a2 such that Modifies(a1,"h") and Modifies(a3,"l") and Affects*(a1, a2) and Affects*(a2, a3)]]></querystr>
+<stuans>12,17,25</stuans>
+<correct>17,12,25</correct>
+<time_taken>11.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" Modifies="1" comment="" >8</id><querystr><![CDATA[variable v; assign a1, a2, a3; Select v such that Modifies(a1,"h") and Modifies(a3,"b") and Affects*(a1, _) and Affects*(_, a3)]]></querystr>
+<stuans>a,b,h,c,d,l,k,j,i,f,e,g,m</stuans>
+<correct>a,b,c,d,e,f,g,h,i,j,k,l,m</correct>
+<time_taken>17.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Affectsstar="1" Modifies="1" comment="" >9</id><querystr><![CDATA[variable v,v1,v2; assign a1, a2, a3, a4; Select v such that Modifies(a1,v) and Modifies(a3,v1) and Affects*(a1, a3) and Modifies(a2,v) and Modifies(a4,v2) and Affects*(a2,a4)]]></querystr>
+<stuans>a,d,l,j,h,i,e,b,k,f,c</stuans>
+<correct>a,b,c,d,e,f,h,i,j,k,l</correct>
+<time_taken>112.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

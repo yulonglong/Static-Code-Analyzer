@@ -1,0 +1,16 @@
+procedure Alpha{
+	x = 5;
+	while x{
+		y = 11;
+		x = y;
+		y = z;
+		z = x;
+	}
+	if y then{
+		a = a + 17;
+	}
+	else{
+		a = b + 34;
+	}
+	w = x + y * ((z*c)-((3+x)*d));
+}

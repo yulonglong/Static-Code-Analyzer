@@ -1,0 +1,31 @@
+procedure TheOne {
+	a = 1;
+	b = 2;
+	c = a * b + 2000 - 3 + a;
+	while a {
+		x = a * b;
+		y = a * b + c;
+		call TheCalledOne;
+	}
+}
+
+procedure TheCalledOne {
+	TheOne = 9999;
+	call AgentSmith;
+}
+
+procedure AgentSmith{
+	if notMe then{
+		notMe = me;
+	}
+	else {
+		me = awesome;
+	}
+	while me {
+		action = killNeo;
+		killNeo = killNeo + killNeo;
+		while NeoAlive {
+			wontLose = 13;
+		}
+	}
+}	
