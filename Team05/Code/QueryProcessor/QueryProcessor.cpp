@@ -70,6 +70,9 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 			else if(it->second == TypeTable::PROCEDURE) {
 				allOfType = pkb->getAllProcIndexes();
 			}
+			else if(it->second == TypeTable::STMTLST) {
+				allOfType = pkb->getAllStmtList();
+			}
 			else {
 				allOfType = pkb->getAllStmts(it->second);
 			}
