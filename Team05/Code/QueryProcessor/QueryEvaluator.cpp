@@ -3106,7 +3106,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 	cout << "NUMBER OF ANSWERS OF AFFECTS*(" << tk1 << "," << tk2 << ") :" << affAns.size() << endl; 
 	cout << "ANSWERS FOR AFFECTS*(" << tk1 << "," << tk2 << ") :" << endl;
-	for(int i=0; i<affAns.size(); i++) {
+	for(int i=0; i<int(affAns.size()); i++) {
 		cout << "(" << affAns.at(i).ans1 << ", " << affAns.at(i).ans2 << ")" << endl;
 	}
 
@@ -3284,7 +3284,7 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3296,7 +3296,7 @@ vector<Pair> QueryEvaluator::findAssign(Node startNode, string lhs, string rhs, 
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3321,12 +3321,12 @@ vector<Pair> QueryEvaluator::findIf(Node startNode, string lhs, string rhs, Rela
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
 				}
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3336,12 +3336,12 @@ vector<Pair> QueryEvaluator::findIf(Node startNode, string lhs, string rhs, Rela
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3366,12 +3366,12 @@ vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, R
 					ans.push_back(Pair(n.getProgLine(), pkb->getVarIndex(left.getData())));
 				}
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3381,12 +3381,12 @@ vector<Pair> QueryEvaluator::findWhile(Node startNode, string lhs, string rhs, R
 					ans.push_back(Pair(n.getProgLine(), n.getProgLine()));
 				}
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 			else {
 				vector<Node*> children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}
@@ -3434,7 +3434,7 @@ bool QueryEvaluator::matchPattern(Node n, string lhs, string rhs, bool leftIsSyn
 				st.pop();
 				rightMatch = matchTree(n, *treeRoot);
 				children = n.getChild();
-				for(int i=0; i<children.size(); i++)
+				for(int i=0; i<int(children.size()); i++)
 					st.push(*children.at(i));
 			}
 		}

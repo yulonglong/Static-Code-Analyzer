@@ -48,7 +48,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	}
 
 	//cout << "Begin handling unprocessed selected synonyms" << endl;
-	for(int i=0; i<selectedSyn.size(); i++) {
+	for(int i=0; i<int(selectedSyn.size()); i++) {
 		//cout << "Checking for the following syn: " << selectedSyn.at(i) << endl;
 		if(synIndexMap.count(selectedSyn.at(i)) == 0) {
 			//cout << selectedSyn.at(i) << " has not been processed" << endl;
@@ -96,10 +96,10 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 		return;
 
 	//cout << "Begin creating tuple of answers" << endl;
-	for(int i=0; i<tupleTable.size(); i++) {
+	for(int i=0; i<int(tupleTable.size()); i++) {
 		//cout << "Creating tuple of answer " << i << endl;
 		string ans = "";
-		for(int j=0; j<selectedSyn.size(); j++) {
+		for(int j=0; j<int(selectedSyn.size()); j++) {
 			//cout << "Adding \"" << selectedSyn.at(j) << " \"to tuple." << endl;
 			unordered_map<string, TypeTable::SynType>::iterator it = synTable.find(selectedSyn.at(j));
 			int index = synIndexMap.at(selectedSyn.at(j));
@@ -150,7 +150,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 	vector<int> emptyTuple;
 	tupleTable.push_back(emptyTuple);
 
-	for(int i=0; i<relationships.size(); i++) {
+	for(int i=0; i<int(relationships.size()); i++) {
 
 		if (AbstractWrapper::GlobalStop) {
 			cout<< "Timeout detected! Stopping QueryProcessor Tuple!" << endl;
@@ -228,8 +228,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 1.1: Both Synonyms are new
 			if(!tk1InMap && !tk2InMap) {
 				//cout << "Case 1.1" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -245,8 +245,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 1.2: First Synonym is new
 			else if(!tk1InMap) {
 				//cout << "Case 1.2" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -263,8 +263,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 1.3: Second Synonym is new
 			else if(!tk2InMap) {
 				//cout << "Case 1.3" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -281,8 +281,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 1.4: Both Synonyms have been seen before
 			else {
 				//cout << "Case 1.4" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -324,8 +324,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 2.1: have seen Synonym
 			if(tkInMap) {
 				//cout << "Case 2.1" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -341,8 +341,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 2.2: haven't seen Synonym
 			else {
 				//cout << "Case 2.2" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -380,8 +380,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 3.1: have seen Synonym
 			if(tkInMap) {
 				//cout << "Case 3.1" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
@@ -397,8 +397,8 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 			//Case 3.2: haven't seen Synonym
 			else {
 				//cout << "Case 3.2" << endl;
-				for(int x=0; x<tupleTable.size(); x++) {
-					for(int y=0; y<clauseAns.size(); y++) {
+				for(int x=0; x<int(tupleTable.size()); x++) {
+					for(int y=0; y<int(clauseAns.size()); y++) {
 						vector<int> tuple;
 						vector<int> tuple1 = tupleTable.at(x);
 						Pair tuple2 = clauseAns.at(y);
