@@ -1,0 +1,2424 @@
+Parameters : S13-next_affects.txt Q13-next_affects.txt R13-next_affects.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+Extracting Sibling
+End DesignExtractor
+End of parsing Simple Program.
+iterationX
+Beginning to evaluate Query File.
+New Category :  NextAffects
+1 - Next :: 
+stmt s;
+Select s such that Next (_, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 1 - Next :: 
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(_, _)
+
+ EVALUATING NEXT (_ _)
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+2 - Next ::
+stmt s;
+Select s such that Next (s, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 2 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(s, _)
+
+ EVALUATING NEXT (s _)
+First Token does not Exist
+Before retrieving getNext it = 1
+Pushing in it = 1
+Before retrieving getNext it = 2
+Pushing in it = 2
+Before retrieving getNext it = 3
+Pushing in it = 3
+Before retrieving getNext it = 4
+Pushing in it = 4
+Before retrieving getNext it = 5
+Pushing in it = 5
+Before retrieving getNext it = 6
+Pushing in it = 6
+Before retrieving getNext it = 7
+Pushing in it = 7
+Before retrieving getNext it = 8
+Pushing in it = 8
+Before retrieving getNext it = 9
+Pushing in it = 9
+Before retrieving getNext it = 10
+Pushing in it = 10
+Before retrieving getNext it = 11
+Pushing in it = 11
+Before retrieving getNext it = 12
+Pushing in it = 12
+Before retrieving getNext it = 13
+Pushing in it = 13
+Before retrieving getNext it = 14
+Pushing in it = 14
+Before retrieving getNext it = 15
+Before retrieving getNext it = 16
+Pushing in it = 16
+Before retrieving getNext it = 17
+Pushing in it = 17
+Before retrieving getNext it = 18
+Pushing in it = 18
+Before retrieving getNext it = 19
+Pushing in it = 19
+Before retrieving getNext it = 20
+Pushing in it = 20
+Before retrieving getNext it = 21
+Pushing in it = 21
+Before retrieving getNext it = 22
+Pushing in it = 22
+Before retrieving getNext it = 23
+Pushing in it = 23
+Before retrieving getNext it = 24
+Pushing in it = 24
+Before retrieving getNext it = 25
+Pushing in it = 25
+Before retrieving getNext it = 26
+Pushing in it = 26
+Before retrieving getNext it = 27
+Pushing in it = 27
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 26
+FIRST PARAM = s
+it2->ans1 = 1
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 7
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 13
+it2->ans1 = 14
+it2->ans1 = 16
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+it2->ans1 = 21
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 25
+it2->ans1 = 26
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 17 18 19 20 21 22 23 24 25 26 27 
+3 - Next ::
+prog_line n;
+Select n such that Next (_, n)
+2,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 3 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(_, n)
+
+ EVALUATING NEXT (_ n)
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 24
+FIRST PARAM = _
+SECOND PARAM = n
+it2->ans2 = 2
+it2->ans2 = 3
+it2->ans2 = 4
+it2->ans2 = 5
+it2->ans2 = 6
+it2->ans2 = 7
+it2->ans2 = 9
+it2->ans2 = 10
+it2->ans2 = 11
+it2->ans2 = 12
+it2->ans2 = 13
+it2->ans2 = 14
+it2->ans2 = 15
+it2->ans2 = 17
+it2->ans2 = 18
+it2->ans2 = 19
+it2->ans2 = 20
+it2->ans2 = 21
+it2->ans2 = 22
+it2->ans2 = 23
+it2->ans2 = 24
+it2->ans2 = 25
+it2->ans2 = 26
+it2->ans2 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 3 4 5 6 7 9 10 11 12 13 14 15 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 2 3 4 5 6 7 9 10 11 12 13 14 15 17 18 19 20 21 22 23 24 25 26 27 
+4 - Next ::
+assign a;
+Select a such that Next (_, 16)
+none
+5000
+Evaluating query 4 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(_, 16)
+
+ EVALUATING NEXT (_ 16)
+--INSERTING 16--
+16 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+5 - Next ::
+while w;
+Select w such that Next (16, _)
+2,11,17,25
+5000
+Evaluating query 5 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(16, _)
+
+ EVALUATING NEXT (16 _)
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 2 11 17 25 
+Correct answer: 2 11 17 25 
+6 - Next ::
+stmt s;
+Select s such that Next (27, s)
+17
+5000
+Evaluating query 6 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(27, s)
+
+ EVALUATING NEXT (27 s)
+Second Token is Alpha
+Iterating through the vector of GETNEXT(TOKEN1)
+Pushing into Answer 17
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = 27
+SECOND PARAM = s
+it2->ans2 = 17
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 17 
+Correct answer: 17 
+7 - Next ::
+stmt s;
+Select s such that Next (s, 23)
+21
+5000
+Evaluating query 7 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(s, 23)
+
+ EVALUATING NEXT (s 23)
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 1
+FIRST PARAM = s
+it2->ans1 = 21
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 21 
+Correct answer: 21 
+8 - Next ::
+stmt s1, s2;
+Select s1 such that Next (s1, s2)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 8 - Next ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(s1, s2)
+
+ EVALUATING NEXT (s1 s2)
+Both Tokens are Alpha
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Pushing in pairs (1 2)
+Pushing in pairs (7 2)
+Pushing in pairs (2 3)
+Pushing in pairs (3 4)
+Pushing in pairs (4 5)
+Pushing in pairs (4 6)
+Pushing in pairs (5 7)
+Pushing in pairs (6 7)
+Pushing in pairs (8 9)
+Pushing in pairs (9 10)
+Pushing in pairs (10 11)
+Pushing in pairs (13 11)
+Pushing in pairs (11 12)
+Pushing in pairs (12 13)
+Pushing in pairs (10 14)
+Pushing in pairs (11 15)
+Pushing in pairs (14 15)
+Pushing in pairs (16 17)
+Pushing in pairs (27 17)
+Pushing in pairs (17 18)
+Pushing in pairs (18 19)
+Pushing in pairs (19 20)
+Pushing in pairs (20 21)
+Pushing in pairs (21 22)
+Pushing in pairs (21 23)
+Pushing in pairs (19 24)
+Pushing in pairs (22 25)
+Pushing in pairs (23 25)
+Pushing in pairs (24 25)
+Pushing in pairs (26 25)
+Pushing in pairs (25 26)
+Pushing in pairs (25 27)
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s1 p.size = 32
+FIRST PARAM = s1
+it2->ans1 = 1
+it2->ans1 = 7
+it2->ans1 = 2
+it2->ans1 = 3
+it2->ans1 = 4
+it2->ans1 = 4
+it2->ans1 = 5
+it2->ans1 = 6
+it2->ans1 = 8
+it2->ans1 = 9
+it2->ans1 = 10
+it2->ans1 = 13
+it2->ans1 = 11
+it2->ans1 = 12
+it2->ans1 = 10
+it2->ans1 = 11
+it2->ans1 = 14
+it2->ans1 = 16
+it2->ans1 = 27
+it2->ans1 = 17
+it2->ans1 = 18
+it2->ans1 = 19
+it2->ans1 = 20
+it2->ans1 = 21
+it2->ans1 = 21
+it2->ans1 = 19
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 26
+it2->ans1 = 25
+it2->ans1 = 25
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 7 2 3 4 5 6 8 9 10 13 11 12 14 16 27 17 18 19 20 21 22 23 24 26 25 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 17 18 19 20 21 22 23 24 25 26 27 
+9 - Next ::
+
+Select BOOLEAN such that Next (20, 19)
+false
+5000
+Evaluating query 9 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(20, 19)
+
+ EVALUATING NEXT (20 19)
+is false
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+10 - NextStar ::
+stmt s;
+Select s such that Next*(_,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 10 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(_, _)
+
+ EVALUATING NEXT* (_ _)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+11 - NextStar ::
+prog_line n;
+Select n such that Next* (n, _)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 11 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(n, _)
+
+ EVALUATING NEXT* (n _)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk1 =n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 26
+FIRST PARAM = n
+it2->ans1 = 27
+it2->ans1 = 26
+it2->ans1 = 25
+it2->ans1 = 24
+it2->ans1 = 23
+it2->ans1 = 22
+it2->ans1 = 21
+it2->ans1 = 20
+it2->ans1 = 19
+it2->ans1 = 18
+it2->ans1 = 17
+it2->ans1 = 16
+it2->ans1 = 14
+it2->ans1 = 13
+it2->ans1 = 12
+it2->ans1 = 11
+it2->ans1 = 10
+it2->ans1 = 9
+it2->ans1 = 8
+it2->ans1 = 7
+it2->ans1 = 6
+it2->ans1 = 5
+it2->ans1 = 4
+it2->ans1 = 3
+it2->ans1 = 2
+it2->ans1 = 1
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 26 25 24 23 22 21 20 19 18 17 16 14 13 12 11 10 9 8 7 6 5 4 3 2 1 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 16 17 18 19 20 21 22 23 24 25 26 27 
+12 - NextStar ::
+stmt s;
+Select s such that Next* (_, s)
+2,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 12 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(_, s)
+
+ EVALUATING NEXT* (_ s)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk2 = s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 24
+FIRST PARAM = _
+SECOND PARAM = s
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 15
+it2->ans2 = 14
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 10
+it2->ans2 = 9
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 26 25 24 23 22 21 20 19 18 17 15 14 13 12 11 10 9 7 6 5 4 3 2 
+Correct answer: 2 3 4 5 6 7 9 10 11 12 13 14 15 17 18 19 20 21 22 23 24 25 26 27 
+13 - NextStar ::
+
+Select BOOLEAN such that Next*(20, _)
+true
+5000
+Evaluating query 13 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(20, _)
+
+ EVALUATING NEXT* (20 _)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+14 - NextStar ::
+stmt s;
+Select s such that Next*(_, 24)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 14 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(_, 24)
+
+ EVALUATING NEXT* (_ 24)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+15 - NextStar ::
+stmt s;
+Select s such that Next*(3, s)
+2,3,4,5,6,7
+5000
+Evaluating query 15 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(3, s)
+
+ EVALUATING NEXT* (3 s)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk2 = s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 6
+FIRST PARAM = 3
+SECOND PARAM = s
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 7 6 5 4 3 2 
+Correct answer: 2 3 4 5 6 7 
+16 - NextStar ::
+stmt s;
+Select s such that Next*(s, 20)
+16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 16 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(s, 20)
+
+ EVALUATING NEXT* (s 20)
+nextStarTable empty = 1
+In Next*(token, digit)
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+TargetIndex found
+Pushing into answer the pair 27and20
+Pushing into answer the pair 26and20
+Pushing into answer the pair 25and20
+Pushing into answer the pair 24and20
+Pushing into answer the pair 23and20
+Pushing into answer the pair 22and20
+Pushing into answer the pair 21and20
+Pushing into answer the pair 20and20
+Pushing into answer the pair 19and20
+Pushing into answer the pair 18and20
+Pushing into answer the pair 17and20
+Pushing into answer the pair 16and20
+In intersect Pairs: both do not exist
+Insert links for tk1 =s
+--INSERTING s--
+s Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s p.size = 12
+FIRST PARAM = s
+it2->ans1 = 27
+it2->ans1 = 26
+it2->ans1 = 25
+it2->ans1 = 24
+it2->ans1 = 23
+it2->ans1 = 22
+it2->ans1 = 21
+it2->ans1 = 20
+it2->ans1 = 19
+it2->ans1 = 18
+it2->ans1 = 17
+it2->ans1 = 16
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 26 25 24 23 22 21 20 19 18 17 16 
+Correct answer: 16 17 18 19 20 21 22 23 24 25 26 27 
+17 - NextStar ::
+stmt s1, s2;
+Select s2 such that Next*(s1, s2)
+2,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 17 - NextStar ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(s1, s2)
+
+ EVALUATING NEXT* (s1 s2)
+nextStarTable empty = 1
+NEXTSTARTABLE(1,2)
+NEXTSTARTABLE(1,3)
+NEXTSTARTABLE(1,4)
+NEXTSTARTABLE(1,5)
+NEXTSTARTABLE(1,6)
+NEXTSTARTABLE(1,7)
+NEXTSTARTABLE(2,2)
+NEXTSTARTABLE(2,3)
+NEXTSTARTABLE(2,4)
+NEXTSTARTABLE(2,5)
+NEXTSTARTABLE(2,6)
+NEXTSTARTABLE(2,7)
+NEXTSTARTABLE(3,2)
+NEXTSTARTABLE(3,3)
+NEXTSTARTABLE(3,4)
+NEXTSTARTABLE(3,5)
+NEXTSTARTABLE(3,6)
+NEXTSTARTABLE(3,7)
+NEXTSTARTABLE(4,2)
+NEXTSTARTABLE(4,3)
+NEXTSTARTABLE(4,4)
+NEXTSTARTABLE(4,5)
+NEXTSTARTABLE(4,6)
+NEXTSTARTABLE(4,7)
+NEXTSTARTABLE(5,2)
+NEXTSTARTABLE(5,3)
+NEXTSTARTABLE(5,4)
+NEXTSTARTABLE(5,5)
+NEXTSTARTABLE(5,6)
+NEXTSTARTABLE(5,7)
+NEXTSTARTABLE(6,2)
+NEXTSTARTABLE(6,3)
+NEXTSTARTABLE(6,4)
+NEXTSTARTABLE(6,5)
+NEXTSTARTABLE(6,6)
+NEXTSTARTABLE(6,7)
+NEXTSTARTABLE(7,2)
+NEXTSTARTABLE(7,3)
+NEXTSTARTABLE(7,4)
+NEXTSTARTABLE(7,5)
+NEXTSTARTABLE(7,6)
+NEXTSTARTABLE(7,7)
+NEXTSTARTABLE(8,9)
+NEXTSTARTABLE(8,10)
+NEXTSTARTABLE(8,11)
+NEXTSTARTABLE(8,12)
+NEXTSTARTABLE(8,13)
+NEXTSTARTABLE(8,14)
+NEXTSTARTABLE(8,15)
+NEXTSTARTABLE(9,10)
+NEXTSTARTABLE(9,11)
+NEXTSTARTABLE(9,12)
+NEXTSTARTABLE(9,13)
+NEXTSTARTABLE(9,14)
+NEXTSTARTABLE(9,15)
+NEXTSTARTABLE(10,11)
+NEXTSTARTABLE(10,12)
+NEXTSTARTABLE(10,13)
+NEXTSTARTABLE(10,14)
+NEXTSTARTABLE(10,15)
+NEXTSTARTABLE(11,11)
+NEXTSTARTABLE(11,12)
+NEXTSTARTABLE(11,13)
+NEXTSTARTABLE(11,15)
+NEXTSTARTABLE(12,11)
+NEXTSTARTABLE(12,12)
+NEXTSTARTABLE(12,13)
+NEXTSTARTABLE(12,15)
+NEXTSTARTABLE(13,11)
+NEXTSTARTABLE(13,12)
+NEXTSTARTABLE(13,13)
+NEXTSTARTABLE(13,15)
+NEXTSTARTABLE(14,15)
+NEXTSTARTABLE(16,17)
+NEXTSTARTABLE(16,18)
+NEXTSTARTABLE(16,19)
+NEXTSTARTABLE(16,20)
+NEXTSTARTABLE(16,21)
+NEXTSTARTABLE(16,22)
+NEXTSTARTABLE(16,23)
+NEXTSTARTABLE(16,24)
+NEXTSTARTABLE(16,25)
+NEXTSTARTABLE(16,26)
+NEXTSTARTABLE(16,27)
+NEXTSTARTABLE(17,17)
+NEXTSTARTABLE(17,18)
+NEXTSTARTABLE(17,19)
+NEXTSTARTABLE(17,20)
+NEXTSTARTABLE(17,21)
+NEXTSTARTABLE(17,22)
+NEXTSTARTABLE(17,23)
+NEXTSTARTABLE(17,24)
+NEXTSTARTABLE(17,25)
+NEXTSTARTABLE(17,26)
+NEXTSTARTABLE(17,27)
+NEXTSTARTABLE(18,17)
+NEXTSTARTABLE(18,18)
+NEXTSTARTABLE(18,19)
+NEXTSTARTABLE(18,20)
+NEXTSTARTABLE(18,21)
+NEXTSTARTABLE(18,22)
+NEXTSTARTABLE(18,23)
+NEXTSTARTABLE(18,24)
+NEXTSTARTABLE(18,25)
+NEXTSTARTABLE(18,26)
+NEXTSTARTABLE(18,27)
+NEXTSTARTABLE(19,17)
+NEXTSTARTABLE(19,18)
+NEXTSTARTABLE(19,19)
+NEXTSTARTABLE(19,20)
+NEXTSTARTABLE(19,21)
+NEXTSTARTABLE(19,22)
+NEXTSTARTABLE(19,23)
+NEXTSTARTABLE(19,24)
+NEXTSTARTABLE(19,25)
+NEXTSTARTABLE(19,26)
+NEXTSTARTABLE(19,27)
+NEXTSTARTABLE(20,17)
+NEXTSTARTABLE(20,18)
+NEXTSTARTABLE(20,19)
+NEXTSTARTABLE(20,20)
+NEXTSTARTABLE(20,21)
+NEXTSTARTABLE(20,22)
+NEXTSTARTABLE(20,23)
+NEXTSTARTABLE(20,24)
+NEXTSTARTABLE(20,25)
+NEXTSTARTABLE(20,26)
+NEXTSTARTABLE(20,27)
+NEXTSTARTABLE(21,17)
+NEXTSTARTABLE(21,18)
+NEXTSTARTABLE(21,19)
+NEXTSTARTABLE(21,20)
+NEXTSTARTABLE(21,21)
+NEXTSTARTABLE(21,22)
+NEXTSTARTABLE(21,23)
+NEXTSTARTABLE(21,24)
+NEXTSTARTABLE(21,25)
+NEXTSTARTABLE(21,26)
+NEXTSTARTABLE(21,27)
+NEXTSTARTABLE(22,17)
+NEXTSTARTABLE(22,18)
+NEXTSTARTABLE(22,19)
+NEXTSTARTABLE(22,20)
+NEXTSTARTABLE(22,21)
+NEXTSTARTABLE(22,22)
+NEXTSTARTABLE(22,23)
+NEXTSTARTABLE(22,24)
+NEXTSTARTABLE(22,25)
+NEXTSTARTABLE(22,26)
+NEXTSTARTABLE(22,27)
+NEXTSTARTABLE(23,17)
+NEXTSTARTABLE(23,18)
+NEXTSTARTABLE(23,19)
+NEXTSTARTABLE(23,20)
+NEXTSTARTABLE(23,21)
+NEXTSTARTABLE(23,22)
+NEXTSTARTABLE(23,23)
+NEXTSTARTABLE(23,24)
+NEXTSTARTABLE(23,25)
+NEXTSTARTABLE(23,26)
+NEXTSTARTABLE(23,27)
+NEXTSTARTABLE(24,17)
+NEXTSTARTABLE(24,18)
+NEXTSTARTABLE(24,19)
+NEXTSTARTABLE(24,20)
+NEXTSTARTABLE(24,21)
+NEXTSTARTABLE(24,22)
+NEXTSTARTABLE(24,23)
+NEXTSTARTABLE(24,24)
+NEXTSTARTABLE(24,25)
+NEXTSTARTABLE(24,26)
+NEXTSTARTABLE(24,27)
+NEXTSTARTABLE(25,17)
+NEXTSTARTABLE(25,18)
+NEXTSTARTABLE(25,19)
+NEXTSTARTABLE(25,20)
+NEXTSTARTABLE(25,21)
+NEXTSTARTABLE(25,22)
+NEXTSTARTABLE(25,23)
+NEXTSTARTABLE(25,24)
+NEXTSTARTABLE(25,25)
+NEXTSTARTABLE(25,26)
+NEXTSTARTABLE(25,27)
+NEXTSTARTABLE(26,17)
+NEXTSTARTABLE(26,18)
+NEXTSTARTABLE(26,19)
+NEXTSTARTABLE(26,20)
+NEXTSTARTABLE(26,21)
+NEXTSTARTABLE(26,22)
+NEXTSTARTABLE(26,23)
+NEXTSTARTABLE(26,24)
+NEXTSTARTABLE(26,25)
+NEXTSTARTABLE(26,26)
+NEXTSTARTABLE(26,27)
+NEXTSTARTABLE(27,17)
+NEXTSTARTABLE(27,18)
+NEXTSTARTABLE(27,19)
+NEXTSTARTABLE(27,20)
+NEXTSTARTABLE(27,21)
+NEXTSTARTABLE(27,22)
+NEXTSTARTABLE(27,23)
+NEXTSTARTABLE(27,24)
+NEXTSTARTABLE(27,25)
+NEXTSTARTABLE(27,26)
+NEXTSTARTABLE(27,27)
+In intersect Pairs: both do not exist
+Insert links for tk1 =s1
+--INSERTING s1--
+s1 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Insert links for tk2 = s2
+--INSERTING s2--
+s2 Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = s2 p.size = 205
+FIRST PARAM = s1
+SECOND PARAM = s2
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 27
+it2->ans2 = 26
+it2->ans2 = 25
+it2->ans2 = 24
+it2->ans2 = 23
+it2->ans2 = 22
+it2->ans2 = 21
+it2->ans2 = 20
+it2->ans2 = 19
+it2->ans2 = 18
+it2->ans2 = 17
+it2->ans2 = 15
+it2->ans2 = 15
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 15
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 15
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 15
+it2->ans2 = 14
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 15
+it2->ans2 = 14
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 10
+it2->ans2 = 15
+it2->ans2 = 14
+it2->ans2 = 13
+it2->ans2 = 12
+it2->ans2 = 11
+it2->ans2 = 10
+it2->ans2 = 9
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+it2->ans2 = 7
+it2->ans2 = 6
+it2->ans2 = 5
+it2->ans2 = 4
+it2->ans2 = 3
+it2->ans2 = 2
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 26 25 24 23 22 21 20 19 18 17 15 13 12 11 14 10 9 7 6 5 4 3 2 
+Correct answer: 2 3 4 5 6 7 9 10 11 12 13 14 15 17 18 19 20 21 22 23 24 25 26 27 
+18 - NextStar ::
+
+Select BOOLEAN such that Next*(24, 23)
+true
+5000
+Evaluating query 18 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(24, 23)
+
+ EVALUATING NEXT* (24 23)
+nextStarTable empty = 1
+tk1Int = 24 tk2Int = 23
+TargetIndex found
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - NextStar ::
+
+Select BOOLEAN such that Next*(12, 14)
+false
+5000
+Evaluating query 19 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(12, 14)
+
+ EVALUATING NEXT* (12 14)
+nextStarTable empty = 1
+tk1Int = 12 tk2Int = 14
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+20 - NextStar ::
+
+Select BOOLEAN such that Next*(6, 3)
+true
+5000
+Evaluating query 20 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(6, 3)
+
+ EVALUATING NEXT* (6 3)
+nextStarTable empty = 1
+tk1Int = 6 tk2Int = 3
+TargetIndex found
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: true 
+Correct answer: true 
+21 - Affects ::
+stmt s;
+Select s such that Affects(_,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 21 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(_, _)
+
+ EVALUATING AFFECTS
+Case 5: Both are underscore
+In intersect Pairs: both do not exist
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+22 - Affects ::
+assign a;
+Select a such that Affects(a, _)
+8,13,22,23,24,27
+5000
+Evaluating query 22 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(a, _)
+
+ EVALUATING AFFECTS
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 6
+FIRST PARAM = a
+it2->ans1 = 8
+it2->ans1 = 13
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 8 13 22 23 24 27 
+Correct answer: 8 13 22 23 24 27 
+23 - Affects ::
+assign a;
+Select a such that Affects(_,a)
+9,12,18,22,20
+5000
+Evaluating query 23 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(_, a)
+
+ EVALUATING AFFECTS
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 6
+FIRST PARAM = _
+SECOND PARAM = a
+it2->ans2 = 9
+it2->ans2 = 12
+it2->ans2 = 20
+it2->ans2 = 22
+it2->ans2 = 20
+it2->ans2 = 18
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 12 20 22 18 
+Correct answer: 9 12 18 22 20 
+24 - Affects ::
+
+Select BOOLEAN such that Affects(5, _)
+false
+5000
+Evaluating query 24 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(5, _)
+
+ EVALUATING AFFECTS
+Case 3: Right is Synonym
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+25 - Affects ::
+
+Select BOOLEAN such that Affects(_,27)
+false
+5000
+Evaluating query 25 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(_, 27)
+
+ EVALUATING AFFECTS
+Case 2: Left is Synonym
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+26 - Affects ::
+prog_line n;
+Select n such that Affects(n, 18)
+27
+5000
+Evaluating query 26 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(n, 18)
+
+ EVALUATING AFFECTS
+Case 2: Left is Synonym
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 1
+FIRST PARAM = n
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 
+Correct answer: 27 
+27 - Affects ::
+assign a;
+Select a such that Affects(6, a)
+none
+5000
+Evaluating query 27 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(6, a)
+
+ EVALUATING AFFECTS
+Case 3: Right is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = 6
+SECOND PARAM = a
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+28 - Affects ::
+assign a; prog_line n;
+Select a such that Affects(a, n)
+8,13,22,23,24,27
+5000
+Evaluating query 28 - Affects ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(a, n)
+
+ EVALUATING AFFECTS
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 6
+FIRST PARAM = a
+it2->ans1 = 8
+it2->ans1 = 13
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 8 13 22 23 24 27 
+Correct answer: 8 13 22 23 24 27 
+29 - Affects ::
+
+Select BOOLEAN such that Affects(26, 18)
+false
+5000
+Evaluating query 29 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(26, 18)
+
+ EVALUATING AFFECTS
+Case 4: Both are Constants
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+30 - Affects ::
+if i;
+Select i such that Affects(16, 17)
+none
+5000
+Evaluating query 30 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(16, 17)
+
+ EVALUATING AFFECTS
+Case 4: Both are Constants
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+31 - AffectsStar ::
+stmt s;
+Select s such that Affects*(_,_)
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+Evaluating query 31 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(_, _)
+
+ EVALUATING AFFECTSSTAR
+Case 5: Both are underscore
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 
+32 - AffectsStar ::
+assign a;
+Select a such that Affects*(a, _)
+8,13,22,23,24,27
+5000
+Evaluating query 32 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(a, _)
+
+ EVALUATING AFFECTSSTAR
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Affects*(8,9) is true. Inserting into affAns.
+Affects*(13,12) is true. Inserting into affAns.
+Affects*(22,20) is true. Inserting into affAns.
+Affects*(23,20) is true. Inserting into affAns.
+Affects*(23,22) is true. Inserting into affAns.
+Affects*(24,20) is true. Inserting into affAns.
+Affects*(27,18) is true. Inserting into affAns.
+NUMBER OF ANSWERS OF AFFECTS*(a,_) :7
+ANSWERS FOR AFFECTS*(a,_) :
+(8, 9)
+(13, 12)
+(22, 20)
+(23, 20)
+(23, 22)
+(24, 20)
+(27, 18)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 7
+FIRST PARAM = a
+it2->ans1 = 8
+it2->ans1 = 13
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 8 13 22 23 24 27 
+Correct answer: 8 13 22 23 24 27 
+33 - AffectsStar ::
+prog_line n;
+Select n such that Affects*(_, n)
+9,12,18,22,20
+5000
+Evaluating query 33 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(_, n)
+
+ EVALUATING AFFECTSSTAR
+Case 1: Both are Synonyms
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Affects*(8,9) is true. Inserting into affAns.
+Affects*(13,12) is true. Inserting into affAns.
+Affects*(22,20) is true. Inserting into affAns.
+Affects*(23,20) is true. Inserting into affAns.
+Affects*(23,22) is true. Inserting into affAns.
+Affects*(24,20) is true. Inserting into affAns.
+Affects*(27,18) is true. Inserting into affAns.
+NUMBER OF ANSWERS OF AFFECTS*(_,n) :7
+ANSWERS FOR AFFECTS*(_,n) :
+(8, 9)
+(13, 12)
+(22, 20)
+(23, 20)
+(23, 22)
+(24, 20)
+(27, 18)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 7
+FIRST PARAM = _
+SECOND PARAM = n
+it2->ans2 = 9
+it2->ans2 = 12
+it2->ans2 = 20
+it2->ans2 = 20
+it2->ans2 = 22
+it2->ans2 = 20
+it2->ans2 = 18
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 9 12 20 22 18 
+Correct answer: 9 12 18 22 20 
+34 - AffectsStar ::
+
+Select BOOLEAN such that Affects*(1, _)
+false
+5000
+Evaluating query 34 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(1, _)
+
+ EVALUATING AFFECTSSTAR
+Case 3: Right is Synonym
+NUMBER OF ANSWERS OF AFFECTS*(1,_) :0
+ANSWERS FOR AFFECTS*(1,_) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+35 - AffectsStar ::
+if i;
+Select i such that Affects*(_, 18)
+4,10,19,21
+5000
+Evaluating query 35 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(_, 18)
+
+ EVALUATING AFFECTSSTAR
+Case 2: Left is Synonym
+NUMBER OF ANSWERS OF AFFECTS*(_,18) :1
+ANSWERS FOR AFFECTS*(_,18) :
+(-1, -1)
+Inserting tokens into relParameters
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 4 10 19 21 
+Correct answer: 4 10 19 21 
+36 - AffectsStar ::
+prog_line n;
+Select n such that Affects*(n, 18)
+27
+5000
+Evaluating query 36 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(n, 18)
+
+ EVALUATING AFFECTSSTAR
+Case 2: Left is Synonym
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(n,18) :1
+ANSWERS FOR AFFECTS*(n,18) :
+(27, 18)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = n p.size = 1
+FIRST PARAM = n
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 27 
+Correct answer: 27 
+37 - AffectsStar ::
+assign a;
+Select a such that Affects*(6, a)
+none
+5000
+Evaluating query 37 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(6, a)
+
+ EVALUATING AFFECTSSTAR
+Case 3: Right is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(6,a) :0
+ANSWERS FOR AFFECTS*(6,a) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = 6
+SECOND PARAM = a
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+38 - AffectsStar ::
+assign a; prog_line n;
+Select a such that Affects*(a, n)
+8,13,22,23,24,27
+5000
+Evaluating query 38 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(a, n)
+
+ EVALUATING AFFECTSSTAR
+Case 1: Both are Synonyms
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Affects*(8,9) is true. Inserting into affAns.
+Affects*(13,12) is true. Inserting into affAns.
+Affects*(22,20) is true. Inserting into affAns.
+Affects*(23,20) is true. Inserting into affAns.
+Affects*(23,22) is true. Inserting into affAns.
+Affects*(24,20) is true. Inserting into affAns.
+Affects*(27,18) is true. Inserting into affAns.
+NUMBER OF ANSWERS OF AFFECTS*(a,n) :7
+ANSWERS FOR AFFECTS*(a,n) :
+(8, 9)
+(13, 12)
+(22, 20)
+(23, 20)
+(23, 22)
+(24, 20)
+(27, 18)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 7
+FIRST PARAM = a
+it2->ans1 = 8
+it2->ans1 = 13
+it2->ans1 = 22
+it2->ans1 = 23
+it2->ans1 = 23
+it2->ans1 = 24
+it2->ans1 = 27
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 8 13 22 23 24 27 
+Correct answer: 8 13 22 23 24 27 
+39 - AffectsStar ::
+
+Select BOOLEAN such that Affects*(26, 18)
+false
+5000
+Evaluating query 39 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(26, 18)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+NUMBER OF ANSWERS OF AFFECTS*(26,18) :0
+ANSWERS FOR AFFECTS*(26,18) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+40 - AffectsStar ::
+assign a;
+Select a such that Affects*(22, a)
+20
+5000
+Evaluating query 40 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(22, a)
+
+ EVALUATING AFFECTSSTAR
+Case 3: Right is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(22,a) :1
+ANSWERS FOR AFFECTS*(22,a) :
+(22, 20)
+Inserting tokens into relParameters
+Iterating Selected Syn
+token in selectedSyn = a p.size = 1
+FIRST PARAM = 22
+SECOND PARAM = a
+it2->ans2 = 20
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 20 
+Correct answer: 20 
+41 - Next ::
+assign a;
+Select a such that Next(a, 1000)
+none
+5000
+Evaluating query 41 - Next ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next(a, 1000)
+
+ EVALUATING NEXT (a 1000)
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,6,
+5 has next consisting of 7,
+6 has next consisting of 7,
+7 has next consisting of 2,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,14,
+11 has next consisting of 12,15,
+12 has next consisting of 13,
+13 has next consisting of 11,
+14 has next consisting of 15,
+15 has next consisting of 
+16 has next consisting of 17,
+17 has next consisting of 18,
+18 has next consisting of 19,
+19 has next consisting of 20,24,
+20 has next consisting of 21,
+21 has next consisting of 22,23,
+22 has next consisting of 25,
+23 has next consisting of 25,
+24 has next consisting of 25,
+25 has next consisting of 26,27,
+26 has next consisting of 25,
+27 has next consisting of 17,
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = a
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+42 - NextStar ::
+prog_line n;
+Select n such that Next*(55, n)
+none
+5000
+Evaluating query 42 - NextStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+next*(55, n)
+
+ EVALUATING NEXT* (55 n)
+nextStarTable empty = 1
+In intersect Pairs: both do not exist
+Insert links for tk2 = n
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = n p.size = 0
+FIRST PARAM = 55
+SECOND PARAM = n
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+43 - Affects ::
+assign a;
+Select a such that Affects(a, 100)
+none
+5000
+Evaluating query 43 - Affects ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects(a, 100)
+
+ EVALUATING AFFECTS
+Case 2: Left is Synonym
+--INSERTING a--
+a Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = a p.size = 0
+FIRST PARAM = a
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+44 - AffectsStar ::
+prog_line n;
+Select n such that Affects*(55, n)
+none
+5000
+Evaluating query 44 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(55, n)
+
+ EVALUATING AFFECTSSTAR
+Case 3: Right is Synonym
+--INSERTING n--
+n Not Found in Linkages and relIndex = 0
+--END OF INSERT--
+NUMBER OF ANSWERS OF AFFECTS*(55,n) :0
+ANSWERS FOR AFFECTS*(55,n) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+token in selectedSyn = n p.size = 0
+FIRST PARAM = 55
+SECOND PARAM = n
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: 
+Correct answer: 
+45 - AffectsStar ::
+prog_line n;
+Select BOOLEAN such that Affects*(22, 18)
+false
+5000
+Evaluating query 45 - AffectsStar ::
+Ordering Relationships
+In orderRelationships
+relationships with only one alpha token found
+After Ordering Relations, r.size = 1
+Initializing Variables
+ 
+affects*(22, 18)
+
+ EVALUATING AFFECTSSTAR
+Case 4: Both are Constants
+NUMBER OF ANSWERS OF AFFECTS*(22,18) :0
+ANSWERS FOR AFFECTS*(22,18) :
+Inserting tokens into relParameters
+Found Relations to be False or Empty
+Iterating Selected Syn
+RETURNING FINAL ANSWERS
+
+
+
+
+Your answer: false 
+Correct answer: false 
+End of evaluating Query File.
+AutoTester Completed !
