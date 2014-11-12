@@ -715,6 +715,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 
 		//Sibling(stmtlst, stmtlst)
 		else if(i1->second == TypeTable::STMTLST && i2->second == TypeTable::STMTLST){
+			cout<<"stmtlist stmtlist detected"<<endl;
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				cout<<"supposedForLoop"<<endl;
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
