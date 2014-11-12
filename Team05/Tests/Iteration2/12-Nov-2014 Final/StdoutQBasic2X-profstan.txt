@@ -1,0 +1,122 @@
+Parameters : Source2A.txt QBasic2X-profstan.txt ResultQBasic2X-profstan.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration2
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - ParenStar ::
+while w;
+Select w such that Parent*(w, 13)
+9
+5000
+Evaluating query 1 - ParenStar ::
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+2 - FollowsStar ::
+stmt s; while w;
+Select w such that Follows* (s, w)
+9
+5000
+Evaluating query 2 - FollowsStar ::
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+3 - FollowsStar ::
+if ifstat;
+Select ifstat such that Follows* (ifstat, 17)
+11
+5000
+Evaluating query 3 - FollowsStar ::
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+4 - Modifies ::
+variable v;
+Select v such that Modifies (9, v)
+idx,t,x,y,z
+5000
+Evaluating query 4 - Modifies ::
+
+
+
+
+Your answer: y x z t idx 
+Correct answer: idx t x y z 
+5 - Modifies, Uses ::
+assign a;
+Select a such that Modifies (a, "idx") and Uses (a, "idx")
+16,22
+5000
+Evaluating query 5 - Modifies, Uses ::
+
+
+
+
+Your answer: 16 22 
+Correct answer: 16 22 
+6 - CallsStar ::
+procedure p;
+Select p such that Calls* (p, "Tulip")
+Fern,Orchid
+5000
+Evaluating query 6 - CallsStar ::
+
+
+
+
+Your answer: Orchid Fern 
+Correct answer: Fern Orchid 
+7 -Pattern ::
+assign a;
+Select a pattern a ("y", "2 * x")
+none
+5000
+Evaluating query 7 -Pattern ::
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - NextStar ::
+prog_line n;
+Select n such that Next* (10, n) and Next* (n, 9)
+9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 8 - NextStar ::
+
+
+
+
+Your answer: 17 16 15 14 13 12 11 10 9 
+Correct answer: 9 10 11 12 13 14 15 16 17 
+9 - Modifies, Uses, Follows, ParentStar :: Tests multiple clauses (it is not in Assignment 1).
+assign a; while w;
+Select a such that Modifies (a, "idx") and Uses (a, "idx") and Follows (15, a) and Parent* (w, a)
+16
+5000
+Evaluating query 9 - Modifies, Uses, Follows, ParentStar :: Tests multiple clauses (it is not in Assignment 1).
+
+
+
+
+Your answer: 16 
+Correct answer: 16 
+End of evaluating Query File.
+AutoTester Completed !

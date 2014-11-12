@@ -1,0 +1,178 @@
+Parameters : Source2A.txt QInterm2B-such-that-with.txt ResultQInterm2B-such-that-with.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration2
+Beginning to evaluate Query File.
+New Category :  such that and with compound clauses
+1 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select p2 such that Calls (p1, p2) with p1.procName = "Fern"
+Tulip, Lily, Orchid
+5000
+Evaluating query 1 - multiple ::
+
+
+
+
+Your answer: Orchid Lily Tulip 
+Correct answer: Tulip Lily Orchid 
+2 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select a1 such that Modifies(a1, v1) and Uses (a1, v2) with v1.varName = "x" with v2.varName = "y"
+2, 14, 17, 26, 29
+5000
+Evaluating query 2 - multiple ::
+
+
+
+
+Your answer: 2 14 17 26 29 
+Correct answer: 2 14 17 26 29 
+3 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Modifies (s1, v1) and Uses (s1, v2) with v1.varName = "x" with v2.varName = "y" with s1.stmt# = 9
+9
+5000
+Evaluating query 3 - multiple ::
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+4 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select p1 such that Modifies (p1, v1) and Uses (p1, v1) with v1.varName = "idx"
+Fern, Tulip
+5000
+Evaluating query 4 - multiple ::
+
+
+
+
+Your answer: Fern Orchid 
+Correct answer: Fern Tulip 
+Missing: Tulip 
+Additional: Orchid 
+5 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Parent (s1, s2) with s1.stmt# = s2.stmt#
+
+5000
+Evaluating query 5 - multiple ::
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s1 such that Parent (s1, s2) with s2.stmt# = 12
+11
+5000
+Evaluating query 6 - multiple ::
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+7 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select i1 such that Follows (w1, i1) with w2.stmt# = 9
+28
+5000
+Evaluating query 7 - multiple ::
+
+
+
+
+Your answer: 
+Correct answer: 28 
+Missing: 28 
+Additional: 
+8 - multiple ::
+assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
+Select s2 such that Next (i1, s2) with i1.stmt# = 11
+12, 14
+5000
+Evaluating query 8 - multiple ::
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,
+9 has next consisting of 10,18,
+10 has next consisting of 11,
+11 has next consisting of 12,14,
+12 has next consisting of 13,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 9,
+18 has next consisting of 
+19 has next consisting of 20,23,
+20 has next consisting of 21,
+21 has next consisting of 22,
+22 has next consisting of 19,
+23 has next consisting of 
+24 has next consisting of 25,26,
+25 has next consisting of 24,
+26 has next consisting of 
+27 has next consisting of 28,
+28 has next consisting of 29,30,
+29 has next consisting of 27,
+30 has next consisting of 27,
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,
+9 has next consisting of 10,18,
+10 has next consisting of 11,
+11 has next consisting of 12,14,
+12 has next consisting of 13,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 9,
+18 has next consisting of 
+19 has next consisting of 20,23,
+20 has next consisting of 21,
+21 has next consisting of 22,
+22 has next consisting of 19,
+23 has next consisting of 
+24 has next consisting of 25,26,
+25 has next consisting of 24,
+26 has next consisting of 
+27 has next consisting of 28,
+28 has next consisting of 29,30,
+29 has next consisting of 27,
+30 has next consisting of 27,
+
+
+
+
+Your answer: 12 14 
+Correct answer: 12 14 
+End of evaluating Query File.
+AutoTester Completed !
