@@ -1,6 +1,6 @@
 README
 
-CS3202 Sem1-2014, Team members details can be found in contact.txt.
+CS3202 Sem1-2014, Team members details can be found in contact.txt in Code05 folder.
 
 Team 05:
 - A0099214B	Adinda Ayu Savitri	
@@ -10,9 +10,12 @@ Team 05:
 - A0080415N	Steven Kester Yuwono	
 - A0099768Y	Yohanes Lim	
 
-Code05 Folder contains our Visual Studio solution (source files).
-Tests05 Folder contains our test files (including unit testing, complete system testing test files)
-Team05.pdf is the Final Report for this project
+The files included in this archive:
+- Code05 		Folder contains our Visual Studio solution (source files).
+- Tests05 		Folder contains our THREE test files (including combinations of clauses)
+- UnitTests05	Folder contains our CodeParser and DesignExtractor files for Unit Testing
+- Bonus 		Folder contains our SPA which can handle Sibling bonus feature.
+- Team05.pdf 	is the Final Report for this project
 
 
 
