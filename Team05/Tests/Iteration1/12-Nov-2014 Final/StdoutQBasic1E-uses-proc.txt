@@ -1,0 +1,366 @@
+Parameters : Source1D.txt QBasic1E-uses-proc.txt ResultQBasic1E-uses-proc.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration1
+Beginning to evaluate Query File.
+New Category :  BASIC queries with uses procedure
+1 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, v)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 1 - Uses ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+2 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "x")
+First, Second, Fifth
+5000
+Evaluating query 2 - Uses ::
+
+
+
+
+Your answer: First Second Fifth 
+Correct answer: First Second Fifth 
+3 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "wrong")
+
+5000
+Evaluating query 3 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses ("First", "x")
+true
+5000
+Evaluating query 4 - Uses ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+5 - Uses ::
+procedure p; variable v; 
+Select BOOLEAN such that Uses ("Fourth", _)
+true
+5000
+Evaluating query 5 - Uses ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+6 - Uses ::
+procedure p; variable v;
+Select BOOLEAH such that Uses (p, "y")
+true
+5000
+Evaluating query 6 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: true 
+Missing: true 
+Additional: 
+7 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses (p, "wrong")
+false
+5000
+Evaluating query 7 - Uses ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+8 - Uses ::
+procedure p; variable v;
+Select BOOELAN such that Uses ("Third", v)
+true
+5000
+Evaluating query 8 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: true 
+Missing: true 
+Additional: 
+9 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses ("Fourth", "y")
+true
+5000
+Evaluating query 9 - Uses ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+10 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, "z")
+First, Second, Third
+5000
+Evaluating query 10 - Uses ::
+
+
+
+
+Your answer: First Second Third 
+Correct answer: First Second Third 
+11 - Uses ::
+procedure p; variable v;
+Select p such that Modifies (p, "y")
+First, Second, Fourth, Sixth
+5000
+Evaluating query 11 - Uses ::
+
+
+
+
+Your answer: First Second Fourth Sixth 
+Correct answer: First Second Fourth Sixth 
+12 - Uses ::
+procedure p; variable v;
+Select v such that Uses (p, v)
+i, x, y, z
+5000
+Evaluating query 12 - Uses ::
+
+
+
+
+Your answer: x i y z 
+Correct answer: i x y z 
+13 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Second", v)
+i, x, y, z
+5000
+Evaluating query 13 - Uses ::
+
+
+
+
+Your answer: x i y z 
+Correct answer: i x y z 
+14 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Fourth", v)
+y
+5000
+Evaluating query 14 - Uses ::
+
+
+
+
+Your answer: y 
+Correct answer: y 
+15 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses (p, v)
+true
+5000
+Evaluating query 15 - Uses ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+16 - Uses ::
+procedure p; variable v;
+Select p such that Uses (p, _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 16 - Uses ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+17 - Uses ::
+procedure p; variable v;
+Select BOOLEAN such that Uses(p, _)
+true
+5000
+Evaluating query 17 - Uses ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+18 - Uses ::
+procedure p; variable v;
+Select v such that Uses (p, "v")
+v
+5000
+Evaluating query 18 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: v 
+Missing: v 
+Additional: 
+19 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", "y")
+Fourth
+5000
+Evaluating query 19 - Uses ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: Fourth 
+Missing: 
+Additional: Fifth First Second Sixth Third 
+20 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Third", "wrong")
+
+5000
+Evaluating query 20 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+21 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "x")
+x
+5000
+Evaluating query 21 - Uses ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: x 
+Missing: 
+Additional: i v y z 
+22 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("First", "wrong")
+
+5000
+Evaluating query 22 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+23 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("First", _)
+First
+5000
+Evaluating query 23 - Uses ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First 
+Missing: 
+Additional: Fifth Fourth Second Sixth Third 
+24 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("DoesNotExist", _)
+
+5000
+Evaluating query 24 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+25 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("Fourth", _)
+y
+5000
+Evaluating query 25 - Uses ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: y 
+Missing: 
+Additional: i v x z 
+26 - Uses ::
+procedure p; variable v;
+Select v such that Uses ("DoesNotExist", _)
+
+5000
+Evaluating query 26 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+27 - Uses ::
+procedure p; variable v;
+Select p such that Uses ("Fourth", v)
+Fourth
+5000
+Evaluating query 27 - Uses ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: Fourth 
+Missing: 
+Additional: Fifth First Second Sixth Third 
+28 - Uses ::
+procecure p; variable v;
+Select p such that Uses ("DoesNotExist", v)
+
+5000
+Evaluating query 28 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

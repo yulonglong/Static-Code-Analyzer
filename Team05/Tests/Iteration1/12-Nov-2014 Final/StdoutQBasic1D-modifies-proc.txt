@@ -1,0 +1,338 @@
+Parameters : Source1D.txt QBasic1D-modifies-proc.txt ResultQBasic1D-modifies-proc.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration1
+Beginning to evaluate Query File.
+New Category :  BASIC queries with modifies procedure
+1 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, v)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 1 - Modifies ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+2 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "x")
+First, Second, Fifth
+5000
+Evaluating query 2 - Modifies ::
+
+
+
+
+Your answer: First Second Fifth 
+Correct answer: First Second Fifth 
+3 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "wrong")
+
+5000
+Evaluating query 3 - Modifies ::
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("First", "x")
+true
+5000
+Evaluating query 4 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+5 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("Fourth", _)
+true
+5000
+Evaluating query 5 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+6 - Modifies ::
+procedure p; variable v; 
+Select BOOLEAN such that Modifies (p, "y")
+true
+5000
+Evaluating query 6 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+7 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies (p, "wrong")
+false
+5000
+Evaluating query 7 - Modifies ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+8 - Modifies ::
+procedure p; variable v; 
+Select BOOLEAN such that Modifies ("Third", v)
+true
+5000
+Evaluating query 8 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+9 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies ("Fourth", "y")
+true
+5000
+Evaluating query 9 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+10 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "y")
+First, Second, Fourth, Sixth
+5000
+Evaluating query 10 - Modifies ::
+
+
+
+
+Your answer: First Second Fourth Sixth 
+Correct answer: First Second Fourth Sixth 
+11 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "z")
+First, Second, Third
+5000
+Evaluating query 11 - Modifies ::
+
+
+
+
+Your answer: First Second Third 
+Correct answer: First Second Third 
+12 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies (p, "wrong")
+
+5000
+Evaluating query 12 - Modifies ::
+
+
+
+
+Your answer: 
+Correct answer: 
+13 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies (p, v)
+i, v, x, y, z
+5000
+Evaluating query 13 - Modifies ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: i v x y z 
+14 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Second", v)
+i, x, y, z, v
+5000
+Evaluating query 14 - Modifies ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: i x y z v 
+15 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Fourth", v)
+y
+5000
+Evaluating query 15 - Modifies ::
+
+
+
+
+Your answer: y 
+Correct answer: y 
+16 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies(p, v)
+true
+5000
+Evaluating query 16 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+17 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies(p, _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 17 - Modifies ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+18 - Modifies ::
+procedure p; variable v;
+Select BOOLEAN such that Modifies(p, _)
+true
+5000
+Evaluating query 18 - Modifies ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies (p, "x")
+x, i, y, z, v
+5000
+Evaluating query 19 - Modifies ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: x i y z v 
+20 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Sixth", "y")
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 20 - Modifies ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+21 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Third", "z")
+x, i, y, z, v
+5000
+Evaluating query 21 - Modifies ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: x i y z v 
+22 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Third", "wrong")
+
+5000
+Evaluating query 22 - Modifies ::
+
+
+
+
+Your answer: 
+Correct answer: 
+23 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Third", _)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 23 - Modifies ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+24 - Modifies ::
+procedure p; variable v;
+Select v such that Modifies ("Fourth", _)
+x, i, y, z, v
+5000
+Evaluating query 24 - Modifies ::
+
+
+
+
+Your answer: x i y z v 
+Correct answer: x i y z v 
+25 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("Fourth", v)
+First, Second, Third, Fourth, Fifth, Sixth
+5000
+Evaluating query 25 - Modifies ::
+
+
+
+
+Your answer: First Second Third Fourth Fifth Sixth 
+Correct answer: First Second Third Fourth Fifth Sixth 
+26 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("DoesNotExist", v)
+
+5000
+Evaluating query 26 - Modifies ::
+
+
+
+
+Your answer: 
+Correct answer: 
+27 - Modifies ::
+procedure p; variable v;
+Select p such that Modifies ("DoesNotExist", _)
+
+5000
+Evaluating query 27 - Modifies ::
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !

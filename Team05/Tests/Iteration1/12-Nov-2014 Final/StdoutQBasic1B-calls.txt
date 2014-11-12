@@ -1,0 +1,206 @@
+Parameters : Source1B.txt QBasic1B-calls.txt ResultQBasic1B-calls.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration1
+Beginning to evaluate Query File.
+New Category :  BASIC queries with Calls
+1 - Calls::
+assign a;
+Select a such that Calls (_,_)
+1, 2, 4, 5, 7, 9, 14, 15, 16, 17, 18
+5000
+Evaluating query 1 - Calls::
+
+
+
+
+Your answer: 1 2 4 5 7 9 14 15 16 17 18 
+Correct answer: 1 2 4 5 7 9 14 15 16 17 18 
+2 - Calls::
+while w;
+Select w such that Calls ("First", "Second")
+6
+5000
+Evaluating query 2 - Calls::
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+3 - Calls::
+procedure p, q;
+Select p such that Calls (p, q)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+Evaluating query 3 - Calls::
+
+
+
+
+Your answer: First Second Fourth Fifth Sixth Seventh 
+Correct answer: First Second Fourth Fifth Sixth Seventh 
+4 - Calls::
+procedure p;
+Select p such that Calls (p, _)
+First, Second, Fourth, Fifth, Sixth, Seventh
+5000
+Evaluating query 4 - Calls::
+
+
+
+
+Your answer: First Second Fourth Fifth Sixth Seventh 
+Correct answer: First Second Fourth Fifth Sixth Seventh 
+5 - Calls::
+procedure p, q;
+Select q such that Calls (p, q)
+First, Second, Third, Fourth, Fifth, Sixth, Seventh
+5000
+Evaluating query 5 - Calls::
+
+
+
+
+Your answer: Second Third Fourth Fifth First Sixth Seventh 
+Correct answer: First Second Third Fourth Fifth Sixth Seventh 
+6 - Calls::
+procedure p;
+Select p such that Calls (_, p)
+First, Second, Third, Fourth, Fifth, Sixth, Seventh
+5000
+Evaluating query 6 - Calls::
+
+
+
+
+Your answer: Second Third Fourth Fifth First Sixth Seventh 
+Correct answer: First Second Third Fourth Fifth Sixth Seventh 
+7 - Calls::
+procedure p;
+Select BOOLEAN such that Calls (_, _)
+true
+5000
+Evaluating query 7 - Calls::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+8 - Calls::
+procedure p;
+Select BOOLEAN such that Calls ("First", "Second")
+true
+5000
+Evaluating query 8 - Calls::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+9 - Calls::
+procedure p;
+Select BOOLEAN such that Calls ("Third", "First")
+false
+5000
+Evaluating query 9 - Calls::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+10 - Calls::
+procedure p;
+Select BOOLEAN such that Calls ("Seventh", "Sixth")
+true
+5000
+Evaluating query 10 - Calls::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+11 - Calls::
+procedure p;
+Select p such that Calls ("Second", p)
+Third, Fourth, Fifth
+5000
+Evaluating query 11 - Calls::
+
+
+
+
+Your answer: Third Fourth Fifth 
+Correct answer: Third Fourth Fifth 
+12 - Calls::
+procedure p;
+Select p such that Calls ("Third", p)
+
+5000
+Evaluating query 12 - Calls::
+
+
+
+
+Your answer: 
+Correct answer: 
+13 - Calls::
+procedure p;
+Select p such that Calls (p, "Third")
+Second
+5000
+Evaluating query 13 - Calls::
+
+
+
+
+Your answer: Second 
+Correct answer: Second 
+14 - Calls::
+procedure p;
+Select p such that Calls (p, "First")
+Fourth
+5000
+Evaluating query 14 - Calls::
+
+
+
+
+Your answer: Fourth 
+Correct answer: Fourth 
+15 - Calls::
+procedure p;
+Select p such that Calls (p, "Second")
+First, Sixth
+5000
+Evaluating query 15 - Calls::
+
+
+
+
+Your answer: First Sixth 
+Correct answer: First Sixth 
+16 - Calls::
+procedure p;
+Select p such that Calls (p, p)
+
+5000
+Evaluating query 16 - Calls::
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !
