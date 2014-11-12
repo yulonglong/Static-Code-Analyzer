@@ -569,8 +569,6 @@ bool Sibling::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2) {
 bool Sibling::isSiblingVarIndexVarIndex(VARINDEX varIndex1, VARINDEX varIndex2) {
 	try{
 		if(varIndex1 != -1 && varIndex2 != -1){
-			if(varIndex1==varIndex2)
-				return false;
 			if(!flagVarIndexVarIndexTable.at(varIndex1) || !flagVarIndexVarIndexTable.at(varIndex2))
 				return false;
 			if(indexVarIndexVarIndexTable.at(varIndex1) == -1 || indexVarIndexVarIndexTable.at(varIndex2) == -1)
