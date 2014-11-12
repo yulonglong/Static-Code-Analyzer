@@ -784,7 +784,9 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 				}
 			}else if(isOperator(i2->second) && i1->second == TypeTable::VARIABLE){
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
-					if(pkb->isSiblingVarIndexMathOp(*i, i1->second)){
+					cout<<"varindex = "<<*i<<endl;
+					if(pkb->isSiblingVarIndexMathOp(*i, i2->second)){
+						cout<<"inserting Pair("<<*i<<" -1)"<<endl;
 						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
 					}
 				}
@@ -799,7 +801,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 				}
 			}else{
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
-					if(pkb->isSiblingConstantMathOp(*i, i1->second)){
+					if(pkb->isSiblingConstantMathOp(*i, i2->second)){
 						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
 					}
 				}
