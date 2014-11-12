@@ -32,6 +32,7 @@ using namespace std;
  * - Storing the extracted relationships in the Modifies and Uses tables in PKB.
  * - Building the CFG given the AST.
  * - Storing the Next relationships in the Next table in PKB.
+ * - Extract the Sibling relationship from AST and store in PKB. 
  * 
  * To invoke the DesignExtractor's methods, use the public method:
  * \code
@@ -42,6 +43,7 @@ using namespace std;
  * \code
  * static void extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, ProcTable &procTable, Modifies &modifies, Uses &uses, Parent &parent);
  * static void buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot);
+ * static void extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb);
  * \endcode
  *
  *

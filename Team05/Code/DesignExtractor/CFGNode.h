@@ -50,10 +50,13 @@ public:
 	//! Get the pointer of the child of the Node (at the specified index)
 	CFGNode* getMultiChild(unsigned int index);
 
+	//! Sets a direct pointer to the End-Of-If dummy node. Only set if this node is an IF node.
+	void setEndOfIfNode(CFGNode*);
+	//! Get the pointer to the End-Of-If dummy node. 
+	CFGNode* getEndOfIfNode();
+	
 	void printCFGNode();
 
-	void setEndOfIfNode(CFGNode*);
-	CFGNode* getEndOfIfNode();
 };
 
 #endif
