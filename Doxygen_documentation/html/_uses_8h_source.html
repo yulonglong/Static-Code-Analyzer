@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Static-Code-Analyzer: D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/PKB/Uses.h Source File</title>
+<title>Static-Code-Analyzer: D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code05/PKB/Uses.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_275089585c7fc1b5fd5d7d42c69cb1da.html">D:</a></li><li class="navelem"><a class="el" href="dir_f51c55927ee0976e098a437dc30fa3a1.html">My Uni</a></li><li class="navelem"><a class="el" href="dir_1effb59c73c67988f41a07fde6d76616.html">Programming Projects</a></li><li class="navelem"><a class="el" href="dir_2afe67cd664cac559bb567b7bc82e772.html">Static-Code-Analyzer</a></li><li class="navelem"><a class="el" href="dir_5e932fdf4e29c968e8757ca8e6909905.html">Team05</a></li><li class="navelem"><a class="el" href="dir_2c31d343e29fbfc90a2256f09f7482fc.html">Code</a></li><li class="navelem"><a class="el" href="dir_710b3b3bcbf68acc2be5d530b618b87d.html">PKB</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_275089585c7fc1b5fd5d7d42c69cb1da.html">D:</a></li><li class="navelem"><a class="el" href="dir_f51c55927ee0976e098a437dc30fa3a1.html">My Uni</a></li><li class="navelem"><a class="el" href="dir_1effb59c73c67988f41a07fde6d76616.html">Programming Projects</a></li><li class="navelem"><a class="el" href="dir_2afe67cd664cac559bb567b7bc82e772.html">Static-Code-Analyzer</a></li><li class="navelem"><a class="el" href="dir_5e932fdf4e29c968e8757ca8e6909905.html">Team05</a></li><li class="navelem"><a class="el" href="dir_655fe844abd66ef9715be619273f9cb2.html">Code05</a></li><li class="navelem"><a class="el" href="dir_61fc8e0c5c310c685578185d511cfb7f.html">PKB</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -113,47 +113,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    vector&lt;vector&lt;int64_t&gt;&gt; usedProcVarTable;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> instanceFlag;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_uses.html">Uses</a> *uses;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_type_table.html">TypeTable</a> *typeTable;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_proc_table.html">ProcTable</a> *procTable;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    set&lt;STMTNUM&gt; usesList;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    set&lt;VARINDEX&gt; usedList;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    set&lt;PROCINDEX&gt; usesProcList;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    set&lt;VARINDEX&gt; usedProcList;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_uses.html">Uses</a>(<a class="code" href="class_var_table.html">VarTable</a>*);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ~<a class="code" href="class_uses.html">Uses</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_uses.html">Uses</a>* getInstance(<a class="code" href="class_var_table.html">VarTable</a>*);    <span class="comment">// to be used to get instance of singleton class</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> setUses(STMTNUM, VARNAME);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> setUses(STMTNUM, set&lt;VARINDEX&gt;);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> setUsesProc(PROCINDEX, set&lt;VARINDEX&gt;);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> isUses(STMTNUM, VARINDEX);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    set&lt;VARINDEX&gt; getUsed(STMTNUM);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    set&lt;STMTNUM&gt; getUses(VARINDEX);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    set&lt;VARINDEX&gt; getAllUsed();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    set&lt;STMTNUM&gt; getAllUses();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">bool</span> isUsesProc(PROCINDEX, VARINDEX);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    set&lt;VARINDEX&gt; getUsedProc(PROCINDEX);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    set&lt;PROCINDEX&gt; getUsesProc(VARINDEX);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    set&lt;VARINDEX&gt; getAllUsedProc();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    set&lt;PROCINDEX&gt; getAllUsesProc();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> printUsesTable();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_var_table.html">VarTable</a> *varTable;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    set&lt;STMTNUM&gt; usesList;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    set&lt;VARINDEX&gt; usedList;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    set&lt;PROCINDEX&gt; usesProcList;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    set&lt;VARINDEX&gt; usedProcList;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="class_uses.html">Uses</a>(<a class="code" href="class_var_table.html">VarTable</a>*);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ~<a class="code" href="class_uses.html">Uses</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_uses.html">Uses</a>* getInstance(<a class="code" href="class_var_table.html">VarTable</a>*);    <span class="comment">// to be used to get instance of singleton class</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> setUses(STMTNUM, VARNAME);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> setUses(STMTNUM, set&lt;VARINDEX&gt;);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> setUsesProc(PROCINDEX, set&lt;VARINDEX&gt;);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span> isUses(STMTNUM, VARINDEX);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    set&lt;VARINDEX&gt; getUsed(STMTNUM);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    set&lt;STMTNUM&gt; getUses(VARINDEX);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    set&lt;VARINDEX&gt; getAllUsed();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    set&lt;STMTNUM&gt; getAllUses();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> isUsesProc(PROCINDEX, VARINDEX);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    set&lt;VARINDEX&gt; getUsedProc(PROCINDEX);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    set&lt;PROCINDEX&gt; getUsesProc(VARINDEX);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    set&lt;VARINDEX&gt; getAllUsedProc();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    set&lt;PROCINDEX&gt; getAllUsesProc();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> printUsesTable();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
 <div class="ttc" id="class_uses_html"><div class="ttname"><a href="class_uses.html">Uses</a></div><div class="ttdoc">A Uses class to store the Modifies relationship. </div><div class="ttdef"><b>Definition:</b> Uses.h:34</div></div>
-<div class="ttc" id="class_proc_table_html"><div class="ttname"><a href="class_proc_table.html">ProcTable</a></div><div class="ttdoc">A ProcTable class to store the procedure names from the source code. </div><div class="ttdef"><b>Definition:</b> ProcTable.h:36</div></div>
 <div class="ttc" id="class_var_table_html"><div class="ttname"><a href="class_var_table.html">VarTable</a></div><div class="ttdoc">A VarTable class to store the variable names from the source code. </div><div class="ttdef"><b>Definition:</b> VarTable.h:36</div></div>
-<div class="ttc" id="class_type_table_html"><div class="ttname"><a href="class_type_table.html">TypeTable</a></div><div class="ttdoc">A TypeTable class to store the type of expression of a statement number from the source code...</div><div class="ttdef"><b>Definition:</b> TypeTable.h:35</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 12 2014 17:49:10 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Nov 13 2014 02:31:41 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
