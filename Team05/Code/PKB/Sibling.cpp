@@ -556,10 +556,8 @@ bool Sibling::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-bool Sibling::isSiblingVarNameVarName(VARNAME v1, VARNAME v2) {
+bool Sibling::isSiblingVarIndexVarIndex(VARINDEX varIndex1, VARINDEX varIndex2) {
 	try{
-		int varIndex1 = varTable->getVarIndex(v1);
-		int varIndex2 = varTable->getVarIndex(v2);
 		if(varIndex1 != -1 && varIndex2 != -1){
 			if(!flagVarIndexVarIndexTable.at(varIndex1) || !flagVarIndexVarIndexTable.at(varIndex2))
 				return false;
@@ -573,10 +571,8 @@ bool Sibling::isSiblingVarNameVarName(VARNAME v1, VARNAME v2) {
 	return false;
 }
 
-bool Sibling::isSiblingVarNameConstant(VARNAME v1, CONSTVALUE cv2) {
+bool Sibling::isSiblingVarIndexConstant(VARINDEX varIndex, CONSTINDEX constVarIndex) {
 	try{
-		int varIndex = varTable->getVarIndex(v1);
-		int constVarIndex = constTable->getConstIndex(cv2);
 		if(varIndex != -1 && constVarIndex != -1){
 			vector<CONSTINDEX> temp = siblingVarIndexConstantTable.at(varIndex);
 			for(vector<CONSTINDEX>::iterator it = temp.begin(); it != temp.end();it++){
@@ -590,10 +586,8 @@ bool Sibling::isSiblingVarNameConstant(VARNAME v1, CONSTVALUE cv2) {
 	return false;
 }
 
-bool Sibling::isSiblingConstantConstant(CONSTVALUE cv1, CONSTVALUE cv2) {
+bool Sibling::isSiblingConstantConstant(CONSTINDEX constVarIndex1, CONSTINDEX constVarIndex2) {
 	try{
-		int constVarIndex1 = constTable->getConstIndex(cv1);
-		int constVarIndex2 = constTable->getConstIndex(cv2);
 		if(!flagConstantConstantTable.at(constVarIndex1) || !flagConstantConstantTable.at(constVarIndex2))
 			return false;
 		if(indexConstantConstantTable.at(constVarIndex1) == -1 || indexConstantConstantTable.at(constVarIndex2) == -1)
@@ -605,9 +599,8 @@ bool Sibling::isSiblingConstantConstant(CONSTVALUE cv1, CONSTVALUE cv2) {
 	return false;
 }
 
-bool Sibling::isSiblingVarNameMathOp(VARNAME v1, TypeTable::SynType t2) {
+bool Sibling::isSiblingVarIndexMathOp(VARINDEX varIndex, TypeTable::SynType t2) {
 	try{
-		int varIndex = varTable->getVarIndex(v1);
 		int typeIndex;
 		if(t2==TypeTable::PLUS)
 			typeIndex = 1;
@@ -630,9 +623,8 @@ bool Sibling::isSiblingVarNameMathOp(VARNAME v1, TypeTable::SynType t2) {
 	return false;
 }
 
-bool Sibling::isSiblingConstantMathOp(CONSTVALUE cv1, TypeTable::SynType t2) {
+bool Sibling::isSiblingConstantMathOp(CONSTINDEX constIndex, TypeTable::SynType t2) {
 	try{
-		int constIndex = constTable->getConstIndex(cv1);
 		int typeIndex;
 		if(t2==TypeTable::PLUS)
 			typeIndex = 1;
@@ -691,10 +683,8 @@ bool Sibling::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2
 	return false;
 }
 
-bool Sibling::isSiblingProcNameProcName(PROCNAME p1, PROCNAME p2) {
+bool Sibling::isSiblingProcIndexProcIndex(PROCINDEX procIndex1, PROCINDEX procIndex2) {
 	try{
-		int procIndex1 = procTable->getProcIndex(p1);
-		int procIndex2 = procTable->getProcIndex(p2);
 		if(procIndex1 != -1 && procIndex2 != -1){
 			if(!flagProcIndexProcIndexTable.at(procIndex1) || !flagProcIndexProcIndexTable.at(procIndex2))
 				return false;
@@ -708,9 +698,8 @@ bool Sibling::isSiblingProcNameProcName(PROCNAME p1, PROCNAME p2) {
 	return false;
 }
 
-bool Sibling::isSiblingVarNameStmtList(VARNAME v1, STMTNUM s2) {
+bool Sibling::isSiblingVarIndexStmtList(VARINDEX varIndex, STMTNUM s2) {
 	try{
-		int varIndex = varTable->getVarIndex(v1);
 		if(varIndex != -1 && s2 != -1){
 			vector<STMTNUM> temp = siblingVarIndexStmtListTable.at(varIndex);
 			for(vector<CONSTINDEX>::iterator it = temp.begin(); it != temp.end();it++){

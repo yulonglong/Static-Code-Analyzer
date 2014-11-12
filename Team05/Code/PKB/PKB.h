@@ -266,14 +266,14 @@ public:
 	void setToSiblingStmtListStmtList(STMTNUM, STMTNUM);
 	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
 	bool isSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
-	bool isSiblingVarNameVarName(VARNAME, VARNAME);
-	bool isSiblingVarNameConstant(VARNAME, CONSTVALUE);
-	bool isSiblingConstantConstant(CONSTVALUE, CONSTVALUE);
-	bool isSiblingVarNameMathOp(VARNAME, TypeTable::SynType);
-	bool isSiblingConstantMathOp(CONSTVALUE, TypeTable::SynType); 
+	bool isSiblingVarIndexVarIndex(VARINDEX, VARINDEX);
+	bool isSiblingVarIndexConstant(VARINDEX, CONSTINDEX);
+	bool isSiblingConstantConstant(CONSTINDEX, CONSTINDEX);
+	bool isSiblingVarIndexMathOp(VARINDEX, TypeTable::SynType);
+	bool isSiblingConstantMathOp(CONSTINDEX, TypeTable::SynType); 
 	bool isSiblingMathOpMathOp(TypeTable::SynType, TypeTable::SynType);
-	bool isSiblingProcNameProcName(PROCNAME, PROCNAME);
-	bool isSiblingVarNameStmtList(VARNAME, STMTNUM);
+	bool isSiblingProcIndexProcIndex(PROCINDEX, PROCINDEX);
+	bool isSiblingVarIndexStmtList(VARINDEX, STMTNUM);
 	bool isSiblingStmtListStmtList(STMTNUM, STMTNUM);
 
 	//! Return a statement number that is the parent of the given statement number.

@@ -461,29 +461,29 @@ bool PKB::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2){
 	return sibling->isSiblingStmtNumStmtNum(s1,s2);
 }
 
-bool PKB::isSiblingVarNameVarName(VARNAME v1, VARNAME v2){
-	return sibling->isSiblingVarNameVarName(v1,v2);
+bool PKB::isSiblingVarIndexVarIndex(VARINDEX v1, VARINDEX v2){
+	return sibling->isSiblingVarIndexVarIndex(v1,v2);
 }
-bool PKB::isSiblingVarNameConstant(VARNAME v, CONSTVALUE cv){
-	return sibling->isSiblingVarNameConstant(v,cv);
+bool PKB::isSiblingVarIndexConstant(VARINDEX v, CONSTINDEX cv){
+	return sibling->isSiblingVarIndexConstant(v,cv);
 }
-bool PKB::isSiblingConstantConstant(CONSTVALUE cv1, CONSTVALUE cv2){
+bool PKB::isSiblingConstantConstant(CONSTINDEX cv1, CONSTINDEX cv2){
 	return sibling->isSiblingConstantConstant(cv1,cv2);
 }
-bool PKB::isSiblingVarNameMathOp(VARNAME v, TypeTable::SynType t){
-	return sibling->isSiblingVarNameMathOp(v,t);
+bool PKB::isSiblingVarIndexMathOp(VARINDEX v, TypeTable::SynType t){
+	return sibling->isSiblingVarIndexMathOp(v,t);
 }
-bool PKB::isSiblingConstantMathOp(CONSTVALUE cv, TypeTable::SynType t){ 
+bool PKB::isSiblingConstantMathOp(CONSTINDEX cv, TypeTable::SynType t){ 
 	return sibling->isSiblingConstantMathOp(cv,t);
 }
 bool PKB::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2){
 	return sibling->isSiblingMathOpMathOp(t1,t2);
 }
-bool PKB::isSiblingProcNameProcName(PROCNAME p1, PROCNAME p2){
-	return sibling->isSiblingProcNameProcName(p1,p2);
+bool PKB::isSiblingProcIndexProcIndex(PROCINDEX p1, PROCINDEX p2){
+	return sibling->isSiblingProcIndexProcIndex(p1,p2);
 }
-bool PKB::isSiblingVarNameStmtList(VARNAME v, STMTNUM s){
-	return sibling->isSiblingVarNameStmtList(v,s);
+bool PKB::isSiblingVarIndexStmtList(VARINDEX v, STMTNUM s){
+	return sibling->isSiblingVarIndexStmtList(v,s);
 }
 bool PKB::isSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2){
 	return sibling->isSiblingStmtListStmtList(s1,s2);
