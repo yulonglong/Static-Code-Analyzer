@@ -841,10 +841,12 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		}
 
 		else if(i1->second == TypeTable::CONSTANT && i2->second == TypeTable::VARIABLE){
+			cout<<"tk1 is constant and tk2 is variable"<<endl;
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingVarIndexConstant(*i, *i2)){
-						siblingAns.insert(Pair(atoi(pkb->getConstValue(*i2).c_str()), *i));
+					if(pkb->isSiblingVarIndexConstant(*i2, *i)){
+						siblingAns.insert(Pair(atoi(pkb->getConstValue(*i).c_str()), *i2));
+						cout<<"inserting Pair("<<atoi(pkb->getConstValue(*i).c_str())<<" "<<*i2<<endl;
 					}
 				}
 			}
