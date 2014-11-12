@@ -32,10 +32,148 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 	Relationship temp;
 	//Relationship with;
 	//bool flag = false;
+	//weight
+	float followsWeight = 10;
+	float followsStarWeight = 20;
+	float parentWeight = 10;
+	float parentStarWeight = 20;
+	float callsWeight = 10;
+	float callStarWeight = 20;
+	float modifiesWeight = 10;
+	float usesWeight = 10;
+	float nextWeight = 20;
+	float nextStarWeight= 40;
+	float withWeight = 20;
+	float patternWeight = 20;
+	float affectsWeight = 40;
+	float affectsStarWeight = 80;
+	float siblingWeight = 10;
+
+	float twoTokenMultiplier = 1.5;
+
+	float synonymMultiplier = 1.0;
+	float identifierMultiplier = 1.0;
+	float integerMultiplier = 0.3;
+	float underscoreMultiplier = 2;
+	float underscoreExpMultiplier = 1.5;
+	float exprMultiplier = 1;
+
+
 	cout<<"In orderRelationships"<<endl;
 
+	vector<float> weightArr (r.size(),0);
+
 	for(unsigned int i=0; i<r.size(); i++){
-		
+		Relationship currentRel = r.at(i);
+		//Give weight based on the relationship type
+		switch(currentRel.getRelType()){
+		case Relationship::FOLLOWS:
+			weightArr[i]=followsWeight;
+
+		case Relationship::FOLLOWSSTAR:
+			weightArr[i]=followsStarWeight;
+
+		case Relationship::PARENT:
+			weightArr[i]=parentWeight;
+
+		case Relationship::PARENTSTAR:
+			weightArr[i]=parentStarWeight;
+
+		case Relationship::CALLS:
+			weightArr[i]=callsWeight;
+
+		case Relationship::CALLSSTAR:
+			weightArr[i]=callStarWeight;
+
+		case Relationship::MODIFIES:
+			weightArr[i]=modifiesWeight;
+
+		case Relationship::USES:
+			weightArr[i]=usesWeight;
+
+		case Relationship::NEXT:
+			weightArr[i]=nextWeight;
+
+		case Relationship::NEXTSTAR:
+			weightArr[i]=nextStarWeight;
+
+		case Relationship::WITH:
+			weightArr[i]=withWeight;
+
+		case Relationship::PATTERN:	
+			weightArr[i]=patternWeight;
+
+		case Relationship::AFFECTS:
+			weightArr[i]=affectsWeight;
+
+		case Relationship::AFFECTSSTAR:
+			weightArr[i]=affectsStarWeight;
+
+		case Relationship::SIBLING:
+			weightArr[i]=siblingWeight;
+		}
+
+		//multiply based on token
+		switch(currentRel.getToken1Type()){
+		case Relationship::SYNONYM:
+			weightArr[i]*=synonymMultiplier;
+
+		case Relationship::IDENTIFIER:
+			weightArr[i]*=identifierMultiplier;
+
+		case Relationship::INTEGER:
+			weightArr[i]*=integerMultiplier;
+
+		case Relationship::UNDERSCORE:
+			weightArr[i]*=underscoreMultiplier;
+
+		case Relationship::UNDERSCOREEXPR:
+			weightArr[i]*=underscoreExpMultiplier;
+
+		case Relationship::EXPR:
+			weightArr[i]*=exprMultiplier;
+		}
+
+		switch(currentRel.getToken2Type()){
+		case Relationship::SYNONYM:
+			weightArr[i]*=synonymMultiplier;
+
+		case Relationship::IDENTIFIER:
+			weightArr[i]*=identifierMultiplier;
+
+		case Relationship::INTEGER:
+			weightArr[i]*=integerMultiplier;
+
+		case Relationship::UNDERSCORE:
+			weightArr[i]*=underscoreMultiplier;
+
+		case Relationship::UNDERSCOREEXPR:
+			weightArr[i]*=underscoreExpMultiplier;
+
+		case Relationship::EXPR:
+			weightArr[i]*=exprMultiplier;
+		}
+	}
+
+	//order based on weight
+	vector<Relationship> newOrder;
+	while(r.size()>0){
+		float minWeight = weightArr.at(0);
+		int minWeightIndex = 0;
+		for(int j =1; j<weightArr.size();j++){
+			if(minWeight>weightArr.at(j)){
+				minWeightIndex = j;
+				minWeight = weightArr.at(j);
+			}
+		}
+		newOrder.push_back(r.at(minWeightIndex));
+		weightArr.erase(weightArr.begin()+minWeightIndex);
+		r.erase(r.begin()+minWeightIndex);
+	}
+	r =newOrder;
+
+
+	for(unsigned int i=0; i<r.size(); i++){
 		if(r.at(i).getRelType()==Relationship::PATTERN){
 			cout<<"pattern found"<<endl;
 			temp = r.at(sorted);
@@ -117,6 +255,8 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 	for(vector<Relationship>::iterator it = relations.begin(); it!=relations.end(); it++){
 		if (AbstractWrapper::GlobalStop) {
 			cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+			affectsTable.clear();
+			affectsStarTable.clear();
 			return relAns;
 		}
 
@@ -2820,7 +2960,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
 				if (AbstractWrapper::GlobalStop) {
-					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					cout<< "Timeout detected! Stopping Affects Evaluation!" << endl;
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 					return;
 				}
@@ -2847,7 +2987,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
 			if (AbstractWrapper::GlobalStop) {
-				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				cout<< "Timeout detected! Stopping Affects Evaluation!" << endl;
 				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 				return;
 			}
@@ -2884,7 +3024,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
 			if (AbstractWrapper::GlobalStop) {
-				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				cout<< "Timeout detected! Stopping Affects Evaluation!" << endl;
 				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 				return;
 			}
@@ -2922,7 +3062,7 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
 				if (AbstractWrapper::GlobalStop) {
-					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					cout<< "Timeout detected! Stopping Affects Evaluation!" << endl;
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 					return;
 				}
@@ -2984,7 +3124,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
 				if (AbstractWrapper::GlobalStop) {
-					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					cout<< "Timeout detected! Stopping Affects* Evaluation!" << endl;
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 					return;
 				}
@@ -3013,7 +3153,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++) {
 			if (AbstractWrapper::GlobalStop) {
-				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				cout<< "Timeout detected! Stopping Affects* Evaluation!" << endl;
 				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 				return;
 			}
@@ -3051,7 +3191,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 
 		for(set<int>::iterator it = tk2List.begin(); it!=tk2List.end(); it++) {
 			if (AbstractWrapper::GlobalStop) {
-				cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+				cout<< "Timeout detected! Stopping Affects* Evaluation!" << endl;
 				QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 				return;
 			}
@@ -3088,7 +3228,7 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
 			for(set<int>::iterator itB = tk2List.begin(); itB!=tk2List.end(); itB++) {
 				if (AbstractWrapper::GlobalStop) {
-					cout<< "Timeout detected! Stopping QueryEvaluator!" << endl;
+					cout<< "Timeout detected! Stopping Affects* Evaluation!" << endl;
 					QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
 					return;
 				}
