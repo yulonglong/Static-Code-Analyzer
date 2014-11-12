@@ -50,7 +50,7 @@ Please build in the following order:
 - AutoTester
 
 After building the AutoTester, please navigate to the Release folder. The AutoTester.exe will be inside.
-i.e. "..\Team05\Code05\Release\AutoTester.exe"
+i.e. "..\Team05\Bonus\Code05\Release\AutoTester.exe"
 and find AutoTester.exe in the directory
 
 Please move the AutoTester.exe to the desired directory with the source file and test cases.
@@ -67,7 +67,7 @@ To execute full system testing, please follow the steps to build Autotester abov
 After Autotester is built and AutoTester.exe is created,
 
 Please copy AutoTester.exe and paste it in the "Tests05" folder
-i.e. "..\Team05\Tests05\"
+i.e. "..\Team05\Bonus\Tests05\"
 
 Once Autotester.exe is copied/pasted in the respective directory,
 The System testing can simply be done by running/double-clicking "auto.bat"
