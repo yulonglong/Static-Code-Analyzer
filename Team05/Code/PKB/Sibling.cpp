@@ -68,6 +68,7 @@ Sibling::~Sibling() {
 	siblingVarIndexStmtListList.clear();
 	siblingStmtListVarIndexList.clear();
 	siblingStmtListStmtListList.clear();
+	siblingAllStmtList.clear();
 
 	instanceFlag=false;
 }
@@ -540,6 +541,13 @@ void Sibling::setToSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2) {
 	}
 }
 
+void Sibling::setToSiblingAllStmtList(STMTNUM s) {
+	try{
+		if(s!=-1)
+			siblingAllStmtList.insert(s);
+	}catch(...){
+	}
+}
 
 
 
@@ -1083,10 +1091,7 @@ set<STMTNUM> Sibling::getAllSiblingStmtListWithStmtList(){
 }
 
 set<STMTNUM> Sibling::getAllStmtList(){
-	set<STMTNUM> ans;
-	ans.insert(siblingStmtListVarIndexList.begin(),siblingStmtListVarIndexList.end());
-	ans.insert(siblingStmtListStmtListList.begin(),siblingStmtListStmtListList.end());
-	return ans;
+	return siblingAllStmtList;
 }
 
 void Sibling::printSiblingTable() {

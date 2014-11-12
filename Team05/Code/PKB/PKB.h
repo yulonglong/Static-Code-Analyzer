@@ -264,6 +264,7 @@ public:
 	void setToSiblingProcNameProcName(PROCNAME, PROCNAME);
 	void setToSiblingVarNameStmtList(VARNAME, STMTNUM);
 	void setToSiblingStmtListStmtList(STMTNUM, STMTNUM);
+	void setToSiblingAllStmtList(STMTNUM);
 	//! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
 	bool isSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
 	bool isSiblingVarIndexVarIndex(VARINDEX, VARINDEX);

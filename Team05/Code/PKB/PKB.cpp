@@ -457,6 +457,10 @@ void PKB::setToSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2){
 	sibling->setToSiblingStmtListStmtList(s1,s2);
 }
 
+void PKB::setToSiblingAllStmtList(STMTNUM s1){
+	sibling->setToSiblingAllStmtList(s1);
+}
+
 bool PKB::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2){
 	return sibling->isSiblingStmtNumStmtNum(s1,s2);
 }
