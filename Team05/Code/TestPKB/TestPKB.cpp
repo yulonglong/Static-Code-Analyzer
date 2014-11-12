@@ -28,15 +28,4 @@ void PKBTest::tearDown() {
 CPPUNIT_TEST_SUITE_REGISTRATION( PKBTest ); // Note 4 
 
 void PKBTest::testDestructor() {
-	pkb = PKB::getInstance();
-
-	pkb->setToParent(1,2);
-	parent = pkb->getParent();
-	
-	CPPUNIT_ASSERT(parent->getParent(2) == 1);
-
-	pkb->~PKB();
-	pkb = PKB::getInstance();
-	parent = pkb->getParent();
-	cout<<parent->getParent(2)<<endl;
 }

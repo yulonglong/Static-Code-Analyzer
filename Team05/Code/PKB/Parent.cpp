@@ -34,30 +34,33 @@ Parent* Parent::getInstance(){
 
 void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 	try{
-		vector<int64_t> placeHolder (0,1);
-		vector<int64_t> temp (0,1);
-		try{
-			temp = parentTable.at(s1);
-		}catch(...){
-			parentTable.resize(s1+1,placeHolder);
+		if(s2>s1){
+			vector<int64_t> placeHolder (0,1);
+			vector<int64_t> temp (0,1);
+			try{
+				temp = parentTable.at(s1);
+			}catch(...){
+				parentTable.resize(s1+1,placeHolder);
+			}
+			int diff = s2-s1;
+			int location =ceil((double)diff/63);
+			int bitPos = diff%63;
+
+			if(temp.size()<location)
+				temp.resize(location);
+
+			int64_t bitArray = temp.at(location-1);
+			bitArray = bitArray | (((int64_t)1)<<bitPos);
+
+			temp[location-1]=bitArray;
+			parentTable[s1]=temp;
+			if(s2>=childrenTable.size())
+				childrenTable.resize(s2+1,-1);
+			childrenTable[s2] = s1;
+
+			parentList.insert(s1);
+			childrenList.insert(s2);
 		}
-		int location =ceil((double)s2/63);
-		int bitPos = s2%63;
-
-		if(temp.size()<location)
-			temp.resize(location);
-
-		int64_t bitArray = temp.at(location-1);
-		bitArray = bitArray | (((int64_t)1)<<bitPos);
-
-		temp[location-1]=bitArray;
-		parentTable[s1]=temp;
-		if(s2>=childrenTable.size())
-			childrenTable.resize(s2+1,-1);
-		childrenTable[s2] = s1;
-
-		parentList.insert(s1);
-		childrenList.insert(s2);
 	}catch(...){
 	}
 }
@@ -73,17 +76,17 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-set<STMTNUM> Parent::getChildren(STMTNUM s){
+set<STMTNUM> Parent::getChildren(STMTNUM stmtNum){
 	set<STMTNUM> ans;
 	try{
-		vector<int64_t> temp=parentTable.at(s);
-
+		vector<int64_t> temp=parentTable.at(stmtNum);
 		for(size_t s = 0;s<temp.size();s++){
 			int64_t bitArray = temp.at(s);
 			while(bitArray>0){
 				int64_t bit = bitArray & -bitArray;
 				bitArray -= bit;
 				int number = log((double)bit)/log(2.0) + s*63;
+				number+=stmtNum;
 				ans.insert(number);
 			}
 		}
@@ -126,7 +129,7 @@ void Parent::printParentTable() {
 					int64_t bit = bitArray & -bitArray;
 					bitArray -= bit;
 					int number = log((double)bit)/log(2.0) + s*63;
-					cout<< number<< ",";
+					cout<< number+index<< ",";
 				}
 			}		
 			cout<<endl;

@@ -1,6 +1,7 @@
 #ifndef TestUses_h
 #define TestUses_h
 #include "Uses.h"
+#include "PKB.h"
 #include "TypeTable.h"
 
 // Note 1
