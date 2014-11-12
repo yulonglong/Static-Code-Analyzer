@@ -802,7 +802,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			}else{
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 					if(pkb->isSiblingConstantMathOp(*i, i2->second)){
-						siblingAns.insert(Pair(*i, -1)); //-1 cuz operator will nvr be selected
+						siblingAns.insert(Pair(atoi(pkb->getConstValue(*i).c_str()), -1)); //-1 cuz operator will nvr be selected
 					}
 				}
 			}
@@ -822,7 +822,6 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			cout<<"tk1 is var and tk2 is var"<<endl;
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					cout<<"iterating through "<<*i<<" "<<*i2<<endl;
 					if(pkb->isSiblingVarIndexVarIndex(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 						cout<<"inserting pair("<<*i<<" "<<*i2<<endl;
