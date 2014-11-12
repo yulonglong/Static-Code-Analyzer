@@ -1,7 +1,0 @@
-Parameters : S5-basicTests.txt Q5-basicTests.txt R5-basicTests.xml
-Beginning to parse Simple Program.
-Begin CodeParser
-End CodeParser
-Begin DesignExtractor
-DE: Extracted Relationships
-Building CFG

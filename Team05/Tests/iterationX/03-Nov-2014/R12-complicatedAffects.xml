@@ -1,9 +1,0 @@
-<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
-<test_results>
-<info>
-<name>iterationX</name><parsing_time_taken>2.000000</parsing_time_taken>
-</info>
-<queries>
-<category name=" Mainly Affect*">
-<query>
-<id Affectsstar="1" comment="Not manually computed" >1</id><querystr><![CDATA[assign a, a1, a2, a3, a4, a5; Select a3 such that Affects*(a, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) ]]></querystr>
