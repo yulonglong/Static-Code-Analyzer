@@ -59,7 +59,7 @@ TypeTable::SynType TypeTable::getSynType(std::string input){
 	else if(input=="times"){
 		return TypeTable::TIMES;
 	}
-	else if(input=="stmtLst"){
+	else if(input=="stmtlst"){
 		return TypeTable::STMTLST;
 	}
 	else{
