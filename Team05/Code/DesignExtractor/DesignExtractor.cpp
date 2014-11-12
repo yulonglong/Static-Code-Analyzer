@@ -185,11 +185,11 @@ void DesignExtractor::setSiblingForAssign(vector<Node*> vector, PKB &pkb) {
 	} else if (leftNodeType == "operator" && rightNodeType == "variable") {
 		// PKB SET:
 		TypeTable::SynType leftNodeSynType; 
-		if (leftNodeType == "+") {
+		if (leftNodeData == "+") {
 			leftNodeSynType = TypeTable::PLUS;
-		} else if (leftNodeType == "-") {
+		} else if (leftNodeData == "-") {
 			leftNodeSynType = TypeTable::MINUS;
-		} else if (leftNodeType == "*") {
+		} else if (leftNodeData == "*") {
 			leftNodeSynType = TypeTable::TIMES;
 		}
 		if (debugModeExtension) {
@@ -213,11 +213,11 @@ void DesignExtractor::setSiblingForAssign(vector<Node*> vector, PKB &pkb) {
 	} else if (leftNodeType == "operator" && rightNodeType == "constant") {
 		// PKB SET:
 		TypeTable::SynType leftNodeSynType; 
-		if (leftNodeType == "+") {
+		if (leftNodeData == "+") {
 			leftNodeSynType = TypeTable::PLUS;
-		} else if (leftNodeType == "-") {
+		} else if (leftNodeData == "-") {
 			leftNodeSynType = TypeTable::MINUS;
-		} else if (leftNodeType == "*") {
+		} else if (leftNodeData == "*") {
 			leftNodeSynType = TypeTable::TIMES;
 		}
 		if (debugModeExtension) {
