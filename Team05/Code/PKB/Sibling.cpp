@@ -553,6 +553,8 @@ void Sibling::setToSiblingAllStmtList(STMTNUM s) {
 
 bool Sibling::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2) {
 	try{
+		if(s1==s2)
+			return false;
 		if(!flagStmtNumStmtNumTable.at(s1) || !flagStmtNumStmtNumTable.at(s2))
 			return false;
 		if(indexStmtNumStmtNumTable.at(s1) == -1 || indexStmtNumStmtNumTable.at(s2) == -1)
@@ -567,6 +569,8 @@ bool Sibling::isSiblingStmtNumStmtNum(STMTNUM s1, STMTNUM s2) {
 bool Sibling::isSiblingVarIndexVarIndex(VARINDEX varIndex1, VARINDEX varIndex2) {
 	try{
 		if(varIndex1 != -1 && varIndex2 != -1){
+			if(varIndex1==varIndex2)
+				return false;
 			if(!flagVarIndexVarIndexTable.at(varIndex1) || !flagVarIndexVarIndexTable.at(varIndex2))
 				return false;
 			if(indexVarIndexVarIndexTable.at(varIndex1) == -1 || indexVarIndexVarIndexTable.at(varIndex2) == -1)
@@ -596,6 +600,8 @@ bool Sibling::isSiblingVarIndexConstant(VARINDEX varIndex, CONSTINDEX constVarIn
 
 bool Sibling::isSiblingConstantConstant(CONSTINDEX constVarIndex1, CONSTINDEX constVarIndex2) {
 	try{
+		if(constVarIndex1==constVarIndex2)
+			return false;
 		if(!flagConstantConstantTable.at(constVarIndex1) || !flagConstantConstantTable.at(constVarIndex2))
 			return false;
 		if(indexConstantConstantTable.at(constVarIndex1) == -1 || indexConstantConstantTable.at(constVarIndex2) == -1)
@@ -694,6 +700,8 @@ bool Sibling::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2
 bool Sibling::isSiblingProcIndexProcIndex(PROCINDEX procIndex1, PROCINDEX procIndex2) {
 	try{
 		if(procIndex1 != -1 && procIndex2 != -1){
+			if(procIndex1==procIndex2)
+				return false;
 			if(!flagProcIndexProcIndexTable.at(procIndex1) || !flagProcIndexProcIndexTable.at(procIndex2))
 				return false;
 			if(indexProcIndexProcIndexTable.at(procIndex1) == -1 || indexProcIndexProcIndexTable.at(procIndex2) == -1)
@@ -723,6 +731,8 @@ bool Sibling::isSiblingVarIndexStmtList(VARINDEX varIndex, STMTNUM s2) {
 
 bool Sibling::isSiblingStmtListStmtList(STMTNUM s1, STMTNUM s2) {
 	try{
+		if(s1==s2)
+			return false;
 		if(!flagStmtListStmtListTable.at(s1) || !flagStmtListStmtListTable.at(s2))
 			return false;
 		if(indexStmtListStmtListTable.at(s1) == -1 || indexStmtListStmtListTable.at(s2) == -1)
