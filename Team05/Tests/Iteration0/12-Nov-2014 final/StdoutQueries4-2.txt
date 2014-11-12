@@ -1,0 +1,38 @@
+Parameters : Source4.txt Queries4-2.txt ResultQueries4-2.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  Modifies and Uses
+1 - Modifies, ImplStmtLine ::
+while w;
+Select w such that Modifies(w, "lacie")
+7
+5000
+Evaluating query 1 - Modifies, ImplStmtLine ::
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+2 - Uses, ImplStmtLine ::
+while w;
+Select w such that Uses(w, "lacie")
+7
+5000
+Evaluating query 2 - Uses, ImplStmtLine ::
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+End of evaluating Query File.
+AutoTester Completed !

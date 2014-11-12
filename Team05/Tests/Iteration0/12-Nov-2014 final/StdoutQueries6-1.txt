@@ -1,0 +1,158 @@
+Parameters : Source6.txt Queries6-1.txt ResultQueries6-1.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  Errors From Prototype Grading
+1 - Uses ::
+stmt s;
+Select s such that Uses (s,"wrong")
+
+5000
+Evaluating query 1 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - Uses ::
+stmt x;
+Select x such that Uses(x,"left")
+3, 5, 7, 8, 9, 18, 19, 20, 24, 26, 27, 29, 30, 33, 34
+5000
+Evaluating query 2 - Uses ::
+
+
+
+
+Your answer: 3 5 7 8 9 18 19 20 24 26 27 29 30 33 34 
+Correct answer: 3 5 7 8 9 18 19 20 24 26 27 29 30 33 34 
+3 - Uses, Pattern ::
+assign a;
+Select a such that Uses(a,"x") pattern a("x",_"left+x"_)
+18
+5000
+Evaluating query 3 - Uses, Pattern ::
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+4 - Pattern ::
+assign a; 
+Select a such that pattern a(_,_"iter +1")
+
+5000
+Evaluating query 4 - Pattern ::
+
+
+
+
+Your answer: 
+Correct answer: 
+5 - Pattern ::
+assign a; 
+Select a such that pattern a(_,_"iter+ 1")
+
+5000
+Evaluating query 5 - Pattern ::
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - Pattern ::
+assign a; variable v; 
+Select v pattern a(v,_"x+left"_)
+radius,radius1,x
+5000
+Evaluating query 6 - Pattern ::
+
+
+
+
+Your answer: x radius1 radius 
+Correct answer: radius radius1 x 
+7 - Pattern ::
+assign a; 
+Select a pattern a(_,_"x+left"_)
+5, 7, 30, 33, 34
+5000
+Evaluating query 7 - Pattern ::
+
+
+
+
+Your answer: 34 33 30 7 5 
+Correct answer: 5 7 30 33 34 
+8 - Uses ::
+while w; stmt s; 
+Select w such that Uses (s,"wrong")
+
+5000
+Evaluating query 8 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+9 - Uses ::
+stmt s; 
+Select s such that Uses (s,"wrong")
+
+5000
+Evaluating query 9 - Uses ::
+
+
+
+
+Your answer: 
+Correct answer: 
+10 - Pattern ::
+assign a; variable v; 
+Select pattern a(v,_)
+
+5000
+Evaluating query 10 - Pattern ::
+
+
+
+
+Your answer: 
+Correct answer: 
+11 - FollowsStar, Pattern ::
+assign a; 
+Select a such that Follows* (25,a) pattern a("x",_"x+left"_)
+33
+5000
+Evaluating query 11 - FollowsStar, Pattern ::
+
+
+
+
+Your answer: 33 
+Correct answer: 33 
+12 - Uses, Pattern ::
+assign a; variable v; 
+Select v such that Uses(a,v) pattern a(v,_)
+temp, right, iter, x
+5000
+Evaluating query 12 - Uses, Pattern ::
+
+
+
+
+Your answer: temp right iter x 
+Correct answer: temp right iter x 
+End of evaluating Query File.
+AutoTester Completed !

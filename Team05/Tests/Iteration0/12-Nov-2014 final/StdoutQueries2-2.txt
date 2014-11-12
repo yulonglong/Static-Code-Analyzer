@@ -1,0 +1,194 @@
+Parameters : Source2.txt Queries2-2.txt ResultQueries2-2.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  Iteration 2 requirements including Follows* and Parent* relationships
+1 - Follows*, Typed, ImplStmtLine ::
+while w; stmt s; 
+Select w such that Follows*(s, w)
+4,7,9,11,16
+5000
+Evaluating query 1 - Follows*, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 16 11 9 7 4 
+Correct answer: 4 7 9 11 16 
+2 - Follows*, Typed, ImplStmtLine :: 
+while w; stmt s; 
+Select w such that Follows*(w, s)
+4,5,7,9,11,12,16
+5000
+Evaluating query 2 - Follows*, Typed, ImplStmtLine :: 
+
+
+
+
+Your answer: 16 12 11 9 7 5 4 
+Correct answer: 4 5 7 9 11 12 16 
+3 - Follows*, ImplStmtLine ::
+stmt s;
+Select s such that Follows*(s, 3)
+1,2
+5000
+Evaluating query 3 - Follows*, ImplStmtLine ::
+
+
+
+
+Your answer: 1 2 
+Correct answer: 1 2 
+4 - Follows*, ImplStmtLine ::
+stmt s; 
+Select s such that Follows*(s, 20)
+6,7,9
+5000
+Evaluating query 4 - Follows*, ImplStmtLine ::
+
+
+
+
+Your answer: 6 7 9 
+Correct answer: 6 7 9 
+5 - Follows*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Follows*(w, 20)
+7,9
+5000
+Evaluating query 5 - Follows*, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 7 9 
+Correct answer: 7 9 
+6 - Follows*, ImplStmtLine ::
+stmt s;
+Select s such that Follows*(4, s)
+23
+5000
+Evaluating query 6 - Follows*, ImplStmtLine ::
+
+
+
+
+Your answer: 23 
+Correct answer: 23 
+7 - Follows*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Follows*(12, w)
+16
+5000
+Evaluating query 7 - Follows*, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 16 
+Correct answer: 16 
+8 - Follows*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Follows*(4, 19)
+false
+5000
+Evaluating query 8 - Follows*, Boolean, ImplStmtLine ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+9 - Parent*, ImplStmtLine ::
+stmt s; 
+Select s such that Parent*(s, 12)
+4,5,9,11
+5000
+Evaluating query 9 - Parent*, ImplStmtLine ::
+
+
+
+
+Your answer: 4 5 9 11 
+Correct answer: 4 5 9 11 
+10 - Parent*, ImplStmtLine ::
+stmt s;
+Select s such that Parent*(s, 11)
+4,5,9
+5000
+Evaluating query 10 - Parent*, ImplStmtLine ::
+
+
+
+
+Your answer: 4 5 9 
+Correct answer: 4 5 9 
+11 - Parent*, Typed, ImplStmtLine :: 
+while w; stmt s; 
+Select w such that Parent*(w, 15)
+4,5,9,11,12
+5000
+Evaluating query 11 - Parent*, Typed, ImplStmtLine :: 
+
+
+
+
+Your answer: 4 5 9 11 12 
+Correct answer: 4 5 9 11 12 
+12 - Parent*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Parent*(w, 17)
+4,5,9,11,16
+5000
+Evaluating query 12 - Parent*, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 4 5 9 11 16 
+Correct answer: 4 5 9 11 16 
+13 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(4, 17)
+true
+5000
+Evaluating query 13 - Parent*, Boolean, ImplStmtLine ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+14 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(11, 15)
+true
+5000
+Evaluating query 14 - Parent*, Boolean, ImplStmtLine ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+15 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(9, 18)
+true
+5000
+Evaluating query 15 - Parent*, Boolean, ImplStmtLine ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+End of evaluating Query File.
+AutoTester Completed !

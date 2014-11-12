@@ -1,0 +1,662 @@
+Parameters : Source5.txt Queries5-1.txt ResultQueries5-1.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - Modifies, Typed :: 
+assign a;
+Select a such that Modifies(a, "oSCar")
+6, 8
+5000
+Evaluating query 1 - Modifies, Typed :: 
+
+
+
+
+Your answer: 6 8 
+Correct answer: 6 8 
+2 - Modifies, Typed :: 
+assign a; variable v;
+Select a such that Modifies (a,v)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+Evaluating query 2 - Modifies, Typed :: 
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+3 - Modifies :: 
+assign a;
+Select a such that Modifies (a,_)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+Evaluating query 3 - Modifies :: 
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+4 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,"oSCar")
+4, 5, 6, 7, 8 
+5000
+Evaluating query 4 - Modifies :: 
+
+
+
+
+Your answer: 4 5 6 7 8 
+Correct answer: 4 5 6 7 8 
+5 - Modifies :: 
+stmt s;
+Select s such that Modifies (s,_)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+Evaluating query 5 - Modifies :: 
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+6 - Uses :: 
+assign a;
+Select a such that Uses (a, "beta")
+6
+5000
+Evaluating query 6 - Uses :: 
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+7 - Uses :: 
+assign a; variable v;
+Select a such that Uses (a,v)
+3, 6, 8, 10, 13, 15, 17, 18, 20
+5000
+Evaluating query 7 - Uses :: 
+
+
+
+
+Your answer: 3 6 8 10 13 15 17 18 20 
+Correct answer: 3 6 8 10 13 15 17 18 20 
+8 - Uses :: 
+stmt s;
+Select s such that Uses (s,"delta")
+4, 5, 9, 11, 12, 15
+5000
+Evaluating query 8 - Uses :: 
+
+
+
+
+Your answer: 4 5 9 11 12 15 
+Correct answer: 4 5 9 11 12 15 
+9 - Uses :: 
+stmt s;
+Select s such that Uses (s,_)
+3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 20
+5000
+Evaluating query 9 - Uses :: 
+
+
+
+
+Your answer: 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 20 
+Correct answer: 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 20 
+10 - Parent :: 
+stmt s;
+Select s such that Parent(s,6)
+5
+5000
+Evaluating query 10 - Parent :: 
+
+
+
+
+Your answer: 5 
+Correct answer: 5 
+11 - Parent :: 
+stmt s;
+Select s such that Parent(5,s)
+6, 7, 9, 19
+5000
+Evaluating query 11 - Parent :: 
+
+
+
+
+Your answer: 6 7 9 19 
+Correct answer: 6 7 9 19 
+12 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s,6)
+4, 5
+5000
+Evaluating query 12 - ParentStar :: 
+
+
+
+
+Your answer: 4 5 
+Correct answer: 4 5 
+13 - ParentStar :: 
+stmt s;
+Select s such that Parent* (5,s)
+6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+5000
+Evaluating query 13 - ParentStar :: 
+
+
+
+
+Your answer: 19 18 17 16 15 14 13 12 11 10 9 8 7 6 
+Correct answer: 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+14 - Follows :: 
+stmt s;
+Select s such that Follows (s,4)
+3
+5000
+Evaluating query 14 - Follows :: 
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+15 - Follows :: 
+stmt s;
+Select s such that Follows (4,s)
+none
+5000
+Evaluating query 15 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - Follows :: 
+stmt s;
+Select s such that Follows (7,s)
+9
+5000
+Evaluating query 16 - Follows :: 
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+17 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (7,s)
+9, 19
+5000
+Evaluating query 17 - FollowsStar :: 
+
+
+
+
+Your answer: 19 9 
+Correct answer: 9 19 
+18 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (1, s)
+2, 3, 4
+5000
+Evaluating query 18 - FollowsStar :: 
+
+
+
+
+Your answer: 4 3 2 
+Correct answer: 2 3 4 
+19 - Pattern :: 
+assign a;
+Select a pattern a(_,_"x"_)
+10, 18
+5000
+Evaluating query 19 - Pattern :: 
+
+
+
+
+Your answer: 18 10 
+Correct answer: 10 18 
+20 - Pattern :: 
+assign a, a1;
+Select a such that Modifies (a, "x") pattern a1(_,_)
+10, 18
+5000
+Evaluating query 20 - Pattern :: 
+
+
+
+
+Your answer: 10 18 
+Correct answer: 10 18 
+21 - Follows, Pattern :: 
+stmt s; assign a;
+Select s such that Follows (s,4) pattern a(_,_"x"_)
+3
+5000
+Evaluating query 21 - Follows, Pattern :: 
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+22 - Modifes, Pattern :: 
+assign a; variable v; assign a1;
+Select a such that Modifies (a,v) pattern a("x",_"beta"_)
+none
+5000
+Evaluating query 22 - Modifes, Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+23 - Uses, Pattern :: 
+assign a;
+Select a such that Uses (a,"beta") pattern a("oSCar", _"beta"_)
+6
+5000
+Evaluating query 23 - Uses, Pattern :: 
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+24 - Modifies, while :: 
+while w;
+Select w such that Modifies (w, "oSCar")
+4, 5, 7
+5000
+Evaluating query 24 - Modifies, while :: 
+
+
+
+
+Your answer: 4 5 7 
+Correct answer: 4 5 7 
+25 - Uses, while :: 
+while w;
+Select w such that Uses (w, "x")
+4, 5, 9, 11
+5000
+Evaluating query 25 - Uses, while :: 
+
+
+
+
+Your answer: 4 5 9 11 
+Correct answer: 4 5 9 11 
+26 - Follows, Pattern :: 
+stmt s; assign a;
+Select s such that Follows (1, s) pattern a(_, _"x"_)
+2
+5000
+Evaluating query 26 - Follows, Pattern :: 
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+27 - Follows :: 
+assign a;
+Select a such that Follows (1, a)
+2
+5000
+Evaluating query 27 - Follows :: 
+
+
+
+
+Your answer: 2 
+Correct answer: 2 
+28 - Modifies :: 
+stmt s; variable v;
+Select v such that Modifies (s, v)
+i, b, c, oSCar, x, Romeo, a, w
+5000
+Evaluating query 28 - Modifies :: 
+
+
+
+
+Your answer: i b c a oSCar x Romeo w 
+Correct answer: i b c oSCar x Romeo a w 
+29 - Typed :: 
+assign a;
+Select a
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20
+5000
+Evaluating query 29 - Typed :: 
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+30 - Modifies :: 
+variable v;
+Select v
+I, Romeo, a, b, beta, c, chArlie, delta, i, j1k, k, l, left, oSCar, right, tmp, w, width, x
+5000
+Evaluating query 30 - Modifies :: 
+
+
+
+
+Your answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+Correct answer: I Romeo a b beta c chArlie delta i j1k k l left oSCar right tmp w width x 
+31 - Invalid :: 
+assign a, a1;
+Select a such that Modifies(a,a1);
+
+5000
+Evaluating query 31 - Invalid :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+32 - Modifies, Pattern :: 
+assign a; stmt s; variable v; assign a1; variable v2;
+Select a such that Modifies (s,v) pattern a1(v2, _"beta"_)
+1, 2, 3, 6, 8, 10, 13, 14, 15, 17, 18, 19, 20 
+5000
+Evaluating query 32 - Modifies, Pattern :: 
+
+
+
+
+Your answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+Correct answer: 1 2 3 6 8 10 13 14 15 17 18 19 20 
+33 - Uses, Pattern :: 
+assign a; stmt s; variable v; assign a1; variable v2;
+Select a such that Uses (s,v) pattern a1(v2, _"asd"_)
+none
+5000
+Evaluating query 33 - Uses, Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+34 - Multiple, Uses :: 
+assign a;
+Select a such that Uses(a,"delta") such that Uses(a, "Romeo")
+15
+5000
+Evaluating query 34 - Multiple, Uses :: 
+
+
+
+
+Your answer: 15 
+Correct answer: 15 
+35 - Multiple, Modifies, Parent :: 
+assign a; stmt s;
+Select s such that Parent (s, a) such that Modifies (s, "oSCar")
+4, 5, 7
+5000
+Evaluating query 35 - Multiple, Modifies, Parent :: 
+
+
+
+
+Your answer: 4 5 7 
+Correct answer: 4 5 7 
+36 - Indirect :: 
+assign a, a1; variable v;
+Select a such that Uses (a, v) pattern a1(v,_)
+3, 10, 13, 15, 17, 18, 20
+5000
+Evaluating query 36 - Indirect :: 
+
+
+
+
+Your answer: 3 10 13 15 17 18 20 
+Correct answer: 3 10 13 15 17 18 20 
+37 - Indirect :: 
+assign a; stmt s;
+Select s such that Parent(s,a) pattern a("x",_)
+9, 11
+5000
+Evaluating query 37 - Indirect :: 
+
+
+
+
+Your answer: 9 11 
+Correct answer: 9 11 
+38 - Indirect :: 
+while w; assign a;
+Select w such that Follows(w,a) pattern a(_,_"x"_)
+16
+5000
+Evaluating query 38 - Indirect :: 
+
+
+
+
+Your answer: 16 
+Correct answer: 16 
+39 - Indirect :: 
+while w; assign a;
+Select w such that Parent(w,a) pattern a(_,_"x"_)
+9, 11
+5000
+Evaluating query 39 - Indirect :: 
+
+
+
+
+Your answer: 9 11 
+Correct answer: 9 11 
+40 - Direct :: 
+assign a; variable v;
+Select a such that Uses (a,v) pattern a(v,_)
+10, 13, 17, 18, 20
+5000
+Evaluating query 40 - Direct :: 
+
+
+
+
+Your answer: 10 13 17 18 20 
+Correct answer: 10 13 17 18 20 
+41 - Indirect :: 
+assign a, a1;
+Select a such that Follows(a1, a) pattern a1(_,_"Romeo"_)
+14
+5000
+Evaluating query 41 - Indirect :: 
+
+
+
+
+Your answer: 14 
+Correct answer: 14 
+42 - Constant :: 
+constant c;
+Select c
+0, 1, 200, 2
+5000
+Evaluating query 42 - Constant :: 
+
+
+
+
+Your answer: 0 1 2 200 
+Correct answer: 0 1 200 2 
+43 - ProgLine :: 
+prog_line n;
+Select n
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+5000
+Evaluating query 43 - ProgLine :: 
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+44 - Follows :: 
+stmt s;
+Select s such that Follows(s,s)
+
+5000
+Evaluating query 44 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+45 - Follows :: 
+while w;
+Select w such that Follows(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 45 - Follows :: 
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+46 - Follows, Pattern :: 
+stmt s; assign a;
+Select a such that Follows (s,s) pattern a (_, _"Romeo"_)
+
+5000
+Evaluating query 46 - Follows, Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+47 - Follows :: 
+while w, w1;
+Select w such that Follows (w,w1)
+7, 12
+5000
+Evaluating query 47 - Follows :: 
+
+
+
+
+Your answer: 7 12 
+Correct answer: 7 12 
+48 - Follows, All :: 
+while w;
+Select w such that Follows (_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 48 - Follows, All :: 
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+49 - Follows, Pattern, indirect :: 
+while w; assign a;
+Select w such that Follows(w,a) pattern a("x",_)
+16
+5000
+Evaluating query 49 - Follows, Pattern, indirect :: 
+
+
+
+
+Your answer: 16 
+Correct answer: 16 
+50 - Uses, Pattern, indirect :: 
+assign a;
+Select a such that Uses(a,"x") pattern a("x" , _"x"_)
+10, 18
+5000
+Evaluating query 50 - Uses, Pattern, indirect :: 
+
+
+
+
+Your answer: 18 10 
+Correct answer: 10 18 
+51 - Parent :: 
+while w, w1;
+Select w such that Parent(w,w1)
+4, 5, 9, 11
+5000
+Evaluating query 51 - Parent :: 
+
+
+
+
+Your answer: 4 5 9 11 
+Correct answer: 4 5 9 11 
+52 - FollowsStar :: 
+while w;
+Select w such that Follows*(_,_)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 52 - FollowsStar :: 
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+53 - Parent :: 
+while w; assign a;
+Select w such that Parent(w,a)
+4, 5, 7, 9, 11, 12, 16
+5000
+Evaluating query 53 - Parent :: 
+
+
+
+
+Your answer: 4 5 7 9 11 12 16 
+Correct answer: 4 5 7 9 11 12 16 
+54 - Follows :: 
+while w; assign a;
+Select a such that Follows(a,w)
+3, 6, 10
+5000
+Evaluating query 54 - Follows :: 
+
+
+
+
+Your answer: 3 6 10 
+Correct answer: 3 6 10 
+End of evaluating Query File.
+AutoTester Completed !

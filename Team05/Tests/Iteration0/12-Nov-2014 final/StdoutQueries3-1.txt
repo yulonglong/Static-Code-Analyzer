@@ -1,0 +1,206 @@
+Parameters : Source3.txt Queries3-1.txt ResultQueries3-1.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration0
+Beginning to evaluate Query File.
+New Category :  Modifies and Uses relationships only
+1 - Modifies, Typed, ImplStmtLine ::
+assign a;
+Select a such that Modifies(a, "c")
+3,15,17
+5000
+Evaluating query 1 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 3 15 17 
+Correct answer: 3 15 17 
+2 - Modifies, Typed, ImplStmtLine ::
+assign a;
+Select a such that Modifies(a, "x")
+10,18
+5000
+Evaluating query 2 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 10 18 
+Correct answer: 10 18 
+3 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(8, v)
+oSCar
+5000
+Evaluating query 3 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: oSCar 
+Correct answer: oSCar 
+4 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(15, v)
+c
+5000
+Evaluating query 4 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: c 
+Correct answer: c 
+5 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select BOOLEAN such that Modifies(4, v)
+true
+5000
+Evaluating query 5 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+6 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(5, "oSCar")
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
+5000
+Evaluating query 6 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+7 - Modifies, Typed, ImplStmtLine ::
+while w;
+Select w such that Modifies(w, "Romeo")
+4, 5, 9, 11, 12
+5000
+Evaluating query 7 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 4 5 9 11 12 
+Correct answer: 4 5 9 11 12 
+8 - Uses, Typed, ImplStmtLine ::
+assign a;
+Select a such that Uses(a, "c")
+17
+5000
+Evaluating query 8 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 17 
+Correct answer: 17 
+9 - Uses, Typed, ImplStmtLine ::
+assign a;
+Select a such that Uses(a, "x")
+10,18
+5000
+Evaluating query 9 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 10 18 
+Correct answer: 10 18 
+10 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(8, v)
+I, k, j1k, chArlie
+5000
+Evaluating query 10 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: I k j1k chArlie 
+Correct answer: I k j1k chArlie 
+11 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(15, v)
+delta, width, Romeo, l
+5000
+Evaluating query 11 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: Romeo delta l width 
+Correct answer: delta width Romeo l 
+12 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "beta")
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
+5000
+Evaluating query 12 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+13 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "hello")
+none
+5000
+Evaluating query 13 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - Uses, Typed, ImplStmtLine ::
+variable v;
+Select v such that Uses(5, "k")
+i, b, c, a, beta, oSCar, tmp, I, k, j1k, chArlie, x, left, right, Romeo, delta, l, width, w
+5000
+Evaluating query 14 - Uses, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+Correct answer: i b c a beta oSCar tmp I k j1k chArlie x left right Romeo delta l width w 
+15 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(5, "hello")
+none
+5000
+Evaluating query 15 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - Modifies, Typed, ImplStmtLine ::
+variable v;
+Select v such that Modifies(90, "hello")
+none
+5000
+Evaluating query 16 - Modifies, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 
+Correct answer: 
+End of evaluating Query File.
+AutoTester Completed !
