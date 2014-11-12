@@ -11,7 +11,7 @@ Team 05:
 - A0099768Y	Yohanes Lim	
 
 Code05 Folder contains our Visual Studio solution (source files).
-Test05 Folder contains our test files (including unit testing, complete system testing test files)
+Tests05 Folder contains our test files (including unit testing, complete system testing test files)
 Team05.pdf is the Final Report for this project
 
 ---------------- AUTOTESTER --------------------
@@ -72,10 +72,10 @@ and find the unitTestName.exe, e.g. TestQueryParser.exe
 
 If you are RUNNING CodeParser, or Design Extractor Unit Test.
 - Please copy the TestCodeParser.exe to the Test Folder, CodeParser Unit Test case.
-  i.e. "Team05\Test05\CodeParser Unit Test Cases"
+  i.e. "Team05\Tests05\CodeParser Unit Test Cases"
   then double click / run the TestCodeParser.exe in that directory
 - Please copy the TestDesignExtractor.exe to the Test Folder, DesignExtractor Unit Test case.
-  i.e. "Team05\Test05\DesignExtractor Unit Test Cases"
+  i.e. "Team05\Tests05\DesignExtractor Unit Test Cases"
   then double click / run the TestDesignExtractor.exe in that directory
 
 If you are RUNNING other unit testing:
