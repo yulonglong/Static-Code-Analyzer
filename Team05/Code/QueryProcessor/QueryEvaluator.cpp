@@ -654,7 +654,8 @@ bool QueryEvaluator::isConstOrVar(TypeTable::SynType t){
 	}
 }
 void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	/*string tk1 = r.getToken1();
+	/*
+	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 	set<int> tk1List;
 	set<int> tk2List;
@@ -703,7 +704,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		if(i1->second == TypeTable::PROCEDURE && i2->second == TypeTable::PROCEDURE){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingProcNames(pkb->getProcName(*i), pkb->getProcName(*i2))){
+					if(pkb->isSiblingProcNameProcName(pkb->getProcName(*i), pkb->getProcName(*i2))){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -714,7 +715,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(i1->second == TypeTable::STMTLST && i2->second == TypeTable::STMTLST){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingStmtLists(*i, *i2)){
+					if(pkb->isSiblingStmtListStmtList(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -725,7 +726,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		else if(isStmtType(i1->second) && isStmtType(i2->second)){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
-					if(pkb->isSiblingStmtNums(*i, *i2)){
+					if(pkb->isSiblingStmtNumStmtNum(*i, *i2)){
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
