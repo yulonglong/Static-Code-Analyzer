@@ -14,6 +14,17 @@ Code05 Folder contains our Visual Studio solution (source files).
 Tests05 Folder contains our test files (including unit testing, complete system testing test files)
 Team05.pdf is the Final Report for this project
 
+--------------- SOURCE ------------------
+
+The source files are located inside each module's folder.
+
+For example the source files for DesignExtractor will be in "..\Team05\Code05\DesignExtractor\"
+together with the solution files (.vcxproj) for each of the module.
+
+-----------------------------------------
+
+
+
 ---------------- AUTOTESTER --------------------
 
 Open "Static-Code-Analyzer.sln" in Visual C++ Express 2010 (this is the version we use)
