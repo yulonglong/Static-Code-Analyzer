@@ -28,7 +28,7 @@ typedef int STMTNUM;
  * 
  * Parent is a singleton class, it can be invoked using:
  * \code
- * static Parent* getInstance(TypeTable*);
+ * static Parent* getInstance();
  * \endcode
  *
  */

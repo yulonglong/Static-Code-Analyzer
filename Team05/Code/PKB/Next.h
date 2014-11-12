@@ -26,7 +26,7 @@ typedef int STMTNUM;
  * 
  * Next is a singleton class, it can be invoked using:
  * \code
- * static Next* getInstance(TypeTable*);
+ * static Next* getInstance();
  * \endcode
  *
  */
@@ -38,16 +38,15 @@ private:
 	vector<vector<pair<STMTNUM,STMTNUM>>> nextPairTable;
 	static bool instanceFlag;
 	static Next *next;
-	TypeTable *typeTable;
 	set<STMTNUM> nextList;
 	set<STMTNUM> previousList;
 public:	
 	//! A constructor to initialize the Next class.
-	Next(TypeTable*);
+	Next();
 	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~Next();
 	//! Returns the instance of Next singleton class.
-	static Next* getInstance(TypeTable*);	// to be used to get instance of singleton class 
+	static Next* getInstance();	// to be used to get instance of singleton class 
 	//! Set the Next relationship between the two statement numbers to be true.
 	void setNext(STMTNUM, STMTNUM);
 	//! Set the Next relationship between a statement number and a pair of statement numbers which represent the range of the Next relationship of the first statement number.

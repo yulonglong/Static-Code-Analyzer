@@ -30,7 +30,7 @@ typedef TypeTable::SynType SYNTYPE;
  * 
  * Modifies is a singleton class, it can be invoked using:
  * \code
- * static Modifies* getInstance(TypeTable*, VarTable*, ProcTable*);
+ * static Modifies* getInstance(VarTable*);
  * \endcode
  *
  */

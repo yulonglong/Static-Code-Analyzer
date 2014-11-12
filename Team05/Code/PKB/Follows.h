@@ -24,7 +24,7 @@ typedef int STMTNUM;
  * 
  * Follows is a singleton class, it can be invoked using:
  * \code
- * static Follows* getInstance(TypeTable*);
+ * static Follows* getInstance();
  * \endcode
  *
  */

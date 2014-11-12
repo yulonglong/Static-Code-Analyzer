@@ -253,7 +253,6 @@ public:
 	//! Return a vector of ranges that the given statement number will have a Next relationship with.
 	vector<pair<STMTNUM,STMTNUM>> getNextPair(STMTNUM);
 
-	//SIBLINGS
 	//! Set a Sibling relationship between the two given statement numbers to be true.
 	void setToSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
 	//! Set a Sibling relationship between the two given variable names to be true.

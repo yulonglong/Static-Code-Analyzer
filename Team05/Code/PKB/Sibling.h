@@ -98,15 +98,6 @@ public:
 	//! Returns the instance of Sibling singleton class.
 	static Sibling* getInstance(VarTable*,ProcTable*,ConstTable*,TypeTable*);	// to be used to get instance of singleton class
 
-	//! Set the Sibling relationship between the two statement numbers to be true.
-	//void setSibling(STMTNUM, STMTNUM);
-	////! If the Sibling relationship between the two statement numbers is true, return true. Otherwise, return false.
-	//bool isSibling(STMTNUM, STMTNUM);	
-	////! Return a statement number that is the parent of the given statement number.
-	//set<STMTNUM> getSibling(STMTNUM);
-	////! Return a set of all statement numbers that has a sibling.
-	//set<STMTNUM> getAllSibling();
-
 	//! Set a Sibling relationship between the two given statement numbers to be true.
 	void setToSiblingStmtNumStmtNum(STMTNUM, STMTNUM);
 	//! Set a Sibling relationship between the two given variable names to be true.

@@ -10,16 +10,13 @@ TypeTable* typeTable;
 
 void NextTest::setUp() {
 	pkb = PKB::getInstance();
-	next1 = pkb->getNext();
-	typeTable = TypeTable::getInstance();
-	next1 = Next::getInstance(typeTable);
+	next1 = Next::getInstance();
 }
 
 void NextTest::tearDown() {
 	pkb->~PKB();
 	pkb = new PKB();
-	typeTable = TypeTable::getInstance();
-	next1 = Next::getInstance(typeTable);
+	next1 = Next::getInstance();
 }
 
 // Registers the fixture into the 'registry'

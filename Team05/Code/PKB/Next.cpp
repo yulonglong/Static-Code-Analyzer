@@ -14,10 +14,10 @@ Next::~Next(){
 }
 
 
-Next* Next::getInstance(TypeTable* tt) {
+Next* Next::getInstance() {
 	if(!instanceFlag)
     {
-        next = new Next(tt);
+        next = new Next();
         instanceFlag = true;
         return next;
     }
@@ -28,8 +28,7 @@ Next* Next::getInstance(TypeTable* tt) {
 }
 
 
-Next::Next(TypeTable* tt){
-	typeTable = tt;
+Next::Next(){
 }
 
 

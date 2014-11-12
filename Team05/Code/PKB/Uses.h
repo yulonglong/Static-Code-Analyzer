@@ -26,7 +26,7 @@ typedef TypeTable::SynType SYNTYPE;
  * 
  * Uses is a singleton class, it can be invoked using:
  * \code
- * static Uses* getInstance(TypeTable*, VarTable*, ProcTable*);
+ * static Uses* getInstance(VarTable*);
  * \endcode
  *
  */
@@ -39,9 +39,7 @@ private:
 	vector<vector<int64_t>> usedProcVarTable;
 	static bool instanceFlag;
 	static Uses *uses;
-	TypeTable *typeTable;
 	VarTable *varTable;
-	ProcTable *procTable;
 	set<STMTNUM> usesList;
 	set<VARINDEX> usedList;
 	set<PROCINDEX> usesProcList;
