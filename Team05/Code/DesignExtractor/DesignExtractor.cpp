@@ -11,7 +11,7 @@ using namespace std;
 bool debugModeIteration1 = 0; 
 bool debugModeIteration2 = 0;
 bool debugModeIteration3 = 0; 
-bool debugModeExtension = 0; 
+bool debugModeExtension = 1; 
 
 int counter = 0;
 vector<int> visited; 
@@ -28,28 +28,31 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
 	// PKB GET:
 	callsTable = pkb->getCallsTable();
-	
-
 	if (debugModeIteration1) {
 		printCallsTable(callsTable);
 		cout << "DE has obtained tables from PKB" << endl;
 	}
-	
 	// PKB GET: 
 	Node* ASTRoot = pkb->getASTRoot();
 	Node* CFGRoot = pkb->getCFGRoot();
-	
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	cout << "Extracting Relationships" << endl;
 	extractRelationships(*ASTRoot, callsTable, *pkb);
-	cout << "DE: Extracted Relationships" << endl;
+	cout << "Building CFG" << endl;
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
+	cout << "Extracting Sibling" << endl;
 	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
 }
 
 void DesignExtractor::extractSiblingRelationshipDriver(Node &ASTRoot, PKB &pkb) {
-	cout << "Extracting Sibling" << endl;
-	
 	vector<Node*> procNodes = ASTRoot.getChild();
 	setSiblingforProcedures(procNodes, pkb);
 
@@ -254,7 +257,6 @@ void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
 
 void DesignExtractor::buildCFGDriver(PKB &pkb, Node &ASTRoot, Node &CFGRoot) {
 	try {
-		cout << "Building CFG" << endl;
 		buildCFG(ASTRoot, pkb);
 		setNextRelationshipDriver(pkb);
 	} catch(const std::runtime_error& re) {
