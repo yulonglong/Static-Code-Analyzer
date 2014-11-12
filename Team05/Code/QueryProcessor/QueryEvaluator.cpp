@@ -2126,31 +2126,46 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		}
 
 		else{
-			selected = pkb->getAllStmts(i1->second);	//get all while statements
+			if(isExistInLinkages(tk1)){
+				selected = retrieveTokenEvaluatedAnswers(tk1);
+			}
+			else{
+				selected = pkb->getAllStmts(i1->second);	//get all while statements
+			}
 		}
+
 
 		for(set<int>::iterator it = selected.begin(); it!=selected.end(); it++){
 			stmtNumber = pkb->getFollows(*it);
+			/*
 			if(tk2!="_"){
 				if(!pkb->isSynType(i2->second, stmtNumber)){
 					stmtNumber = -1;
 				}
-			}
+			}*/
 			do{			
 				if(stmtNumber!=-1){
-					followsStarAnsSet.insert(Pair (*it, stmtNumber));
+					if(tk2!="_"){
+						if(pkb->isSynType(i2->second, stmtNumber)){
+							followsStarAnsSet.insert(Pair (*it, stmtNumber));
+						}
+					}else{
+						followsStarAnsSet.insert(Pair (*it, stmtNumber));
+					}
 				}
 				else{
 					break;
 				}
 				stmtNumber = pkb->getFollows(stmtNumber);
+				/*
 				if(tk2!="_"){
 					if(!pkb->isSynType(i2->second, stmtNumber)){
 						stmtNumber = -1;
 					}
-				}
+				}*/
 			}while(true);
 		}
+
 	}
 	
 	//Select a such that Follows*(a, 13)
@@ -2227,7 +2242,7 @@ void QueryEvaluator::evaluateFollowsStar(Relationship r, unordered_map<string, T
 		}
 	}
 
-	//Follows(_,2)
+	//Follows*(_,2)
 	else{
 		stmtNumber = pkb->getFollowedBy(atoi(tk2.c_str()));
 		if(stmtNumber==-1){
@@ -2267,7 +2282,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 
 	}
 
-	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
+	else if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0]))|| (tk2=="_" && isalpha(tk1[0])) ){
 
 		if(isExistInLinkages(tk1))
 			answer = retrieveTokenEvaluatedAnswers(tk1);
