@@ -121,24 +121,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::vector&lt;CFGNode*&gt; <a class="code" href="class_c_f_g_node.html#a6f7b556917c64331f2518c390c0f6631">getMultiChild</a>();</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* <a class="code" href="class_c_f_g_node.html#a6f7b556917c64331f2518c390c0f6631">getMultiChild</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> printCFGNode();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> setEndOfIfNode(<a class="code" href="class_c_f_g_node.html">CFGNode</a>*);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* getEndOfIfNode();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_c_f_g_node.html#ac83bd0033331b112bc330deb54110b67">setEndOfIfNode</a>(<a class="code" href="class_c_f_g_node.html">CFGNode</a>*);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_c_f_g_node.html">CFGNode</a>* <a class="code" href="class_c_f_g_node.html#a8598ff09df030c99bbd45319e48be5ac">getEndOfIfNode</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> printCFGNode();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="class_c_f_g_node_html_a2e9b29dfff90f1a08e5e2b127b7102f9"><div class="ttname"><a href="class_c_f_g_node.html#a2e9b29dfff90f1a08e5e2b127b7102f9">CFGNode::setMultiChild</a></div><div class="ttdeci">void setMultiChild(CFGNode *newParent)</div><div class="ttdoc">Add a new child to the current Node to the list of children. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:44</div></div>
 <div class="ttc" id="class_node_html"><div class="ttname"><a href="class_node.html">Node</a></div><div class="ttdoc">A Node Structure for AST.Overview: Node is the node structure of AST nodes. </div><div class="ttdef"><b>Definition:</b> Node.h:29</div></div>
 <div class="ttc" id="class_c_f_g_node_html_a93c7fe727599b5fd46918de1dca499b5"><div class="ttname"><a href="class_c_f_g_node.html#a93c7fe727599b5fd46918de1dca499b5">CFGNode::getMultiParent</a></div><div class="ttdeci">std::vector&lt; CFGNode * &gt; getMultiParent()</div><div class="ttdoc">Returns a LIST of Node pointers of the current node’s parents. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:18</div></div>
+<div class="ttc" id="class_c_f_g_node_html_ac83bd0033331b112bc330deb54110b67"><div class="ttname"><a href="class_c_f_g_node.html#ac83bd0033331b112bc330deb54110b67">CFGNode::setEndOfIfNode</a></div><div class="ttdeci">void setEndOfIfNode(CFGNode *)</div><div class="ttdoc">Sets a direct pointer to the End-Of-If dummy node. Only set if this node is an IF node...</div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:53</div></div>
 <div class="ttc" id="class_c_f_g_node_html"><div class="ttname"><a href="class_c_f_g_node.html">CFGNode</a></div><div class="ttdoc">A set of methods to extract more relationships after the CodeParser has parsed the SIMPLE source prog...</div><div class="ttdef"><b>Definition:</b> CFGNode.h:31</div></div>
+<div class="ttc" id="class_c_f_g_node_html_a8598ff09df030c99bbd45319e48be5ac"><div class="ttname"><a href="class_c_f_g_node.html#a8598ff09df030c99bbd45319e48be5ac">CFGNode::getEndOfIfNode</a></div><div class="ttdeci">CFGNode * getEndOfIfNode()</div><div class="ttdoc">Get the pointer to the End-Of-If dummy node. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:57</div></div>
 <div class="ttc" id="class_c_f_g_node_html_ad30a0dd6f14549aec1663dc92dad1468"><div class="ttname"><a href="class_c_f_g_node.html#ad30a0dd6f14549aec1663dc92dad1468">CFGNode::setMultiParent</a></div><div class="ttdeci">void setMultiParent(CFGNode *newParent)</div><div class="ttdoc">Add a new parent to the current Node to the list of parents. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:29</div></div>
 <div class="ttc" id="class_c_f_g_node_html_a38cd68f2ce650b69ebb8bac094347506"><div class="ttname"><a href="class_c_f_g_node.html#a38cd68f2ce650b69ebb8bac094347506">CFGNode::CFGNode</a></div><div class="ttdeci">CFGNode(std::string newType, int newProgLine)</div><div class="ttdoc">A constructor to create a node with newType, and progLine as its attributes. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:12</div></div>
 <div class="ttc" id="class_c_f_g_node_html_a6f7b556917c64331f2518c390c0f6631"><div class="ttname"><a href="class_c_f_g_node.html#a6f7b556917c64331f2518c390c0f6631">CFGNode::getMultiChild</a></div><div class="ttdeci">std::vector&lt; CFGNode * &gt; getMultiChild()</div><div class="ttdoc">Returns a LIST of Node pointers of the current node’s children. </div><div class="ttdef"><b>Definition:</b> CFGNode.cpp:33</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 12 2014 02:32:23 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 12 2014 17:49:10 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

@@ -5,6 +5,7 @@ var searchData=
   ['setcfgroot',['setCFGRoot',['../class_p_k_b.html#ac4bfd291c946856849d979f5c3dec6a8',1,'PKB']]],
   ['setchild',['setChild',['../class_node.html#a688312102a11ecd53bc9b37806c3cfaa',1,'Node']]],
   ['setdata',['setData',['../class_node.html#a11390082535d132bf9f6ee8985a6137e',1,'Node']]],
+  ['setendofifnode',['setEndOfIfNode',['../class_c_f_g_node.html#ac83bd0033331b112bc330deb54110b67',1,'CFGNode']]],
   ['setfollows',['setFollows',['../class_follows.html#aedb054980d641dd543ea8848c25c6a84',1,'Follows']]],
   ['setmodifies',['setModifies',['../class_modifies.html#aef6ad36813520d0ac747ce99d6fb8a40',1,'Modifies::setModifies(STMTNUM, VARNAME)'],['../class_modifies.html#a2eeaeb280b6c617fb6de01f78f0371e2',1,'Modifies::setModifies(STMTNUM, set&lt; VARINDEX &gt;)']]],
   ['setmodifiesproc',['setModifiesProc',['../class_modifies.html#af147c869fd21f8ca4a8aa6d4817dbab6',1,'Modifies']]],

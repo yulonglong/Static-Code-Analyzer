@@ -117,10 +117,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>extractSibling
 <li>Storing the extracted relationships in the <a class="el" href="class_modifies.html" title="A Modifies class to store the Modifies relationship. ">Modifies</a> and <a class="el" href="class_uses.html" title="A Uses class to store the Modifies relationship. ">Uses</a> tables in <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a>.</li>
 <li>Building the CFG given the AST.</li>
 <li>Storing the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> relationships in the <a class="el" href="class_next.html" title="A Next class to store the Next relationship. ">Next</a> table in <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a>.</li>
+<li>Extract the <a class="el" href="class_sibling.html" title="A Sibling class to store the Sibling relationship. ">Sibling</a> relationship from AST and store in <a class="el" href="class_p_k_b.html" title="A PKB class to store all the datas needed for the program. ">PKB</a>.</li>
 </ul>
 <p>To invoke the <a class="el" href="class_design_extractor.html" title="A set of methods to extract more design abstractions and store them in the PKB after the CodeParser h...">DesignExtractor</a>'s methods, use the public method: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> extractorDriver(<a class="code" href="class_p_k_b.html">PKB</a>* pkb);</div>
 </div><!-- fragment --><p>When extractorDriver() is called, the following methods are called which execute <a class="el" href="class_design_extractor.html" title="A set of methods to extract more design abstractions and store them in the PKB after the CodeParser h...">DesignExtractor</a>'s responsibilities: </p><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> extractRelationships(<a class="code" href="class_node.html">Node</a> &amp;ASTRoot, unordered_map&lt;PROCINDEX, vector&lt;CALLSPAIR&gt;&gt; callsTable, <a class="code" href="class_proc_table.html">ProcTable</a> &amp;procTable, <a class="code" href="class_modifies.html">Modifies</a> &amp;modifies, <a class="code" href="class_uses.html">Uses</a> &amp;uses, <a class="code" href="class_parent.html">Parent</a> &amp;parent);</div>
 <div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> buildCFGDriver(<a class="code" href="class_p_k_b.html">PKB</a> &amp;pkb, <a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_node.html">Node</a> &amp;CFGRoot);</div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> extractSiblingRelationshipDriver(<a class="code" href="class_node.html">Node</a> &amp;ASTRoot, <a class="code" href="class_p_k_b.html">PKB</a> &amp;pkb);</div>
 </div><!-- fragment --> </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/DesignExtractor/<a class="el" href="_design_extractor_8h_source.html">DesignExtractor.h</a></li>
 <li>D:/My Uni/Programming Projects/Static-Code-Analyzer/Team05/Code/DesignExtractor/DesignExtractor.cpp</li>
@@ -128,7 +130,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>extractSibling
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 12 2014 02:32:23 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 12 2014 17:49:10 for Static-Code-Analyzer by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
