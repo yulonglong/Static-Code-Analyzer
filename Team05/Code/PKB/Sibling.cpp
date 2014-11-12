@@ -19,6 +19,7 @@ Sibling::Sibling(VarTable *vt,ProcTable *pt, ConstTable *ct, TypeTable *tt) {
 	siblingMathOpConstantTable.push_back(placeHolder);
 	siblingVarIndexStmtListTable.push_back(placeHolder);
 	siblingStmtListVarIndexTable.push_back(placeHolder); 
+	siblingMathOpMathOpTable.push_back(placeHolder); 
 
 
 	flagStmtNumStmtNumTable.push_back(false);
@@ -657,10 +658,10 @@ bool Sibling::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2
 			typeIndex2 = 3;
 		else
 			typeIndex2 = -1;
-
 		if(typeIndex1 != -1 && typeIndex2 != -1){
 			vector<int> temp = siblingMathOpMathOpTable.at(typeIndex1);
 			for(vector<int>::iterator it = temp.begin(); it != temp.end();it++){
+				cout<<*it<<endl;
 				if(*it==typeIndex2)
 					return true;
 			}
