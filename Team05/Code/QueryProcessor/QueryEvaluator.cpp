@@ -373,14 +373,14 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 			if(*it==param.at(0)){
 				for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 					synAns.insert(it2->ans1);
-					
+					cout<<"ans = "<<it2->ans1<<endl;
 				}
 
 			}else {
 				
 				for(vector<Pair>::iterator it2 = p.begin(); it2!=p.end(); it2++){
 					synAns.insert(it2->ans2);
-					
+					cout<<"ans = "<<it2->ans2<<endl;
 				}
 			}
 
@@ -670,7 +670,11 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			tk1List = pkb->getAllVarIndex();
 		}else if(i1->second == TypeTable::PLUS || i1->second == TypeTable::MINUS || i1->second == TypeTable::TIMES){
 			flag = true;
+		}else if(i1->second == TypeTable::STMTLST){
+			cout<<"getting all stmtlist"<<endl;
+			tk1List = pkb->getAllStmtList();
 		}else {
+			cout<<"in else"<<endl;
 			tk1List = pkb->getAllStmts(i1->second);
 		}
 	}
@@ -686,6 +690,8 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			tk2List = pkb->getAllVarIndex();
 		}else if(i2->second == TypeTable::PLUS || i2->second == TypeTable::MINUS || i2->second == TypeTable::TIMES){
 			flag = true;
+		}else if(i1->second == TypeTable::STMTLST){
+			tk2List = pkb->getAllStmtList();
 		}else {
 			tk2List = pkb->getAllStmts(i2->second);
 		}
@@ -710,8 +716,11 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		//Sibling(stmtlst, stmtlst)
 		else if(i1->second == TypeTable::STMTLST && i2->second == TypeTable::STMTLST){
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
+				cout<<"supposedForLoop"<<endl;
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+					cout<<"supposedForLoop2"<<endl;
 					if(pkb->isSiblingStmtListStmtList(*i, *i2)){
+						cout<<"inserting "<<*i<<" "<<*i2<<endl;
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}

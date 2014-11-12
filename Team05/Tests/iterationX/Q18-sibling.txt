@@ -1,4 +1,4 @@
-150
+149
 cat: All Queries
 293 - Sibling :: 
 procedure p, p1;
@@ -729,9 +729,4 @@ abc
 variable v;
 Select v such that Sibling (v, "j")
 i
-5000
-439 - Contains ::
-stmt s;
-Select s such that Contains(s, 18)
-17
 5000
