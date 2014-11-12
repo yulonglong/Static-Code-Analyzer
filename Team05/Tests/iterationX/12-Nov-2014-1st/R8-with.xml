@@ -1,0 +1,248 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>iterationX</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" All Category">
+<query>
+<id constant="1" stmtNumber="1" comment="" >1</id><querystr><![CDATA[stmt s; constant co; Select s with s.stmt#=co.value]]></querystr>
+<stuans>1,2,3,13</stuans>
+<correct>1,2,3,13</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id constant="1" stmtNumber="1" literal="1" comment="" >2</id><querystr><![CDATA[stmt s; constant co; Select s with s.stmt#=co.value and co.value=3]]></querystr>
+<stuans>3</stuans>
+<correct>3</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id constant="1" stmtNumber="1" literal="1" comment="" >3</id><querystr><![CDATA[stmt s; constant co; Select s with s.stmt#=co.value and co.value=9999]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" varName="1" comment="" >4</id><querystr><![CDATA[variable v; procedure p; Select p with p.procName=v.varName]]></querystr>
+<stuans>TheOne</stuans>
+<correct>TheOne</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id prog_line="1" comment="" >5</id><querystr><![CDATA[prog_line n; stmt s; Select s such that Follows*(n,s) with n=5]]></querystr>
+<stuans>7,6</stuans>
+<correct>6,7</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id call="1" procName="1" comment="" >6</id><querystr><![CDATA[call c; stmt s; Select s such that Parent(s,c) with c.procName="TheCalledOne"]]></querystr>
+<stuans>4</stuans>
+<correct>4</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id call="1" procName="1" comment="" >7</id><querystr><![CDATA[call c; stmt s; Select s such that Parent(s,c) with c.procName="TheOne"]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id invalid="1" comment="" >8</id><querystr><![CDATA[assign a; stmt s; while w; Select s with a.stmt#=s.stmt# and w.stmt#=s.stmt#]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" stmtNumber="1" comment="" >9</id><querystr><![CDATA[assign a; stmt s; Select s with a.stmt#=s.stmt# and s.stmt#=3]]></querystr>
+<stuans>3</stuans>
+<correct>3</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" stmtNumber="1" comment="" >10</id><querystr><![CDATA[while w; Select w with w.stmt#=4]]></querystr>
+<stuans>4</stuans>
+<correct>4</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" constant="1" comment="" >11</id><querystr><![CDATA[if i; while w; variable v; constant co; Select i such that Modifies(i,v) and Uses(w,v) with w.stmt#=co.value]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" literal="1" comment="" >12</id><querystr><![CDATA[if i; Select i with i.stmt#=10]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" literal="1" comment="" >13</id><querystr><![CDATA[if i; Select i with i.stmt#=11]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" literal="1" comment="" >14</id><querystr><![CDATA[if i; while w; Select w with i.stmt#=10]]></querystr>
+<stuans>4,13,16</stuans>
+<correct>4,13,16</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" literal="1" comment="" >15</id><querystr><![CDATA[if i; while w; Select w with i.stmt#=11]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" comment="" >16</id><querystr><![CDATA[while w; Select w with 10=10]]></querystr>
+<stuans>4,13,16</stuans>
+<correct>4,13,16</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" comment="" >17</id><querystr><![CDATA[while w; Select w with 10=11]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" BOOLEAN="1" comment="" >18</id><querystr><![CDATA[while w; Select BOOLEAN with 1=1]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id literal="1" BOOLEAN="1" comment="" >19</id><querystr><![CDATA[while w; Select BOOLEAN with 1=2]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id call="1" BOOLEAN="1" comment="" >20</id><querystr><![CDATA[call c; Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=9]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id call="1" BOOLEAN="1" comment="" >21</id><querystr><![CDATA[call c; Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=7]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id call="1" comment="" >22</id><querystr><![CDATA[call c; Select c with c.procName="AgentSmith" and c.stmt#=9]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" prog_line="1" comment="" >23</id><querystr><![CDATA[assign a; prog_line n; Select n with n = a.stmt#]]></querystr>
+<stuans>1,2,3,5,6,8,11,12,14,15,17</stuans>
+<correct>1,2,3,5,6,8,11,12,14,15,17</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" prog_line="1" comment="" >24</id><querystr><![CDATA[assign a; prog_line n; Select a with a.stmt# = n]]></querystr>
+<stuans>1,2,3,5,6,8,11,12,14,15,17</stuans>
+<correct>1,2,3,5,6,8,11,12,14,15,17</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id constant="1" prog_line="1" comment="" >25</id><querystr><![CDATA[constant co; prog_line n; Select n with n = co.value]]></querystr>
+<stuans>1,2,3,13</stuans>
+<correct>1,2,3,13</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id constant="1" stmtNumber="1" comment="" >26</id><querystr><![CDATA[stmt s; constant co; Select co with s.stmt#=co.value]]></querystr>
+<stuans>1,2,3,13</stuans>
+<correct>1,2,3,13</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" comment="" >27</id><querystr><![CDATA[stmt s1, s2; Select s1 with s1.stmt#=s2.stmt#]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" comment="" >28</id><querystr><![CDATA[stmt s1, s2; Select s1 with s2.stmt#=s1.stmt#]]></querystr>
+<stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</stuans>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" comment="" >29</id><querystr><![CDATA[variable v1, v2; Select v1 with v1.varName=v2.varName]]></querystr>
+<stuans>a,b,c,x,y,TheOne,notMe,me,awesome,action,killNeo,NeoAlive,wontLose</stuans>
+<correct>NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id varName="1" comment="" >30</id><querystr><![CDATA[variable v1, v2; Select v2 with v1.varName=v2.varName]]></querystr>
+<stuans>a,b,c,x,y,TheOne,notMe,me,awesome,action,killNeo,NeoAlive,wontLose</stuans>
+<correct>NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" comment="" >31</id><querystr><![CDATA[procedure p1, p2; Select p1 with p1.procName=p2.procName]]></querystr>
+<stuans>TheOne,TheCalledOne,AgentSmith</stuans>
+<correct>AgentSmith,TheCalledOne,TheOne</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id procName="1" comment="" >32</id><querystr><![CDATA[procedure p1, p2; Select p2 with p1.procName=p2.procName]]></querystr>
+<stuans>TheOne,TheCalledOne,AgentSmith</stuans>
+<correct>AgentSmith,TheCalledOne,TheOne</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" comment="" >33</id><querystr><![CDATA[stmt s1, s2; Select <s1,s2> with s2.stmt#=s1.stmt#]]></querystr>
+<stuans>1 1,2 2,3 3,4 4,5 5,6 6,7 7,8 8,9 9,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17</stuans>
+<correct>1 1,2 2,3 3,4 4,5 5,6 6,7 7,8 8,9 9,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17</correct>
+<time_taken>2.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id stmtNumber="1" comment="" >34</id><querystr><![CDATA[stmt s1, s2; Select <s1,s2> with s1.stmt#=s2.stmt# and s1.stmt#=3]]></querystr>
+<stuans>3 3</stuans>
+<correct>3 3</correct>
+<time_taken>1.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>
