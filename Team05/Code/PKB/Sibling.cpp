@@ -1082,7 +1082,12 @@ set<STMTNUM> Sibling::getAllSiblingStmtListWithStmtList(){
 	return siblingStmtListStmtListList;
 }
 
-
+set<STMTNUM> Sibling::getAllStmtList(){
+	set<STMTNUM> ans;
+	ans.insert(siblingStmtListVarIndexList.begin(),siblingStmtListVarIndexList.end());
+	ans.insert(siblingStmtListStmtListList.begin(),siblingStmtListStmtListList.end());
+	return ans;
+}
 
 void Sibling::printSiblingTable() {
 	cout<< "Sibling Table" << endl;

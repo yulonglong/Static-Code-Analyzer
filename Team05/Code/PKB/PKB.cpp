@@ -575,7 +575,9 @@ set<STMTNUM> PKB::getAllSiblingStmtListWithStmtList(){
 	return sibling->getAllSiblingStmtListWithStmtList();
 }
 
-
+set<STMTNUM> PKB::getAllStmtList(){
+	return sibling->getAllStmtList();
+}
 
 void PKB::printNextTable(){
 	return next->printNextTable();

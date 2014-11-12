@@ -160,7 +160,7 @@ public:
 	set<VARINDEX> getAllSiblingVarIndexWithStmtList();
 	set<STMTNUM> getAllSiblingStmtListWithVarIndex();
 	set<STMTNUM> getAllSiblingStmtListWithStmtList();
-
+	set<STMTNUM> getAllStmtList();
 
 	/// @cond
 	void printSiblingTable();
