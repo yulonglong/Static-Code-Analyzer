@@ -576,8 +576,6 @@ bool Sibling::isSiblingVarIndexConstant(VARINDEX varIndex, CONSTINDEX constVarIn
 
 bool Sibling::isSiblingConstantConstant(CONSTINDEX constVarIndex1, CONSTINDEX constVarIndex2) {
 	try{
-		if(constVarIndex1==constVarIndex2)
-			return false;
 		if(!flagConstantConstantTable.at(constVarIndex1) || !flagConstantConstantTable.at(constVarIndex2))
 			return false;
 		if(indexConstantConstantTable.at(constVarIndex1) == -1 || indexConstantConstantTable.at(constVarIndex2) == -1)
