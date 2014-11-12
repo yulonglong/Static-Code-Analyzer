@@ -24,14 +24,12 @@ Sibling::Sibling(VarTable *vt,ProcTable *pt, ConstTable *ct, TypeTable *tt) {
 	flagStmtNumStmtNumTable.push_back(false);
 	flagVarIndexVarIndexTable.push_back(false);
 	flagConstantConstantTable.push_back(false);
-	flagMathOpMathOpTable.push_back(false);
 	flagProcIndexProcIndexTable.push_back(false);
 	flagStmtListStmtListTable.push_back(false);
 
 	indexStmtNumStmtNumTable.push_back(-1);
 	indexVarIndexVarIndexTable.push_back(-1);
 	indexConstantConstantTable.push_back(-1);
-	indexMathOpMathOpTable.push_back(-1);
 	indexProcIndexProcIndexTable.push_back(-1);
 	indexStmtListStmtListTable.push_back(-1);
 
@@ -367,46 +365,25 @@ void Sibling::setToSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType
 			typeIndex2 = -1;
 
 		if(typeIndex1 != -1 && typeIndex2 != -1){
-			if(typeIndex1>flagMathOpMathOpTable.size()-1)
-				flagMathOpMathOpTable.resize(typeIndex1+1,false);
-			if(typeIndex2>flagMathOpMathOpTable.size()-1)
-				flagMathOpMathOpTable.resize(typeIndex2+1,false);
-			if(typeIndex1>indexMathOpMathOpTable.size()-1)
-				indexMathOpMathOpTable.resize(typeIndex1+1,-1);
-			if(typeIndex2>indexMathOpMathOpTable.size()-1)
-				indexMathOpMathOpTable.resize(typeIndex2+1,-1);
+			vector<int> placeHolder (1,-1);
+			if(typeIndex1>siblingMathOpMathOpTable.size()-1)
+				siblingMathOpMathOpTable.resize(typeIndex1+1,placeHolder);
+			if(typeIndex2>siblingMathOpMathOpTable.size()-1)
+				siblingMathOpMathOpTable.resize(typeIndex2+1,placeHolder);
+			vector<int> temp = siblingMathOpMathOpTable.at(typeIndex1);
+			if(temp.size()==1 && temp.at(0)==-1)
+				temp.clear();
+			
+			temp.push_back(typeIndex2);
+			siblingMathOpMathOpTable[typeIndex1] = temp;
 
-			if(!flagMathOpMathOpTable.at(typeIndex1) && !flagMathOpMathOpTable.at(typeIndex2)){
-				flagMathOpMathOpTable[typeIndex1] = true;
-				flagMathOpMathOpTable[typeIndex2] = true;
+			vector<int> temp1 = siblingMathOpMathOpTable.at(typeIndex2);
+			if(temp1.size()==1 && temp1.at(0)==-1)
+				temp1.clear();
+			
+			temp1.push_back(typeIndex1);
+			siblingMathOpMathOpTable[typeIndex2] = temp1;
 
-				int index = siblingMathOpMathOpTable.size();
-				indexMathOpMathOpTable[typeIndex1] = index;
-				indexMathOpMathOpTable[typeIndex2] = index;
-
-				vector<STMTNUM> temp;
-				temp.push_back(typeIndex1);
-				temp.push_back(typeIndex2);
-				siblingMathOpMathOpTable.push_back(temp);
-			} else if (flagMathOpMathOpTable.at(typeIndex1) && !flagMathOpMathOpTable.at(typeIndex2)){
-				flagMathOpMathOpTable[typeIndex2] = true;
-
-				int index = indexMathOpMathOpTable.at(typeIndex1);
-				indexMathOpMathOpTable[typeIndex2] = index;
-
-				vector<STMTNUM> temp = siblingMathOpMathOpTable.at(index);
-				temp.push_back(typeIndex2);
-				siblingMathOpMathOpTable[index] = temp;
-			} else if (!flagMathOpMathOpTable.at(typeIndex1) && flagMathOpMathOpTable.at(typeIndex2)){
-				flagMathOpMathOpTable[typeIndex1] = true;
-
-				int index = indexMathOpMathOpTable.at(typeIndex2);
-				indexMathOpMathOpTable[typeIndex1] = index;
-
-				vector<STMTNUM> temp = siblingMathOpMathOpTable.at(index);
-				temp.push_back(typeIndex1);
-				siblingMathOpMathOpTable[index] = temp;
-			}
 			siblingMathOpMathOpList.insert(typeIndex1);
 			siblingMathOpMathOpList.insert(typeIndex2);
 		}
@@ -682,12 +659,11 @@ bool Sibling::isSiblingMathOpMathOp(TypeTable::SynType t1, TypeTable::SynType t2
 			typeIndex2 = -1;
 
 		if(typeIndex1 != -1 && typeIndex2 != -1){
-			if(!flagMathOpMathOpTable.at(typeIndex1) || !flagMathOpMathOpTable.at(typeIndex2))
-				return false;
-			if(indexMathOpMathOpTable.at(typeIndex1) == -1 || indexMathOpMathOpTable.at(typeIndex2) == -1)
-				return false;
-			if(indexMathOpMathOpTable.at(typeIndex1) == indexMathOpMathOpTable.at(typeIndex2))
-				return true;
+			vector<int> temp = siblingMathOpMathOpTable.at(typeIndex1);
+			for(vector<int>::iterator it = temp.begin(); it != temp.end();it++){
+				if(*it==typeIndex2)
+					return true;
+			}
 		}
 	} catch(...){
 		return false;
@@ -767,8 +743,7 @@ set<VARINDEX> Sibling::getSiblingVarIndexWithVarIndex(VARINDEX v){
 		int index = indexVarIndexVarIndexTable.at(v);
 		vector<STMTNUM> temp = siblingVarIndexVarIndexTable.at(index);
 		for (vector<STMTNUM>::iterator it = temp.begin(); it != temp.end(); it++){
-			if(*it!=v)
-				ans.insert(*it);
+			ans.insert(*it);
 		}
 		return ans;
 	} catch (...){
@@ -813,8 +788,7 @@ set<CONSTINDEX> Sibling::getSiblingConstantWithConstant(CONSTINDEX cv){
 		int index = indexConstantConstantTable.at(cv);
 		vector<CONSTINDEX> temp = siblingConstantConstantTable.at(index);
 		for (vector<CONSTINDEX>::iterator it = temp.begin(); it != temp.end(); it++){
-			if(*it!=cv)
-				ans.insert(*it);
+			ans.insert(*it);
 		}
 		return ans;
 	} catch (...){
@@ -930,17 +904,14 @@ set<TypeTable::SynType> Sibling::getSiblingMathOpWithMathOp(TypeTable::SynType t
 		typeIndex = -1;
 	try{
 		if(typeIndex!=-1){
-			int index = indexMathOpMathOpTable.at(typeIndex);
-			vector<int> temp = siblingMathOpMathOpTable.at(index);
+			vector<int> temp = siblingMathOpMathOpTable.at(typeIndex);
 			for (vector<int>::iterator it = temp.begin(); it != temp.end(); it++){
-				if(*it!=typeIndex){
-					if(*it==1)
-						ans.insert(TypeTable::PLUS);
-					else if(*it==2)
-						ans.insert(TypeTable::MINUS);
-					else if(*it==3)
-						ans.insert(TypeTable::TIMES);
-				}
+				if(*it==1)
+					ans.insert(TypeTable::PLUS);
+				else if(*it==2)
+					ans.insert(TypeTable::MINUS);
+				else if(*it==3)
+					ans.insert(TypeTable::TIMES);
 			}
 			return ans;
 		}

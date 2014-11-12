@@ -56,14 +56,12 @@ private:
 	vector<bool> flagStmtNumStmtNumTable; 
 	vector<bool> flagVarIndexVarIndexTable; 
 	vector<bool> flagConstantConstantTable; 
-	vector<bool> flagMathOpMathOpTable; 
 	vector<bool> flagProcIndexProcIndexTable; 
 	vector<bool> flagStmtListStmtListTable;
 
 	vector<int> indexStmtNumStmtNumTable; 
 	vector<int> indexVarIndexVarIndexTable; 
 	vector<int> indexConstantConstantTable; 
-	vector<int> indexMathOpMathOpTable; 
 	vector<int> indexProcIndexProcIndexTable; 
 	vector<int> indexStmtListStmtListTable;
 
