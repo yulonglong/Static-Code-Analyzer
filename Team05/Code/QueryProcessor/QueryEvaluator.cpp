@@ -733,6 +733,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
 					if(pkb->isSiblingStmtNumStmtNum(*i, *i2)){
+						cout<<"insert Pair("<<*i<<" "<<*i2<<")"<<endl;
 						siblingAns.insert(Pair(*i, *i2));
 					}
 				}
@@ -742,10 +743,13 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 		//Sibling(stmtlst, variable)
 		else if((i1->second == TypeTable::STMTLST && i2->second == TypeTable::VARIABLE) || (i2->second == TypeTable::STMTLST && i1->second == TypeTable::VARIABLE)){
 			if(i1->second == TypeTable::STMTLST){
+				cout<<"tk1 is stmtlst and tk2 is variable"<<endl;
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+						cout<<*i2<<" "<<*i<<endl;
 						if(pkb->isSiblingVarIndexStmtList(*i2, *i)){
-							siblingAns.insert(Pair(*i2, *i));
+							
+							siblingAns.insert(Pair(*i, *i2));
 						}
 					}
 				}

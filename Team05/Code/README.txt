@@ -64,7 +64,7 @@ If we place the testing in the "UnitTesting" directory, they will not be able to
 Hence we have renamed the unit testing folders and related files, with the "Test" prefix.
 
 
-To run unit tests (CPPUNIT), build and run any of the following in Visual C++ express 2010:
+To run unit tests (CPPUNIT), build any of the following in Visual C++ express 2010:
 - TestCalls
 - TestCodeParser
 - TestDesignExtractor
@@ -83,12 +83,12 @@ After building any unit test, please navigate to the Release folder
 i.e. "..\Team05\Code05\Release\"
 and find the unitTestName.exe, e.g. TestQueryParser.exe
 
-If you are RUNNING CodeParser, or Design Extractor Unit Test.
+If you are RUNNING CodeParser, or DesignExtractor Unit Test.
 - Please copy the TestCodeParser.exe to the Test Folder, CodeParser Unit Test case.
-  i.e. "Team05\Tests05\CodeParser Unit Test Cases"
+  i.e. "Team05\UnitTests05\CodeParser Unit Test Cases"
   then double click / run the TestCodeParser.exe in that directory
 - Please copy the TestDesignExtractor.exe to the Test Folder, DesignExtractor Unit Test case.
-  i.e. "Team05\Tests05\DesignExtractor Unit Test Cases"
+  i.e. "Team05\UnitTests05\DesignExtractor Unit Test Cases"
   then double click / run the TestDesignExtractor.exe in that directory
 
 If you are RUNNING other unit testing:
@@ -102,3 +102,20 @@ due to the convenience and easy to debug with std out.
 
 
 
+----------------- SYSTEM TESTING ---------------------
+
+To execute full system testing, please follow the steps to build Autotester above.
+After Autotester is built and AutoTester.exe is created,
+
+Please copy AutoTester.exe and paste it in the "Tests05" folder
+i.e. "..\Team05\Tests05\"
+
+Once Autotester.exe is copied/pasted in the respective directory,
+The System testing can simply be done by running/double-clicking "auto.bat"
+It is a batch file to run all the test cases with the correct sources and query files in that particular directory.
+
+The result of the testing will be produced in the same directory with standardized naming convention:
+The .xml files will have "Result" prefix.
+The stdout (cout) fill have "Stdout" prefix.
+
+---------------------------------------------------------
