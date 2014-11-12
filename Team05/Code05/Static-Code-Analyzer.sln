@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoTester", "AutoTester\AutoTester.vcxproj", "{20A7FBF3-D972-4220-A6AA-960484999FBB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A28F6BBC-5250-4FDB-9B56-E18978C61FF2} = {A28F6BBC-5250-4FDB-9B56-E18978C61FF2}
@@ -49,8 +49,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCodeParser", "TestCodeP
 	ProjectSection(ProjectDependencies) = postProject
 		{DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE} = {DE613EE1-B8EE-4C75-B403-09CA6DE4FDFE}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestIntegration", "TestIntegration\TestIntegration.vcxproj", "{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestQueryParser", "TestQueryParser\TestQueryParser.vcxproj", "{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -131,10 +129,6 @@ Global
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Debug|Win32.Build.0 = Debug|Win32
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Release|Win32.ActiveCfg = Release|Win32
 		{EABA2811-8D0B-42A5-87F9-00FE2AB580A1}.Release|Win32.Build.0 = Release|Win32
-		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Debug|Win32.ActiveCfg = Debug|Win32
-		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Debug|Win32.Build.0 = Debug|Win32
-		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Release|Win32.ActiveCfg = Release|Win32
-		{44B65641-96D6-4FB5-B78A-F0CAD8DDA42C}.Release|Win32.Build.0 = Release|Win32
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Debug|Win32.Build.0 = Debug|Win32
 		{DFEE4E5A-93F2-4D47-8AF0-778031A5F2CE}.Release|Win32.ActiveCfg = Release|Win32

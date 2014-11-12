@@ -42,7 +42,7 @@ void DesignExtractor::extractorDriver(PKB *pkb) {
 	extractRelationships(*ASTRoot, callsTable, *pkb);
 	cout << "DE: Extracted Relationships" << endl;
 	buildCFGDriver(*pkb, *ASTRoot, *CFGRoot);
-	extractSiblingRelationshipDriver(*ASTRoot, *pkb);
+	//extractSiblingRelationshipDriver(*ASTRoot, *pkb);
 
 	cout << "End DesignExtractor" << endl;
 }
