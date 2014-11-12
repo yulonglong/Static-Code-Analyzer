@@ -53,7 +53,7 @@ true
 11 - Calls* ::
 procedure p;
 Select p such that Calls* ("Second", p)
-First, Second, Third, Fourth, Fifth, Sixth
+First, Second, Third, Fourth, Fifth, Sixth, Seventh
 5000
 12 - Calls* ::
 procedure p;

@@ -27,7 +27,7 @@ true
 5000
 6 - Uses ::
 procedure p; variable v;
-Select BOOLEAH such that Uses (p, "y")
+Select BOOLEAN such that Uses (p, "y")
 true
 5000
 7 - Uses ::
@@ -88,12 +88,12 @@ true
 18 - Uses ::
 procedure p; variable v;
 Select v such that Uses (p, "v")
-v
+none
 5000
 19 - Uses ::
 procedure p; variable v;
 Select p such that Uses ("Fourth", "y")
-Fourth
+First,Second,Third,Fourth,Fifth,Sixth
 5000
 20 - Uses ::
 procedure p; variable v;
@@ -103,7 +103,7 @@ Select p such that Uses ("Third", "wrong")
 21 - Uses ::
 procedure p; variable v;
 Select v such that Uses ("First", "x")
-x
+x,i,y,z,v
 5000
 22 - Uses ::
 procedure p; variable v;
@@ -113,7 +113,7 @@ Select v such that Uses ("First", "wrong")
 23 - Uses ::
 procedure p; variable v;
 Select p such that Uses ("First", _)
-First
+First,Second,Third,Fourth,Fifth,Sixth
 5000
 24 - Uses ::
 procedure p; variable v;
@@ -123,7 +123,7 @@ Select p such that Uses ("DoesNotExist", _)
 25 - Uses ::
 procedure p; variable v;
 Select v such that Uses ("Fourth", _)
-y
+x,i,y,z,v
 5000
 26 - Uses ::
 procedure p; variable v;
@@ -133,7 +133,7 @@ Select v such that Uses ("DoesNotExist", _)
 27 - Uses ::
 procedure p; variable v;
 Select p such that Uses ("Fourth", v)
-Fourth
+First,Second,Third,Fourth,Fifth,Sixth
 5000
 28 - Uses ::
 procecure p; variable v;
