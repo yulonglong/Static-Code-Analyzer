@@ -1,0 +1,70 @@
+Parameters : Source3A.txt QInterm3A-tuple.txt ResultQInterm3A-tuple.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration3
+Beginning to evaluate Query File.
+New Category :  tuple
+1 - tuple ::
+procedure p1, p2;
+Select <p1, p2> such that Calls*(p1, p2)
+Fern, Lily, Orchid, Tulip
+5000
+Evaluating query 1 - tuple ::
+
+
+
+
+Your answer: Orchid Tulip Fern Lily Fern Tulip Fern Orchid 
+Correct answer: Fern Lily Orchid Tulip 
+Missing: Fern Lily Orchid Tulip 
+Additional: Fern Lily Fern Orchid Fern Tulip Orchid Tulip 
+2 - tuple ::
+stmt s1; variable v;
+Select <s1, v> such that Modifies*(s1, v)
+1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 20, 22, 23, 25, 26, 29, 30, x, y, z, t, idx, v
+5000
+Evaluating query 2 - tuple ::
+
+
+
+
+Your answer: 
+Correct answer: 1 2 3 4 6 8 10 12 13 14 16 17 20 22 23 25 26 29 30 x y z t idx v 
+Missing: 1 10 12 13 14 16 17 2 20 22 23 25 26 29 3 30 4 6 8 idx t v x y z 
+Additional: 
+3 - tuple ::
+procedure p1; variable v;
+Select <p1, v> such that Modifies*(p1, v)
+Fern, y, x, z, v, t, idx, Orchid, Lily, Tulip
+5000
+Evaluating query 3 - tuple ::
+
+
+
+
+Your answer: 
+Correct answer: Fern y x z v t idx Orchid Lily Tulip 
+Missing: Fern Lily Orchid Tulip idx t v x y z 
+Additional: 
+4 - tuple ::
+assign a1, a2;
+Select <a1, a2> such that Affects*(a1, a2)
+1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 22, 23, 25, 26, 29, 30
+5000
+Evaluating query 4 - tuple ::
+
+
+
+
+Your answer: 1 2 1 3 1 4 1 6 1 8 1 10 1 12 1 13 1 14 1 16 1 17 2 3 2 4 2 6 2 8 2 10 2 12 2 13 2 14 2 16 2 17 3 4 3 6 3 8 3 10 3 12 3 13 3 14 3 16 3 17 4 6 4 8 6 8 12 10 12 12 12 13 12 14 12 16 12 17 13 16 16 16 17 10 22 22 22 23 25 25 25 26 29 29 29 30 30 29 30 30 
+Correct answer: 1 2 3 4 6 8 10 12 13 14 16 17 22 23 25 26 29 30 
+Missing: 1 10 12 13 14 16 17 2 22 23 25 26 29 3 30 4 6 8 
+Additional: 1 10 1 12 1 13 1 14 1 16 1 17 1 2 1 3 1 4 1 6 1 8 12 10 12 12 12 13 12 14 12 16 12 17 13 16 16 16 17 10 2 10 2 12 2 13 2 14 2 16 2 17 2 3 2 4 2 6 2 8 22 22 22 23 25 25 25 26 29 29 29 30 3 10 3 12 3 13 3 14 3 16 3 17 3 4 3 6 3 8 30 29 30 30 4 6 4 8 6 8 
+End of evaluating Query File.
+AutoTester Completed !

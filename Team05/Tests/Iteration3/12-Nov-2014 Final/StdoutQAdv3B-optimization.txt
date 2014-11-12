@@ -1,0 +1,158 @@
+Parameters : Source3A.txt QAdv3B-optimization.txt ResultQAdv3B-optimization.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration3
+Beginning to evaluate Query File.
+New Category :  optimization tests
+1 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v) and Affects*(1, 30)
+false
+5000
+Evaluating query 1 - optimization ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+2 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Affects*(1, 30) and Next* (n1, n2) and Uses (s1, v)
+false
+5000
+Evaluating query 2 - optimization ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+3 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Affects*(1, 30) and Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v)
+false
+5000
+Evaluating query 3 - optimization ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+4 - optimization ::
+procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v;
+Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Affects*(1, 30) and Uses (s1, v)
+false
+5000
+Evaluating query 4 - optimization ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+5 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx")
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 5 - optimization ::
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+6 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Modifies (s1, "idx") and Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 6 - optimization ::
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+7 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Modifies (s1, "idx") and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 7 - optimization ::
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+8 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Modifies (s1, "idx") and Calls* (p2, p3) and Uses (s1, v)
+9, 11, 13, 16, 19, 22
+5000
+Evaluating query 8 - optimization ::
+
+
+
+
+Your answer: 9 11 13 16 18 19 22 
+Correct answer: 9 11 13 16 19 22 
+Missing: 
+Additional: 18 
+9 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select s2 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20
+20
+5000
+Evaluating query 9 - optimization ::
+
+
+
+
+Your answer: 20 
+Correct answer: 20 
+10 - optimization ::
+procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v;
+Select p1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20 with p1.procName = "Fern" and Modifies (p1, v)
+Fern
+5000
+Evaluating query 10 - optimization ::
+
+
+
+
+Your answer: 
+Correct answer: Fern 
+Missing: Fern 
+Additional: 
+11 - optimization ::
+procedure p1, p2; stmt s1, s2, s3, s4, s5, s6, s7;
+Select s7 such that Calls*(p1, p2) and Modifies (s1, v1) and Uses (s2, v2) and Modifies (s2, v2) and Affects* (s2, s3) and Affects* (s3, s4) and Parent* (s5, s6) and Modifies (s7, v) with s7.stmt# = 29
+29
+5000
+Evaluating query 11 - optimization ::
+
+
+
+
+Your answer: 
+Correct answer: 29 
+Missing: 29 
+Additional: 
+End of evaluating Query File.
+AutoTester Completed !

@@ -1,9 +1,0 @@
-Parameters : Source3A.txt QInterm3C-multiple-affects-star.txt ResultQInterm3C-multiple-affects-star.xml
-Beginning to parse Simple Program.
-Begin CodeParser
-End CodeParser
-Begin DesignExtractor
-DE: Extracted Relationships
-Building CFG
-End DesignExtractor
-End of parsing Simple Program.

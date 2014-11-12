@@ -1,0 +1,141 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>Iteration3</name><parsing_time_taken>1.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" optimization tests">
+<query>
+<id optimization="1" comment="" >1</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v; Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v) and Affects*(1, 30)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>17.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id optimization="1" comment="" >2</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v; Select BOOLEAN such that Calls* (p1, p2) and Affects*(1, 30) and Next* (n1, n2) and Uses (s1, v)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id optimization="1" comment="" >3</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v; Select BOOLEAN such that Affects*(1, 30) and Calls* (p1, p2) and Next* (n1, n2) and Uses (s1, v)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>17.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id optimization="1" comment="" >4</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2; prog_line n1, n2; variable v; Select BOOLEAN such that Calls* (p1, p2) and Next* (n1, n2) and Affects*(1, 30) and Uses (s1, v)]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id optimization="1" comment="" >5</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx")]]></querystr>
+<stuans>9,11,13,16,18,19,22</stuans>
+<correct>9,11,13,16,19,22</correct>
+<time_taken>29.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>18</additional>
+<summary>
+<expected>6</expected>
+<matched>6</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id optimization="1" comment="" >6</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select s1 such that Modifies (s1, "idx") and Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)]]></querystr>
+<stuans>9,11,13,16,18,19,22</stuans>
+<correct>9,11,13,16,19,22</correct>
+<time_taken>27.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>18</additional>
+<summary>
+<expected>6</expected>
+<matched>6</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id optimization="1" comment="" >7</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select s1 such that Calls* (p1, p2) and Modifies (s1, "idx") and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v)]]></querystr>
+<stuans>9,11,13,16,18,19,22</stuans>
+<correct>9,11,13,16,19,22</correct>
+<time_taken>26.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>18</additional>
+<summary>
+<expected>6</expected>
+<matched>6</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id optimization="1" comment="" >8</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select s1 such that Calls* (p1, p2) and Next* (n1, n2) and Modifies (s1, "idx") and Calls* (p2, p3) and Uses (s1, v)]]></querystr>
+<stuans>9,11,13,16,18,19,22</stuans>
+<correct>9,11,13,16,19,22</correct>
+<time_taken>27.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>18</additional>
+<summary>
+<expected>6</expected>
+<matched>6</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id optimization="1" comment="" >9</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select s2 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20]]></querystr>
+<stuans>20</stuans>
+<correct>20</correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id optimization="1" comment="" >10</id><querystr><![CDATA[procedure p1, p2, p3; stmt s1, s2; prog_line n1, n2; variable v; Select p1 such that Calls* (p1, p2) and Next* (n1, n2) and Calls* (p2, p3) and Uses (s1, v) and Modifies (s1, "idx") with s2.stmt# = 20 with p1.procName = "Fern" and Modifies (p1, v)]]></querystr>
+<stuans></stuans>
+<correct>Fern</correct>
+<time_taken>1.000000</time_taken>
+<failed>
+<missing>Fern</missing>
+<additional></additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id optimization="1" comment="" >11</id><querystr><![CDATA[procedure p1, p2; stmt s1, s2, s3, s4, s5, s6, s7; Select s7 such that Calls*(p1, p2) and Modifies (s1, v1) and Uses (s2, v2) and Modifies (s2, v2) and Affects* (s2, s3) and Affects* (s3, s4) and Parent* (s5, s6) and Modifies (s7, v) with s7.stmt# = 29]]></querystr>
+<stuans></stuans>
+<correct>29</correct>
+<time_taken>2.000000</time_taken>
+<failed>
+<missing>29</missing>
+<additional></additional>
+<summary>
+<expected>1</expected>
+<matched>0</matched>
+<missing>1</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>iteration3</name><parsing_time_taken>1.000000</parsing_time_taken>
+<name>Iteration3</name><parsing_time_taken>2.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" affects">
@@ -9,14 +9,14 @@
 <id affects="1" comment="" >1</id><querystr><![CDATA[assign a1, a2; Select a2 such that Affects(1, a2)]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>2.000000</time_taken>
+<time_taken>4.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" comment="" >2</id><querystr><![CDATA[assign a1, a2; Select BOOLEAN such that Affects (4, a2)]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>2.000000</time_taken>
+<time_taken>1.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -36,18 +36,9 @@
 <query>
 <id affects="1" comment="" >5</id><querystr><![CDATA[assign a1, a2; Select BOOLEAN such that Affects (a1, 14)]]></querystr>
 <stuans>true</stuans>
-<correct>false</correct>
+<correct>true</correct>
 <time_taken>2.000000</time_taken>
-<failed>
-<missing>false</missing>
-<additional>true</additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<passed/>
 </query>
 <query>
 <id affects="1" comment="" >6</id><querystr><![CDATA[assign a1, a2; Select BOOLEAN such that Affects (12, 10)]]></querystr>
@@ -95,7 +86,7 @@
 <id affects="1" comment="" >12</id><querystr><![CDATA[assign a1, a2; Select a1 such that Affects (_, a2)]]></querystr>
 <stuans>1,2,3,4,6,8,10,12,13,14,16,17,20,22,23,25,26,29,30</stuans>
 <correct>1,2,3,4,6,8,10,12,13,14,16,17,20,22,23,25,26,29,30</correct>
-<time_taken>6.000000</time_taken>
+<time_taken>3.000000</time_taken>
 <passed/>
 </query>
 </category>

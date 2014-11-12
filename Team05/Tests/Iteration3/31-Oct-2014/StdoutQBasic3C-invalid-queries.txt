@@ -1,9 +1,0 @@
-Parameters : Source3A.txt QBasic3C-invalid-queries.txt ResultQBasic3C-invalid-queries.xml
-Beginning to parse Simple Program.
-Begin CodeParser
-End CodeParser
-Begin DesignExtractor
-DE: Extracted Relationships
-Building CFG
-End DesignExtractor
-End of parsing Simple Program.

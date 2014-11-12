@@ -1,0 +1,158 @@
+Parameters : Source3A.txt QBasic3B-affects-star.txt ResultQBasic3B-affects-star.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+Iteration3
+Beginning to evaluate Query File.
+New Category :  Affects*
+1 - Affects* ::
+assign a1, a2;
+Select a2 such that Affects*(1, a2)
+2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17
+5000
+Evaluating query 1 - Affects* ::
+
+
+
+
+Your answer: 2 3 4 6 8 10 12 13 14 16 17 
+Correct answer: 2 3 4 6 8 10 12 13 14 16 17 
+2 - Affects* ::
+assign a1, a2;
+Select BOOLEAN such that Affects* (4, a2)
+true
+5000
+Evaluating query 2 - Affects* ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+3 - Affects* ::
+assign a1, a2;
+Select a1 such that Affects* (a1, 4)
+1, 2, 3
+5000
+Evaluating query 3 - Affects* ::
+
+
+
+
+Your answer: 1 2 3 
+Correct answer: 1 2 3 
+4 - Affects* ::
+assign a1, a2;
+Select a1 such that Affects* (a1, 8)
+1, 2, 3, 4, 6
+5000
+Evaluating query 4 - Affects* ::
+
+
+
+
+Your answer: 1 2 3 4 6 
+Correct answer: 1 2 3 4 6 
+5 - Affects* ::
+assign a1, a2;
+Select BOOLEAN such that Affects* (a1, 14)
+true
+5000
+Evaluating query 5 - Affects* ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+6 - Affects* ::
+assign a1, a2;
+Select BOOLEAN such that Affects* (12, 10)
+true
+5000
+Evaluating query 6 - Affects* ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+7 - Affects* ::
+assign a1, a2;
+Select BOOLEAN such that Affects* (14, 10)
+false
+5000
+Evaluating query 7 - Affects* ::
+
+
+
+
+Your answer: false 
+Correct answer: false 
+8 - Affects* ::
+assign a1, a2;
+Select BOOLEAN such that Affects* (16, 16)
+true
+5000
+Evaluating query 8 - Affects* ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+9 - Affects* ::
+assign a1, a2;
+Select a2 such that Affects* (12, a2)
+10, 12, 13, 14, 16, 17
+5000
+Evaluating query 9 - Affects* ::
+
+
+
+
+Your answer: 10 12 13 14 16 17 
+Correct answer: 10 12 13 14 16 17 
+10 - Affects* ::
+assign a1, a2;
+Select a1 such that Affects* (a1, a2)
+1, 2, 3, 4, 6, 12, 13, 16, 17, 22, 25, 29, 30
+5000
+Evaluating query 10 - Affects* ::
+
+
+
+
+Your answer: 1 2 3 4 6 12 13 16 17 22 25 29 30 
+Correct answer: 1 2 3 4 6 12 13 16 17 22 25 29 30 
+11 - Affects* ::
+assign a1, a2;
+Select a2 such that Affects* (a1, a2)
+2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 22, 23, 25, 26, 29, 30
+5000
+Evaluating query 11 - Affects* ::
+
+
+
+
+Your answer: 2 3 4 6 8 10 12 13 14 16 17 22 23 25 26 29 30 
+Correct answer: 2 3 4 6 8 10 12 13 14 16 17 22 23 25 26 29 30 
+12 - Affects* ::
+assign a1, a2;
+Select a1 such that Affects* (_, a2)
+1, 2, 3, 4, 6, 8, 10, 12, 13, 14, 16, 17, 20, 22, 23, 25, 26, 29, 30
+5000
+Evaluating query 12 - Affects* ::
+
+
+
+
+Your answer: 1 2 3 4 6 8 10 12 13 14 16 17 20 22 23 25 26 29 30 
+Correct answer: 1 2 3 4 6 8 10 12 13 14 16 17 20 22 23 25 26 29 30 
+End of evaluating Query File.
+AutoTester Completed !
