@@ -415,11 +415,7 @@ vector<vector<int>> createTupleTable(unordered_map<int, vector<Pair>> clauseAnsw
 		//Case 4: neither are Synonyms(answer is boolean)
 		else {
 			//cout << "Case 4" << endl;
-			Pair p = clauseAns.at(0);
-			int boolean = p.ans1;
-			if(boolean==-1)
-				continue;
-			else
+			if(clauseAns.size() == 0)
 				tupleTable.clear();
 		}
 

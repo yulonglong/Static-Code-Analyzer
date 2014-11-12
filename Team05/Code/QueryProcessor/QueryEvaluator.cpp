@@ -3065,10 +3065,6 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 				}
 			}
 		}
-
-		if(affAns.size()==0 && tk1=="_") {
-			affAns.push_back(Pair(-2, -2));
-		}
 	}
 
 	//Affects("1", a)
@@ -3103,9 +3099,6 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 			}
 		}
 
-		if(affAns.size()==0 && tk2=="_") {
-			affAns.push_back(Pair(-2, -2));
-		}
 	}
 
 	//Affects("1", "2")
@@ -3113,8 +3106,6 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		cout << "Case 4: Both are Constants" << endl;
 		if(isAffects(atoi(tk1.c_str()), atoi(tk2.c_str())))
 			affAns.push_back(Pair(-1, -1));
-		else
-			affAns.push_back(Pair(-2, -2));
 	}
 
 	//Affects(_,_)
@@ -3138,8 +3129,6 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 				}
 			}
 		}
-
-		affAns.push_back(Pair(-2, -2));
 	}
 
 	//intersectPairs(tk1, tk2, &affAns, relIndex);
@@ -3232,10 +3221,6 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 				}
 			}
 		}
-
-		if(affAns.size()==0 && tk1=="_")
-			affAns.push_back(Pair(-2,-2));
-
 	}
 
 	//Affects*("1", a)
@@ -3269,9 +3254,6 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 				}
 			}
 		}
-
-		if(affAns.size()==0 && tk2=="_")
-			affAns.push_back(Pair(-2,-2));
 	}
 
 	//Affects*("1", "2")
@@ -3279,8 +3261,6 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 		cout << "Case 4: Both are Constants" << endl;
 		if(isAffectsStar(atoi(tk1.c_str()), atoi(tk2.c_str())))
 			affAns.push_back(Pair(-1, -1));
-		else
-			affAns.push_back(Pair(-2, -2));
 	}
 
 	//Affects*(_,_)
@@ -3304,8 +3284,6 @@ void QueryEvaluator::evaluateAffectsStar(Relationship r, std::unordered_map<std:
 				}
 			}
 		}
-
-		affAns.push_back(Pair(-2, -2));
 	}
 
 	cout << "NUMBER OF ANSWERS OF AFFECTS*(" << tk1 << "," << tk2 << ") :" << affAns.size() << endl; 
