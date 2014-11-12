@@ -73,11 +73,8 @@ To run unit tests (CPPUNIT), build any of the following in Visual C++ express 20
 - TestNext
 - TestParent
 - TestPKB
-- TestQueryEvaluator
 - TestQueryParser
-- TestSibling
 - TestTable
-- TestUses
 
 After building any unit test, please navigate to the Release folder
 i.e. "..\Team05\Code05\Release\"
