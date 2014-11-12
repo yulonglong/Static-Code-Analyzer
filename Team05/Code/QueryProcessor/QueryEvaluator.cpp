@@ -351,7 +351,7 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 	for(unsigned int i=0; i<relations.size(); i++){
 		vector<Pair> v = relAns.find(i)->second;
 		if(v.empty() || v.at(0).ans1==-2){
-			
+			cout<<"relation found to be false or empty"<<endl;
 			//return answers;
 		}
 	}
@@ -690,7 +690,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			tk2List = pkb->getAllVarIndex();
 		}else if(i2->second == TypeTable::PLUS || i2->second == TypeTable::MINUS || i2->second == TypeTable::TIMES){
 			flag = true;
-		}else if(i1->second == TypeTable::STMTLST){
+		}else if(i2->second == TypeTable::STMTLST){
 			tk2List = pkb->getAllStmtList();
 		}else {
 			tk2List = pkb->getAllStmts(i2->second);
@@ -756,8 +756,10 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			}else{
 				for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 					for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
+						cout<<"i1 = "<<*i<<" i2= "<<*i2<<endl;
 						if(pkb->isSiblingVarIndexStmtList(*i, *i2)){
 							siblingAns.insert(Pair(*i, *i2));
+							cout<<"inserting Pair("<<*i<<" "<<*i2<<endl;
 						}
 					}
 				}
@@ -766,7 +768,9 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 
 		//Sibling(op, op)
 		else if(isOperator(i1->second) && isOperator(i2->second)){
+			cout<<"tk1 is operator and tk2 is operator"<<endl;
 			if(pkb->isSiblingMathOpMathOp(i1->second, i2->second)){
+				cout<<"operator evaluated to be true"<<endl;
 				siblingAns.insert(Pair(-1,-1));
 			}
 		}

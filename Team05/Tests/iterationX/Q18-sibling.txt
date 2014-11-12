@@ -511,7 +511,7 @@ Select BOOLEAN such that Sibling (m, w)
 false
 5000
 395 - Sibling :: 
-minus m; ifstat;
+minus m; if ifstat;
 Select BOOLEAN such that Sibling (m, ifstat)
 false
 5000
@@ -523,7 +523,7 @@ false
 397 - Sibling :: 
 minus m, m1;
 Select BOOLEAN such that Sibling (m, m1)
-false
+true
 5000
 398 - Sibling :: 
 minus m; times t;
@@ -571,7 +571,7 @@ Select BOOLEAN such that Sibling (t, w)
 false
 5000
 407 - Sibling :: 
-times t; ifstat;
+times t; if ifstat;
 Select BOOLEAN such that Sibling (t, ifstat)
 false
 5000
