@@ -102,30 +102,3 @@ due to the convenience and easy to debug with std out.
 
 
 
------------------ SYSTEM TESTING ---------------------
-
-To execute full system testing, please follow the steps to build Autotester above.
-After Autotester is built and AutoTester.exe is created,
-
-Please copy AutoTester.exe and paste it in the test cases folders.
-Currently we have 5 Test cases folder:
-- Iteration0
-- Iteration1
-- Iteration2
-- Iteration3
-- IterationX
-
-They are located inside the Tests05 directory:
-i.e. "..\Team05\Tests\Iteration0\"
-
-Once Autotester.exe is copied/pasted in the respective directory,
-The System testing can simply be done by running/double-clicking "auto.bat"
-It is a batch file to run all the test cases with the correct sources and query files in that particular directory.
-
-The result of the testing will be produced in the same directory with standardized naming convention:
-The .xml files will have "Result" prefix.
-The stdout (cout) fill have "Stdout" prefix.
-
----------------------------------------------------------
-
-
