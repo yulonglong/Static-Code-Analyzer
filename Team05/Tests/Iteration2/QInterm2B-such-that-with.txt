@@ -18,7 +18,7 @@ Select s1 such that Modifies (s1, v1) and Uses (s1, v2) with v1.varName = "x" wi
 4 - multiple ::
 assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
 Select p1 such that Modifies (p1, v1) and Uses (p1, v1) with v1.varName = "idx"
-Fern, Tulip
+Fern, Orchid
 5000
 5 - multiple ::
 assign a1, a2; prog_line n1, n2; stmt s1, s2; while w1, w2; if i1, i2; procedure p1, p2; variable v1, v2; constant c1, c2;
