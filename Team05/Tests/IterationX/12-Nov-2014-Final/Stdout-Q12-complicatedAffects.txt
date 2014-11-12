@@ -1,0 +1,38 @@
+Parameters : S12-complicatedAffects.txt Q12-complicatedAffects.txt R12-complicatedAffects.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  Mainly Affect*
+1 - Affects* :: Not manually computed
+assign a, a1, a2, a3, a4, a5;
+Select a3 such that Affects*(a, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) 
+11,14,15,16,17,23,28,29,33,36,6
+20000
+Evaluating query 1 - Affects* :: Not manually computed
+
+
+
+
+Your answer: 6 11 14 15 16 17 23 28 29 33 36 
+Correct answer: 11 14 15 16 17 23 28 29 33 36 6 
+2 - Affects* :: Not manually computed
+assign a1, a2;
+Select a1 such that Affects*(a1, a2) and Affects*(a2,a1) and Affects*(a1,a1)
+11,14,15,28,29,33,36,6
+5000
+Evaluating query 2 - Affects* :: Not manually computed
+
+
+
+
+Your answer: 6 11 14 15 28 29 33 36 
+Correct answer: 11 14 15 28 29 33 36 6 
+End of evaluating Query File.
+AutoTester Completed !

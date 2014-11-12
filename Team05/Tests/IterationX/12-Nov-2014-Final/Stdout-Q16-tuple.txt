@@ -1,0 +1,134 @@
+Parameters : S16-tuple.txt Q16-tuple.txt R16-tuple.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  Tuple
+1 - NoLinks :: 
+assign a1, a2; while w;
+Select <a1, a2, w> such that Affects*(6,a1) and Uses(a2, "b")
+5 9 2,10 9 2
+5000
+Evaluating query 1 - NoLinks :: 
+
+
+
+
+Your answer: 5 9 2 10 9 2 
+Correct answer: 5 9 2 10 9 2 
+2 - SomeLinks ::
+stmt s1, s2; assign a;
+Select <s1, s2, a> such that Parent(s1, s2) pattern a("a", _)
+2 3 8,2 4 8,2 5 8,2 6 8, 2 3 9, 2 4 9, 2 5 9, 2 6 9, 7 8 8, 7 9 8, 7 8 9, 7 9 9
+5000
+Evaluating query 2 - SomeLinks ::
+
+
+
+
+Your answer: 2 3 9 2 3 8 2 4 9 2 4 8 2 5 9 2 5 8 2 6 9 2 6 8 7 8 9 7 8 8 7 9 9 7 9 8 
+Correct answer: 2 3 8 2 4 8 2 5 8 2 6 8 2 3 9 2 4 9 2 5 9 2 6 9 7 8 8 7 9 8 7 8 9 7 9 9 
+3 - SomeLinks :: linked component is split
+stmt s1, s2; assign a;
+Select <s1, a, s2> such that Parent(s1, s2) pattern a("a", _)
+2 8 3,2 8 4,2 8 5,2 8 6, 2 9 3, 2 9 4, 2 9 5, 2 9 6, 7 8 8, 7 9 8, 7 8 9, 7 9 9
+5000
+Evaluating query 3 - SomeLinks :: linked component is split
+
+
+
+
+Your answer: 2 9 3 2 8 3 2 9 4 2 8 4 2 9 5 2 8 5 2 9 6 2 8 6 7 9 8 7 8 8 7 9 9 7 8 9 
+Correct answer: 2 8 3 2 8 4 2 8 5 2 8 6 2 9 3 2 9 4 2 9 5 2 9 6 7 8 8 7 9 8 7 8 9 7 9 9 
+4 - AllLinks ::
+stmt s1, s2, s3;
+Select <s1, s2, s3> such that Parent(s1, s2) and Follows(s2, s3)
+2 3 4, 2 4 5, 2 5 6
+5000
+Evaluating query 4 - AllLinks ::
+
+
+
+
+Your answer: 2 3 4 2 4 5 2 5 6 
+Correct answer: 2 3 4 2 4 5 2 5 6 
+5 - KnownValue ::
+stmt s1, s2; variable v;
+Select <s1, s2, v> such that Parent(s1, s2) with v.varName = "w"
+2 3 w,2 4 w,2 5 w,2 6 w,7 8 w,7 9 w
+5000
+Evaluating query 5 - KnownValue ::
+
+
+
+
+Your answer: 2 3 w 2 4 w 2 5 w 2 6 w 7 8 w 7 9 w 
+Correct answer: 2 3 w 2 4 w 2 5 w 2 6 w 7 8 w 7 9 w 
+6 - KnownValue ::
+stmt s1, s2; assign a;
+Select <s1, s2, a> such that Parent(s1, s2) with a.stmt# = 8
+2 3 8,2 4 8,2 5 8,2 6 8,7 8 8,7 9 8
+5000
+Evaluating query 6 - KnownValue ::
+
+
+
+
+Your answer: 2 3 8 2 4 8 2 5 8 2 6 8 7 8 8 7 9 8 
+Correct answer: 2 3 8 2 4 8 2 5 8 2 6 8 7 8 8 7 9 8 
+7 - KnownValue :: with the known value inserted in between
+stmt s1, s2; assign a;
+Select <s1, a, s2> such that Parent(s1, s2) with a.stmt# = 8
+2 8 3,2 8 4,2 8 5,2 8 6,7 8 8,7 8 9
+5000
+Evaluating query 7 - KnownValue :: with the known value inserted in between
+
+
+
+
+Your answer: 2 8 3 2 8 4 2 8 5 2 8 6 7 8 8 7 8 9 
+Correct answer: 2 8 3 2 8 4 2 8 5 2 8 6 7 8 8 7 8 9 
+8 - Mix ::
+assign a1, a2, a3, x, y; stmt w;
+Select <a1,x,y,a2,a3,w> such that Follows(a1,a2) and Follows(a1,a3) and Follows(x,y) and Parent(w,_)
+3 3 4 4 4 2, 3 4 5 4 4 2, 3 5 6 4 4 2, 3 3 4 4 4 7, 3 4 5 4 4 7, 3 5 6 4 4 7, 4 3 4 5 5 2, 4 4 5 5 5 2, 4 5 6 5 5 2, 4 3 4 5 5 7, 4 4 5 5 5 7, 4 5 6 5 5 7, 5 3 4 6 6 2, 5 4 5 6 6 2, 5 5 6 6 6 2, 5 3 4 6 6 7, 5 4 5 6 6 7, 5 5 6 6 6 7
+5000
+Evaluating query 8 - Mix ::
+
+
+
+
+Your answer: 3 3 4 4 4 2 3 4 5 4 4 2 3 5 6 4 4 2 4 3 4 5 5 2 4 4 5 5 5 2 4 5 6 5 5 2 5 3 4 6 6 2 5 4 5 6 6 2 5 5 6 6 6 2 3 3 4 4 4 7 3 4 5 4 4 7 3 5 6 4 4 7 4 3 4 5 5 7 4 4 5 5 5 7 4 5 6 5 5 7 5 3 4 6 6 7 5 4 5 6 6 7 5 5 6 6 6 7 
+Correct answer: 3 3 4 4 4 2 3 4 5 4 4 2 3 5 6 4 4 2 3 3 4 4 4 7 3 4 5 4 4 7 3 5 6 4 4 7 4 3 4 5 5 2 4 4 5 5 5 2 4 5 6 5 5 2 4 3 4 5 5 7 4 4 5 5 5 7 4 5 6 5 5 7 5 3 4 6 6 2 5 4 5 6 6 2 5 5 6 6 6 2 5 3 4 6 6 7 5 4 5 6 6 7 5 5 6 6 6 7 
+9 - Duplicates ::
+assign a1, a2, a3, x, y; stmt w;
+Select <a1,a1,x,a1> such that Follows(a1,a2) and Follows(a1,a3) and Follows(x,y) and Parent(w,_)
+3 3 3 3, 3 3 4 3, 3 3 5 3, 4 4 3 4, 4 4 4 4, 4 4 5 4, 5 5 3 5, 5 5 4 5, 5 5 5 5
+5000
+Evaluating query 9 - Duplicates ::
+
+
+
+
+Your answer: 3 3 3 3 3 3 4 3 3 3 5 3 4 4 3 4 4 4 4 4 4 4 5 4 5 5 3 5 5 5 4 5 5 5 5 5 
+Correct answer: 3 3 3 3 3 3 4 3 3 3 5 3 4 4 3 4 4 4 4 4 4 4 5 4 5 5 3 5 5 5 4 5 5 5 5 5 
+9 - Duplicates ::
+assign a;
+Select <a,a>
+1 1,3 3,4 4,5 5,6 6,8 8,9 9,10 10
+5000
+Evaluating query 9 - Duplicates ::
+
+
+
+
+Your answer: 1 1 3 3 4 4 5 5 6 6 8 8 9 9 10 10 
+Correct answer: 1 1 3 3 4 4 5 5 6 6 8 8 9 9 10 10 
+End of evaluating Query File.
+AutoTester Completed !

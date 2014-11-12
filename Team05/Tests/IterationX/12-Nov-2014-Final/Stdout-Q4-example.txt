@@ -1,0 +1,338 @@
+Parameters : S4-example.txt Q4-example.txt R4-example.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - Parent, ImplStmtLine, Typed :: Which is the parent (type while) of the statement in line number 7
+while w;
+Select w such that Parent(w, 7)
+none
+5000
+Evaluating query 1 - Parent, ImplStmtLine, Typed :: Which is the parent (type while) of the statement in line number 7
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - Follows, Typed, ImplStmtLine ::
+if ifs;
+Select ifs such that Follows(5, ifs)
+6
+5000
+Evaluating query 2 - Follows, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+3 - ParentStar, Typed, ImplStmtLine ::
+assign a;
+Select a such that Parent*(4, a)
+5, 7, 8, 9, 11
+5000
+Evaluating query 3 - ParentStar, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 11 9 8 7 5 
+Correct answer: 5 7 8 9 11 
+4 - FollowsStar, Typed, ImplStmtLine ::
+call c;
+Select c such that Follows*(1, c)
+12
+5000
+Evaluating query 4 - FollowsStar, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 12 
+Correct answer: 12 
+5 - Modifies ::
+stmt s;
+Select s such that Modifies(s, "i")
+3, 4, 11, 12, 13, 14, 17
+5000
+Evaluating query 5 - Modifies ::
+
+
+
+
+Your answer: 3 4 11 12 13 14 17 
+Correct answer: 3 4 11 12 13 14 17 
+6 - Typed, Uses ::
+variable v;
+Select v such that Uses("p", v)
+i, x, y, z
+5000
+Evaluating query 6 - Typed, Uses ::
+
+
+
+
+Your answer: x z i y 
+Correct answer: i x y z 
+7 - Calls, Typed ::
+procedure p;
+Select p such that Calls(p, "q")
+Example, p
+5000
+Evaluating query 7 - Calls, Typed ::
+
+
+
+
+Your answer: Example p 
+Correct answer: Example p 
+8 - CallsStar, Typed ::
+procedure p;
+Select p such that Calls*("Example", p)
+p, q
+5000
+Evaluating query 8 - CallsStar, Typed ::
+
+
+
+
+Your answer: q p 
+Correct answer: p q 
+9 - Typed, Next, ImplStmtLine ::
+prog_line n;
+Select n such that Next(4, n)
+5, 12
+5000
+Evaluating query 9 - Typed, Next, ImplStmtLine ::
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,12,
+5 has next consisting of 6,
+6 has next consisting of 7,8,
+7 has next consisting of 9,
+8 has next consisting of 9,
+9 has next consisting of 10,
+10 has next consisting of 11,
+11 has next consisting of 4,
+12 has next consisting of 
+13 has next consisting of 14,20,
+14 has next consisting of 15,18,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 14,
+18 has next consisting of 19,
+19 has next consisting of 21,
+20 has next consisting of 21,
+21 has next consisting of 
+22 has next consisting of 23,24,
+
+
+
+
+Your answer: 5 12 
+Correct answer: 5 12 
+10 - NextStar, Typed, ImplStmtLine ::
+prog_line n;
+Select n such that Next*(n, 4)
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+5000
+Evaluating query 10 - NextStar, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 11 10 9 8 7 6 5 4 3 2 1 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 
+11 - Affects, Typed, ImplStmtLine ::
+assign a;
+Select a such that Affects(a, 9)
+2, 3, 5, 7, 11
+5000
+Evaluating query 11 - Affects, Typed, ImplStmtLine ::
+
+
+
+
+Your answer: 2 3 5 7 11 
+Correct answer: 2 3 5 7 11 
+12 - AffectsStar, ImplStmtLine, Typed ::
+assign a;
+Select a such that Affects*(11, a)
+9, 11
+5000
+Evaluating query 12 - AffectsStar, ImplStmtLine, Typed ::
+
+
+
+
+Your answer: 9 11 
+Correct answer: 9 11 
+13 - Pattern, Typed ::
+assign a;
+Select a pattern a("z", _"x+i")
+none
+5000
+Evaluating query 13 - Pattern, Typed ::
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - Pattern, Typed ::
+assign a;
+Select a pattern a(_, _"x + 1"_)
+7, 18, 23
+5000
+Evaluating query 14 - Pattern, Typed ::
+
+
+
+
+Your answer: 23 18 7 
+Correct answer: 7 18 23 
+15 - Pattern, Typed ::
+assign a;
+Select a pattern a(_, " 3  +  2 ")
+none
+5000
+Evaluating query 15 - Pattern, Typed ::
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - Typed, Modifies, With ::
+while w; variable v;
+Select w such that Modifies(w, v) with v.varName = "x"
+4, 14
+5000
+Evaluating query 16 - Typed, Modifies, With ::
+
+
+
+
+Your answer: 4 14 
+Correct answer: 4 14 
+17 - Typed, Uses, With ::
+if ifs; variable v;
+Select v such that Uses(ifs, v) with ifs.stmt# = 22
+x, z
+5000
+Evaluating query 17 - Typed, Uses, With ::
+
+
+
+
+Your answer: x z 
+Correct answer: x z 
+18 - Typed, ReturnBoolean, Calls, With, With-And ::
+procedure p, q;
+Select BOOLEAN such that Calls(p, q) with q.procName = "p" and p.procName = "Example"
+true
+5000
+Evaluating query 18 - Typed, ReturnBoolean, Calls, With, With-And ::
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - Typed, FollowsStar, Modifies, Uses, With, And-Multi ::
+if ifs; assign a1, a2; variable v1, v2;
+Select ifs such that Follows*(a1, ifs) and Follows*(ifs, a2) and Modifies(ifs, v1) and Uses(ifs, v2) with v1.varName = v2.varName
+6
+5000
+Evaluating query 19 - Typed, FollowsStar, Modifies, Uses, With, And-Multi ::
+
+
+
+
+Your answer: 6 
+Correct answer: 6 
+20 - Typed, NextStar, ParentStar, ImplStmtLine, And-Tuple ::
+prog_line n; stmt s;
+Select s such that Next*(16, n) and Parent*(s, n)
+13, 14
+5000
+Evaluating query 20 - Typed, NextStar, ParentStar, ImplStmtLine, And-Tuple ::
+
+
+
+
+Your answer: 13 14 
+Correct answer: 13 14 
+21 - Typed, AffectsStar, NextStar, ImplStmtLine, And-Tuple ::
+prog_line n; assign a;
+Select a such that Affects*(a, n) and Next*(13, n)
+17, 18, 19, 20
+5000
+Evaluating query 21 - Typed, AffectsStar, NextStar, ImplStmtLine, And-Tuple ::
+
+
+
+
+Your answer: 17 18 19 20 
+Correct answer: 17 18 19 20 
+22 - ReturnTriple, Modifies, Calls, Typed, And-Tuple ::
+procedure p, q; variable v;
+Select <p, q, v> such that Modifies(p, v) and Calls(p, q)
+Example p i, Example p x, Example p y, Example p z, Example q i, Example q x, Example q y, Example q z, p q i, p q x, p q z
+5000
+Evaluating query 22 - ReturnTriple, Modifies, Calls, Typed, And-Tuple ::
+
+
+
+
+Your answer: Example p x Example q x Example p z Example q z Example p i Example q i Example p y Example q y p q x p q z p q i 
+Correct answer: Example p i Example p x Example p y Example p z Example q i Example q x Example q y Example q z p q i p q x p q z 
+23 - Typed, ReturnBoolean, UnnamedVar, FollowsStar, Affects, Uses, And-Multi :: Establish the truth if a call-statement followsStar some statement AND assignment a1 affects assignment a2 AND assignment a2 uses something
+call c; assign a1, a2;
+Select BOOLEAN such that Follows*(_, c) and Affects(a1, a2) and Uses(a2, _)
+true
+5000
+Evaluating query 23 - Typed, ReturnBoolean, UnnamedVar, FollowsStar, Affects, Uses, And-Multi :: Establish the truth if a call-statement followsStar some statement AND assignment a1 affects assignment a2 AND assignment a2 uses something
+
+
+
+
+Your answer: true 
+Correct answer: true 
+24 - Typed, Pattern, And-Tuple, AffectsStar, Uses ::
+assign a1, a2; variable v;
+Select v pattern a1(v, _) such that Affects*(a1, a2) and Uses(a2, v)
+i, x, z
+5000
+Evaluating query 24 - Typed, Pattern, And-Tuple, AffectsStar, Uses ::
+
+
+
+
+Your answer: x z i 
+Correct answer: i x z 
+25 - NextStar, Modifies, Uses, And-Multi ::
+prog_line n1, n2; variable v; call c;
+Select c such that Next*(n1, n2) and Modifies(n1, v) and Uses(n2, v) and Modifies(c, v)
+10, 12, 16
+5000
+Evaluating query 25 - NextStar, Modifies, Uses, And-Multi ::
+
+
+
+
+Your answer: 10 12 16 
+Correct answer: 10 12 16 
+End of evaluating Query File.
+AutoTester Completed !

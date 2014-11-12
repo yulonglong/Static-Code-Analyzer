@@ -1,0 +1,1562 @@
+Parameters : S2-assignment1.txt Q2-assignment1.txt R2-assignment1.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - Parent :: 
+stmt s, s1;
+Select s such that Parent (s, s1) with s1.stmt# = 3
+none
+5000
+Evaluating query 1 - Parent :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+2 - Parent :: 
+stmt s, s1;
+Select s such that Parent (s, s1) with s1.stmt# = 10
+8
+5000
+Evaluating query 2 - Parent :: 
+
+
+
+
+Your answer: 8 
+Correct answer: 8 
+3 - Parent :: 
+stmt s, s1;
+Select s such that Parent (s, s1) with s1.stmt# = 12
+10
+5000
+Evaluating query 3 - Parent :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+4 - Parent :: 
+stmt s, s1;
+Select s such that Parent (s, s1) with s1.stmt# = 20
+18
+5000
+Evaluating query 4 - Parent :: 
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+5 - Parent :: 
+stmt s;
+Select s such that Parent (s, 3)
+none
+5000
+Evaluating query 5 - Parent :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+6 - Parent :: 
+stmt s;
+Select s such that Parent (s, 10)
+8
+5000
+Evaluating query 6 - Parent :: 
+
+
+
+
+Your answer: 8 
+Correct answer: 8 
+7 - Parent :: 
+stmt s;
+Select s such that Parent (s, 12)
+10
+5000
+Evaluating query 7 - Parent :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+8 - Parent :: 
+stmt s;
+Select s such that Parent (s, 20)
+18
+5000
+Evaluating query 8 - Parent :: 
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+9 - Parent :: 
+stmt s;
+Select s such that Parent (3, s)
+none
+5000
+Evaluating query 9 - Parent :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+10 - Parent :: 
+stmt s;
+Select s such that Parent (8, s)
+9, 10, 13, 14, 15, 16
+5000
+Evaluating query 10 - Parent :: 
+
+
+
+
+Your answer: 9 10 13 14 15 16 
+Correct answer: 9 10 13 14 15 16 
+11 - Parent :: 
+stmt s;
+Select s such that Parent (9, s)
+none
+5000
+Evaluating query 11 - Parent :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+12 - Parent :: 
+stmt s;
+Select s such that Parent (25, s)
+none
+5000
+Evaluating query 12 - Parent :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+13 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, 3)
+none
+5000
+Evaluating query 13 - ParentStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, 10)
+8
+5000
+Evaluating query 14 - ParentStar :: 
+
+
+
+
+Your answer: 8 
+Correct answer: 8 
+15 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, 12)
+8, 10
+5000
+Evaluating query 15 - ParentStar :: 
+
+
+
+
+Your answer: 8 10 
+Correct answer: 8 10 
+16 - ParentStar :: 
+stmt s;
+Select s such that Parent* (s, 20)
+18
+5000
+Evaluating query 16 - ParentStar :: 
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+17 - ParentStar :: 
+stmt s; while w;
+Select w such that Parent* (s, 3)
+none
+5000
+Evaluating query 17 - ParentStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+18 - ParentStar :: 
+stmt s; while w;
+Select w such that Parent* (s, 10)
+10, 18, 23
+5000
+Evaluating query 18 - ParentStar :: 
+
+
+
+
+Your answer: 10 18 23 
+Correct answer: 10 18 23 
+19 - ParentStar :: 
+stmt s; while w;
+Select w such that Parent* (s, 12)
+10, 18, 23
+5000
+Evaluating query 19 - ParentStar :: 
+
+
+
+
+Your answer: 10 18 23 
+Correct answer: 10 18 23 
+20 - ParentStar :: 
+stmt s; while w;
+Select w such that Parent* (s, 20)
+10, 18, 23
+5000
+Evaluating query 20 - ParentStar :: 
+
+
+
+
+Your answer: 10 18 23 
+Correct answer: 10 18 23 
+21 - ParentStar :: 
+while w;
+Select w such that Parent* (w, 9)
+none
+5000
+Evaluating query 21 - ParentStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+22 - ParentStar :: 
+while w;
+Select w such that Parent* (w, 11)
+10
+5000
+Evaluating query 22 - ParentStar :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+23 - ParentStar :: 
+while w;
+Select w such that Parent* (w, 13)
+none
+5000
+Evaluating query 23 - ParentStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+24 - ParentStar :: 
+while w;
+Select w such that Parent* (w, 21)
+18
+5000
+Evaluating query 24 - ParentStar :: 
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+25 - Follows :: 
+stmt s;
+Select s such that Follows (s, 1)
+none
+5000
+Evaluating query 25 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+26 - Follows :: 
+stmt s;
+Select s such that Follows (s, 8)
+7
+5000
+Evaluating query 26 - Follows :: 
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+27 - Follows :: 
+stmt s;
+Select s such that Follows (s, 9)
+none
+5000
+Evaluating query 27 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+28 - Follows :: 
+stmt s;
+Select s such that Follows (s, 10)
+9
+5000
+Evaluating query 28 - Follows :: 
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+29 - Follows :: 
+stmt s;
+Select s such that Follows (s, 12)
+11
+5000
+Evaluating query 29 - Follows :: 
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+30 - Follows :: 
+stmt s;
+Select s such that Follows (s, 13)
+10
+5000
+Evaluating query 30 - Follows :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+31 - Follows :: 
+stmt s;
+Select s such that Follows (s, 23)
+none
+5000
+Evaluating query 31 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+32 - Follows :: 
+assign a;
+Select a such that Follows (a, 1)
+none
+5000
+Evaluating query 32 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+33 - Follows :: 
+assign a;
+Select a such that Follows (a, 8)
+7
+5000
+Evaluating query 33 - Follows :: 
+
+
+
+
+Your answer: 7 
+Correct answer: 7 
+34 - Follows :: 
+assign a;
+Select a such that Follows (a, 9)
+none
+5000
+Evaluating query 34 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+35 - Follows :: 
+assign a;
+Select a such that Follows (a, 10)
+9
+5000
+Evaluating query 35 - Follows :: 
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+36 - Follows :: 
+assign a;
+Select a such that Follows (a, 12)
+11
+5000
+Evaluating query 36 - Follows :: 
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+37 - Follows :: 
+assign a;
+Select a such that Follows (a, 13)
+none
+5000
+Evaluating query 37 - Follows :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+38 - FollowsStar :: 
+stmt s; while w;
+Select w such that Follows* (s, w)
+10
+5000
+Evaluating query 38 - FollowsStar :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+39 - FollowsStar :: 
+stmt s; while w;
+Select w such that Follows* (w, s)
+10, 18, 23
+5000
+Evaluating query 39 - FollowsStar :: 
+
+
+
+
+Your answer: 23 18 10 
+Correct answer: 10 18 23 
+40 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 1)
+none
+5000
+Evaluating query 40 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+41 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 8)
+1, 2, 3, 4, 5, 6, 7
+5000
+Evaluating query 41 - FollowsStar :: 
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 
+Correct answer: 1 2 3 4 5 6 7 
+42 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 9)
+none
+5000
+Evaluating query 42 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+43 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 13)
+9, 10
+5000
+Evaluating query 43 - FollowsStar :: 
+
+
+
+
+Your answer: 9 10 
+Correct answer: 9 10 
+44 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 19)
+none
+5000
+Evaluating query 44 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+45 - FollowsStar :: 
+stmt s;
+Select s such that Follows* (s, 22)
+18
+5000
+Evaluating query 45 - FollowsStar :: 
+
+
+
+
+Your answer: 18 
+Correct answer: 18 
+46 - FollowsStar :: 
+if ifstat;
+Select ifstat such that Follows* (ifstat, 8)
+none
+5000
+Evaluating query 46 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+47 - FollowsStar :: 
+if ifstat;
+Select ifstat such that Follows* (ifstat, 17)
+8
+5000
+Evaluating query 47 - FollowsStar :: 
+
+
+
+
+Your answer: 8 
+Correct answer: 8 
+48 - FollowsStar :: 
+if ifstat;
+Select ifstat such that Follows* (ifstat, 25)
+none
+5000
+Evaluating query 48 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+49 - FollowsStar :: 
+if ifstat;
+Select ifstat such that Follows* (ifstat, 27)
+none
+5000
+Evaluating query 49 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+50 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 6)
+1, 2, 3, 5
+5000
+Evaluating query 50 - FollowsStar :: 
+
+
+
+
+Your answer: 1 2 3 5 
+Correct answer: 1 2 3 5 
+51 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 9)
+none
+5000
+Evaluating query 51 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+52 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 10)
+9
+5000
+Evaluating query 52 - FollowsStar :: 
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+53 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 12)
+11
+5000
+Evaluating query 53 - FollowsStar :: 
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+54 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 17)
+1, 2, 3, 5, 7
+5000
+Evaluating query 54 - FollowsStar :: 
+
+
+
+
+Your answer: 1 2 3 5 7 
+Correct answer: 1 2 3 5 7 
+55 - FollowsStar :: 
+assign a;
+Select a such that Follows* (a, 28)
+none
+5000
+Evaluating query 55 - FollowsStar :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+56 - Modifies :: 
+variable v;
+Select v such that Modifies (3, v)
+x
+5000
+Evaluating query 56 - Modifies :: 
+
+
+
+
+Your answer: x 
+Correct answer: x 
+57 - Modifies :: 
+variable v;
+Select v such that Modifies (4, v)
+x, y, z
+5000
+Evaluating query 57 - Modifies :: 
+
+
+
+
+Your answer: y x z 
+Correct answer: x y z 
+58 - Modifies :: 
+variable v;
+Select v such that Modifies (6, v)
+idx
+5000
+Evaluating query 58 - Modifies :: 
+
+
+
+
+Your answer: idx 
+Correct answer: idx 
+59 - Modifies :: 
+variable v;
+Select v such that Modifies (18, v)
+idx, x, y, z
+5000
+Evaluating query 59 - Modifies :: 
+
+
+
+
+Your answer: idx y x z 
+Correct answer: idx x y z 
+60 - Modifies :: 
+variable v;
+Select v such that Modifies (24, v)
+x, y
+5000
+Evaluating query 60 - Modifies :: 
+
+
+
+
+Your answer: y x 
+Correct answer: x y 
+61 - Modifies :: 
+variable v;
+Select v such that Modifies (28, v)
+idx
+5000
+Evaluating query 61 - Modifies :: 
+
+
+
+
+Your answer: idx 
+Correct answer: idx 
+62 - Modifies :: 
+while w;
+Select w such that Modifies (w, "x")
+10, 18, 23
+5000
+Evaluating query 62 - Modifies :: 
+
+
+
+
+Your answer: 10 18 23 
+Correct answer: 10 18 23 
+63 - Modifies :: 
+while w;
+Select w such that Modifies (w, "z")
+10, 18
+5000
+Evaluating query 63 - Modifies :: 
+
+
+
+
+Your answer: 10 18 
+Correct answer: 10 18 
+64 - Modifies :: 
+variable v;
+Select v such that Modifies ("Bravo", v)
+idx, x, y, z
+5000
+Evaluating query 64 - Modifies :: 
+
+
+
+
+Your answer: idx y x z 
+Correct answer: idx x y z 
+65 - Uses :: 
+stmt s;
+Select s such that Uses (s, "x")
+4, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 23, 24, 26, 27
+5000
+Evaluating query 65 - Uses :: 
+
+
+
+
+Your answer: 4 8 9 10 11 12 13 14 17 18 19 20 23 24 26 27 
+Correct answer: 4 8 9 10 11 12 13 14 17 18 19 20 23 24 26 27 
+66 - Uses :: 
+stmt s;
+Select s such that Uses (s, "z")
+8, 10, 16, 17, 18, 19, 21
+5000
+Evaluating query 66 - Uses :: 
+
+
+
+
+Your answer: 8 10 16 17 18 19 21 
+Correct answer: 8 10 16 17 18 19 21 
+67 - Uses :: 
+variable v;
+Select v such that Uses (10, v)
+x, z, idx
+5000
+Evaluating query 67 - Uses :: 
+
+
+
+
+Your answer: idx x z 
+Correct answer: x z idx 
+68 - Uses :: 
+variable v;
+Select v such that Uses (18, v)
+x, y, z, idx, k ,t
+5000
+Evaluating query 68 - Uses :: 
+
+
+
+
+Your answer: idx y x t k z 
+Correct answer: x y z idx k t 
+69 - Uses :: 
+variable v;
+Select v such that Uses (23, v)
+k, t, x, y, idx
+5000
+Evaluating query 69 - Uses :: 
+
+
+
+
+Your answer: idx y x t k 
+Correct answer: k t x y idx 
+70 - Uses :: 
+assign a; variable v;
+Select v such that Uses (a, v)
+x, y, z, idx, t, k
+5000
+Evaluating query 70 - Uses :: 
+
+
+
+
+Your answer: idx y x z t k 
+Correct answer: x y z idx t k 
+71 - Uses, Modifies :: 
+assign a;
+Select a such that Modifies (a, "y") and Uses (a, "y")
+26
+5000
+Evaluating query 71 - Uses, Modifies :: 
+
+
+
+
+Your answer: 26 
+Correct answer: 26 
+72 - Uses, Modifies :: 
+assign a;
+Select a such that Modifies (a, "x") and Uses (a, "x")
+11
+5000
+Evaluating query 72 - Uses, Modifies :: 
+
+
+
+
+Your answer: 11 
+Correct answer: 11 
+73 - Uses, Modifies :: 
+assign a;
+Select a such that Modifies (a, "t") and Uses (a, "t")
+none
+5000
+Evaluating query 73 - Uses, Modifies :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+74 - Uses, Modifies :: 
+assign a;
+Select a such that Modifies (a, "z") and Uses (a, "z")
+16, 21
+5000
+Evaluating query 74 - Uses, Modifies :: 
+
+
+
+
+Your answer: 16 21 
+Correct answer: 16 21 
+75 - Modifies, Parent :: 
+assign a; while w;
+Select a such that Modifies (a, "idx") and Parent (w, a)
+19
+5000
+Evaluating query 75 - Modifies, Parent :: 
+
+
+
+
+Your answer: 19 
+Correct answer: 19 
+76 - Modifies, Parent :: 
+assign a; while w;
+Select a such that Parent (w, a) and Modifies (a, "idx")
+19
+5000
+Evaluating query 76 - Modifies, Parent :: 
+
+
+
+
+Your answer: 19 
+Correct answer: 19 
+77 - Modifies, Parent :: 
+assign a; while w;
+Select a such that Modifies (a, "idx") such that Parent (w, a)
+19
+5000
+Evaluating query 77 - Modifies, Parent :: 
+
+
+
+
+Your answer: 19 
+Correct answer: 19 
+78 - CallsStar :: 
+procedure p;
+Select p such that Calls* (p, "Charlie")
+Alpha, Bravo
+5000
+Evaluating query 78 - CallsStar :: 
+
+
+
+
+Your answer: Bravo Alpha 
+Correct answer: Alpha Bravo 
+79 - Calls, Modifies, Uses :: 
+procedure p;
+Select p such that Calls ("Alpha", p) and Modifies (p, "z") and Uses (p, "y")
+Bravo, Charlie
+5000
+Evaluating query 79 - Calls, Modifies, Uses :: 
+
+
+
+
+Your answer: Bravo Charlie 
+Correct answer: Bravo Charlie 
+80 - CallsStar, Modifies :: 
+procedure p;
+Select p such that Calls* ("Alpha", p) and Modifies (p, "z")
+Bravo, Charlie
+5000
+Evaluating query 80 - CallsStar, Modifies :: 
+
+
+
+
+Your answer: Charlie Bravo 
+Correct answer: Bravo Charlie 
+81 - Pattern :: 
+assign a;
+Select a pattern a ("x", _)
+3, 11, 22, 25
+5000
+Evaluating query 81 - Pattern :: 
+
+
+
+
+Your answer: 25 22 11 3 
+Correct answer: 3 11 22 25 
+82 - Pattern :: 
+assign a;
+Select a pattern a ("idx", "3 * y")
+none
+5000
+Evaluating query 82 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+83 - Pattern, Follows :: 
+assign a; while w;
+Select a pattern a ("y", _) such that Follows (w, a)
+13
+5000
+Evaluating query 83 - Pattern, Follows :: 
+
+
+
+
+Your answer: 13 
+Correct answer: 13 
+84 - Pattern :: 
+assign a;
+Select a pattern a (_, "x + 1")
+12
+5000
+Evaluating query 84 - Pattern :: 
+
+
+
+
+Your answer: 12 
+Correct answer: 12 
+85 - Pattern :: 
+assign a;
+Select a pattern a (_, "x * 5 + 3")
+none
+5000
+Evaluating query 85 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+86 - Pattern :: 
+assign a;
+Select a pattern a (_, _"x + k * t"_)
+none
+5000
+Evaluating query 86 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+87 - Pattern :: 
+assign a;
+Select a pattern a (_, _"x + idx"_)
+11, 13, 14
+5000
+Evaluating query 87 - Pattern :: 
+
+
+
+
+Your answer: 14 13 11 
+Correct answer: 11 13 14 
+88 - Pattern :: 
+assign a;
+Select a pattern a (_, _"k + x"_)
+none
+5000
+Evaluating query 88 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+89 - Pattern :: 
+assign a;
+Select a pattern a (_, _"x + 3"_)
+none
+5000
+Evaluating query 89 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+90 - Pattern :: 
+assign a;
+Select a pattern a (_, _"x + 3 * y"_)
+19
+5000
+Evaluating query 90 - Pattern :: 
+
+
+
+
+Your answer: 19 
+Correct answer: 19 
+91 - Pattern :: 
+assign a;
+Select a pattern a (_, _"3 * y"_)
+19
+5000
+Evaluating query 91 - Pattern :: 
+
+
+
+
+Your answer: 19 
+Correct answer: 19 
+92 - Pattern :: 
+assign a;
+Select a pattern a (_, _"5 + 3"_)
+none
+5000
+Evaluating query 92 - Pattern :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+93 - Pattern :: 
+assign a, a1;
+Select a pattern a1 (_, _"x + 1"_)
+1, 2, 3, 5, 7, 9, 11, 12, 13, 14, 16, 19, 21, 22, 25, 26, 27, 28
+5000
+Evaluating query 93 - Pattern :: 
+
+
+
+
+Your answer: 1 2 3 5 7 9 11 12 13 14 16 19 21 22 25 26 27 28 
+Correct answer: 1 2 3 5 7 9 11 12 13 14 16 19 21 22 25 26 27 28 
+94 - With :: 
+stmt s; constant co;
+Select s with s.stmt# = co.value
+1, 2, 3
+5000
+Evaluating query 94 - With :: 
+
+
+
+
+Your answer: 1 2 3 
+Correct answer: 1 2 3 
+95 - Pattern, With :: 
+if ifstat; constant co;
+Select BOOLEAN pattern ifstat ("idx", _, _) with co.value = 2
+true
+5000
+Evaluating query 95 - Pattern, With :: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+96 - Next :: 
+
+Select BOOLEAN such that Next (1, 2)
+true
+5000
+Evaluating query 96 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: true 
+Correct answer: true 
+97 - Next :: 
+
+Select BOOLEAN such that Next (6, 8)
+false
+5000
+Evaluating query 97 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: false 
+Correct answer: false 
+98 - Next :: 
+
+Select BOOLEAN such that Next (8, 9)
+true
+5000
+Evaluating query 98 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: true 
+Correct answer: true 
+99 - Next :: 
+
+Select BOOLEAN such that Next (10, 11)
+true
+5000
+Evaluating query 99 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: true 
+Correct answer: true 
+100 - Next ::
+
+Select BOOLEAN such that Next (12, 10)
+true
+5000
+Evaluating query 100 - Next ::
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: true 
+Correct answer: true 
+101 - Next :: 
+
+Select BOOLEAN such that Next (12, 11)
+false
+5000
+Evaluating query 101 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: false 
+Correct answer: false 
+102 - Next :: 
+
+Select BOOLEAN such that Next (13, 14)
+false
+5000
+Evaluating query 102 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: false 
+Correct answer: false 
+103 - Next :: 
+
+Select BOOLEAN such that Next (17, 18)
+false
+5000
+Evaluating query 103 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: false 
+Correct answer: false 
+104 - Next :: 
+
+Select BOOLEAN such that Next (23, 27)
+true
+5000
+Evaluating query 104 - Next :: 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,
+5 has next consisting of 6,
+6 has next consisting of 7,
+7 has next consisting of 8,
+8 has next consisting of 9,14,
+9 has next consisting of 10,
+10 has next consisting of 11,13,
+11 has next consisting of 12,
+12 has next consisting of 10,
+13 has next consisting of 17,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,
+17 has next consisting of 
+18 has next consisting of 19,22,
+19 has next consisting of 20,
+20 has next consisting of 21,
+21 has next consisting of 18,
+22 has next consisting of 
+23 has next consisting of 24,27,
+24 has next consisting of 25,26,
+25 has next consisting of 23,
+26 has next consisting of 23,
+
+
+
+
+Your answer: true 
+Correct answer: true 
+105 - NextStar :: 
+
+Select BOOLEAN such that Next* (9, 9)
+false
+5000
+Evaluating query 105 - NextStar :: 
+
+
+
+
+Your answer: false 
+Correct answer: false 
+106 - NextStar :: 
+
+Select BOOLEAN such that Next* (10, 10)
+true
+5000
+Evaluating query 106 - NextStar :: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+107 - NextStar :: 
+
+Select BOOLEAN such that Next* (12, 12)
+true
+5000
+Evaluating query 107 - NextStar :: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+108 - NextStar :: 
+
+Select BOOLEAN such that Next* (20, 20)
+true
+5000
+Evaluating query 108 - NextStar :: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+End of evaluating Query File.
+AutoTester Completed !

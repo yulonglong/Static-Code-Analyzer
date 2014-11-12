@@ -1,0 +1,122 @@
+Parameters : S11-affectsTests.txt Q11-affectsTests.txt R11-affectsTests.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  Mainly Affect*
+1 - Affects* :: 
+assign a1, a2, a3, a4, a5;
+Select a3 such that Affects*(1, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) 
+8,12,19,25
+5000
+Evaluating query 1 - Affects* :: 
+
+
+
+
+Your answer: 25 12 19 8 
+Correct answer: 8 12 19 25 
+2 - Affects* :: 
+assign a, a1, a2, a3, a4, a5;
+Select a3 such that Affects*(a, a1) and Affects*(a1, a2) and Affects*(a2,a3) and Affects*(a3,a4) and Affects*(a4,a5) 
+8,12,19,25
+5000
+Evaluating query 2 - Affects* :: 
+
+
+
+
+Your answer: 25 12 19 8 
+Correct answer: 8 12 19 25 
+3 - Affects* :: 
+assign a, a1, a2, a3, a4, a5;
+Select a2 such that Affects*(a, a1) and Affects*(a1, 8) and Affects*(8,a2) and Affects*(a2,a3)
+19,28
+5000
+Evaluating query 3 - Affects* :: 
+
+
+
+
+Your answer: 19 28 
+Correct answer: 19 28 
+4 - Affects* :: 
+assign a1, a2, a3;
+Select a2 such that Affects*(a1, a2) and Affects*(a2, a3)
+24,31,8,19,28,15,17,12,25,9
+5000
+Evaluating query 4 - Affects* :: 
+
+
+
+
+Your answer: 8 9 12 15 17 19 24 25 28 31 
+Correct answer: 24 31 8 19 28 15 17 12 25 9 
+5 - Affects* :: 
+assign a;
+Select a such that Affects*(1, 34) and Affects*(24, 22) and Affects*(12,35) and Affects*(17,a)
+12,25,9,35
+5000
+Evaluating query 5 - Affects* :: 
+
+
+
+
+Your answer: 9 12 25 35 
+Correct answer: 12 25 9 35 
+6 - Affects* :: 
+assign a;
+Select a such that Affects*(_, 19) and Affects*(19, a)
+20,28,34,22
+5000
+Evaluating query 6 - Affects* :: 
+
+
+
+
+Your answer: 20 22 28 34 
+Correct answer: 20 28 34 22 
+7 - Affects*, Modifies :: 
+assign a1, a2, a3;
+Select a2 such that Modifies(a1,"h") and Modifies(a3,"l") and Affects*(a1, a2) and Affects*(a2, a3)
+17,12,25
+5000
+Evaluating query 7 - Affects*, Modifies :: 
+
+
+
+
+Your answer: 12 17 25 
+Correct answer: 17 12 25 
+8 - Affects*, Modifies :: 
+variable v; assign a1, a2, a3;
+Select v such that Modifies(a1,"h") and Modifies(a3,"b") and Affects*(a1, _) and Affects*(_, a3)
+a,b,c,d,e,f,g,h,i,j,k,l,m
+5000
+Evaluating query 8 - Affects*, Modifies :: 
+
+
+
+
+Your answer: a b h c d l k j i f e g m 
+Correct answer: a b c d e f g h i j k l m 
+9 - Affects*, Modifies :: 
+variable v,v1,v2; assign a1, a2, a3, a4;
+Select v such that Modifies(a1,v) and Modifies(a3,v1) and Affects*(a1, a3) and Modifies(a2,v) and Modifies(a4,v2) and Affects*(a2,a4)
+a,b,c,d,e,f,h,i,j,k,l
+5000
+Evaluating query 9 - Affects*, Modifies :: 
+
+
+
+
+Your answer: a d l j h i e b k f c 
+Correct answer: a b c d e f h i j k l 
+End of evaluating Query File.
+AutoTester Completed !

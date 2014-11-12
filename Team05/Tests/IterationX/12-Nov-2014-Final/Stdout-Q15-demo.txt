@@ -1,0 +1,438 @@
+Parameters : S15-demo.txt Q15-demo.txt R15-demo.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  All Queries
+1 - ModifiesAssignment::Parent to limit the result 
+call c; assign a; while w; if i; stmt s;
+Select <a, c, i> such that Modifies (a, "delta") and Modifies (w, "x") and Modifies(c, "bravo") and Modifies(s, _) and Modifies(i, "b4") and Parent*(84, i)
+51 11 85, 51 11 87, 51 32 85, 51 32 87, 51 38 85, 51 38 87, 51 43 85, 51 43 87, 51 100 85, 51 100 87, 51 101 85, 51 101 87
+5000
+Evaluating query 1 - ModifiesAssignment::Parent to limit the result 
+
+
+
+
+Your answer: 51 11 85 51 11 87 51 32 85 51 32 87 51 38 85 51 38 87 51 43 85 51 43 87 51 100 85 51 100 87 51 101 85 51 101 87 
+Correct answer: 51 11 85 51 11 87 51 32 85 51 32 87 51 38 85 51 38 87 51 43 85 51 43 87 51 100 85 51 100 87 51 101 85 51 101 87 
+2 - ModifiesProcedure:: 
+procedure p, q;
+Select <p, q> such that Modifies (p, "apparentlyThisDoesNothing") and Modifies(q, "b")
+A A, A B, A C, A F, B A, B B, B C, B F, DizIzAVeryLongLongProcProcProcName A, DizIzAVeryLongLongProcProcProcName B, DizIzAVeryLongLongProcProcProcName C, DizIzAVeryLongLongProcProcProcName F, F A, F B, F C, F F
+5000
+Evaluating query 2 - ModifiesProcedure:: 
+
+
+
+
+Your answer: A A A B A C A F B A B B B C B F DizIzAVeryLongLongProcProcProcName A DizIzAVeryLongLongProcProcProcName B DizIzAVeryLongLongProcProcProcName C DizIzAVeryLongLongProcProcProcName F F A F B F C F F 
+Correct answer: A A A B A C A F B A B B B C B F DizIzAVeryLongLongProcProcProcName A DizIzAVeryLongLongProcProcProcName B DizIzAVeryLongLongProcProcProcName C DizIzAVeryLongLongProcProcProcName F F A F B F C F F 
+3 - UsesAssignment::
+if i; assign a;
+Select <a, i> such that Uses(a,"a") and Uses (a, "y") and Uses (i, "yy")
+15 6, 15 13, 58 6, 58 13
+5000
+Evaluating query 3 - UsesAssignment::
+
+
+
+
+Your answer: 15 6 15 13 58 6 58 13 
+Correct answer: 15 6 15 13 58 6 58 13 
+4 - UsesProcedure:: 
+procedure p; call c;
+Select <p, c> such that Uses (p, "delta") and Uses(c, "delta")
+A 11, A 32, A 38, A 43, A 100, A 101, B 11, B 32, B 38, B 43, B 100, B 101, C 11, C 32, C 38, C 43, C 100, C 101, F 11, F 32, F 38, F 43, F 100, F 101
+5000
+Evaluating query 4 - UsesProcedure:: 
+
+
+
+
+Your answer: A 11 A 32 A 38 A 43 A 100 A 101 B 11 B 32 B 38 B 43 B 100 B 101 C 11 C 32 C 38 C 43 C 100 C 101 F 11 F 32 F 38 F 43 F 100 F 101 
+Correct answer: A 11 A 32 A 38 A 43 A 100 A 101 B 11 B 32 B 38 B 43 B 100 B 101 C 11 C 32 C 38 C 43 C 100 C 101 F 11 F 32 F 38 F 43 F 100 F 101 
+5 - Calls:: 
+procedure p, q;
+Select BOOLEAN such that Calls(p, q) and Calls(q, "DizIzAVeryLongLongProcProcProcName") with q.procName = "B"
+true
+5000
+Evaluating query 5 - Calls:: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+6 - CallsStar:: 
+procedure p, q;
+Select p such that Calls*(p, "DizIzAVeryLongLongProcProcProcName") and Calls*(_, q) with q.procName = "E"
+A, B, F
+5000
+Evaluating query 6 - CallsStar:: 
+
+
+
+
+Your answer: F A B 
+Correct answer: A B F 
+7 - Parent:: 
+stmt s1, s2, s3; assign a;
+Select s1 such that Parent(s1, s2) and Parent(s2, s3) and Parent(s3, a) with a.stmt# = 19
+13
+5000
+Evaluating query 7 - Parent:: 
+
+
+
+
+Your answer: 13 
+Correct answer: 13 
+8 - ParentStar:: Select the 2nd level parent or more of a call statement
+stmt s1, s2, s3, s4; call c;
+Select s1 such that Parent*(s1, s2) and Parent*(s3, s4) and Parent*(s4, s2) and Parent(s2, c)
+4, 6, 9, 12, 13
+5000
+Evaluating query 8 - ParentStar:: Select the 2nd level parent or more of a call statement
+
+
+
+
+Your answer: 4 6 9 12 13 
+Correct answer: 4 6 9 12 13 
+9 - Follows:: Find a while loop that is followed by at least 2 statements
+while w; stmt s1, s2;
+Select w such that Follows(w, s1) and Follows(s1, s2)
+48, 57, 60
+5000
+Evaluating query 9 - Follows:: Find a while loop that is followed by at least 2 statements
+
+
+
+
+Your answer: 48 57 60 
+Correct answer: 48 57 60 
+10 - FollowsStar:: Find an ordering of stmt --> while --> if in a single level
+while w; if i; stmt s;
+Select <w, i, s> such that Follows*(s, w) and Follows*(w, i)
+4 44 1, 4 44 2, 4 44 3
+5000
+Evaluating query 10 - FollowsStar:: Find an ordering of stmt --> while --> if in a single level
+
+
+
+
+Your answer: 4 44 3 4 44 2 4 44 1 
+Correct answer: 4 44 1 4 44 2 4 44 3 
+11 - Next::Find all if statement that is executed after a while statement, and is a parent of some other if 
+while w; if i, k; call c;
+Select i such that Next(w, i) and Parent*(i, k)
+13
+5000
+Evaluating query 11 - Next::Find all if statement that is executed after a while statement, and is a parent of some other if 
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,44,
+5 has next consisting of 6,
+6 has next consisting of 7,38,
+7 has next consisting of 8,
+8 has next consisting of 9,
+9 has next consisting of 10,4,
+10 has next consisting of 11,
+11 has next consisting of 12,
+12 has next consisting of 13,33,
+13 has next consisting of 14,27,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,21,
+17 has next consisting of 18,20,
+18 has next consisting of 19,
+19 has next consisting of 17,
+20 has next consisting of 32,
+21 has next consisting of 22,
+22 has next consisting of 23,32,
+23 has next consisting of 24,25,
+24 has next consisting of 22,
+25 has next consisting of 26,
+26 has next consisting of 22,
+27 has next consisting of 28,
+28 has next consisting of 29,
+29 has next consisting of 30,32,
+30 has next consisting of 31,
+31 has next consisting of 29,
+32 has next consisting of 12,
+33 has next consisting of 34,9,
+34 has next consisting of 35,
+35 has next consisting of 36,
+36 has next consisting of 37,
+37 has next consisting of 33,
+38 has next consisting of 39,
+39 has next consisting of 40,43,
+40 has next consisting of 41,
+41 has next consisting of 42,
+42 has next consisting of 39,
+43 has next consisting of 4,
+44 has next consisting of 45,46,
+45 has next consisting of 
+46 has next consisting of 
+47 has next consisting of 48,
+48 has next consisting of 49,54,
+49 has next consisting of 50,52,
+50 has next consisting of 51,
+51 has next consisting of 48,
+52 has next consisting of 53,
+53 has next consisting of 48,
+54 has next consisting of 55,
+55 has next consisting of 
+56 has next consisting of 57,
+57 has next consisting of 58,59,
+58 has next consisting of 57,
+59 has next consisting of 60,
+60 has next consisting of 61,67,
+61 has next consisting of 62,
+62 has next consisting of 63,
+63 has next consisting of 64,
+64 has next consisting of 65,
+65 has next consisting of 66,
+66 has next consisting of 60,
+67 has next consisting of 68,
+68 has next consisting of 69,56,
+69 has next consisting of 70,68,
+70 has next consisting of 71,69,
+71 has next consisting of 72,
+72 has next consisting of 73,70,
+73 has next consisting of 74,80,
+74 has next consisting of 75,
+75 has next consisting of 76,73,
+76 has next consisting of 77,
+77 has next consisting of 78,79,
+78 has next consisting of 77,
+79 has next consisting of 75,
+80 has next consisting of 72,
+81 has next consisting of 
+82 has next consisting of 83,
+83 has next consisting of 84,
+84 has next consisting of 85,99,
+85 has next consisting of 86,98,
+86 has next consisting of 87,
+87 has next consisting of 88,96,
+88 has next consisting of 89,95,
+89 has next consisting of 90,94,
+90 has next consisting of 91,
+91 has next consisting of 92,93,
+92 has next consisting of 
+93 has next consisting of 
+94 has next consisting of 
+95 has next consisting of 
+96 has next consisting of 97,
+97 has next consisting of 
+98 has next consisting of 
+99 has next consisting of 
+100 has next consisting of 101,
+101 has next consisting of 102,
+102 has next consisting of 103,
+Next Table
+0 has next consisting of 
+1 has next consisting of 2,
+2 has next consisting of 3,
+3 has next consisting of 4,
+4 has next consisting of 5,44,
+5 has next consisting of 6,
+6 has next consisting of 7,38,
+7 has next consisting of 8,
+8 has next consisting of 9,
+9 has next consisting of 10,4,
+10 has next consisting of 11,
+11 has next consisting of 12,
+12 has next consisting of 13,33,
+13 has next consisting of 14,27,
+14 has next consisting of 15,
+15 has next consisting of 16,
+16 has next consisting of 17,21,
+17 has next consisting of 18,20,
+18 has next consisting of 19,
+19 has next consisting of 17,
+20 has next consisting of 32,
+21 has next consisting of 22,
+22 has next consisting of 23,32,
+23 has next consisting of 24,25,
+24 has next consisting of 22,
+25 has next consisting of 26,
+26 has next consisting of 22,
+27 has next consisting of 28,
+28 has next consisting of 29,
+29 has next consisting of 30,32,
+30 has next consisting of 31,
+31 has next consisting of 29,
+32 has next consisting of 12,
+33 has next consisting of 34,9,
+34 has next consisting of 35,
+35 has next consisting of 36,
+36 has next consisting of 37,
+37 has next consisting of 33,
+38 has next consisting of 39,
+39 has next consisting of 40,43,
+40 has next consisting of 41,
+41 has next consisting of 42,
+42 has next consisting of 39,
+43 has next consisting of 4,
+44 has next consisting of 45,46,
+45 has next consisting of 
+46 has next consisting of 
+47 has next consisting of 48,
+48 has next consisting of 49,54,
+49 has next consisting of 50,52,
+50 has next consisting of 51,
+51 has next consisting of 48,
+52 has next consisting of 53,
+53 has next consisting of 48,
+54 has next consisting of 55,
+55 has next consisting of 
+56 has next consisting of 57,
+57 has next consisting of 58,59,
+58 has next consisting of 57,
+59 has next consisting of 60,
+60 has next consisting of 61,67,
+61 has next consisting of 62,
+62 has next consisting of 63,
+63 has next consisting of 64,
+64 has next consisting of 65,
+65 has next consisting of 66,
+66 has next consisting of 60,
+67 has next consisting of 68,
+68 has next consisting of 69,56,
+69 has next consisting of 70,68,
+70 has next consisting of 71,69,
+71 has next consisting of 72,
+72 has next consisting of 73,70,
+73 has next consisting of 74,80,
+74 has next consisting of 75,
+75 has next consisting of 76,73,
+76 has next consisting of 77,
+77 has next consisting of 78,79,
+78 has next consisting of 77,
+79 has next consisting of 75,
+80 has next consisting of 72,
+81 has next consisting of 
+82 has next consisting of 83,
+83 has next consisting of 84,
+84 has next consisting of 85,99,
+85 has next consisting of 86,98,
+86 has next consisting of 87,
+87 has next consisting of 88,96,
+88 has next consisting of 89,95,
+89 has next consisting of 90,94,
+90 has next consisting of 91,
+91 has next consisting of 92,93,
+92 has next consisting of 
+93 has next consisting of 
+94 has next consisting of 
+95 has next consisting of 
+96 has next consisting of 97,
+97 has next consisting of 
+98 has next consisting of 
+99 has next consisting of 
+100 has next consisting of 101,
+101 has next consisting of 102,
+102 has next consisting of 103,
+
+
+
+
+Your answer: 13 
+Correct answer: 13 
+12 - NextStar:: 
+while w1, w2; stmt s1, s2; call c;
+Select w1 such that Next*(w1, s1) and Next*(s1, w2) and Next*(w2, s2) and Next*(s2, c)
+4, 9, 12, 17, 22, 29, 33, 39, 48
+5000
+Evaluating query 12 - NextStar:: 
+
+
+
+
+Your answer: 48 39 33 29 22 17 12 9 4 
+Correct answer: 4 9 12 17 22 29 33 39 48 
+13 - Affects:: not manually calculated
+assign a1, a2, a3, a4;
+Select a1 such that Affects(a1, a2) and Affects(a2, a3) and Affects(a3, a4) and Affects(a4, a4)
+10,14,15,18,19,2,21,24,25,27,3,36,37,51,58,59,61,62,63,8
+5000
+Evaluating query 13 - Affects:: not manually calculated
+
+
+
+
+Your answer: 2 3 8 10 14 15 18 19 21 24 25 27 36 37 51 58 59 61 62 63 
+Correct answer: 10 14 15 18 19 2 21 24 25 27 3 36 37 51 58 59 61 62 63 8 
+14 - AffectsStar:: not manually calculated
+assign a1, a2, a3, a4;
+Select a1 such that Affects*(a1, 31) and Affects*(a2, 31) and Affects*(a2, 27) and Affects*(14, a4) and Affects*(a4, a2) and Affects*(a2, a1)
+none
+5000
+Evaluating query 14 - AffectsStar:: not manually calculated
+
+
+
+
+Your answer: 
+Correct answer: 
+15 - With:: 
+stmt s; procedure p; variable v, x;
+Select <s, v> such that Calls(p, _) with p.procName = v.varName and p.procName = "B" such that Uses(s, x) with x.varName = "charlie"
+
+5000
+Evaluating query 15 - With:: 
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - FullPattern:: 
+assign a; while w; if i; variable v;
+Select <a, v> pattern a(_,"10") and w(v, _) and i(v,_,_)
+8 y, 97 y, 8 z, 97 z, 8 b, 97 b, 8 x, 97 x
+5000
+Evaluating query 16 - FullPattern:: 
+
+
+
+
+Your answer: 97 x 97 z 97 y 97 b 8 x 8 z 8 y 8 b 
+Correct answer: 8 y 97 y 8 z 97 z 8 b 97 b 8 x 97 x 
+17 - SubPattern:: 
+assign a; while w; if i; variable v;
+Select <a, v> pattern a(_, _"y+5"_) and w(v,_) and i(v,_,_)
+18 y, 58 y, 18 z, 58 z, 18 b, 58 b, 18 x, 58 x
+5000
+Evaluating query 17 - SubPattern:: 
+
+
+
+
+Your answer: 58 x 58 z 58 y 58 b 18 x 18 z 18 y 18 b 
+Correct answer: 18 y 58 y 18 z 58 z 18 b 58 b 18 x 58 x 
+18 - Constant::
+constant co;
+Select co
+1,2,3,10,7,5,12,4,10000000,0,2147483647
+5000
+Evaluating query 18 - Constant::
+
+
+
+
+Your answer: 0 1 2 3 4 5 7 10 12 10000000 2147483647 
+Correct answer: 1 2 3 10 7 5 12 4 10000000 0 2147483647 
+End of evaluating Query File.
+AutoTester Completed !

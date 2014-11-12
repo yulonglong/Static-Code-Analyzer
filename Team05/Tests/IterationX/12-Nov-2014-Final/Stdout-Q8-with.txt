@@ -1,0 +1,427 @@
+Parameters : S8-with.txt Q8-with.txt R8-with.xml
+Beginning to parse Simple Program.
+Begin CodeParser
+End CodeParser
+Begin DesignExtractor
+DE: Extracted Relationships
+Building CFG
+End DesignExtractor
+End of parsing Simple Program.
+IterationX
+Beginning to evaluate Query File.
+New Category :  All Category
+1 - constant, stmtNumber ::
+stmt s; constant co;
+Select s with s.stmt#=co.value
+1,2,3,13
+5000
+Evaluating query 1 - constant, stmtNumber ::
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+2 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=3
+3
+5000
+Evaluating query 2 - constant, stmtNumber, literal ::
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+3 - constant, stmtNumber, literal ::
+stmt s; constant co;
+Select s with s.stmt#=co.value and co.value=9999
+none
+5000
+Evaluating query 3 - constant, stmtNumber, literal ::
+
+
+
+
+Your answer: 
+Correct answer: 
+4 - procName, varName :: 
+variable v; procedure p;
+Select p with p.procName=v.varName
+TheOne
+5000
+Evaluating query 4 - procName, varName :: 
+
+
+
+
+Your answer: TheOne 
+Correct answer: TheOne 
+5 - prog_line :: 
+prog_line n; stmt s;
+Select s such that Follows*(n,s) with n=5
+6,7
+5000
+Evaluating query 5 - prog_line :: 
+
+
+
+
+Your answer: 7 6 
+Correct answer: 6 7 
+6 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheCalledOne"
+4
+5000
+Evaluating query 6 - call, procName :: 
+loop
+
+
+
+
+Your answer: 4 
+Correct answer: 4 
+7 - call, procName :: 
+call c; stmt s;
+Select s such that Parent(s,c) with c.procName="TheOne"
+none
+5000
+Evaluating query 7 - call, procName :: 
+loop
+
+
+
+
+Your answer: 
+Correct answer: 
+8 - invalid :: 
+assign a; stmt s; while w;
+Select s with a.stmt#=s.stmt# and w.stmt#=s.stmt#
+none
+5000
+Evaluating query 8 - invalid :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+9 - literal, stmtNumber ::
+assign a; stmt s;
+Select s with a.stmt#=s.stmt# and s.stmt#=3
+3
+5000
+Evaluating query 9 - literal, stmtNumber ::
+
+
+
+
+Your answer: 3 
+Correct answer: 3 
+10 - literal, stmtNumber :: 
+while w;
+Select w with w.stmt#=4
+4
+5000
+Evaluating query 10 - literal, stmtNumber :: 
+
+
+
+
+Your answer: 4 
+Correct answer: 4 
+11 - stmtNumber, constant :: 
+if i; while w; variable v; constant co;
+Select i such that Modifies(i,v) and Uses(w,v) with w.stmt#=co.value
+10
+5000
+Evaluating query 11 - stmtNumber, constant :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+12 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=10
+10
+5000
+Evaluating query 12 - stmtNumber, literal :: 
+
+
+
+
+Your answer: 10 
+Correct answer: 10 
+13 - stmtNumber, literal :: 
+if i;
+Select i with i.stmt#=11
+none
+5000
+Evaluating query 13 - stmtNumber, literal :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+14 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=10
+4,13,16
+5000
+Evaluating query 14 - stmtNumber, literal :: 
+
+
+
+
+Your answer: 4 13 16 
+Correct answer: 4 13 16 
+15 - stmtNumber, literal :: 
+if i; while w;
+Select w with i.stmt#=11
+none
+5000
+Evaluating query 15 - stmtNumber, literal :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+16 - literal :: 
+while w;
+Select w with 10=10
+4,13,16
+5000
+Evaluating query 16 - literal :: 
+
+
+
+
+Your answer: 4 13 16 
+Correct answer: 4 13 16 
+17 - literal :: 
+while w;
+Select w with 10=11
+none
+5000
+Evaluating query 17 - literal :: 
+
+
+
+
+Your answer: 
+Correct answer: 
+18 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=1
+true
+5000
+Evaluating query 18 - literal, BOOLEAN :: 
+
+
+
+
+Your answer: true 
+Correct answer: true 
+19 - literal, BOOLEAN :: 
+while w;
+Select BOOLEAN with 1=2
+false
+5000
+Evaluating query 19 - literal, BOOLEAN :: 
+
+
+
+
+Your answer: false 
+Correct answer: false 
+20 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=9
+true
+5000
+Evaluating query 20 - call, BOOLEAN :: 
+loop
+
+
+
+
+Your answer: true 
+Correct answer: true 
+21 - call, BOOLEAN :: 
+call c;
+Select BOOLEAN with c.procName="AgentSmith" and c.stmt#=7
+false
+5000
+Evaluating query 21 - call, BOOLEAN :: 
+loop
+
+
+
+
+Your answer: false 
+Correct answer: false 
+22 - call :: 
+call c;
+Select c with c.procName="AgentSmith" and c.stmt#=9
+9
+5000
+Evaluating query 22 - call :: 
+loop
+
+
+
+
+Your answer: 9 
+Correct answer: 9 
+23 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select n with n = a.stmt#
+1,2,3,5,6,8,11,12,14,15,17
+5000
+Evaluating query 23 - stmtNumber, prog_line ::
+
+
+
+
+Your answer: 1 2 3 5 6 8 11 12 14 15 17 
+Correct answer: 1 2 3 5 6 8 11 12 14 15 17 
+24 - stmtNumber, prog_line ::
+assign a; prog_line n;
+Select a with a.stmt# = n
+1,2,3,5,6,8,11,12,14,15,17
+5000
+Evaluating query 24 - stmtNumber, prog_line ::
+
+
+
+
+Your answer: 1 2 3 5 6 8 11 12 14 15 17 
+Correct answer: 1 2 3 5 6 8 11 12 14 15 17 
+25 - constant, prog_line ::
+constant co; prog_line n;
+Select n with n = co.value
+1,2,3,13
+5000
+Evaluating query 25 - constant, prog_line ::
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+26 - constant, stmtNumber ::
+stmt s; constant co;
+Select co with s.stmt#=co.value
+1,2,3,13
+5000
+Evaluating query 26 - constant, stmtNumber ::
+
+
+
+
+Your answer: 1 2 3 13 
+Correct answer: 1 2 3 13 
+27 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s1.stmt#=s2.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 27 - stmtNumber ::
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+28 - stmtNumber ::
+stmt s1, s2;
+Select s1 with s2.stmt#=s1.stmt#
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
+5000
+Evaluating query 28 - stmtNumber ::
+
+
+
+
+Your answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Correct answer: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+29 - varName ::
+variable v1, v2;
+Select v1 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+Evaluating query 29 - varName ::
+
+
+
+
+Your answer: a b c x y TheOne notMe me awesome action killNeo NeoAlive wontLose 
+Correct answer: NeoAlive TheOne a action awesome b c killNeo me notMe wontLose x y 
+30 - varName ::
+variable v1, v2;
+Select v2 with v1.varName=v2.varName
+NeoAlive,TheOne,a,action,awesome,b,c,killNeo,me,notMe,wontLose,x,y
+5000
+Evaluating query 30 - varName ::
+
+
+
+
+Your answer: a b c x y TheOne notMe me awesome action killNeo NeoAlive wontLose 
+Correct answer: NeoAlive TheOne a action awesome b c killNeo me notMe wontLose x y 
+31 - procName ::
+procedure p1, p2;
+Select p1 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+Evaluating query 31 - procName ::
+
+
+
+
+Your answer: TheOne TheCalledOne AgentSmith 
+Correct answer: AgentSmith TheCalledOne TheOne 
+32 - procName ::
+procedure p1, p2;
+Select p2 with p1.procName=p2.procName
+AgentSmith,TheCalledOne,TheOne
+5000
+Evaluating query 32 - procName ::
+
+
+
+
+Your answer: TheOne TheCalledOne AgentSmith 
+Correct answer: AgentSmith TheCalledOne TheOne 
+33 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s2.stmt#=s1.stmt#
+1 1,2 2,3 3,4 4,5 5,6 6,7 7,8 8,9 9,10 10,11 11,12 12,13 13,14 14,15 15,16 16,17 17
+5000
+Evaluating query 33 - stmtNumber ::
+
+
+
+
+Your answer: 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 
+Correct answer: 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 
+34 - stmtNumber ::
+stmt s1, s2;
+Select <s1,s2> with s1.stmt#=s2.stmt# and s1.stmt#=3
+3 3
+5000
+Evaluating query 34 - stmtNumber ::
+
+
+
+
+Your answer: 3 3 
+Correct answer: 3 3 
+End of evaluating Query File.
+AutoTester Completed !
