@@ -1,0 +1,77 @@
+15
+cat: Iteration 2 requirements including Follows* and Parent* relationships
+1 - Follows*, Typed, ImplStmtLine ::
+while w; stmt s; 
+Select w such that Follows*(s, w)
+// ans 
+5000
+2 - Follows*, Typed, ImplStmtLine :: 
+while w; stmt s; 
+Select w such that Follows*(w, s)
+// ans
+5000
+3 - Follows*, ImplStmtLine ::
+stmt s;
+Select s such that Follows*(s, 3)
+// ans
+5000
+4 - Follows*, ImplStmtLine ::
+stmt s; 
+Select s such that Follows*(s, 20)
+// ans
+5000
+5 - Follows*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Follows*(w, 20)
+// ans
+5000
+6 - Follows*, ImplStmtLine ::
+stmt s;
+Select s such that Follows*(4, s)
+// ans
+5000
+7 - Follows*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Follows*(12, w)
+16
+5000
+8 - Follows*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Follows*(4, 19)
+false
+5000
+9 - Parent*, ImplStmtLine ::
+stmt s; 
+Select s such that Parent*(s, 12)
+// ans
+5000
+10 - Parent*, ImplStmtLine ::
+stms s;
+Select s such that Parent*(s, 11)
+// ans
+5000
+11 - Parent*, Typed, ImplStmtLine :: 
+while w; stmt s; 
+Select w such that Parent*(s, 15)
+// ans
+5000
+12 - Parent*, Typed, ImplStmtLine ::
+while w; 
+Select w such that Parent*(w, 17)
+// ans
+5000
+13 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(4, 17)
+// ans
+5000
+14 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(11, 15)
+// ans
+5000
+15 - Parent*, Boolean, ImplStmtLine ::
+
+Select BOOLEAN such that Parent*(9, 18)
+false
+5000

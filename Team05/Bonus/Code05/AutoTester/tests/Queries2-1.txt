@@ -1,0 +1,62 @@
+12
+cat: Iteration 2 requirements but only Follows and Parent relationships
+1 - Follows, Typed, ImplStmtLine :: Which while statement follows statment in line 3
+while w;
+Select w such that Follows(3, w)
+4
+5000
+2 - Follows, Typed, ImplStmtLine :: Which while statement follows statement in line 4
+while w;
+Select w such that Follows(4, w)
+none
+5000
+3 - Follows, Typed, ImplStmtLine :: Which statement is followed by statement in line 19
+stmt s;
+Select s such that Follows(s, 19)
+9
+5000
+4 - Follows, Boolean :: Is Follows(7, 9) true
+
+Select BOOLEAN such that Follows(7, 9)
+true
+5000
+5 - Follows, Boolean :: Is Follows(15, 16) true
+
+Select BOOLEAN such that Follows(15, 16)
+false
+5000
+6 - Parent, ImplStmtLine :: Which statement is the parent of statement in line 9
+stmt s;
+Select s such that Parent(s, 9)
+4
+5000
+7 - Parent, Typed, ImplStmtLine :: Which while statement is the parent of statement in line 11
+while w;
+Select w such that Parent(w, 11)
+9
+5000
+8 - Parent, Typed, ImplStmtLine :: Which assign statement is the parent of statement in line 3
+assign a;
+Select a such that Parent(a, 3)
+none
+5000
+9 - Parent, Typed, ImplStmtLine :: Which while statements are the parent of some assignment statement
+while w; assign a;
+Select w such that Parent(w, a)
+4, 5, 7, 9, 11, 12, 16
+5000
+10 - Parent, Boolean :: Is line 4 the parent of line 9
+
+Select BOOLEAN such that Parent(4, 9)
+true
+5000
+11 - Parent, Boolean :: Is there any while statement that is the child of statement in line 4
+while w;
+Select BOOLEAN such that Parent(4, w)
+true
+5000
+12 - Parent, Typed, ImplStmtLine :: Which are the assign statements that are the children of the statment in line 11
+assign a;
+Select a such that Parent(11, a)
+18
+5000

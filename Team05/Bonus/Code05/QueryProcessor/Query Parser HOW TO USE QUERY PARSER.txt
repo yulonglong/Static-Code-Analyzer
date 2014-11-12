@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include "QueryParser.h"
+
+using namespace std;
+
+int main(){
+	QueryParser qp;
+	// bool isValid = qp.validate("assign as; while ww2; while w2;");
+	// bool isValid = qp.validate("assign as; while ww2; while w2; Select as  such that Modifies ( 2 , as )");
+	// bool isValid = qp.validate("assign as; while ww2; while w2; Select as");
+	// bool isValid = qp.validate("Select BOOLEAN meh meh");
+	// bool isValid = qp.validate("Select as");
+	// bool isValid = qp.validate("assign a; while w; Select a such that Uses(2, a)");
+	// bool isValid = qp.validate("assign a; while w; Select a pattern a (_\"x+y\"_, _)");
+	// bool isValid = qp.validate("Select a pattern a (x, _\"x+y\"_) such that Uses(2, a)");
+	// bool isValid = qp.validate("assign a; while w; Select a pattern a (x, _\"x+y\"_) such that Uses(2, a)");
+	// bool isValid = qp.validate("assign a; while w; Select a pattern a (x, _\"x\"_) such that Uses(2, a)");
+	 bool isValid = qp.validate("assign a; while w; Select a such that Uses(2, a) pattern a (x, _\"x+y\"_)");
+	// bool isValid = qp.validate("    bla    ")
+	// bool isValid = qp.validate("assign a; while w; Select a such that Modifies(2, w)");
+
+	if(!isValid){
+		cout << "INVALID QUERY" << endl;
+	} else {
+		Query query = qp.parse();
+		
+
+		cout << endl << "Query decomposition: " << endl;
+
+		vector<Relationship> relVect = 
+		query.getRelVect();
+
+		vector<string> relationshipType;
+		vector<string> statementType;
+
+		relationshipType.push_back("Follows");
+		relationshipType.push_back("Follows*");
+		relationshipType.push_back("Parent");
+		relationshipType.push_back("Parent*");
+		relationshipType.push_back("Modifies");
+		relationshipType.push_back("Uses");
+		relationshipType.push_back("Pattern");
+
+		statementType.push_back("assign");
+		statementType.push_back("if");
+		statementType.push_back("while");
+		statementType.push_back("stmt");
+		statementType.push_back("BOOLEAN");
+		statementType.push_back("call");
+		statementType.push_back("variable");
+		statementType.push_back("constant");
+		statementType.push_back("prog_line");
+		statementType.push_back("invalid");
+
+		string ssyn = 
+		query.getSelectedSyn();
+		cout << "Selected synonym: ";
+		cout << ssyn << endl;
+
+		unordered_map<string, TypeTable::SynType> synTable = 
+		query.getSynTable();
+		TypeTable::SynType synType = synTable.at(ssyn);
+		cout << "SSyn type: ";
+		cout << statementType.at(synType) << endl;
+
+		for(size_t i = 0; i < relVect.size(); i++){
+			Relationship r = relVect.at(i);
+			Relationship::RelType relType = r.getRelType();
+			string token1 = r.getToken1();
+			string token2 = r.getToken2();
+
+			cout << "Relationship type: " ;
+			cout << relationshipType.at(relType) << endl;
+			cout << "Argument 1: ";
+			cout << token1 << endl;
+			cout << "Argument 2: ";
+			cout << token2 << endl;
+		}
+
+		cout << endl << endl;
+
+	} 
+	
+	string a;
+	cin >> a;
+}
+

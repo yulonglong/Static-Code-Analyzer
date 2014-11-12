@@ -1,0 +1,13 @@
+procedure Mini {
+A1 = 29;
+a1 = 31;
+i = 51; }
+
+procedure mini {
+i = a1; 
+a1 = A1; 
+}
+
+procedure q {
+q = A1; 
+A1 = 90; }

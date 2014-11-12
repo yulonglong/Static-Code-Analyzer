@@ -1,0 +1,44 @@
+\hypertarget{class_query_evaluator}{\section{Query\+Evaluator Class Reference}
+\label{class_query_evaluator}\index{Query\+Evaluator@{Query\+Evaluator}}
+}
+
+
+\hyperlink{class_query}{Query} Evaluator class.  
+
+
+
+
+{\ttfamily \#include $<$Query\+Evaluator.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_query_evaluator_a861e04948c25774d74a7dcb4137864aa}{\hyperlink{class_query_evaluator_a861e04948c25774d74a7dcb4137864aa}{Query\+Evaluator} (P\+K\+B $\ast$)}\label{class_query_evaluator_a861e04948c25774d74a7dcb4137864aa}
+
+\begin{DoxyCompactList}\small\item\em Constructor for \hyperlink{class_query_evaluator}{Query\+Evaluator}. Takes in the singleton P\+K\+B as input parameter. \end{DoxyCompactList}\item 
+\hypertarget{class_query_evaluator_a3b4e7218194d6338941eee6ba5a1cd42}{std\+::unordered\+\_\+map\\*
+$<$ std\+::string, std\+::vector\\*
+$<$ int $>$ $>$ \hyperlink{class_query_evaluator_a3b4e7218194d6338941eee6ba5a1cd42}{evaluate\+Query} (\hyperlink{class_query}{Query})}\label{class_query_evaluator_a3b4e7218194d6338941eee6ba5a1cd42}
+
+\begin{DoxyCompactList}\small\item\em To evaluate Queries, the \hyperlink{class_query}{Query} Processor will call evaluate\+Query and pass in the \hyperlink{class_query}{Query} object returned by the \hyperlink{class_query}{Query} Parser. This method will then return an unordered\+\_\+map that has every selected syn and their corresponding vector of answers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_query}{Query} Evaluator class. 
+
+Overview\+: \hyperlink{class_query}{Query} Evaluator is responsible for \+:
+\begin{DoxyItemize}
+\item Accepting \hyperlink{class_query}{Query} object made by the \hyperlink{class_query}{Query} Parser
+\item And evaluate the set of answers resquested by the user
+\end{DoxyItemize}
+
+To evaluate query, call 
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} unordered\_map<string, vector<Pair>> \hyperlink{class_query_evaluator_a3b4e7218194d6338941eee6ba5a1cd42}{evaluateQuery}(\hyperlink{class_query}{Query});
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Query\+Evaluator.\+h\item 
+Query\+Evaluator.\+cpp\end{DoxyCompactItemize}

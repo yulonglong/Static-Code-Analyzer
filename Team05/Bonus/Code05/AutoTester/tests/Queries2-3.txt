@@ -1,0 +1,22 @@
+15
+cat: Meaningless Queries
+1 - Typed, ImplStmtLine :: What are all the assignment statement lines
+assign a; 
+Select a
+// ans 
+5000
+2 - Typed, ImplStmtLine :: What are all the while statement lines
+while w; 
+Select w
+// ans 
+5000
+3 - ImplStmtLine :: What are all the statements
+stmt s; 
+Select s
+// ans 
+5000
+4 - ImplStmtLine :: 
+stmt s; 
+Select s
+// ans 
+5000

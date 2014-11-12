@@ -1,0 +1,24 @@
+procedure ABC {
+  i=1;							\\1
+ b=200 ;						\\2
+	c= a   ;					\\3
+while a							\\4
+{
+   while beta {						\\5
+        oSCar  = 1 + beta + tmp;			\\6
+        while tmp{					\\7
+          oSCar = I + k + j1k + chArlie; }		\\8
+	while x {					\\9
+        x = x + 1;					\\10
+        while left {					\\11
+          while right {					\\12
+            Romeo = Romeo + 1;				\\13
+            b = 0;					\\14
+            c = delta    + l  + width + Romeo ; }	\\15
+            while c {					\\16
+              c = c +1   	; } 			\\17
+            x = x+ 1	; }}				\\18
+          a=   2; }					\\19
+   w = w+1  ;						\\20
+}
+}
