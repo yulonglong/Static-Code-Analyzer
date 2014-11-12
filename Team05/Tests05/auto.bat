@@ -1,2 +1,2 @@
-AutoTester.exe S1-sibling.txt Q1-sibling.txt ResultQ1-sibling.xml >StdoutQ1-sibling.txt
+AutoTester.exe sibling-source.txt sibling-query.txt Result-sibling.xml >Stdout-sibling.txt
 PAUSE

@@ -523,7 +523,7 @@ false
 397 - Sibling :: 
 minus m, m1;
 Select BOOLEAN such that Sibling (m, m1)
-true
+false
 5000
 398 - Sibling :: 
 minus m; times t;
@@ -723,12 +723,12 @@ Select co such that Sibling (co, co1)
 437 - Sibling :: 
 variable v;
 Select v such that Sibling (v, "999")
-abc
+
 5000
 438 - Sibling :: 
 variable v;
 Select v such that Sibling (v, "j")
-i
+
 5000
 439 - Sibling :: 
 stmtLst sl;
