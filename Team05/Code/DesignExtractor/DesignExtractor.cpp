@@ -68,7 +68,11 @@ void DesignExtractor::setSiblingforProcedures(vector<Node*> procNodes, PKB &pkb)
 	for (unsigned int i=0; i<procNodes.size()-1; i++) {
 		// set the stmtLst under the procNode
 		int firstStmtNumOfStmtLstUnderProcedure = procNodes[i]->getChild(0)->getChild(0)->getProgLine();
-		// PKB SET: INSERT NEW METHOD HERE 
+		// PKB SET: 
+		pkb.setToSiblingAllStmtList(firstStmtNumOfStmtLstUnderProcedure);
+		if (debugModeExtension) {
+				cout<<"setToSiblingAllStmtList("<<firstStmtNumOfStmtLstUnderProcedure<< ")" <<endl;
+		}
 
 		for (unsigned int j=i+1; j<procNodes.size(); j++) {
 			std::string procName1 = procNodes[i]->getData();
@@ -234,8 +238,15 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 	int firstStmtOfThenStmtLst = vector[1]->getChild(0)->getProgLine();
 	int firstStmtOfElseStmtLst = vector[2]->getChild(0)->getProgLine();
 
-	// PKB SET: INSERT NEW METHOD HERE
-	
+	// PKB SET: 
+	pkb.setToSiblingAllStmtList(firstStmtOfThenStmtLst);
+	if (debugModeExtension) {
+			cout<<"setToSiblingAllStmtList("<<firstStmtOfThenStmtLst<< ")" <<endl;
+	}
+	pkb.setToSiblingAllStmtList(firstStmtOfElseStmtLst);
+	if (debugModeExtension) {
+			cout<<"setToSiblingAllStmtList("<<firstStmtOfElseStmtLst<< ")" <<endl;
+	}
 
 	if (debugModeExtension) {
 		cout<<"setToSiblingVarNameStmtList("<<varName<<", "<<firstStmtOfThenStmtLst<<")"<<endl;
@@ -254,7 +265,11 @@ void DesignExtractor::setSiblingForIf(vector<Node*> vector, PKB &pkb) {
 void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb) {
 	string varName = vector[0]->getData();
 	int firstStmtOfStmtLst = vector[1]->getChild(0)->getProgLine();
-	// PKB SET: INSERT NEW METHOD HERE
+	// PKB SET: 
+	pkb.setToSiblingAllStmtList(firstStmtOfStmtLst);
+	if (debugModeExtension) {
+			cout<<"setToSiblingAllStmtList("<<firstStmtOfStmtLst<< ")" <<endl;
+	}
 
 	// PKB SET:
 	if (debugModeExtension) {

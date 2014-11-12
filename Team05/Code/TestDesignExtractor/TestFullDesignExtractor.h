@@ -13,7 +13,7 @@ class FullDesignExtractorTest : public CPPUNIT_NS::TestFixture // Note 2
 
 	//CPPUNIT_TEST( testIter2SimpleSource );
 	//CPPUNIT_TEST( testSource1B );
-	CPPUNIT_TEST( testAnySource );
+	//CPPUNIT_TEST( testAnySource );
 
 	CPPUNIT_TEST_SUITE_END();
 

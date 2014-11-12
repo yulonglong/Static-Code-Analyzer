@@ -11,9 +11,9 @@ class ExtractSiblingTest : public CPPUNIT_NS::TestFixture // Note 2
 { 
 	CPPUNIT_TEST_SUITE( ExtractSiblingTest ); // Note 3 
 
-	//CPPUNIT_TEST( testSource1B );
-	//CPPUNIT_TEST( testSourceDE5 );
-	//CPPUNIT_TEST( testSourceSibling );
+	CPPUNIT_TEST( testSource1B );
+	CPPUNIT_TEST( testSourceDE5 );
+	CPPUNIT_TEST( testSourceSibling );
 
 	CPPUNIT_TEST_SUITE_END();
 
