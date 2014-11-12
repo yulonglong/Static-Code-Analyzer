@@ -785,9 +785,12 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 					}
 				}
 			}else if(isOperator(i1->second) && i2->second == TypeTable::CONSTANT){
+				cout<<"tk1 is operator and tk2 is constant"<<endl;
 				for(set<int>::iterator i = tk2List.begin(); i!=tk2List.end(); i++){
+					cout<<"constIndex = "<<*i<<" constValue = "<<atoi(pkb->getConstValue(*i).c_str())<<endl;
 					if(pkb->isSiblingConstantMathOp(*i, i1->second)){
-						siblingAns.insert(Pair(-1, *i)); //-1 cuz operator will nvr be selected
+						siblingAns.insert(Pair(-1, atoi(pkb->getConstValue(*i).c_str()))); //-1 cuz operator will nvr be selected
+						cout<<"pushing Pair(constINdex = "<<*i<<" constValue = "<<atoi(pkb->getConstValue(*i).c_str())<<endl;
 					}
 				}
 			}else{
@@ -803,7 +806,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
 					if(pkb->isSiblingConstantConstant(*i, *i2)){
-						siblingAns.insert(Pair(*i, *i2));
+						siblingAns.insert(Pair(atoi(pkb->getConstValue(*i).c_str()), atoi(pkb->getConstValue(*i2).c_str())));
 					}
 				}
 			}
@@ -823,7 +826,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
 					if(pkb->isSiblingVarIndexConstant(*i, *i2)){
-						siblingAns.insert(Pair(*i, *i2));
+						siblingAns.insert(Pair(*i, atoi(pkb->getConstValue(*i2).c_str())));
 					}
 				}
 			}
@@ -833,7 +836,7 @@ void QueryEvaluator::evaluateSibling(Relationship r, unordered_map<string, TypeT
 			for(set<int>::iterator i = tk1List.begin(); i!=tk1List.end(); i++){
 				for(set<int>::iterator i2 = tk2List.begin(); i2!=tk2List.end(); i2++){
 					if(pkb->isSiblingVarIndexConstant(*i, *i2)){
-						siblingAns.insert(Pair(*i2, *i));
+						siblingAns.insert(Pair(atoi(pkb->getConstValue(*i2).c_str()), *i));
 					}
 				}
 			}
