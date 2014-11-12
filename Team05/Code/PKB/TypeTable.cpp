@@ -50,6 +50,18 @@ TypeTable::SynType TypeTable::getSynType(std::string input){
 	else if(input=="procedure"){
 		return TypeTable::PROCEDURE;
 	}
+	else if(input=="plus"){
+		return TypeTable::PLUS;
+	}
+	else if(input=="minus"){
+		return TypeTable::MINUS;
+	}
+	else if(input=="times"){
+		return TypeTable::TIMES;
+	}
+	else if(input=="stmtLst"){
+		return TypeTable::STMTLST;
+	}
 	else{
 		return TypeTable::INVALID;
 	}
