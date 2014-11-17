@@ -616,6 +616,17 @@ void DesignExtractor::traverseGraph(CFGNode &node, int progLine) {
 	}
 }
 
+// Given a set of VARINDEX and the corresponding varTable, returns a String of the VARNAMEs
+string DesignExtractor::printVariables(set<int> v, PKB &pkb) {
+	string s = "";
+	set<int>::iterator it;
+	for (it = v.begin(); it != v.end(); ++it) {
+		s += pkb.getVarName(*it);
+		s += " ";
+	}
+	return s; 
+}
+
 // extracting of modifies and uses relationship for procedures and statements.
 // set the modifies and uses relationships for statements and procedures. 
 void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb) {
@@ -651,7 +662,7 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 			// PKB SET: procedure procIndex modifies these variables too
 			pkb.setToModifiesProc(procIndex, variablesModifiedByProgLine);
 			if (debugModeIteration1) {
-				cout << "setToModifesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
+				cout << "setToModifiesProc(" << procIndex << ", " << "variablesModifiedByProgLine)" << endl;
 			}
 			// PKB GET: 
 			set<VARINDEX> variablesUsedByProgLine = pkb.getUsed(i);
@@ -665,8 +676,17 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 					int progLine = progLines[j];
 					// PKB SET:
 					pkb.setToModifies(progLine, variablesModifiedByProgLine); 
+					if (debugModeIteration1) {
+						cout << "setToModifies(" << progLine << ", " << "variablesModifiedByProgLine)" << endl;
+						if (progLine == 63) {
+							cout << "ALL THE VARS:" << printVariables(variablesModifiedByProgLine, pkb) << endl;
+						}
+					}
 					// PKB SET:
 					pkb.setToUses(progLine, variablesUsedByProgLine); 
+					if (debugModeIteration1) {
+						cout << "setToUses(" << progLine << ", " << "variablesUsedByProgLine)" << endl;
+					}
 					// check if progLine is in some container statement. if yes, then add the variables to the parent STMTNUM too.
 
 					if (debugModeIteration1) {
@@ -682,7 +702,7 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 						// PKB SET:
 						pkb.setToModifies(parentProgLine, variablesModifiedByProgLine); 
 						if (debugModeIteration1) {
-							cout << "setToModifes(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
+							cout << "setToModifies(" << parentProgLine << ", " << "variablesModifiedByProgLine)" << endl;
 						}
 						// PKB SET:
 						pkb.setToUses(parentProgLine, variablesUsedByProgLine); 
@@ -734,12 +754,17 @@ void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> c
 	*/
 
 	// change to 1 because calls tree has root 1. All proc indices start with 1 
-	DFS(1, emptyVector, callsTable, visited);
+	for (unsigned int i=1; i<visited.size(); i++) {
+		if (visited[i] == 0) {
+			cout << "HELLOOO" << " " << i << endl;
+			visited = DFS(i, emptyVector, callsTable, visited);
+		}
+	}
 	visited.clear();
 
 }
 
-void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited) {
+vector<int> DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited) {
 	try {
 		if (debugModeIteration1) {
 			cout << "callsTable.at("<< source<< ").empty(): " << callsTable.at(source).empty() << endl;
@@ -791,7 +816,7 @@ void DesignExtractor::DFS(int source, vector<int> progLine, unordered_map<PROCIN
 		// catch any other errors (that we have no information about)
 		std::cerr << "DE: Unknown failure occured. Possible memory corruption" << std::endl;
 	}
-
+	return visited; 
 }
 
 //
