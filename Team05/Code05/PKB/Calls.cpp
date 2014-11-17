@@ -60,7 +60,7 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 			}catch(...){
 				callsTable.resize(s+1,placeHolder);
 			}
-			int location =(int) (ceil((double)index2/63));
+			int location =(int)floor(((double)index2/63)+1);
 			int bitPos = index2%63;
 
 			if(temp.size()<location)
@@ -83,7 +83,7 @@ void Calls::setCalls(PROCNAME p1, PROCNAME p2, STMTNUM s){
 			}catch(...){
 				calledByTable.resize(index2+1,placeHolder);
 			}
-			int location =(int) (ceil((double)index1/63));
+			int location =(int)floor(((double)index1/63)+1);
 			int bitPos = index1%63;
 
 			if(temp.size()<location)
@@ -128,7 +128,7 @@ bool Calls::isCalls(PROCINDEX index1, PROCINDEX index2){
 			return false;
 
 		vector<int64_t> temp=callsTable.at(index1);
-		int location =(int) (ceil((double)index2/63));
+		int location =(int)floor(((double)index2/63)+1);
 		int bitPos = index2%63;
 		if(temp.size()<location)
 			return false;

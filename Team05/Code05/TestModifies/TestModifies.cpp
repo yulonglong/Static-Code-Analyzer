@@ -16,7 +16,7 @@ void ModifiesTest::setUp() {
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
 	procTable = pkb->getProcTable();
-	modifies = Modifies::getInstance(varTable);
+	modifies = Modifies::getInstance(varTable,procTable);
 
 	varTable->insertVar("a");
 	varTable->insertVar("b");
@@ -57,7 +57,7 @@ void ModifiesTest::tearDown() {
 	typeTable = pkb->getTypeTable();
 	varTable = pkb->getVarTable();
 	procTable = pkb->getProcTable();
-	modifies = Modifies::getInstance(varTable);
+	modifies = Modifies::getInstance(varTable,procTable);
 }
 	
 // Registers the fixture into the 'registry'

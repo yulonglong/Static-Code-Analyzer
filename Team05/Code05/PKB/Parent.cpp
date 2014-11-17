@@ -41,8 +41,10 @@ void Parent::setParent(STMTNUM s1, STMTNUM s2) {
 		}catch(...){
 			parentTable.resize(s1+1,placeHolder);
 		}
-		int location =ceil((double)s2/63);
-		int bitPos = s2%63;
+
+		int diff = s2-s1;
+		int location =floor(((double)diff/63)+1);
+		int bitPos = diff%63;
 
 		if(temp.size()<location)
 			temp.resize(location);
@@ -73,10 +75,10 @@ bool Parent::isParent(STMTNUM s1, STMTNUM s2) {
 	return false;
 }
 
-set<STMTNUM> Parent::getChildren(STMTNUM s){
+set<STMTNUM> Parent::getChildren(STMTNUM s1){
 	set<STMTNUM> ans;
 	try{
-		vector<int64_t> temp=parentTable.at(s);
+		vector<int64_t> temp=parentTable.at(s1);
 
 		for(size_t s = 0;s<temp.size();s++){
 			int64_t bitArray = temp.at(s);
@@ -84,6 +86,7 @@ set<STMTNUM> Parent::getChildren(STMTNUM s){
 				int64_t bit = bitArray & -bitArray;
 				bitArray -= bit;
 				int number = log((double)bit)/log(2.0) + s*63;
+				number+=s1;
 				ans.insert(number);
 			}
 		}
@@ -126,7 +129,7 @@ void Parent::printParentTable() {
 					int64_t bit = bitArray & -bitArray;
 					bitArray -= bit;
 					int number = log((double)bit)/log(2.0) + s*63;
-					cout<< number<< ",";
+					cout<< number+index<< ",";
 				}
 			}		
 			cout<<endl;

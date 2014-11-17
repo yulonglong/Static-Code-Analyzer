@@ -327,6 +327,10 @@ public:
 	void printNextTableForTesting();
 	void printNextPairTableForTesting();
 	void printCallsPairTable();
+
+	void printParentTable();
+	void printModifiesTable();
+	void printModifiesProcTable();
 	/// @endcond
 };
 

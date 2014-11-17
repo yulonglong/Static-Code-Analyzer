@@ -40,7 +40,7 @@ void Uses::setUses(STMTNUM s, VARNAME v) {
 		}catch(...){
 			usesTable.resize(s+1,placeHolder);
 		}
-		int location =ceil((double)index/63);
+		int location =floor(((double)index/63)+1);
 		int bitPos = index%63;
 
 		if(temp.size()<location)
@@ -65,7 +65,7 @@ void Uses::setUses(STMTNUM s, VARNAME v) {
 		}catch(...){
 			usedVarTable.resize(index+1,placeHolder);
 		}
-		int location =ceil((double)s/63);
+		int location =floor(((double)s/63)+1);
 		int bitPos = s%63;
 
 		if(temp.size()<location)
@@ -93,7 +93,7 @@ void Uses::setUses(STMTNUM s, set<VARINDEX> varSet) {
 			}catch(...){
 				usesTable.resize(s+1,placeHolder);
 			}
-			int location =ceil((double)index/63);
+			int location =floor(((double)index/63)+1);
 			int bitPos = index%63;
 
 			if(temp.size()<location)
@@ -117,7 +117,7 @@ void Uses::setUses(STMTNUM s, set<VARINDEX> varSet) {
 			}catch(...){
 				usedVarTable.resize(index+1,placeHolder);
 			}
-			int location =ceil((double)s/63);
+			int location =floor(((double)s/63)+1);
 			int bitPos = s%63;
 
 			if(temp.size()<location)
@@ -146,7 +146,7 @@ void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> varSet) {
 			}catch(...){
 				usesProcTable.resize(p+1,placeHolder);
 			}
-			int location =ceil((double)index/63);
+			int location =floor(((double)index/63)+1);
 			int bitPos = index%63;
 
 			if(temp.size()<location)
@@ -170,7 +170,7 @@ void Uses::setUsesProc(PROCINDEX p, set<VARINDEX> varSet) {
 			}catch(...){
 				usedProcVarTable.resize(index+1,placeHolder);
 			}
-			int location =ceil((double)p/63);
+			int location =floor(((double)p/63)+1);
 			int bitPos = p%63;
 
 			if(temp.size()<location)
@@ -195,7 +195,7 @@ bool Uses::isUses(STMTNUM s, VARINDEX index){
 		}
 
 		vector<int64_t> temp=usesTable.at(s);
-		int location =ceil((double)index/63);
+		int location =floor(((double)index/63)+1);
 		int bitPos = index%63;
 		if(temp.size()<location)
 			return false;
@@ -268,7 +268,7 @@ bool Uses::isUsesProc(PROCINDEX p, VARINDEX index){
 		}
 
 		vector<int64_t> temp=usesProcTable.at(p);
-		int location =ceil((double)index/63);
+		int location =floor(((double)index/63)+1);
 		int bitPos = index%63;
 		if(temp.size()<location)
 			return false;
