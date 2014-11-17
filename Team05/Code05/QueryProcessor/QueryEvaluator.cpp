@@ -2060,7 +2060,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(a, _)
 			else {
-				set<int> a = pkb->getAllFollows();
+				set<int> a = pkb->getAllStmts(i1->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					if(pkb->isSynType(i1->second, *it))
 						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
