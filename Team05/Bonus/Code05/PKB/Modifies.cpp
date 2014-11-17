@@ -7,8 +7,9 @@
 bool Modifies::instanceFlag=false;
 Modifies* Modifies::modifies=NULL;
 	
-Modifies::Modifies(VarTable *vt) {
+Modifies::Modifies(VarTable *vt,ProcTable *pt) {
 	varTable = vt;
+	procTable = pt;
 }
 
 
@@ -19,9 +20,9 @@ Modifies::~Modifies() {
 }
 
 
-Modifies* Modifies::getInstance(VarTable* vt) {
+Modifies* Modifies::getInstance(VarTable* vt,ProcTable *pt) {
 	if(!instanceFlag) {
-        modifies = new Modifies(vt);
+        modifies = new Modifies(vt,pt);
         instanceFlag = true;
         return modifies;
     }
@@ -342,6 +343,29 @@ void Modifies::printModifiesTable() {
 	for(vector<vector<int64_t>>::iterator it = modifiesTable.begin(); it != modifiesTable.end(); it++,index++) {
 		if(it->size()!=0){
 			cout<< index << " modifies ";
+			vector<int64_t> temp = *it; 
+			for (size_t s =0; s!=temp.size(); s++) {
+				int64_t bitArray = temp.at(s);
+				while(bitArray>0){
+					int64_t bit = bitArray & -bitArray;
+					bitArray -= bit;
+					int number = log((double)bit)/log(2.0) + s*63;
+					string name = varTable->getVarName(number);
+					cout<< name<< ",";
+				}
+			}		
+			cout<<endl;
+		}
+	}
+}
+
+void Modifies::printModifiesProcTable() {
+	cout<< "Modifies Call Table" << endl;
+	int index =0;
+	for(vector<vector<int64_t>>::iterator it = modifiesProcTable.begin(); it != modifiesProcTable.end(); it++,index++) {
+		if(it->size()!=0){
+			string nameProc = procTable->getProcName(index);
+			cout<< nameProc << " modifies ";
 			vector<int64_t> temp = *it; 
 			for (size_t s =0; s!=temp.size(); s++) {
 				int64_t bitArray = temp.at(s);

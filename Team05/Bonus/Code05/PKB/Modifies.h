@@ -44,17 +44,18 @@ private:
 	static bool instanceFlag;
 	static Modifies *modifies;
 	VarTable *varTable;
+	ProcTable *procTable;
 	set<STMTNUM> modifiesList;
 	set<VARINDEX> modifiedList;
 	set<PROCINDEX> modifiesProcList;
 	set<VARINDEX> modifiedProcList;
 public:	
 	//! A constructor to initialize the Modifies class.
-	Modifies(VarTable*);
+	Modifies(VarTable*,ProcTable*);
 	//! A destructor to clear all the tables and set the instance flag of the singleton class to false.
 	~Modifies();
 	//! Returns the instance of Modifies singleton class.
-	static Modifies* getInstance(VarTable*);	// to be used to get instance of singleton class 
+	static Modifies* getInstance(VarTable*,ProcTable*);	// to be used to get instance of singleton class 
 
 	//! Set the Modifies relationship between a statement number and a variable name to be true.
 	void setModifies(STMTNUM, VARNAME);
@@ -87,6 +88,7 @@ public:
 	
 	/// @cond
 	void printModifiesTable();
+	void printModifiesProcTable();
 	/// @endcond
 };
 

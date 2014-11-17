@@ -365,6 +365,9 @@ public:
 	Node* getASTRoot();
 	CFGNode* getCFGRoot();
 	unordered_map<PROCINDEX, vector<CALLSPAIR>> getCallsTable(); 
+	void printParentTable();
+	void printModifiesTable();
+	void printModifiesProcTable();
 	/// @endcond
 };
 

@@ -7,7 +7,21 @@ using namespace std;
 
 void queryDriver(string query, list<string> &result, PKB *pkb){
 	//// cout<<"Begin parse query"<<endl;
-	
+	pkb->printParentTable();
+	pkb->printModifiesTable();
+	pkb->printModifiesProcTable();
+
+	/*cout<<"test here"<<endl;
+	cout<<"getChildren 15"<<endl;
+	set<STMTNUM> temp = pkb->getChildren(15);
+	for(set<STMTNUM>::iterator it = temp.begin();it!=temp.end();it++){
+		cout<<*it<<endl;
+	}
+	cout<<"getParent 63"<<endl;
+	cout<<pkb->getParent(63)<<endl;*/
+
+
+
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);
 

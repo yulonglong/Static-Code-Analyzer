@@ -13,7 +13,7 @@ PKB::PKB(){
 	constTable = ConstTable::getInstance();
 	parent = Parent::getInstance();
 	follows = Follows::getInstance();
-	modifies = Modifies::getInstance(varTable);
+	modifies = Modifies::getInstance(varTable,procTable);
 	uses = Uses::getInstance(varTable);
 	calls = Calls::getInstance(procTable);
 	next = Next::getInstance();
@@ -549,3 +549,14 @@ set<STMTNUM> PKB::getAllStmtList(){
 	return sibling->getAllStmtList();
 }
 
+void PKB::printParentTable(){
+	return parent->printParentTable();
+}
+
+void PKB::printModifiesTable(){
+	return modifies->printModifiesTable();
+}
+
+void PKB::printModifiesProcTable(){
+	return modifies->printModifiesProcTable();
+}
