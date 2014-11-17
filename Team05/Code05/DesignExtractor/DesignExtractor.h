@@ -66,7 +66,7 @@ private:
 	static void DesignExtractor::setSiblingForWhile(vector<Node*> vector, PKB &pkb);
 
 	static void runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, PKB &pkb);
-	static void DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited);
+	static vector<int> DFS(int source, vector<int> progLine, unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable, vector<int> visited);
 	static void buildCFG(Node &ASTroot, PKB &pkb);
 	static void setNextRelationshipDriver(PKB &pkb);
 	static void setNextRelationship(CFGNode &node, PKB &pkb);
@@ -88,5 +88,8 @@ private:
 	static void clear(std::queue<QueueItem> &q);
 	static void printCallsTable(unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable);
 	static void printQueue();
+
+	static string DesignExtractor::printVariables(set<int> v, PKB &pkb);
+
 };
 #endif

@@ -302,7 +302,45 @@ void FullDesignExtractorTest::testSource1B() {
 	expected = "x i y z v ";
 	CPPUNIT_ASSERT_EQUAL(expected, printVariables(v, *pkb));
 	
+	pkb->~PKB();
 }
+
+
+void FullDesignExtractorTest::testAnySource() {
+	PKB *pkb;
+	Node* ASTRoot;
+	CFGNode* CFGRoot;
+	unordered_map<PROCINDEX, vector<CALLSPAIR>> callsTable; 
+
+	pkb = PKB::getInstance();
+	CodeParser::parserDriver("sourceori.txt",pkb);
+	
+	ASTRoot = pkb->getASTRoot();
+	CFGRoot = pkb->getCFGRoot();
+
+	if (CFGRoot == NULL && ASTRoot != NULL) {
+		cout << "CFGRoot is null and ASTRoot is not null" << endl;
+	} 
+	if (CFGRoot != NULL) {
+		cout << "CFGRoot is NOT NULL!!" << endl;
+	} 
+	if (ASTRoot == NULL) {
+		cout << "ASTRoot is null!!!" << endl;
+	}
+
+	// CALLS DE
+	DesignExtractor::extractorDriver(pkb);
+	// after this, PKB Next, Modifies, Uses and CFGRoot should be filled in
+	CFGRoot = pkb->getCFGRoot();	
+
+	if (CFGRoot == NULL) {
+		cout << "CFGRoot is STILL NULL!!" << endl;
+	}
+
+
+	pkb->~PKB();
+}
+
 // Given a set of int, returns a String of the ints
 string FullDesignExtractorTest::print(set<int> v) {
 	string s = "";
