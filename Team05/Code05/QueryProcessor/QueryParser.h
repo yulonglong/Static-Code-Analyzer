@@ -129,6 +129,7 @@ private:
 	static const string that;
 	static const string freeString;
 	static const string freeStringWithSpace;
+	static const string freeExpression;
 	static const string expr;
 
 	//auxiliary grammar rules

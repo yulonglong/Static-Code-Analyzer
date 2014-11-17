@@ -1354,6 +1354,236 @@ void QueryParserTest::testQueryPattern4(){
 	return;
 }
 
+
+void QueryParserTest::testQueryPattern5(){
+	//INIT BEGIN
+	string query = "assign a; Select a pattern a(\"height\",\"tmp - k + I + y2\")";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("a");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("pattern","a","\"height\"",Relationship::IDENTIFIER,"\"tmp - k + I + y2\"",Relationship::EXPR));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
+
+
+void QueryParserTest::testQueryPattern6(){
+	//INIT BEGIN
+	string query = "assign a;Select a pattern a(_,_\"x2-x1\"_)";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("a");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("pattern","a","_",Relationship::UNDERSCORE,"_\"x2-x1\"_",Relationship::UNDERSCOREEXPR));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
+
+
+void QueryParserTest::testQueryPattern7(){
+	//INIT BEGIN
+	string query = "assign a; Select a pattern a(_,_\"y2 - left\"_)";
+	QueryParser qp;
+	bool isValid = true;
+	Query parsedQuery = qp.queryParse(query,isValid);
+
+	bool expectedIsValid = true;
+	CPPUNIT_ASSERT_EQUAL(expectedIsValid,isValid);
+	//INIT END
+	
+	//SELECTEDSYN BEGIN
+	//actual selected syn
+	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
+	//expected selected syn
+	vector<string> expectedSelectedSyn;
+	expectedSelectedSyn.push_back("a");
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSyn.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSyn[i],selectedSyn[i]);
+	}
+	//SELECTEDSYN END
+
+	//SELECTEDSYNISCALLPROCEDURE BEGIN
+	//actual selected syn
+	vector<bool> selectedSynIsCallProcedure = parsedQuery.getSelectedSynIsCallProcedure();
+	//expected selected syn
+	vector<bool> expectedSelectedSynIsCallProcedure;
+	expectedSelectedSynIsCallProcedure.push_back(false);
+	//assert selected syn
+	for(int i=0;i<(int)expectedSelectedSynIsCallProcedure.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedSelectedSynIsCallProcedure[i],selectedSynIsCallProcedure[i]);
+	}
+	//SELECTEDSYNISCALLPROCEDURE END
+
+	//SYNTABLE BEGIN
+	//actual syn table
+	unordered_map<string, TypeTable::SynType> synTable = parsedQuery.getSynTable();
+	unordered_map<string, TypeTable::SynType>::iterator iter;
+	iter = synTable.begin();
+	//expected syn table
+	unordered_map<string, TypeTable::SynType> expectedSynTable;
+	expectedSynTable.insert(make_pair("BOOLEAN", TypeTable::BOOLEAN));
+	expectedSynTable.insert(make_pair("a", TypeTable::ASSIGN));
+	unordered_map<string, TypeTable::SynType>::iterator expectedIter;
+	expectedIter= expectedSynTable.begin();
+	//assert syn table
+	for(int i=0;i<expectedSynTable.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedIter->first,iter->first);
+		CPPUNIT_ASSERT_EQUAL(expectedIter->second,iter->second);
+		iter++;
+		expectedIter++;
+	}
+	//SYNTABLE END
+
+	//RELATIONSHIP BEGIN
+	//actual relationship
+	vector<Relationship> relVect = parsedQuery.getRelVect();
+	//expected relationship
+	vector<Relationship> expectedRelVect;
+	expectedRelVect.push_back(Relationship("pattern","a","_",Relationship::UNDERSCORE,"_\"y2 - left\"_",Relationship::UNDERSCOREEXPR));
+	//assert relationship
+	for(int i=0;i<(int)expectedRelVect.size();i++){
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getRelType(),relVect[i].getRelType());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getPatternSyn(),relVect[i].getPatternSyn());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1(),relVect[i].getToken1());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken1Type(),relVect[i].getToken1Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2(),relVect[i].getToken2());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getToken2Type(),relVect[i].getToken2Type());
+		CPPUNIT_ASSERT_EQUAL(expectedRelVect[i].getCallSynType(),relVect[i].getCallSynType());
+	}
+	//RELATIONSHIP END
+
+	return;
+}
 void QueryParserTest::testQueryPatternWhile1(){
 	//INIT BEGIN
 	string query = "while a; Select a pattern a (\"y\", _)";
@@ -2899,7 +3129,7 @@ void QueryParserTest::testQueryValidationPattern3(){
 }
 
 void QueryParserTest::testQueryValidationPattern4(){
-	string query = "assign a1; prog_line n1; Select n1 pattern a1(_,_\"(b-2)+(*2)\"_) with n1=1";
+	string query = "assign a1; prog_line n1; Select n1 pattern a1(_,_\"\"(b-2)+(*2)\"_) with n1=1";
 	QueryParser qp;
 	bool isValid = true;
 	Query parsedQuery = qp.queryParse(query,isValid);
