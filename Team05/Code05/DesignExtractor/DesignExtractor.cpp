@@ -678,9 +678,9 @@ void DesignExtractor::extractRelationships(Node &ASTRoot, unordered_map<PROCINDE
 					pkb.setToModifies(progLine, variablesModifiedByProgLine); 
 					if (debugModeIteration1) {
 						cout << "setToModifies(" << progLine << ", " << "variablesModifiedByProgLine)" << endl;
-						if (progLine == 63) {
+						/*if (progLine == 286) {
 							cout << "ALL THE VARS:" << printVariables(variablesModifiedByProgLine, pkb) << endl;
-						}
+						}*/
 					}
 					// PKB SET:
 					pkb.setToUses(progLine, variablesUsedByProgLine); 
@@ -756,7 +756,7 @@ void DesignExtractor::runDFSDriver(unordered_map<PROCINDEX, vector<CALLSPAIR>> c
 	// change to 1 because calls tree has root 1. All proc indices start with 1 
 	for (unsigned int i=1; i<visited.size(); i++) {
 		if (visited[i] == 0) {
-			cout << "HELLOOO" << " " << i << endl;
+			//cout << "HELLOOO" << " " << i << endl;
 			visited = DFS(i, emptyVector, callsTable, visited);
 		}
 	}
