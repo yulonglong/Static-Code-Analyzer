@@ -209,7 +209,7 @@ vector<Relationship> QueryEvaluator::orderRelationship(vector<Relationship> r){
 }
 
 unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<Relationship> *newRelations){
-
+	cout<<"Start Query Evaluator"<<endl;
 	//Get relationships and order them
 	vector<Relationship> relations = q.getRelVect();
 	linkages.clear();
@@ -410,6 +410,7 @@ unordered_map<int, vector<Pair>> QueryEvaluator::evaluateQuery(Query q, vector<R
 
 
 	// cout<<"RETURNING FINAL ANSWERS"<<endl;
+	cout<<"End Query Evaluator"<<endl;
 	return relAns;
 }
 
@@ -1199,6 +1200,9 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 			}
 		}
 
+		if(tk1==tk2){
+			nextAns.clear();
+		}
 		insertLinks(tk1, relIndex);
 		insertLinks(tk2, relIndex);
 	}
@@ -1343,7 +1347,7 @@ void QueryEvaluator::evaluateNext(Relationship r, unordered_map<string, TypeTabl
 }
 
 void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, TypeTable::SynType> m, int relIndex){
-	// cout<<"nextStarTable empty = "<<nextStarTable.empty()<<endl;
+	cout<<"Start Evaluate NextStar"<<endl;
 	string tk1 = r.getToken1();
 	string tk2 = r.getToken2();
 
@@ -1401,12 +1405,18 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 				}
 			}
 		}
-
+		else if(i1->second==TypeTable::PROGLINE && i2->second==TypeTable::PROGLINE && tk1!=tk2){
+			set<int> dummy = pkb->getAllNext();
+			for(set<int>::iterator it = dummy.begin(); it!=dummy.end(); it++){
+				nextStarAns.insert(Pair(*it,*it));
+			}
+		}
 		//Next*(n1,n2)
 		else{
 			for(set<int>::iterator it = tk1List.begin(); it!=tk1List.end(); it++){
 				for(set<int>::iterator it2 = tk2List.begin(); it2!=tk2List.end(); it2++){
 					traverseTable.clear();
+					cout<<"it1 " << *it << " it2 "<<*it2<<endl;
 					if(nextStarTable.find(*it)!=nextStarTable.end() && nextStarTable.find(*it)->second.find(*it2)!=nextStarTable.find(*it)->second.end()){
 						// cout<<"NEXTSTARTABLE("<<*it<<","<<*it2<<")"<<endl;
 						nextStarAns.insert(Pair(*it, *it2));
@@ -1523,6 +1533,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 
 	intersectPairs(tk1,tk2,&nextStarAnsVec, relIndex);
 	relAns.insert(make_pair<int, vector<Pair>>(relIndex, nextStarAnsVec));
+	cout<<"End Evaluate Next Star"<<endl;
 }
 
 //find Next*(1, s2)
@@ -2049,7 +2060,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(a, _)
 			else {
-				set<int> a = pkb->getAllFollows();
+				set<int> a = pkb->getAllStmts(i1->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					if(pkb->isSynType(i1->second, *it))
 						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
@@ -2104,7 +2115,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(_,b)
 			else {
-				set<int> a = pkb->getAllFollowedBy();
+				set<int> a = pkb->getAllStmts(i2->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}

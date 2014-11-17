@@ -62,8 +62,8 @@ const string QueryParser::that = "that";
 const string QueryParser::freeString = "\\S+";
 const string QueryParser::freeStringWithSpace = "[.]+";
 
-const string QueryParser::expr = "\\s*(?:\\()*\\s*" + LETTERORINTEGER +"(?:\\s*(?:\\))*"+"\\s*" + OPERATOR + "\\s*(?:\\()*\\s*" + LETTERORINTEGER + "\\s*(?:\\))*)*" + "\\s*";
-
+//const string QueryParser::expr = "\\s*(?:\\()*\\s*" + LETTERORINTEGER +"(?:\\s*(?:\\))*"+"\\s*" + OPERATOR + "\\s*(?:\\()*\\s*" + LETTERORINTEGER + "\\s*(?:\\))*)*" + "\\s*";
+const string QueryParser::expr = "[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890\\(\\)\\+\\-\\*\\s]+";
 
 const string QueryParser::ModifiesP = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+entRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";
 const string QueryParser::ModifiesS = "(?:(?:[Mm]odifies)\\s*\\(\\s*(?:"+stmtRef+")"+ "\\s*\\,\\s*" +"(?:"+varRef+")" + "\\s*\\))";

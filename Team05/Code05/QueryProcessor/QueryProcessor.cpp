@@ -6,7 +6,7 @@ using namespace std;
 
 
 void queryDriver(string query, list<string> &result, PKB *pkb){
-	//cout<<"Begin parse query"<<endl;
+	cout<<"Begin parse query"<<endl;
 	
 	QueryParser qp;
 	QueryEvaluator qe = QueryEvaluator::QueryEvaluator(pkb);
@@ -15,20 +15,20 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	Query parsedQuery = qp.queryParse(query,isValid);
 
 	if(!isValid){
-		//cout << "Query Invalid" << endl;
+		cout << "Query Invalid" << endl;
 		return;
 	}
 
-	//cout<<"End parse query"<<endl;
+	cout<<"End parse query"<<endl;
 	
 
-	//cout<<"Begin evaluate query"<<endl;
+	cout<<"Begin evaluate query"<<endl;
 
 	vector<Relationship> newRelations;
 	unordered_map<string, int> synIndexMap;
 	unordered_map<int, vector<Pair>> clauseAnswers = qe.evaluateQuery(parsedQuery, &newRelations);
 
-	//cout<<"End evaluate query"<<endl;
+	cout<<"End evaluate query"<<endl;
 
 	//cout <<"Begin projecting results"<< endl;
 	vector<vector<int>> tupleTable = createTupleTable(clauseAnswers, newRelations, &synIndexMap );
