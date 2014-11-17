@@ -2115,7 +2115,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 
 			//Follows(_,b)
 			else {
-				set<int> a = pkb->getAllFollowedBy();
+				set<int> a = pkb->getAllStmts(i2->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
 					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}
