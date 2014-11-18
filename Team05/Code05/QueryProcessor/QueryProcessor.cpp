@@ -30,7 +30,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 
 	cout<<"End evaluate query"<<endl;
 
-	//cout <<"Begin projecting results"<< endl;
+	cout <<"Begin projecting results"<< endl;
 	vector<vector<int>> tupleTable = createTupleTable(clauseAnswers, newRelations, &synIndexMap );
 
 	vector<string> selectedSyn = parsedQuery.getSelectedSyn();
@@ -139,7 +139,7 @@ void queryDriver(string query, list<string> &result, PKB *pkb){
 	}
 	//cout << "End creating tuple of answers" << endl;
 
-	//cout <<"End projecting results"<< endl;
+	cout <<"End projecting results"<< endl;
 	
 }
 

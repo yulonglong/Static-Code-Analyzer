@@ -117,6 +117,7 @@ private:
 	static std::unordered_map<int,std::set<int>> nextStarTable;
 	static std::unordered_map<int, bool> affectsTable;
 	static std::unordered_map<int, bool> affectsStarTable;
+	static std::unordered_map<int, set<int>> nst;
 
 
 	PKB *pkb;
