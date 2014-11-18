@@ -3011,27 +3011,42 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 		cout << "Case 1: Both are Synonyms" << endl;
 		set<int> tk1List;
 		set<int> tk2List;
-		
-		if(tk1=="_")
-			tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
-		else if(isExistInLinkages(tk1)) {
-			tk1List = retrieveTokenEvaluatedAnswers(tk1);
-			insertLinks(tk1, relIndex);
+		if(tk1==tk2) {
+			if(tk1=="_")
+				tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
+			else if(isExistInLinkages(tk1)) {
+				tk1List = retrieveTokenEvaluatedAnswers(tk1);
+				insertLinks(tk1, relIndex);
+			}
+			else {
+				tk1List = pkb->getAllStmts(i1->second);
+				insertLinks(tk1, relIndex);
+			}
+
+			tk2List = tk1List;
 		}
 		else {
-			tk1List = pkb->getAllStmts(i1->second);
-			insertLinks(tk1, relIndex);
-		}
+			if(tk1=="_")
+				tk1List = pkb->getAllStmts(TypeTable::ASSIGN);
+			else if(isExistInLinkages(tk1)) {
+				tk1List = retrieveTokenEvaluatedAnswers(tk1);
+				insertLinks(tk1, relIndex);
+			}
+			else {
+				tk1List = pkb->getAllStmts(i1->second);
+				insertLinks(tk1, relIndex);
+			}
 		
-		if(tk2=="_")
-			tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
-		else if(isExistInLinkages(tk2)) {
-			tk2List = retrieveTokenEvaluatedAnswers(tk2);
-			insertLinks(tk2, relIndex);
-		}
-		else {
-			tk2List = pkb->getAllStmts(i2->second);
-			insertLinks(tk2, relIndex);
+			if(tk2=="_")
+				tk2List = pkb->getAllStmts(TypeTable::ASSIGN);
+			else if(isExistInLinkages(tk2)) {
+				tk2List = retrieveTokenEvaluatedAnswers(tk2);
+				insertLinks(tk2, relIndex);
+			}
+			else {
+				tk2List = pkb->getAllStmts(i2->second);
+				insertLinks(tk2, relIndex);
+			}
 		}
 
 		for(set<int>::iterator itA = tk1List.begin(); itA!=tk1List.end(); itA++) {
