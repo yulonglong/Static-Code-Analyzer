@@ -21,7 +21,7 @@ Information to build the system and unit testing are identical in the original R
 Bugs fixed:
 
 1. line numbers 0, 63, 126, 252  missing from the answer. 
-   It is caused by a bug in PKB with regards to its bitvector implementation.
+   It is caused by a bug in PKB with regards to its bitvector implementation. (the error always a multiple of 63, the size of the data type)
    Fixed by Yohanes Lim.
    
 2. line numbers 280+ missing from the answer.
