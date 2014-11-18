@@ -3002,11 +3002,6 @@ void QueryEvaluator::evaluateAffects(Relationship r, std::unordered_map<std::str
 	unordered_map<string, TypeTable::SynType>::iterator i1 = m.find(tk1);
 	unordered_map<string, TypeTable::SynType>::iterator i2 = m.find(tk2);
 
-	if(tk1==tk2) {
-		QueryEvaluator::relAns.insert(make_pair(relIndex, affAns));
-		return;
-	}
-
 
 	//Affects(a1, a2)
 	if((isalpha(tk1[0]) && isalpha(tk2[0])) || (tk1=="_" && isalpha(tk2[0])) || (isalpha(tk1[0])&& tk2=="_")) {
