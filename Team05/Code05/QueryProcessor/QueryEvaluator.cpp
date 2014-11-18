@@ -2060,7 +2060,7 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			else {
 				set<int> a = pkb->getAllStmts(i1->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-					if(pkb->isSynType(i1->second, *it))
+					if(pkb->getFollows(*it)!=-1)
 						followsAns.push_back(Pair (*it, pkb->getFollows(*it)));
 				}
 			}
@@ -2115,7 +2115,8 @@ void QueryEvaluator::evaluateFollows(Relationship r, unordered_map<string, TypeT
 			else {
 				set<int> a = pkb->getAllStmts(i2->second);
 				for(set<int>::iterator it = a.begin(); it!=a.end(); it++){
-					followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
+					if(pkb->getFollowedBy(*it)!=-1)
+						followsAns.push_back(Pair (pkb->getFollowedBy(*it), *it));
 				}
 			}
 
@@ -2344,13 +2345,14 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 
 		if(isExistInLinkages(tk1))
 			answer = retrieveTokenEvaluatedAnswers(tk1);
+		
+		//Parent(_, b)
+		else if(tk1=="_"){
+			answer = pkb->getAllStmts(TypeTable::STMT);
+		}
 		else
 			answer = pkb->getAllStmts(i1->second);
 
-		//Parent(_, b)
-		if(tk1=="_"){
-			answer = pkb->getAllStmts(TypeTable::STMT);
-		}
 		
 		for(set<int>::iterator it=answer.begin(); it!=answer.end(); it++){
 			set<int> children;
@@ -2360,7 +2362,7 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 				children = pkb->getChildren(*it);
 			}
 			for(set<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
-				if(pkb->isSynType(i2->second, *it2)){
+				if(pkb->isSynType(i2->second, *it2) || tk2=="_"){
 					parentAns.push_back(Pair(*it, *it2));
 				}
 			}
