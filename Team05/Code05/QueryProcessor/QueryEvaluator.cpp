@@ -1406,12 +1406,7 @@ void QueryEvaluator::evaluateNextStar(Relationship r, unordered_map<string, Type
 					// cout<<"recursive method"<<endl;
 					recursiveNextTarget(*it, *it, *it, &nextStarAns, &traverseTable, false);
 				}
-			}
-		}
-		else if(i1->second==TypeTable::PROGLINE && i2->second==TypeTable::PROGLINE && tk1!=tk2){
-			set<int> dummy = pkb->getAllNext();
-			for(set<int>::iterator it = dummy.begin(); it!=dummy.end(); it++){
-				nextStarAns.insert(Pair(*it,*it));
+
 			}
 		}
 		//Next*(n1,n2)
