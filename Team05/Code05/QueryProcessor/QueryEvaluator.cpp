@@ -2364,7 +2364,6 @@ void QueryEvaluator::evaluateParent(Relationship r, unordered_map<string, TypeTa
 			for(set<int>::iterator it2=children.begin(); it2!=children.end(); it2++){
 				if(pkb->isSynType(i2->second, *it2)){
 					parentAns.push_back(Pair(*it, *it2));
-					// cout<<"pushing into parent pair1 = " << *it << "pair2 = "<<*it2<<endl;
 				}
 			}
 		}
